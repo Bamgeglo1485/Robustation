@@ -1,4 +1,4 @@
-extends "res://Scripts/Mobs/MobSystem.gd"
+extends "res://Scripts(REFACTOR NEEDED)/Mobs/MobSystem.gd"
 
 @onready var camera: Camera2D = $Camera
 

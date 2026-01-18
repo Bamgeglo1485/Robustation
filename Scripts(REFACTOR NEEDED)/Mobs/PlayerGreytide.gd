@@ -1,4 +1,4 @@
-extends "res://Scripts/Mobs/PlayerSystem.gd"
+extends "res://Scripts(REFACTOR NEEDED)/Mobs/PlayerSystem.gd"
 
 @onready var kick_weapon: Node2D = $Kick
 @onready var kick_target_timer: Timer = $KickTargetTimer

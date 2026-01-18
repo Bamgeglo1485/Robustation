@@ -14,6 +14,10 @@ config/name="Robustation-OOP"
 run/main_scene="uid://biuw5t7gsnxbp"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 
+[dotnet]
+
+project/assembly_name="Robustation-OOP"
+
 [input]
 
 movement_right={

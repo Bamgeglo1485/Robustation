@@ -1,4 +1,4 @@
-extends "res://Scripts/Mobs/EnemySystem.gd"
+extends "res://Scripts(REFACTOR NEEDED)/Mobs/EnemySystem.gd"
 
 func _ready() -> void:
 	_random_weapon()

@@ -8,20 +8,20 @@ class_name MobMoverComponent extends Component
 @export var friction: int = 700
 var direction = Vector2.ZERO
 
-@export var can_fall: bool = false
-@export var movement_blocked: bool = false
-@export var set_navigation_velocity: bool = false
+@export var can_fall: bool
+@export var movement_blocked: bool
+@export var set_navigation_velocity: bool
 
-var flying: bool = false
-var base_fly_speed: float = 0.0
-var fly_speed: float = 0.0
 var fly_direction: Vector2 = Vector2.ZERO
+var flying: bool
+var base_fly_speed: float
+var fly_speed: float
 var fly_stop_speed: float = 200
 var fly_modifier: float = 1
 
 @export var body_fall_sound: AudioStreamPlayer2D
-var fallen: bool = false
-var standing_delay: float = 0
+var fallen: bool
+var standing_delay: float
 
 @export var fall_effect: PackedScene = preload("res://Scenes/Effects/Particles/Fall.tscn")
 
@@ -45,7 +45,7 @@ func _move(delta) -> void:
 			parent.velocity -= parent.velocity.normalized() * _friction_multiplier
 		else:
 			parent.velocity = Vector2.ZERO
-	elif movement_blocked == false and fallen == false:
+	elif !movement_blocked and !fallen:
 		parent.velocity += direction * acceleration
 		if parent.has_node("NavigationAgent"):
 			parent.get_node("NavigationAgent").set_velocity(direction * acceleration)
@@ -54,7 +54,7 @@ func _move(delta) -> void:
 	parent.move_and_slide()
 
 func _walk_animation():
-	if animation_component == null or flying == true or fallen == true:
+	if animation_component == null or flying or !fallen:
 		return
 	
 	if parent.velocity == Vector2.ZERO and animation_component.animation_priority == 1:
@@ -75,7 +75,7 @@ func _walk_animation():
 func _fly_movement() -> void:
 	var fly_velocity = fly_direction * fly_speed * fly_modifier
 	
-	if direction != Vector2.ZERO and fallen == false:
+	if direction != Vector2.ZERO and !fallen:
 		var control_velocity = direction * acceleration
 		var combined_velocity = fly_velocity + control_velocity
 		parent.velocity = combined_velocity.limit_length(fly_speed + max_speed)
@@ -85,7 +85,7 @@ func _fly_movement() -> void:
 	parent.move_and_slide()
 
 func _fly(delta):
-	if not flying or fly_speed <= 0:
+	if !flying or fly_speed <= 0:
 		return
 	
 	fly_speed -= 400 * delta
@@ -113,10 +113,10 @@ func throw(throw_direction: Vector2, throw_speed: float, throw_stop_speed: float
 		flying = true
 
 func _fall_process(delta):
-	if fallen == false:
+	if !fallen:
 		return
 	
-	if flying == false:
+	if !flying:
 		standing_delay -= delta
 	if standing_delay <= 0:
 		stand_up()
@@ -124,7 +124,7 @@ func _fall_process(delta):
 func drop(delay):
 	standing_delay += delay
 	
-	if fallen == true:
+	if fallen:
 		return
 	
 	fallen = true

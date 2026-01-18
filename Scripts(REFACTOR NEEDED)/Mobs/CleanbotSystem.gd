@@ -1,4 +1,4 @@
-extends "res://Scripts/Mobs/EnemySystem.gd"
+extends "res://Scripts(REFACTOR NEEDED)/Mobs/EnemySystem.gd"
 
 var cleaning: bool = false
 var rage: bool = false
@@ -8,7 +8,7 @@ var rage: bool = false
 @export var cleanbot_rage_texture: Resource
 
 func _enemy_logic(_delta):
-	if rage == true:
+	if rage == false:
 		if target == null:
 			rage = false
 			sprite.texture = cleanbot_texture

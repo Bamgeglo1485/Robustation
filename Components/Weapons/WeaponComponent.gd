@@ -48,7 +48,6 @@ func _swing(direction):
 func _cooldown():
 	if cooldown_delay != 0:
 		cooldown = true
-		
 		if timers_timescaled == true:
 			await get_tree().create_timer(cooldown_delay).timeout
 		else:

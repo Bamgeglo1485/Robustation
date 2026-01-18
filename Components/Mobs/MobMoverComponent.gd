@@ -107,7 +107,6 @@ func throw(throw_direction: Vector2, throw_speed: float, throw_stop_speed: float
 	
 	fly_speed = actual_speed
 	base_fly_speed = actual_speed
-	fly_stop_speed = throw_speed
 	fly_stop_speed = throw_stop_speed
 	
 	if fly_speed > 100 and fly_direction != Vector2.ZERO:

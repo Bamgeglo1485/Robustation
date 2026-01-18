@@ -58,8 +58,8 @@ func kick_teleport():
 	parent.global_position = teleport_position
 	
 	if kick_target != null and not kick_target.has_node("ProjectileComponent"):
-		kick_weapon.cooldown = false
-		kick_weapon.attack(self, false)
+		var direction = (kick_target.global_position - parent.global_position)
+		kick_weapon._melee_attack_target(kick_target, direction)
 	elif kick_target.has_node("ProjectileComponent"):
 		kick_target = null
 	

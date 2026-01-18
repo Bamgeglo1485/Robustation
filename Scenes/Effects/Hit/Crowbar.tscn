@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cmjp8nchl1qit"]
 
 [ext_resource type="Texture2D" uid="uid://bgixpaxb82hij" path="res://Textures/Weapons/Crowbar/crowbar.png" id="1_tgvkw"]
-[ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts/Effects/TimedDelete.gd" id="2_lg4ro"]
+[ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts(REFACTOR NEEDED)/Effects/TimedDelete.gd" id="2_lg4ro"]
 
 [sub_resource type="Gradient" id="Gradient_xn8vk"]
 colors = PackedColorArray(1, 1, 1, 0.7411765, 1, 1, 1, 1)

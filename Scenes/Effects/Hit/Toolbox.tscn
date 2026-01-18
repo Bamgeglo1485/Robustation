@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cf6tlkwsb1qq2"]
 
-[ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts/Effects/TimedDelete.gd" id="1_gy36f"]
+[ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts(REFACTOR NEEDED)/Effects/TimedDelete.gd" id="1_gy36f"]
 [ext_resource type="Texture2D" uid="uid://dverpu5mv40au" path="res://Textures/Weapons/Toolbox/toolbox.png" id="2_rnmhq"]
 
 [sub_resource type="Gradient" id="Gradient_xn8vk"]

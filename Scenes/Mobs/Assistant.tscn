@@ -1,9 +1,9 @@
 [gd_scene load_steps=35 format=3 uid="uid://vjubfbb1hjee"]
 
 [ext_resource type="PackedScene" uid="uid://c0eulucj1dtco" path="res://Scenes/Mobs/Base/BaseEnemy.tscn" id="1_bk7ip"]
-[ext_resource type="Script" uid="uid://bt3tj361yyosk" path="res://Scripts/Mobs/AssistantSystem.gd" id="2_fyx81"]
-[ext_resource type="Script" uid="uid://c6dwbfbr85v85" path="res://Scripts/Weapons/MeleeWeaponSystem.gd" id="3_6s5yd"]
-[ext_resource type="Script" uid="uid://cwhipi7j1doff" path="res://Scripts/RandomTextureSystem.gd" id="3_nv2ml"]
+[ext_resource type="Script" uid="uid://bt3tj361yyosk" path="res://Scripts(REFACTOR NEEDED)/Mobs/AssistantSystem.gd" id="2_fyx81"]
+[ext_resource type="Script" path="res://Scripts/Weapons/MeleeWeaponSystem.gd" id="3_6s5yd"]
+[ext_resource type="Script" uid="uid://cwhipi7j1doff" path="res://Scripts(REFACTOR NEEDED)/RandomTextureSystem.gd" id="3_nv2ml"]
 [ext_resource type="PackedScene" uid="uid://cf6tlkwsb1qq2" path="res://Scenes/Effects/Hit/Toolbox.tscn" id="4_nv2ml"]
 [ext_resource type="Texture2D" uid="uid://bycgr8sglyoi3" path="res://Textures/Mobs/Mobs/passanger.png" id="4_r4whd"]
 [ext_resource type="Texture2D" uid="uid://1yvrhqvfqqus" path="res://Textures/Weapons/Toolbox/toolbox_inhand.png" id="5_1g5ge"]

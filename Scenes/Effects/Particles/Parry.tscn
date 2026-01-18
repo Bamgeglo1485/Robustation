@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://lf1pf5qmfpp4"]
 
-[ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts/Effects/TimedDelete.gd" id="2_hcue4"]
+[ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts(REFACTOR NEEDED)/Effects/TimedDelete.gd" id="2_hcue4"]
 [ext_resource type="PackedScene" uid="uid://bkvbjh83h5ap3" path="res://Scenes/Effects/Particles/ParrySymbols.tscn" id="2_i4s1l"]
 
 [sub_resource type="Curve" id="Curve_mgjcw"]

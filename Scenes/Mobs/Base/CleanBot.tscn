@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://cm7i3v6s6xr3n"]
 
 [ext_resource type="PackedScene" uid="uid://c0eulucj1dtco" path="res://Scenes/Mobs/Base/BaseEnemy.tscn" id="1_jq0t8"]
-[ext_resource type="Script" uid="uid://ccp2nosanxd0p" path="res://Scripts/Mobs/CleanbotSystem.gd" id="2_ihsqm"]
+[ext_resource type="Script" uid="uid://ccp2nosanxd0p" path="res://Scripts(REFACTOR NEEDED)/Mobs/CleanbotSystem.gd" id="2_ihsqm"]
 [ext_resource type="Texture2D" uid="uid://bctt0pg6d4nbo" path="res://Textures/Mobs/Mobs/cleanbot.png" id="3_5ak7a"]
 [ext_resource type="PackedScene" uid="uid://c6hdbx68d4jqg" path="res://Scenes/Effects/Particles/CleanbotGib.tscn" id="3_m2uay"]
 [ext_resource type="Texture2D" uid="uid://bgipu5cvjg3ql" path="res://Textures/Mobs/Mobs/cleanbot_rage.png" id="3_rmva3"]

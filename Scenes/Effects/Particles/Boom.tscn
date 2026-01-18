@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://cyp3pqnhbfrj3" path="res://Resources/Shaders/Jiggle.tres" id="1_jhcux"]
 [ext_resource type="Texture2D" uid="uid://c6bub62glyrsf" path="res://Textures/Effects/Particles/boom.png" id="2_jhcux"]
-[ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts/Effects/TimedDelete.gd" id="3_gxwgi"]
+[ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts(REFACTOR NEEDED)/Effects/TimedDelete.gd" id="3_gxwgi"]
 
 [sub_resource type="Gradient" id="Gradient_lvx2o"]
 offsets = PackedFloat32Array(0.009090909, 0.5090909, 0.9909091)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://g2ac83tmeyxn"]
 
 [ext_resource type="Texture2D" uid="uid://bbk76vne52rnv" path="res://Textures/Effects/Particles/blood_big.png" id="1_kgwu6"]
-[ext_resource type="Script" uid="uid://ckngjbi4531ra" path="res://Scripts/Effects/BloodSystem.gd" id="2_7m5ur"]
+[ext_resource type="Script" uid="uid://ckngjbi4531ra" path="res://Scripts(REFACTOR NEEDED)/Effects/BloodSystem.gd" id="2_7m5ur"]
 [ext_resource type="Texture2D" uid="uid://dqxd8gltygvr4" path="res://Textures/Effects/Organs/brain.png" id="3_s0kwc"]
 [ext_resource type="Texture2D" uid="uid://svtalply7ojr" path="res://Textures/Effects/Organs/eyeball-r.png" id="3_si16w"]
 [ext_resource type="Script" uid="uid://d2eyb2xe1mh3p" path="res://Components/Entity/OrganComponent.gd" id="4_kg6vs"]

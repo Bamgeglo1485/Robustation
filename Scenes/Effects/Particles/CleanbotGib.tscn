@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://c6hdbx68d4jqg"]
 
 [ext_resource type="Texture2D" uid="uid://bc4akrjd4yio1" path="res://Textures/Effects/Particles/blood.png" id="1_oc2wt"]
-[ext_resource type="Script" uid="uid://ckngjbi4531ra" path="res://Scripts/Effects/BloodSystem.gd" id="2_xei43"]
+[ext_resource type="Script" uid="uid://ckngjbi4531ra" path="res://Scripts(REFACTOR NEEDED)/Effects/BloodSystem.gd" id="2_xei43"]
 [ext_resource type="Script" uid="uid://cbntkpop03p5e" path="res://Components/Entity/PhysicalParticleComponent.gd" id="4_0jlee"]
 [ext_resource type="Texture2D" uid="uid://cvt7rxsrr8jc5" path="res://Textures/Effects/Organs/junk-bucket.png" id="4_su8ag"]
 [ext_resource type="Texture2D" uid="uid://caw1rdwkyrooc" path="res://Textures/Effects/Organs/borg_arm.png" id="7_aq6w6"]

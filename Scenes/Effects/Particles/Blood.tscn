@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://fhhycrapltrq"]
 
 [ext_resource type="Texture2D" uid="uid://bc4akrjd4yio1" path="res://Textures/Effects/Particles/blood.png" id="1_iq24q"]
-[ext_resource type="Script" uid="uid://ckngjbi4531ra" path="res://Scripts/Effects/BloodSystem.gd" id="2_70dfb"]
+[ext_resource type="Script" uid="uid://ckngjbi4531ra" path="res://Scripts(REFACTOR NEEDED)/Effects/BloodSystem.gd" id="2_70dfb"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ttwd7"]
 particle_flag_disable_z = true

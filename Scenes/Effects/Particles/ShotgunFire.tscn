@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cowxlra6ogbp0"]
 
-[ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts/Effects/TimedDelete.gd" id="1_h4vrm"]
+[ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts(REFACTOR NEEDED)/Effects/TimedDelete.gd" id="1_h4vrm"]
 
 [sub_resource type="Curve" id="Curve_gec8y"]
 _limits = [0.0, 1.6853933, 0.0, 1.0]

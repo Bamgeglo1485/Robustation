@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://40fiorxrk4xk"]
 
 [ext_resource type="Texture2D" uid="uid://bc4akrjd4yio1" path="res://Textures/Effects/Particles/blood.png" id="1_nr0qg"]
-[ext_resource type="Script" uid="uid://ckngjbi4531ra" path="res://Scripts/Effects/BloodSystem.gd" id="2_nr0qg"]
+[ext_resource type="Script" uid="uid://ckngjbi4531ra" path="res://Scripts(REFACTOR NEEDED)/Effects/BloodSystem.gd" id="2_nr0qg"]
 
 [sub_resource type="Curve" id="Curve_gec8y"]
 _limits = [0.0, 1.6853933, 0.0, 1.0]

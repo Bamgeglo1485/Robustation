@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bbqpmpj4ntyg"]
 
-[ext_resource type="Script" uid="uid://b8ixjn50v3a88" path="res://Scripts/ExplosionSystem.gd" id="1_cpk21"]
+[ext_resource type="Script" uid="uid://b8ixjn50v3a88" path="res://Scripts(REFACTOR NEEDED)/ExplosionSystem.gd" id="1_cpk21"]
 [ext_resource type="PackedScene" uid="uid://bjqvcwxstx8u1" path="res://Scenes/Effects/Particles/Boom.tscn" id="2_a5ua4"]
 [ext_resource type="PackedScene" uid="uid://dmjnaimj7xbw1" path="res://Scenes/Effects/ExplosionEffect.tscn" id="2_cq02y"]
 [ext_resource type="PackedScene" uid="uid://do6wj3407tcik" path="res://Scenes/Effects/Particles/Soot.tscn" id="3_a5ua4"]

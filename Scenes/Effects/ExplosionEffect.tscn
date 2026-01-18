@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://dmjnaimj7xbw1"]
 
-[ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts/Effects/TimedDelete.gd" id="1_kodbr"]
+[ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts(REFACTOR NEEDED)/Effects/TimedDelete.gd" id="1_kodbr"]
 [ext_resource type="Material" uid="uid://4yrd4354bvw7" path="res://Resources/Shaders/Explosion.tres" id="2_cq02y"]
-[ext_resource type="Script" uid="uid://tjlcu3a27wqd" path="res://Scripts/Effects/ShockwaveEffect.gd" id="3_a5ua4"]
+[ext_resource type="Script" uid="uid://tjlcu3a27wqd" path="res://Scripts(REFACTOR NEEDED)/Effects/ShockwaveEffect.gd" id="3_a5ua4"]
 [ext_resource type="AudioStream" uid="uid://ba7j68er83sfy" path="res://Resources/Audio/ExplosionRandom.tres" id="4_a5ua4"]
 
 [sub_resource type="Curve" id="Curve_mgjcw"]

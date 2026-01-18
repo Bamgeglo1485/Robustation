@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://beyi1acvpd21n"]
 
 [ext_resource type="Texture2D" uid="uid://bc4akrjd4yio1" path="res://Textures/Effects/Particles/blood.png" id="1_0er5h"]
-[ext_resource type="Script" uid="uid://ckngjbi4531ra" path="res://Scripts/Effects/BloodSystem.gd" id="3_v8gbt"]
+[ext_resource type="Script" uid="uid://ckngjbi4531ra" path="res://Scripts(REFACTOR NEEDED)/Effects/BloodSystem.gd" id="3_v8gbt"]
 
 [sub_resource type="Shader" id="Shader_0er5h"]
 code = "shader_type canvas_item;

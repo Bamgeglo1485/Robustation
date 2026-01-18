@@ -46,10 +46,6 @@ func kick():
 	
 	elif kick_target != null and can_teleport == true and kicks < max_kicks:
 		kick_teleport()
-		return
-	
-	else:
-		return
 
 func kick_teleport():
 	if not is_instance_valid(kick_target):
@@ -67,13 +63,14 @@ func kick_teleport():
 	elif kick_target.has_node("ProjectileComponent"):
 		kick_target = null
 	
-	can_teleport_timer.start()
-	
 	if parent.has_node("HealthComponent"):
 		parent.get_node("HealthComponent").INVINCIBLE = true
 	
 	can_teleport = false
 	kicks += 1
+	
+	target_clear_timer.start()
+	can_teleport_timer.start()
 	
 	if teleport_sound != null:
 		teleport_sound.global_position = parent.global_position

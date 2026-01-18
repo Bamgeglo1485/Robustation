@@ -71,37 +71,27 @@ vec3 hsl2rgb(vec3 hsl) {
 }
 
 void fragment() {
-    // Get screen texture color (post-processing)
     vec4 tex_color = texture(SCREEN_TEXTURE, SCREEN_UV);
     
-    // Apply RGB adjustments
     vec3 color = tex_color.rgb;
     color.r *= red_factor;
     color.g *= green_factor;
     color.b *= blue_factor;
 
-    // Convert to HSL for hue and saturation adjustments
     vec3 hsl = rgb2hsl(color);
     
-    // Hue shift
     hsl.x = mod(hsl.x + hue_shift, 1.0);
     
-    // Saturation adjustment
     hsl.y *= saturation;
     
-    // Clamp saturation
     hsl.y = clamp(hsl.y, 0.0, 1.0);
 
-    // Convert back to RGB
     color = hsl2rgb(hsl);
 
-    // Apply contrast and brightness
     color = color * contrast + vec3(brightness);
     
-    // Apply gamma correction
     color = pow(color, vec3(gamma));
     
-    // Apply vignette effect
     if (vignette_strength > 0.0) {
         vec2 uv = SCREEN_UV * 2.0 - 1.0;
         float vignette = 1.0 - dot(uv, uv) * vignette_strength;

@@ -61,24 +61,12 @@ spread_angle = 3
 bullets_max_count = 1
 bullets = 1
 bullets_recover_count = 1
-shots = null
-shots_angle = null
 shoot_sound = NodePath("ShootSound")
 bullets_recovery_delay = 8.0
-timers_timescaled = null
-can_attack = null
-cooldown = null
 cooldown_delay = 0.0
 swing_delay = 0.2
-swinging = null
 equipped_texture = ExtResource("13_aa22f")
 icon_texture = ExtResource("24_46s63")
-damage_modifier = null
-self_throw_speed = null
-self_throw_stop_speed = null
-swing_rotation_multiplier = null
-attack_rotation_multiplier = null
-attack_shift_multiplier = null
 metadata/_custom_type_script = "uid://bi1gje1pfokqc"
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Spear" index="0"]
@@ -115,25 +103,17 @@ spread_angle = 2
 bullets_max_count = 6
 bullets = 6
 bullets_recover_count = 6
-shots = null
-shots_angle = null
 case_scene = ExtResource("15_lx2yc")
 shoot_sound = NodePath("ShootSound")
 empty_shoot_sound = NodePath("EmptySound")
 bullets_recover_sound = NodePath("BulletRecoverSound")
 bullets_recovery_delay = 2.0
 gun_fire_effect = ExtResource("16_w1un4")
-timers_timescaled = null
-can_attack = null
-cooldown = null
 cooldown_delay = 0.5
 swing_delay = 0.0
-swinging = null
 equipped_texture = ExtResource("17_w1un4")
 icon_texture = ExtResource("18_ger1f")
-damage_modifier = null
-self_throw_speed = 500
-self_throw_stop_speed = null
+self_throw_speed = 425
 swing_rotation_multiplier = 0.0
 attack_rotation_multiplier = -0.6
 attack_shift_multiplier = -0.7
@@ -193,11 +173,10 @@ stream = ExtResource("3_8fokh")
 stream = ExtResource("11_si836")
 
 [node name="CanTeleportTimer" type="Timer" parent="KickDashAbilityComponent" index="1"]
-one_shot = true
+wait_time = 0.5
 ignore_time_scale = true
 
 [node name="TargetClearTimer" type="Timer" parent="KickDashAbilityComponent" index="2"]
-one_shot = true
 ignore_time_scale = true
 
 [node name="Teleport" type="AudioStreamPlayer2D" parent="Sounds" index="0"]

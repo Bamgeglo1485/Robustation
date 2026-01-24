@@ -18,7 +18,7 @@ uniform float aura_opacity: hint_range(0.0, 1.0) = 1.0;
 
 /* ================= FLASH EFFECT UNIFORMS ================= */
 uniform vec4 flash_color : source_color = vec4(1., 1., 0., 1);
-uniform float flash_intensity : hint_range(0.0, 1.0) = 0.0;
+uniform float flash_intensity : hint_range(0.0, 1.0) = 1.0;
 
 /* ================= GLITCH EFFECT UNIFORMS ================= */
 uniform float glitch_chance : hint_range(0.0, 1.0) = 0.2;

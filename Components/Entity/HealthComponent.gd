@@ -37,7 +37,7 @@ func _ready():
 	health = max_health
 
 func set_health(new_health: int):
-	if shader == null and parent != null and parent.material != null:
+	if (shader == null and parent != null and parent.material != null) or shader != null and parent.material != null and shader != parent.material:
 		shader = parent.material
 	
 	EventBusManager.health_changed.emit(parent, health, new_health)
@@ -105,7 +105,7 @@ func damage_effects(damager):
 		blood_spurt_effect.emitting = true
 		blood_spurt_effect.global_position = parent.global_position
 
-func _flash(speed_multiplier: float = 1, color: Color = Color(0.7, 0.0, 0.3, 1.0)):
+func _flash(speed_multiplier: float = 1, color: Color = Color(0.7, 0.0, 0.3, 0.729)):
 	if shader != null and shader.get_shader_parameter("flash_color"):
 		var _tween = create_tween()
 		_tween.tween_property(shader, "shader_parameter/flash_color", color, 0.1 * speed_multiplier)

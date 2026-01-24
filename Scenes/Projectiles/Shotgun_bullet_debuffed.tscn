@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bc7it233sooyn"]
+
+[ext_resource type="PackedScene" uid="uid://8u8crosi4th3" path="res://Scenes/Projectiles/Shotgun_bullet.tscn" id="1_86s3g"]
+
+[node name="Projectile" instance=ExtResource("1_86s3g")]
+
+[node name="ProjectileComponent" parent="." index="0"]
+damage = 10

@@ -99,7 +99,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.has_node("HealthComponent"):
 		body.get_node("HealthComponent").take_damage(modified_damage, shooter)
 	
-	if body.has_node("MobMoverComponent"):
+	if body.has_node("MobMoverComponent") and throw_speed != 0:
 		body.get_node("MobMoverComponent").throw(parent.velocity, throw_speed, shooter)
 	
 	if explode_on_hit == true:

@@ -19,14 +19,12 @@
 [sub_resource type="Shader" id="Shader_yekaq"]
 code = "shader_type canvas_item;
 
-// Blood effect uniforms
 uniform sampler2D blood_noise : repeat_enable;
 uniform float blood_noise_shading = 1.0;
 uniform float blood_intensity : hint_range(0.0, 1.0) = 0.0; 
 uniform vec4 blood_color : source_color = vec4(1.0, 0.0, 0.0, 1.0);
 uniform float blood_pixel_scale : hint_range(1.0, 100.0) = 10.0;
 
-// Dynamic outline effect uniforms (replacing aura)
 uniform float aura_max_line_width: hint_range(0.0, 100.0) = 10.0;
 uniform float aura_min_line_width: hint_range(0.0, 100.0) = 5.0;
 uniform float aura_speed: hint_range(0.0, 10.0) = 1.0;
@@ -35,25 +33,20 @@ uniform vec4 aura_outline_color: source_color = vec4(1.0, 1.0, 1.0, 1.0);
 uniform float aura_outline_tolerance: hint_range(0.0, 0.999) = 0.0;
 uniform float aura_opacity: hint_range(0.0, 1.0) = 1.0;
 
-// Flash effect uniforms
 uniform vec4 flash_color : source_color = vec4(1., 1., 0., 1);
-uniform float flash_intensity : hint_range(0.0, 1.0) = 0.0; // Контроль интенсивности вспышки
+uniform float flash_intensity : hint_range(0.0, 1.0) = 0.0;
 
-// Compensate UV for outline
 void vertex() {
-	// Используем правильные имена переменных
 	float max_width = max(aura_max_line_width, aura_min_line_width);
 	VERTEX = vec2(VERTEX.x * (1.0 + TEXTURE_PIXEL_SIZE.x * max_width * 2.0), 
 				  VERTEX.y * (1.0 + TEXTURE_PIXEL_SIZE.y * max_width * 2.0));
 }
 
-// Checks a fragment for the edge of an uv
 bool border(vec2 uv) {
 	vec2 uvBorder = abs(uv - vec2(0.5));
 	return max(step(0.5, uvBorder.x), step(0.5, uvBorder.y)) > 0.0;
 }
 
-// Gets alpha of given fragment if not near the edge
 float get_alpha(sampler2D tex, vec2 uv) {
 	float res = 0.0;
 	if (!border(uv)) {
@@ -62,12 +55,10 @@ float get_alpha(sampler2D tex, vec2 uv) {
 	return res;
 }
 
-// Pseudorandom number
 float hash(vec2 p, float s) {
 	return fract(35.1 * sin(dot(vec3(112.3, 459.2, 753.2), vec3(p, s))));
 }
 
-// Noise function
 float noise(vec2 p, float s) {
 	vec2 d = vec2(0, 1);
 	vec2 b = floor(p);
@@ -77,7 +68,6 @@ float noise(vec2 p, float s) {
 		mix(hash(b + d.xy, s), hash(b + d.yy, s), f.x), f.y);
 }
 
-// Randomize line width at fragment
 float get_line_width(vec2 p, float s) {
 	p /= aura_block_size;
 	float w = 0.0;
@@ -91,7 +81,6 @@ float get_line_width(vec2 p, float s) {
 	return mix(aura_max_line_width, aura_min_line_width, w);
 }
 
-// Checks for neighboring pixels (for dynamic outline)
 float in_range(vec2 size, sampler2D tex, vec2 uv) {
 	float res = 0.0;
 	for (float i = -1.0; i < 2.0; i += 2.0) {
@@ -106,17 +95,13 @@ float in_range(vec2 size, sampler2D tex, vec2 uv) {
 }
 
 void fragment() {
-	// Получаем оригинальный цвет текстуры
 	vec4 originalColor = texture(TEXTURE, UV);
 	vec4 newColor = originalColor;
 	
-	// Apply dynamic outline effect
 	float max_width = max(aura_max_line_width, aura_min_line_width);
 	if (max_width > 0.0 && aura_opacity > 0.0) {
-		// Корректируем UV для ауры - используем тот же UV что и для основного цвета
 		vec2 uv = UV;
 		
-		// Проверяем границы
 		if (!border(uv)) {
 			float timeStep = floor(TIME * aura_speed);
 			vec2 size = TEXTURE_PIXEL_SIZE;
@@ -124,17 +109,14 @@ void fragment() {
 			float outline_alpha = step(1.0 - aura_outline_tolerance, in_range(size, TEXTURE, uv));
 			
 			if (outline_alpha > 0.0 && originalColor.a <= aura_outline_tolerance) {
-				// Применяем прозрачность ауры
 				vec4 aura_color_with_opacity = aura_outline_color;
 				aura_color_with_opacity.a *= aura_opacity * outline_alpha;
 				
-				// Используем цвет ауры только для прозрачных областей
 				newColor = aura_color_with_opacity;
 			}
 		}
 	}
 	
-	// Apply blood effect on top of outline
 	vec2 pixel_size = vec2(1.0) / TEXTURE_PIXEL_SIZE;
 	vec2 pixelated_uv = floor(UV * pixel_size / blood_pixel_scale) * (blood_pixel_scale / pixel_size);
 	
@@ -149,18 +131,14 @@ void fragment() {
 		final_color = mix(final_color, blood_color_final, blood_color.a * blood_mask);
 	}
 	
-	// Apply flash effect LAST (on top of everything)
 	if (flash_color.a > 0.0) {
-		// Используем flash_intensity для контроля силы эффекта
 		float flash_strength = flash_color.a * flash_intensity;
 		if (flash_strength > 0.0) {
-			// Смешиваем с цветом вспышки
 			vec3 flash_final = mix(final_color, flash_color.rgb, flash_strength);
 			final_color = flash_final;
 		}
 	}
 	
-	// Сохраняем альфа-канал оригинального цвета или ауры
 	float final_alpha = max(originalColor.a, newColor.a);
 	COLOR = vec4(final_color, final_alpha);
 }"

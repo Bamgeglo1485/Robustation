@@ -105,12 +105,9 @@ func damage_effects(damager):
 		blood_spurt_effect.emitting = true
 		blood_spurt_effect.global_position = parent.global_position
 
-func _flash(speed_multiplier: float = 1, color: Color = Color(0.7, 0.0, 0.3, 0.7)):
+func _flash(speed_multiplier: float = 1, color: Color = Color(0.7, 0.0, 0.3, 1.0)):
 	if shader != null and shader.get_shader_parameter("flash_color"):
 		var _tween = create_tween()
-		_tween.set_trans(Tween.TRANS_SINE)
-		_tween.set_ease(Tween.EASE_IN_OUT)
-		
 		_tween.tween_property(shader, "shader_parameter/flash_color", color, 0.1 * speed_multiplier)
 		_tween.tween_property(shader, "shader_parameter/flash_color", Color(0.7, 0.0, 0.3, 0.0), 0.2 * speed_multiplier)
 

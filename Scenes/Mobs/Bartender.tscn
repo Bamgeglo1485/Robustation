@@ -1,0 +1,86 @@
+[gd_scene load_steps=32 format=3 uid="uid://detw4so2cuuhb"]
+
+[ext_resource type="PackedScene" uid="uid://c0eulucj1dtco" path="res://Scenes/Mobs/Base/BaseEnemy.tscn" id="1_cs75w"]
+[ext_resource type="Texture2D" uid="uid://c3sledmjh2jwl" path="res://Textures/Mobs/Mobs/Hair/bartender.png" id="2_pjus4"]
+[ext_resource type="Texture2D" uid="uid://cryexxr4x761f" path="res://Textures/Mobs/Mobs/Hair/undercutright.png" id="3_p0u7e"]
+[ext_resource type="Script" uid="uid://bi1gje1pfokqc" path="res://Components/Weapons/RangeWeaponComponent.gd" id="3_tv8gs"]
+[ext_resource type="Script" uid="uid://bqvdlb3r03cs0" path="res://Components/Visual/DirectionalSpriteComponent.gd" id="4_p2u1y"]
+[ext_resource type="PackedScene" uid="uid://bc7it233sooyn" path="res://Scenes/Projectiles/Shotgun_bullet_debuffed.tscn" id="4_tv8gs"]
+[ext_resource type="PackedScene" uid="uid://vj6mn42tufxs" path="res://Scenes/Effects/Particles/Case/ShotgunCase.tscn" id="5_8fd87"]
+[ext_resource type="Texture2D" uid="uid://t8go84dailgi" path="res://Textures/Mobs/Mobs/Hair/shorthairg.png" id="5_oymp5"]
+[ext_resource type="PackedScene" uid="uid://cowxlra6ogbp0" path="res://Scenes/Effects/Particles/ShotgunFire.tscn" id="6_et3ly"]
+[ext_resource type="Texture2D" uid="uid://fx8bg7p2wfff" path="res://Textures/Mobs/Mobs/Hair/80s.png" id="6_s35q8"]
+[ext_resource type="Texture2D" uid="uid://3st8a6jvfl4i" path="res://Textures/Weapons/Shotgun/shotgun-inhand.png" id="7_11246"]
+[ext_resource type="Texture2D" uid="uid://exreeul6rla6" path="res://Textures/Mobs/Mobs/Hair/bald.png" id="7_hks56"]
+[ext_resource type="Texture2D" uid="uid://b60x76q21cp5u" path="res://Textures/Weapons/Shotgun/shotgun_icon.png" id="8_biq87"]
+[ext_resource type="Texture2D" uid="uid://b46je4cwbysn6" path="res://Textures/Mobs/Mobs/Hair/bun3.png" id="8_vpsl8"]
+[ext_resource type="AudioStream" uid="uid://cenp8snm2kjdm" path="res://Audio/Weapon/Projectile/shotgun_shoot.ogg" id="9_3c5wa"]
+[ext_resource type="Texture2D" uid="uid://boij24x83l0lv" path="res://Textures/Mobs/Mobs/Hair/afro2.png" id="9_ftumu"]
+[ext_resource type="AudioStream" uid="uid://2r0y32cx4e8s" path="res://Audio/Weapon/empty.ogg" id="10_coqyf"]
+[ext_resource type="Texture2D" uid="uid://b44oghif1lc4g" path="res://Textures/Mobs/Mobs/Hair/curls.png" id="10_tv8gs"]
+[ext_resource type="Texture2D" uid="uid://yqtajeusof8p" path="res://Textures/Mobs/Mobs/Hair/flair.png" id="11_17egj"]
+[ext_resource type="AudioStream" uid="uid://dhwn1xi06keaf" path="res://Audio/Weapon/shotgun_insert.ogg" id="11_lbqxj"]
+[ext_resource type="Texture2D" uid="uid://lcbe8war4xp7" path="res://Textures/Mobs/Mobs/Hair/spiky.png" id="12_8fd87"]
+[ext_resource type="Texture2D" uid="uid://ci84jx3iuyn21" path="res://Textures/Mobs/Mobs/Hair/bobcut.png" id="13_et3ly"]
+[ext_resource type="Texture2D" uid="uid://drxdjuw45awor" path="res://Textures/Mobs/Mobs/Hair/gentle.png" id="14_11246"]
+[ext_resource type="Texture2D" uid="uid://dpr87culdu5mg" path="res://Textures/Mobs/Mobs/Hair/swept2.png" id="15_biq87"]
+[ext_resource type="Texture2D" uid="uid://b1r30o42v7kyr" path="res://Textures/Mobs/Mobs/Hair/bobcurl.png" id="16_3c5wa"]
+[ext_resource type="Texture2D" uid="uid://dlu5n8uy6npxo" path="res://Textures/Mobs/Mobs/Hair/joestar.png" id="17_coqyf"]
+[ext_resource type="Texture2D" uid="uid://k32gxv505ucy" path="res://Textures/Mobs/Mobs/Hair/sidecut.png" id="18_lbqxj"]
+[ext_resource type="Texture2D" uid="uid://dab0prsqfymf6" path="res://Textures/Mobs/Mobs/Hair/halfbang.png" id="19_2nwrh"]
+[ext_resource type="Texture2D" uid="uid://c2j84lfhydlo7" path="res://Textures/Mobs/Mobs/Hair/bedheadv2.png" id="20_q7sf3"]
+[ext_resource type="Texture2D" uid="uid://4rew8bctbhwt" path="res://Textures/Mobs/Mobs/Hair/undercutleft.png" id="21_ka5a3"]
+[ext_resource type="Texture2D" uid="uid://cvtrwkf34me6c" path="res://Textures/Mobs/Mobs/Hair/classicmulder.png" id="22_mdp64"]
+
+[node name="Bartender" instance=ExtResource("1_cs75w")]
+
+[node name="Texture" parent="." index="2"]
+texture = ExtResource("2_pjus4")
+
+[node name="WeaponUserComponent" parent="." index="7" node_paths=PackedStringArray("selected_weapon")]
+selected_weapon = NodePath("Shotgun")
+
+[node name="Shotgun" type="Node" parent="WeaponUserComponent" index="0" node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound", "bullets_recover_sound")]
+script = ExtResource("3_tv8gs")
+projectile = ExtResource("4_tv8gs")
+spread_angle = 2
+bullets_max_count = 6
+bullets = 6
+bullets_recover_count = 6
+case_scene = ExtResource("5_8fd87")
+shoot_sound = NodePath("ShootSound")
+empty_shoot_sound = NodePath("EmptySound")
+bullets_recover_sound = NodePath("BulletRecoverSound")
+bullets_recovery_delay = 2.0
+gun_fire_effect = ExtResource("6_et3ly")
+cooldown_delay = 0.5
+swing_delay = 0.0
+equipped_texture = ExtResource("7_11246")
+icon_texture = ExtResource("8_biq87")
+self_throw_speed = 425
+swing_rotation_multiplier = 0.0
+attack_rotation_multiplier = -0.6
+attack_shift_multiplier = -0.7
+metadata/_custom_type_script = "uid://bi1gje1pfokqc"
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Shotgun" index="0"]
+stream = ExtResource("9_3c5wa")
+
+[node name="EmptySound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Shotgun" index="1"]
+stream = ExtResource("10_coqyf")
+
+[node name="BulletRecoverSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Shotgun" index="2"]
+stream = ExtResource("11_lbqxj")
+
+[node name="MoveToPointComponent" parent="AI" index="0"]
+run_to_target_range = 60.0
+run_from_target_range = 100.0
+
+[node name="Hair" type="Sprite2D" parent="." index="15"]
+texture = ExtResource("3_p0u7e")
+offset = Vector2(0, -2)
+region_enabled = true
+script = ExtResource("4_p2u1y")
+random_textures = Array[Texture2D]([ExtResource("5_oymp5"), ExtResource("6_s35q8"), ExtResource("7_hks56"), ExtResource("8_vpsl8"), ExtResource("9_ftumu"), ExtResource("10_tv8gs"), ExtResource("11_17egj"), ExtResource("12_8fd87"), ExtResource("13_et3ly"), ExtResource("14_11246"), ExtResource("15_biq87"), ExtResource("16_3c5wa"), ExtResource("17_coqyf"), ExtResource("18_lbqxj"), ExtResource("19_2nwrh"), ExtResource("20_q7sf3"), ExtResource("21_ka5a3"), ExtResource("22_mdp64"), ExtResource("3_p0u7e")])
+random_color = true
+metadata/_custom_type_script = "uid://bqvdlb3r03cs0"

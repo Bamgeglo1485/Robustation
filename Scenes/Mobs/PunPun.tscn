@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlvfaaebkqfa"]
+
+[ext_resource type="PackedScene" uid="uid://c0eulucj1dtco" path="res://Scenes/Mobs/Base/BaseEnemy.tscn" id="1_45881"]
+[ext_resource type="Texture2D" uid="uid://d4fp13y4g4eqc" path="res://Textures/Mobs/Mobs/punpun.png" id="2_twaep"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m5j7d"]
+radius = 7.0
+height = 20.0
+
+[node name="PunPun" instance=ExtResource("1_45881")]
+
+[node name="Texture" parent="." index="2"]
+texture = ExtResource("2_twaep")
+
+[node name="Collision" parent="." index="3"]
+position = Vector2(-1, -2)
+shape = SubResource("CapsuleShape2D_m5j7d")
+debug_color = Color(0, 0.60038817, 0.70000815, 0.44200003)
+
+[node name="MoveToTargetComponent" parent="AI" index="1"]
+priority = 1

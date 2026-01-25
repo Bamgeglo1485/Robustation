@@ -5,10 +5,12 @@ var raged = false
 @export var rage_delay: float = 15
 @export var rage_damage_addendum: float = 1
 @export var rage_damage_resistance_subtrahend: float = 0.5
+@export var rage_speed_modifier_addendum: float = 0
 @export var aura_effect: Node2D
 
 @onready var weapon_user_component: WeaponUserComponent = parent.get_node_or_null("WeaponUserComponent")
 @onready var health_component: HealthComponent = parent.get_node_or_null("HealthComponent")
+@onready var mob_mover_component: MobMoverComponent = parent.get_node_or_null("MobMoverComponent")
 
 @export var rage_sound: AudioStreamPlayer2D
 @export var unrage_sound: AudioStreamPlayer2D
@@ -20,6 +22,8 @@ signal rage_state_change(raged)
 func rage():
 	if raged == true:
 		return
+	
+	EventBusManager.raged.emit(parent)
 	
 	raged = true
 	rage_state_change.emit(raged)
@@ -45,6 +49,8 @@ func rage():
 		weapon_user_component.damage_modifier += rage_damage_addendum
 	if health_component != null:
 		health_component.damage_modifier -= rage_damage_resistance_subtrahend
+	if mob_mover_component != null:
+		mob_mover_component.speed_modifier += rage_speed_modifier_addendum
 	
 	if rage_delay != 0:
 		await get_tree().create_timer(rage_delay).timeout
@@ -73,3 +79,5 @@ func unrage():
 		weapon_user_component.damage_modifier -= rage_damage_addendum
 	if health_component != null:
 		health_component.damage_modifier += rage_damage_resistance_subtrahend
+	if mob_mover_component != null:
+		mob_mover_component.speed_modifier -= rage_speed_modifier_addendum

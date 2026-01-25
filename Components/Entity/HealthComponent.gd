@@ -70,6 +70,8 @@ func take_damage(damage: int, damager):
 	health -= int(modified_damage)
 	if damage > 0:
 		damage_effects(damager)
+	else:
+		_flash(1, Color(0.0, 0.937, 0.792, 1.0))
 	
 	EventBusManager.damaged.emit(parent, damage, damager)
 	

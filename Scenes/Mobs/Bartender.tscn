@@ -1,6 +1,7 @@
-[gd_scene load_steps=32 format=3 uid="uid://detw4so2cuuhb"]
+[gd_scene load_steps=41 format=3 uid="uid://detw4so2cuuhb"]
 
 [ext_resource type="PackedScene" uid="uid://c0eulucj1dtco" path="res://Scenes/Mobs/Base/BaseEnemy.tscn" id="1_cs75w"]
+[ext_resource type="Shader" uid="uid://cch5nmhk121wx" path="res://Resources/Shaders/MobShader.gdshader" id="2_11246"]
 [ext_resource type="Texture2D" uid="uid://c3sledmjh2jwl" path="res://Textures/Mobs/Mobs/Hair/bartender.png" id="2_pjus4"]
 [ext_resource type="Texture2D" uid="uid://cryexxr4x761f" path="res://Textures/Mobs/Mobs/Hair/undercutright.png" id="3_p0u7e"]
 [ext_resource type="Script" uid="uid://bi1gje1pfokqc" path="res://Components/Weapons/RangeWeaponComponent.gd" id="3_tv8gs"]
@@ -21,6 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://yqtajeusof8p" path="res://Textures/Mobs/Mobs/Hair/flair.png" id="11_17egj"]
 [ext_resource type="AudioStream" uid="uid://dhwn1xi06keaf" path="res://Audio/Weapon/shotgun_insert.ogg" id="11_lbqxj"]
 [ext_resource type="Texture2D" uid="uid://lcbe8war4xp7" path="res://Textures/Mobs/Mobs/Hair/spiky.png" id="12_8fd87"]
+[ext_resource type="Script" uid="uid://da2q40ragr5wk" path="res://Components/Mobs/NPC/BuddyComponent.gd" id="12_17egj"]
+[ext_resource type="AudioStream" uid="uid://dba5vdenu1s2u" path="res://Audio/Effects/bartender_rage.ogg" id="13_biq87"]
 [ext_resource type="Texture2D" uid="uid://ci84jx3iuyn21" path="res://Textures/Mobs/Mobs/Hair/bobcut.png" id="13_et3ly"]
 [ext_resource type="Texture2D" uid="uid://drxdjuw45awor" path="res://Textures/Mobs/Mobs/Hair/gentle.png" id="14_11246"]
 [ext_resource type="Texture2D" uid="uid://dpr87culdu5mg" path="res://Textures/Mobs/Mobs/Hair/swept2.png" id="15_biq87"]
@@ -31,11 +34,52 @@
 [ext_resource type="Texture2D" uid="uid://c2j84lfhydlo7" path="res://Textures/Mobs/Mobs/Hair/bedheadv2.png" id="20_q7sf3"]
 [ext_resource type="Texture2D" uid="uid://4rew8bctbhwt" path="res://Textures/Mobs/Mobs/Hair/undercutleft.png" id="21_ka5a3"]
 [ext_resource type="Texture2D" uid="uid://cvtrwkf34me6c" path="res://Textures/Mobs/Mobs/Hair/classicmulder.png" id="22_mdp64"]
+[ext_resource type="Script" uid="uid://d0a8e3f7tepch" path="res://Components/Mobs/RageComponent.gd" id="33_et3ly"]
+[ext_resource type="PackedScene" uid="uid://bpw4s6mkg7wkg" path="res://Scenes/Effects/Particles/RageEffect.tscn" id="34_11246"]
+[ext_resource type="Script" uid="uid://clr7jbioge17t" path="res://Components/Entity/ExplosionResistanceComponent.gd" id="37_3c5wa"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uq2f5"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hpbaa"]
+noise = SubResource("FastNoiseLite_uq2f5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_biq87"]
+shader = ExtResource("2_11246")
+shader_parameter/blood_noise = SubResource("NoiseTexture2D_hpbaa")
+shader_parameter/blood_noise_shading = 1.0
+shader_parameter/blood_intensity = 1.0
+shader_parameter/blood_color = Color(0.44688815, 0, 0.14078581, 0.7294118)
+shader_parameter/blood_pixel_scale = 1.0
+shader_parameter/aura_max_line_width = 0.0
+shader_parameter/aura_min_line_width = 0.0
+shader_parameter/aura_speed = 10.0
+shader_parameter/aura_block_size = 1.01200004807
+shader_parameter/aura_outline_color = Color(1.1761364, 0.7979116, 0, 1)
+shader_parameter/aura_outline_tolerance = 0.0
+shader_parameter/aura_opacity = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 0)
+shader_parameter/flash_intensity = 1.0
+shader_parameter/glitch_chance = 0.0
+shader_parameter/glitch_speed = 20.0
+shader_parameter/glitch_slice_density = 1.0
+shader_parameter/glitch_slice_strength = 0.1
+shader_parameter/glitch_shake_strength = 0.05
+shader_parameter/glitch_chroma_offset = 1.0
+shader_parameter/glitch_noise_strength = 0.2
+shader_parameter/glitch_color_flash_strength = 0.0
+shader_parameter/glitch_scanline_strength = 0.18
+shader_parameter/glitch_local_warp_strength = 0.14
+shader_parameter/glitch_flip_chance = 0.0
 
 [node name="Bartender" instance=ExtResource("1_cs75w")]
+material = SubResource("ShaderMaterial_biq87")
+metadata/_edit_horizontal_guides_ = [-17.0]
 
 [node name="Texture" parent="." index="2"]
 texture = ExtResource("2_pjus4")
+
+[node name="HealthComponent" parent="." index="4"]
+max_health = 200
 
 [node name="WeaponUserComponent" parent="." index="7" node_paths=PackedStringArray("selected_weapon")]
 selected_weapon = NodePath("Shotgun")
@@ -57,7 +101,6 @@ cooldown_delay = 0.5
 swing_delay = 0.0
 equipped_texture = ExtResource("7_11246")
 icon_texture = ExtResource("8_biq87")
-self_throw_speed = 425
 swing_rotation_multiplier = 0.0
 attack_rotation_multiplier = -0.6
 attack_shift_multiplier = -0.7
@@ -72,15 +115,39 @@ stream = ExtResource("10_coqyf")
 [node name="BulletRecoverSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Shotgun" index="2"]
 stream = ExtResource("11_lbqxj")
 
+[node name="Rage" type="AudioStreamPlayer2D" parent="Sounds" index="1"]
+stream = ExtResource("13_biq87")
+
 [node name="MoveToPointComponent" parent="AI" index="0"]
-run_to_target_range = 60.0
-run_from_target_range = 100.0
+run_to_target_range = 150.0
+run_from_target_range = 200.0
 
 [node name="Hair" type="Sprite2D" parent="." index="15"]
 texture = ExtResource("3_p0u7e")
-offset = Vector2(0, -2)
+offset = Vector2(0, -1)
 region_enabled = true
 script = ExtResource("4_p2u1y")
 random_textures = Array[Texture2D]([ExtResource("5_oymp5"), ExtResource("6_s35q8"), ExtResource("7_hks56"), ExtResource("8_vpsl8"), ExtResource("9_ftumu"), ExtResource("10_tv8gs"), ExtResource("11_17egj"), ExtResource("12_8fd87"), ExtResource("13_et3ly"), ExtResource("14_11246"), ExtResource("15_biq87"), ExtResource("16_3c5wa"), ExtResource("17_coqyf"), ExtResource("18_lbqxj"), ExtResource("19_2nwrh"), ExtResource("20_q7sf3"), ExtResource("21_ka5a3"), ExtResource("22_mdp64"), ExtResource("3_p0u7e")])
 random_color = true
 metadata/_custom_type_script = "uid://bqvdlb3r03cs0"
+
+[node name="BuddyComponent" type="Node" parent="." index="16"]
+script = ExtResource("12_17egj")
+buddy_group = "Bartender"
+metadata/_custom_type_script = "uid://da2q40ragr5wk"
+
+[node name="RageComponent" type="Node" parent="." index="17" node_paths=PackedStringArray("aura_effect", "rage_sound")]
+script = ExtResource("33_et3ly")
+rage_delay = 0.0
+rage_damage_addendum = 0.0
+rage_damage_resistance_subtrahend = 0.7
+rage_speed_modifier_addendum = 0.5
+aura_effect = NodePath("..")
+rage_sound = NodePath("../Sounds/Rage")
+rage_effect = ExtResource("34_11246")
+metadata/_custom_type_script = "uid://d0a8e3f7tepch"
+
+[node name="ExplosionResistanceComponent" type="Node" parent="." index="18"]
+script = ExtResource("37_3c5wa")
+resistance = 0.2
+metadata/_custom_type_script = "uid://clr7jbioge17t"

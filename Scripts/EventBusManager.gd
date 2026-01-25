@@ -12,3 +12,5 @@ signal tendency_changed(emitter)
 signal tendency_section_changed(emitter)
 
 signal kick_dash_combo(emitter)
+
+signal raged(emitter)

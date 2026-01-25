@@ -6,6 +6,7 @@ class_name MobMoverComponent extends Component
 @export var max_speed: int = base_max_speed
 @export var acceleration: int = 100
 @export var friction: int = 700
+@export var speed_modifier: float = 1
 var direction = Vector2.ZERO
 
 @export var can_fall: bool = true
@@ -54,8 +55,8 @@ func _move(delta) -> void:
 	elif movement_blocked == false and fallen == false:
 		parent.velocity += direction * acceleration
 		if parent.has_node("NavigationAgent"):
-			parent.get_node("NavigationAgent").set_velocity(direction * acceleration)
-		parent.velocity = parent.velocity.limit_length(max_speed)
+			parent.get_node("NavigationAgent").set_velocity(direction * acceleration * speed_modifier)
+		parent.velocity = parent.velocity.limit_length(max_speed * speed_modifier)
 	
 	parent.move_and_slide()
 

@@ -3,7 +3,7 @@ class_name DashAbilityComponent extends Component
 @export var trail_effect: bool = true
 @export var dash_sound: AudioStreamPlayer2D
 @export var overdose_refuel_sound: AudioStreamPlayer2D
-@export var overdose_refuel_damage: int = 10
+@export var overdose_refuel_damage: int = 5
 @export var overdose_refuel_damage_time: int = 8
 @export var overdose_refuel_count: float = 2.5
 

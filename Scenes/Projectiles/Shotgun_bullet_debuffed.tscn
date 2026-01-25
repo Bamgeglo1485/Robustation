@@ -5,4 +5,4 @@
 [node name="Projectile" instance=ExtResource("1_86s3g")]
 
 [node name="ProjectileComponent" parent="." index="0"]
-damage = 10
+damage = 5

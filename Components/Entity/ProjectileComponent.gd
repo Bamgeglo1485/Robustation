@@ -21,6 +21,7 @@ var moving: bool = true
 
 @export var parriable: bool = true
 @export var parry_speed_boost: float = 1.5
+@export var ignore_faction: bool = false
 
 @export_category("Explosion")
 
@@ -82,7 +83,9 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	
 	if shooter != null:
-		if (shooter.has_node("FactionComponent") and 
+		if shooter == body:
+			return
+		if (ignore_faction == false and shooter.has_node("FactionComponent") and 
 			body.has_node("FactionComponent")):
 			
 			var shooter_faction = shooter.get_node("FactionComponent")

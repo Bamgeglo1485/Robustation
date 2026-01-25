@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=4 uid="uid://biuw5t7gsnxbp"]
+[gd_scene load_steps=8 format=4 uid="uid://biuw5t7gsnxbp"]
 
 [ext_resource type="PackedScene" uid="uid://roeennw572p2" path="res://Scenes/Mobs/PlayerGreytide.tscn" id="2_84lva"]
 [ext_resource type="TileSet" uid="uid://bc7bghcv8144y" path="res://Resources/TileMaps/Tiles.tres" id="3_7ee7k"]
 [ext_resource type="PackedScene" uid="uid://detw4so2cuuhb" path="res://Scenes/Mobs/Bartender.tscn" id="4_a1dcl"]
 [ext_resource type="PackedScene" uid="uid://cm7i3v6s6xr3n" path="res://Scenes/Mobs/CleanBot.tscn" id="4_xwwje"]
 [ext_resource type="PackedScene" uid="uid://dlvfaaebkqfa" path="res://Scenes/Mobs/PunPun.tscn" id="5_a1dcl"]
+[ext_resource type="PackedScene" uid="uid://vjubfbb1hjee" path="res://Scenes/Mobs/Assistant.tscn" id="6_qkpe2"]
 
 [sub_resource type="Environment" id="Environment_7ee7k"]
 background_mode = 3
@@ -36,8 +37,23 @@ position = Vector2(20, 33)
 [node name="Cleanbot" parent="." instance=ExtResource("4_xwwje")]
 position = Vector2(48, -16)
 
-[node name="BaseEnemy" parent="." instance=ExtResource("4_a1dcl")]
-position = Vector2(-214, -24)
+[node name="Bartender" parent="." instance=ExtResource("4_a1dcl")]
+position = Vector2(-78, -44)
 
-[node name="BaseEnemy2" parent="." instance=ExtResource("5_a1dcl")]
-position = Vector2(-188, -69)
+[node name="PunPun" parent="." instance=ExtResource("5_a1dcl")]
+position = Vector2(-145, -113)
+
+[node name="Assistant" parent="." instance=ExtResource("6_qkpe2")]
+position = Vector2(-244, -181)
+
+[node name="Assistant2" parent="." instance=ExtResource("6_qkpe2")]
+position = Vector2(-370, -165)
+
+[node name="Assistant3" parent="." instance=ExtResource("6_qkpe2")]
+position = Vector2(-193, -259)
+
+[node name="Assistant4" parent="." instance=ExtResource("6_qkpe2")]
+position = Vector2(236, -295)
+
+[node name="Assistant5" parent="." instance=ExtResource("6_qkpe2")]
+position = Vector2(11, -318)

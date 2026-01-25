@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ca0sdsshfl0iw"
-path="res://.godot/imported/icon.png-fc5c05aa57d31ff81dd6508a4652fdb6.ctex"
+uid="uid://b75rrmhwl01ix"
+path="res://.godot/imported/inhand-right.png-3885d71ded95805afafce3794548c4dc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Weapons/icon.png"
-dest_files=["res://.godot/imported/icon.png-fc5c05aa57d31ff81dd6508a4652fdb6.ctex"]
+source_file="res://Textures/Weapons/Beer/inhand-right.png"
+dest_files=["res://.godot/imported/inhand-right.png-3885d71ded95805afafce3794548c4dc.ctex"]
 
 [params]
 

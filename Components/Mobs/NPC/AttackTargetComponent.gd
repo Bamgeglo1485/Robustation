@@ -5,6 +5,7 @@ class_name AttackTargetComponent extends Component
 @onready var mob_mover_component: MobMoverComponent = parent.get_node_or_null("MobMoverComponent")
 
 var attack_direction
+var target
 
 func _ready() -> void:
 	if move_to_target_component == null:
@@ -23,10 +24,13 @@ func _process(delta: float) -> void:
 		if mob_mover_component.fallen == true:
 			return
 	
-	if move_to_target_component.target == null or weapon_user_component.selected_weapon == null:
+	if target == null and move_to_target_component != null and move_to_target_component.target != null:
+		target = move_to_target_component.target
+	
+	if target == null or weapon_user_component.selected_weapon == null:
 		return
 	
-	attack_direction = move_to_target_component.target.global_position - parent.global_position
+	attack_direction = target.global_position - parent.global_position
 	
 	var weapon = weapon_user_component.selected_weapon
 	
@@ -42,6 +46,6 @@ func get_attack_direction():
 
 func get_attack_target():
 	if move_to_target_component != null:
-		return move_to_target_component.target
+		return target
 	else:
 		return null

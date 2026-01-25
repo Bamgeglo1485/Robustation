@@ -1,13 +1,61 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlvfaaebkqfa"]
+[gd_scene load_steps=21 format=3 uid="uid://dlvfaaebkqfa"]
 
 [ext_resource type="PackedScene" uid="uid://c0eulucj1dtco" path="res://Scenes/Mobs/Base/BaseEnemy.tscn" id="1_45881"]
+[ext_resource type="Shader" uid="uid://cch5nmhk121wx" path="res://Resources/Shaders/MobShader.gdshader" id="2_qbofe"]
 [ext_resource type="Texture2D" uid="uid://d4fp13y4g4eqc" path="res://Textures/Mobs/Mobs/punpun.png" id="2_twaep"]
+[ext_resource type="Script" uid="uid://da2q40ragr5wk" path="res://Components/Mobs/NPC/BuddyComponent.gd" id="3_twaep"]
+[ext_resource type="AudioStream" uid="uid://t3u7pr7oosw" path="res://Audio/Effects/punpun_rage.ogg" id="4_3gs27"]
+[ext_resource type="Script" uid="uid://d0a8e3f7tepch" path="res://Components/Mobs/RageComponent.gd" id="4_j6rn7"]
+[ext_resource type="Script" uid="uid://bi1gje1pfokqc" path="res://Components/Weapons/RangeWeaponComponent.gd" id="4_oll56"]
+[ext_resource type="PackedScene" uid="uid://beb1g115q2nkn" path="res://Scenes/Projectiles/Beer.tscn" id="5_7ll6j"]
+[ext_resource type="PackedScene" uid="uid://bpw4s6mkg7wkg" path="res://Scenes/Effects/Particles/RageEffect.tscn" id="5_qbofe"]
+[ext_resource type="Texture2D" uid="uid://fiix6iyke3n3" path="res://Textures/Weapons/Spear/spear_inhand.png" id="6_72kss"]
+[ext_resource type="Texture2D" uid="uid://c2wadc7c7e3v3" path="res://Textures/Weapons/Spear/spear.png" id="7_km5u7"]
+[ext_resource type="Script" uid="uid://sdg1qnsru5up" path="res://Components/Weapons/ChangeWeaponOnRageComponent.gd" id="8_t3rp4"]
+[ext_resource type="Script" uid="uid://6b7bcparwq17" path="res://Components/Weapons/MeleeWeaponComponent.gd" id="9_um8ik"]
+[ext_resource type="AudioStream" uid="uid://djoctj4ftdjw0" path="res://Audio/Weapon/bite.ogg" id="10_5f11a"]
+[ext_resource type="AudioStream" uid="uid://eogckfs15aph" path="res://Audio/Weapon/miss.ogg" id="11_bohml"]
+[ext_resource type="Script" uid="uid://clr7jbioge17t" path="res://Components/Entity/ExplosionResistanceComponent.gd" id="16_oll56"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uq2f5"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hpbaa"]
+noise = SubResource("FastNoiseLite_uq2f5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3gs27"]
+shader = ExtResource("2_qbofe")
+shader_parameter/blood_noise = SubResource("NoiseTexture2D_hpbaa")
+shader_parameter/blood_noise_shading = 1.0
+shader_parameter/blood_intensity = 1.0
+shader_parameter/blood_color = Color(0.44688815, 0, 0.14078581, 0.7294118)
+shader_parameter/blood_pixel_scale = 1.0
+shader_parameter/aura_max_line_width = 0.0
+shader_parameter/aura_min_line_width = 0.0
+shader_parameter/aura_speed = 10.0
+shader_parameter/aura_block_size = 1.01200004807
+shader_parameter/aura_outline_color = Color(1.176, 0.798, 0, 1)
+shader_parameter/aura_outline_tolerance = 0.0
+shader_parameter/aura_opacity = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 0)
+shader_parameter/flash_intensity = 1.0
+shader_parameter/glitch_chance = 0.0
+shader_parameter/glitch_speed = 20.0
+shader_parameter/glitch_slice_density = 1.0
+shader_parameter/glitch_slice_strength = 0.1
+shader_parameter/glitch_shake_strength = 0.05
+shader_parameter/glitch_chroma_offset = 1.0
+shader_parameter/glitch_noise_strength = 0.2
+shader_parameter/glitch_color_flash_strength = 0.0
+shader_parameter/glitch_scanline_strength = 0.18
+shader_parameter/glitch_local_warp_strength = 0.14
+shader_parameter/glitch_flip_chance = 0.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m5j7d"]
-radius = 7.0
-height = 20.0
+radius = 4.0
+height = 14.0
 
 [node name="PunPun" instance=ExtResource("1_45881")]
+material = SubResource("ShaderMaterial_3gs27")
 
 [node name="Texture" parent="." index="2"]
 texture = ExtResource("2_twaep")
@@ -15,7 +63,89 @@ texture = ExtResource("2_twaep")
 [node name="Collision" parent="." index="3"]
 position = Vector2(-1, -2)
 shape = SubResource("CapsuleShape2D_m5j7d")
-debug_color = Color(0, 0.60038817, 0.70000815, 0.44200003)
+debug_color = Color(0, 0.60038817, 0.70000815, 1)
+
+[node name="WeaponUserComponent" parent="." index="7" node_paths=PackedStringArray("selected_weapon")]
+selected_weapon = NodePath("Beer")
+
+[node name="Beer" type="Node" parent="WeaponUserComponent" index="0" node_paths=PackedStringArray("shoot_sound")]
+script = ExtResource("4_oll56")
+projectile = ExtResource("5_7ll6j")
+spread_angle = 3
+bullets_max_count = 1
+bullets = 1
+bullets_recover_count = 1
+shoot_sound = NodePath("ShootSound")
+bullets_recovery_delay = 2.0
+cooldown_delay = 0.0
+swing_delay = 0.2
+equipped_texture = ExtResource("6_72kss")
+icon_texture = ExtResource("7_km5u7")
+metadata/_custom_type_script = "uid://bi1gje1pfokqc"
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Beer" index="0"]
+stream = ExtResource("11_bohml")
+
+[node name="WeaponTexture" parent="." index="8"]
+offset = Vector2(0, -3)
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Rage" type="AudioStreamPlayer2D" parent="Sounds" index="1"]
+stream = ExtResource("4_3gs27")
+
+[node name="MoveToPointComponent" parent="AI" index="0"]
+run_to_target_range = 70.0
+run_from_target_range = 10.0
 
 [node name="MoveToTargetComponent" parent="AI" index="1"]
 priority = 1
+
+[node name="BuddyComponent" type="Node" parent="." index="15"]
+script = ExtResource("3_twaep")
+set_buddy_on_start = true
+buddy_group = "Bartender"
+set_buddy_as_attack_target = true
+move_to_buddy = true
+move_priority = 3
+metadata/_custom_type_script = "uid://da2q40ragr5wk"
+
+[node name="RageComponent" type="Node" parent="." index="16" node_paths=PackedStringArray("aura_effect", "rage_sound")]
+script = ExtResource("4_j6rn7")
+rage_delay = 0.0
+rage_damage_addendum = 0.0
+rage_damage_resistance_subtrahend = 0.7
+rage_speed_modifier_addendum = 0.5
+aura_effect = NodePath("..")
+rage_sound = NodePath("../Sounds/Rage")
+rage_effect = ExtResource("5_qbofe")
+metadata/_custom_type_script = "uid://d0a8e3f7tepch"
+
+[node name="ChangeWeaponOnRageComponent" type="Node" parent="." index="17" node_paths=PackedStringArray("weapon")]
+script = ExtResource("8_t3rp4")
+weapon = NodePath("BiteTheDust")
+metadata/_custom_type_script = "uid://sdg1qnsru5up"
+
+[node name="BiteTheDust" type="Node" parent="ChangeWeaponOnRageComponent" index="0" node_paths=PackedStringArray("attack_sound", "miss_sound")]
+script = ExtResource("9_um8ik")
+damage = 6
+attack_range = 48
+attack_sound = NodePath("HitSound")
+miss_sound = NodePath("MissSound")
+throw_stop_speed = 200
+cooldown_delay = 0.1
+swing_delay = 0.2
+attack_rotation_multiplier = 0.5
+attack_shift_multiplier = 0.0
+parriable = false
+metadata/_custom_type_script = "uid://6b7bcparwq17"
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="ChangeWeaponOnRageComponent/BiteTheDust" index="0"]
+stream = ExtResource("10_5f11a")
+
+[node name="MissSound" type="AudioStreamPlayer2D" parent="ChangeWeaponOnRageComponent/BiteTheDust" index="1"]
+stream = ExtResource("11_bohml")
+
+[node name="ExplosionResistanceComponent" type="Node" parent="." index="18"]
+script = ExtResource("16_oll56")
+resistance = 0.2
+metadata/_custom_type_script = "uid://clr7jbioge17t"

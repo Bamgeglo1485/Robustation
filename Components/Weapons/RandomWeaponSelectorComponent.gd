@@ -24,5 +24,5 @@ func _ready() -> void:
 		move_to_point_component.run_from_target_range = 16
 		move_to_point_component.run_to_target_range = 1000
 	else:
-		move_to_point_component.run_from_target_range = 250
-		move_to_point_component.run_to_target_range = 130
+		move_to_point_component.run_from_target_range = 130
+		move_to_point_component.run_to_target_range = 250

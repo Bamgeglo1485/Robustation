@@ -70,8 +70,13 @@ func _apply_damage_to_body(body: Node2D) -> void:
 	var distance_factor = 1.0 - clamp(distance / radius, 0.0, 1.0)
 	
 	if distance_factor > 0.1:
+		var modifier: float = 1
+		
+		if body.has_node("ExplosionResistanceComponent"):
+			modifier = body.get_node("ExplosionResistanceComponent").resistance
+		
 		if body.has_node("HealthComponent"):
-			body.get_node("HealthComponent").take_damage(damage * distance_factor, source)
+			body.get_node("HealthComponent").take_damage(damage * distance_factor * modifier, source)
 		
 		if body.has_node("MobMoverComponent"):
 			var mob_mover = body.get_node("MobMoverComponent")

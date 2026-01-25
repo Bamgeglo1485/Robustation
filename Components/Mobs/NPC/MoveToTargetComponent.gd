@@ -10,13 +10,13 @@ var direction_component: DirectionComponent
 @export var look_at_target: bool = true
 
 func _ready() -> void:
-	if set_player_as_target == true:
-		target = scene.get_node_or_null("Player")
-	
 	direction_component = parent.get_node_or_null("DirectionComponent")
 
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
+	if set_player_as_target == true:
+		target = scene.get_node_or_null("Player")
+	
 	if target == null or move_to_point_component == null:
 		return
 	

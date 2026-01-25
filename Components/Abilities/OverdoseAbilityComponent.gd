@@ -42,7 +42,7 @@ func activate_ability():
 		effect_tween.tween_property(overdose_effect.material, "shader_parameter/green_factor", 1, ability_delay)
 		effect_tween.tween_property(overdose_effect.material, "shader_parameter/hue_shift", -0.3, ability_delay)
 		effect_tween.set_ignore_time_scale(true)
-		effect_tween.set_loops()
+		effect_tween.set_loops(100)
 
 func overdose_effects():
 	var trail = TrailEffectComponent.new()

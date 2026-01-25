@@ -46,6 +46,10 @@ friction = 1300
 [node name="Texture" parent="." index="2"]
 random_textures = Array[Texture2D]([ExtResource("5_ngqn2"), ExtResource("4_r4whd")])
 
+[node name="MoveToPointComponent" parent="AI" index="0"]
+run_to_target_range = 250.0
+run_from_target_range = 130.0
+
 [node name="MoveToTargetComponent" parent="AI" index="1"]
 set_player_as_target = null
 priority = null

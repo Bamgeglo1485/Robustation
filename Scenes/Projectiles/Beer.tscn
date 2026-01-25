@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://beb1g115q2nkn"]
+
+[ext_resource type="PackedScene" uid="uid://c2fs5eoy7ntgu" path="res://Scenes/Projectiles/BaseProjectile.tscn" id="1_2emlx"]
+[ext_resource type="AudioStream" uid="uid://c4l4xjb4wiba4" path="res://Audio/Weapon/Projectile/drink.ogg" id="2_ee1o5"]
+[ext_resource type="Texture2D" uid="uid://csjs5ggnfnuhm" path="res://Textures/Weapons/Beer/beer.png" id="3_tufts"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i6uow"]
+radius = 5.0
+height = 26.0
+
+[sub_resource type="Curve" id="Curve_vdni2"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 1.011236), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_c1ng1"]
+curve = SubResource("Curve_vdni2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jvo0r"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.099999994
+scale_over_velocity_max = 1000.0
+scale_over_velocity_curve = SubResource("CurveTexture_c1ng1")
+
+[node name="Projectile" instance=ExtResource("1_2emlx")]
+
+[node name="ProjectileComponent" parent="." index="0" node_paths=PackedStringArray("texture", "particle_emitter")]
+texture = NodePath("../Texture")
+particle_emitter = NodePath("GPUParticles2D")
+speed = 1000
+damage = -50
+rotate_speed = 20
+parriable = false
+ignore_faction = true
+
+[node name="CollisionShape2D" parent="ProjectileComponent" index="0"]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_i6uow")
+
+[node name="HitSound" parent="ProjectileComponent" index="1"]
+stream = ExtResource("2_ee1o5")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ProjectileComponent" index="2"]
+modulate = Color(0.5526029, 0.54781777, 0, 1)
+amount = 40
+preprocess = 0.5
+speed_scale = 4.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_jvo0r")
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+disabled = true
+
+[node name="Texture" type="Sprite2D" parent="." index="4"]
+texture = ExtResource("3_tufts")

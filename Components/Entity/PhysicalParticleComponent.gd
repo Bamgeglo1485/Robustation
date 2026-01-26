@@ -15,7 +15,6 @@ var lifetime: float
 var acceleration_time: float
 
 func _ready() -> void:
-	
 	if parent is not CharacterBody2D:
 		queue_free()
 		return

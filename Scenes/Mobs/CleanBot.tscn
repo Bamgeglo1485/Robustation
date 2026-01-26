@@ -192,6 +192,8 @@ selected_weapon = NodePath("ShvabraForReal")
 
 [node name="ShvabraForReal" type="Node" parent="WeaponUserComponent" index="0" node_paths=PackedStringArray("attack_sound", "miss_sound")]
 script = ExtResource("4_2ysnf")
+damage = 6
+attack_range = 32
 attack_sound = NodePath("MeleeHitSound")
 miss_sound = NodePath("MeleeMissSound")
 parry_force = 2.0

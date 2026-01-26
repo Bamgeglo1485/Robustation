@@ -35,7 +35,7 @@ hue_variation_max = -0.67
 [node name="BaseExplosion" type="Node2D"]
 script = ExtResource("1_cpk21")
 damage = 150.0
-fly_force = 1000
+fly_force = 700
 fall_time = 1
 radius = 200
 

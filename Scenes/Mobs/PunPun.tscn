@@ -9,8 +9,8 @@
 [ext_resource type="Script" uid="uid://bi1gje1pfokqc" path="res://Components/Weapons/RangeWeaponComponent.gd" id="4_oll56"]
 [ext_resource type="PackedScene" uid="uid://beb1g115q2nkn" path="res://Scenes/Projectiles/Beer.tscn" id="5_7ll6j"]
 [ext_resource type="PackedScene" uid="uid://bpw4s6mkg7wkg" path="res://Scenes/Effects/Particles/RageEffect.tscn" id="5_qbofe"]
-[ext_resource type="Texture2D" uid="uid://fiix6iyke3n3" path="res://Textures/Weapons/Spear/spear_inhand.png" id="6_72kss"]
-[ext_resource type="Texture2D" uid="uid://c2wadc7c7e3v3" path="res://Textures/Weapons/Spear/spear.png" id="7_km5u7"]
+[ext_resource type="Texture2D" uid="uid://b75rrmhwl01ix" path="res://Textures/Weapons/Beer/inhand-right.png" id="6_oll56"]
+[ext_resource type="Texture2D" uid="uid://csjs5ggnfnuhm" path="res://Textures/Weapons/Beer/beer.png" id="7_7ll6j"]
 [ext_resource type="Script" uid="uid://sdg1qnsru5up" path="res://Components/Weapons/ChangeWeaponOnRageComponent.gd" id="8_t3rp4"]
 [ext_resource type="Script" uid="uid://6b7bcparwq17" path="res://Components/Weapons/MeleeWeaponComponent.gd" id="9_um8ik"]
 [ext_resource type="AudioStream" uid="uid://djoctj4ftdjw0" path="res://Audio/Weapon/bite.ogg" id="10_5f11a"]
@@ -79,8 +79,8 @@ shoot_sound = NodePath("ShootSound")
 bullets_recovery_delay = 2.0
 cooldown_delay = 0.0
 swing_delay = 0.2
-equipped_texture = ExtResource("6_72kss")
-icon_texture = ExtResource("7_km5u7")
+equipped_texture = ExtResource("6_oll56")
+icon_texture = ExtResource("7_7ll6j")
 metadata/_custom_type_script = "uid://bi1gje1pfokqc"
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Beer" index="0"]

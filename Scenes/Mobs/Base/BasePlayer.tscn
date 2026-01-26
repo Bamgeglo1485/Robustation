@@ -84,9 +84,10 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
 
-[node name="ImpactFrameComponent" type="Node" parent="." index="19" node_paths=PackedStringArray("effect_frame")]
+[node name="ImpactFrameComponent" type="Node" parent="." index="19" node_paths=PackedStringArray("effect_frame", "color_modify_frame")]
 script = ExtResource("10_m2dsc")
 effect_frame = NodePath("CanvasLayer/ColorRect")
+color_modify_frame = NodePath("CanvasLayer/ColorModify")
 metadata/_custom_type_script = "uid://c3d63pm2kikgh"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="ImpactFrameComponent" index="0"]
@@ -94,6 +95,16 @@ metadata/_custom_type_script = "uid://c3d63pm2kikgh"
 [node name="ColorRect" type="ColorRect" parent="ImpactFrameComponent/CanvasLayer" index="0"]
 visible = false
 material = ExtResource("11_oayod")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="ColorModify" type="ColorRect" parent="ImpactFrameComponent/CanvasLayer" index="1"]
+z_index = 20
+material = ExtResource("9_d6ik8")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

@@ -35,8 +35,10 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	_fly(delta)
 	_move(delta)
-	_fall_process(delta)
+
+func _process(delta: float) -> void:
 	_walk_animation()
+	_fall_process(delta)
 
 func _move(delta) -> void:
 	if parent is not CharacterBody2D:
@@ -143,7 +145,7 @@ func _fall_process(delta):
 		stand_up()
 
 func drop(delay):
-	if can_fall == false:
+	if can_fall == false or delay < 0.3:
 		return
 	
 	standing_delay += delay

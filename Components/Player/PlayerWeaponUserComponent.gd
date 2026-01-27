@@ -27,7 +27,7 @@ func _weapon_input():
 	
 	var attack = Input.is_action_just_pressed("attack")
 	if attack and weapon_user_component.selected_weapon != null:
-		weapon_user_component.selected_weapon.attack(self, false)
+		weapon_user_component.attack(self, false)
 
 func get_attack_direction():
 	if not parent.has_method("get_global_mouse_position"):

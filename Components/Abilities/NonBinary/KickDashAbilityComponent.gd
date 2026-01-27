@@ -32,6 +32,8 @@ func kick():
 	targets = await kick_weapon.attack(self, false)
 	if targets != null and not targets.is_empty():
 		for target in targets.values():
+			if target is not CharacterBody2D:
+				continue
 			kick_target = target
 			if parent.has_node("HealthComponent"):
 				parent.get_node("HealthComponent").INVINCIBLE = true

@@ -19,6 +19,8 @@ func _ready() -> void:
 	EventBusManager.damaged.connect(_on_damaged)
 	EventBusManager.gibbed.connect(_on_gibbed)
 	EventBusManager.parry.connect(_on_parry)
+	EventBusManager.projectile_miss.connect(_on_projectile_miss)
+	EventBusManager.melee_miss.connect(_on_melee_miss)
 
 @warning_ignore("unused_parameter")
 func _on_health_changed(emitter, health, new_health):
@@ -39,6 +41,16 @@ func _on_gibbed(damager):
 func _on_parry(emitter):
 	if emitter == parent:
 		change_battle_tendency(1.5)
+
+func _on_projectile_miss(emitter, projectile):
+	if emitter != parent:
+		return
+	change_battle_tendency(projectile.get_node("ProjectileComponent").damage * -0.05)
+
+func _on_melee_miss(emitter, weapon):
+	if emitter != parent:
+		return
+	change_battle_tendency(weapon.damage * -0.05)
 
 func change_battle_tendency(value):
 	if health_component == null:

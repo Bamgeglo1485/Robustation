@@ -1,9 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://ctjnwl5bhistw"]
+[gd_scene load_steps=6 format=3 uid="uid://ctjnwl5bhistw"]
 
 [ext_resource type="Script" uid="uid://cbntkpop03p5e" path="res://Components/Entity/PhysicalParticleComponent.gd" id="1_xwp0d"]
 [ext_resource type="AudioStream" uid="uid://udkj0cyu458c" path="res://Resources/Audio/CasingRandom.tres" id="2_xwp0d"]
+[ext_resource type="Script" uid="uid://b4ckmc2py8cmg" path="res://Components/Entity/MeleeAttackIgnoreComponent.gd" id="3_ud7k7"]
+[ext_resource type="Script" uid="uid://ch6fjxkr8n5db" path="res://Components/Entity/ProjectileIgnoreComponent.gd" id="4_vsa8m"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xwp0d"]
+radius = 4.0
 
 [node name="Case" type="CharacterBody2D"]
+collision_layer = 252
+collision_mask = 0
 motion_mode = 1
 
 [node name="Texture" type="Sprite2D" parent="."]
@@ -15,3 +22,14 @@ metadata/_custom_type_script = "uid://cbntkpop03p5e"
 
 [node name="FallSound" type="AudioStreamPlayer2D" parent="PhysicalParticleComponent"]
 stream = ExtResource("2_xwp0d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xwp0d")
+
+[node name="MeleeAttackIgnoreComponent" type="Node" parent="."]
+script = ExtResource("3_ud7k7")
+metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
+
+[node name="ProjectileIgnoreComponent" type="Node" parent="."]
+script = ExtResource("4_vsa8m")
+metadata/_custom_type_script = "uid://ch6fjxkr8n5db"

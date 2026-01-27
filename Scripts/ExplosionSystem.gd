@@ -53,7 +53,7 @@ func _check_overlapping_bodies():
 	
 	var bodies = area2d.get_overlapping_bodies()
 	for body in bodies:
-		if is_instance_valid(body) and body not in damaged_bodies:
+		if is_instance_valid(body) and body not in damaged_bodies and body.has_node("HealthComponent"):
 			_apply_damage_to_body(body)
 
 func _on_body_entered(body: Node2D) -> void:

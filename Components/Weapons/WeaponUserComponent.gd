@@ -30,7 +30,7 @@ func select_weapon(new_weapon: Weapon):
 	if selected_weapon.equipped_texture != null and weapon_texture != null:
 		weapon_texture.texture = selected_weapon.equipped_texture
 
-func attack(raiser):
+func attack(raiser, npc = true):
 	if selected_weapon.get_cooldown() == true:
 		return
 	
@@ -41,5 +41,4 @@ func attack(raiser):
 			return
 	
 	selected_weapon.damage_modifier = damage_modifier
-	
-	selected_weapon.attack(raiser)
+	selected_weapon.attack(raiser, npc)

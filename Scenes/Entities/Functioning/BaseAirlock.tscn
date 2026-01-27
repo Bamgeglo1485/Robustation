@@ -1,0 +1,106 @@
+[gd_scene load_steps=17 format=3 uid="uid://c23n3m40ywq45"]
+
+[ext_resource type="Texture2D" uid="uid://1jeqb16j6wba" path="res://Textures/Entities/Airlock/Base/closed.png" id="1_ayhy7"]
+[ext_resource type="Texture2D" uid="uid://dqq1m0rmps0cf" path="res://Textures/Entities/Airlock/Base/closed_unlit.png" id="2_qpagl"]
+[ext_resource type="Texture2D" uid="uid://dj1mk412pchw5" path="res://Textures/Entities/Airlock/Base/open_unlit.png" id="3_8h5f3"]
+[ext_resource type="Texture2D" uid="uid://dhrryucmj2c5l" path="res://Textures/Entities/Airlock/Base/opening.png" id="4_3vib2"]
+[ext_resource type="Texture2D" uid="uid://j25cdiotq3br" path="res://Textures/Entities/Airlock/Base/closing.png" id="5_pj5ht"]
+[ext_resource type="Texture2D" uid="uid://c5yotio73i3vr" path="res://Textures/Entities/Airlock/Base/open.png" id="6_7pel4"]
+[ext_resource type="Script" uid="uid://bkyx6u1ve7hyr" path="res://Components/Entity/Structures/AirlockComponent.gd" id="7_8h5f3"]
+[ext_resource type="Texture2D" uid="uid://b4ury0f6mc5b" path="res://Textures/Entities/Airlock/Base/bolted_unlit.png" id="8_3vib2"]
+[ext_resource type="Texture2D" uid="uid://dbxtj66wthauf" path="res://Textures/Entities/Airlock/Base/opening_unlit.png" id="9_pj5ht"]
+[ext_resource type="Texture2D" uid="uid://br5xyrkw5mc48" path="res://Textures/Entities/Airlock/Base/closing_unlit.png" id="10_7pel4"]
+[ext_resource type="AudioStream" uid="uid://dcmhqofd4i2w0" path="res://Audio/Entites/Airlock/airlock_open.ogg" id="11_6g1pn"]
+[ext_resource type="AudioStream" uid="uid://d385ie7v0biwi" path="res://Audio/Entites/Airlock/airlock_close.ogg" id="12_0x40r"]
+[ext_resource type="AudioStream" uid="uid://dxx46djc71lba" path="res://Audio/Entites/Airlock/boltsup.ogg" id="13_hktyc"]
+[ext_resource type="AudioStream" uid="uid://ctj7y0ss8e7mw" path="res://Audio/Entites/Airlock/boltsdown.ogg" id="14_biyfq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bb2nl"]
+size = Vector2(32, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sx2rc"]
+radius = 112.00446
+
+[node name="BaseAirlock" type="StaticBody2D"]
+collision_layer = 255
+collision_mask = 255
+
+[node name="Closed" type="Sprite2D" parent="."]
+texture = ExtResource("1_ayhy7")
+
+[node name="ClosedUnlit" type="Sprite2D" parent="."]
+texture = ExtResource("2_qpagl")
+
+[node name="OpenUnlit" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_8h5f3")
+
+[node name="Opening" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("4_3vib2")
+hframes = 2
+vframes = 3
+
+[node name="Closing" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("5_pj5ht")
+hframes = 2
+vframes = 3
+
+[node name="Open" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("6_7pel4")
+
+[node name="ClosedCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bb2nl")
+
+[node name="Outercollision" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="Outercollision"]
+shape = SubResource("CircleShape2D_sx2rc")
+
+[node name="AirlockComponent" type="Node" parent="." node_paths=PackedStringArray("collision", "closed_sprite", "closed_unlit_sprite", "opened_sprite", "opened_unlit_sprite", "closing_sprite", "closing_unlit_sprite", "opening_sprite", "opening_unlit_sprite", "bolted_unlit", "open_sound", "close_sound", "bolt_sound", "unbolt_sound")]
+script = ExtResource("7_8h5f3")
+collision = NodePath("../ClosedCollision")
+closed_sprite = NodePath("../Closed")
+closed_unlit_sprite = NodePath("../ClosedUnlit")
+opened_sprite = NodePath("../Open")
+opened_unlit_sprite = NodePath("../OpenUnlit")
+closing_sprite = NodePath("../Closing")
+closing_unlit_sprite = NodePath("../ClosingUnlit")
+opening_sprite = NodePath("../Opening")
+opening_unlit_sprite = NodePath("../OpeningUnlit")
+bolted_unlit = NodePath("../BoltedUnlit")
+open_sound = NodePath("../OpenSound")
+close_sound = NodePath("../CloseSound")
+bolt_sound = NodePath("../BoltSound")
+unbolt_sound = NodePath("../UnboltSound")
+metadata/_custom_type_script = "uid://bkyx6u1ve7hyr"
+
+[node name="BoltedUnlit" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("8_3vib2")
+
+[node name="OpeningUnlit" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("9_pj5ht")
+hframes = 2
+vframes = 3
+
+[node name="ClosingUnlit" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("10_7pel4")
+hframes = 2
+vframes = 3
+
+[node name="OpenSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_6g1pn")
+
+[node name="CloseSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_0x40r")
+
+[node name="BoltSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_hktyc")
+
+[node name="UnboltSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_biyfq")

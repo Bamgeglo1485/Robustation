@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://biuw5t7gsnxbp"]
+[gd_scene load_steps=10 format=4 uid="uid://biuw5t7gsnxbp"]
 
 [ext_resource type="Script" uid="uid://biu25s800hsex" path="res://Scripts/PrototypeArenaSystem.gd" id="1_7ee7k"]
 [ext_resource type="PackedScene" uid="uid://roeennw572p2" path="res://Scenes/Mobs/PlayerGreytide.tscn" id="2_84lva"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cm7i3v6s6xr3n" path="res://Scenes/Mobs/CleanBot.tscn" id="4_xwwje"]
 [ext_resource type="PackedScene" uid="uid://dlvfaaebkqfa" path="res://Scenes/Mobs/PunPun.tscn" id="5_a1dcl"]
 [ext_resource type="PackedScene" uid="uid://vjubfbb1hjee" path="res://Scenes/Mobs/Assistant.tscn" id="6_qkpe2"]
+[ext_resource type="PackedScene" uid="uid://dnoaq77825hf2" path="res://Scenes/Entities/Functioning/BaseOpenableAirlock.tscn" id="8_kq8ho"]
 
 [sub_resource type="Environment" id="Environment_7ee7k"]
 background_mode = 3
@@ -41,8 +42,11 @@ environment = SubResource("Environment_7ee7k")
 position = Vector2(20, 33)
 
 [node name="WaveTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 60.0
 one_shot = true
 autostart = true
+
+[node name="BaseOpenableAirlock" parent="." instance=ExtResource("8_kq8ho")]
+position = Vector2(-161, 39)
 
 [connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]

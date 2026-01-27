@@ -123,6 +123,7 @@ func _melee_attack_target(target, direction = null, multiple_attack = false):
 			animation_component.shift_to_direction(direction, 0.2, attack_shift_multiplier)
 	
 	if target == null:
+		EventBusManager.melee_miss.emit(parent, self)
 		return false
 	
 	if target.has_node("ProjectileComponent") and parry_force != 0:

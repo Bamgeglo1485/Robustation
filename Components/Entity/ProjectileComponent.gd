@@ -35,7 +35,9 @@ func _ready() -> void:
 	if parent == null or parent is not CharacterBody2D:
 		queue_free()
 	
-	get_tree().create_timer(lifetime).timeout.connect(_delete)
+	await get_tree().create_timer(lifetime).timeout
+	_delete()
+	EventBusManager.projectile_miss.emit(shooter, parent)
 
 func _physics_process(delta: float) -> void:
 	if moving == false:
@@ -80,6 +82,9 @@ func explode():
 
 func _on_body_entered(body: Node2D) -> void:
 	if body == null:
+		return
+	
+	if body.has_node("ProjectileIgnoreComponent"):
 		return
 	
 	if shooter != null:

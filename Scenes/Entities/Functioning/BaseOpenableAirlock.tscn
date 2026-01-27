@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnoaq77825hf2"]
+
+[ext_resource type="PackedScene" uid="uid://c23n3m40ywq45" path="res://Scenes/Entities/Functioning/BaseAirlock.tscn" id="1_soual"]
+[ext_resource type="Script" uid="uid://yhmqgocl43pi" path="res://Components/Entity/Structures/OpenableAirlockComponent.gd" id="2_xct4t"]
+
+[node name="BaseOpenableAirlock" instance=ExtResource("1_soual")]
+
+[node name="OpenableAirlockComponent" type="Node" parent="." index="10" node_paths=PackedStringArray("trigger_area")]
+script = ExtResource("2_xct4t")
+trigger_area = NodePath("../Outercollision")
+metadata/_custom_type_script = "uid://yhmqgocl43pi"

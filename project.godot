@@ -8,12 +8,16 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Robustation-OOP"
 config/version="DEMO 0.1"
 run/main_scene="uid://biuw5t7gsnxbp"
-config/features=PackedStringArray("4.5", "GL Compatibility")
+config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="uid://8d2n77fftdbi"
 
 [autoload]

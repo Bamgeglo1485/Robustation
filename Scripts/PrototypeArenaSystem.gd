@@ -3,6 +3,7 @@ extends Node2D
 var diff: float = 1
 var enemies_per_wave = 5
 var wave_cleanbots: Array[CharacterBody2D]
+var wave_assistants: Array[CharacterBody2D]
 @onready var wave_timer = $WaveTimer
 @onready var player: CharacterBody2D = $Player
 @export var assistant: PackedScene
@@ -44,20 +45,22 @@ func _on_wave_timer_timeout() -> void:
 		inst_bar.global_position = Vector2(x_spawn_pos, y_spawn_pos)
 		add_child(inst_bar)
 	
-	var mod = 1
-	if diff > 2:
-		mod = diff
-		mod = clamp(mod, 1, 4)
+	for enemy in wave_assistants:
+		if is_instance_valid(enemy):
+			clean_array.append(enemy)
+	wave_assistants = clean_array
 	
-	for enemy in randi_range(1, 2 * mod):
-		randomize()
-		var x_spawn_pos = randf_range(0, 100) + player.global_position.x + randf_range(0, 100)
-		randomize()
-		var y_spawn_pos = randf_range(0, 100) + player.global_position.y + randf_range(0, 100)
-		
-		var inst = assistant.instantiate()
-		inst.global_position = Vector2(x_spawn_pos, y_spawn_pos)
-		add_child(inst)
+	if wave_assistants.size() <= 20:
+		for enemy in randi_range(1, 3):
+			randomize()
+			var x_spawn_pos = randf_range(0, 100) + player.global_position.x + randf_range(0, 100)
+			randomize()
+			var y_spawn_pos = randf_range(0, 100) + player.global_position.y + randf_range(0, 100)
+			
+			var inst = assistant.instantiate()
+			inst.global_position = Vector2(x_spawn_pos, y_spawn_pos)
+			add_child(inst)
+			wave_assistants.append(inst)
 	
 	diff += 0.1
 	wave_timer.start()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c0eulucj1dtco"]
+[gd_scene format=3 uid="uid://c0eulucj1dtco"]
 
 [ext_resource type="PackedScene" uid="uid://c0elisnkry0s6" path="res://Scenes/Mobs/Base/BaseMob.tscn" id="1_8ckee"]
 [ext_resource type="Script" uid="uid://crchnvrl7mcdd" path="res://Components/ComponentFolder.gd" id="2_4xxt2"]
@@ -6,12 +6,12 @@
 [ext_resource type="Script" uid="uid://bv7whrderww4t" path="res://Components/Mobs/NPC/MoveToTargetComponent.gd" id="3_vb81k"]
 [ext_resource type="Script" uid="uid://yxsq46ajfdy4" path="res://Components/Mobs/NPC/AttackTargetComponent.gd" id="4_gb06t"]
 
-[node name="BaseEnemy" instance=ExtResource("1_8ckee")]
+[node name="BaseEnemy" unique_id=600669417 instance=ExtResource("1_8ckee")]
 
 [node name="MobMoverComponent" parent="." index="1"]
 set_navigation_velocity = true
 
-[node name="NavigationAgent" type="NavigationAgent2D" parent="." index="5"]
+[node name="NavigationAgent" type="NavigationAgent2D" parent="." index="5" unique_id=1358139639]
 avoidance_enabled = true
 radius = 15.0
 neighbor_distance = 128.0
@@ -22,19 +22,19 @@ avoidance_mask = 3
 [node name="WeaponTexture" parent="." index="8"]
 region_enabled = true
 
-[node name="AI" type="Node" parent="." index="14"]
+[node name="AI" type="Node" parent="." index="14" unique_id=1365591205]
 script = ExtResource("2_4xxt2")
 metadata/_custom_type_script = "uid://crchnvrl7mcdd"
 
-[node name="MoveToPointComponent" type="Node" parent="AI" index="0" node_paths=PackedStringArray("navigation_agent")]
+[node name="MoveToPointComponent" type="Node" parent="AI" index="0" unique_id=395370591 node_paths=PackedStringArray("navigation_agent")]
 script = ExtResource("2_i6wsw")
 navigation_agent = NodePath("../../NavigationAgent")
 metadata/_custom_type_script = "uid://vaff4lwkvrc7"
 
-[node name="MoveToTargetComponent" type="Node" parent="AI" index="1"]
+[node name="MoveToTargetComponent" type="Node" parent="AI" index="1" unique_id=1800782744]
 script = ExtResource("3_vb81k")
 metadata/_custom_type_script = "uid://bv7whrderww4t"
 
-[node name="AttackTargetComponent" type="Node" parent="AI" index="2"]
+[node name="AttackTargetComponent" type="Node" parent="AI" index="2" unique_id=1357236819]
 script = ExtResource("4_gb06t")
 metadata/_custom_type_script = "uid://yxsq46ajfdy4"

@@ -37,12 +37,12 @@ func set_color_modify():
 	material.set_shader_parameter("blue_factor", 1)
 	material.set_shader_parameter("red_factor", 1)
 	material.set_shader_parameter("hue_shift", 0)
-	material.set_shader_parameter("alpha", 0.5)
+	material.set_shader_parameter("alpha", 0.9)
 	
-	color_tween.tween_property(material, "shader_parameter/alpha", 0, 3)
+	color_tween.tween_property(material, "shader_parameter/alpha", 0, 1)
 	
 	if randf() > 0.5:
-		material.set_shader_parameter("hue_shift", randf_range(-0.15, 0.15))
+		material.set_shader_parameter("hue_shift", randf_range(-3, -1))
 		return
 	
 	randomize()
@@ -53,15 +53,20 @@ func set_color_modify():
 	material.set_shader_parameter("blue_factor", randf_range(1, 1.5))
 
 func _ready() -> void:
-	EventBusManager.explosion.connect(on_exlosion)
-	EventBusManager.kick_dash_combo.connect(on_kickdash_combo)
+	EventBusManager.explosion.connect(_on_exlosion)
+	EventBusManager.kick_dash_combo.connect(_on_kickdash_combo)
+	EventBusManager.parry.connect(_on_parry)
 
-func on_exlosion(explosion):
+func _on_exlosion(explosion):
 	if explosion.impact_frame == false:
 		return
 	impact_frame()
 
-func on_kickdash_combo(emitter):
+func _on_parry(emitter, type):
+	if emitter == parent and type == "Projectile":
+		impact_frame(0.1, 0, false)
+
+func _on_kickdash_combo(emitter):
 	if emitter != parent:
 		return
 	

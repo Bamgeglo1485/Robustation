@@ -4,7 +4,7 @@ extends Node
 signal health_changed(emitter, health, new_health)
 signal damaged(emitter, taked_damage, damager)
 signal gibbed(emitter)
-signal parry(emitter)
+signal parry(emitter, type: String)
 signal projectile_miss(emitter, projectile)
 signal melee_miss(emitter, weapon)
 signal on_fall()

@@ -175,7 +175,7 @@ use_parent_material = true
 texture = ExtResource("13_aa22f")
 region_enabled = true
 
-[node name="PlayerWeaponUserComponent" parent="." index="12" node_paths=PackedStringArray("weapon_1", "weapon_2", "weapon_3")]
+[node name="PlayerWeaponUserComponent" parent="." index="12" unique_id=283125688 node_paths=PackedStringArray("weapon_1", "weapon_2", "weapon_3")]
 weapon_1 = NodePath("../WeaponUserComponent/Toolbox")
 weapon_2 = NodePath("../WeaponUserComponent/Shotgun")
 weapon_3 = NodePath("../WeaponUserComponent/Spear")
@@ -246,6 +246,7 @@ metadata/_custom_type_script = "uid://cmonoqon5s4vx"
 script = ExtResource("27_l8jtb")
 trail_colors = Array[Color]([Color(0.8736105, 0, 0.34971508, 1), Color(0, 0.49991995, 0.47274232, 1), Color(0.5611145, 0.44604957, 0, 1)])
 overdose_effect = NodePath("CanvasLayer/ColorRect")
+cooldown_delay = 15.0
 ability_delay = 3.0
 metadata/_custom_type_script = "uid://b8d56xguabrvi"
 
@@ -261,11 +262,11 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
 
-[node name="ColorRect" parent="BattleTendencyComponent/CanvasLayer" index="0"]
+[node name="ColorRect" parent="BattleTendencyComponent/CanvasLayer" parent_id_path=PackedInt32Array(1279961535) index="0" unique_id=586695650]
 z_index = -1
 material = SubResource("ShaderMaterial_3kfxb")
 
-[node name="ColorModify" parent="ImpactFrameComponent/CanvasLayer" index="1"]
+[node name="ColorModify" parent="ImpactFrameComponent/CanvasLayer" parent_id_path=PackedInt32Array(892594464) index="1" unique_id=395695325]
 material = SubResource("ShaderMaterial_v1rwi")
 
 [connection signal="timeout" from="Toolbox/CooldownTimer" to="Toolbox" method="_on_cooldown_timer_timeout"]

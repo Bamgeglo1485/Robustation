@@ -155,7 +155,7 @@ func _melee_attack_target(target, direction = null, multiple_attack = false):
 	return true
 
 func parry_weapon(weapon, target):
-	EventBusManager.parry.emit(parent)
+	EventBusManager.parry.emit(parent, "Weapon")
 	weapon.swinging_cancelled = true
 	parry_effects()
 	
@@ -169,7 +169,7 @@ func parry_weapon(weapon, target):
 		target.get_node("MobMoverComponent").drop(0.5)
 
 func parry_projectile(target, projectile, direction):
-		EventBusManager.parry.emit(parent)
+		EventBusManager.parry.emit(parent, "Projectile")
 		var angle = direction.normalized().angle()
 		target.modulate = parry_color
 		target.global_rotation = angle

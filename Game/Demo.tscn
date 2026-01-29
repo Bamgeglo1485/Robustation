@@ -43,9 +43,41 @@ position = Vector2(20, 33)
 [node name="WaveTimer" type="Timer" parent="." unique_id=1724218207]
 wait_time = 5.0
 one_shot = true
-autostart = true
 
 [node name="BaseOpenableAirlock" parent="." unique_id=341990053 instance=ExtResource("8_kq8ho")]
 position = Vector2(-468, 41)
+
+[node name="Assistant" parent="." unique_id=1346317014 instance=ExtResource("6_qkpe2")]
+position = Vector2(-544, -396)
+
+[node name="Assistant2" parent="." unique_id=326710745 instance=ExtResource("6_qkpe2")]
+position = Vector2(-638, -401)
+
+[node name="Assistant3" parent="." unique_id=922061018 instance=ExtResource("6_qkpe2")]
+position = Vector2(-667, -329)
+
+[node name="Assistant4" parent="." unique_id=1872645141 instance=ExtResource("6_qkpe2")]
+position = Vector2(-544, -298)
+
+[node name="Assistant5" parent="." unique_id=1201396465 instance=ExtResource("6_qkpe2")]
+position = Vector2(-676, -251)
+
+[node name="Assistant6" parent="." unique_id=1128639273 instance=ExtResource("6_qkpe2")]
+position = Vector2(-807, -284)
+
+[node name="Assistant7" parent="." unique_id=1375164957 instance=ExtResource("6_qkpe2")]
+position = Vector2(-684, -212)
+
+[node name="Cleanbot" parent="." unique_id=1850228264 instance=ExtResource("4_xwwje")]
+position = Vector2(19, -516)
+
+[node name="Cleanbot2" parent="." unique_id=1074171303 instance=ExtResource("4_xwwje")]
+position = Vector2(-87, -534)
+
+[node name="Bartender" parent="." unique_id=1198067079 instance=ExtResource("4_a1dcl")]
+position = Vector2(-288, -517)
+
+[node name="PunPun" parent="." unique_id=1156111297 instance=ExtResource("5_a1dcl")]
+position = Vector2(-336, -495)
 
 [connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]

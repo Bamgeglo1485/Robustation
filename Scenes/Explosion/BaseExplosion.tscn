@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bbqpmpj4ntyg"]
+[gd_scene format=3 uid="uid://bbqpmpj4ntyg"]
 
 [ext_resource type="Script" uid="uid://b8ixjn50v3a88" path="res://Scripts/ExplosionSystem.gd" id="1_cpk21"]
 [ext_resource type="PackedScene" uid="uid://bjqvcwxstx8u1" path="res://Scenes/Effects/Particles/Boom.tscn" id="2_a5ua4"]
@@ -32,33 +32,33 @@ scale_over_velocity_curve = SubResource("CurveTexture_c1ng1")
 hue_variation_min = -1.0
 hue_variation_max = -0.67
 
-[node name="BaseExplosion" type="Node2D"]
+[node name="BaseExplosion" type="Node2D" unique_id=890470773]
 script = ExtResource("1_cpk21")
 damage = 150.0
 fly_force = 700
 fall_time = 1
 radius = 200
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=251884086]
 collision_layer = 15
 collision_mask = 15
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1183762416]
 shape = SubResource("CircleShape2D_a5ua4")
 
-[node name="GPUParticles2D" parent="." instance=ExtResource("2_cq02y")]
-modulate = Color(1.5229772, 1.5229772, 1.5229772, 1)
+[node name="GPUParticles2D" parent="." unique_id=668633620 instance=ExtResource("2_cq02y")]
+modulate = Color(3.5629182, 3.5629182, 3.5629182, 1)
 amount = 3000
 lifetime = 5.93
 process_material = SubResource("ParticleProcessMaterial_a5ua4")
 
-[node name="GPUParticles2D2" parent="." instance=ExtResource("2_a5ua4")]
+[node name="GPUParticles2D2" parent="." unique_id=621859249 instance=ExtResource("2_a5ua4")]
 position = Vector2(-1, -1)
 emitting = false
 amount = 3
 
-[node name="GPUParticles2D3" parent="." instance=ExtResource("3_a5ua4")]
+[node name="GPUParticles2D3" parent="." unique_id=2131820347 instance=ExtResource("3_a5ua4")]
 z_index = 1
 amount = 16
 lifetime = 125.12

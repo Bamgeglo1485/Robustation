@@ -4,7 +4,7 @@ class_name BattleTendencyComponent extends Component
 @export var max_battle_tendency: float = 100
 @export var battle_tendecy_dependency: float = 1
 @export var battle_tendency_debuff_multiplier: float = 0.5
-@export var battle_tendency_buff_multiplier: float = 0.1
+@export var battle_tendency_buff_multiplier: float = 1
 @export var battle_tendency_bonus = 0
 @export var palette_section: int = 2
 @export var section: int = 2
@@ -30,7 +30,7 @@ func _on_damaged(emitter, damage, damager):
 	if damager == emitter and emitter == parent: # SELFHARM
 		change_battle_tendency(damage * -0.2)
 	elif damager == parent:
-		change_battle_tendency(damage * 0.2) # DAMAGE
+		change_battle_tendency(damage * 0.) # DAMAGE
 	else:
 		change_battle_tendency(damage * -0.1) # PLAYER DAMAGED
 
@@ -38,7 +38,8 @@ func _on_gibbed(damager):
 	if damager != parent:
 		change_battle_tendency(1.5)
 
-func _on_parry(emitter):
+@warning_ignore("unused_parameter")
+func _on_parry(emitter, type):
 	if emitter == parent:
 		change_battle_tendency(1.5)
 

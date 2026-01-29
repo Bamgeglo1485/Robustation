@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DungeonTemplate" format=3 uid="uid://brrvrfsr8kitx"]
+
+[ext_resource type="PackedScene" uid="uid://dnoaq77825hf2" path="res://Scenes/Entities/Functioning/BaseOpenableAirlock.tscn" id="1_dber4"]
+[ext_resource type="Script" uid="uid://dmt16kr0b6pxm" path="res://Resources/Levels/BaseResources/DungeonTemplate.gd" id="1_le3r4"]
+
+[resource]
+script = ExtResource("1_le3r4")
+door = ExtResource("1_dber4")
+metadata/_custom_type_script = "uid://dmt16kr0b6pxm"

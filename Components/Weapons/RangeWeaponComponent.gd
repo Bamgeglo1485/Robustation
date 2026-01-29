@@ -33,6 +33,7 @@ func attack(raiser, npc = true):
 	await _swing(raiser.get_attack_direction())
 	
 	var direction = raiser.get_attack_direction()
+	EventBusManager.gun_shoot_event.emit(parent, self, direction)
 	
 	if parent.has_node("MobMoverComponent"):
 		if self_throw_speed != 0:

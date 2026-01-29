@@ -121,55 +121,55 @@ func set_battle_tendency_modifiers():
 
 # PLS REWORK THIS SHIT
 func change_palette():
-	if palette_section == section:
+	if section < 1 or section > 4:
 		return
 	
-	palette_section = section
+	var tween = create_tween()
+	tween.set_parallel(true)
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_ease(Tween.EASE_IN_OUT)
 	
-	if section == 1:
-		battle_tendency_effect.material.set_shader_parameter("saturation", 0)
-		battle_tendency_effect.material.set_shader_parameter("contrast", 0.5)
-		battle_tendency_effect.material.set_shader_parameter("vignette_strength", 1)
-		battle_tendency_effect.material.set_shader_parameter("red_factor", 1)
-		if material != null:
-			var _tween = create_tween()
-			_tween.set_trans(Tween.TRANS_SINE)
-			_tween.set_ease(Tween.EASE_IN_OUT)
-			_tween.tween_property(material, "shader_parameter/aura_opacity", 0, 0.5)
-	elif section == 2:
-		battle_tendency_effect.material.set_shader_parameter("saturation", 1)
-		battle_tendency_effect.material.set_shader_parameter("contrast", 1)
-		battle_tendency_effect.material.set_shader_parameter("green_factor", 1)
-		battle_tendency_effect.material.set_shader_parameter("vignette_strength", 0.1)
-		battle_tendency_effect.material.set_shader_parameter("red_factor", 1)
-		if material != null:
-			var _tween = create_tween()
-			_tween.set_trans(Tween.TRANS_SINE)
-			_tween.set_ease(Tween.EASE_IN_OUT)
-			_tween.tween_property(material, "shader_parameter/aura_opacity", 0, 0.5)
-	elif section == 3:
-		battle_tendency_effect.material.set_shader_parameter("saturation", 1.5)
-		battle_tendency_effect.material.set_shader_parameter("contrast", 1.5)
-		battle_tendency_effect.material.set_shader_parameter("green_factor", 0.9)
-		battle_tendency_effect.material.set_shader_parameter("red_factor", 1.1)
-		battle_tendency_effect.material.set_shader_parameter("vignette_strength", 0)
-		if material != null:
-			var _tween = create_tween()
-			_tween.set_trans(Tween.TRANS_SINE)
-			_tween.set_ease(Tween.EASE_IN_OUT)
-			_tween.tween_property(material, "shader_parameter/aura_min_line_width", 0.1, 0.5)
-			_tween.tween_property(material, "shader_parameter/aura_max_line_width", 1.4, 0.5)
-			_tween.tween_property(material, "shader_parameter/aura_opacity", 0.2, 0.5)
-	elif section == 4:
-		battle_tendency_effect.material.set_shader_parameter("saturation", 2)
-		battle_tendency_effect.material.set_shader_parameter("contrast", 2)
-		battle_tendency_effect.material.set_shader_parameter("vignette_strength", 0)
-		battle_tendency_effect.material.set_shader_parameter("red_factor", 1.2)
-		battle_tendency_effect.material.set_shader_parameter("green_factor", 0.8)
-		if material != null:
-			var _tween = create_tween()
-			_tween.set_trans(Tween.TRANS_SINE)
-			_tween.set_ease(Tween.EASE_IN_OUT)
-			_tween.tween_property(material, "shader_parameter/aura_min_line_width", 0.1, 0.5)
-			_tween.tween_property(material, "shader_parameter/aura_max_line_width", 2.3, 0.5)
-			_tween.tween_property(material, "shader_parameter/aura_opacity", 0.5, 0.5)
+	match section:
+		1:
+			tween.tween_property(battle_tendency_effect.material, "shader_parameter/saturation", 0.0, 0.5)
+			tween.tween_property(battle_tendency_effect.material, "shader_parameter/contrast", 0.5, 0.5)
+			tween.tween_property(battle_tendency_effect.material, "shader_parameter/vignette_strength", 0.4, 0.5)
+			tween.tween_property(battle_tendency_effect.material, "shader_parameter/red_factor", 1.0, 0.5)
+			tween.tween_property(battle_tendency_effect.material, "shader_parameter/green_factor", 1.0, 0.5)
+			
+			if material != null:
+				tween.tween_property(material, "shader_parameter/aura_opacity", 0.0, 0.5)
+		
+		2:
+			tween.tween_property(battle_tendency_effect.material, "shader_parameter/saturation", 1.0, 0.5)
+			tween.tween_property(battle_tendency_effect.material, "shader_parameter/contrast", 1.0, 0.5)
+			tween.tween_property(battle_tendency_effect.material, "shader_parameter/green_factor", 1.0, 0.5)
+			tween.tween_property(battle_tendency_effect.material, "shader_parameter/vignette_strength", 0.1, 0.5)
+			tween.tween_property(battle_tendency_effect.material, "shader_parameter/red_factor", 1.0, 0.5)
+			
+			if material != null:
+				tween.tween_property(material, "shader_parameter/aura_opacity", 0.0, 0.5)
+		
+		3:
+			tween.tween_property(battle_tendency_effect.material, "shader_parameter/saturation", 1.5, 0.5)
+			tween.tween_property(battle_tendency_effect.material, "shader_parameter/contrast", 1.5, 0.5)
+			tween.tween_property(battle_tendency_effect.material, "shader_parameter/green_factor", 0.9, 0.5)
+			tween.tween_property(battle_tendency_effect.material, "shader_parameter/red_factor", 1.1, 0.5)
+			tween.tween_property(battle_tendency_effect.material, "shader_parameter/vignette_strength", 0.0, 0.5)
+			
+			if material != null:
+				tween.tween_property(material, "shader_parameter/aura_min_line_width", 0.1, 0.5)
+				tween.tween_property(material, "shader_parameter/aura_max_line_width", 1.4, 0.5)
+				tween.tween_property(material, "shader_parameter/aura_opacity", 0.2, 0.5)
+		
+		4:
+			tween.tween_property(battle_tendency_effect.material, "shader_parameter/saturation", 2.0, 0.5)
+			tween.tween_property(battle_tendency_effect.material, "shader_parameter/contrast", 2.0, 0.5)
+			tween.tween_property(battle_tendency_effect.material, "shader_parameter/vignette_strength", 0.0, 0.5)
+			tween.tween_property(battle_tendency_effect.material, "shader_parameter/red_factor", 1.2, 0.5)
+			tween.tween_property(battle_tendency_effect.material, "shader_parameter/green_factor", 0.8, 0.5)
+			
+			if material != null:
+				tween.tween_property(material, "shader_parameter/aura_min_line_width", 0.1, 0.5)
+				tween.tween_property(material, "shader_parameter/aura_max_line_width", 2.3, 0.5)
+				tween.tween_property(material, "shader_parameter/aura_opacity", 0.5, 0.5)

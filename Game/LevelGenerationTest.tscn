@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://t11oui78ufap"]
+
+[ext_resource type="Script" uid="uid://ckct0i0n4njah" path="res://Components/Level/LevelComponent.gd" id="1_n33q2"]
+[ext_resource type="Script" uid="uid://bsm5m054pjuyg" path="res://Components/Level/DungeonGeneratorComponent.gd" id="2_usbqj"]
+[ext_resource type="Resource" uid="uid://brrvrfsr8kitx" path="res://Resources/Levels/MaintenceDungeon.tres" id="3_e1wfd"]
+[ext_resource type="TileSet" uid="uid://bc7bghcv8144y" path="res://Resources/TileMaps/Tiles.tres" id="4_82w5q"]
+[ext_resource type="TileSet" uid="uid://c7mk0aiygychu" path="res://Resources/TileMaps/Walls.tres" id="5_e1wfd"]
+[ext_resource type="PackedScene" uid="uid://roeennw572p2" path="res://Scenes/Mobs/PlayerGreytide.tscn" id="6_82w5q"]
+
+[node name="Game" type="Node2D" unique_id=49398453]
+script = ExtResource("1_n33q2")
+metadata/_custom_type_script = "uid://ckct0i0n4njah"
+
+[node name="DungeonGeneratorComponent" type="Node" parent="." unique_id=96809053 node_paths=PackedStringArray("plating_tilemap", "wall_tilemap")]
+script = ExtResource("2_usbqj")
+dungeon_template = ExtResource("3_e1wfd")
+plating_tilemap = NodePath("../PlatingTileMap")
+wall_tilemap = NodePath("../WallTileMap")
+metadata/_custom_type_script = "uid://bsm5m054pjuyg"
+
+[node name="PlatingTileMap" type="TileMapLayer" parent="." unique_id=1292036472]
+tile_set = ExtResource("4_82w5q")
+
+[node name="WallTileMap" type="TileMapLayer" parent="." unique_id=525973106]
+tile_set = ExtResource("5_e1wfd")
+
+[node name="Player" parent="." unique_id=1830007488 instance=ExtResource("6_82w5q")]

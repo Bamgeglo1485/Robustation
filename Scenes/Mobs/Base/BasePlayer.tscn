@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://jg0ru5ss6ppw"]
+[gd_scene format=3 uid="uid://jg0ru5ss6ppw"]
 
 [ext_resource type="PackedScene" uid="uid://c0elisnkry0s6" path="res://Scenes/Mobs/Base/BaseMob.tscn" id="1_gq7me"]
 [ext_resource type="Shape2D" uid="uid://cnu52idib8ugp" path="res://Resources/Colliders/PlayerCollider.tres" id="2_7ipmw"]
@@ -12,8 +12,128 @@
 [ext_resource type="Material" uid="uid://dctvv4tidab2r" path="res://Resources/Shaders/BattleTendency.tres" id="9_d6ik8"]
 [ext_resource type="Script" uid="uid://c3d63pm2kikgh" path="res://Components/Player/ImpactFrameComponent.gd" id="10_m2dsc"]
 [ext_resource type="Material" uid="uid://dufhgddaeqjd4" path="res://Resources/Shaders/ImpactFrame.tres" id="11_oayod"]
+[ext_resource type="Script" uid="uid://bdxrxakvokr52" path="res://Components/Player/ScreenShakeComponent.gd" id="13_0r3jo"]
 
-[node name="Player" instance=ExtResource("1_gq7me")]
+[sub_resource type="Shader" id="Shader_oayod"]
+code = "shader_type canvas_item;
+
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+
+uniform float red_factor : hint_range(0.0, 2.0) = 1.0;
+uniform float green_factor : hint_range(0.0, 2.0) = 1.0;
+uniform float blue_factor : hint_range(0.0, 2.0) = 1.0;
+
+uniform float saturation : hint_range(0.0, 2.0) = 1.0;
+uniform float brightness : hint_range(-1.0, 1.0) = 0.0;
+uniform float contrast : hint_range(0.0, 2.0) = 1.0;
+uniform float hue_shift : hint_range(-1.0, 1.0) = 0.0;
+uniform float gamma : hint_range(0.1, 3.0) = 1.0;
+
+uniform float alpha : hint_range(0.0, 1.0) = 1.0;
+uniform float vignette_strength : hint_range(0.0, 1.0) = 0.0;
+
+vec3 rgb2hsl(vec3 color) {
+    float max_color = max(max(color.r, color.g), color.b);
+    float min_color = min(min(color.r, color.g), color.b);
+    float delta = max_color - min_color;
+
+    float lightness = (max_color + min_color) / 2.0;
+    float hue = 0.0;
+    float sat = 0.0;
+
+    if (delta != 0.0) {
+        sat = (lightness < 0.5) ? (delta / (max_color + min_color)) : (delta / (2.0 - max_color - min_color));
+        
+        if (max_color == color.r) {
+            hue = (color.g - color.b) / delta + (color.g < color.b ? 6.0 : 0.0);
+        } else if (max_color == color.g) {
+            hue = (color.b - color.r) / delta + 2.0;
+        } else {
+            hue = (color.r - color.g) / delta + 4.0;
+        }
+
+        hue /= 6.0;
+    }
+
+    return vec3(hue, sat, lightness);
+}
+
+vec3 hsl2rgb(vec3 hsl) {
+    float hue = hsl.x;
+    float sat = hsl.y;
+    float lightness = hsl.z;
+
+    float chroma = (1.0 - abs(2.0 * lightness - 1.0)) * sat;
+    float h = hue * 6.0;
+    float x = chroma * (1.0 - abs(mod(h, 2.0) - 1.0));
+
+    vec3 result;
+
+    if (h < 1.0) {
+        result = vec3(chroma, x, 0.0);
+    } else if (h < 2.0) {
+        result = vec3(x, chroma, 0.0);
+    } else if (h < 3.0) {
+        result = vec3(0.0, chroma, x);
+    } else if (h < 4.0) {
+        result = vec3(0.0, x, chroma);
+    } else if (h < 5.0) {
+        result = vec3(x, 0.0, chroma);
+    } else {
+        result = vec3(chroma, 0.0, x);
+    }
+
+    float m = lightness - chroma / 2.0;
+    return result + vec3(m, m, m);
+}
+
+void fragment() {
+    vec4 tex_color = texture(SCREEN_TEXTURE, SCREEN_UV);
+    
+    vec3 color = tex_color.rgb;
+    color.r *= red_factor;
+    color.g *= green_factor;
+    color.b *= blue_factor;
+
+    vec3 hsl = rgb2hsl(color);
+    
+    hsl.x = mod(hsl.x + hue_shift, 1.0);
+    
+    hsl.y *= saturation;
+    
+    hsl.y = clamp(hsl.y, 0.0, 1.0);
+
+    color = hsl2rgb(hsl);
+
+    color = color * contrast + vec3(brightness);
+    
+    color = pow(color, vec3(gamma));
+    
+    if (vignette_strength > 0.0) {
+        vec2 uv = SCREEN_UV * 2.0 - 1.0;
+        float vignette = 1.0 - dot(uv, uv) * vignette_strength;
+        vignette = clamp(vignette, 0.0, 1.0);
+        color *= vignette;
+    }
+    
+    color = clamp(color, 0.0, 1.0);
+    COLOR = vec4(color, tex_color.a * alpha);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dytnj"]
+shader = SubResource("Shader_oayod")
+shader_parameter/red_factor = 1.0
+shader_parameter/green_factor = 1.0
+shader_parameter/blue_factor = 1.0
+shader_parameter/saturation = 1.0
+shader_parameter/brightness = 0.0
+shader_parameter/contrast = 1.0
+shader_parameter/hue_shift = 0.0
+shader_parameter/gamma = 1.0
+shader_parameter/alpha = 1.0
+shader_parameter/vignette_strength = 0.0
+
+[node name="Player" unique_id=808070232 instance=ExtResource("1_gq7me")]
 collision_layer = 1
 collision_mask = 1
 
@@ -23,11 +143,11 @@ can_fall = false
 [node name="Collision" parent="." index="3"]
 shape = ExtResource("2_7ipmw")
 
-[node name="InputMoverComponent" type="Node" parent="." index="4"]
+[node name="InputMoverComponent" type="Node" parent="." index="4" unique_id=1794246453]
 script = ExtResource("4_3n0k4")
 metadata/_custom_type_script = "uid://clpuxn7ckkj6f"
 
-[node name="PlayerCamera" type="Camera2D" parent="." index="5"]
+[node name="PlayerCamera" type="Camera2D" parent="." index="5" unique_id=2000720665]
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 position_smoothing_speed = 15.0
@@ -41,25 +161,25 @@ heal_for_damage_multiplier = 0.3
 [node name="FactionComponent" parent="." index="7"]
 faction = "Player"
 
-[node name="AudioListener" type="AudioListener2D" parent="." index="8"]
+[node name="AudioListener" type="AudioListener2D" parent="." index="8" unique_id=803579808]
 current = true
 
 [node name="WeaponUserComponent" parent="." index="9"]
 block_when_fallen = false
 block_when_flying = false
 
-[node name="PlayerWeaponUserComponent" type="Node" parent="." index="11"]
+[node name="PlayerWeaponUserComponent" type="Node" parent="." index="11" unique_id=283125688]
 script = ExtResource("5_3n0k4")
 metadata/_custom_type_script = "uid://gek7ma2qpdp6"
 
-[node name="HealthOverlayComponent" type="Node" parent="." index="17" node_paths=PackedStringArray("overlay")]
+[node name="HealthOverlayComponent" type="Node" parent="." index="17" unique_id=490260157 node_paths=PackedStringArray("overlay")]
 script = ExtResource("6_korw6")
 overlay = NodePath("CanvasLayer/ColorRect")
 metadata/_custom_type_script = "uid://djmi5xfppmrii"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="HealthOverlayComponent" index="0"]
+[node name="CanvasLayer" type="CanvasLayer" parent="HealthOverlayComponent" index="0" unique_id=1340539651]
 
-[node name="ColorRect" type="ColorRect" parent="HealthOverlayComponent/CanvasLayer" index="0"]
+[node name="ColorRect" type="ColorRect" parent="HealthOverlayComponent/CanvasLayer" index="0" unique_id=657939308]
 material = ExtResource("7_5768p")
 anchors_preset = 15
 anchor_right = 1.0
@@ -68,14 +188,14 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
 
-[node name="BattleTendencyComponent" type="Node" parent="." index="18" node_paths=PackedStringArray("battle_tendency_effect")]
+[node name="BattleTendencyComponent" type="Node" parent="." index="18" unique_id=1071898636 node_paths=PackedStringArray("battle_tendency_effect")]
 script = ExtResource("8_ljr5e")
 battle_tendency_effect = NodePath("CanvasLayer/ColorRect")
 metadata/_custom_type_script = "uid://bjb1tak0ajoof"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="BattleTendencyComponent" index="0"]
+[node name="CanvasLayer" type="CanvasLayer" parent="BattleTendencyComponent" index="0" unique_id=1279961535]
 
-[node name="ColorRect" type="ColorRect" parent="BattleTendencyComponent/CanvasLayer" index="0"]
+[node name="ColorRect" type="ColorRect" parent="BattleTendencyComponent/CanvasLayer" index="0" unique_id=586695650]
 material = ExtResource("9_d6ik8")
 anchors_preset = 15
 anchor_right = 1.0
@@ -84,15 +204,15 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
 
-[node name="ImpactFrameComponent" type="Node" parent="." index="19" node_paths=PackedStringArray("effect_frame", "color_modify_frame")]
+[node name="ImpactFrameComponent" type="Node" parent="." index="19" unique_id=462102113 node_paths=PackedStringArray("effect_frame", "color_modify_frame")]
 script = ExtResource("10_m2dsc")
 effect_frame = NodePath("CanvasLayer/ColorRect")
 color_modify_frame = NodePath("CanvasLayer/ColorModify")
 metadata/_custom_type_script = "uid://c3d63pm2kikgh"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="ImpactFrameComponent" index="0"]
+[node name="CanvasLayer" type="CanvasLayer" parent="ImpactFrameComponent" index="0" unique_id=892594464]
 
-[node name="ColorRect" type="ColorRect" parent="ImpactFrameComponent/CanvasLayer" index="0"]
+[node name="ColorRect" type="ColorRect" parent="ImpactFrameComponent/CanvasLayer" index="0" unique_id=1727064910]
 visible = false
 material = ExtResource("11_oayod")
 anchors_preset = 15
@@ -102,12 +222,16 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
 
-[node name="ColorModify" type="ColorRect" parent="ImpactFrameComponent/CanvasLayer" index="1"]
-z_index = 20
-material = ExtResource("9_d6ik8")
+[node name="ColorModify" type="ColorRect" parent="ImpactFrameComponent/CanvasLayer" index="1" unique_id=395695325]
+z_index = 50
+material = SubResource("ShaderMaterial_dytnj")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
+
+[node name="ScreenShakeComponent" type="Node" parent="." index="20" unique_id=416984762]
+script = ExtResource("13_0r3jo")
+metadata/_custom_type_script = "uid://bdxrxakvokr52"

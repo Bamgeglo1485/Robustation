@@ -37,7 +37,7 @@ func set_color_modify():
 	material.set_shader_parameter("blue_factor", 1)
 	material.set_shader_parameter("red_factor", 1)
 	material.set_shader_parameter("hue_shift", 0)
-	material.set_shader_parameter("alpha", 0.3)
+	material.set_shader_parameter("alpha", 0.5)
 	
 	color_tween.tween_property(material, "shader_parameter/alpha", 0, 3)
 	

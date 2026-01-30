@@ -32,7 +32,7 @@ func _on_wave_timer_timeout() -> void:
 	
 	_clean_invalid_instances(wave_assistants)
 	
-	if wave_assistants.size() <= 20:
+	if wave_assistants.size() <= 13:
 		var enemy_count = randi_range(1, 3)
 		for i in range(enemy_count):
 			_spawn_enemy(assistant, wave_assistants)

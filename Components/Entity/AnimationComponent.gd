@@ -21,7 +21,6 @@ func set_animation(tween, priority, rewrite = false):
 	if (priority > animation_priority) or (priority == animation_priority and rewrite == true):
 		if animation_tween != null:
 			animation_tween.kill()
-		
 		tween.set_ignore_time_scale(ignore_time_scale)
 		animation_tween = tween
 		animation_priority = priority

@@ -13,6 +13,8 @@ class_name BuddyComponent extends Component
 @onready var move_to_point_component = parent.get_node_or_null("MoveToPoinComponent")
 
 func _ready() -> void:
+	await get_tree().create_timer(0.1).timeout
+	
 	EventBusManager.gibbed.connect(on_gibbed)
 	
 	if move_to_point_component == null and parent.has_node("AI"):

@@ -29,6 +29,7 @@ metadata/_custom_type_script = "uid://crchnvrl7mcdd"
 [node name="MoveToPointComponent" type="Node" parent="AI" index="0" unique_id=395370591 node_paths=PackedStringArray("navigation_agent")]
 script = ExtResource("2_i6wsw")
 navigation_agent = NodePath("../../NavigationAgent")
+update_rate = 0.3
 metadata/_custom_type_script = "uid://vaff4lwkvrc7"
 
 [node name="MoveToTargetComponent" type="Node" parent="AI" index="1" unique_id=1800782744]

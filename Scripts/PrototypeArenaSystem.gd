@@ -18,11 +18,11 @@ func _on_wave_timer_timeout() -> void:
 			clean_array.append(bot)
 	wave_cleanbots = clean_array
 	
+	randomize()
+	
 	if wave_cleanbots.is_empty():
 		for bot in randi_range(0, 2):
-			randomize()
 			var x_spawn_pos = randf_range(0, 500)
-			randomize()
 			var y_spawn_pos = randf_range(0, 500)
 			
 			var inst = cleanbot.instantiate()
@@ -30,11 +30,8 @@ func _on_wave_timer_timeout() -> void:
 			wave_cleanbots.append(inst)
 			add_child(inst)
 	
-	randomize()
 	if randf() * (diff / 3) > 0.5:
-		randomize()
 		var x_spawn_pos = randf_range(0, 500)
-		randomize()
 		var y_spawn_pos = randf_range(0, 500)
 		
 		var inst = pun_pun.instantiate()
@@ -52,9 +49,7 @@ func _on_wave_timer_timeout() -> void:
 	
 	if wave_assistants.size() <= 20:
 		for enemy in randi_range(1, 3):
-			randomize()
 			var x_spawn_pos = randf_range(0, 500)
-			randomize()
 			var y_spawn_pos = randf_range(0, 500)
 			
 			var inst = assistant.instantiate()

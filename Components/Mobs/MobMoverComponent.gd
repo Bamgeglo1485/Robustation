@@ -1,13 +1,13 @@
 class_name MobMoverComponent extends Component
 
-@onready var animation_component = parent.get_node_or_null("AnimationComponent")
+@onready var animation_component: Node = parent.get_node_or_null("AnimationComponent")
 
-@export var base_max_speed: int = 300
-@export var max_speed: int = base_max_speed
-@export var acceleration: int = 100
-@export var friction: int = 700
-@export var speed_modifier: float = 1
-var direction = Vector2.ZERO
+@export var base_max_speed: float = 300.0
+@export var max_speed: float = base_max_speed
+@export var acceleration: float = 100.0
+@export var friction: float = 700.0
+@export var speed_modifier: float = 1.0
+var direction: Vector2 = Vector2.ZERO
 
 @export var can_fall: bool = true
 @export var movement_blocked: bool = false
@@ -30,7 +30,7 @@ var standing_delay: float = 0
 @onready var navigation_agent: NavigationAgent2D = parent.get_node_or_null("NavigationAgent")
 
 func _ready() -> void:
-	if fly_impact_area != null:
+	if fly_impact_area:
 		fly_impact_area.body_entered.connect(on_fly_impact)
 
 func _physics_process(delta: float) -> void:
@@ -42,7 +42,7 @@ func _process(delta: float) -> void:
 	_fall_process(delta)
 
 func _move(delta) -> void:
-	if not parent is CharacterBody2D:
+	if !parent is CharacterBody2D:
 		return
 	
 	if flying:
@@ -52,22 +52,22 @@ func _move(delta) -> void:
 	var velocity = parent.velocity
 	
 	if direction.is_zero_approx():
-		if not velocity.is_zero_approx():
+		if !velocity.is_zero_approx():
 			var friction_amount = friction * delta
 			var speed = velocity.length()
 			if speed > friction_amount:
 				velocity -= (velocity / speed) * friction_amount
 			else:
 				velocity = Vector2.ZERO
-	elif not movement_blocked and not fallen:
-		var dir = direction
+	elif !movement_blocked and !fallen:
+		var dir: Vector2 = direction
 		velocity += dir * acceleration
 		
 		if navigation_agent:
-			var nav_vel = dir * acceleration * speed_modifier
+			var nav_vel: Vector2 = dir * acceleration * speed_modifier
 			navigation_agent.set_velocity(nav_vel)
 		
-		var max_speed_current = max_speed * speed_modifier
+		var max_speed_current: float = max_speed * speed_modifier
 		var current_speed = velocity.length()
 		if current_speed > max_speed_current:
 			velocity = (velocity / current_speed) * max_speed_current
@@ -75,19 +75,19 @@ func _move(delta) -> void:
 	parent.velocity = velocity
 	parent.move_and_slide()
 
-func _walk_animation():
-	if animation_component == null or flying == true or fallen == true:
+func _walk_animation() -> void:
+	if !animation_component or flying or fallen:
 		return
 	
 	if parent.velocity == Vector2.ZERO and animation_component.animation_priority == 1:
 		animation_component.clear_animation()
 	elif parent.velocity.length_squared() > 0.01 and animation_component.animation_priority < 1:
-		var walk_tween = create_tween()
+		var walk_tween: Tween = create_tween()
 		walk_tween.set_loops()
 		walk_tween.set_trans(Tween.TRANS_SINE)
 		walk_tween.set_ease(Tween.EASE_IN_OUT)
 		
-		var modified_time = 0.2 * (float(max_speed) / float(base_max_speed))
+		var modified_time: float = 0.2 * max_speed / base_max_speed
 		
 		walk_tween.tween_property(parent, "global_rotation", -0.08, modified_time)
 		walk_tween.tween_property(parent, "global_rotation", 0.08, modified_time)
@@ -95,25 +95,25 @@ func _walk_animation():
 		animation_component.set_animation(walk_tween, 1)
 
 func _fly_movement() -> void:
-	var fly_velocity = fly_direction * fly_speed * fly_modifier
+	var fly_velocity: Vector2 = fly_direction * fly_speed * fly_modifier
 	
-	if direction != Vector2.ZERO and fallen == false:
-		var control_velocity = direction * acceleration
-		var combined_velocity = fly_velocity + control_velocity
+	if direction != Vector2.ZERO and !fallen:
+		var control_velocity: Vector2 = direction * acceleration
+		var combined_velocity: Vector2 = fly_velocity + control_velocity
 		parent.velocity = combined_velocity.limit_length(fly_speed + max_speed)
 	else:
 		parent.velocity = fly_velocity
 	
 	parent.move_and_slide()
 
-func _fly(delta):
-	if not flying or fly_speed <= 0:
+func _fly(delta) -> void:
+	if !flying or fly_speed <= 0:
 		return
 	
 	fly_speed -= 400 * delta
 	
 	if fly_speed < fly_stop_speed * 20:
-		var tween = create_tween()
+		var tween: Tween = create_tween()
 		tween.set_trans(Tween.TRANS_SINE)
 		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.tween_property(parent, "scale", Vector2(1, 1), 0.2)
@@ -124,8 +124,15 @@ func _fly(delta):
 		parent.velocity = Vector2.ZERO
 		flying = false
 
-func throw(throw_direction: Vector2, throw_speed: float, throw_source = null, throw_stop_speed: float = 10, animation = true):
-	var max_throw_speed = 2000
+func throw(
+	throw_direction: Vector2,
+	throw_speed: float,
+	throw_source = null,
+	throw_stop_speed: float = 10,
+	animation = true
+	) -> void:
+	
+	var max_throw_speed: int = 2000
 	var actual_speed = min(throw_speed, max_throw_speed)
 	fly_source = throw_source
 	
@@ -141,71 +148,71 @@ func throw(throw_direction: Vector2, throw_speed: float, throw_source = null, th
 	if fly_speed > 100 and fly_direction != Vector2.ZERO:
 		flying = true
 	
-	if animation == true:
-		var tween = create_tween()
+	if animation:
+		var tween: Tween = create_tween()
 		tween.set_trans(Tween.TRANS_SINE)
 		tween.set_ease(Tween.EASE_IN_OUT)
 		
 		tween.tween_property(parent, "scale", Vector2(1.35, 1.35), 0.2)
 
-func _fall_process(delta):
-	if fallen == false:
+func _fall_process(delta) -> void:
+	if !fallen:
 		return
 	
-	if flying == false:
+	if !flying:
 		standing_delay -= delta
 	if standing_delay <= 0:
 		stand_up()
 
-func drop(delay):
-	if can_fall == false or delay < 0.3:
+func drop(delay) -> void:
+	if !can_fall or delay < 0.3:
 		return
 	
 	standing_delay += delay
 	
-	if fallen == true:
+	if fallen:
 		return
 	
 	fallen = true
 	
-	if animation_component != null:
-		var tween = create_tween()
+	if animation_component:
+		var tween: Tween = create_tween()
 		tween.set_loops()
 		tween.set_trans(Tween.TRANS_SINE)
 		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.tween_property(parent, "global_rotation", -1.55, 0.2)
 		animation_component.set_animation(tween, 5)
-	if fall_effect != null:
+	if fall_effect:
 		if parent.has_node("HealthComponent") and parent.get_node("HealthComponent").health <= 0:
 			return
 		
-		var inst = fall_effect.instantiate()
+		var inst: Node = fall_effect.instantiate()
 		scene.add_child(inst)
 		inst.global_position = parent.global_position
-	if body_fall_sound != null:
+	if body_fall_sound:
 		body_fall_sound.play()
 
-func stand_up():
+func stand_up() -> void:
 	standing_delay = 0
 	
-	if animation_component != null:
+	if animation_component:
 		animation_component.clear_animation()
 	
 	await get_tree().create_timer(0.3).timeout
 	
 	fallen = false
  
-func on_fly_impact(body):
-	if not flying:
+func on_fly_impact(body) -> void:
+	if !flying:
 		return
-	if not body.has_node("MobMoverComponent") or fly_speed < 200:
+	if !body.has_node("MobMoverComponent") or fly_speed < 200:
 		return
 	if body is Area2D or body == parent:
 		return
 	var mob_mover = body.get_node("MobMoverComponent")
-	if mob_mover.can_fall == false:
+	if !mob_mover.can_fall:
 		return
 	mob_mover.throw(parent.velocity, fly_speed/1.5)
 	mob_mover.drop(1)
 	if body.has_node("HealthComponent"):
-		body.get_node("HealthComponent").take_damage(fly_speed/50, fly_source)
+		body.get_node("HealthComponent").take_damage(fly_speed*0.02, fly_source) # mult on 0.02 equals sub on 50

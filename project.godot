@@ -29,6 +29,10 @@ EventBusManager="*res://Scripts/EventBusManager.gd"
 
 window/size/mode=3
 
+[dotnet]
+
+project/assembly_name="Robustation-OOP"
+
 [editor]
 
 movie_writer/movie_file="C:/Users/orang/Videos/sd.avi"

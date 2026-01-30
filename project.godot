@@ -18,6 +18,7 @@ config/name="Robustation-OOP"
 config/version="DEMO 0.1"
 run/main_scene="uid://d243vjfiqh74f"
 config/features=PackedStringArray("4.6", "GL Compatibility")
+boot_splash/use_filter=false
 config/icon="uid://8d2n77fftdbi"
 
 [autoload]

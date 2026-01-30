@@ -3,7 +3,6 @@
 [resource]
 background_mode = 3
 ssr_depth_tolerance = 128.0
-ssao_enabled = true
 ssao_intensity = 16.45
 ssao_detail = 5.0
 ssao_horizon = 1.0

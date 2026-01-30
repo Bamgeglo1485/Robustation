@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c0elisnkry0s6"]
+[gd_scene format=3 uid="uid://c0elisnkry0s6"]
 
 [ext_resource type="Shape2D" uid="uid://bniep6322iouj" path="res://Resources/Colliders/HumanCollider.tres" id="2_vbbsq"]
 [ext_resource type="Script" uid="uid://df356su15y7ow" path="res://Components/Entity/HealthComponent.gd" id="7_6tb4j"]
@@ -18,7 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://dnveb48dgrefd" path="res://Resources/Audio/FootstepFloorRandom.tres" id="16_g8los"]
 [ext_resource type="AudioStream" uid="uid://b7l65hp5rr2pt" path="res://Resources/Audio/BodyFallRandom.tres" id="17_g8los"]
 
-[node name="Mob" type="CharacterBody2D"]
+[node name="Mob" type="CharacterBody2D" unique_id=660687485]
 physics_interpolation_mode = 1
 z_index = 3
 texture_filter = 1
@@ -27,17 +27,17 @@ collision_layer = 2
 collision_mask = 0
 motion_mode = 1
 
-[node name="DirectionComponent" type="Node" parent="."]
+[node name="DirectionComponent" type="Node" parent="." unique_id=1422345271]
 script = ExtResource("8_gq5ok")
 metadata/_custom_type_script = "uid://dcmqlndbp0jp7"
 
-[node name="MobMoverComponent" type="Node" parent="." node_paths=PackedStringArray("fly_impact_area", "body_fall_sound")]
+[node name="MobMoverComponent" type="Node" parent="." unique_id=2027089689 node_paths=PackedStringArray("fly_impact_area", "body_fall_sound")]
 script = ExtResource("10_nmodv")
 fly_impact_area = NodePath("../Area2D")
 body_fall_sound = NodePath("../Sounds/BodyFall")
 metadata/_custom_type_script = "uid://dfs78nrhukxbl"
 
-[node name="Texture" type="Sprite2D" parent="."]
+[node name="Texture" type="Sprite2D" parent="." unique_id=382857461]
 use_parent_material = true
 texture = ExtResource("11_obr0u")
 region_enabled = true
@@ -45,57 +45,62 @@ region_rect = Rect2(0, 0, 32, 32)
 script = ExtResource("12_g8los")
 metadata/_custom_type_script = "uid://bqvdlb3r03cs0"
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=424093742]
 visible = false
 position = Vector2(-1, 1)
 shape = ExtResource("2_vbbsq")
 
-[node name="HealthComponent" type="Node" parent="."]
+[node name="HealthComponent" type="Node" parent="." unique_id=1758373275]
 script = ExtResource("7_6tb4j")
 blood_effect_scene = ExtResource("8_kftdd")
 blood_spurt_effect_scene = ExtResource("9_gq5ok")
 gib_effect_scene = ExtResource("9_aasos")
 metadata/_custom_type_script = "uid://df356su15y7ow"
 
-[node name="FactionComponent" type="Node" parent="."]
+[node name="FactionComponent" type="Node" parent="." unique_id=1651473390]
 script = ExtResource("8_02kti")
 faction = "Enemy"
 metadata/_custom_type_script = "uid://b2j14u62ikqnw"
 
-[node name="WeaponUserComponent" type="Node" parent="."]
+[node name="WeaponUserComponent" type="Node" parent="." unique_id=2123544057]
 script = ExtResource("9_331la")
 metadata/_custom_type_script = "uid://b1p6bdh2vi8b"
 
-[node name="WeaponTexture" type="Sprite2D" parent="."]
+[node name="WeaponTexture" type="Sprite2D" parent="." unique_id=1059769572]
 script = ExtResource("12_g8los")
 metadata/_custom_type_script = "uid://bqvdlb3r03cs0"
 
-[node name="UniqueShaderComponent" type="Node" parent="."]
+[node name="UniqueShaderComponent" type="Node" parent="." unique_id=1545334767]
 script = ExtResource("12_aasos")
 metadata/_custom_type_script = "uid://qcmegh7138ug"
 
-[node name="AnimationComponent" type="Node" parent="."]
+[node name="AnimationComponent" type="Node" parent="." unique_id=1054272185]
 script = ExtResource("14_s34w8")
 metadata/_custom_type_script = "uid://b770h0bntm0u4"
 
-[node name="FootstepComponent" type="Node" parent="." node_paths=PackedStringArray("footstep_sound")]
+[node name="FootstepComponent" type="Node" parent="." unique_id=86781683 node_paths=PackedStringArray("footstep_sound")]
 script = ExtResource("15_obr0u")
 footstep_sound = NodePath("FootstepSounds")
 metadata/_custom_type_script = "uid://cwh8ve85ed8gv"
 
-[node name="FootstepSounds" type="AudioStreamPlayer2D" parent="FootstepComponent"]
+[node name="FootstepSounds" type="AudioStreamPlayer2D" parent="FootstepComponent" unique_id=1611482403]
 stream = ExtResource("16_g8los")
 
-[node name="Sounds" type="Node2D" parent="."]
+[node name="Sounds" type="Node2D" parent="." unique_id=1426643006]
 
-[node name="BodyFall" type="AudioStreamPlayer2D" parent="Sounds"]
+[node name="BodyFall" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1649394651]
 stream = ExtResource("17_g8los")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=151901461]
 collision_layer = 3
 collision_mask = 3
 
-[node name="Collision" type="CollisionShape2D" parent="Area2D"]
+[node name="Collision" type="CollisionShape2D" parent="Area2D" unique_id=2006731696]
 visible = false
 position = Vector2(-1, 1)
 shape = ExtResource("2_vbbsq")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=395231922]
+position = Vector2(-5, -8)
+rect = Rect2(-11, -11, 31, 39)
+show_rect = false

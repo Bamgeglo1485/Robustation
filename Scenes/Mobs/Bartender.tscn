@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://detw4so2cuuhb"]
+[gd_scene format=3 uid="uid://detw4so2cuuhb"]
 
 [ext_resource type="PackedScene" uid="uid://c0eulucj1dtco" path="res://Scenes/Mobs/Base/BaseEnemy.tscn" id="1_cs75w"]
 [ext_resource type="Shader" uid="uid://cch5nmhk121wx" path="res://Resources/Shaders/MobShader.gdshader" id="2_11246"]
@@ -71,20 +71,23 @@ shader_parameter/glitch_scanline_strength = 0.18
 shader_parameter/glitch_local_warp_strength = 0.14
 shader_parameter/glitch_flip_chance = 0.0
 
-[node name="Bartender" instance=ExtResource("1_cs75w")]
+[node name="Bartender" unique_id=238657700 instance=ExtResource("1_cs75w")]
 material = SubResource("ShaderMaterial_biq87")
 metadata/_edit_horizontal_guides_ = [-17.0]
 
-[node name="Texture" parent="." index="2"]
+[node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
+base_max_speed = 200
+
+[node name="Texture" parent="." index="2" unique_id=382857461]
 texture = ExtResource("2_pjus4")
 
-[node name="HealthComponent" parent="." index="4"]
+[node name="HealthComponent" parent="." index="4" unique_id=1758373275]
 max_health = 200
 
-[node name="WeaponUserComponent" parent="." index="7" node_paths=PackedStringArray("selected_weapon")]
+[node name="WeaponUserComponent" parent="." index="6" unique_id=2123544057 node_paths=PackedStringArray("selected_weapon")]
 selected_weapon = NodePath("Shotgun")
 
-[node name="Shotgun" type="Node" parent="WeaponUserComponent" index="0" node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound", "bullets_recover_sound")]
+[node name="Shotgun" type="Node" parent="WeaponUserComponent" index="0" unique_id=889538511 node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound", "bullets_recover_sound")]
 script = ExtResource("3_tv8gs")
 projectile = ExtResource("4_tv8gs")
 spread_angle = 2
@@ -106,23 +109,23 @@ attack_rotation_multiplier = -0.6
 attack_shift_multiplier = -0.7
 metadata/_custom_type_script = "uid://bi1gje1pfokqc"
 
-[node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Shotgun" index="0"]
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Shotgun" index="0" unique_id=75351607]
 stream = ExtResource("9_3c5wa")
 
-[node name="EmptySound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Shotgun" index="1"]
+[node name="EmptySound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Shotgun" index="1" unique_id=117816236]
 stream = ExtResource("10_coqyf")
 
-[node name="BulletRecoverSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Shotgun" index="2"]
+[node name="BulletRecoverSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Shotgun" index="2" unique_id=596330660]
 stream = ExtResource("11_lbqxj")
 
-[node name="Rage" type="AudioStreamPlayer2D" parent="Sounds" index="1"]
+[node name="Rage" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="1" unique_id=1773599417]
 stream = ExtResource("13_biq87")
 
-[node name="MoveToPointComponent" parent="AI" index="0"]
+[node name="MoveToPointComponent" parent="AI" parent_id_path=PackedInt32Array(1365591205) index="0" unique_id=395370591]
 run_to_target_range = 150.0
 run_from_target_range = 200.0
 
-[node name="Hair" type="Sprite2D" parent="." index="15"]
+[node name="Hair" type="Sprite2D" parent="." index="15" unique_id=510513125]
 texture = ExtResource("3_p0u7e")
 offset = Vector2(0, -1)
 region_enabled = true
@@ -131,12 +134,12 @@ random_textures = Array[Texture2D]([ExtResource("5_oymp5"), ExtResource("6_s35q8
 random_color = true
 metadata/_custom_type_script = "uid://bqvdlb3r03cs0"
 
-[node name="BuddyComponent" type="Node" parent="." index="16"]
+[node name="BuddyComponent" type="Node" parent="." index="16" unique_id=1866595739]
 script = ExtResource("12_17egj")
 buddy_group = "Bartender"
 metadata/_custom_type_script = "uid://da2q40ragr5wk"
 
-[node name="RageComponent" type="Node" parent="." index="17" node_paths=PackedStringArray("aura_effect", "rage_sound")]
+[node name="RageComponent" type="Node" parent="." index="17" unique_id=497965005 node_paths=PackedStringArray("aura_effect", "rage_sound")]
 script = ExtResource("33_et3ly")
 rage_delay = 0.0
 rage_damage_addendum = 0.0
@@ -147,7 +150,7 @@ rage_sound = NodePath("../Sounds/Rage")
 rage_effect = ExtResource("34_11246")
 metadata/_custom_type_script = "uid://d0a8e3f7tepch"
 
-[node name="ExplosionResistanceComponent" type="Node" parent="." index="18"]
+[node name="ExplosionResistanceComponent" type="Node" parent="." index="18" unique_id=1198277426]
 script = ExtResource("37_3c5wa")
 resistance = 0.2
 metadata/_custom_type_script = "uid://clr7jbioge17t"

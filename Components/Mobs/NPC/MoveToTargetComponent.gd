@@ -4,6 +4,7 @@ class_name MoveToTargetComponent extends Component
 
 @onready var target: CharacterBody2D
 @onready var move_to_point_component: MoveToPointComponent = get_parent().get_node_or_null("MoveToPointComponent")
+@onready var player = scene.get_node_or_null("Player")
 var direction_component: DirectionComponent
 
 @export var priority: int = 2
@@ -14,10 +15,13 @@ func _ready() -> void:
 
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
-	if set_player_as_target == true:
-		target = scene.get_node_or_null("Player")
+	if set_player_as_target == true and player != target:
+		target = player
 	
 	if target == null or move_to_point_component == null:
+		return
+	
+	if move_to_point_component.current_priority > priority:
 		return
 	
 	move_to_point_component.set_point(target.global_position, priority)

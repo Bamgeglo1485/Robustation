@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://28ktlm8hudhq"]
+[gd_scene format=3 uid="uid://28ktlm8hudhq"]
 
 [ext_resource type="Material" uid="uid://cyp3pqnhbfrj3" path="res://Resources/Shaders/Jiggle.tres" id="1_chbsr"]
 [ext_resource type="Texture2D" uid="uid://tq70wp3sblsx" path="res://Textures/Effects/Particles/parry.png" id="2_urugt"]
@@ -23,11 +23,11 @@ scale_max = 2.0
 color = Color(1, 1, 1, 0.6901961)
 color_ramp = SubResource("GradientTexture1D_4ifew")
 
-[node name="GPUParticles2D" type="GPUParticles2D"]
+[node name="GPUParticles2D" type="GPUParticles2D" unique_id=128321773]
 modulate = Color(2.4325802, 2.4325802, 2.4325802, 1)
 texture_filter = 1
 material = ExtResource("1_chbsr")
-amount = 2
+amount = 1
 texture = ExtResource("2_urugt")
 lifetime = 0.41
 preprocess = 0.5
@@ -36,12 +36,12 @@ randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_mbpk4")
 script = ExtResource("3_jaw6g")
 
-[node name="Delete" type="Timer" parent="."]
+[node name="Delete" type="Timer" parent="." unique_id=204386344]
 wait_time = 0.4
 one_shot = true
 autostart = true
 
-[node name="GPUParticles2D" parent="." instance=ExtResource("4_tulvs")]
+[node name="GPUParticles2D" parent="." unique_id=1822385500 instance=ExtResource("4_tulvs")]
 amount = 10
 
 [connection signal="timeout" from="Delete" to="." method="_on_delete_timeout"]

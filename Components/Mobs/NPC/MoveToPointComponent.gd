@@ -87,9 +87,10 @@ func _pathfinding_update():
 	if point != Vector2.ZERO:
 		navigation_agent.target_position = point
 	
-	pathfinding_timer.wait_time = randf_range(update_rate * 0.9, update_rate * 1.2)
+	randomize()
+	pathfinding_timer.wait_time = randf_range(update_rate * 0.8, update_rate * 1.2)
 	pathfinding_timer.start()
 
 func _on_navigation_agent_velocity_computed(safe_velocity: Vector2) -> void:
-	if mob_mover_component != null and safe_velocity.length() > 0.1:
+	if mob_mover_component != null and safe_velocity.length_squared() > 0.1:
 		mob_mover_component.direction = safe_velocity.normalized()

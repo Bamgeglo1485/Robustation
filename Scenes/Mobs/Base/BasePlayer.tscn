@@ -138,6 +138,7 @@ shader_parameter/vignette_strength = 0.0
 [node name="Player" unique_id=808070232 instance=ExtResource("1_gq7me")]
 collision_layer = 1
 collision_mask = 1
+script = ExtResource("8_ljr5e")
 
 [node name="MobMoverComponent" parent="." index="1"]
 can_fall = false
@@ -150,7 +151,7 @@ script = ExtResource("4_3n0k4")
 metadata/_custom_type_script = "uid://clpuxn7ckkj6f"
 
 [node name="PlayerCamera" type="Camera2D" parent="." index="5" unique_id=2000720665]
-zoom = Vector2(2, 2)
+zoom = Vector2(2.25, 2.25)
 position_smoothing_enabled = true
 position_smoothing_speed = 15.0
 script = ExtResource("5_korw6")

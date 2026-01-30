@@ -1,0 +1,12 @@
+[gd_resource type="Environment" format=3 uid="uid://d2fbug66o4pw7"]
+
+[resource]
+background_mode = 3
+ssr_depth_tolerance = 128.0
+ssao_enabled = true
+ssao_intensity = 16.45
+ssao_detail = 5.0
+ssao_horizon = 1.0
+ssao_light_affect = 1.0
+ssao_ao_channel_affect = 1.0
+glow_enabled = true

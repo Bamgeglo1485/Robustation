@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://beyi1acvpd21n"]
+[gd_scene format=3 uid="uid://cw4f1ukqf6wh5"]
 
 [ext_resource type="Texture2D" uid="uid://bc4akrjd4yio1" path="res://Textures/Effects/Particles/blood.png" id="1_0er5h"]
 [ext_resource type="Script" uid="uid://ckngjbi4531ra" path="res://Scripts/Effects/BloodSystem.gd" id="3_v8gbt"]
@@ -129,7 +129,12 @@ shader_parameter/flip_chance = 0.15
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_vd2x5"]
 
+[sub_resource type="Curve" id="Curve_0er5h"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="CurveTexture" id="CurveTexture_v8gbt"]
+curve = SubResource("Curve_0er5h")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tktbe"]
 particle_flag_disable_z = true
@@ -142,7 +147,7 @@ scale_min = 0.5
 scale_max = 0.5
 color_ramp = SubResource("GradientTexture1D_vd2x5")
 
-[node name="GPUParticles2D" type="GPUParticles2D"]
+[node name="GPUParticles2D" type="GPUParticles2D" unique_id=559083804]
 self_modulate = Color(1, 0.6120815, 0.9912531, 1)
 z_index = -2
 texture_filter = 1
@@ -160,7 +165,7 @@ seed = 4246352849
 process_material = SubResource("ParticleProcessMaterial_tktbe")
 script = ExtResource("3_v8gbt")
 
-[node name="PauseTimer" type="Timer" parent="."]
+[node name="PauseTimer" type="Timer" parent="." unique_id=518010845]
 wait_time = 0.6
 one_shot = true
 autostart = true

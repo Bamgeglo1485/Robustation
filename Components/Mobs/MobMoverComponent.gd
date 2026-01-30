@@ -23,10 +23,11 @@ var fly_modifier: float = 1
 var fly_source
 
 @export var body_fall_sound: AudioStreamPlayer2D
+@export var fall_effect: PackedScene = preload("res://Scenes/Effects/Particles/Fall.tscn")
 var fallen: bool = false
 var standing_delay: float = 0
 
-@export var fall_effect: PackedScene = preload("res://Scenes/Effects/Particles/Fall.tscn")
+@onready var navigation_agent: NavigationAgent2D = parent.get_node_or_null("NavigationAgent")
 
 func _ready() -> void:
 	if fly_impact_area != null:
@@ -41,25 +42,37 @@ func _process(delta: float) -> void:
 	_fall_process(delta)
 
 func _move(delta) -> void:
-	if parent is not CharacterBody2D:
+	if not parent is CharacterBody2D:
 		return
 	
 	if flying:
 		_fly_movement()
 		return
 	
-	if direction == Vector2.ZERO:
-		var _friction_multiplier = friction * delta
-		if parent.velocity.length() > _friction_multiplier:
-			parent.velocity -= parent.velocity.normalized() * _friction_multiplier
-		else:
-			parent.velocity = Vector2.ZERO
-	elif movement_blocked == false and fallen == false:
-		parent.velocity += direction * acceleration
-		if parent.has_node("NavigationAgent"):
-			parent.get_node("NavigationAgent").set_velocity(direction * acceleration * speed_modifier)
-		parent.velocity = parent.velocity.limit_length(max_speed * speed_modifier)
+	var velocity = parent.velocity
 	
+	if direction.is_zero_approx():
+		if not velocity.is_zero_approx():
+			var friction_amount = friction * delta
+			var speed = velocity.length()
+			if speed > friction_amount:
+				velocity -= (velocity / speed) * friction_amount
+			else:
+				velocity = Vector2.ZERO
+	elif not movement_blocked and not fallen:
+		var dir = direction
+		velocity += dir * acceleration
+		
+		if navigation_agent:
+			var nav_vel = dir * acceleration * speed_modifier
+			navigation_agent.set_velocity(nav_vel)
+		
+		var max_speed_current = max_speed * speed_modifier
+		var current_speed = velocity.length()
+		if current_speed > max_speed_current:
+			velocity = (velocity / current_speed) * max_speed_current
+	
+	parent.velocity = velocity
 	parent.move_and_slide()
 
 func _walk_animation():

@@ -7,20 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://cm7i3v6s6xr3n" path="res://Scenes/Mobs/CleanBot.tscn" id="4_xwwje"]
 [ext_resource type="PackedScene" uid="uid://dlvfaaebkqfa" path="res://Scenes/Mobs/PunPun.tscn" id="5_a1dcl"]
 [ext_resource type="PackedScene" uid="uid://vjubfbb1hjee" path="res://Scenes/Mobs/Assistant.tscn" id="6_qkpe2"]
-[ext_resource type="Shape2D" uid="uid://b2j7fs73lgrj2" path="res://DemoTrash/InvisibleWall.tres" id="8_ou8w1"]
+[ext_resource type="Environment" uid="uid://d2fbug66o4pw7" path="res://DemoTrash/environment.tres" id="7_gnkl7"]
 [ext_resource type="Texture2D" uid="uid://cvur3giqeqos0" path="res://Textures/Tiles/plates.png" id="9_ou8w1"]
 [ext_resource type="Script" uid="uid://bo7lklhepnuja" path="res://Scripts/fps.gd" id="10_4cjyq"]
-
-[sub_resource type="Environment" id="Environment_7ee7k"]
-background_mode = 3
-ssr_depth_tolerance = 128.0
-ssao_enabled = true
-ssao_intensity = 16.45
-ssao_detail = 5.0
-ssao_horizon = 1.0
-ssao_light_affect = 1.0
-ssao_ao_channel_affect = 1.0
-glow_enabled = true
+[ext_resource type="PackedScene" uid="uid://w41g5yq5hw6o" path="res://DemoTrash/borders.tscn" id="10_gnkl7"]
 
 [node name="Game" type="Node2D" unique_id=1049691661]
 script = ExtResource("1_7ee7k")
@@ -37,7 +27,7 @@ tile_set = ExtResource("3_7ee7k")
 collision_enabled = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1790577969]
-environment = SubResource("Environment_7ee7k")
+environment = ExtResource("7_gnkl7")
 
 [node name="Player" parent="." unique_id=1362917973 instance=ExtResource("2_84lva")]
 position = Vector2(20, 33)
@@ -49,40 +39,25 @@ offset_left = 3.0
 offset_top = 3.0
 offset_right = 43.0
 offset_bottom = 52.0
-text = "1
+text = "69
 "
 script = ExtResource("10_4cjyq")
+
+[node name="Label2" type="Label" parent="Player/CanvasLayer" unique_id=810837539]
+offset_left = 93.0
+offset_top = 3.0
+offset_right = 168.0
+offset_bottom = 78.0
+text = "DEMO 0.1
+
+"
 
 [node name="WaveTimer" type="Timer" parent="." unique_id=1724218207]
 wait_time = 5.0
 one_shot = true
 autostart = true
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=845457767]
-collision_layer = 255
-collision_mask = 255
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=340640432]
-position = Vector2(-3840, 33.5)
-shape = ExtResource("8_ou8w1")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=20585031]
-position = Vector2(3959, 48)
-shape = ExtResource("8_ou8w1")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=1066193638]
-position = Vector2(62.125, -3711)
-rotation = 1.5707964
-shape = ExtResource("8_ou8w1")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D" unique_id=1031986445]
-position = Vector2(11758, 62.5)
-shape = ExtResource("8_ou8w1")
-
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D" unique_id=1592161204]
-position = Vector2(93, 3758)
-rotation = 1.5707964
-shape = ExtResource("8_ou8w1")
+[node name="StaticBody2D" parent="." unique_id=2008962255 instance=ExtResource("10_gnkl7")]
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=114553403]
 z_index = -10
@@ -94,5 +69,3 @@ position = Vector2(3966, -43)
 texture = ExtResource("9_ou8w1")
 region_enabled = true
 region_rect = Rect2(0, 0, 32, 32)
-
-[connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]

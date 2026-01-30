@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://w41g5yq5hw6o"]
+
+[ext_resource type="Shape2D" uid="uid://b2j7fs73lgrj2" path="res://DemoTrash/InvisibleWall.tres" id="1_nur7l"]
+
+[node name="StaticBody2D" type="StaticBody2D" unique_id=2008962255]
+collision_layer = 255
+collision_mask = 255
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=298667584]
+position = Vector2(-3840, 33.5)
+shape = ExtResource("1_nur7l")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=1939551358]
+position = Vector2(3959, 48)
+shape = ExtResource("1_nur7l")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="." unique_id=1613722797]
+position = Vector2(62.125, -3711)
+rotation = 1.5707964
+shape = ExtResource("1_nur7l")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="." unique_id=799336098]
+position = Vector2(11758, 62.5)
+shape = ExtResource("1_nur7l")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="." unique_id=625874616]
+position = Vector2(93, 3758)
+rotation = 1.5707964
+shape = ExtResource("1_nur7l")

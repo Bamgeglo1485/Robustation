@@ -8,21 +8,13 @@
 
 [node name="BaseEnemy" unique_id=600669417 instance=ExtResource("1_8ckee")]
 
-[node name="MobMoverComponent" parent="." index="1"]
+[node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
 set_navigation_velocity = true
 
-[node name="NavigationAgent" type="NavigationAgent2D" parent="." index="5" unique_id=1358139639]
-avoidance_enabled = true
-radius = 15.0
-neighbor_distance = 128.0
-time_horizon_agents = 0.5
-avoidance_layers = 3
-avoidance_mask = 3
-
-[node name="WeaponTexture" parent="." index="8"]
+[node name="WeaponTexture" parent="." index="7" unique_id=1059769572]
 region_enabled = true
 
-[node name="AI" type="Node" parent="." index="14" unique_id=1365591205]
+[node name="AI" type="Node" parent="." index="13" unique_id=1365591205]
 script = ExtResource("2_4xxt2")
 metadata/_custom_type_script = "uid://crchnvrl7mcdd"
 
@@ -39,3 +31,13 @@ metadata/_custom_type_script = "uid://bv7whrderww4t"
 [node name="AttackTargetComponent" type="Node" parent="AI" index="2" unique_id=1357236819]
 script = ExtResource("4_gb06t")
 metadata/_custom_type_script = "uid://yxsq46ajfdy4"
+
+[node name="NavigationAgent" type="NavigationAgent2D" parent="." index="15" unique_id=1358139639]
+path_postprocessing = 1
+path_search_max_polygons = 2048
+avoidance_enabled = true
+radius = 15.0
+neighbor_distance = 128.0
+time_horizon_agents = 0.5
+avoidance_layers = 3
+avoidance_mask = 3

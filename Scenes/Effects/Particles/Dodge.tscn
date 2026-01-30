@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://deq4t84d81wnb"]
+[gd_scene format=3 uid="uid://deq4t84d81wnb"]
 
 [ext_resource type="Material" uid="uid://cyp3pqnhbfrj3" path="res://Resources/Shaders/Jiggle.tres" id="1_y3u13"]
 [ext_resource type="Texture2D" uid="uid://cni7p0juck2o" path="res://Textures/Effects/Particles/dodge.png" id="2_c3nq6"]
@@ -22,11 +22,11 @@ scale_max = 2.0
 color = Color(1, 1, 1, 0.6901961)
 color_ramp = SubResource("GradientTexture1D_4ifew")
 
-[node name="GPUParticles2D" type="GPUParticles2D"]
+[node name="GPUParticles2D" type="GPUParticles2D" unique_id=379104243]
 modulate = Color(2.184344, 2.184344, 2.184344, 1)
 texture_filter = 1
 material = ExtResource("1_y3u13")
-amount = 2
+amount = 1
 texture = ExtResource("2_c3nq6")
 lifetime = 0.41
 preprocess = 0.5
@@ -35,7 +35,7 @@ randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_mbpk4")
 script = ExtResource("2_y3u13")
 
-[node name="Delete" type="Timer" parent="."]
+[node name="Delete" type="Timer" parent="." unique_id=1205351948]
 wait_time = 0.4
 one_shot = true
 autostart = true

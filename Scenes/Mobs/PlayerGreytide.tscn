@@ -114,7 +114,7 @@ stream = ExtResource("18_w1un4")
 
 [node name="Toolbox" type="Node" parent="WeaponUserComponent" index="1" unique_id=140255965 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound")]
 script = ExtResource("12_tn3ht")
-damage = 30
+damage = 40
 attack_range = 96
 parry_sound = NodePath("ParrySound")
 attack_sound = NodePath("MeleeHitSound")

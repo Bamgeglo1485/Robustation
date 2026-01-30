@@ -18,6 +18,7 @@ var shooter: CharacterBody2D
 var direction: float
 var damage_modifier: float = 1
 var moving: bool = true
+var deleted: bool = false
 
 @export var parriable: bool = true
 @export var parry_speed_boost: float = 1.5
@@ -36,6 +37,9 @@ func _ready() -> void:
 		queue_free()
 	
 	await get_tree().create_timer(lifetime).timeout
+	if deleted == true:
+		return
+	
 	_delete()
 	EventBusManager.projectile_miss.emit(shooter, parent)
 
@@ -53,6 +57,7 @@ func _physics_process(delta: float) -> void:
 func _delete():
 	parriable = false
 	moving = false
+	deleted = true
 	set_deferred("monitoring", false)
 	set_deferred("monitorable", false)
 	self.collision_layer = 0

@@ -16,13 +16,17 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="Robustation-OOP"
 config/version="DEMO 0.1"
-run/main_scene="uid://biuw5t7gsnxbp"
+run/main_scene="uid://d243vjfiqh74f"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="uid://8d2n77fftdbi"
 
 [autoload]
 
 EventBusManager="*res://Scripts/EventBusManager.gd"
+
+[display]
+
+window/size/mode=3
 
 [editor]
 

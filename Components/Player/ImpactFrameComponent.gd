@@ -42,7 +42,7 @@ func set_color_modify():
 	color_tween.tween_property(material, "shader_parameter/alpha", 0, 1)
 	
 	if randf() > 0.5:
-		material.set_shader_parameter("hue_shift", randf_range(-3, -1))
+		material.set_shader_parameter("hue_shift", randf_range(-1.5, -0.7))
 		return
 	
 	randomize()

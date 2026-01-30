@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://vjubfbb1hjee"]
+[gd_scene format=3 uid="uid://vjubfbb1hjee"]
 
 [ext_resource type="PackedScene" uid="uid://c0eulucj1dtco" path="res://Scenes/Mobs/Base/BaseEnemy.tscn" id="1_bk7ip"]
 [ext_resource type="Script" uid="uid://bqvdlb3r03cs0" path="res://Components/Visual/DirectionalSpriteComponent.gd" id="4_ijq5e"]
@@ -34,7 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://dverpu5mv40au" path="res://Textures/Weapons/Toolbox/toolbox.png" id="32_8jwui"]
 [ext_resource type="Texture2D" uid="uid://1yvrhqvfqqus" path="res://Textures/Weapons/Toolbox/toolbox_inhand.png" id="33_fg1co"]
 
-[node name="Assistant" instance=ExtResource("1_bk7ip")]
+[node name="Assistant" unique_id=1270222458 instance=ExtResource("1_bk7ip")]
 visibility_layer = 3
 
 [node name="MobMoverComponent" parent="." index="1"]
@@ -46,16 +46,16 @@ friction = 1300
 [node name="Texture" parent="." index="2"]
 random_textures = Array[Texture2D]([ExtResource("5_ngqn2"), ExtResource("4_r4whd")])
 
-[node name="MoveToPointComponent" parent="AI" index="0"]
+[node name="MoveToPointComponent" parent="AI" parent_id_path=PackedInt32Array(1365591205) index="0" unique_id=395370591]
 run_to_target_range = 250.0
 run_from_target_range = 130.0
 
-[node name="MoveToTargetComponent" parent="AI" index="1"]
+[node name="MoveToTargetComponent" parent="AI" parent_id_path=PackedInt32Array(1365591205) index="1" unique_id=1800782744]
 set_player_as_target = null
 priority = null
 look_at_target = null
 
-[node name="Hair" type="Sprite2D" parent="." index="15"]
+[node name="Hair" type="Sprite2D" parent="." index="15" unique_id=927075308]
 texture = ExtResource("30_qavuh")
 offset = Vector2(0, -2)
 region_enabled = true
@@ -64,42 +64,43 @@ random_textures = Array[Texture2D]([ExtResource("25_1l0qo"), ExtResource("12_kqv
 random_color = true
 metadata/_custom_type_script = "uid://bqvdlb3r03cs0"
 
-[node name="RandomizeMobMoverComponent" type="Node" parent="." index="16"]
+[node name="RandomizeMobMoverComponent" type="Node" parent="." index="16" unique_id=831758902]
 script = ExtResource("24_nl1i0")
 randomize_multiplier_min = 0.85
 randomize_multiplier_max = 1.2
 metadata/_custom_type_script = "uid://hv0g6akh0ftn"
 
-[node name="RandomWeaponSelectorComponent" type="Node" parent="." index="17" node_paths=PackedStringArray("weapons_to_select")]
+[node name="RandomWeaponSelectorComponent" type="Node" parent="." index="17" unique_id=1846898249 node_paths=PackedStringArray("weapons_to_select")]
 script = ExtResource("25_urnpk")
 weapons_to_select = [NodePath("Crowbar"), NodePath("Fist"), NodePath("Toolbox")]
 change_behavior = true
 metadata/_custom_type_script = "uid://bd0gbdhbjn7xx"
 
-[node name="Crowbar" type="Node" parent="RandomWeaponSelectorComponent" index="0" node_paths=PackedStringArray("attack_sound", "miss_sound")]
+[node name="Crowbar" type="Node" parent="RandomWeaponSelectorComponent" index="0" unique_id=30503364 node_paths=PackedStringArray("attack_sound", "miss_sound")]
 script = ExtResource("26_kqv0r")
-damage = 8
+damage = 15
 attack_range = 48
 attack_sound = NodePath("HitSound")
 miss_sound = NodePath("MissSound")
 throw_speed = 400
 throw_stop_speed = 300
 cooldown_delay = 0.5
+swing_delay = 0.25
 equipped_texture = ExtResource("27_pjvyl")
 icon_texture = ExtResource("28_mmn5l")
 attack_rotation_multiplier = 0.5
 attack_shift_multiplier = 0.7
 metadata/_custom_type_script = "uid://6b7bcparwq17"
 
-[node name="HitSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/Crowbar" index="0"]
+[node name="HitSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/Crowbar" index="0" unique_id=1629730960]
 stream = ExtResource("29_8jwui")
 
-[node name="MissSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/Crowbar" index="1"]
+[node name="MissSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/Crowbar" index="1" unique_id=69188948]
 stream = ExtResource("30_fg1co")
 
-[node name="Fist" type="Node" parent="RandomWeaponSelectorComponent" index="1" node_paths=PackedStringArray("attack_sound", "miss_sound")]
+[node name="Fist" type="Node" parent="RandomWeaponSelectorComponent" index="1" unique_id=1616782744 node_paths=PackedStringArray("attack_sound", "miss_sound")]
 script = ExtResource("26_kqv0r")
-damage = 3
+damage = 5
 attack_range = 48
 attack_sound = NodePath("HitSound")
 miss_sound = NodePath("MissSound")
@@ -111,26 +112,24 @@ attack_shift_multiplier = 0.0
 parriable = false
 metadata/_custom_type_script = "uid://6b7bcparwq17"
 
-[node name="HitSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/Fist" index="0"]
+[node name="HitSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/Fist" index="0" unique_id=1360764065]
 stream = ExtResource("31_pjvyl")
 
-[node name="MissSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/Fist" index="1"]
+[node name="MissSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/Fist" index="1" unique_id=1221566427]
 stream = ExtResource("30_fg1co")
 
-[node name="Toolbox" type="Node" parent="RandomWeaponSelectorComponent" index="2" node_paths=PackedStringArray("attack_sound", "miss_sound")]
+[node name="Toolbox" type="Node" parent="RandomWeaponSelectorComponent" index="2" unique_id=2011423731 node_paths=PackedStringArray("attack_sound", "miss_sound")]
 script = ExtResource("26_kqv0r")
-damage = 20
+damage = 30
 attack_range = 48
 attack_sound = NodePath("HitSound")
 miss_sound = NodePath("MissSound")
-cooldown_delay = 2.0
-swing_delay = 1.0
 equipped_texture = ExtResource("33_fg1co")
 icon_texture = ExtResource("32_8jwui")
 metadata/_custom_type_script = "uid://6b7bcparwq17"
 
-[node name="MissSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/Toolbox" index="0"]
+[node name="MissSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/Toolbox" index="0" unique_id=1937837893]
 stream = ExtResource("30_fg1co")
 
-[node name="HitSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/Toolbox" index="1"]
+[node name="HitSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/Toolbox" index="1" unique_id=303361046]
 stream = ExtResource("29_8jwui")

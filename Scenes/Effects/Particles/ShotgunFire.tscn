@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cowxlra6ogbp0"]
+[gd_scene format=3 uid="uid://cowxlra6ogbp0"]
 
 [ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts/Effects/TimedDelete.gd" id="1_h4vrm"]
 
@@ -22,12 +22,12 @@ scale_over_velocity_curve = SubResource("CurveTexture_6ugap")
 hue_variation_min = -1.0
 hue_variation_max = -0.3
 
-[node name="GPUParticles2D" type="GPUParticles2D"]
+[node name="GPUParticles2D" type="GPUParticles2D" unique_id=1567534584]
 modulate = Color(10.034221, 4.298072, 4.201102, 1)
 z_index = -2
 texture_filter = 1
 emitting = false
-amount = 64
+amount = 48
 one_shot = true
 speed_scale = 5.53
 explosiveness = 1.0
@@ -36,7 +36,7 @@ seed = 4246352849
 process_material = SubResource("ParticleProcessMaterial_0sbr1")
 script = ExtResource("1_h4vrm")
 
-[node name="PauseTimer" type="Timer" parent="."]
+[node name="PauseTimer" type="Timer" parent="." unique_id=1815170734]
 wait_time = 0.2
 one_shot = true
 autostart = true

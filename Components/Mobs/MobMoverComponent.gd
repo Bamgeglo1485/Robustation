@@ -1,13 +1,13 @@
 class_name MobMoverComponent extends Component
 
-@onready var animation_component = parent.get_node_or_null("AnimationComponent")
+@onready var animation_component: AnimationComponent = parent.get_node_or_null("AnimationComponent")
 
-@export var base_max_speed: int = 300
-@export var max_speed: int = base_max_speed
-@export var acceleration: int = 100
-@export var friction: int = 700
-@export var speed_modifier: float = 1
-var direction = Vector2.ZERO
+@export var base_max_speed: float = 300.0
+@export var max_speed: float = base_max_speed
+@export var acceleration: float = 100.0
+@export var friction: float = 700.0
+@export var speed_modifier: float = 1.0
+var direction: Vector2 = Vector2.ZERO
 
 @export var can_fall: bool = true
 @export var movement_blocked: bool = false
@@ -18,19 +18,19 @@ var flying: bool = false
 var base_fly_speed: float = 0.0
 var fly_speed: float = 0.0
 var fly_direction: Vector2 = Vector2.ZERO
-var fly_stop_speed: float = 200
-var fly_modifier: float = 1
+var fly_stop_speed: float = 200.0
+var fly_modifier: float = 1.0
 var fly_source
 
 @export var body_fall_sound: AudioStreamPlayer2D
 @export var fall_effect: PackedScene = preload("res://Scenes/Effects/Particles/Fall.tscn")
 var fallen: bool = false
-var standing_delay: float = 0
+var standing_delay: float = 0.0
 
 @onready var navigation_agent: NavigationAgent2D = parent.get_node_or_null("NavigationAgent")
 
 func _ready() -> void:
-	if fly_impact_area != null:
+	if fly_impact_area:
 		fly_impact_area.body_entered.connect(on_fly_impact)
 
 func _physics_process(delta: float) -> void:
@@ -41,7 +41,7 @@ func _process(delta: float) -> void:
 	_walk_animation()
 	_fall_process(delta)
 
-func _move(delta) -> void:
+func _move(delta: float) -> void:
 	if not parent is CharacterBody2D:
 		return
 	
@@ -52,15 +52,15 @@ func _move(delta) -> void:
 	var velocity = parent.velocity
 	
 	if direction.is_zero_approx():
-		if not velocity.is_zero_approx():
-			var friction_amount = friction * delta
+		if !velocity.is_zero_approx():
+			var friction_amount: float = friction * delta
 			var speed = velocity.length()
 			if speed > friction_amount:
 				velocity -= (velocity / speed) * friction_amount
 			else:
 				velocity = Vector2.ZERO
-	elif not movement_blocked and not fallen:
-		var dir = direction
+	elif !movement_blocked and !fallen:
+		var dir: Vector2 = direction
 		velocity += dir * acceleration
 		
 		if navigation_agent:
@@ -75,8 +75,8 @@ func _move(delta) -> void:
 	parent.velocity = velocity
 	parent.move_and_slide()
 
-func _walk_animation():
-	if animation_component == null or flying == true or fallen == true:
+func _walk_animation() -> void:
+	if !animation_component or flying or fallen:
 		return
 	
 	if parent.velocity == Vector2.ZERO and animation_component.animation_priority == 1:
@@ -124,8 +124,15 @@ func _fly(delta):
 		parent.velocity = Vector2.ZERO
 		flying = false
 
-func throw(throw_direction: Vector2, throw_speed: float, throw_source = null, throw_stop_speed: float = 10, animation = true):
-	var max_throw_speed = 2000
+func throw(
+	throw_direction: Vector2,
+	throw_speed: float,
+	throw_source = null,
+	throw_stop_speed: float = 10,
+	animation = true
+	) -> void:
+	
+	var max_throw_speed: int = 2000
 	var actual_speed = min(throw_speed, max_throw_speed)
 	fly_source = throw_source
 	
@@ -148,8 +155,8 @@ func throw(throw_direction: Vector2, throw_speed: float, throw_source = null, th
 		
 		tween.tween_property(parent, "scale", Vector2(1.35, 1.35), 0.2)
 
-func _fall_process(delta):
-	if fallen == false:
+func _fall_process(delta: float) -> void:
+	if !fallen:
 		return
 	
 	if flying == false:
@@ -157,8 +164,8 @@ func _fall_process(delta):
 	if standing_delay <= 0:
 		stand_up()
 
-func drop(delay):
-	if can_fall == false or delay < 0.3:
+func drop(delay: float) -> void:
+	if !can_fall or delay < 0.3:
 		return
 	
 	standing_delay += delay
@@ -195,15 +202,11 @@ func stand_up():
 	
 	fallen = false
  
-func on_fly_impact(body):
-	if not flying:
+func on_fly_impact(body: Node) -> void:
+	if !flying or !body.has_node("MobMoverComponent") or fly_speed < 200 or body is Area2D or body == parent:
 		return
-	if not body.has_node("MobMoverComponent") or fly_speed < 200:
-		return
-	if body is Area2D or body == parent:
-		return
-	var mob_mover = body.get_node("MobMoverComponent")
-	if mob_mover.can_fall == false:
+	var mob_mover: MobMoverComponent = body.get_node("MobMoverComponent")
+	if !mob_mover.can_fall:
 		return
 	mob_mover.throw(parent.velocity, fly_speed/1.5)
 	mob_mover.drop(1)

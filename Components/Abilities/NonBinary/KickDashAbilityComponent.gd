@@ -13,24 +13,23 @@ var kick_target: CharacterBody2D
 var can_teleport: bool
 
 func _ready() -> void:
-	if can_teleport_timer != null:
+	if can_teleport_timer:
 		can_teleport_timer.timeout.connect(_on_kick_teleport_timer_timeout)
-	if target_clear_timer != null:
+	if target_clear_timer:
 		target_clear_timer.timeout.connect(_on_kick_target_timer_timeout)
-
-@warning_ignore("unused_parameter")
-func _process(delta: float) -> void:
+		
+func _process(_delta: float) -> void:
 	if parent.has_node("InputMoverComponent"):
 		input()
 	
-func input():
+func input() -> void:
 	if Input.is_action_just_pressed("movement_ability"):
 		kick()
 
-func kick():
+func kick() -> void:
 	var targets = {}
 	targets = await kick_weapon.attack(self, false)
-	if targets != null and not targets.is_empty():
+	if targets and !targets.is_empty():
 		for target in targets.values():
 			if target is not CharacterBody2D:
 				continue
@@ -47,10 +46,10 @@ func kick():
 		target_clear_timer.start()
 		return
 	
-	elif kick_target != null and can_teleport == true and kicks < max_kicks:
+	elif kick_target and can_teleport and kicks < max_kicks:
 		kick_teleport()
 
-func kick_teleport():
+func kick_teleport() -> void:
 	if not is_instance_valid(kick_target):
 		kick_target = null
 		return

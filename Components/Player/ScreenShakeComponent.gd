@@ -24,6 +24,8 @@ func shake(power, delay):
 		randomize()
 		var x = randf_range(-power, power)
 		var y = randf_range(-power, power)
+		x = clamp(x, 0, 64)
+		y = clamp(x, 0, 64)
 		_tween.tween_property(camera, "position", Vector2(x, y), 0.1)
 		_tween.tween_property(camera, "position", Vector2.ZERO, 0.1)
 

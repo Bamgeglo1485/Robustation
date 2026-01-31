@@ -99,8 +99,3 @@ collision_mask = 3
 visible = false
 position = Vector2(-1, 1)
 shape = ExtResource("2_vbbsq")
-
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=395231922]
-position = Vector2(-5, -8)
-rect = Rect2(-11, -11, 31, 39)
-show_rect = false

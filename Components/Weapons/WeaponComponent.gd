@@ -34,7 +34,7 @@ func _ready() -> void:
 		animation_component = parent.get_node_or_null("AnimationComponent")
 	
 	if parent.has_node("Sounds"):
-		var sounds = parent.get_node("Sounds")
+		var sounds: Node = parent.get_node("Sounds")
 		for child in get_children():
 			if child is AudioStreamPlayer2D:
 				child.reparent(sounds)

@@ -140,10 +140,10 @@ collision_layer = 1
 collision_mask = 1
 script = ExtResource("8_ljr5e")
 
-[node name="MobMoverComponent" parent="." index="1"]
+[node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
 can_fall = false
 
-[node name="Collision" parent="." index="3"]
+[node name="Collision" parent="." index="3" unique_id=424093742]
 shape = ExtResource("2_7ipmw")
 
 [node name="InputMoverComponent" type="Node" parent="." index="4" unique_id=1794246453]
@@ -157,17 +157,17 @@ position_smoothing_speed = 15.0
 script = ExtResource("5_korw6")
 metadata/_custom_type_script = "uid://cmmp453ap55cp"
 
-[node name="HealthComponent" parent="." index="6"]
+[node name="HealthComponent" parent="." index="6" unique_id=1758373275]
 invinciblitiy_attack_effect = ExtResource("5_oayod")
 heal_for_damage_multiplier = 0.3
 
-[node name="FactionComponent" parent="." index="7"]
+[node name="FactionComponent" parent="." index="7" unique_id=1651473390]
 faction = "Player"
 
 [node name="AudioListener" type="AudioListener2D" parent="." index="8" unique_id=803579808]
 current = true
 
-[node name="WeaponUserComponent" parent="." index="9"]
+[node name="WeaponUserComponent" parent="." index="9" unique_id=2123544057]
 block_when_fallen = false
 block_when_flying = false
 
@@ -247,10 +247,10 @@ color = Color(1, 1, 1, 0)
 script = ExtResource("11_yhquf")
 metadata/_custom_type_script = "uid://qcmegh7138ug"
 
-[node name="ScreenShakeComponent" type="Node" parent="." index="20" unique_id=416984762]
-script = ExtResource("13_0r3jo")
-metadata/_custom_type_script = "uid://bdxrxakvokr52"
-
-[node name="RestartComponent" type="Node" parent="." index="21" unique_id=2088749855]
+[node name="RestartComponent" type="Node" parent="." index="20" unique_id=2088749855]
 script = ExtResource("14_dytnj")
 metadata/_custom_type_script = "uid://clfjtp26jetey"
+
+[node name="ScreenShakeComponent" type="Node" parent="." index="22" unique_id=1270479005]
+script = ExtResource("13_0r3jo")
+metadata/_custom_type_script = "uid://bdxrxakvokr52"

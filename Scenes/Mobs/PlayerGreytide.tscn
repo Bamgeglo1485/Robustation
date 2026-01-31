@@ -71,7 +71,7 @@ shader_parameter/vignette_strength = 0.0
 
 [node name="Player" unique_id=914217487 instance=ExtResource("1_mq7la")]
 
-[node name="Texture" parent="." index="2"]
+[node name="Texture" parent="." index="2" unique_id=382857461]
 texture = ExtResource("4_bvl14")
 
 [node name="Toolbox" type="Node2D" parent="." index="6" unique_id=886142419]
@@ -87,10 +87,10 @@ region_rect = Rect2(0, 0, 32, 32)
 one_shot = true
 ignore_time_scale = true
 
-[node name="HealthComponent" parent="." index="7"]
+[node name="HealthComponent" parent="." index="7" unique_id=1758373275]
 ignore_time_scale = true
 
-[node name="WeaponUserComponent" parent="." index="10" node_paths=PackedStringArray("selected_weapon")]
+[node name="WeaponUserComponent" parent="." index="10" unique_id=2123544057 node_paths=PackedStringArray("selected_weapon")]
 selected_weapon = NodePath("Spear")
 timers_timescaled = false
 
@@ -170,7 +170,7 @@ stream = ExtResource("19_kyb4y")
 [node name="BulletRecoverSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Shotgun" index="2" unique_id=673851274]
 stream = ExtResource("20_si836")
 
-[node name="WeaponTexture" parent="." index="11"]
+[node name="WeaponTexture" parent="." index="11" unique_id=1059769572]
 use_parent_material = true
 texture = ExtResource("13_aa22f")
 region_enabled = true
@@ -180,7 +180,7 @@ weapon_1 = NodePath("../WeaponUserComponent/Toolbox")
 weapon_2 = NodePath("../WeaponUserComponent/Shotgun")
 weapon_3 = NodePath("../WeaponUserComponent/Spear")
 
-[node name="AnimationComponent" parent="." index="14"]
+[node name="AnimationComponent" parent="." index="14" unique_id=1054272185]
 ignore_time_scale = true
 
 [node name="KickDashAbilityComponent" type="Node" parent="." index="15" unique_id=1855025226 node_paths=PackedStringArray("kick_weapon", "target_clear_timer", "can_teleport_timer", "teleport_sound")]
@@ -224,14 +224,14 @@ ignore_time_scale = true
 one_shot = true
 ignore_time_scale = true
 
-[node name="Teleport" type="AudioStreamPlayer2D" parent="Sounds" index="0" unique_id=2115506269]
+[node name="Teleport" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="0" unique_id=2115506269]
 stream = ExtResource("5_42pyi")
 
-[node name="DashSound" type="AudioStreamPlayer2D" parent="Sounds" index="1" unique_id=789210605]
+[node name="DashSound" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="1" unique_id=789210605]
 stream = ExtResource("25_hf65o")
 max_polyphony = 3
 
-[node name="OverdoseRefuel" type="AudioStreamPlayer2D" parent="Sounds" index="3" unique_id=1750222133]
+[node name="OverdoseRefuel" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="3" unique_id=1750222133]
 stream = ExtResource("26_27vau")
 max_polyphony = 3
 

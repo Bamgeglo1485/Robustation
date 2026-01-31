@@ -16,7 +16,7 @@ class_name MeleeWeapon extends Weapon
 
 @export var throw_speed: int = 300
 @export var throw_stop_speed: int = 10
-@export var drop_enemy_delay: float = 0
+@export var drop_enemy_delay: float = 0.0
 
 func attack(raiser, npc = true):
 	if not raiser.has_method("get_attack_direction"):
@@ -47,13 +47,13 @@ func _try_melee_attack(direction):
 	await get_tree().physics_frame
 	var space_state = parent.get_world_2d().direct_space_state
 	var _targets: Dictionary
-	var attacked_enemies = []
+	var attacked_enemies: Array = []
 	
 	for i in range(5):
-		var angle_offset = deg_to_rad(i * 20 - 90)
-		var ray_direction = direction.rotated(angle_offset)
-		var ray_start = parent.global_position - ray_direction * 0.2
-		var ray_end = parent.global_position + ray_direction * attack_range
+		var angle_offset: float = deg_to_rad(i * 20 - 90)
+		var ray_direction: Vector2 = direction.rotated(angle_offset)
+		var ray_start: Vector2 = parent.global_position - ray_direction * 0.2
+		var ray_end: Vector2 = parent.global_position + ray_direction * attack_range
 		
 		var query = PhysicsRayQueryParameters2D.create(ray_start, ray_end)
 		query.collision_mask = 1 | 2 | 3 | 4

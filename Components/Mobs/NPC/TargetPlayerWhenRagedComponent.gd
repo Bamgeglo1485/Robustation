@@ -8,11 +8,11 @@ func _ready() -> void:
 	if rage_component != null:
 		rage_component.rage_state_change.connect(on_rage_state_change)
 
-func on_rage_state_change(rage_state):
-	if move_to_target_component == null:
+func on_rage_state_change(rage_state: bool) -> void:
+	if !move_to_target_component:
 		return
 	
-	if rage_state == false:
+	if !rage_state:
 		move_to_target_component.target = null
 	else:
 		move_to_target_component.target = player

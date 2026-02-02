@@ -4,48 +4,47 @@ class_name AttackTargetComponent extends Component
 @onready var weapon_user_component: WeaponUserComponent = parent.get_node_or_null("WeaponUserComponent")
 @onready var mob_mover_component: MobMoverComponent = parent.get_node_or_null("MobMoverComponent")
 
-var attack_direction
-var target
+var attack_direction: Vector2
+var target: CharacterBody2D
 
 func _ready() -> void:
-	if move_to_target_component == null:
+	if !move_to_target_component:
 		move_to_target_component = parent.get_node_or_null("MoveToTargetComponent")
-	if weapon_user_component == null:
+	if !weapon_user_component:
 		weapon_user_component = parent.get_node_or_null("WeaponUserComponent")
-	if mob_mover_component == null:
+	if !mob_mover_component:
 		mob_mover_component = parent.get_node_or_null("MobMoverComponent")
 		
-@warning_ignore("unused_parameter")
-func _process(delta: float) -> void:
-	if move_to_target_component == null or weapon_user_component == null:
+func _process(_delta: float) -> void:
+	if !move_to_target_component or !weapon_user_component:
 		return
 	
-	if mob_mover_component != null:
-		if mob_mover_component.fallen == true:
+	if mob_mover_component:
+		if mob_mover_component.fallen:
 			return
 	
-	if target == null and move_to_target_component != null and move_to_target_component.target != null:
+	if !target and move_to_target_component and move_to_target_component.target:
 		target = move_to_target_component.target
 	
-	if target == null or weapon_user_component.selected_weapon == null:
+	if !target or !weapon_user_component.selected_weapon:
 		return
 	
 	attack_direction = target.global_position - parent.global_position
 	
-	var weapon = weapon_user_component.selected_weapon
+	var weapon: Weapon = weapon_user_component.selected_weapon
 	
 	if weapon is MeleeWeapon:
-		if attack_direction.length() > weapon.attack_range:
+		if attack_direction.length_squared() > weapon.attack_range:
 			return
 		weapon_user_component.attack(self)
 	elif weapon.bullets != 0:
 		weapon_user_component.attack(self)
 
-func get_attack_direction():
+func get_attack_direction() -> Vector2:
 	return attack_direction
 
-func get_attack_target():
-	if move_to_target_component != null:
+func get_attack_target() -> CharacterBody2D:
+	if move_to_target_component:
 		return target
 	else:
 		return null

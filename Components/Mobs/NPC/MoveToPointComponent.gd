@@ -9,11 +9,11 @@ class_name MoveToPointComponent extends Component
 @onready var direction_component: DirectionComponent = parent.get_node_or_null("DirectionComponent")
 var pathfinding_timer: Timer
 
-@export var run_to_target_range: float = 130
-@export var run_from_target_range: float = 250
+@export var run_to_target_range: float = 130.0
+@export var run_from_target_range: float = 250.0
 @export var look_at_direction: bool = false
 
-func set_point(position, priority):
+func set_point(position, priority) -> void:
 	if current_priority > priority:
 		return
 	current_priority = priority
@@ -27,16 +27,15 @@ func _ready() -> void:
 	pathfinding_timer.timeout.connect(_pathfinding_update)
 	pathfinding_timer.start()
 	
-	if navigation_agent != null:
+	if navigation_agent:
 		navigation_agent.velocity_computed.connect(_on_navigation_agent_velocity_computed)
-	if mob_mover_component == null:
+	if !mob_mover_component:
 		mob_mover_component = parent.get_node_or_null("MobMoverComponent")
-	if direction_component == null:
+	if !direction_component:
 		direction_component = parent.get_node_or_null("DirectionComponent")
-
-@warning_ignore("unused_parameter")
-func _process(delta: float) -> void:
-	if mob_mover_component == null or navigation_agent == null:
+		
+func _process(_delta: float) -> void:
+	if !mob_mover_component or !navigation_agent:
 		return
 	
 	if point == Vector2.ZERO:
@@ -44,8 +43,8 @@ func _process(delta: float) -> void:
 		_set_direction()
 		return
 	
-	var direction_to_target = (point - parent.global_position)
-	var distance_to_target = direction_to_target.length()
+	var direction_to_target: Vector2 = (point - parent.global_position)
+	var distance_to_target: float = direction_to_target.length()
 	
 	if distance_to_target < stop_range:
 		mob_mover_component.direction = Vector2.ZERO
@@ -55,7 +54,7 @@ func _process(delta: float) -> void:
 		return
 	
 	if distance_to_target > run_from_target_range:
-		if not navigation_agent.is_navigation_finished():
+		if !navigation_agent.is_navigation_finished():
 			mob_mover_component.direction = parent.global_position.direction_to(navigation_agent.get_next_path_position())
 		else:
 			mob_mover_component.direction = direction_to_target.normalized()
@@ -63,7 +62,7 @@ func _process(delta: float) -> void:
 		_set_direction()
 		
 	elif distance_to_target < run_to_target_range:
-		var away_direction = -direction_to_target.normalized()
+		var away_direction: Vector2 = -direction_to_target.normalized()
 		mob_mover_component.direction = away_direction
 		_set_direction()
 		
@@ -71,8 +70,8 @@ func _process(delta: float) -> void:
 		mob_mover_component.direction = Vector2.ZERO
 		_set_direction()
 
-func _set_direction():
-	if direction_component == null or look_at_direction == false:
+func _set_direction() -> void:
+	if !direction_component or !look_at_direction:
 		return
 	
 	if mob_mover_component.direction != Vector2.ZERO:
@@ -83,7 +82,7 @@ func _set_direction():
 	else:
 		direction_component.look_at_direction(Vector2.RIGHT)
 
-func _pathfinding_update():
+func _pathfinding_update() -> void:
 	if point != Vector2.ZERO:
 		navigation_agent.target_position = point
 	
@@ -92,5 +91,5 @@ func _pathfinding_update():
 	pathfinding_timer.start()
 
 func _on_navigation_agent_velocity_computed(safe_velocity: Vector2) -> void:
-	if mob_mover_component != null and safe_velocity.length_squared() > 0.1:
+	if mob_mover_component and safe_velocity.length_squared() > 0.1:
 		mob_mover_component.direction = safe_velocity.normalized()

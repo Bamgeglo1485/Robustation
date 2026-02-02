@@ -1,7 +1,7 @@
 class_name ProjectileComponent extends Area2D
 
 @onready var scene: Node2D = get_tree().get_root().get_node("Game")
-@onready var parent = get_parent()
+@onready var parent: Node = get_parent()
 
 @export var texture: Sprite2D
 @export var hit_sound: AudioStreamPlayer2D
@@ -33,18 +33,18 @@ var deleted: bool = false
 var sploded: bool = false
 
 func _ready() -> void:
-	if parent == null or parent is not CharacterBody2D:
+	if !parent or parent is not CharacterBody2D:
 		queue_free()
 	
 	await get_tree().create_timer(lifetime).timeout
-	if deleted == true:
+	if deleted:
 		return
 	
 	_delete()
 	EventBusManager.projectile_miss.emit(shooter, parent)
 
 func _physics_process(delta: float) -> void:
-	if moving == false:
+	if !moving:
 		return
 	
 	if speed_decreasing != 0:
@@ -54,7 +54,7 @@ func _physics_process(delta: float) -> void:
 	parent.rotation += rotate_speed * delta
 	parent.move_and_collide(parent.velocity * delta)
 
-func _delete():
+func _delete() -> void:
 	parriable = false
 	moving = false
 	deleted = true
@@ -65,49 +65,49 @@ func _delete():
 	if parent.has_node("Area2D"):
 		parent.get_node("Area2D").queue_free()
 	
-	if texture != null:
+	if texture:
 		texture.texture = null
 	
-	if particle_emitter != null:
+	if particle_emitter:
 		particle_emitter.emitting = false
 	
-	if explode_on_delete == true:
+	if explode_on_delete:
 		explode()
 	
 	await get_tree().create_timer(5.0).timeout
 	parent.queue_free()
 
-func explode():
-	if explosion_scene != null and sploded == false:
+func explode() -> void:
+	if explosion_scene and !sploded:
 		sploded = true
-		var instance = explosion_scene.instantiate()
+		var instance: Node = explosion_scene.instantiate()
 		instance.global_position = parent.global_position
 		instance.source = shooter
 		scene.add_child(instance)
 
 func _on_body_entered(body: Node2D) -> void:
-	if body == null:
+	if !body:
 		return
 	
 	if body.has_node("ProjectileIgnoreComponent"):
 		return
 	
-	if shooter != null:
+	if shooter:
 		if shooter == body:
 			return
-		if (ignore_faction == false and shooter.has_node("FactionComponent") and 
+		if (!ignore_faction and shooter.has_node("FactionComponent") and 
 			body.has_node("FactionComponent")):
 			
-			var shooter_faction = shooter.get_node("FactionComponent")
-			var body_faction = body.get_node("FactionComponent")
+			var shooter_faction: Node = shooter.get_node("FactionComponent")
+			var body_faction: Node = body.get_node("FactionComponent")
 			
 			if shooter_faction.faction == body_faction.faction:
 				return
 	
-	if hit_sound != null:
+	if hit_sound:
 		hit_sound.play()
 	
-	var modified_damage = damage * damage_modifier
+	var modified_damage: float = damage * damage_modifier
 	
 	if body.has_node("HealthComponent"):
 		body.get_node("HealthComponent").take_damage(modified_damage, shooter)
@@ -115,7 +115,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.has_node("MobMoverComponent") and throw_speed != 0:
 		body.get_node("MobMoverComponent").throw(parent.velocity, throw_speed, shooter)
 	
-	if explode_on_hit == true:
+	if explode_on_hit:
 		explode()
 	
 	_delete()

@@ -11,9 +11,9 @@ enum Direction {
 
 signal direction_changed(new_rect: Rect2)
 
-func look_at_direction(look_direction: Vector2):
-	var angle = look_direction.angle()
-	var angle_deg = rad_to_deg(angle)
+func look_at_direction(look_direction: Vector2) -> Direction:
+	var angle: float = look_direction.angle()
+	var angle_deg: float = rad_to_deg(angle)
 	angle_deg = fmod(angle_deg + 360, 360)
 	
 	var rect: Rect2
@@ -34,5 +34,5 @@ func look_at_direction(look_direction: Vector2):
 	change_rect(rect)
 	return direction
 
-func change_rect(rect):
+func change_rect(rect) -> void:
 	direction_changed.emit(rect)

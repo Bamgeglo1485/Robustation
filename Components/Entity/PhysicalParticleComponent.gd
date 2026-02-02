@@ -9,8 +9,8 @@ class_name PhysicalParticleComponent extends Component
 
 @onready var sprite: Sprite2D = parent.get_node("Texture")
 
-var accelerating = true
-var direction: float = 0
+var accelerating: bool = true
+var direction: float = 0.0
 var lifetime: float
 var acceleration_time: float
 
@@ -32,13 +32,13 @@ func _physics_process(_delta: float) -> void:
 	if lifetime < 0:
 		parent.queue_free()
 	
-	if acceleration_time < 0 and accelerating == true:
+	if acceleration_time < 0 and accelerating:
 		accelerating = false
-		if fall_sound != null:
+		if fall_sound:
 			fall_sound.global_position = parent.global_position
 			fall_sound.play()
 	
-	if accelerating == true:
+	if accelerating:
 		parent.velocity = Vector2(acceleration_time * speed, 0).rotated(direction)
 		parent.move_and_slide()
 	

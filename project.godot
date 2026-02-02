@@ -25,9 +25,9 @@ config/icon="uid://8d2n77fftdbi"
 
 EventBusManager="*res://Scripts/EventBusManager.gd"
 
-[editor]
+[dotnet]
 
-movie_writer/movie_file="C:/Users/orang/Videos/sd.avi"
+project/assembly_name="Robustation-OOP"
 
 [input]
 

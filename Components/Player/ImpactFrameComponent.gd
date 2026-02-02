@@ -5,27 +5,31 @@ class_name ImpactFrameComponent extends Component
 
 var color_tween: Tween
 
-func impact_frame(impact_time = 0.3, wait_time = 0.0, modify_color = true):
+func impact_frame(
+	impact_time = 0.3,
+	wait_time = 0.0,
+	modify_color = true
+	) -> void:
 	if wait_time != 0:
 		await(get_tree().create_timer(wait_time, true, false, true).timeout)
 	effect_frame.visible = true
 	frame_freeze(impact_time)
-	if modify_color == true:
+	if modify_color:
 		set_color_modify()
 	await(get_tree().create_timer(impact_time, true, false, true).timeout)
 	effect_frame.visible = false
 
-func frame_freeze(impact_time = 0.3):
+func frame_freeze(impact_time = 0.3) -> void:
 	get_tree().paused = true
 	await(get_tree().create_timer(impact_time, true, false, true).timeout)
 	get_tree().paused = false
 
-func set_color_modify():
-	if color_modify_frame == null or color_modify_frame.material == null:
+func set_color_modify() -> void:
+	if !color_modify_frame or !color_modify_frame.material:
 		return
-	var material = color_modify_frame.material
+	var material: Material = color_modify_frame.material
 	
-	if color_tween != null:
+	if color_tween:
 		color_tween.kill()
 	
 	color_tween = create_tween()
@@ -57,8 +61,8 @@ func _ready() -> void:
 	EventBusManager.kick_dash_combo.connect(_on_kickdash_combo)
 	EventBusManager.parry.connect(_on_parry)
 
-func _on_exlosion(explosion):
-	if explosion.impact_frame == false:
+func _on_exlosion(explosion) -> void:
+	if !explosion.impact_frame:
 		return
 	impact_frame()
 
@@ -66,7 +70,7 @@ func _on_parry(emitter, type):
 	if emitter == parent and type == "Projectile":
 		impact_frame(0.1, 0, false)
 
-func _on_kickdash_combo(emitter):
+func _on_kickdash_combo(emitter) -> void:
 	if emitter != parent:
 		return
 	

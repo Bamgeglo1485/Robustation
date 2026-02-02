@@ -11,15 +11,15 @@ class_name BaseAbilityComponent extends Component
 @export var stop_effect: PackedScene
 @export var stop_sound: AudioStreamPlayer2D
 
-var active = false
-var ability_timer = 0
+var active: bool = false
+var ability_timer: float = 0.0
 
-func  _ready() -> void:
+func _ready() -> void:
 	if parent.has_node("Sounds"):
-		var sounds = parent.get_node("Sounds")
-		if start_sound != null:
+		var sounds: Node = parent.get_node("Sounds")
+		if start_sound:
 			start_sound.reparent(sounds)
-		if stop_sound != null:
+		if stop_sound:
 			stop_sound.reparent(sounds)
 
 func _process(delta: float) -> void:
@@ -29,14 +29,15 @@ func _process(delta: float) -> void:
 			ability_timer = 0
 			if active:
 				on_disable_ability()
+		
 	
 	input()
 
-func input():
-	if Input.is_action_just_pressed("ability") and not cooldown and not active:
+func input() -> void:
+	if Input.is_action_just_pressed("ability") and !cooldown and !active:
 		on_activate_ability()
 
-func on_activate_ability():
+func on_activate_ability() -> void:
 	cooldown = true
 	active = true
 	
@@ -50,35 +51,35 @@ func on_activate_ability():
 	else:
 		on_disable_ability()
 	
-	if start_sound != null:
+	if start_sound:
 		start_sound.play()
-	if start_effect != null:
-		var inst = start_effect.instantiate()
+	if start_effect:
+		var inst: Node = start_effect.instantiate()
 		inst.global_position = parent.global_position
 		scene.add_child(inst)
 
-func on_disable_ability():
+func on_disable_ability() -> void:
 	active = false
 	
-	if cooldown_on_activate == false:
+	if !cooldown_on_activate:
 		_start_cooldown()
 	
 	disable_ability()
 	
-	if stop_sound != null:
+	if stop_sound:
 		stop_sound.play()
-	if stop_effect != null:
-		var inst = stop_effect.instantiate()
+	if stop_effect:
+		var inst: Node = stop_effect.instantiate()
 		inst.global_position = parent.global_position
 		scene.add_child(inst)
 
-func activate_ability():
+func activate_ability() -> void:
 	pass
 
-func disable_ability():
+func disable_ability() -> void:
 	pass
 
-func _start_cooldown():
+func _start_cooldown() -> void:
 		cooldown = true
 		await get_tree().create_timer(cooldown_delay, true, false, true).timeout
 		cooldown = false

@@ -2,7 +2,7 @@ class_name PlayerCamera extends Camera2D
 
 @export var offset_modifier: int = 15
 @onready var parent: Node = get_parent()
-@onready var direction_component = get_direction_component()
+@onready var direction_component: DirectionComponent = get_direction_component()
 
 func _notification(notif):
 	if notif == NOTIFICATION_PARENTED:

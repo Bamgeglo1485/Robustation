@@ -5,9 +5,9 @@ class_name ActivateProjectileParticlesOnTriggerComponent extends BaseXOnTriggerC
 func _ready() -> void:
 	super._ready()
 	
-	if projectile != null and projectile.particle_emitter != null:
+	if projectile and projectile.particle_emitter:
 		projectile.particle_emitter.emitting = false
 
 func on_trigger():
-	if projectile != null and projectile.particle_emitter != null:
+	if projectile and projectile.particle_emitter:
 		projectile.particle_emitter.emitting = true

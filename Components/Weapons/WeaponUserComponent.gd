@@ -9,7 +9,7 @@ class_name WeaponUserComponent extends Component
 @export var block_when_fallen: bool = true
 @export var block_when_flying: bool = true
 
-@export var damage_modifier: float = 1
+@export var damage_modifier: float = 1.0
 
 func _ready() -> void:
 	if !weapon_texture:

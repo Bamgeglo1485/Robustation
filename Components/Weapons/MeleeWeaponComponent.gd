@@ -18,32 +18,33 @@ class_name MeleeWeapon extends Weapon
 @export var throw_stop_speed: int = 10
 @export var drop_enemy_delay: float = 0.0
 
-func attack(raiser, npc = true):
-	if not raiser.has_method("get_attack_direction"):
-		return
+func attack(raiser, npc = true) -> Dictionary:
+	if !raiser.has_method("get_attack_direction"):
+		return {}
 	
-	if cooldown == true or can_attack == false or swinging == true:
-		return
+	if cooldown or !can_attack or swinging:
+		return {}
 	
-	if npc == true:
+	if npc:
 		var succefull_swing = await attack_logic(raiser)
-		if succefull_swing == false:
-			return
+		if !succefull_swing:
+			return {}
 		_melee_attack_target(raiser.get_attack_target(), raiser.get_attack_direction())
 	else:
 		var succefull_swing = await attack_logic(raiser)
-		if succefull_swing == false:
-			return
+		if !succefull_swing:
+			return {}
 		return await _try_melee_attack(raiser.get_attack_direction())
+	return {}
 
-func attack_logic(raiser):
+func attack_logic(raiser) -> bool:
 	await _swing(raiser.get_attack_direction())
-	if swinging_cancelled == true:
+	if swinging_cancelled:
 		return false
 	_cooldown()
 	return true
 
-func _try_melee_attack(direction):
+func _try_melee_attack(direction) -> Dictionary:
 	await get_tree().physics_frame
 	var space_state = parent.get_world_2d().direct_space_state
 	var _targets: Dictionary
@@ -55,7 +56,7 @@ func _try_melee_attack(direction):
 		var ray_start: Vector2 = parent.global_position - ray_direction * 0.2
 		var ray_end: Vector2 = parent.global_position + ray_direction * attack_range
 		
-		var query = PhysicsRayQueryParameters2D.create(ray_start, ray_end)
+		var query: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.create(ray_start, ray_end)
 		query.collision_mask = 1 | 2 | 3 | 4
 		query.collide_with_areas = true
 		
@@ -88,7 +89,7 @@ func _try_melee_attack(direction):
 		
 		var _attacked = _melee_attack_target(enemy, direction, true)
 		
-		if _attacked == true and enemy != null:
+		if _attacked and enemy:
 			_targets[i] = enemy
 			attacked_enemies.append(enemy)
 	
@@ -97,46 +98,46 @@ func _try_melee_attack(direction):
 	
 	return _targets
 
-func _melee_attack_target(target, direction = null, multiple_attack = false):
-	if slash_effect != null:
-		var _slash_effect = slash_effect.instantiate()
+func _melee_attack_target(target, direction = null, multiple_attack = false) -> bool:
+	if slash_effect:
+		var _slash_effect: Node = slash_effect.instantiate()
 		_slash_effect.global_rotation = direction.angle() + 90
 		parent.add_child(_slash_effect)
 		if _slash_effect.has_node("AnimationPlayer"):
 			_slash_effect.get_node("AnimationPlayer").play("Slash")
 	
-	if target != null and (target.global_position - parent.global_position).length() > attack_range:
+	if target and (target.global_position - parent.global_position).length_squared() > attack_range:
 		target = null
 	
-	if attack_sound != null and target != null:
+	if attack_sound and target:
 		attack_sound.play()
-	elif miss_sound != null:
+	elif miss_sound:
 		miss_sound.play()
 	
-	if multiple_attack != false:
+	if multiple_attack:
 		_cooldown()
 	
-	if animation_component != null:
+	if animation_component:
 		if attack_rotation_multiplier != 0:
 			animation_component.lean_to_direction(direction, 3, 0.2, attack_rotation_multiplier)
 		if attack_shift_multiplier != 0:
 			animation_component.shift_to_direction(direction, 0.2, attack_shift_multiplier)
 	
-	if target == null:
+	if !target:
 		EventBusManager.melee_miss.emit(parent, self)
 		return false
 	
 	if target.has_node("ProjectileComponent") and parry_force != 0:
 		var projectile = target.get_node("ProjectileComponent")
 		if projectile.parriable == false:
-			return
+			return false
 		parry_projectile(target, projectile, direction)
 	
 	if can_parry_weapon and target.has_node("WeaponUserComponent"):
 		var target_weapon_user_component = target.get_node("WeaponUserComponent")
-		if target_weapon_user_component != null and target_weapon_user_component.selected_weapon != null:
+		if target_weapon_user_component and target_weapon_user_component.selected_weapon:
 			var weapon = target_weapon_user_component.selected_weapon 
-			if weapon.swinging == true and weapon.parriable == true:
+			if weapon.swinging and weapon.parriable:
 				parry_weapon(weapon, target)
 	
 	if target.has_node("HealthComponent"):
@@ -154,7 +155,7 @@ func _melee_attack_target(target, direction = null, multiple_attack = false):
 	
 	return true
 
-func parry_weapon(weapon, target):
+func parry_weapon(weapon, target) -> void:
 	EventBusManager.parry.emit(parent, "Weapon")
 	weapon.swinging_cancelled = true
 	parry_effects()
@@ -168,7 +169,7 @@ func parry_weapon(weapon, target):
 		target.get_node("MobMoverComponent").throw(-direction, 300, 50)
 		target.get_node("MobMoverComponent").drop(0.5)
 
-func parry_projectile(target, projectile, direction):
+func parry_projectile(target, projectile, direction) -> void:
 		EventBusManager.parry.emit(parent, "Projectile")
 		var angle = direction.normalized().angle()
 		target.modulate = parry_color
@@ -192,9 +193,9 @@ func parry_projectile(target, projectile, direction):
 		target.add_child(trail)
 
 func parry_effects():
-	if parry_sound != null:
+	if parry_sound:
 		parry_sound.play()
-	if parry_effect != null:
-		var inst = parry_effect.instantiate()
+	if parry_effect:
+		var inst: Node = parry_effect.instantiate()
 		inst.global_position = parent.global_position
 		scene.add_child(inst)

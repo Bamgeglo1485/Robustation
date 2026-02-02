@@ -12,7 +12,7 @@ var wave_special_agents: Array[CharacterBody2D] = []
 @export var bartender: PackedScene
 @export var cleanbot: PackedScene
 
-func _ready():
+func _ready() -> void:
 	wave_timer.timeout.connect(_on_wave_timer_timeout)
 	wave_timer.start()
 

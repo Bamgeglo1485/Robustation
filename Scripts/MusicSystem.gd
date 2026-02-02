@@ -7,14 +7,13 @@ var queue_priority: int
 
 func _ready() -> void:
 	max_polyphony = 3
-
-@warning_ignore("unused_parameter")
-func _process(delta: float) -> void:
-	if playing == false and queue_stream != null:
+	
+func _process(_delta: float) -> void:
+	if !playing and queue_stream:
 		set_music(queue_stream, queue_priority)
 
-func set_music(new_stream, priority = 1, timed = false):
-	if timed == true and current_timed != true and stream != null:
+func set_music(new_stream, priority = 1, timed = false) -> void:
+	if timed and !current_timed and stream:
 		queue_stream = stream
 		queue_priority = priority
 	
@@ -25,7 +24,7 @@ func set_music(new_stream, priority = 1, timed = false):
 	
 	play()
 
-func clear_musics():
+func clear_musics() -> void:
 	stop()
 	current_priority = 0
 	stream = null

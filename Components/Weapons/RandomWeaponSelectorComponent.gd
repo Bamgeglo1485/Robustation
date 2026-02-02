@@ -5,19 +5,19 @@ class_name RandomWeaponSelectorComponent extends Component
 @onready var weapon_user_component: WeaponUserComponent = parent.get_node_or_null("WeaponUserComponent")
 
 func _ready() -> void:
-	if weapon_user_component == null or weapons_to_select.is_empty():
+	if !weapon_user_component or weapons_to_select.is_empty():
 		return
 	
 	weapon_user_component.select_weapon(weapons_to_select.pick_random())
 	
-	if change_behavior == false:
+	if !change_behavior:
 		return
 	
-	var move_to_point_component = parent.get_node_or_null("MoveToPointComponent")
-	if move_to_point_component == null:
-		var ai_folder = parent.get_node_or_null("AI")
+	var move_to_point_component: MoveToPointComponent = parent.get_node_or_null("MoveToPointComponent")
+	if !move_to_point_component:
+		var ai_folder: Node = parent.get_node_or_null("AI")
 		move_to_point_component = ai_folder.get_node_or_null("MoveToPointComponent")
-		if move_to_point_component == null:
+		if !move_to_point_component:
 			return
 	
 	if weapon_user_component.selected_weapon is MeleeWeapon:

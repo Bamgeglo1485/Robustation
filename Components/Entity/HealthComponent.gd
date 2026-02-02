@@ -16,7 +16,7 @@ class_name HealthComponent extends Component
 @onready var shader: ShaderMaterial
 
 @export_category("Heal For Damage")
-@export var heal_for_damage_multiplier: float = 0
+@export var heal_for_damage_multiplier: float = 0.0
 @export var heal_for_damage_range: int = 64
 
 var delayed_damage_timer: Timer
@@ -36,8 +36,8 @@ func _ready():
 	
 	health = max_health
 
-func set_health(new_health: int):
-	if (shader == null and parent != null and parent.material != null) or shader != null and parent.material != null and shader != parent.material:
+func set_health(new_health: int) -> void:
+	if (!shader and parent and parent.material) or shader and parent.material and shader != parent.material:
 		shader = parent.material
 	
 	EventBusManager.health_changed.emit(parent, health, new_health)
@@ -50,23 +50,23 @@ func set_health(new_health: int):
 	
 	health_effect()
 
-func health_effect():
-	if shader != null:
+func health_effect() -> void:
+	if shader:
 		shader.set_shader_parameter("blood_intensity", (float(health) / float(max_health)))
 
-func get_health():
+func get_health() -> int:
 	return health
 
 # Наносит урон и создаёт эффекты
-func take_damage(damage: int, damager):
-	if INVINCIBLE == true:
-		if invinciblitiy_attack_effect != null:
-			var inst = invinciblitiy_attack_effect.instantiate()
+func take_damage(damage: int, damager) -> void:
+	if INVINCIBLE:
+		if invinciblitiy_attack_effect:
+			var inst: Node = invinciblitiy_attack_effect.instantiate()
 			scene.add_child(inst)
 			inst.global_position = parent.global_position
 		return
 	
-	var modified_damage = damage * damage_modifier
+	var modified_damage: float = damage * damage_modifier
 	health -= int(modified_damage)
 	if damage > 0:
 		damage_effects(damager)
@@ -75,7 +75,7 @@ func take_damage(damage: int, damager):
 	
 	EventBusManager.damaged.emit(parent, damage, damager)
 	
-	if damager == null:
+	if !damager:
 		return
 	var direction = (damager.global_position-parent.global_position)
 	
@@ -88,37 +88,41 @@ func take_damage(damage: int, damager):
 		if direction.length() <= damager_health.heal_for_damage_range:
 			damager_health.set_health(damager_health.health + damage * damager_health.heal_for_damage_multiplier)
 
-func damage_effects(damager):
-	if parent == null or damager == null:
+func damage_effects(damager) -> void:
+	if !parent or !damager:
 		return
 	
 	var attack_direction = (parent.global_position - damager.global_position).normalized()
 	_flash()
 	
-	if blood_effect_scene != null:
-		var blood_effect = blood_effect_scene.instantiate()
+	if blood_effect_scene:
+		var blood_effect: Node = blood_effect_scene.instantiate()
 		scene.add_child(blood_effect)
 		blood_effect.global_position = parent.global_position
 		blood_effect.rotation = attack_direction.angle()
 	
-	if blood_spurt_effect_scene != null:
-		var blood_spurt_effect = blood_spurt_effect_scene.instantiate()
+	if blood_spurt_effect_scene:
+		var blood_spurt_effect: Node = blood_spurt_effect_scene.instantiate()
 		scene.add_child(blood_spurt_effect)
 		blood_spurt_effect.emitting = true
 		blood_spurt_effect.global_position = parent.global_position
 
-func _flash(speed_multiplier: float = 1, color: Color = Color(0.7, 0.0, 0.3, 0.729)):
-	if shader != null and shader.get_shader_parameter("flash_color"):
-		var _tween = create_tween()
+func _flash(
+	speed_multiplier: float = 1,
+	color: Color = Color(0.7, 0.0, 0.3, 0.729)
+	) -> void:
+	
+	if shader and shader.get_shader_parameter("flash_color"):
+		var _tween: Tween = create_tween()
 		_tween.tween_property(shader, "shader_parameter/flash_color", color, 0.1 * speed_multiplier)
 		_tween.tween_property(shader, "shader_parameter/flash_color", Color(0.7, 0.0, 0.3, 0.0), 0.2 * speed_multiplier)
 
-func _death():
-	if gibbed == true:
+func _death() -> void:
+	if gibbed:
 		return
 	gibbed = true
-	if gib_effect_scene != null:
-		var gib_effect = gib_effect_scene.instantiate()
+	if gib_effect_scene:
+		var gib_effect: Node = gib_effect_scene.instantiate()
 		scene.add_child.call_deferred(gib_effect)
 		gib_effect.global_position = parent.global_position
 	
@@ -126,19 +130,19 @@ func _death():
 	
 	EventBusManager.gibbed.emit(parent)
 
-func set_delayed_damage(damage: int, time: int):
+func set_delayed_damage(damage: int, time: int) -> void:
 	delayed_damage_queue.append({"damage": damage, "time": time})
 	
-	if not delayed_damage_timer.is_stopped():
+	if !delayed_damage_timer.is_stopped():
 		delayed_damage_timer.start()
 
-func _delayed_damage_process():
+func _delayed_damage_process() -> void:
 	if delayed_damage_queue.is_empty():
 		delayed_damage_timer.start()
 		return
 	
-	var total_damage = 0
-	var new_queue = []
+	var total_damage: int = 0
+	var new_queue: Array = []
 	
 	for task in delayed_damage_queue:
 		total_damage += task.damage

@@ -5,5 +5,5 @@ class_name FactionComponent extends Component
 func get_faction() -> String:
 	return faction
 
-func set_faction(new_faction) -> void:
+func set_faction(new_faction: String) -> void:
 	faction = new_faction

@@ -12,32 +12,32 @@ class_name WeaponUserComponent extends Component
 @export var damage_modifier: float = 1
 
 func _ready() -> void:
-	if weapon_texture == null:
+	if !weapon_texture:
 		weapon_texture = DirectionalSprite.new()
 		weapon_texture.region_enabled = true
 		parent.add_child(weapon_texture)
 	
-	if selected_weapon != null:
+	if selected_weapon:
 		select_weapon(selected_weapon)
 
-func select_weapon(new_weapon: Weapon):
-	if new_weapon == null or (selected_weapon != null and selected_weapon.swinging == true):
+func select_weapon(new_weapon: Weapon) -> void:
+	if !new_weapon or (selected_weapon and selected_weapon.swinging):
 		return
 	
 	selected_weapon = new_weapon
 	selected_weapon.timers_timescaled = timers_timescaled
 	
-	if selected_weapon.equipped_texture != null and weapon_texture != null:
+	if selected_weapon.equipped_texture and weapon_texture:
 		weapon_texture.texture = selected_weapon.equipped_texture
 
-func attack(raiser, npc = true):
-	if selected_weapon.get_cooldown() == true:
+func attack(raiser, npc: bool = true) -> void:
+	if selected_weapon.get_cooldown():
 		return
 	
-	if mob_mover_component != null:
-		if mob_mover_component.fallen == true and block_when_fallen == true:
+	if mob_mover_component:
+		if mob_mover_component.fallen and block_when_fallen:
 			return
-		if mob_mover_component.flying == true and block_when_flying == true:
+		if mob_mover_component.flying and block_when_flying:
 			return
 	
 	selected_weapon.damage_modifier = damage_modifier

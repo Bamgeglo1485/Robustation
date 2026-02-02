@@ -5,14 +5,14 @@ class_name BattleTendencyComponent extends Component
 @export var battle_tendecy_dependency: float = 1
 @export var battle_tendency_debuff_multiplier: float = 0.15
 @export var battle_tendency_buff_multiplier: float = 1
-@export var battle_tendency_bonus = 0
+@export var battle_tendency_bonus: int = 0
 @export var palette_section: int = 2
 @export var section: int = 2
 
 @export var battle_tendency_effect: ColorRect
 @onready var material = parent.material
 @onready var health_component: HealthComponent = parent.get_node_or_null("HealthComponent")
-@onready var weapon_user_component = parent.get_node_or_null("WeaponUserComponent")
+@onready var weapon_user_component: Node = parent.get_node_or_null("WeaponUserComponent")
 
 func _ready() -> void:
 	EventBusManager.health_changed.connect(_on_health_changed)
@@ -21,12 +21,11 @@ func _ready() -> void:
 	EventBusManager.parry.connect(_on_parry)
 	EventBusManager.projectile_miss.connect(_on_projectile_miss)
 	EventBusManager.melee_miss.connect(_on_melee_miss)
-
-@warning_ignore("unused_parameter")
-func _on_health_changed(emitter, health, new_health):
+	
+func _on_health_changed(_emitter, _health, _new_health) -> void:
 	change_battle_tendency(0)
 
-func _on_damaged(emitter, damage, damager):
+func _on_damaged(emitter, damage, damager) -> void:
 	if damager == emitter and emitter == parent: # SELFHARM
 		change_battle_tendency(damage * -0.2)
 	elif damager == parent:
@@ -34,27 +33,26 @@ func _on_damaged(emitter, damage, damager):
 	else:
 		change_battle_tendency(damage * -0.1) # PLAYER DAMAGED
 
-func _on_gibbed(damager):
+func _on_gibbed(damager) -> void:
 	if damager != parent:
 		change_battle_tendency(1.5)
-
-@warning_ignore("unused_parameter")
-func _on_parry(emitter, type):
+		
+func _on_parry(emitter, _type):
 	if emitter == parent:
 		change_battle_tendency(1.5)
 
-func _on_projectile_miss(emitter, projectile):
+func _on_projectile_miss(emitter, projectile) -> void:
 	if emitter != parent:
 		return
 	change_battle_tendency(projectile.get_node("ProjectileComponent").damage * -0.05)
 
-func _on_melee_miss(emitter, weapon):
+func _on_melee_miss(emitter, weapon) -> void:
 	if emitter != parent:
 		return
 	change_battle_tendency(weapon.damage * -0.05)
 
-func change_battle_tendency(value):
-	if health_component == null:
+func change_battle_tendency(value) -> int:
+	if !health_component:
 		return section
 	
 	if value > 0:
@@ -62,7 +60,7 @@ func change_battle_tendency(value):
 	else:
 		value *= battle_tendency_debuff_multiplier
 	
-	if battle_tendency_bonus == null:
+	if !battle_tendency_bonus:
 		battle_tendency_bonus = 0
 	
 	EventBusManager.tendency_changed.emit(parent)
@@ -73,8 +71,8 @@ func change_battle_tendency(value):
 	
 	#print("Battle tendency: ", battle_tendency)
 	
-	var segmentation = max_battle_tendency / 4.0
-	var old_section = section
+	var segmentation: float = max_battle_tendency * 0.25
+	var old_section: int = section
 	
 	if battle_tendency > segmentation * 3:
 		section = 4  # ЭЙФОРИЯ (EUPHORIA)
@@ -102,8 +100,8 @@ func get_section_name() -> String:
 		4: return "EUPHORIA"
 		_: return "NUH UN WHAT THE FUCK IS A BUG"
 
-func set_battle_tendency_modifiers():
-	if health_component == null or weapon_user_component == null:
+func set_battle_tendency_modifiers() -> void:
+	if !health_component or !weapon_user_component:
 		return
 	
 	if section == 1:
@@ -121,11 +119,11 @@ func set_battle_tendency_modifiers():
 	change_palette()
 
 # PLS REWORK THIS SHIT
-func change_palette():
+func change_palette() -> void:
 	if section < 1 or section > 4:
 		return
 	
-	var tween = create_tween()
+	var tween: Tween = create_tween()
 	tween.set_parallel(true)
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_IN_OUT)
@@ -138,7 +136,7 @@ func change_palette():
 			tween.tween_property(battle_tendency_effect.material, "shader_parameter/red_factor", 1.0, 0.5)
 			tween.tween_property(battle_tendency_effect.material, "shader_parameter/green_factor", 1.0, 0.5)
 			
-			if material != null:
+			if material:
 				tween.tween_property(material, "shader_parameter/aura_opacity", 0.0, 0.5)
 		
 		2:
@@ -148,7 +146,7 @@ func change_palette():
 			tween.tween_property(battle_tendency_effect.material, "shader_parameter/vignette_strength", 0.1, 0.5)
 			tween.tween_property(battle_tendency_effect.material, "shader_parameter/red_factor", 1.0, 0.5)
 			
-			if material != null:
+			if material:
 				tween.tween_property(material, "shader_parameter/aura_opacity", 0.0, 0.5)
 		
 		3:
@@ -158,7 +156,7 @@ func change_palette():
 			tween.tween_property(battle_tendency_effect.material, "shader_parameter/red_factor", 1.1, 0.5)
 			tween.tween_property(battle_tendency_effect.material, "shader_parameter/vignette_strength", 0.0, 0.5)
 			
-			if material != null:
+			if material:
 				tween.tween_property(material, "shader_parameter/aura_min_line_width", 0.1, 0.5)
 				tween.tween_property(material, "shader_parameter/aura_max_line_width", 1.4, 0.5)
 				tween.tween_property(material, "shader_parameter/aura_opacity", 0.2, 0.5)
@@ -170,7 +168,7 @@ func change_palette():
 			tween.tween_property(battle_tendency_effect.material, "shader_parameter/red_factor", 1.2, 0.5)
 			tween.tween_property(battle_tendency_effect.material, "shader_parameter/green_factor", 0.8, 0.5)
 			
-			if material != null:
+			if material:
 				tween.tween_property(material, "shader_parameter/aura_min_line_width", 0.1, 0.5)
 				tween.tween_property(material, "shader_parameter/aura_max_line_width", 2.3, 0.5)
 				tween.tween_property(material, "shader_parameter/aura_opacity", 0.5, 0.5)

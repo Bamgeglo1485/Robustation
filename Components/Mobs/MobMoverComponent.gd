@@ -64,10 +64,10 @@ func _move(delta: float) -> void:
 		velocity += dir * acceleration
 		
 		if navigation_agent:
-			var nav_vel = dir * acceleration * speed_modifier
+			var nav_vel: Vector2 = dir * acceleration * speed_modifier
 			navigation_agent.set_velocity(nav_vel)
 		
-		var max_speed_current = max_speed * speed_modifier
+		var max_speed_current: float = max_speed * speed_modifier
 		var current_speed = velocity.length()
 		if current_speed > max_speed_current:
 			velocity = (velocity / current_speed) * max_speed_current
@@ -81,13 +81,13 @@ func _walk_animation() -> void:
 	
 	if parent.velocity == Vector2.ZERO and animation_component.animation_priority == 1:
 		animation_component.clear_animation()
-	elif parent.velocity.length() > 0.01 and animation_component.animation_priority < 1:
-		var walk_tween = create_tween()
+	elif parent.velocity.length_squared() != 0 and animation_component.animation_priority < 1:
+		var walk_tween: Tween = create_tween()
 		walk_tween.set_loops()
 		walk_tween.set_trans(Tween.TRANS_SINE)
 		walk_tween.set_ease(Tween.EASE_IN_OUT)
 		
-		var modified_time = 0.2 * (float(max_speed) / float(base_max_speed))
+		var modified_time: float = 0.2 * max_speed / base_max_speed
 		
 		walk_tween.tween_property(parent, "global_rotation", -0.08, modified_time)
 		walk_tween.tween_property(parent, "global_rotation", 0.08, modified_time)
@@ -95,25 +95,25 @@ func _walk_animation() -> void:
 		animation_component.set_animation(walk_tween, 1)
 
 func _fly_movement() -> void:
-	var fly_velocity = fly_direction * fly_speed * fly_modifier
+	var fly_velocity: Vector2 = fly_direction * fly_speed * fly_modifier
 	
-	if direction != Vector2.ZERO and fallen == false:
-		var control_velocity = direction * acceleration
-		var combined_velocity = fly_velocity + control_velocity
+	if direction != Vector2.ZERO and !fallen:
+		var control_velocity: Vector2 = direction * acceleration
+		var combined_velocity: Vector2 = fly_velocity + control_velocity
 		parent.velocity = combined_velocity.limit_length(fly_speed + max_speed)
 	else:
 		parent.velocity = fly_velocity
 	
 	parent.move_and_slide()
 
-func _fly(delta):
-	if not flying or fly_speed <= 0:
+func _fly(delta) -> void:
+	if !flying or fly_speed <= 0:
 		return
 	
 	fly_speed -= 400 * delta
 	
 	if fly_speed < fly_stop_speed * 20:
-		var tween = create_tween()
+		var tween: Tween = create_tween()
 		tween.set_trans(Tween.TRANS_SINE)
 		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.tween_property(parent, "scale", Vector2(1, 1), 0.2)
@@ -148,8 +148,8 @@ func throw(
 	if fly_speed > 100 and fly_direction != Vector2.ZERO:
 		flying = true
 	
-	if animation == true:
-		var tween = create_tween()
+	if animation:
+		var tween: Tween = create_tween()
 		tween.set_trans(Tween.TRANS_SINE)
 		tween.set_ease(Tween.EASE_IN_OUT)
 		
@@ -159,7 +159,7 @@ func _fall_process(delta: float) -> void:
 	if !fallen:
 		return
 	
-	if flying == false:
+	if !flying:
 		standing_delay -= delta
 	if standing_delay <= 0:
 		stand_up()
@@ -170,32 +170,32 @@ func drop(delay: float) -> void:
 	
 	standing_delay += delay
 	
-	if fallen == true:
+	if fallen:
 		return
 	
 	fallen = true
 	
-	if animation_component != null:
-		var tween = create_tween()
+	if animation_component:
+		var tween: Tween = create_tween()
 		tween.set_loops()
 		tween.set_trans(Tween.TRANS_SINE)
 		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.tween_property(parent, "global_rotation", -1.55, 0.2)
 		animation_component.set_animation(tween, 5)
-	if fall_effect != null:
+	if fall_effect:
 		if parent.has_node("HealthComponent") and parent.get_node("HealthComponent").health <= 0:
 			return
 		
-		var inst = fall_effect.instantiate()
+		var inst: Node = fall_effect.instantiate()
 		scene.add_child(inst)
 		inst.global_position = parent.global_position
-	if body_fall_sound != null:
+	if body_fall_sound:
 		body_fall_sound.play()
 
-func stand_up():
+func stand_up() -> void:
 	standing_delay = 0
 	
-	if animation_component != null:
+	if animation_component:
 		animation_component.clear_animation()
 	
 	await get_tree().create_timer(0.3).timeout

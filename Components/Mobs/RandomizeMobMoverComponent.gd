@@ -11,7 +11,7 @@ class_name RandomizeMobMoverComponent extends Component
 @onready var mob_mover_component: MobMoverComponent = parent.get_node("MobMoverComponent")
 
 func _ready() -> void:
-	if mob_mover_component == null:
+	if !mob_mover_component:
 		return
 	
 	if max_speed != 0 and min_speed != 0:
@@ -20,8 +20,7 @@ func _ready() -> void:
 		mob_mover_component.acceleration = randi_range(min_acceleration, max_acceleration)
 	if randomize_multiplier_max != 0 and randomize_multiplier_min != 0:
 		randomize()
-		var multiplier = randf_range(randomize_multiplier_min, randomize_multiplier_max)
-		@warning_ignore("narrowing_conversion")
+		var multiplier: float = randf_range(randomize_multiplier_min, randomize_multiplier_max)
+	
 		mob_mover_component.acceleration *= multiplier
-		@warning_ignore("narrowing_conversion")
 		mob_mover_component.max_speed *= multiplier

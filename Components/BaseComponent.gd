@@ -7,12 +7,12 @@ var parent: Node = _get_valid_parent()
 func _get_valid_parent() -> Node:
 	var current_parent: Node = get_parent()
 	
-	if current_parent == null:
+	if !current_parent:
 		return null
 	
 	while current_parent is ComponentFolder:
 		var next_parent: Node = current_parent.get_parent()
-		if next_parent == null:
+		if !next_parent:
 			break
 		current_parent = next_parent
 	

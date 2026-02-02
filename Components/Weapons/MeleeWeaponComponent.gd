@@ -1,7 +1,7 @@
 class_name MeleeWeapon extends Weapon
 
 @export var damage: int = 10
-@export var attack_range: int = 64
+@export var attack_range: int = 4096 # 64^2
 @export var slash_effect: PackedScene = preload("res://Scenes/Effects/Slash.tscn")
 
 @export var parry_effect: PackedScene = preload("res://Scenes/Effects/Particles/ParryEffect.tscn")

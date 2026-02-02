@@ -40,18 +40,18 @@ func generate_dungeon():
 			rooms.append(room)
  
 # Генерирует комнату со случайной шириной, высотой и позицией в пределах сетки
-func generate_room():
+func generate_room() -> Rect2:
 	# Определение ширины и высоты комнаты случайным образом в заданном диапазоне
-	var width = randi() % (dungeon_template.MAX_ROOM_SIZE - dungeon_template.MIN_ROOM_SIZE + 1) + dungeon_template.MIN_ROOM_SIZE
-	var height = randi() % (dungeon_template.MAX_ROOM_SIZE - dungeon_template.MIN_ROOM_SIZE + 1) + dungeon_template.MIN_ROOM_SIZE
+	var width: int = randi() % (dungeon_template.MAX_ROOM_SIZE - dungeon_template.MIN_ROOM_SIZE + 1) + dungeon_template.MIN_ROOM_SIZE
+	var height: int = randi() % (dungeon_template.MAX_ROOM_SIZE - dungeon_template.MIN_ROOM_SIZE + 1) + dungeon_template.MIN_ROOM_SIZE
 	# Размещение комнаты случайным образом в сетке, гарантируя, что она вписывается в границы
-	var x = randi() % (dungeon_template.WIDTH - width - 1) + 1
-	var y = randi() % (dungeon_template.HEIGHT - height - 1) + 1
+	var x: int = randi() % (dungeon_template.WIDTH - width - 1) + 1
+	var y: int = randi() % (dungeon_template.HEIGHT - height - 1) + 1
 	# Возврат комнаты в виде объекта Rect2, представляющего ее позицию и размер
 	return Rect2(x, y, width, height)
  
 # Пытается разместить комнату в сетке, гарантируя отсутствие перекрытия с существующими комнатами
-func place_room(room):
+func place_room(room) -> bool:
 	# Проверка, перекрывается ли комната с существующими полами (ячейками со значением 0)
 	for x in range(room.position.x, room.end.x):
 		for y in range(room.position.y, room.end.y):
@@ -65,26 +65,25 @@ func place_room(room):
 	return true  # Комната успешно размещена, возвращаем true
  
 # Соединяет две комнаты коридором, позволяя задавать ширину коридора
-func connect_rooms(room1, room2):
+func connect_rooms(room1, room2) -> void:
 	# Определение начальной точки коридора (центр room1)
-	var start = Vector2(
+	var start: Vector2 = Vector2(
 		int(room1.position.x + room1.size.x / 2),
 		int(room1.position.y + room1.size.y / 2))
 	# Определение конечной точки коридора (центр room2)
-	var end = Vector2(
+	var end: Vector2 = Vector2(
 		int(room2.position.x + room2.size.x / 2),
 		int(room2.position.y + room2.size.y / 2))
 	
-	var current = start
+	var current: Vector2 = start
 	
 	# Сначала двигаемся горизонтально к конечной точке
 	while current.x != end.x:
 		# Двигаемся на один шаг влево или вправо
 		current.x += 1 if end.x > current.x else -1
 		# Создаем коридор с указанной шириной
-		@warning_ignore_start("integer_division")
-		for i in range(-int(dungeon_template.CORRIDOR_WIDTH / 2), int(dungeon_template.CORRIDOR_WIDTH / 2) + 1):
-			for j in range(-int(dungeon_template.CORRIDOR_WIDTH / 2), int(dungeon_template.CORRIDOR_WIDTH / 2) + 1):
+		for i in range(-int(dungeon_template.CORRIDOR_WIDTH * 0.5), int(dungeon_template.CORRIDOR_WIDTH * 0.5) + 1):
+			for j in range(-int(dungeon_template.CORRIDOR_WIDTH * 0.5), int(dungeon_template.CORRIDOR_WIDTH * 0.5) + 1):
 				# Гарантируем, что не выходим за границы сетки
 				if current.y + j >= 0 and current.y + j < dungeon_template.HEIGHT and current.x + i >= 0 and current.x + i < dungeon_template.WIDTH:
 					grid[current.x + i][current.y + j] = 0  # Устанавливаем ячейки как пол
@@ -94,17 +93,17 @@ func connect_rooms(room1, room2):
 		# Двигаемся на один шаг вверх или вниз
 		current.y += 1 if end.y > current.y else -1
 		# Создаем коридор с указанной шириной
-		for i in range(-int(dungeon_template.CORRIDOR_WIDTH / 2), int(dungeon_template.CORRIDOR_WIDTH / 2) + 1):
-			for j in range(-int(dungeon_template.CORRIDOR_WIDTH / 2), int(dungeon_template.CORRIDOR_WIDTH / 2) + 1):
+		for i in range(-int(dungeon_template.CORRIDOR_WIDTH * 0.5), int(dungeon_template.CORRIDOR_WIDTH * 0.5) + 1):
+			for j in range(-int(dungeon_template.CORRIDOR_WIDTH * 0.5), int(dungeon_template.CORRIDOR_WIDTH * 0.5) + 1):
 				# Гарантируем, что не выходим за границы сетки
 				if current.x + i >= 0 and current.x + i < dungeon_template.WIDTH and current.y + j >= 0 and current.y + j < dungeon_template.HEIGHT:
 					grid[current.x + i][current.y + j] = 0  # Устанавливаем ячейки как пол
 
 # Отрисовывает подземелье на экране, создавая визуальные представления сетки
-func draw_dungeon():
+func draw_dungeon() -> void:
 	for x in range(dungeon_template.WIDTH):
 		for y in range(dungeon_template.HEIGHT):
-			var tile_position = Vector2i(x, y)
+			var tile_position: Vector2i = Vector2i(x, y)
 			if grid[x][y] == 0:
 				plating_tilemap.set_cell(tile_position, 1, dungeon_template.base_plating_position)
 			else:
@@ -115,7 +114,7 @@ func draw_dungeon():
 	for x in range(dungeon_template.WIDTH):
 		for y in range(dungeon_template.HEIGHT):
 			if grid[x][y] == 1:
-				var has_adjacent_floor = false
+				var has_adjacent_floor: bool = false
 				
 				for dx in [-1, 0, 1]:
 					for dy in [-1, 0, 1]:

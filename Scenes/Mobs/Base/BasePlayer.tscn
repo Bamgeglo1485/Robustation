@@ -14,7 +14,6 @@
 [ext_resource type="Material" uid="uid://dufhgddaeqjd4" path="res://Resources/Shaders/ImpactFrame.tres" id="11_oayod"]
 [ext_resource type="Script" uid="uid://qcmegh7138ug" path="res://Components/Entity/UniqueShaderComponent.gd" id="11_yhquf"]
 [ext_resource type="Script" uid="uid://bdxrxakvokr52" path="res://Components/Player/ScreenShakeComponent.gd" id="13_0r3jo"]
-[ext_resource type="Script" uid="uid://clfjtp26jetey" path="res://Components/Player/RestartComponent.gd" id="14_dytnj"]
 
 [sub_resource type="Shader" id="Shader_oayod"]
 code = "shader_type canvas_item;
@@ -247,10 +246,6 @@ color = Color(1, 1, 1, 0)
 script = ExtResource("11_yhquf")
 metadata/_custom_type_script = "uid://qcmegh7138ug"
 
-[node name="RestartComponent" type="Node" parent="." index="20" unique_id=2088749855]
-script = ExtResource("14_dytnj")
-metadata/_custom_type_script = "uid://clfjtp26jetey"
-
-[node name="ScreenShakeComponent" type="Node" parent="." index="22" unique_id=1270479005]
+[node name="ScreenShakeComponent" type="Node" parent="." index="20" unique_id=1270479005]
 script = ExtResource("13_0r3jo")
 metadata/_custom_type_script = "uid://bdxrxakvokr52"

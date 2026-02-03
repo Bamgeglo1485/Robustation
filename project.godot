@@ -25,6 +25,10 @@ config/icon="uid://8d2n77fftdbi"
 
 EventBusManager="*res://Scripts/EventBusManager.gd"
 
+[display]
+
+window/size/mode=3
+
 [editor]
 
 movie_writer/movie_file="C:/Users/orang/Videos/sd.avi"

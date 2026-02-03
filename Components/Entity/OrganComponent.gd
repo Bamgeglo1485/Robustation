@@ -9,15 +9,15 @@ func _ready() -> void:
 	super._ready()
 	parent.reparent.call_deferred(scene)
 	
-	if area2d != null:
+	if area2d:
 		area2d.body_entered.connect(_on_step)
 
-func _on_step(_body):
-	if accelerating == true:
+func _on_step(_body) -> void:
+	if accelerating:
 		return
 	
-	if blood_scene != null:
-		var _effect = blood_scene.instantiate()
+	if blood_scene:
+		var _effect: Node = blood_scene.instantiate()
 		scene.add_child(_effect)
 		_effect.emitting = true
 		_effect.global_position = parent.global_position
@@ -26,12 +26,12 @@ func _on_step(_body):
 			_effect.rotation = _body.velocity.angle()
 			health_component.set_health(health_component.health + health_bonus)
 	
-	if step_sound != null:
+	if step_sound:
 		step_sound.reparent(scene)
 		step_sound.global_position = parent.global_position
 		step_sound.play()
 		
-		var auto_delete = AutoDeleteComponent.new()
+		var auto_delete: AutoDeleteComponent = AutoDeleteComponent.new()
 		step_sound.add_child(auto_delete)
 	
 	parent.queue_free()

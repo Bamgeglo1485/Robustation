@@ -1,6 +1,6 @@
 class_name RageComponent extends Component
 
-var raged = false
+var raged: bool = false
 
 @export var rage_delay: float = 15
 @export var rage_damage_addendum: float = 1
@@ -19,8 +19,8 @@ var raged = false
 
 signal rage_state_change(raged)
 
-func rage():
-	if raged == true:
+func rage() -> void:
+	if raged:
 		return
 	
 	EventBusManager.raged.emit(parent)
@@ -28,56 +28,56 @@ func rage():
 	raged = true
 	rage_state_change.emit(raged)
 	
-	if rage_sound != null:
+	if rage_sound:
 		rage_sound.play()
-	if rage_effect != null:
-		var inst = rage_effect.instantiate()
+	if rage_effect:
+		var inst: Node = rage_effect.instantiate()
 		scene.add_child(inst)
 		inst.global_position = parent.global_position
-	if rage_sprite != null:
+	if rage_sprite:
 		rage_sprite.visible = true
 	
-	if aura_effect != null:
-		var _tween = create_tween()
+	if aura_effect:
+		var _tween: Tween = create_tween()
 		_tween.set_trans(Tween.TRANS_SINE)
 		_tween.set_ease(Tween.EASE_IN_OUT)
 		_tween.tween_property(aura_effect.material, "shader_parameter/aura_min_line_width", 0.1, 0.5)
 		_tween.tween_property(aura_effect.material, "shader_parameter/aura_max_line_width", 2.3, 0.5)
 		_tween.tween_property(aura_effect.material, "shader_parameter/aura_opacity", 0.5, 0.5)
 	
-	if weapon_user_component != null:
+	if weapon_user_component:
 		weapon_user_component.damage_modifier += rage_damage_addendum
-	if health_component != null:
+	if health_component:
 		health_component.damage_modifier -= rage_damage_resistance_subtrahend
-	if mob_mover_component != null:
+	if mob_mover_component:
 		mob_mover_component.speed_modifier += rage_speed_modifier_addendum
 	
 	if rage_delay != 0:
 		await get_tree().create_timer(rage_delay).timeout
 		unrage()
 
-func unrage():
+func unrage() -> void:
 	raged = false
 	rage_state_change.emit(raged)
 	
-	if rage_sound != null:
+	if rage_sound:
 		rage_sound.stop()
-	if unrage_sound != null:
+	if unrage_sound:
 		unrage_sound.play()
-	if rage_sprite != null:
+	if rage_sprite:
 		rage_sprite.visible = false
 	
-	if aura_effect != null:
-		var _tween = create_tween()
+	if aura_effect:
+		var _tween: Tween = create_tween()
 		_tween.set_trans(Tween.TRANS_SINE)
 		_tween.set_ease(Tween.EASE_IN_OUT)
 		_tween.tween_property(aura_effect.material, "shader_parameter/aura_min_line_width", 0, 0.5)
 		_tween.tween_property(aura_effect.material, "shader_parameter/aura_max_line_width", 0, 0.5)
 		_tween.tween_property(aura_effect.material, "shader_parameter/aura_opacity", 0, 0.5)
 	
-	if weapon_user_component != null:
+	if weapon_user_component:
 		weapon_user_component.damage_modifier -= rage_damage_addendum
-	if health_component != null:
+	if health_component:
 		health_component.damage_modifier += rage_damage_resistance_subtrahend
-	if mob_mover_component != null:
+	if mob_mover_component:
 		mob_mover_component.speed_modifier -= rage_speed_modifier_addendum

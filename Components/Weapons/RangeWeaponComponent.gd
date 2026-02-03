@@ -20,13 +20,12 @@ class_name RangeWeapon extends Weapon
 @export var bullets_recovery_delay: float = 4
 @export var gun_fire_effect: PackedScene
 
-@warning_ignore("unused_parameter")
-func attack(raiser, npc = true):
-	if cooldown == true or can_attack == false or swinging == true or projectile == null or not raiser.has_method("get_attack_direction"):
+func attack(raiser, _npc = true) -> void:
+	if cooldown or !can_attack or swinging or !projectile or not raiser.has_method("get_attack_direction"):
 		return
 	
 	if bullets == 0:
-		if empty_shoot_sound != null:
+		if empty_shoot_sound:
 			empty_shoot_sound.play()
 		return
 	
@@ -40,10 +39,9 @@ func attack(raiser, npc = true):
 			parent.get_node("MobMoverComponent").throw(-direction, self_throw_speed, null, self_throw_stop_speed)
 	
 	if shots > 1:
-		var total_spread = deg_to_rad(shots_angle)
-		@warning_ignore("incompatible_ternary")
-		var angle_step = total_spread / (shots - 1) if shots > 1 else 0
-		var start_angle = -total_spread / 2
+		var total_spread: float = deg_to_rad(shots_angle)
+		var angle_step: float = total_spread / (shots - 1) if shots > 1 else 0.0
+		var start_angle: float = -total_spread * 0.5
 		
 		var possible_shots: int = 0
 		if bullets < shots:
@@ -61,24 +59,24 @@ func attack(raiser, npc = true):
 		_projectile_shoot(direction)
 		bullets -= 1
 	
-	if shoot_sound != null:
+	if shoot_sound:
 		shoot_sound.play()
 	
 	if bullets <= 0:
-		if timers_timescaled == true:
+		if timers_timescaled:
 			get_tree().create_timer(bullets_recovery_delay).timeout.connect(_on_bullets_recover)
 		else:
 			get_tree().create_timer(bullets_recovery_delay, true, false, true).timeout.connect(_on_bullets_recover)
-		if bullets_end_sound != null:
+		if bullets_end_sound:
 			bullets_end_sound.play()
 	
-	if case_scene != null:
-		var case = case_scene.instantiate()
+	if case_scene:
+		var case: Node = case_scene.instantiate()
 		case.global_position = parent.global_position
 		scene.add_child(case)
 	
-	if gun_fire_effect != null:
-		var fire = gun_fire_effect.instantiate()
+	if gun_fire_effect:
+		var fire: Node = gun_fire_effect.instantiate()
 		fire.global_position = parent.global_position
 		fire.global_rotation = direction.angle()
 		fire.emitting = true
@@ -86,32 +84,32 @@ func attack(raiser, npc = true):
 	
 	_cooldown()
 	
-	if animation_component != null:
+	if animation_component:
 		if attack_rotation_multiplier != 0:
 			animation_component.lean_to_direction(direction, 3, 0.2, attack_rotation_multiplier)
 		if attack_shift_multiplier != 0:
 			animation_component.shift_to_direction(direction, 0.2, attack_shift_multiplier)
 
-func _projectile_shoot(direction):
+func _projectile_shoot(direction) -> void:
 	if direction > Vector2(1, 1):
 		direction = direction.normalized()
 	
 	var weapon_spread: int = spread_angle
-	var spread: float = 0
+	var spread: float = 0.0
 	
 	if weapon_spread != 0:
 		spread = deg_to_rad(randf_range(-weapon_spread, weapon_spread))
 		direction = direction.rotated(spread)
 	
-	var angle = direction.normalized().angle()
+	var angle: float = direction.normalized().angle()
 	
-	var inst_projectile = projectile.instantiate()
+	var inst_projectile: Node = projectile.instantiate()
 	
-	if not inst_projectile.has_node("ProjectileComponent"):
+	if !inst_projectile.has_node("ProjectileComponent"):
 		inst_projectile.queue_free()
 		return
 	
-	var projectile_component = inst_projectile.get_node("ProjectileComponent")
+	var projectile_component: ProjectileComponent = inst_projectile.get_node("ProjectileComponent")
 	
 	inst_projectile.global_position = parent.global_position
 	inst_projectile.global_rotation = angle
@@ -119,10 +117,10 @@ func _projectile_shoot(direction):
 	projectile_component.direction = angle
 	projectile_component.shooter = parent
 	
-	if scene != null:
+	if scene:
 		scene.add_child.call_deferred(inst_projectile)
 
-func _on_bullets_recover():
+func _on_bullets_recover() -> void:
 	bullets += bullets_recover_count
-	if bullets_recover_sound != null:
+	if bullets_recover_sound:
 		bullets_recover_sound.play()

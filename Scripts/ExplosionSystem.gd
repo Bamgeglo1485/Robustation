@@ -9,9 +9,9 @@ extends Node2D
 @export var source: CharacterBody2D
 @export var explosion_duration: float = 0.3
 @export var check_interval: float = 0.05
-var active = true
+var active: bool = true
 
-var damaged_bodies = []
+var damaged_bodies: Array = []
 var check_timer: Timer
 
 func _ready() -> void:
@@ -47,17 +47,17 @@ func _ready() -> void:
 	await get_tree().create_timer(5.0).timeout
 	queue_free()
 
-func _check_overlapping_bodies():
-	if not active:
+func _check_overlapping_bodies() -> void:
+	if !active:
 		return
 	
-	var bodies = area2d.get_overlapping_bodies()
+	var bodies: Array[Node2D] = area2d.get_overlapping_bodies()
 	for body in bodies:
 		if is_instance_valid(body) and body not in damaged_bodies and body.has_node("HealthComponent"):
 			_apply_damage_to_body(body)
 
 func _on_body_entered(body: Node2D) -> void:
-	if active == false:
+	if !active:
 		return
 	if is_instance_valid(body) and body not in damaged_bodies:
 		_apply_damage_to_body(body)
@@ -66,7 +66,7 @@ func _apply_damage_to_body(body: Node2D) -> void:
 	if not is_instance_valid(body) or body in damaged_bodies:
 		return
 	
-	var distance = (body.global_position - global_position).length()
+	var distance: float = (body.global_position - global_position).length()
 	var distance_factor = 1.0 - clamp(distance / radius, 0.0, 1.0)
 	
 	if distance_factor > 0.1:
@@ -79,9 +79,9 @@ func _apply_damage_to_body(body: Node2D) -> void:
 			body.get_node("HealthComponent").take_damage(damage * distance_factor * modifier, source)
 		
 		if body.has_node("MobMoverComponent"):
-			var mob_mover = body.get_node("MobMoverComponent")
+			var mob_mover: MobMoverComponent = body.get_node("MobMoverComponent")
 			mob_mover.drop(fall_time * distance_factor)
-			var direction = (body.global_position - global_position).normalized()
+			var direction: Vector2 = (body.global_position - global_position).normalized()
 			if direction.length_squared() > 0:
 				mob_mover.throw(direction, fly_force * distance_factor)
 		

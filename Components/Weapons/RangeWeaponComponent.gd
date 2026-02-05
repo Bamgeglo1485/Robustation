@@ -103,22 +103,31 @@ func _projectile_shoot(direction) -> void:
 	
 	var angle: float = direction.normalized().angle()
 	
-	var inst_projectile: Node = projectile.instantiate()
+	var instance: Node = projectile.instantiate()
 	
-	if !inst_projectile.has_node("ProjectileComponent"):
-		inst_projectile.queue_free()
-		return
-	
-	var projectile_component: ProjectileComponent = inst_projectile.get_node("ProjectileComponent")
-	
-	inst_projectile.global_position = parent.global_position
-	inst_projectile.global_rotation = angle
-	
-	projectile_component.direction = angle
-	projectile_component.shooter = parent
-	
-	if scene:
-		scene.add_child.call_deferred(inst_projectile)
+	if instance.has_node("ProjectileComponent"):
+		var projectile_component: ProjectileComponent = instance.get_node("ProjectileComponent")
+		
+		instance.global_position = parent.global_position
+		instance.global_rotation = angle
+		
+		projectile_component.direction = angle
+		projectile_component.shooter = parent
+		
+		if scene:
+			scene.add_child.call_deferred(instance)
+	elif instance.has_node("HitscanComponent"):
+		var hitscan_component: HitscanComponent = instance.get_node("HitscanComponent")
+		instance.global_position = parent.global_position
+		instance.global_rotation = angle
+		
+		hitscan_component.direction = angle
+		hitscan_component.shooter = parent
+		
+		if scene:
+			scene.add_child.call_deferred(instance)
+	else:
+		instance.queue_free()
 
 func _on_bullets_recover() -> void:
 	bullets += bullets_recover_count

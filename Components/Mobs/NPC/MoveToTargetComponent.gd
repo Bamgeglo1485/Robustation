@@ -10,6 +10,7 @@ var direction_component: DirectionComponent
 @export var priority: int = 2
 @export var look_at_target: bool = true
 
+
 func _ready() -> void:
 	direction_component = parent.get_node_or_null("DirectionComponent")
 	

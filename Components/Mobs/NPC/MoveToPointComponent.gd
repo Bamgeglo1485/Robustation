@@ -4,9 +4,11 @@ class_name MoveToPointComponent extends Component
 @export var point: Vector2 = Vector2.ZERO
 @export var current_priority: int = -1
 @export var stop_range: int = 48
-@export var update_rate: float = 0.1
+@export var pathfind_update_rate: float = 0.3
+@export var move_update_rate: float = 0.1
 @onready var mob_mover_component: MobMoverComponent = parent.get_node_or_null("MobMoverComponent")
 @onready var direction_component: DirectionComponent = parent.get_node_or_null("DirectionComponent")
+var move_logic_timer: Timer
 var pathfinding_timer: Timer
 
 @export var run_to_target_range: float = 130.0
@@ -23,9 +25,16 @@ func _ready() -> void:
 	pathfinding_timer = Timer.new()
 	add_child(pathfinding_timer)
 	pathfinding_timer.one_shot = true
-	pathfinding_timer.wait_time = update_rate
+	pathfinding_timer.wait_time = pathfind_update_rate
 	pathfinding_timer.timeout.connect(_pathfinding_update)
 	pathfinding_timer.start()
+	
+	move_logic_timer = Timer.new()
+	add_child(move_logic_timer)
+	move_logic_timer.one_shot = true
+	move_logic_timer.wait_time = move_update_rate
+	move_logic_timer.timeout.connect(_update_attack_logic)
+	move_logic_timer.start()
 	
 	if navigation_agent:
 		navigation_agent.velocity_computed.connect(_on_navigation_agent_velocity_computed)
@@ -34,9 +43,13 @@ func _ready() -> void:
 	if !direction_component:
 		direction_component = parent.get_node_or_null("DirectionComponent")
 		
-func _process(_delta: float) -> void:
+func _update_attack_logic() -> void:
 	if !mob_mover_component or !navigation_agent:
 		return
+	
+	# Randomize update times to avoid lags
+	move_logic_timer.wait_time = randf_range(move_update_rate * 0.8, move_update_rate * 1.2)
+	move_logic_timer.start()
 	
 	if point == Vector2.ZERO:
 		mob_mover_component.direction = Vector2.ZERO
@@ -53,16 +66,18 @@ func _process(_delta: float) -> void:
 		_set_direction()
 		return
 	
+	var direction_to_target_normalized: Vector2 = direction_to_target.normalized()
+	
 	if distance_to_target > run_from_target_range:
 		if !navigation_agent.is_navigation_finished():
 			mob_mover_component.direction = parent.global_position.direction_to(navigation_agent.get_next_path_position())
 		else:
-			mob_mover_component.direction = direction_to_target.normalized()
+			mob_mover_component.direction = direction_to_target_normalized
 		
 		_set_direction()
 		
 	elif distance_to_target < run_to_target_range:
-		var away_direction: Vector2 = -direction_to_target.normalized()
+		var away_direction: Vector2 = -direction_to_target_normalized
 		mob_mover_component.direction = away_direction
 		_set_direction()
 		
@@ -77,7 +92,7 @@ func _set_direction() -> void:
 	if mob_mover_component.direction != Vector2.ZERO:
 		direction_component.look_at_direction(mob_mover_component.direction)
 	elif point != Vector2.ZERO:
-		var direction_to_target = (point - parent.global_position).normalized()
+		var direction_to_target = (point - parent.global_position)
 		direction_component.look_at_direction(direction_to_target)
 	else:
 		direction_component.look_at_direction(Vector2.RIGHT)
@@ -86,8 +101,8 @@ func _pathfinding_update() -> void:
 	if point != Vector2.ZERO:
 		navigation_agent.target_position = point
 	
-	randomize()
-	pathfinding_timer.wait_time = randf_range(update_rate * 0.8, update_rate * 1.2)
+	# Randomize update times to avoid lags
+	pathfinding_timer.wait_time = randf_range(pathfind_update_rate * 0.8, pathfind_update_rate * 1.2)
 	pathfinding_timer.start()
 
 func _on_navigation_agent_velocity_computed(safe_velocity: Vector2) -> void:

@@ -7,15 +7,6 @@ var last_time_scale: float
 
 @export var ignore_time_scale: bool = false
 
-func _process(_delta: float) -> void:
-	if ignore_time_scale and last_time_scale == Engine.time_scale:
-		return
-	
-	last_time_scale = Engine.time_scale
-	
-	if animation_tween:
-		animation_tween.set_speed_scale(Engine.time_scale)
-
 func set_animation(tween, priority, rewrite = false) -> void:
 	if (priority > animation_priority) or (priority == animation_priority and rewrite):
 		if animation_tween:
@@ -28,8 +19,8 @@ func set_animation(tween, priority, rewrite = false) -> void:
 	else:
 		tween.kill()
 
-func clear_animation() -> void:
-	if animation_tween:
+func clear_animation(kill_tween = true) -> void:
+	if animation_tween and kill_tween:
 		animation_tween.kill()
 	animation_priority = -1
 	_clear_tween()

@@ -37,23 +37,19 @@
 [node name="Assistant" unique_id=1270222458 instance=ExtResource("1_bk7ip")]
 visibility_layer = 3
 
-[node name="MobMoverComponent" parent="." index="1"]
+[node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
 base_max_speed = 200
 max_speed = 200
 acceleration = 50
 friction = 1300
 
-[node name="Texture" parent="." index="2"]
+[node name="Texture" parent="." index="2" unique_id=382857461]
 random_textures = Array[Texture2D]([ExtResource("5_ngqn2"), ExtResource("4_r4whd")])
 
 [node name="MoveToPointComponent" parent="AI" parent_id_path=PackedInt32Array(1365591205) index="0" unique_id=395370591]
+pathfind_update_rate = 0.2
 run_to_target_range = 250.0
 run_from_target_range = 130.0
-
-[node name="MoveToTargetComponent" parent="AI" parent_id_path=PackedInt32Array(1365591205) index="1" unique_id=1800782744]
-set_player_as_target = null
-priority = null
-look_at_target = null
 
 [node name="Hair" type="Sprite2D" parent="." index="15" unique_id=927075308]
 texture = ExtResource("30_qavuh")

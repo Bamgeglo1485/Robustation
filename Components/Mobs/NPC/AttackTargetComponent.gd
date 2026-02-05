@@ -7,7 +7,17 @@ class_name AttackTargetComponent extends Component
 var attack_direction: Vector2
 var target: CharacterBody2D
 
+@export var update_rate: float = 0.2
+var update_timer: Timer
+
 func _ready() -> void:
+	update_timer = Timer.new()
+	add_child(update_timer)
+	update_timer.one_shot = true
+	update_timer.wait_time = update_rate
+	update_timer.timeout.connect(_update)
+	update_timer.start()
+	
 	if !move_to_target_component:
 		move_to_target_component = parent.get_node_or_null("MoveToTargetComponent")
 	if !weapon_user_component:
@@ -15,9 +25,13 @@ func _ready() -> void:
 	if !mob_mover_component:
 		mob_mover_component = parent.get_node_or_null("MobMoverComponent")
 		
-func _process(_delta: float) -> void:
+func _update() -> void:
 	if !move_to_target_component or !weapon_user_component:
 		return
+	
+	# Randomize update times to avoid lags
+	update_timer.wait_time = randf_range(update_rate * 0.8, update_rate * 1.2)
+	update_timer.start()
 	
 	if mob_mover_component:
 		if mob_mover_component.fallen:
@@ -34,7 +48,7 @@ func _process(_delta: float) -> void:
 	var weapon: Weapon = weapon_user_component.selected_weapon
 	
 	if weapon is MeleeWeapon:
-		if attack_direction.length_squared() > weapon.attack_range:
+		if attack_direction.length() > weapon.attack_range:
 			return
 		weapon_user_component.attack(self)
 	elif weapon.bullets != 0:

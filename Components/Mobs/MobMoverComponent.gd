@@ -28,18 +28,26 @@ var fallen: bool = false
 var standing_delay: float = 0.0
 
 @onready var navigation_agent: NavigationAgent2D = parent.get_node_or_null("NavigationAgent")
+@onready var health_component: HealthComponent = parent.get_node_or_null("HealthComponent")
+
+var walking_tween: Tween
+var drop_tween: Tween
 
 func _ready() -> void:
 	if fly_impact_area:
 		fly_impact_area.body_entered.connect(on_fly_impact)
 
 func _physics_process(delta: float) -> void:
-	_fly(delta)
+	if flying and fly_speed > 0:
+		_fly(delta)
+	
 	_move(delta)
 
 func _process(delta: float) -> void:
-	_walk_animation()
-	_fall_process(delta)
+	if animation_component and !flying and !fallen:
+		_walk_animation()
+	if fallen:
+		_fall_process(delta)
 
 func _move(delta: float) -> void:
 	if not parent is CharacterBody2D:
@@ -49,50 +57,45 @@ func _move(delta: float) -> void:
 		_fly_movement()
 		return
 	
-	var velocity = parent.velocity
+	var velocity: Vector2 = parent.velocity
+	var speed: float = velocity.length()
 	
 	if direction.is_zero_approx():
 		if !velocity.is_zero_approx():
 			var friction_amount: float = friction * delta
-			var speed = velocity.length()
 			if speed > friction_amount:
 				velocity -= (velocity / speed) * friction_amount
 			else:
 				velocity = Vector2.ZERO
 	elif !movement_blocked and !fallen:
-		var dir: Vector2 = direction
-		velocity += dir * acceleration
+		velocity += direction * acceleration
 		
 		if navigation_agent:
-			var nav_vel: Vector2 = dir * acceleration * speed_modifier
+			var nav_vel: Vector2 = direction * acceleration * speed_modifier
 			navigation_agent.set_velocity(nav_vel)
 		
 		var max_speed_current: float = max_speed * speed_modifier
-		var current_speed = velocity.length()
-		if current_speed > max_speed_current:
-			velocity = (velocity / current_speed) * max_speed_current
+		if speed > max_speed_current:
+			velocity = (velocity / speed) * max_speed_current
 	
 	parent.velocity = velocity
 	parent.move_and_slide()
 
 func _walk_animation() -> void:
-	if !animation_component or flying or fallen:
-		return
-	
 	if parent.velocity == Vector2.ZERO and animation_component.animation_priority == 1:
 		animation_component.clear_animation()
 	elif parent.velocity.length_squared() != 0 and animation_component.animation_priority < 1:
-		var walk_tween: Tween = create_tween()
-		walk_tween.set_loops()
-		walk_tween.set_trans(Tween.TRANS_SINE)
-		walk_tween.set_ease(Tween.EASE_IN_OUT)
+		walking_tween = create_tween()
+		walking_tween.set_loops()
+		walking_tween.set_trans(Tween.TRANS_SINE)
+		walking_tween.set_ease(Tween.EASE_IN_OUT)
 		
 		var modified_time: float = 0.2 * max_speed / base_max_speed
 		
-		walk_tween.tween_property(parent, "global_rotation", -0.08, modified_time)
-		walk_tween.tween_property(parent, "global_rotation", 0.08, modified_time)
+		walking_tween.tween_property(parent, "global_rotation", -0.08, modified_time)
+		walking_tween.tween_property(parent, "global_rotation", 0.08, modified_time)
 		
-		animation_component.set_animation(walk_tween, 1)
+		animation_component.set_animation(walking_tween, 1)
 
 func _fly_movement() -> void:
 	var fly_velocity: Vector2 = fly_direction * fly_speed * fly_modifier
@@ -107,9 +110,6 @@ func _fly_movement() -> void:
 	parent.move_and_slide()
 
 func _fly(delta) -> void:
-	if !flying or fly_speed <= 0:
-		return
-	
 	fly_speed -= 400 * delta
 	
 	if fly_speed < fly_stop_speed * 20:
@@ -156,9 +156,6 @@ func throw(
 		tween.tween_property(parent, "scale", Vector2(1.35, 1.35), 0.2)
 
 func _fall_process(delta: float) -> void:
-	if !fallen:
-		return
-	
 	if !flying:
 		standing_delay -= delta
 	if standing_delay <= 0:
@@ -168,6 +165,7 @@ func drop(delay: float) -> void:
 	if !can_fall or delay < 0.3:
 		return
 	
+	parent.velocity = Vector2.ZERO
 	standing_delay += delay
 	
 	if fallen:
@@ -176,14 +174,14 @@ func drop(delay: float) -> void:
 	fallen = true
 	
 	if animation_component:
-		var tween: Tween = create_tween()
-		tween.set_loops()
-		tween.set_trans(Tween.TRANS_SINE)
-		tween.set_ease(Tween.EASE_IN_OUT)
-		tween.tween_property(parent, "global_rotation", -1.55, 0.2)
-		animation_component.set_animation(tween, 5)
+		drop_tween = create_tween()
+		drop_tween.set_loops()
+		drop_tween.set_trans(Tween.TRANS_SINE)
+		drop_tween.set_ease(Tween.EASE_IN_OUT)
+		drop_tween.tween_property(parent, "global_rotation", -1.55, 0.2)
+		animation_component.set_animation(drop_tween, 5)
 	if fall_effect:
-		if parent.has_node("HealthComponent") and parent.get_node("HealthComponent").health <= 0:
+		if health_component and health_component.health <= 0:
 			return
 		
 		var inst: Node = fall_effect.instantiate()

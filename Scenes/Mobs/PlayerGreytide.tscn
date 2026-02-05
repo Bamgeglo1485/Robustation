@@ -193,6 +193,7 @@ metadata/_custom_type_script = "uid://dhxtoiim76o2t"
 
 [node name="Kick" type="Node" parent="KickDashAbilityComponent" index="0" unique_id=649844006 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound")]
 script = ExtResource("12_tn3ht")
+attack_range = 96
 parry_sound = NodePath("ParrySound")
 attack_sound = NodePath("MeleeHitSound")
 miss_sound = NodePath("MeleeMissSound")

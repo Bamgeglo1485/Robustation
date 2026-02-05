@@ -21,7 +21,6 @@ metadata/_custom_type_script = "uid://crchnvrl7mcdd"
 [node name="MoveToPointComponent" type="Node" parent="AI" index="0" unique_id=395370591 node_paths=PackedStringArray("navigation_agent")]
 script = ExtResource("2_i6wsw")
 navigation_agent = NodePath("../../NavigationAgent")
-update_rate = 0.3
 metadata/_custom_type_script = "uid://vaff4lwkvrc7"
 
 [node name="MoveToTargetComponent" type="Node" parent="AI" index="1" unique_id=1800782744]
@@ -32,11 +31,10 @@ metadata/_custom_type_script = "uid://bv7whrderww4t"
 script = ExtResource("4_gb06t")
 metadata/_custom_type_script = "uid://yxsq46ajfdy4"
 
-[node name="NavigationAgent" type="NavigationAgent2D" parent="." index="15" unique_id=1358139639]
-path_postprocessing = 1
-path_search_max_polygons = 2048
+[node name="NavigationAgent" type="NavigationAgent2D" parent="." index="14" unique_id=1358139639]
+path_postprocessing = 2
 avoidance_enabled = true
-radius = 15.0
+radius = 5.0
 neighbor_distance = 128.0
 time_horizon_agents = 0.5
 avoidance_layers = 3

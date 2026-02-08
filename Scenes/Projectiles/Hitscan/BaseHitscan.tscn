@@ -19,5 +19,4 @@ default_color = Color(5.033489, 0, 1.7397217, 1)
 [node name="HitscanComponent" type="Node" parent="." unique_id=993689081 node_paths=PackedStringArray("ray_line")]
 script = ExtResource("1_c2a5l")
 ray_line = NodePath("../RayLine")
-drop_enemy_delay = 1.0
 metadata/_custom_type_script = "uid://c7ls6pxubfe4d"

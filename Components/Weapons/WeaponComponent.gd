@@ -8,6 +8,7 @@ class_name Weapon extends Component
 @export var can_attack: bool = true
 @export var cooldown: bool = false
 @export var cooldown_delay: float = 1.0
+@export var cooldown_modifier: float = 1.0
 
 @export var swing_delay: float = 0.5
 @export var swinging: bool = false
@@ -57,10 +58,11 @@ func _swing(direction) -> void:
 func _cooldown() -> void:
 	if cooldown_delay != 0:
 		cooldown = true
+		var modified_cooldown = cooldown_delay * cooldown_modifier
 		if timers_timescaled:
-			await get_tree().create_timer(cooldown_delay).timeout
+			await get_tree().create_timer(modified_cooldown).timeout
 		else:
-			await get_tree().create_timer(cooldown_delay, true, false, true).timeout
+			await get_tree().create_timer(modified_cooldown, true, false, true).timeout
 		cooldown = false
 
 func get_cooldown() -> bool:

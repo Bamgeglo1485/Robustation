@@ -15,7 +15,7 @@ func set_animation(tween, priority, rewrite = false) -> void:
 		animation_tween = tween
 		animation_priority = priority
 		
-		animation_tween.finished.connect(_on_animation_end)
+		animation_tween.finished.connect(clear_animation)
 	else:
 		tween.kill()
 
@@ -32,9 +32,6 @@ func _clear_tween() -> void:
 	_tween.tween_property(parent, "scale", Vector2(1, 1), 0.2)
 	_tween.tween_property(parent, "skew", 0, 0.2)
 
-func _on_animation_end() -> void:
-	clear_animation()
-
 func shift_to_direction(
 	direction: Vector2,
 	time: float,
@@ -43,6 +40,9 @@ func shift_to_direction(
 	
 	for child in parent.get_children():
 		if child is not Sprite2D:
+			continue
+		
+		if child.position.length() > 13:
 			continue
 		
 		var _tween: Tween = create_tween()

@@ -8,12 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://deq4t84d81wnb" path="res://Scenes/Effects/Particles/Dodge.tscn" id="5_oayod"]
 [ext_resource type="Script" uid="uid://djmi5xfppmrii" path="res://Components/Visual/HealthOverlayComponent.gd" id="6_korw6"]
 [ext_resource type="Material" uid="uid://bx7piwibywxgi" path="res://Resources/Shaders/DamageScreen.tres" id="7_5768p"]
+[ext_resource type="AudioStream" uid="uid://drhi1s5c4ustd" path="res://Audio/Effects/perk_collect.ogg" id="8_4awd5"]
 [ext_resource type="Script" uid="uid://bjb1tak0ajoof" path="res://Components/Player/BattleTendencyComponent.gd" id="8_ljr5e"]
 [ext_resource type="Material" uid="uid://dctvv4tidab2r" path="res://Resources/Shaders/BattleTendency.tres" id="9_d6ik8"]
 [ext_resource type="Script" uid="uid://c3d63pm2kikgh" path="res://Components/Player/ImpactFrameComponent.gd" id="10_m2dsc"]
 [ext_resource type="Material" uid="uid://dufhgddaeqjd4" path="res://Resources/Shaders/ImpactFrame.tres" id="11_oayod"]
 [ext_resource type="Script" uid="uid://qcmegh7138ug" path="res://Components/Entity/UniqueShaderComponent.gd" id="11_yhquf"]
 [ext_resource type="Script" uid="uid://bdxrxakvokr52" path="res://Components/Player/ScreenShakeComponent.gd" id="13_0r3jo"]
+[ext_resource type="Script" uid="uid://bl4o52tmouk6e" path="res://Components/Perks/Entity/PerkOwnerComponent.gd" id="15_4awd5"]
 
 [sub_resource type="Shader" id="Shader_oayod"]
 code = "shader_type canvas_item;
@@ -174,6 +176,10 @@ block_when_flying = false
 script = ExtResource("5_3n0k4")
 metadata/_custom_type_script = "uid://gek7ma2qpdp6"
 
+[node name="PerkCollect" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="1" unique_id=1054597139]
+stream = ExtResource("8_4awd5")
+max_polyphony = 10
+
 [node name="HealthOverlayComponent" type="Node" parent="." index="17" unique_id=490260157 node_paths=PackedStringArray("overlay")]
 script = ExtResource("6_korw6")
 overlay = NodePath("CanvasLayer/ColorRect")
@@ -249,3 +255,31 @@ metadata/_custom_type_script = "uid://qcmegh7138ug"
 [node name="ScreenShakeComponent" type="Node" parent="." index="20" unique_id=1270479005]
 script = ExtResource("13_0r3jo")
 metadata/_custom_type_script = "uid://bdxrxakvokr52"
+
+[node name="PerkOwnerComponent" type="Node" parent="." index="22" unique_id=830713071 node_paths=PackedStringArray("perk_ui", "perk_notification_ui", "perk_collect_sound")]
+script = ExtResource("15_4awd5")
+perk_ui = NodePath("PerkUI/Control/Panel/GridContainer")
+perk_notification_ui = NodePath("PerkUI")
+perk_collect_sound = NodePath("../Sounds/PerkCollect")
+metadata/_custom_type_script = "uid://bl4o52tmouk6e"
+
+[node name="PerkUI" type="CanvasLayer" parent="PerkOwnerComponent" index="0" unique_id=1530233190]
+layer = 17
+
+[node name="Control" type="Control" parent="PerkOwnerComponent/PerkUI" index="0" unique_id=1491893049]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="PerkOwnerComponent/PerkUI/Control" index="0" unique_id=1414116930]
+self_modulate = Color(0.8283503, 0, 0.34580213, 0.17500001)
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 128.0
+
+[node name="GridContainer" type="GridContainer" parent="PerkOwnerComponent/PerkUI/Control/Panel" index="0" unique_id=2074224388]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 128.0
+columns = 17

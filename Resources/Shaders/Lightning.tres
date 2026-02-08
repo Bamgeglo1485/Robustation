@@ -1,0 +1,31 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://4jfkf7fh6bhx"]
+
+[ext_resource type="Shader" uid="uid://dw5pupqulb3x3" path="res://Resources/Shaders/Lightning.gdshader" id="1_wxcag"]
+
+[resource]
+shader = ExtResource("1_wxcag")
+shader_parameter/jitter_strength = 2.50000011875
+shader_parameter/jitter_speed = 13.66800064597012
+shader_parameter/jitter_frequency = 10.299000485942619
+shader_parameter/separate_xy = true
+shader_parameter/time_offset = 22.7270010795325
+shader_parameter/enable_rotation = true
+shader_parameter/rotation_strength = 8.06800038323
+shader_parameter/rotation_speed = 10.0
+shader_parameter/rotation_frequency = 4.0
+shader_parameter/enable_scaling = true
+shader_parameter/scale_strength = 0.41200001957
+shader_parameter/scale_speed = 4.41200020631012
+shader_parameter/scale_frequency = 13.236000625450119
+shader_parameter/base_scale = 1.0
+shader_parameter/text_color = Color(13.092191, 11.684567, 18.892157, 1)
+shader_parameter/use_custom_color = true
+shader_parameter/shake_intensity = 1.0
+shader_parameter/enable_pixelation = false
+shader_parameter/pixel_size = 4.0
+shader_parameter/adaptive_pixels = false
+shader_parameter/enable_outline = false
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_thickness = 1.0
+shader_parameter/chromatic_aberration = true
+shader_parameter/aberration_strength = 1.0

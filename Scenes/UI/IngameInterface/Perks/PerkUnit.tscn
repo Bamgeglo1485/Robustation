@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bdvken4srx0cl"]
+
+[ext_resource type="Texture2D" uid="uid://csjs5ggnfnuhm" path="res://Textures/Weapons/Beer/beer.png" id="1_d1si7"]
+[ext_resource type="LabelSettings" uid="uid://dblchlsmqjas1" path="res://Resources/Text/PerkText.tres" id="2_ta5bv"]
+
+[node name="Control" type="Control" unique_id=845987591]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1111249418]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_d1si7")
+
+[node name="Label" type="Label" parent="." unique_id=804063139]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 41.0
+offset_right = 63.0
+offset_bottom = 64.0
+text = "69"
+label_settings = ExtResource("2_ta5bv")

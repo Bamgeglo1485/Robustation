@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://dvl4m2chpcne3"]
+
+[ext_resource type="Texture2D" uid="uid://csjs5ggnfnuhm" path="res://Textures/Weapons/Beer/beer.png" id="1_7555o"]
+[ext_resource type="LabelSettings" uid="uid://dblchlsmqjas1" path="res://Resources/Text/PerkText.tres" id="2_yhas7"]
+[ext_resource type="LabelSettings" uid="uid://ckvx27ngndofk" path="res://Resources/Text/PerkHeading.tres" id="3_emb1s"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_emb1s"]
+
+[node name="Control" type="Control" unique_id=1599381361]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="Panel" type="Panel" parent="." unique_id=1034020159]
+material = SubResource("ShaderMaterial_emb1s")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.23500001
+anchor_top = 0.795
+anchor_right = 0.781
+anchor_bottom = 0.795
+offset_left = 0.27996826
+offset_top = -0.16003418
+offset_right = 0.28796387
+offset_bottom = 106.839966
+
+[node name="Texture" type="TextureRect" parent="Panel" unique_id=1547704492]
+layout_mode = 0
+offset_right = 107.0
+offset_bottom = 107.0
+texture = ExtResource("1_7555o")
+
+[node name="Desc" type="Label" parent="Panel" unique_id=30639874]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 20.0
+offset_right = 563.0
+offset_bottom = 128.0
+text = "Bla bla bla bla bla bla bla bla bla bla bla bla bla bla che blya"
+label_settings = ExtResource("2_yhas7")
+vertical_alignment = 1
+autowrap_trim_flags = 128
+
+[node name="Name" type="Label" parent="Panel" unique_id=2113371782]
+layout_mode = 0
+offset_left = 109.0
+offset_top = -30.0
+offset_right = 564.0
+offset_bottom = 78.0
+text = "Pivo"
+label_settings = ExtResource("3_emb1s")
+vertical_alignment = 1
+autowrap_trim_flags = 128

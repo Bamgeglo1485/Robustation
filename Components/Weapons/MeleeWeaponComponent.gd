@@ -106,7 +106,7 @@ func _melee_attack_target(target, direction = null, multiple_attack = false) -> 
 		if _slash_effect.has_node("AnimationPlayer"):
 			_slash_effect.get_node("AnimationPlayer").play("Slash")
 	
-	if target and (target.global_position - parent.global_position).length() > attack_range:
+	if (target and (target.global_position - parent.global_position).length() > attack_range):
 		target = null
 	
 	if attack_sound and target:

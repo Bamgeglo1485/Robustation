@@ -3,11 +3,12 @@ class_name HitscanComponent extends Component
 @export var ray_line: Line2D
 
 @export var hit_sound: AudioStreamPlayer2D
-@export var hit_effect: GPUParticles2D
+@export var hit_effect: PackedScene
 
 @export var tween_speed: float = 0.2
 @export var damage: int = 10
-@export var lifetime_speed: float = 0.1
+@export var disappear_speed: float = 0.1
+@export var after_delete_lifetime: float = 2
 
 @export var drop_enemy_delay: float = 0.0
 
@@ -32,9 +33,9 @@ func _ready() -> void:
 	damage_collider()
 	parent.enabled = false
 	
-	await get_tree().create_timer(lifetime_speed).timeout
+	await get_tree().create_timer(disappear_speed).timeout
 	_ray_disappear_effects()
-	await get_tree().create_timer(tween_speed).timeout
+	await get_tree().create_timer(after_delete_lifetime + tween_speed).timeout
 	parent.queue_free()
 
 func damage_collider():
@@ -42,16 +43,24 @@ func damage_collider():
 	if !collider:
 		return
 	
+	var collider_position: Vector2 = collider.global_position
+	
 	if collider.has_node("HealthComponent"):
 		collider.get_node("HealthComponent").take_damage(damage * damage_modifier, shooter)
 	if collider.has_node("MobMoverComponent"):
 		if drop_enemy_delay != 0:
 			collider.get_node("MobMoverComponent").drop(drop_enemy_delay)
 	if explosion_scene:
-		var instance = explosion_scene.instantiate()
+		var instance: Object = explosion_scene.instantiate()
 		scene.call_deferred("add_child", instance)
-		instance.global_position = parent.global_position
+		instance.global_position = collider_position
 		instance.source = shooter
+	if hit_effect:
+		var inst: Object = hit_effect.instantiate()
+		scene.add_child(inst)
+		inst.global_position = collider_position
+	if hit_sound:
+		hit_sound.play()
 
 func _ray_appear_effects():
 	if ray_line:

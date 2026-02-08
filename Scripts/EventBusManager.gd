@@ -6,6 +6,7 @@ signal damaged(emitter, taked_damage, damager)
 signal gibbed(emitter)
 signal parry(emitter, type: String)
 signal projectile_miss(emitter, projectile)
+signal projectile_hit(emitter, projectile)
 signal melee_miss(emitter, weapon)
 signal on_fall()
 

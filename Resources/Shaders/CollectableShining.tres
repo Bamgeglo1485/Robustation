@@ -1,0 +1,25 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dtj02cwmf0jbu"]
+
+[ext_resource type="Shader" uid="uid://3piuftd8ukss" path="res://Resources/Shaders/CollectableShining.gdshader" id="1_fie4c"]
+
+[resource]
+shader = ExtResource("1_fie4c")
+shader_parameter/Angle_deg = 30.0
+shader_parameter/Brightness = 2.5
+shader_parameter/Band_Soft = 0.06
+shader_parameter/Stage_Count = 2
+shader_parameter/Stage1_Duration = 0.50000002305148
+shader_parameter/Stage2_Duration = 0.50000002305148
+shader_parameter/Stage3_Duration = 0.50000002305148
+shader_parameter/Stage1_Width = 0.010000000475
+shader_parameter/Stage2_Width = 0.010000000475
+shader_parameter/Stage3_Width = 0.010000000475
+shader_parameter/Stage1_LeftToRight = true
+shader_parameter/Stage2_LeftToRight = false
+shader_parameter/Stage3_LeftToRight = true
+shader_parameter/One_Shot = false
+shader_parameter/OneShot_Delay = 0.0
+shader_parameter/Phase_Offset = 0.0
+shader_parameter/Wiggle_Angle = false
+shader_parameter/Wiggle_Amount_deg = 15.0
+shader_parameter/Shine_Pause = 0.4

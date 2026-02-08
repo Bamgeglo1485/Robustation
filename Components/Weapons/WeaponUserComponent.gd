@@ -10,6 +10,8 @@ class_name WeaponUserComponent extends Component
 @export var block_when_flying: bool = true
 
 @export var damage_modifier: float = 1.0
+@export var knockback_modifier: int = 0
+@export var cooldown_modifier: float = 1.0
 
 func _ready() -> void:
 	if !weapon_texture:
@@ -41,4 +43,5 @@ func attack(raiser, npc: bool = true) -> void:
 			return
 	
 	selected_weapon.damage_modifier = damage_modifier
+	selected_weapon.cooldown_modifier = cooldown_modifier
 	selected_weapon.attack(raiser, npc)

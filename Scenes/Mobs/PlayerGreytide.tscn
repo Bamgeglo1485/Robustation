@@ -4,11 +4,11 @@
 [ext_resource type="AudioStream" uid="uid://djwhsufysh1dq" path="res://Resources/Audio/PunchRandom.tres" id="3_8fokh"]
 [ext_resource type="Texture2D" uid="uid://oeskymbnxvee" path="res://Textures/Mobs/Player/greytide.png" id="4_bvl14"]
 [ext_resource type="AudioStream" uid="uid://eogckfs15aph" path="res://Audio/Weapon/miss.ogg" id="4_pgypf"]
+[ext_resource type="PackedScene" uid="uid://dmokrqrpfaex0" path="res://Scenes/Projectiles/Spear.tscn" id="5_6fu7j"]
 [ext_resource type="AudioStream" uid="uid://c064ooavx7oy1" path="res://Audio/Abilities/Teleport.ogg" id="5_42pyi"]
 [ext_resource type="Texture2D" uid="uid://1yvrhqvfqqus" path="res://Textures/Weapons/Toolbox/toolbox_inhand.png" id="8_42pyi"]
 [ext_resource type="AudioStream" uid="uid://blc0o0577akc7" path="res://Audio/Weapon/Hit/smash.ogg" id="8_pgypf"]
 [ext_resource type="AudioStream" uid="uid://c14ckhtbrb550" path="res://Audio/Weapon/parry.ogg" id="11_si836"]
-[ext_resource type="PackedScene" uid="uid://dmokrqrpfaex0" path="res://Scenes/Projectiles/Spear.tscn" id="12_aa22f"]
 [ext_resource type="Script" uid="uid://6b7bcparwq17" path="res://Components/Weapons/MeleeWeaponComponent.gd" id="12_tn3ht"]
 [ext_resource type="Texture2D" uid="uid://dverpu5mv40au" path="res://Textures/Weapons/Toolbox/toolbox.png" id="13_4xc88"]
 [ext_resource type="Texture2D" uid="uid://fiix6iyke3n3" path="res://Textures/Weapons/Spear/spear_inhand.png" id="13_aa22f"]
@@ -96,11 +96,12 @@ timers_timescaled = false
 
 [node name="Spear" type="Node" parent="WeaponUserComponent" index="0" unique_id=1787565286 node_paths=PackedStringArray("shoot_sound")]
 script = ExtResource("23_si836")
-projectile = ExtResource("12_aa22f")
+projectile = ExtResource("5_6fu7j")
 spread_angle = 3
 bullets_max_count = 1
 bullets = 1
 bullets_recover_count = 1
+shots_angle = 0
 shoot_sound = NodePath("ShootSound")
 bullets_recovery_delay = 8.0
 cooldown_delay = 0.0
@@ -269,5 +270,36 @@ material = SubResource("ShaderMaterial_3kfxb")
 
 [node name="ColorModify" parent="ImpactFrameComponent/CanvasLayer" parent_id_path=PackedInt32Array(892594464) index="1" unique_id=395695325]
 material = SubResource("ShaderMaterial_v1rwi")
+
+[node name="PerkUI" parent="PerkOwnerComponent" parent_id_path=PackedInt32Array(830713071) index="0" unique_id=1530233190]
+layer = 3
+
+[node name="Control" parent="PerkOwnerComponent/PerkUI" index="0" unique_id=1491893049]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.19800001
+offset_right = 0.0
+offset_bottom = -0.3040161
+
+[node name="Panel" parent="PerkOwnerComponent/PerkUI/Control" index="0" unique_id=1414116930]
+self_modulate = Color(0.8283503, 0, 0.34580213, 0.187)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" parent="PerkOwnerComponent/PerkUI/Control/Panel" index="0" unique_id=2074224388]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="timeout" from="Toolbox/CooldownTimer" to="Toolbox" method="_on_cooldown_timer_timeout"]

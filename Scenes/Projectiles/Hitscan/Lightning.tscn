@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ckhhj1jby35og"]
+
+[ext_resource type="PackedScene" uid="uid://ckfxwjnv84i2l" path="res://Scenes/Projectiles/Hitscan/BaseHitscan.tscn" id="1_72e3k"]
+[ext_resource type="Material" uid="uid://4jfkf7fh6bhx" path="res://Resources/Shaders/Lightning.tres" id="2_rhhsc"]
+[ext_resource type="PackedScene" uid="uid://dy6a5fgqnjma0" path="res://Scenes/Effects/Particles/LightningHit.tscn" id="3_cxf87"]
+[ext_resource type="AudioStream" uid="uid://bnv470inlbp14" path="res://Audio/Effects/lightningshock.ogg" id="4_hkc4l"]
+
+[node name="BaseHitscan" unique_id=1219814461 instance=ExtResource("1_72e3k")]
+
+[node name="RayLine" parent="." index="0" unique_id=1153845673]
+material = ExtResource("2_rhhsc")
+position = Vector2(0.05896592, 0.018667966)
+scale = Vector2(1.058966, 1.0186689)
+
+[node name="HitscanComponent" parent="." index="1" unique_id=993689081 node_paths=PackedStringArray("hit_sound")]
+hit_sound = NodePath("../HitSound")
+hit_effect = ExtResource("3_cxf87")
+tween_speed = 0.3
+damage = 0
+drop_enemy_delay = 1.0
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="." index="2" unique_id=1641163860]
+stream = ExtResource("4_hkc4l")

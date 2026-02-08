@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://dy6a5fgqnjma0"]
+
+[ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts/Effects/TimedDelete.gd" id="1_13s4m"]
+[ext_resource type="PackedScene" uid="uid://c3r6qp7twthfm" path="res://Scenes/Effects/Particles/Stun.tscn" id="1_ne7sc"]
+[ext_resource type="Script" uid="uid://cwofh1tgsymr6" path="res://Components/Entity/AutoDeleteComponent.gd" id="3_kyp1k"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_13s4m"]
+particle_flag_disable_z = true
+gravity = Vector3(0, -0.8, 0)
+linear_accel_min = -34.440002
+linear_accel_max = 25.559998
+radial_accel_min = -38.890003
+radial_accel_max = 22.229998
+tangential_accel_min = -93.34
+tangential_accel_max = 99.99999
+
+[node name="LightningHit" type="Node2D" unique_id=384143004]
+
+[node name="GPUParticles2D" parent="." unique_id=181310495 instance=ExtResource("1_ne7sc")]
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="." unique_id=1345377353]
+modulate = Color(14.193309, 10.809714, 18.892002, 1)
+amount = 128
+lifetime = 1.3699999999999999
+speed_scale = 10.49
+process_material = SubResource("ParticleProcessMaterial_13s4m")
+script = ExtResource("1_13s4m")
+
+[node name="Delete" type="Timer" parent="GPUParticles2D2" unique_id=1406372923]
+wait_time = 0.4
+one_shot = true
+autostart = true
+
+[node name="Delete" type="Timer" parent="." unique_id=899516845]
+wait_time = 0.4
+one_shot = true
+autostart = true
+
+[node name="AutoDeleteComponent" type="Node" parent="." unique_id=2025149844]
+script = ExtResource("3_kyp1k")
+lifetime = 4.0
+metadata/_custom_type_script = "uid://cwofh1tgsymr6"
+
+[connection signal="timeout" from="GPUParticles2D2/Delete" to="GPUParticles2D2" method="_on_delete_timeout"]
+[connection signal="timeout" from="Delete" to="." method="_on_delete_timeout"]

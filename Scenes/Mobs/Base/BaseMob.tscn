@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://cwh8ve85ed8gv" path="res://Components/Mobs/FootstepComponent.gd" id="15_obr0u"]
 [ext_resource type="AudioStream" uid="uid://dnveb48dgrefd" path="res://Resources/Audio/FootstepFloorRandom.tres" id="16_g8los"]
 [ext_resource type="AudioStream" uid="uid://b7l65hp5rr2pt" path="res://Resources/Audio/BodyFallRandom.tres" id="17_g8los"]
+[ext_resource type="OccluderPolygon2D" uid="uid://fjhiibh6ji2l" path="res://Resources/Occluders/HumanOccluder.tres" id="18_6uxej"]
 
 [node name="Mob" type="CharacterBody2D" unique_id=660687485]
 physics_interpolation_mode = 1
@@ -99,3 +100,6 @@ collision_mask = 3
 visible = false
 position = Vector2(-1, 1)
 shape = ExtResource("2_vbbsq")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=364816313]
+occluder = ExtResource("18_6uxej")

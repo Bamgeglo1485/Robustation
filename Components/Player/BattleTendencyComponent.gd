@@ -1,6 +1,7 @@
 class_name BattleTendencyComponent extends Component
 
 @export var battle_tendency: float = 30
+@export var battle_tendency_on_max_health: float = 50.0
 @export var max_battle_tendency: float = 100
 @export var battle_tendecy_dependency: float = 1
 @export var battle_tendency_debuff_multiplier: float = 0.15
@@ -66,10 +67,10 @@ func change_battle_tendency(value) -> int:
 	EventBusManager.tendency_changed.emit(parent)
 	battle_tendency_bonus = battle_tendency_bonus + value
 	
-	battle_tendency = float(health_component.health) / 2.0 + battle_tendency_bonus
+	battle_tendency = float(health_component.health) / float(health_component.max_health) * battle_tendency_on_max_health + battle_tendency_bonus
 	battle_tendency = clamp(battle_tendency, 0, max_battle_tendency)
 	
-	#print("Battle tendency: ", battle_tendency)
+	print("Battle tendency: ", battle_tendency)
 	
 	var segmentation: float = max_battle_tendency * 0.25
 	var old_section: int = section
@@ -89,7 +90,7 @@ func change_battle_tendency(value) -> int:
 	EventBusManager.tendency_section_changed.emit(parent)
 	set_battle_tendency_modifiers()
 	
-	print("Section: ", section, " (", get_section_name(), ")")
+	# print("Section: ", section, " (", get_section_name(), ")")
 	return section
 
 func get_section_name() -> String:

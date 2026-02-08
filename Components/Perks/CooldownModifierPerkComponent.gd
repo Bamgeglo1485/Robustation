@@ -1,0 +1,15 @@
+class_name CooldownModifierPerkComponent extends BasePerkComponent
+
+@onready var weapon_user_component: WeaponUserComponent = parent.get_node_or_null("WeaponUserComponent")
+
+func _init() -> void:
+	perk_name = "Combat Glove"
+	perk_desc = "Reduces weapon cooldown by 5%"
+	perk_icon = preload("res://Textures/Perks/combat_glove.png")
+	perk_equipped_texture = preload("res://Textures/Perks/combat_glove_equipped.png")
+
+func apply_modifiers() -> void:
+	if !weapon_user_component:
+		return
+	
+	weapon_user_component.cooldown_modifier *= 1.05

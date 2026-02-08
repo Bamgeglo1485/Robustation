@@ -62,6 +62,9 @@ func _delete() -> void:
 	set_deferred("monitorable", false)
 	self.collision_layer = 0
 	
+	var ignore_component = MeleeAttackIgnoreComponent.new()
+	parent.add_child(ignore_component)
+	
 	if parent.has_node("Area2D"):
 		parent.get_node("Area2D").queue_free()
 	
@@ -104,6 +107,9 @@ func _on_body_entered(body: Node2D) -> void:
 			if shooter_faction.faction == body_faction.faction:
 				return
 	
+	if reflect(body):
+		return
+	
 	if hit_sound:
 		hit_sound.play()
 	
@@ -119,3 +125,33 @@ func _on_body_entered(body: Node2D) -> void:
 		explode()
 	
 	_delete()
+
+func reflect(target) -> bool:
+	if !shooter:
+		return false
+	
+	var reflect_component = target.get_node_or_null("ReflectPerkComponent")
+	if !reflect_component:
+		return false
+	
+	if randf() > reflect_component.chance:
+		return false
+	
+	var angle = (shooter.global_position - parent.global_position).normalized().angle()
+	parent.modulate = Color(2.658, 2.362, 0.0, 1.0)
+	parent.global_rotation = angle
+	direction = angle
+	shooter = target
+	
+	reflect_component.on_reflect()
+	
+	var trail = TrailEffectComponent.new()
+	trail.trail_lifetime = 0.2
+	trail.end_color = Color(0.544, 0.0, 0.578, 0.0)
+	var colors: Array[Color] = [
+		Color(3.674, 1.907, 0.0, 1.0),
+		Color(3.236, 0.576, 1.751, 1.0)]
+	trail.colors = colors
+	parent.add_child(trail)
+	
+	return true

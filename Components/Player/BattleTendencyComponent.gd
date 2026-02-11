@@ -70,7 +70,7 @@ func change_battle_tendency(value) -> int:
 	battle_tendency = float(health_component.health) / float(health_component.max_health) * battle_tendency_on_max_health + battle_tendency_bonus
 	battle_tendency = clamp(battle_tendency, 0, max_battle_tendency)
 	
-	print("Battle tendency: ", battle_tendency)
+	#print("Battle tendency: ", battle_tendency)
 	
 	var segmentation: float = max_battle_tendency * 0.25
 	var old_section: int = section

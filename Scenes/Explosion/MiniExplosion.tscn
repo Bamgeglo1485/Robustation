@@ -1,12 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://c03qvua0tf8st"]
+[gd_scene format=3 uid="uid://c03qvua0tf8st"]
 
 [ext_resource type="PackedScene" uid="uid://bbqpmpj4ntyg" path="res://Scenes/Explosion/BaseExplosion.tscn" id="1_wupnp"]
 
-[node name="MiniExplosion" instance=ExtResource("1_wupnp")]
+[node name="MiniExplosion" unique_id=1040504191 instance=ExtResource("1_wupnp")]
 impact_frame = false
 damage = 30.0
 fly_force = 500
 radius = 64
 
-[node name="GPUParticles2D" parent="." index="1"]
-amount = 700
+[node name="GPUParticles2D" parent="." index="1" unique_id=668633620]
+amount = 3000

@@ -19,6 +19,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 
 [node name="Panel" type="Panel" parent="." unique_id=1034020159]
+self_modulate = Color(0.76891255, 0, 0.3076753, 1)
 material = SubResource("ShaderMaterial_emb1s")
 layout_mode = 1
 anchors_preset = -1

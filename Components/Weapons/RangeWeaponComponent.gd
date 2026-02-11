@@ -32,7 +32,6 @@ func attack(raiser, _npc = true) -> void:
 	await _swing(raiser.get_attack_direction())
 	
 	var direction = raiser.get_attack_direction()
-	EventBusManager.gun_shoot_event.emit(parent, self, direction)
 	
 	if parent.has_node("MobMoverComponent"):
 		if self_throw_speed != 0:
@@ -104,6 +103,7 @@ func _projectile_shoot(direction) -> void:
 	var angle: float = direction.normalized().angle()
 	
 	var instance: Node = projectile.instantiate()
+	EventBusManager.projectile_shoot.emit(parent, self, direction, instance)
 	
 	if instance.has_node("ProjectileComponent"):
 		var projectile_component: ProjectileComponent = instance.get_node("ProjectileComponent")

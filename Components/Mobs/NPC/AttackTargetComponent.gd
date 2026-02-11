@@ -7,6 +7,7 @@ class_name AttackTargetComponent extends Component
 var attack_direction: Vector2
 var target: CharacterBody2D
 
+@export var predict_factor: float = 0.1
 @export var update_rate: float = 0.2
 var update_timer: Timer
 
@@ -54,7 +55,22 @@ func _update() -> void:
 	elif weapon.bullets != 0:
 		weapon_user_component.attack(self)
 
+func _calculate_predicted_target_position() -> Vector2:
+	if !target or !weapon_user_component.selected_weapon:
+		return target.global_position if target else Vector2.ZERO
+	
+	var target_velocity: Vector2 = Vector2.ZERO
+	if target is CharacterBody2D:
+		target_velocity = target.velocity
+	
+	var current_target_position: Vector2 = target.global_position
+	var predicted_position: Vector2 = current_target_position + target_velocity * predict_factor
+	
+	return predicted_position
+
 func get_attack_direction() -> Vector2:
+	if weapon_user_component.selected_weapon is RangeWeapon and target:
+		return _calculate_predicted_target_position() - parent.global_position
 	return attack_direction
 
 func get_attack_target() -> CharacterBody2D:

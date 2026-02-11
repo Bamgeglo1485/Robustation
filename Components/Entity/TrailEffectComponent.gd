@@ -4,8 +4,8 @@ class_name TrailEffectComponent extends Component
 @export var clean_delay: float = 5.0
 @export var trail_lifetime: float = 2.0
 @export var end_color: Color = Color(1.0, 1.0, 1.0, 0.0)
+@export var required_position_length: int = 400 # 20^2
 var last_position: Vector2 = Vector2.ZERO
-var required_position_length: int = 400 # 20^2
 var color: Color
 var color_tween: Tween
 var color_change_delay: float = 0.2
@@ -90,3 +90,9 @@ func _clean() -> void:
 			continue
 		dupl.queue_free()
 	duplicates.clear()
+
+func free() -> void:
+	for dupl in duplicates:
+		if !dupl:
+			continue
+		dupl.queue_free()

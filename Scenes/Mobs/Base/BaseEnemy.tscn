@@ -7,8 +7,11 @@
 [ext_resource type="Script" uid="uid://yxsq46ajfdy4" path="res://Components/Mobs/NPC/AttackTargetComponent.gd" id="4_gb06t"]
 
 [node name="BaseEnemy" unique_id=600669417 instance=ExtResource("1_8ckee")]
+platform_wall_layers = 512
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
+base_max_speed = 150.0
+friction = 10000.0
 set_navigation_velocity = true
 
 [node name="WeaponTexture" parent="." index="7" unique_id=1059769572]
@@ -32,6 +35,7 @@ script = ExtResource("4_gb06t")
 metadata/_custom_type_script = "uid://yxsq46ajfdy4"
 
 [node name="NavigationAgent" type="NavigationAgent2D" parent="." index="14" unique_id=1358139639]
+target_desired_distance = 32.0
 path_postprocessing = 2
 avoidance_enabled = true
 radius = 5.0

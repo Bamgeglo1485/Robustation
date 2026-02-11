@@ -49,7 +49,7 @@ shape = SubResource("CircleShape2D_a5ua4")
 
 [node name="GPUParticles2D" parent="." unique_id=668633620 instance=ExtResource("2_cq02y")]
 modulate = Color(3.5629182, 3.5629182, 3.5629182, 1)
-amount = 3000
+amount = 9000
 lifetime = 5.93
 process_material = SubResource("ParticleProcessMaterial_a5ua4")
 

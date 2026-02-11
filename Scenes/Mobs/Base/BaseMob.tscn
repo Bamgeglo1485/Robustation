@@ -18,13 +18,14 @@
 [ext_resource type="AudioStream" uid="uid://dnveb48dgrefd" path="res://Resources/Audio/FootstepFloorRandom.tres" id="16_g8los"]
 [ext_resource type="AudioStream" uid="uid://b7l65hp5rr2pt" path="res://Resources/Audio/BodyFallRandom.tres" id="17_g8los"]
 [ext_resource type="OccluderPolygon2D" uid="uid://fjhiibh6ji2l" path="res://Resources/Occluders/HumanOccluder.tres" id="18_6uxej"]
+[ext_resource type="Script" uid="uid://bsicagw5u742w" path="res://Components/Mobs/StaminaComponent.gd" id="19_pns3t"]
 
 [node name="Mob" type="CharacterBody2D" unique_id=660687485]
 physics_interpolation_mode = 1
 z_index = 3
 texture_filter = 1
 material = ExtResource("10_kftdd")
-collision_layer = 2
+collision_layer = 514
 collision_mask = 0
 motion_mode = 1
 
@@ -103,3 +104,7 @@ shape = ExtResource("2_vbbsq")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=364816313]
 occluder = ExtResource("18_6uxej")
+
+[node name="StaminaComponent" type="Node" parent="." unique_id=859597356]
+script = ExtResource("19_pns3t")
+metadata/_custom_type_script = "uid://bsicagw5u742w"

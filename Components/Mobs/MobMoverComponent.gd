@@ -3,13 +3,15 @@ class_name MobMoverComponent extends Component
 @onready var animation_component: AnimationComponent = parent.get_node_or_null("AnimationComponent")
 
 @export var base_max_speed: float = 300.0
-@export var max_speed: float = base_max_speed
+@onready var max_speed: float = base_max_speed
 @export var acceleration: float = 100.0
 @export var friction: float = 700.0
 @export var speed_modifier: float = 1.0
+@export var stun_speed_modifier: float = 1.0 # yep shitcode idc
 var direction: Vector2 = Vector2.ZERO
 
 @export var can_fall: bool = true
+@export var can_fall_from_body: bool = true
 @export var movement_blocked: bool = false
 @export var set_navigation_velocity: bool = false
 
@@ -20,7 +22,7 @@ var fly_speed: float = 0.0
 var fly_direction: Vector2 = Vector2.ZERO
 var fly_stop_speed: float = 200.0
 var fly_modifier: float = 1.0
-var fly_source
+var fly_source: Node2D
 
 @export var body_fall_sound: AudioStreamPlayer2D
 @export var fall_effect: PackedScene = preload("res://Scenes/Effects/Particles/Fall.tscn")
@@ -71,10 +73,10 @@ func _move(delta: float) -> void:
 		velocity += direction * acceleration
 		
 		if navigation_agent:
-			var nav_vel: Vector2 = direction * acceleration * speed_modifier
+			var nav_vel: Vector2 = direction * acceleration * speed_modifier * stun_speed_modifier
 			navigation_agent.set_velocity(nav_vel)
 		
-		var max_speed_current: float = max_speed * speed_modifier
+		var max_speed_current: float = max_speed * speed_modifier * stun_speed_modifier
 		if speed > max_speed_current:
 			velocity = (velocity / speed) * max_speed_current
 	
@@ -127,7 +129,7 @@ func _fly(delta) -> void:
 func throw(
 	throw_direction: Vector2,
 	throw_speed: float,
-	throw_source = null,
+	throw_source: Node2D = null,
 	throw_stop_speed: float = 10,
 	animation = true
 	) -> void:
@@ -201,10 +203,12 @@ func stand_up() -> void:
 	fallen = false
  
 func on_fly_impact(body: Node) -> void:
+	if body == fly_source:
+		return
 	if !flying or !body.has_node("MobMoverComponent") or fly_speed < 200 or body is Area2D or body == parent:
 		return
 	var mob_mover: MobMoverComponent = body.get_node("MobMoverComponent")
-	if !mob_mover.can_fall:
+	if !mob_mover.can_fall_from_body:
 		return
 	mob_mover.throw(parent.velocity, fly_speed/1.5)
 	mob_mover.drop(1)

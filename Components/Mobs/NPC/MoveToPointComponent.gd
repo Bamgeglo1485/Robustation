@@ -8,6 +8,7 @@ class_name MoveToPointComponent extends Component
 @export var move_update_rate: float = 0.1
 @onready var mob_mover_component: MobMoverComponent = parent.get_node_or_null("MobMoverComponent")
 @onready var direction_component: DirectionComponent = parent.get_node_or_null("DirectionComponent")
+
 var move_logic_timer: Timer
 var pathfinding_timer: Timer
 
@@ -53,7 +54,6 @@ func _update_attack_logic() -> void:
 	
 	if point == Vector2.ZERO:
 		mob_mover_component.direction = Vector2.ZERO
-		_set_direction()
 		return
 	
 	var direction_to_target: Vector2 = (point - parent.global_position)
@@ -63,7 +63,6 @@ func _update_attack_logic() -> void:
 		mob_mover_component.direction = Vector2.ZERO
 		current_priority = -1
 		point = Vector2.ZERO
-		_set_direction()
 		return
 	
 	var direction_to_target_normalized: Vector2 = direction_to_target.normalized()
@@ -98,8 +97,7 @@ func _set_direction() -> void:
 		direction_component.look_at_direction(Vector2.RIGHT)
 
 func _pathfinding_update() -> void:
-	if point != Vector2.ZERO:
-		navigation_agent.target_position = point
+	navigation_agent.target_position = point
 	
 	# Randomize update times to avoid lags
 	pathfinding_timer.wait_time = randf_range(pathfind_update_rate * 0.8, pathfind_update_rate * 1.2)

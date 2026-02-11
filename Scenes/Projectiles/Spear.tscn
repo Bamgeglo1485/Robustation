@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dmokrqrpfaex0"]
+[gd_scene format=3 uid="uid://dmokrqrpfaex0"]
 
 [ext_resource type="PackedScene" uid="uid://c2fs5eoy7ntgu" path="res://Scenes/Projectiles/BaseProjectile.tscn" id="1_vpryf"]
 [ext_resource type="Shader" uid="uid://dskgkby1vn5hf" path="res://Resources/Shaders/Jiggle.gdshader" id="2_0hneg"]
@@ -38,15 +38,16 @@ scale_over_velocity_curve = SubResource("CurveTexture_c1ng1")
 hue_variation_min = -1.0
 hue_variation_max = -0.54
 
-[node name="Projectile" instance=ExtResource("1_vpryf")]
+[node name="Projectile" unique_id=1574842334 instance=ExtResource("1_vpryf")]
 material = SubResource("ShaderMaterial_oqm3e")
 
 [node name="ProjectileComponent" parent="." index="0" node_paths=PackedStringArray("texture", "particle_emitter")]
+max_penetrations = 1
 texture = NodePath("../Texture")
 particle_emitter = NodePath("GPUParticles2D")
 speed = 100
 speed_decreasing = -5
-damage = 100
+damage = 150
 lifetime = 5.0
 parry_speed_boost = 4.0
 
@@ -57,7 +58,7 @@ shape = SubResource("CapsuleShape2D_vpryf")
 [node name="HitSound" parent="ProjectileComponent" index="1"]
 stream = ExtResource("3_0hneg")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="ProjectileComponent" index="2"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ProjectileComponent" index="2" unique_id=1206047265]
 modulate = Color(18.892157, 18.892157, 18.892157, 1)
 amount = 40
 preprocess = 0.5
@@ -65,17 +66,17 @@ speed_scale = 4.0
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_oqm3e")
 
-[node name="Texture" type="Sprite2D" parent="." index="1"]
+[node name="Texture" type="Sprite2D" parent="." index="1" unique_id=1723735001]
 use_parent_material = true
 texture = ExtResource("2_l3ous")
 
-[node name="SetProjectileExplosionOnTriggerComponent2" type="Node" parent="." index="4"]
+[node name="SetProjectileExplosionOnTriggerComponent2" type="Node" parent="." index="4" unique_id=1322456650]
 script = ExtResource("5_65omb")
 explosion_scene = ExtResource("3_oqm3e")
 explode_on_delete = true
 explode_on_hit = true
 metadata/_custom_type_script = "uid://0qaedvb6js57"
 
-[node name="ActivateProjectileParticlesOnTriggerComponent" type="Node" parent="." index="6"]
+[node name="ActivateProjectileParticlesOnTriggerComponent" type="Node" parent="." index="6" unique_id=791180759]
 script = ExtResource("7_bm2fd")
 metadata/_custom_type_script = "uid://cslfowwgmffis"

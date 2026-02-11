@@ -9,8 +9,9 @@ signal projectile_miss(emitter, projectile)
 signal projectile_hit(emitter, projectile)
 signal melee_miss(emitter, weapon)
 signal on_fall()
+signal stamina_damaged(emitter, damage, damager)
 
-signal gun_shoot_event(emitter, weapon, direction)
+signal projectile_shoot(emitter, weapon, direction, projectile)
 
 signal explosion(explosion_node)
 signal tendency_changed(emitter)

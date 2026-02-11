@@ -3,6 +3,7 @@ class_name ProjectileComponent extends Area2D
 @onready var scene: Node2D = get_tree().get_root().get_node("Game")
 @onready var parent: Node = get_parent()
 
+@export var max_penetrations: int = 0
 @export var texture: Sprite2D
 @export var hit_sound: AudioStreamPlayer2D
 @export var particle_emitter: GPUParticles2D
@@ -19,6 +20,8 @@ var direction: float
 var damage_modifier: float = 1
 var moving: bool = true
 var deleted: bool = false
+var penetration_damaged_bodies: Array
+var penetrations: int = 0
 
 @export var parriable: bool = true
 @export var parry_speed_boost: float = 1.5
@@ -95,6 +98,9 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.has_node("ProjectileIgnoreComponent"):
 		return
 	
+	if max_penetrations != 0 and penetration_damaged_bodies.has(body):
+		return
+	
 	if shooter:
 		if shooter == body:
 			return
@@ -117,6 +123,11 @@ func _on_body_entered(body: Node2D) -> void:
 	
 	if body.has_node("HealthComponent"):
 		body.get_node("HealthComponent").take_damage(modified_damage, shooter)
+		if max_penetrations != 0:
+			penetration_damaged_bodies.append(body)
+			penetrations += 1
+	else:
+		max_penetrations = 0
 	
 	if body.has_node("MobMoverComponent") and throw_speed != 0:
 		body.get_node("MobMoverComponent").throw(parent.velocity, throw_speed, shooter)
@@ -124,7 +135,11 @@ func _on_body_entered(body: Node2D) -> void:
 	if explode_on_hit:
 		explode()
 	
-	_delete()
+	if max_penetrations == 0:
+		_delete()
+	else:
+		if max_penetrations < penetrations:
+			_delete()
 
 func reflect(target) -> bool:
 	if !shooter:

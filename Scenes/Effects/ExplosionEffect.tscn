@@ -33,7 +33,7 @@ hue_variation_max = -0.67
 [node name="GPUParticles2D" type="GPUParticles2D" unique_id=75207985]
 modulate = Color(16.1889, 16.1889, 16.1889, 1)
 z_index = 10
-amount = 8000
+amount = 17000
 lifetime = 1.74
 preprocess = 0.5
 speed_scale = 4.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://8u8crosi4th3"]
+[gd_scene format=3 uid="uid://8u8crosi4th3"]
 
 [ext_resource type="PackedScene" uid="uid://c2fs5eoy7ntgu" path="res://Scenes/Projectiles/BaseProjectile.tscn" id="1_uq5et"]
 [ext_resource type="AudioStream" uid="uid://cg0leh0na5lvv" path="res://Resources/Audio/BulletHitRandom.tres" id="2_box70"]
@@ -27,7 +27,7 @@ scale_min = 0.099999994
 scale_over_velocity_max = 1000.0
 scale_over_velocity_curve = SubResource("CurveTexture_c1ng1")
 
-[node name="Projectile" instance=ExtResource("1_uq5et")]
+[node name="Projectile" unique_id=1536955502 instance=ExtResource("1_uq5et")]
 
 [node name="ProjectileComponent" parent="." index="0" node_paths=PackedStringArray("texture", "particle_emitter")]
 collision_layer = 15
@@ -45,7 +45,7 @@ shape = SubResource("CircleShape2D_uq5et")
 [node name="HitSound" parent="ProjectileComponent" index="1"]
 stream = ExtResource("2_box70")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="ProjectileComponent" index="2"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ProjectileComponent" index="2" unique_id=1108205186]
 modulate = Color(0.8175213, 0.8175213, 0.81752115, 1)
 amount = 100
 lifetime = 2.0
@@ -54,10 +54,10 @@ speed_scale = 8.11
 randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_nkfxt")
 
-[node name="Texture" type="Sprite2D" parent="." index="1"]
+[node name="Texture" type="Sprite2D" parent="." index="1" unique_id=1813040051]
 texture = ExtResource("3_1uto6")
 
-[node name="SetProjectileExplosionOnTriggerComponent2" type="Node" parent="." index="5"]
+[node name="SetProjectileExplosionOnTriggerComponent2" type="Node" parent="." index="5" unique_id=1333599605]
 script = ExtResource("4_1uto6")
 explosion_scene = ExtResource("5_1uto6")
 explode_on_hit = true

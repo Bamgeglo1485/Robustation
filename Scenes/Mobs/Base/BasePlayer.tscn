@@ -142,7 +142,8 @@ collision_mask = 1
 script = ExtResource("8_ljr5e")
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
-can_fall = false
+friction = 500.0
+can_fall_from_body = false
 
 [node name="Collision" parent="." index="3" unique_id=424093742]
 shape = ExtResource("2_7ipmw")
@@ -165,14 +166,11 @@ heal_for_damage_multiplier = 0.3
 [node name="FactionComponent" parent="." index="7" unique_id=1651473390]
 faction = "Player"
 
-[node name="AudioListener" type="AudioListener2D" parent="." index="8" unique_id=803579808]
-current = true
-
-[node name="WeaponUserComponent" parent="." index="9" unique_id=2123544057]
+[node name="WeaponUserComponent" parent="." index="8" unique_id=2123544057]
 block_when_fallen = false
 block_when_flying = false
 
-[node name="PlayerWeaponUserComponent" type="Node" parent="." index="11" unique_id=283125688]
+[node name="PlayerWeaponUserComponent" type="Node" parent="." index="10" unique_id=283125688]
 script = ExtResource("5_3n0k4")
 metadata/_custom_type_script = "uid://gek7ma2qpdp6"
 
@@ -180,7 +178,7 @@ metadata/_custom_type_script = "uid://gek7ma2qpdp6"
 stream = ExtResource("8_4awd5")
 max_polyphony = 10
 
-[node name="HealthOverlayComponent" type="Node" parent="." index="17" unique_id=490260157 node_paths=PackedStringArray("overlay")]
+[node name="HealthOverlayComponent" type="Node" parent="." index="16" unique_id=490260157 node_paths=PackedStringArray("overlay")]
 script = ExtResource("6_korw6")
 overlay = NodePath("CanvasLayer/ColorRect")
 metadata/_custom_type_script = "uid://djmi5xfppmrii"
@@ -196,7 +194,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
 
-[node name="BattleTendencyComponent" type="Node" parent="." index="18" unique_id=1071898636 node_paths=PackedStringArray("battle_tendency_effect")]
+[node name="BattleTendencyComponent" type="Node" parent="." index="17" unique_id=1071898636 node_paths=PackedStringArray("battle_tendency_effect")]
 script = ExtResource("8_ljr5e")
 battle_tendency_effect = NodePath("CanvasLayer/ColorRect")
 metadata/_custom_type_script = "uid://bjb1tak0ajoof"
@@ -216,7 +214,7 @@ color = Color(1, 1, 1, 0)
 script = ExtResource("11_yhquf")
 metadata/_custom_type_script = "uid://qcmegh7138ug"
 
-[node name="ImpactFrameComponent" type="Node" parent="." index="19" unique_id=462102113 node_paths=PackedStringArray("effect_frame", "color_modify_frame")]
+[node name="ImpactFrameComponent" type="Node" parent="." index="18" unique_id=462102113 node_paths=PackedStringArray("effect_frame", "color_modify_frame")]
 script = ExtResource("10_m2dsc")
 effect_frame = NodePath("CanvasLayer/ColorRect")
 color_modify_frame = NodePath("CanvasLayer/ColorModify")
@@ -252,11 +250,11 @@ color = Color(1, 1, 1, 0)
 script = ExtResource("11_yhquf")
 metadata/_custom_type_script = "uid://qcmegh7138ug"
 
-[node name="ScreenShakeComponent" type="Node" parent="." index="20" unique_id=1270479005]
+[node name="ScreenShakeComponent" type="Node" parent="." index="19" unique_id=1270479005]
 script = ExtResource("13_0r3jo")
 metadata/_custom_type_script = "uid://bdxrxakvokr52"
 
-[node name="PerkOwnerComponent" type="Node" parent="." index="22" unique_id=830713071 node_paths=PackedStringArray("perk_ui", "perk_notification_ui", "perk_collect_sound")]
+[node name="PerkOwnerComponent" type="Node" parent="." index="21" unique_id=830713071 node_paths=PackedStringArray("perk_ui", "perk_notification_ui", "perk_collect_sound")]
 script = ExtResource("15_4awd5")
 perk_ui = NodePath("PerkUI/Control/Panel/GridContainer")
 perk_notification_ui = NodePath("PerkUI")

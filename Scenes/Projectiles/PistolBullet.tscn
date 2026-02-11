@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dqdygshu0ple5"]
+
+[ext_resource type="PackedScene" uid="uid://c2fs5eoy7ntgu" path="res://Scenes/Projectiles/BaseProjectile.tscn" id="1_kf5wp"]
+[ext_resource type="Script" uid="uid://dfahm1hamvt58" path="res://Components/Entity/TrailEffectComponent.gd" id="2_i6635"]
+[ext_resource type="Texture2D" uid="uid://dksq5rolyg2r3" path="res://Textures/Weapons/Crowbar/bullet.png" id="3_7flok"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kf5wp"]
+radius = 3.0
+height = 8.0
+
+[node name="Projectile" unique_id=676694476 instance=ExtResource("1_kf5wp")]
+
+[node name="ProjectileComponent" parent="." index="0" node_paths=PackedStringArray("texture")]
+texture = NodePath("../Texture")
+speed = 1500
+
+[node name="CollisionShape2D" parent="ProjectileComponent" index="0"]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_kf5wp")
+
+[node name="TrailEffectComponent" type="Node" parent="." index="4" unique_id=1469260940]
+script = ExtResource("2_i6635")
+colors = Array[Color]([Color(2.152293, 0, 1.0783726, 0.50600004), Color(1.8964944, 0, 2.0369349, 0.536)])
+trail_lifetime = 0.2
+required_position_length = 1
+metadata/_custom_type_script = "uid://dfahm1hamvt58"
+
+[node name="Texture" type="Sprite2D" parent="." index="5" unique_id=7943572]
+texture = ExtResource("3_7flok")

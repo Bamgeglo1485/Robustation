@@ -3,8 +3,8 @@
 [ext_resource type="Shape2D" uid="uid://b2j7fs73lgrj2" path="res://DemoTrash/InvisibleWall.tres" id="1_nur7l"]
 
 [node name="Borders" type="StaticBody2D" unique_id=2008962255]
-collision_layer = 255
-collision_mask = 255
+collision_layer = 1023
+collision_mask = 1023
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=298667584]
 position = Vector2(-1625, 156)

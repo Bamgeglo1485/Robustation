@@ -1,8 +1,10 @@
 class_name MeleeWeapon extends Weapon
 
 @export var damage: int = 10
-@export var attack_range: int = 4096 # 64^2
+@export var stamina_damage: int = 0
+@export var attack_range: int = 7396 # 86^2
 @export var slash_effect: PackedScene = preload("res://Scenes/Effects/Slash.tscn")
+@export var ignore_armor: bool = false
 
 @export var parry_effect: PackedScene = preload("res://Scenes/Effects/Particles/ParryEffect.tscn")
 @export var parry_sound: AudioStreamPlayer2D
@@ -141,7 +143,7 @@ func _melee_attack_target(target, direction = null, multiple_attack = false) -> 
 				parry_weapon(weapon, target)
 	
 	if target.has_node("HealthComponent"):
-		target.get_node("HealthComponent").take_damage(damage * damage_modifier, parent)
+		target.get_node("HealthComponent").take_damage(damage * damage_modifier, parent, ignore_armor)
 	
 	if target.has_node("MobMoverComponent"):
 		if throw_speed != 0:
@@ -149,9 +151,12 @@ func _melee_attack_target(target, direction = null, multiple_attack = false) -> 
 		if drop_enemy_delay != 0:
 			target.get_node("MobMoverComponent").drop(drop_enemy_delay)
 	
+	if target.has_node("StaminaComponent") and stamina_damage != 0:
+		target.get_node("StaminaComponent").take_stamina_damage(stamina_damage * damage_modifier, parent)
+	
 	if parent.has_node("MobMoverComponent"):
 		if self_throw_speed != 0:
-			parent.get_node("MobMoverComponent").throw(-direction, self_throw_speed, self_throw_stop_speed)
+			parent.get_node("MobMoverComponent").throw(-direction, self_throw_speed, parent, self_throw_stop_speed)
 	
 	return true
 
@@ -166,7 +171,7 @@ func parry_weapon(weapon, target) -> void:
 	var direction = (target.global_position - parent.global_position)
 	
 	if target.has_node("MobMoverComponent"):
-		target.get_node("MobMoverComponent").throw(-direction, 300, 50)
+		target.get_node("MobMoverComponent").throw(-direction, 300, parent, 50)
 		target.get_node("MobMoverComponent").drop(0.5)
 
 func parry_projectile(target, projectile, direction) -> void:

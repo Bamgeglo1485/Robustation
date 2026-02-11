@@ -39,7 +39,6 @@ visibility_layer = 3
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
 base_max_speed = 200
-max_speed = 200
 acceleration = 50
 friction = 1300
 
@@ -80,7 +79,7 @@ attack_sound = NodePath("HitSound")
 miss_sound = NodePath("MissSound")
 throw_speed = 400
 throw_stop_speed = 300
-cooldown_delay = 0.5
+cooldown_delay = 0.25
 swing_delay = 0.25
 equipped_texture = ExtResource("27_pjvyl")
 icon_texture = ExtResource("28_mmn5l")
@@ -117,9 +116,11 @@ stream = ExtResource("30_fg1co")
 [node name="Toolbox" type="Node" parent="RandomWeaponSelectorComponent" index="2" unique_id=2011423731 node_paths=PackedStringArray("attack_sound", "miss_sound")]
 script = ExtResource("26_kqv0r")
 damage = 30
+stamina_damage = 20
 attack_range = 48
 attack_sound = NodePath("HitSound")
 miss_sound = NodePath("MissSound")
+cooldown_delay = 0.5
 equipped_texture = ExtResource("33_fg1co")
 icon_texture = ExtResource("32_8jwui")
 metadata/_custom_type_script = "uid://6b7bcparwq17"

@@ -5,7 +5,7 @@ class_name HealthComponent extends Component
 var base_max_health: int = max_health
 @export var health: int = max_health: set = set_health, get = get_health
 @export var damage_modifier: float = 1
-@export var armor: float = 1 # I'm too lazy to integrate the perk with other systems.
+@export var armor: float = 1 # I'm too lazy to integrate armor perk with other systems.
 @export var gibbed: bool = false
 @export var invinciblitiy_attack_effect: PackedScene
 
@@ -16,6 +16,7 @@ var base_max_health: int = max_health
 @export var ignore_time_scale: bool = false
 
 @onready var shader: ShaderMaterial
+@onready var animation_component: AnimationComponent = parent.get_node_or_null("AnimationComponent")
 
 @export_category("Heal For Damage")
 @export var heal_for_damage_multiplier: float = 0.0
@@ -60,15 +61,18 @@ func get_health() -> int:
 	return health
 
 # Наносит урон и создаёт эффекты
-func take_damage(damage: int, damager) -> void:
+func take_damage(damage: int, damager: Node2D, ignore_damage: bool = false) -> void:
 	if INVINCIBLE:
 		if invinciblitiy_attack_effect:
 			var inst: Node = invinciblitiy_attack_effect.instantiate()
 			scene.add_child(inst)
 			inst.global_position = parent.global_position
 		return
+	var modifier = armor
+	if ignore_damage:
+		modifier = 1
 	
-	var modified_damage: float = damage * damage_modifier * armor
+	var modified_damage: float = damage * damage_modifier * modifier
 	health -= int(modified_damage)
 	if damage > 0:
 		damage_effects(damager)
@@ -114,10 +118,8 @@ func _flash(
 	color: Color = Color(0.7, 0.0, 0.3, 0.729)
 	) -> void:
 	
-	if shader and shader.get_shader_parameter("flash_color"):
-		var _tween: Tween = create_tween()
-		_tween.tween_property(shader, "shader_parameter/flash_color", color, 0.1 * speed_multiplier)
-		_tween.tween_property(shader, "shader_parameter/flash_color", Color(0.7, 0.0, 0.3, 0.0), 0.2 * speed_multiplier)
+	if animation_component:
+		animation_component.flash(speed_multiplier, color)
 
 func _death() -> void:
 	if gibbed:

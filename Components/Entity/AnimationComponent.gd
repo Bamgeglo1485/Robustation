@@ -6,6 +6,7 @@ var animation_tween: Tween = null
 var last_time_scale: float
 
 @export var ignore_time_scale: bool = false
+@onready var shader: ShaderMaterial
 
 func set_animation(tween, priority, rewrite = false) -> void:
 	if (priority > animation_priority) or (priority == animation_priority and rewrite):
@@ -99,3 +100,16 @@ func get_direction(angle_deg: float) -> int:
 		direction = 4
 	
 	return direction
+
+func flash(
+	speed_multiplier: float = 1,
+	color: Color = Color(0.7, 0.0, 0.3, 0.729)
+	) -> void:
+	
+	if (!shader and parent and parent.material) or shader and parent.material and shader != parent.material:
+		shader = parent.material
+	
+	if shader and shader.get_shader_parameter("flash_color"):
+		var _tween: Tween = create_tween()
+		_tween.tween_property(shader, "shader_parameter/flash_color", color, 0.1 * speed_multiplier)
+		_tween.tween_property(shader, "shader_parameter/flash_color", Color(0.7, 0.0, 0.3, 0.0), 0.2 * speed_multiplier)

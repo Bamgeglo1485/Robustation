@@ -74,23 +74,10 @@ shader_parameter/vignette_strength = 0.0
 [node name="Texture" parent="." index="2" unique_id=382857461]
 texture = ExtResource("4_bvl14")
 
-[node name="Toolbox" type="Node2D" parent="." index="6" unique_id=886142419]
-
-[node name="Texture" type="Sprite2D" parent="Toolbox" index="0" unique_id=1957533610]
-visible = false
-position = Vector2(0, -2)
-texture = ExtResource("8_42pyi")
-region_enabled = true
-region_rect = Rect2(0, 0, 32, 32)
-
-[node name="CooldownTimer" type="Timer" parent="Toolbox" index="1" unique_id=842874465]
-one_shot = true
+[node name="HealthComponent" parent="." index="6" unique_id=1758373275]
 ignore_time_scale = true
 
-[node name="HealthComponent" parent="." index="7" unique_id=1758373275]
-ignore_time_scale = true
-
-[node name="WeaponUserComponent" parent="." index="10" unique_id=2123544057 node_paths=PackedStringArray("selected_weapon")]
+[node name="WeaponUserComponent" parent="." index="9" unique_id=2123544057 node_paths=PackedStringArray("selected_weapon")]
 selected_weapon = NodePath("Spear")
 timers_timescaled = false
 
@@ -117,6 +104,7 @@ stream = ExtResource("18_w1un4")
 script = ExtResource("12_tn3ht")
 damage = 40
 attack_range = 96
+ignore_armor = true
 parry_sound = NodePath("ParrySound")
 attack_sound = NodePath("MeleeHitSound")
 miss_sound = NodePath("MeleeMissSound")
@@ -171,20 +159,20 @@ stream = ExtResource("19_kyb4y")
 [node name="BulletRecoverSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Shotgun" index="2" unique_id=673851274]
 stream = ExtResource("20_si836")
 
-[node name="WeaponTexture" parent="." index="11" unique_id=1059769572]
+[node name="WeaponTexture" parent="." index="10" unique_id=1059769572]
 use_parent_material = true
 texture = ExtResource("13_aa22f")
 region_enabled = true
 
-[node name="PlayerWeaponUserComponent" parent="." index="12" unique_id=283125688 node_paths=PackedStringArray("weapon_1", "weapon_2", "weapon_3")]
+[node name="PlayerWeaponUserComponent" parent="." index="11" unique_id=283125688 node_paths=PackedStringArray("weapon_1", "weapon_2", "weapon_3")]
 weapon_1 = NodePath("../WeaponUserComponent/Toolbox")
 weapon_2 = NodePath("../WeaponUserComponent/Shotgun")
 weapon_3 = NodePath("../WeaponUserComponent/Spear")
 
-[node name="AnimationComponent" parent="." index="14" unique_id=1054272185]
+[node name="AnimationComponent" parent="." index="13" unique_id=1054272185]
 ignore_time_scale = true
 
-[node name="KickDashAbilityComponent" type="Node" parent="." index="15" unique_id=1855025226 node_paths=PackedStringArray("kick_weapon", "target_clear_timer", "can_teleport_timer", "teleport_sound")]
+[node name="KickDashAbilityComponent" type="Node" parent="." index="14" unique_id=1855025226 node_paths=PackedStringArray("kick_weapon", "target_clear_timer", "can_teleport_timer", "teleport_sound")]
 script = ExtResource("20_0p1r7")
 kick_weapon = NodePath("Kick")
 target_clear_timer = NodePath("TargetClearTimer")
@@ -204,6 +192,7 @@ throw_speed = 500
 drop_enemy_delay = 1.0
 cooldown_delay = 2.0
 swing_delay = 0.0
+self_throw_speed = 500
 attack_rotation_multiplier = -1.0
 attack_shift_multiplier = -1.0
 metadata/_custom_type_script = "uid://6b7bcparwq17"
@@ -237,14 +226,14 @@ max_polyphony = 3
 stream = ExtResource("26_27vau")
 max_polyphony = 3
 
-[node name="DashAbilityComponent" type="Node" parent="." index="18" unique_id=991976233 node_paths=PackedStringArray("dash_sound", "overdose_refuel_sound")]
+[node name="DashAbilityComponent" type="Node" parent="." index="17" unique_id=991976233 node_paths=PackedStringArray("dash_sound", "overdose_refuel_sound")]
 script = ExtResource("25_46s63")
 dash_sound = NodePath("../Sounds/DashSound")
 overdose_refuel_sound = NodePath("../Sounds/OverdoseRefuel")
 trail_colors = Array[Color]([Color(0.9866392, 0, 0.3066764, 1), Color(0.8036335, 0.0022644557, 0.98781973, 1)])
 metadata/_custom_type_script = "uid://cmonoqon5s4vx"
 
-[node name="OverdoseAbilityComponent" type="Node" parent="." index="20" unique_id=142273018 node_paths=PackedStringArray("overdose_effect")]
+[node name="OverdoseAbilityComponent" type="Node" parent="." index="19" unique_id=142273018 node_paths=PackedStringArray("overdose_effect")]
 script = ExtResource("27_l8jtb")
 trail_colors = Array[Color]([Color(0.8736105, 0, 0.34971508, 1), Color(0, 0.49991995, 0.47274232, 1), Color(0.5611145, 0.44604957, 0, 1)])
 overdose_effect = NodePath("CanvasLayer/ColorRect")
@@ -301,5 +290,3 @@ offset_right = 0.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[connection signal="timeout" from="Toolbox/CooldownTimer" to="Toolbox" method="_on_cooldown_timer_timeout"]

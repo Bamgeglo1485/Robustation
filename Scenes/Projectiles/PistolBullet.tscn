@@ -13,6 +13,7 @@ height = 8.0
 [node name="ProjectileComponent" parent="." index="0" node_paths=PackedStringArray("texture")]
 texture = NodePath("../Texture")
 speed = 1500
+damage = 5
 
 [node name="CollisionShape2D" parent="ProjectileComponent" index="0"]
 rotation = 1.5707964

@@ -6,6 +6,7 @@ class_name MoveToPointComponent extends Component
 @export var stop_range: int = 48
 @export var pathfind_update_rate: float = 0.3
 @export var move_update_rate: float = 0.1
+@export var retreat_speed_modifier: float = 0.6
 @onready var mob_mover_component: MobMoverComponent = parent.get_node_or_null("MobMoverComponent")
 @onready var direction_component: DirectionComponent = parent.get_node_or_null("DirectionComponent")
 
@@ -43,7 +44,10 @@ func _ready() -> void:
 		mob_mover_component = parent.get_node_or_null("MobMoverComponent")
 	if !direction_component:
 		direction_component = parent.get_node_or_null("DirectionComponent")
-		
+	
+	if mob_mover_component and retreat_speed_modifier != 1:
+		mob_mover_component.minor_modifiers["retreat_modifier"] = 1.0
+
 func _update_attack_logic() -> void:
 	if !mob_mover_component or !navigation_agent:
 		return
@@ -66,6 +70,7 @@ func _update_attack_logic() -> void:
 		return
 	
 	var direction_to_target_normalized: Vector2 = direction_to_target.normalized()
+	mob_mover_component.minor_modifiers["retreat_modifier"] = 1.0
 	
 	if distance_to_target > run_from_target_range:
 		if !navigation_agent.is_navigation_finished():
@@ -77,6 +82,7 @@ func _update_attack_logic() -> void:
 		
 	elif distance_to_target < run_to_target_range:
 		var away_direction: Vector2 = -direction_to_target_normalized
+		mob_mover_component.minor_modifiers["retreat_modifier"] = retreat_speed_modifier
 		mob_mover_component.direction = away_direction
 		_set_direction()
 		

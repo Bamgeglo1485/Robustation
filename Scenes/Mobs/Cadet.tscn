@@ -44,6 +44,10 @@
 [node name="Cadet" unique_id=1270222458 instance=ExtResource("1_t2qjf")]
 visibility_layer = 3
 
+[node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
+base_max_speed = 200.0
+acceleration = 150.0
+
 [node name="Texture" parent="." index="2" unique_id=382857461]
 texture = ExtResource("2_hnmsv")
 

@@ -6,8 +6,8 @@ class_name MobMoverComponent extends Component
 @onready var max_speed: float = base_max_speed
 @export var acceleration: float = 100.0
 @export var friction: float = 700.0
+@export var minor_modifiers: Dictionary
 @export var speed_modifier: float = 1.0
-@export var stun_speed_modifier: float = 1.0 # yep shitcode idc
 var direction: Vector2 = Vector2.ZERO
 
 @export var can_fall: bool = true
@@ -72,16 +72,29 @@ func _move(delta: float) -> void:
 	elif !movement_blocked and !fallen:
 		velocity += direction * acceleration
 		
+		var minor_modifier: float = _get_minor_modifiers()
+		
 		if navigation_agent:
-			var nav_vel: Vector2 = direction * acceleration * speed_modifier * stun_speed_modifier
+			var nav_vel: Vector2 = direction * acceleration * speed_modifier * minor_modifier
 			navigation_agent.set_velocity(nav_vel)
 		
-		var max_speed_current: float = max_speed * speed_modifier * stun_speed_modifier
+		var max_speed_current: float = max_speed * speed_modifier * minor_modifier
 		if speed > max_speed_current:
 			velocity = (velocity / speed) * max_speed_current
 	
 	parent.velocity = velocity
 	parent.move_and_slide()
+
+func _get_minor_modifiers() -> float:
+	var modifier: float = 1.0
+	
+	if !minor_modifiers:
+		return modifier
+	
+	for minor_mod in minor_modifiers:
+		modifier *= minor_modifiers[minor_mod]
+	
+	return modifier
 
 func _walk_animation() -> void:
 	if parent.velocity == Vector2.ZERO and animation_component.animation_priority == 1:

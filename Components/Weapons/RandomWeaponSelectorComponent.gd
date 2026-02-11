@@ -8,6 +8,7 @@ func _ready() -> void:
 	if !weapon_user_component or weapons_to_select.is_empty():
 		return
 	
+	randomize()
 	weapon_user_component.select_weapon(weapons_to_select.pick_random())
 	
 	if !change_behavior:

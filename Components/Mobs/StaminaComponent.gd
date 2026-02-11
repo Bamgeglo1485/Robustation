@@ -21,6 +21,9 @@ func _ready():
 	stamina_recover_timer.timeout.connect(_recover_stamina)
 	add_child(stamina_recover_timer)
 	stamina_recover_timer.start()
+	
+	if mob_mover_component:
+		mob_mover_component.minor_modifiers["stamina_modifier"] = 1.0
 
 func _recover_stamina():
 	stamina_recover_timer.start()
@@ -44,7 +47,7 @@ func set_stamina(new_stamina):
 	stamina = clamp(stamina, 0, max_stamina)
 	
 	if mob_mover_component:
-		mob_mover_component.stun_speed_modifier = float(stamina) / max_stamina
+		mob_mover_component.minor_modifiers["stamina_modifier"] = float(stamina) / max_stamina
 	
 	if stamina == 0:
 		stun()
@@ -62,7 +65,7 @@ func stun():
 
 func unstun():
 	stunned = false
-	stamina = 100
+	set_stamina(max_stamina)
 
 func _can_recover_cooldown():
 	can_recover = false

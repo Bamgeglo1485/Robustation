@@ -110,9 +110,9 @@ func _notification_update() -> void:
 	if !perk_notification_queue.is_empty():
 		for perk in perk_notification_queue:
 			await create_notification(perk)
-			perk_notification_queue[0] = null
+	perk_notification_queue.clear()
 
-# shitcodea
+# shitcode yep
 func create_notification(perk: BasePerkComponent) -> void:
 	if !perk:
 		return
@@ -150,4 +150,5 @@ func create_notification(perk: BasePerkComponent) -> void:
 	
 	await get_tree().create_timer(0.5).timeout
 	
+	perk_notification_queue.remove_at(0)
 	inst.queue_free()

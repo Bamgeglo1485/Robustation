@@ -80,6 +80,7 @@ func dash(direction) -> void:
 		dash_sound.play()
 	
 	mob_mover_component.throw(direction, dash_speed, null, 1000, false)
+	mob_mover_component.try_stand_up()
 	
 	_cooldown()
 	_INVINCIBLE()

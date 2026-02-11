@@ -27,6 +27,7 @@ var fly_source: Node2D
 @export var body_fall_sound: AudioStreamPlayer2D
 @export var fall_effect: PackedScene = preload("res://Scenes/Effects/Particles/Fall.tscn")
 var fallen: bool = false
+var force_fallen: bool = false
 var standing_delay: float = 0.0
 
 @onready var navigation_agent: NavigationAgent2D = parent.get_node_or_null("NavigationAgent")
@@ -113,7 +114,7 @@ func _walk_animation() -> void:
 		animation_component.set_animation(walking_tween, 1)
 
 func _fly_movement() -> void:
-	var fly_velocity: Vector2 = fly_direction * fly_speed * fly_modifier
+	var fly_velocity: Vector2 = fly_direction * fly_speed
 	
 	if direction != Vector2.ZERO and !fallen:
 		var control_velocity: Vector2 = direction * acceleration
@@ -156,9 +157,9 @@ func throw(
 	else:
 		fly_direction = Vector2.ZERO
 	
-	fly_speed = actual_speed
-	base_fly_speed = actual_speed
-	fly_stop_speed = throw_stop_speed
+	fly_speed = actual_speed * fly_modifier
+	base_fly_speed = actual_speed * fly_modifier
+	fly_stop_speed = throw_stop_speed * fly_modifier
 	
 	if fly_speed > 100 and fly_direction != Vector2.ZERO:
 		flying = true
@@ -176,11 +177,12 @@ func _fall_process(delta: float) -> void:
 	if standing_delay <= 0:
 		stand_up()
 
-func drop(delay: float) -> void:
+func drop(delay: float, force: bool = false) -> void:
 	if !can_fall or delay < 0.3:
 		return
 	
 	parent.velocity = Vector2.ZERO
+	force_fallen = force
 	standing_delay += delay
 	
 	if fallen:
@@ -194,7 +196,7 @@ func drop(delay: float) -> void:
 		drop_tween.set_trans(Tween.TRANS_SINE)
 		drop_tween.set_ease(Tween.EASE_IN_OUT)
 		drop_tween.tween_property(parent, "global_rotation", -1.55, 0.2)
-		animation_component.set_animation(drop_tween, 5)
+		animation_component.set_animation(drop_tween, 69)
 	if fall_effect:
 		if health_component and health_component.health <= 0:
 			return
@@ -205,6 +207,12 @@ func drop(delay: float) -> void:
 	if body_fall_sound:
 		body_fall_sound.play()
 
+func try_stand_up() -> void:
+	if force_fallen:
+		return
+	
+	stand_up()
+
 func stand_up() -> void:
 	standing_delay = 0
 	
@@ -214,6 +222,7 @@ func stand_up() -> void:
 	await get_tree().create_timer(0.3).timeout
 	
 	fallen = false
+	force_fallen = false
  
 func on_fly_impact(body: Node) -> void:
 	if body == fly_source:

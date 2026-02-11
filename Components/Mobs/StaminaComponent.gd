@@ -55,7 +55,7 @@ func set_stamina(new_stamina):
 func stun():
 	stunned = true
 	if mob_mover_component:
-		mob_mover_component.drop(stun_time)
+		mob_mover_component.drop(stun_time, true)
 	if stun_effect:
 		var inst = stun_effect.instantiate()
 		parent.add_child.call_deferred(inst)

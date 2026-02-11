@@ -5,8 +5,6 @@ class_name OverdoseAbilityComponent extends BaseAbilityComponent
 @export var trail_colors: Array[Color]
 @export var overdose_effect: ColorRect
 
-var speed_modification: float
-var acceleration_modification: float
 var friction_modification: float
 
 var effect_tween: Tween
@@ -16,15 +14,9 @@ func activate_ability() -> void:
 		return
 	
 	overdose_effects()
-	
-	speed_modification = mob_mover_component.max_speed / Engine.time_scale * 2.0
-	acceleration_modification = mob_mover_component.acceleration / Engine.time_scale * 2.0
+	mob_mover_component.minor_modifiers["Overdose"] = 3.0
 	friction_modification = mob_mover_component.acceleration * Engine.time_scale * 30.0
-	
-	mob_mover_component.max_speed += speed_modification
-	mob_mover_component.acceleration += acceleration_modification
 	mob_mover_component.friction += friction_modification
-	mob_mover_component.fly_modifier = 0.2
 	
 	var time_tween: Tween = create_tween()
 	time_tween.tween_property(Engine, "time_scale", 0.35, 0.5)
@@ -53,10 +45,8 @@ func disable_ability() -> void:
 	var time_tween: Tween = create_tween()
 	time_tween.tween_property(Engine, "time_scale", 1, 0.5)
 	
-	mob_mover_component.max_speed -= speed_modification
-	mob_mover_component.acceleration -= acceleration_modification
+	mob_mover_component.minor_modifiers["Overdose"] = 1.0
 	mob_mover_component.friction -= friction_modification
-	mob_mover_component.fly_modifier = 1
 	
 	if overdose_effect and overdose_effect.material:
 		effect_tween.kill()

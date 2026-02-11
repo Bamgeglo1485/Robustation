@@ -77,7 +77,7 @@ texture = ExtResource("4_bvl14")
 [node name="HealthComponent" parent="." index="6" unique_id=1758373275]
 ignore_time_scale = true
 
-[node name="WeaponUserComponent" parent="." index="9" unique_id=2123544057 node_paths=PackedStringArray("selected_weapon")]
+[node name="WeaponUserComponent" parent="." index="8" unique_id=2123544057 node_paths=PackedStringArray("selected_weapon")]
 selected_weapon = NodePath("Spear")
 timers_timescaled = false
 
@@ -110,7 +110,7 @@ attack_sound = NodePath("MeleeHitSound")
 miss_sound = NodePath("MeleeMissSound")
 parry_force = 2.0
 throw_speed = 400
-drop_enemy_delay = 1.0
+drop_enemy_delay = 0.5
 cooldown_delay = 0.35
 swing_delay = 0.1
 equipped_texture = ExtResource("8_42pyi")
@@ -159,17 +159,17 @@ stream = ExtResource("19_kyb4y")
 [node name="BulletRecoverSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Shotgun" index="2" unique_id=673851274]
 stream = ExtResource("20_si836")
 
-[node name="WeaponTexture" parent="." index="10" unique_id=1059769572]
+[node name="WeaponTexture" parent="." index="9" unique_id=1059769572]
 use_parent_material = true
 texture = ExtResource("13_aa22f")
 region_enabled = true
 
-[node name="PlayerWeaponUserComponent" parent="." index="11" unique_id=283125688 node_paths=PackedStringArray("weapon_1", "weapon_2", "weapon_3")]
+[node name="PlayerWeaponUserComponent" parent="." index="10" unique_id=283125688 node_paths=PackedStringArray("weapon_1", "weapon_2", "weapon_3")]
 weapon_1 = NodePath("../WeaponUserComponent/Toolbox")
 weapon_2 = NodePath("../WeaponUserComponent/Shotgun")
 weapon_3 = NodePath("../WeaponUserComponent/Spear")
 
-[node name="AnimationComponent" parent="." index="13" unique_id=1054272185]
+[node name="AnimationComponent" parent="." index="12" unique_id=1054272185]
 ignore_time_scale = true
 
 [node name="KickDashAbilityComponent" type="Node" parent="." index="14" unique_id=1855025226 node_paths=PackedStringArray("kick_weapon", "target_clear_timer", "can_teleport_timer", "teleport_sound")]
@@ -190,6 +190,7 @@ can_parry_weapon = false
 parry_force = 1.5
 throw_speed = 500
 drop_enemy_delay = 1.0
+timers_timescaled = false
 cooldown_delay = 2.0
 swing_delay = 0.0
 self_throw_speed = 500

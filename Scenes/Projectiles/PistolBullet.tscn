@@ -14,6 +14,7 @@ height = 8.0
 texture = NodePath("../Texture")
 speed = 1500
 damage = 5
+parriable = false
 
 [node name="CollisionShape2D" parent="ProjectileComponent" index="0"]
 rotation = 1.5707964

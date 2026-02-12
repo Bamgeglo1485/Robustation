@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://cxi2gla87no36"]
+
+[ext_resource type="PackedScene" uid="uid://c0eulucj1dtco" path="res://Scenes/Mobs/Base/BaseEnemy.tscn" id="1_ypxbh"]
+[ext_resource type="Texture2D" uid="uid://52mbog6ej55u" path="res://Textures/Mobs/Mobs/botanist.png" id="2_8bjdt"]
+[ext_resource type="Script" uid="uid://6b7bcparwq17" path="res://Components/Weapons/MeleeWeaponComponent.gd" id="3_r3gap"]
+[ext_resource type="Texture2D" uid="uid://vrqr4j3chq75" path="res://Textures/Weapons/DeathNettle/death-nettle-inhand.png" id="4_x7fu3"]
+[ext_resource type="AudioStream" uid="uid://eogckfs15aph" path="res://Audio/Weapon/miss.ogg" id="5_gume5"]
+[ext_resource type="AudioStream" uid="uid://cuj7tgh253e14" path="res://Resources/Audio/GenHitRandom.tres" id="6_yt3j5"]
+[ext_resource type="Script" uid="uid://bi1gje1pfokqc" path="res://Components/Weapons/RangeWeaponComponent.gd" id="7_gume5"]
+[ext_resource type="Script" uid="uid://da2q40ragr5wk" path="res://Components/Mobs/NPC/BuddyComponent.gd" id="7_r3gap"]
+[ext_resource type="PackedScene" uid="uid://dpbow47giqahy" path="res://Scenes/Projectiles/Bloonion.tscn" id="8_o6aij"]
+[ext_resource type="Script" uid="uid://cbn5a10g0d5yr" path="res://Components/Mobs/NPC/MeleeRangeComponent.gd" id="8_yt3j5"]
+
+[node name="Botanist" unique_id=600669417 instance=ExtResource("1_ypxbh")]
+
+[node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
+base_max_speed = 200.0
+
+[node name="Texture" parent="." index="2" unique_id=382857461]
+position = Vector2(0, 1)
+texture = ExtResource("2_8bjdt")
+
+[node name="HealthComponent" parent="." index="4" unique_id=1758373275]
+max_health = 250
+
+[node name="WeaponUserComponent" parent="." index="6" unique_id=2123544057 node_paths=PackedStringArray("selected_weapon")]
+selected_weapon = NodePath("Deathnettle")
+
+[node name="Deathnettle" type="Node" parent="WeaponUserComponent" index="0" unique_id=1593566200 node_paths=PackedStringArray("attack_sound", "miss_sound")]
+script = ExtResource("3_r3gap")
+attack_range = 48
+delayed_damage = 3
+delayed_damage_delay = 5
+attack_sound = NodePath("HitSound")
+miss_sound = NodePath("MissSound")
+can_parry_weapon = false
+swing_delay = 0.0
+equipped_texture = ExtResource("4_x7fu3")
+metadata/_custom_type_script = "uid://6b7bcparwq17"
+
+[node name="MissSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Deathnettle" index="0" unique_id=1778817825]
+stream = ExtResource("5_gume5")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Deathnettle" index="1" unique_id=1235228624]
+stream = ExtResource("6_yt3j5")
+
+[node name="Bloonion" type="Node" parent="WeaponUserComponent" index="1" unique_id=1804540869 node_paths=PackedStringArray("shoot_sound")]
+script = ExtResource("7_gume5")
+projectile = ExtResource("8_o6aij")
+spread_angle = 5
+bullets_max_count = 1
+bullets = 1
+bullets_recover_count = 1
+shoot_sound = NodePath("ShootSound")
+bullets_recovery_delay = 8.0
+swing_delay = 1.0
+metadata/_custom_type_script = "uid://bi1gje1pfokqc"
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Bloonion" index="0" unique_id=304523583]
+stream = ExtResource("5_gume5")
+
+[node name="MoveToPointComponent" parent="AI" parent_id_path=PackedInt32Array(1365591205) index="0" unique_id=395370591]
+run_to_target_range = 400.0
+run_from_target_range = 0.0
+
+[node name="MeleeRangeComponent" type="Node" parent="AI" parent_id_path=PackedInt32Array(1365591205) index="3" unique_id=1984468361 node_paths=PackedStringArray("melee_weapons", "range_weapons")]
+script = ExtResource("8_yt3j5")
+melee_weapons = [NodePath("../../WeaponUserComponent/Deathnettle")]
+range_weapons = [NodePath("../../WeaponUserComponent/Bloonion")]
+metadata/_custom_type_script = "uid://cbn5a10g0d5yr"
+
+[node name="BuddyComponent" type="Node" parent="." index="17" unique_id=843261648]
+script = ExtResource("7_r3gap")
+buddy_group = "Assistant"
+rage_when_buddy_dead = false
+regular_buddy_set = true
+move_to_buddy = true
+move_priority = 5
+metadata/_custom_type_script = "uid://da2q40ragr5wk"

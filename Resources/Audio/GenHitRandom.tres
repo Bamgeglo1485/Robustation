@@ -1,0 +1,11 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://cuj7tgh253e14"]
+
+[ext_resource type="AudioStream" uid="uid://cruf8qng6u4kk" path="res://Audio/Weapon/Hit/genhit1.ogg" id="1_8xcnu"]
+[ext_resource type="AudioStream" uid="uid://c3x5bi33ftada" path="res://Audio/Weapon/Hit/genhit2.ogg" id="2_v2h3b"]
+[ext_resource type="AudioStream" uid="uid://hdmufly1h3mb" path="res://Audio/Weapon/Hit/genhit3.ogg" id="3_f4q5m"]
+
+[resource]
+streams_count = 3
+stream_0/stream = ExtResource("1_8xcnu")
+stream_1/stream = ExtResource("2_v2h3b")
+stream_2/stream = ExtResource("3_f4q5m")

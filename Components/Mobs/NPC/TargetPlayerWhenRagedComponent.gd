@@ -14,5 +14,5 @@ func on_rage_state_change(rage_state: bool) -> void:
 	
 	if !rage_state:
 		move_to_target_component.target = null
-	else:
+	elif player:
 		move_to_target_component.target = player

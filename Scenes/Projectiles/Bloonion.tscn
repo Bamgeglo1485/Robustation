@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dpbow47giqahy"]
+
+[ext_resource type="PackedScene" uid="uid://c2fs5eoy7ntgu" path="res://Scenes/Projectiles/BaseProjectile.tscn" id="1_cgaq2"]
+[ext_resource type="Shader" uid="uid://dskgkby1vn5hf" path="res://Resources/Shaders/Jiggle.gdshader" id="2_p0unh"]
+[ext_resource type="Texture2D" uid="uid://8e0c31sa6rjo" path="res://Textures/Tiles/bloonion.png" id="3_gyh1l"]
+[ext_resource type="PackedScene" uid="uid://bx84xyap7yon5" path="res://Scenes/Explosion/Fart/BaseFart.tscn" id="3_rbv0g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jll1t"]
+shader = ExtResource("2_p0unh")
+shader_parameter/jiggle = 4.0
+shader_parameter/speed = 50.0
+
+[node name="BotanistProjectile" unique_id=384217582 instance=ExtResource("1_cgaq2")]
+material = SubResource("ShaderMaterial_jll1t")
+
+[node name="ProjectileComponent" parent="." index="0" node_paths=PackedStringArray("texture")]
+texture = NodePath("../Texture")
+lifetime = 0.8
+parriable = false
+explosion_scene = ExtResource("3_rbv0g")
+explode_on_delete = true
+explode_on_hit = true
+
+[node name="Texture" type="Sprite2D" parent="." index="4" unique_id=1621827653]
+use_parent_material = true
+texture = ExtResource("3_gyh1l")

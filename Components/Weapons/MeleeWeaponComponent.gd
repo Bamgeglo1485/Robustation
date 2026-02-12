@@ -2,9 +2,12 @@ class_name MeleeWeapon extends Weapon
 
 @export var damage: int = 10
 @export var stamina_damage: int = 0
-@export var attack_range: int = 7396 # 86^2
+@export var attack_range: int = 64
 @export var slash_effect: PackedScene = preload("res://Scenes/Effects/Slash.tscn")
 @export var ignore_armor: bool = false
+
+@export var delayed_damage: int = 0
+@export var delayed_damage_delay: int = 0
 
 @export var parry_effect: PackedScene = preload("res://Scenes/Effects/Particles/ParryEffect.tscn")
 @export var parry_sound: AudioStreamPlayer2D
@@ -143,7 +146,11 @@ func _melee_attack_target(target, direction = null, multiple_attack = false) -> 
 				parry_weapon(weapon, target)
 	
 	if target.has_node("HealthComponent"):
-		target.get_node("HealthComponent").take_damage(damage * damage_modifier, parent, ignore_armor)
+		var target_health_component: HealthComponent = target.get_node("HealthComponent")
+		@warning_ignore("narrowing_conversion")
+		target_health_component.take_damage(damage * damage_modifier, parent, ignore_armor)
+		if delayed_damage != 0 and delayed_damage_delay != 0:
+			target_health_component.set_delayed_damage(delayed_damage, delayed_damage_delay)
 	
 	if target.has_node("MobMoverComponent"):
 		if throw_speed != 0:

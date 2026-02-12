@@ -88,7 +88,8 @@ func explode() -> void:
 		sploded = true
 		var instance: Node = explosion_scene.instantiate()
 		instance.global_position = parent.global_position
-		instance.source = shooter
+		if shooter:
+			instance.source = shooter
 		scene.add_child(instance)
 
 func _on_body_entered(body: Node2D) -> void:

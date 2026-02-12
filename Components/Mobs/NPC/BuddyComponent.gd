@@ -7,10 +7,11 @@ class_name BuddyComponent extends Component
 
 @export var rage_when_buddy_dead: bool = true
 @export var set_buddy_as_attack_target: bool = false
+@export var regular_buddy_set: bool = false
 
 @export var move_to_buddy: bool = false
 @export var move_priority: int = 1
-@onready var move_to_point_component: Node = parent.get_node_or_null("MoveToPoinComponent")
+@onready var move_to_point_component: Node = parent.get_node_or_null("MoveToPointComponent")
 
 func _ready() -> void:
 	await get_tree().create_timer(0.1).timeout
@@ -20,10 +21,16 @@ func _ready() -> void:
 	if !move_to_point_component and parent.has_node("AI"):
 		move_to_point_component = parent.get_node("AI").get_node_or_null("MoveToPointComponent")
 	
-	if buddy_group and set_buddy_on_start:
+	if set_buddy_on_start:
+		_set_buddy()
+
+func _set_buddy() -> void:
+	if buddy_group:
 		var potential_buddies: Array[Node] = parent.get_parent().get_children()
 		
 		for potential_buddy in potential_buddies:
+			if potential_buddy == parent:
+				continue
 			var buddy_component: Node = potential_buddy.get_node_or_null("BuddyComponent")
 			if !buddy_component:
 				continue
@@ -41,8 +48,11 @@ func _ready() -> void:
 				return
 		
 		attack_target_component.target = buddy
-		
+
 func _process(_delta: float) -> void:
+	if regular_buddy_set and !buddy:
+		_set_buddy()
+	
 	if !move_to_buddy or !move_to_point_component or !buddy:
 		return
 	move_to_point_component.set_point(buddy.global_position, move_priority)

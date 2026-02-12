@@ -22,6 +22,7 @@ var base_max_health: int = max_health
 @export var heal_for_damage_multiplier: float = 0.0
 @export var heal_for_damage_range: int = 64
 
+@export var delayed_damage_modifier: float = 1.0
 var delayed_damage_timer: Timer
 var delayed_damage_queue: Array = []
 var current_delayed_damage: int = 0
@@ -158,7 +159,8 @@ func _delayed_damage_process() -> void:
 	delayed_damage_queue = new_queue
 	
 	if total_damage > 0:
-		take_damage(total_damage, null)
+		@warning_ignore("narrowing_conversion")
+		take_damage(total_damage * delayed_damage_modifier, null)
 		_flash(0.3, Color(0.0, 0.694, 0.508, 0.188))
 	
 	delayed_damage_timer.start()

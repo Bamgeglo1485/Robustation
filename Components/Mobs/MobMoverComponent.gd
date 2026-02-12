@@ -10,6 +10,7 @@ class_name MobMoverComponent extends Component
 @export var speed_modifier: float = 1.0
 var direction: Vector2 = Vector2.ZERO
 
+@export var fallen_speed_modifier: float = 0.3
 @export var can_fall: bool = true
 @export var can_fall_from_body: bool = true
 @export var movement_blocked: bool = false
@@ -39,6 +40,8 @@ var drop_tween: Tween
 func _ready() -> void:
 	if fly_impact_area:
 		fly_impact_area.body_entered.connect(on_fly_impact)
+	
+	minor_modifiers["fallen_modifier"] = 1.0
 
 func _physics_process(delta: float) -> void:
 	if flying and fly_speed > 0:
@@ -70,7 +73,7 @@ func _move(delta: float) -> void:
 				velocity -= (velocity / speed) * friction_amount
 			else:
 				velocity = Vector2.ZERO
-	elif !movement_blocked and !fallen:
+	elif !movement_blocked:
 		velocity += direction * acceleration
 		
 		var minor_modifier: float = _get_minor_modifiers()
@@ -178,7 +181,7 @@ func _fall_process(delta: float) -> void:
 		stand_up()
 
 func drop(delay: float, force: bool = false) -> void:
-	if !can_fall or delay < 0.3:
+	if !can_fall or delay < 0.3 or force_fallen:
 		return
 	
 	parent.velocity = Vector2.ZERO
@@ -189,13 +192,14 @@ func drop(delay: float, force: bool = false) -> void:
 		return
 	
 	fallen = true
+	minor_modifiers["fallen_modifier"] = fallen_speed_modifier
 	
 	if animation_component:
 		drop_tween = create_tween()
-		drop_tween.set_loops()
 		drop_tween.set_trans(Tween.TRANS_SINE)
 		drop_tween.set_ease(Tween.EASE_IN_OUT)
 		drop_tween.tween_property(parent, "global_rotation", -1.55, 0.2)
+		drop_tween.tween_property(parent, "global_rotation", -1.55, 690)
 		animation_component.set_animation(drop_tween, 69)
 	if fall_effect:
 		if health_component and health_component.health <= 0:
@@ -221,6 +225,7 @@ func stand_up() -> void:
 	
 	await get_tree().create_timer(0.3).timeout
 	
+	minor_modifiers["fallen_modifier"] = 1.0
 	fallen = false
 	force_fallen = false
  

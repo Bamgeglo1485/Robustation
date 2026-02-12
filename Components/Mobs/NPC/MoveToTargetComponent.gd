@@ -21,12 +21,12 @@ func _process(_delta: float) -> void:
 	if !target or !move_to_point_component:
 		return
 	
+	_look_at_target()
+	
 	if move_to_point_component.current_priority > priority:
 		return
 	
 	move_to_point_component.set_point(target.global_position, priority)
-	
-	_look_at_target()
 	
 func _look_at_target() -> void:
 	if !direction_component or !look_at_target:

@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bx84xyap7yon5"]
+
+[ext_resource type="Script" uid="uid://db03js2b5wupg" path="res://Scripts/FartSystem.gd" id="1_ovsvj"]
+[ext_resource type="Texture2D" uid="uid://bbk76vne52rnv" path="res://Textures/Effects/Particles/blood_big.png" id="2_80unp"]
+[ext_resource type="Material" uid="uid://cyp3pqnhbfrj3" path="res://Resources/Shaders/Jiggle.tres" id="2_tii3m"]
+[ext_resource type="AudioStream" uid="uid://dnoy8204j4vyi" path="res://Audio/Boom/smoke.ogg" id="3_1eumt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_80unp"]
+radius = 128.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1eumt"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(2, 2, 1)
+emission_shape = 1
+emission_sphere_radius = 69.67
+angular_velocity_min = -376.0
+angular_velocity_max = 520.0
+orbit_velocity_min = -1.0439999
+orbit_velocity_max = 0.84400016
+gravity = Vector3(0, 0, 0)
+
+[node name="BaseFart" type="Node2D" unique_id=1192269142]
+z_index = 10
+script = ExtResource("1_ovsvj")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=391680164]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1744936172]
+shape = SubResource("CircleShape2D_80unp")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1029861196]
+modulate = Color(0.17060252, 0.34511092, 0.087739244, 0.22900002)
+material = ExtResource("2_tii3m")
+amount = 370
+texture = ExtResource("2_80unp")
+process_material = SubResource("ParticleProcessMaterial_1eumt")
+
+[node name="Fart" type="AudioStreamPlayer2D" parent="." unique_id=973600430]
+stream = ExtResource("3_1eumt")
+volume_db = -7.0
+autoplay = true

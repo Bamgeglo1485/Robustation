@@ -41,6 +41,7 @@
 [ext_resource type="AudioStream" uid="uid://2r0y32cx4e8s" path="res://Audio/Weapon/empty.ogg" id="36_bvwdy"]
 [ext_resource type="AudioStream" uid="uid://bxli3cjm2f10v" path="res://Audio/Weapon/pistol_cock.ogg" id="37_1lefm"]
 [ext_resource type="AudioStream" uid="uid://d3ducr0vxj16e" path="res://Audio/Weapon/rifle_bolt_open.ogg" id="38_jwl28"]
+[ext_resource type="Script" uid="uid://bdca2wo1kubsv" path="res://Components/Mobs/SpawnPerkOnDeathComponent.gd" id="42_hks5v"]
 
 [node name="Cadet" unique_id=1270222458 instance=ExtResource("1_t2qjf")]
 visibility_layer = 3
@@ -146,3 +147,7 @@ region_rect = Rect2(0, 0, 32, 32)
 script = ExtResource("5_hmnso")
 random_textures = Array[Texture2D]([ExtResource("34_qcjae"), ExtResource("33_5m84t")])
 metadata/_custom_type_script = "uid://bqvdlb3r03cs0"
+
+[node name="SpawnPerkOnDeathComponent" type="Node" parent="." index="21" unique_id=1480549316]
+script = ExtResource("42_hks5v")
+metadata/_custom_type_script = "uid://bdca2wo1kubsv"

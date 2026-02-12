@@ -16,6 +16,7 @@ func activate_ability() -> void:
 	overdose_effects()
 	mob_mover_component.minor_modifiers["Overdose"] = 3.0
 	friction_modification = mob_mover_component.acceleration * Engine.time_scale * 30.0
+	mob_mover_component.fly_modifier = 0
 	mob_mover_component.friction += friction_modification
 	
 	var time_tween: Tween = create_tween()
@@ -45,6 +46,7 @@ func disable_ability() -> void:
 	var time_tween: Tween = create_tween()
 	time_tween.tween_property(Engine, "time_scale", 1, 0.5)
 	
+	mob_mover_component.fly_modifier = 1
 	mob_mover_component.minor_modifiers["Overdose"] = 1.0
 	mob_mover_component.friction -= friction_modification
 	

@@ -37,6 +37,7 @@
 [ext_resource type="Script" uid="uid://d0a8e3f7tepch" path="res://Components/Mobs/RageComponent.gd" id="33_et3ly"]
 [ext_resource type="PackedScene" uid="uid://bpw4s6mkg7wkg" path="res://Scenes/Effects/Particles/RageEffect.tscn" id="34_11246"]
 [ext_resource type="Script" uid="uid://clr7jbioge17t" path="res://Components/Entity/ExplosionResistanceComponent.gd" id="37_3c5wa"]
+[ext_resource type="Script" uid="uid://bdca2wo1kubsv" path="res://Components/Mobs/SpawnPerkOnDeathComponent.gd" id="38_coqyf"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_uq2f5"]
 
@@ -154,3 +155,7 @@ metadata/_custom_type_script = "uid://d0a8e3f7tepch"
 script = ExtResource("37_3c5wa")
 resistance = 0.2
 metadata/_custom_type_script = "uid://clr7jbioge17t"
+
+[node name="SpawnPerkOnDeathComponent" type="Node" parent="." index="21" unique_id=977793505]
+script = ExtResource("38_coqyf")
+metadata/_custom_type_script = "uid://bdca2wo1kubsv"

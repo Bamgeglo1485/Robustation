@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://da2q40ragr5wk" path="res://Components/Mobs/NPC/BuddyComponent.gd" id="7_r3gap"]
 [ext_resource type="PackedScene" uid="uid://dpbow47giqahy" path="res://Scenes/Projectiles/Bloonion.tscn" id="8_o6aij"]
 [ext_resource type="Script" uid="uid://cbn5a10g0d5yr" path="res://Components/Mobs/NPC/MeleeRangeComponent.gd" id="8_yt3j5"]
+[ext_resource type="Script" uid="uid://bdca2wo1kubsv" path="res://Components/Mobs/SpawnPerkOnDeathComponent.gd" id="11_o6aij"]
 
 [node name="Botanist" unique_id=600669417 instance=ExtResource("1_ypxbh")]
 
@@ -77,3 +78,7 @@ regular_buddy_set = true
 move_to_buddy = true
 move_priority = 5
 metadata/_custom_type_script = "uid://da2q40ragr5wk"
+
+[node name="SpawnPerkOnDeathComponent" type="Node" parent="." index="18" unique_id=942829880]
+script = ExtResource("11_o6aij")
+metadata/_custom_type_script = "uid://bdca2wo1kubsv"

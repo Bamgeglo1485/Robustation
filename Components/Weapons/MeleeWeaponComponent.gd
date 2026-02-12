@@ -55,7 +55,7 @@ func _try_melee_attack(direction) -> Dictionary:
 	var _targets: Dictionary
 	var attacked_enemies: Array = []
 	
-	for i in range(5):
+	for i in range(10):
 		var angle_offset: float = deg_to_rad(i * 20 - 90)
 		var ray_direction: Vector2 = direction.rotated(angle_offset)
 		var ray_start: Vector2 = parent.global_position - ray_direction * 0.2

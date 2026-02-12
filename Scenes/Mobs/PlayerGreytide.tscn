@@ -103,7 +103,6 @@ stream = ExtResource("18_w1un4")
 [node name="Toolbox" type="Node" parent="WeaponUserComponent" index="1" unique_id=140255965 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound")]
 script = ExtResource("12_tn3ht")
 damage = 40
-attack_range = 96
 ignore_armor = true
 parry_sound = NodePath("ParrySound")
 attack_sound = NodePath("MeleeHitSound")
@@ -182,7 +181,6 @@ metadata/_custom_type_script = "uid://dhxtoiim76o2t"
 
 [node name="Kick" type="Node" parent="KickDashAbilityComponent" index="0" unique_id=649844006 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound")]
 script = ExtResource("12_tn3ht")
-attack_range = 96
 parry_sound = NodePath("ParrySound")
 attack_sound = NodePath("MeleeHitSound")
 miss_sound = NodePath("MeleeMissSound")
@@ -291,3 +289,6 @@ offset_right = 0.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="RainbowOverlayComponent" parent="." index="26" unique_id=1613621018 node_paths=PackedStringArray("overlay")]
+overlay = NodePath("CanvasLayer/ColorRect")

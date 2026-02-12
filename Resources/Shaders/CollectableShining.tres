@@ -5,7 +5,7 @@
 [resource]
 shader = ExtResource("1_fie4c")
 shader_parameter/Angle_deg = 30.0
-shader_parameter/Brightness = 2.5
+shader_parameter/Brightness = 10.0
 shader_parameter/Band_Soft = 0.06
 shader_parameter/Stage_Count = 2
 shader_parameter/Stage1_Duration = 0.50000002305148

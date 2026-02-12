@@ -1,0 +1,32 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dm7k2tvshj7cb"]
+
+[ext_resource type="Shader" uid="uid://dncxllhs207sm" path="res://Resources/Shaders/RainbowEffect.gdshader" id="1_upetg"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_upetg"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2nbtd"]
+noise = SubResource("FastNoiseLite_upetg")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qym7f"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sbi27"]
+noise = SubResource("FastNoiseLite_qym7f")
+
+[sub_resource type="Gradient" id="Gradient_upetg"]
+offsets = PackedFloat32Array(0.14864865, 0.33783785, 0.5, 0.6418919, 0.7972973)
+colors = PackedColorArray(0, 0, 1, 1, 0.7792455, 5.9970916e-05, 0.6107414, 1, 0, 1, 0, 1, 0.87941116, 0.46243638, 1.92523e-07, 1, 0.982773, 0.06606233, 2.750329e-08, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2nbtd"]
+gradient = SubResource("Gradient_upetg")
+
+[resource]
+shader = ExtResource("1_upetg")
+shader_parameter/pixelation = Vector2(256, 256)
+shader_parameter/cloud_noise1 = SubResource("NoiseTexture2D_2nbtd")
+shader_parameter/scroll_speed1 = Vector2(-0.5, 0.5)
+shader_parameter/cloud_noise2 = SubResource("NoiseTexture2D_sbi27")
+shader_parameter/scroll_speed2 = Vector2(0.5, -0.5)
+shader_parameter/center_pos = Vector2(0.5, 0)
+shader_parameter/position_impact = 0.249999994412
+shader_parameter/color_gardient = SubResource("GradientTexture1D_2nbtd")
+shader_parameter/transparency = 0.999999977648

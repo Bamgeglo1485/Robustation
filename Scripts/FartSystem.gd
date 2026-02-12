@@ -1,8 +1,8 @@
 extends Node2D
 
 @onready var area2d: Area2D = $Area2D
-@export var delayed_damage: int = 2
-@export var delayed_time: int = 3
+@export var delayed_damage: int = 3
+@export var delayed_time: int = 5
 @export var heal_teammates: bool = true
 @export var heal_amount: int = 40
 @export var radius: int = 128
@@ -10,6 +10,8 @@ extends Node2D
 @export var lifetime: float = 4.0
 @export var update_rate: float = 0.5
 @export var ignore_faction: bool = false
+@export var rainbow_delay: float = 2.5
+
 var active: bool = true
 var check_timer: Timer
 
@@ -61,3 +63,6 @@ func _update() -> void:
 				return
 		if body.has_node("HealthComponent"):
 			body.get_node("HealthComponent").set_delayed_damage(delayed_damage, delayed_time)
+		if body.has_node("RainbowOverlayComponent"):
+			body.get_node("RainbowOverlayComponent").set_rainbow(rainbow_delay)
+			

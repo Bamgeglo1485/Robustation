@@ -16,6 +16,8 @@
 [ext_resource type="Script" uid="uid://qcmegh7138ug" path="res://Components/Entity/UniqueShaderComponent.gd" id="11_yhquf"]
 [ext_resource type="Script" uid="uid://bdxrxakvokr52" path="res://Components/Player/ScreenShakeComponent.gd" id="13_0r3jo"]
 [ext_resource type="Script" uid="uid://bl4o52tmouk6e" path="res://Components/Perks/Entity/PerkOwnerComponent.gd" id="15_4awd5"]
+[ext_resource type="Script" uid="uid://jqnpe0oqv5il" path="res://Components/Player/RainbowOverlayComponent.gd" id="17_egoq8"]
+[ext_resource type="Material" uid="uid://dm7k2tvshj7cb" path="res://Resources/Shaders/RainbowEffect.tres" id="18_wns57"]
 
 [sub_resource type="Shader" id="Shader_oayod"]
 code = "shader_type canvas_item;
@@ -281,3 +283,23 @@ layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 128.0
 columns = 17
+
+[node name="RainbowOverlayComponent" type="Node" parent="." index="23" unique_id=1613621018]
+script = ExtResource("17_egoq8")
+metadata/_custom_type_script = "uid://jqnpe0oqv5il"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="RainbowOverlayComponent" index="0" unique_id=1732800132]
+
+[node name="ColorRect" type="ColorRect" parent="RainbowOverlayComponent/CanvasLayer" index="0" unique_id=400252612]
+z_index = -1
+material = ExtResource("18_wns57")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="UniqueShaderComponent" type="Node" parent="RainbowOverlayComponent/CanvasLayer/ColorRect" index="0" unique_id=1428283624]
+script = ExtResource("11_yhquf")
+metadata/_custom_type_script = "uid://qcmegh7138ug"

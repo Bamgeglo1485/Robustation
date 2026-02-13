@@ -11,6 +11,7 @@ class_name MobMoverComponent extends Component
 var direction: Vector2 = Vector2.ZERO
 
 @export var fallen_speed_modifier: float = 0.3
+@export var fall_delay_modifier: float = 1.0
 @export var can_fall: bool = true
 @export var can_fall_from_body: bool = true
 @export var movement_blocked: bool = false
@@ -184,9 +185,18 @@ func drop(delay: float, force: bool = false) -> void:
 	if !can_fall or delay < 0.3 or force_fallen:
 		return
 	
+	var modifier: float = 1.0
+	if !force:
+		modifier = fall_delay_modifier
+		
+	standing_delay += delay * modifier
+	
+	if standing_delay <= 0.1:
+		standing_delay = 0
+		return
+	
 	parent.velocity = Vector2.ZERO
 	force_fallen = force
-	standing_delay += delay
 	
 	if fallen:
 		return

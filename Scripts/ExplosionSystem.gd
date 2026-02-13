@@ -9,6 +9,7 @@ extends Node2D
 @export var source: CharacterBody2D
 @export var explosion_duration: float = 0.3
 @export var check_interval: float = 0.05
+@export var ignore_faction: bool = false
 var active: bool = true
 
 var damaged_bodies: Array = []
@@ -65,6 +66,14 @@ func _on_body_entered(body: Node2D) -> void:
 func _apply_damage_to_body(body: Node2D) -> void:
 	if not is_instance_valid(body) or body in damaged_bodies:
 		return
+	if (!ignore_faction and source and source.has_node("FactionComponent") and 
+		body.has_node("FactionComponent")):
+		
+		var source_faction: Node = source.get_node("FactionComponent")
+		var body_faction: Node = body.get_node("FactionComponent")
+		
+		if source_faction.faction == body_faction.faction:
+			return
 	
 	var distance: float = (body.global_position - global_position).length()
 	var distance_factor = 1.0 - clamp(distance / radius, 0.0, 1.0)

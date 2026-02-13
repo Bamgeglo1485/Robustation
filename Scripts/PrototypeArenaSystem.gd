@@ -8,8 +8,7 @@ var wave_special_agents: Array[CharacterBody2D] = []
 @onready var wave_timer = $WaveTimer
 @onready var player: CharacterBody2D = $Player
 @export var assistant: PackedScene
-@export var pun_pun: PackedScene
-@export var bartender: PackedScene
+@export var special_agents: Array[PackedScene]
 @export var cleanbot: PackedScene
 
 func _ready() -> void:
@@ -32,7 +31,7 @@ func _on_wave_timer_timeout() -> void:
 	
 	_clean_invalid_instances(wave_assistants)
 	
-	if wave_assistants.size() <= 13:
+	if wave_assistants.size() <= 8:
 		var enemy_count: int = randi_range(1, 3)
 		for i in range(enemy_count):
 			_spawn_enemy(assistant, wave_assistants)
@@ -56,19 +55,14 @@ func _spawn_enemy(enemy_scene: PackedScene, target_array: Array) -> void:
 	target_array.append(inst)
 
 func _spawn_special_enemies() -> void:
+	if special_agents.is_empty():
+		return
+	
 	var spawn_pos: Vector2 = _get_random_spawn_position()
 	
-	var pun_inst: Node = pun_pun.instantiate()
-	pun_inst.global_position = spawn_pos
-	add_child(pun_inst)
-	
-	var bartender_pos: Vector2 = spawn_pos + Vector2(randf_range(-50, 50), randf_range(-50, 50))
-	var bartender_inst: Node = bartender.instantiate()
-	bartender_inst.global_position = bartender_pos
-	add_child(bartender_inst)
-	
-	wave_special_agents.append(bartender_inst)
-	wave_special_agents.append(pun_inst)
+	var agent_inst: Node = special_agents.pick_random().instantiate()
+	agent_inst.global_position = spawn_pos
+	add_child(agent_inst)
 
 func _get_random_spawn_position() -> Vector2:
 	var x_spawn_pos: float = randf_range(0, 500)

@@ -53,6 +53,9 @@ func _physics_process(delta: float) -> void:
 	if speed_decreasing != 0:
 		speed -= speed_decreasing
 	
+	if speed <= 0:
+		_delete()
+	
 	parent.velocity = Vector2(speed, 0).rotated(direction)
 	parent.rotation += rotate_speed * delta
 	parent.move_and_collide(parent.velocity * delta)
@@ -123,6 +126,8 @@ func _on_body_entered(body: Node2D) -> void:
 	var modified_damage: float = damage * damage_modifier
 	
 	if body.has_node("HealthComponent"):
+		if !shooter:
+			shooter = null
 		body.get_node("HealthComponent").take_damage(modified_damage, shooter)
 		if max_penetrations != 0:
 			penetration_damaged_bodies.append(body)

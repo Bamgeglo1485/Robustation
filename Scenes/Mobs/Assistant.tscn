@@ -34,6 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://dverpu5mv40au" path="res://Textures/Weapons/Toolbox/toolbox.png" id="32_8jwui"]
 [ext_resource type="Texture2D" uid="uid://1yvrhqvfqqus" path="res://Textures/Weapons/Toolbox/toolbox_inhand.png" id="33_fg1co"]
 [ext_resource type="Script" uid="uid://da2q40ragr5wk" path="res://Components/Mobs/NPC/BuddyComponent.gd" id="34_fg1co"]
+[ext_resource type="Script" uid="uid://bdca2wo1kubsv" path="res://Components/Mobs/SpawnPerkOnDeathComponent.gd" id="35_23y4n"]
 
 [node name="Assistant" unique_id=1270222458 instance=ExtResource("1_bk7ip")]
 visibility_layer = 3
@@ -134,3 +135,8 @@ script = ExtResource("34_fg1co")
 buddy_group = "Assistant"
 rage_when_buddy_dead = false
 metadata/_custom_type_script = "uid://da2q40ragr5wk"
+
+[node name="SpawnPerkOnDeathComponent" type="Node" parent="." index="21" unique_id=261117993]
+script = ExtResource("35_23y4n")
+chance = 0.1
+metadata/_custom_type_script = "uid://bdca2wo1kubsv"

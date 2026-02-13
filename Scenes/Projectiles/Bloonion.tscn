@@ -15,7 +15,7 @@ material = SubResource("ShaderMaterial_jll1t")
 
 [node name="ProjectileComponent" parent="." index="0" node_paths=PackedStringArray("texture")]
 texture = NodePath("../Texture")
-lifetime = 0.8
+lifetime = 0.5
 parriable = false
 explosion_scene = ExtResource("3_rbv0g")
 explode_on_delete = true

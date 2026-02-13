@@ -78,6 +78,7 @@ metadata/_edit_horizontal_guides_ = [-17.0]
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
 base_max_speed = 200
+can_fall = false
 
 [node name="Texture" parent="." index="2" unique_id=382857461]
 texture = ExtResource("2_pjus4")

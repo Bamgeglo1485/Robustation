@@ -4,7 +4,7 @@ extends Node2D
 @export var delayed_damage: int = 3
 @export var delayed_time: int = 5
 @export var heal_teammates: bool = true
-@export var heal_amount: int = 40
+@export var heal_amount: int = 70
 @export var radius: int = 128
 @export var source: CharacterBody2D
 @export var lifetime: float = 4.0
@@ -41,10 +41,10 @@ func _ready() -> void:
 	queue_free()
 
 func _update() -> void:
-	if !area2d:
-		return
 	check_timer.start()
 	await get_tree().physics_frame
+	if !area2d:
+		return
 	var bodies = area2d.get_overlapping_bodies()
 	
 	for body in bodies:

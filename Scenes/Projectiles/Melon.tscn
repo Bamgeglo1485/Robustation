@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dn612tntf7on4"]
+
+[ext_resource type="PackedScene" uid="uid://c2fs5eoy7ntgu" path="res://Scenes/Projectiles/BaseProjectile.tscn" id="1_824tx"]
+[ext_resource type="PackedScene" uid="uid://c03qvua0tf8st" path="res://Scenes/Explosion/MiniExplosion.tscn" id="2_mq4wm"]
+[ext_resource type="Texture2D" uid="uid://dulb0ngn0w25n" path="res://Textures/Weapons/Melon/produce.png" id="3_is3kv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_il3tl"]
+radius = 18.0
+
+[node name="Projectile" unique_id=1124534166 instance=ExtResource("1_824tx")]
+
+[node name="ProjectileComponent" parent="." index="0" node_paths=PackedStringArray("texture")]
+texture = NodePath("../Texture")
+speed = 1000
+speed_decreasing = 30
+rotate_speed = 10
+lifetime = 4.0
+throw_speed = 500.0
+parry_speed_boost = 3.0
+explosion_scene = ExtResource("2_mq4wm")
+explode_on_delete = true
+explode_on_hit = true
+
+[node name="CollisionShape2D" parent="ProjectileComponent" index="0"]
+shape = SubResource("CircleShape2D_il3tl")
+
+[node name="Texture" type="Sprite2D" parent="." index="4" unique_id=1027792119]
+texture = ExtResource("3_is3kv")

@@ -6,6 +6,7 @@ var raged: bool = false
 @export var rage_damage_addendum: float = 1
 @export var rage_damage_resistance_subtrahend: float = 0.5
 @export var rage_speed_modifier_addendum: float = 0
+@export var rage_fall_delay_subtrahend: float = 0
 @export var aura_effect: Node2D
 
 @onready var weapon_user_component: WeaponUserComponent = parent.get_node_or_null("WeaponUserComponent")
@@ -51,6 +52,7 @@ func rage() -> void:
 		health_component.damage_modifier -= rage_damage_resistance_subtrahend
 	if mob_mover_component:
 		mob_mover_component.speed_modifier += rage_speed_modifier_addendum
+		mob_mover_component.fall_delay_modifier += rage_fall_delay_subtrahend
 	
 	if rage_delay != 0:
 		await get_tree().create_timer(rage_delay).timeout
@@ -81,3 +83,4 @@ func unrage() -> void:
 		health_component.damage_modifier += rage_damage_resistance_subtrahend
 	if mob_mover_component:
 		mob_mover_component.speed_modifier -= rage_speed_modifier_addendum
+		mob_mover_component.fall_delay_modifier -= rage_fall_delay_subtrahend

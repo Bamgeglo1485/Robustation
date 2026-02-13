@@ -58,6 +58,9 @@ height = 14.0
 [node name="PunPun" unique_id=979144824 instance=ExtResource("1_45881")]
 material = SubResource("ShaderMaterial_3gs27")
 
+[node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
+can_fall = false
+
 [node name="Texture" parent="." index="2" unique_id=382857461]
 texture = ExtResource("2_twaep")
 
@@ -134,7 +137,7 @@ attack_sound = NodePath("HitSound")
 miss_sound = NodePath("MissSound")
 throw_stop_speed = 200
 cooldown_delay = 0.1
-swing_delay = 0.2
+swing_delay = 0.0
 attack_rotation_multiplier = 0.5
 attack_shift_multiplier = 0.0
 parriable = false
@@ -150,6 +153,9 @@ stream = ExtResource("11_bohml")
 script = ExtResource("16_oll56")
 resistance = 0.2
 metadata/_custom_type_script = "uid://clr7jbioge17t"
+
+[node name="LightOccluder2D" parent="." index="19" unique_id=364816313]
+occluder = null
 
 [node name="SpawnPerkOnDeathComponent" type="Node" parent="." index="21" unique_id=515428420]
 script = ExtResource("17_7ll6j")

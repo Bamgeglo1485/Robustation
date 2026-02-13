@@ -191,7 +191,6 @@ drop_enemy_delay = 1.0
 timers_timescaled = false
 cooldown_delay = 2.0
 swing_delay = 0.0
-self_throw_speed = 500
 attack_rotation_multiplier = -1.0
 attack_shift_multiplier = -1.0
 metadata/_custom_type_script = "uid://6b7bcparwq17"

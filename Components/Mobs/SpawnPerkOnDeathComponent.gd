@@ -1,7 +1,7 @@
 class_name SpawnPerkOnDeathComponent extends Component
 
 @export var perk: PackedScene = preload("res://Scenes/Collectables/CollectableRandomPerk.tscn")
-@export var chance: float = 0.25
+@export var chance: float = 0.4
 
 func _ready() -> void:
 	EventBusManager.gibbed.connect(_on_gib)

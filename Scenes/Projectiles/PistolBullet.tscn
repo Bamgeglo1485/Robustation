@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c2fs5eoy7ntgu" path="res://Scenes/Projectiles/BaseProjectile.tscn" id="1_kf5wp"]
 [ext_resource type="Script" uid="uid://dfahm1hamvt58" path="res://Components/Entity/TrailEffectComponent.gd" id="2_i6635"]
-[ext_resource type="Texture2D" uid="uid://dksq5rolyg2r3" path="res://Textures/Weapons/Crowbar/bullet.png" id="3_7flok"]
+[ext_resource type="Texture2D" uid="uid://dksq5rolyg2r3" path="res://Textures/Weapons/MK58/bullet.png" id="3_7flok"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kf5wp"]
 radius = 3.0

@@ -66,8 +66,8 @@ func take_damage(damage: int, damager: Node2D, ignore_damage: bool = false) -> v
 	if INVINCIBLE:
 		if invinciblitiy_attack_effect:
 			var inst: Node = invinciblitiy_attack_effect.instantiate()
-			scene.add_child(inst)
 			inst.global_position = parent.global_position
+			scene.add_child(inst)
 		return
 	var modifier = armor
 	if ignore_damage:
@@ -104,15 +104,15 @@ func damage_effects(damager) -> void:
 	
 	if blood_effect_scene:
 		var blood_effect: Node = blood_effect_scene.instantiate()
-		scene.add_child(blood_effect)
 		blood_effect.global_position = parent.global_position
+		scene.add_child(blood_effect)
 		blood_effect.rotation = attack_direction.angle()
 	
 	if blood_spurt_effect_scene:
 		var blood_spurt_effect: Node = blood_spurt_effect_scene.instantiate()
-		scene.add_child(blood_spurt_effect)
-		blood_spurt_effect.emitting = true
 		blood_spurt_effect.global_position = parent.global_position
+		blood_spurt_effect.emitting = true
+		scene.add_child(blood_spurt_effect)
 
 func _flash(
 	speed_multiplier: float = 1,
@@ -128,8 +128,8 @@ func _death() -> void:
 	gibbed = true
 	if gib_effect_scene:
 		var gib_effect: Node = gib_effect_scene.instantiate()
-		scene.add_child.call_deferred(gib_effect)
 		gib_effect.global_position = parent.global_position
+		scene.add_child.call_deferred(gib_effect)
 	
 	parent.queue_free()
 	

@@ -59,7 +59,7 @@ height = 14.0
 material = SubResource("ShaderMaterial_3gs27")
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
-can_fall = false
+drop_resistance = 2
 
 [node name="Texture" parent="." index="2" unique_id=382857461]
 texture = ExtResource("2_twaep")

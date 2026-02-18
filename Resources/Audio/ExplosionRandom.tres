@@ -1,4 +1,4 @@
-[gd_resource type="AudioStreamRandomizer" load_steps=7 format=3 uid="uid://ba7j68er83sfy"]
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://ba7j68er83sfy"]
 
 [ext_resource type="AudioStream" uid="uid://bhb3gitepp75b" path="res://Audio/Boom/explosion1.ogg" id="1_iwbs0"]
 [ext_resource type="AudioStream" uid="uid://4kn6650fd0au" path="res://Audio/Boom/explosion2.ogg" id="2_y2f2v"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://urkbpuv58v0s" path="res://Audio/Boom/explosion6.ogg" id="6_0doh7"]
 
 [resource]
+random_pitch = 1.1892071
 streams_count = 6
 stream_0/stream = ExtResource("1_iwbs0")
 stream_1/stream = ExtResource("2_y2f2v")

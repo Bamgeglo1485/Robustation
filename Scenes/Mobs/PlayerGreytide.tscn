@@ -29,6 +29,8 @@
 [ext_resource type="AudioStream" uid="uid://xbdoc0n20dn" path="res://Audio/Effects/hypospray.ogg" id="26_27vau"]
 [ext_resource type="Script" uid="uid://b8d56xguabrvi" path="res://Components/Abilities/OverdoseAbilityComponent.gd" id="27_l8jtb"]
 [ext_resource type="Shader" uid="uid://4k7fthwpt7bc" path="res://Resources/Shaders/BattleTendency.gdshader" id="30_v1rwi"]
+[ext_resource type="Texture2D" uid="uid://dc0gdpbk12g5w" path="res://Textures/Mobs/Player/greytide_unlit.png" id="30_xwdpk"]
+[ext_resource type="Script" uid="uid://bqvdlb3r03cs0" path="res://Components/Visual/DirectionalSpriteComponent.gd" id="31_m4dpc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6fu7j"]
 shader = ExtResource("30_v1rwi")
@@ -291,3 +293,11 @@ grow_vertical = 2
 
 [node name="RainbowOverlayComponent" parent="." index="26" unique_id=1613621018 node_paths=PackedStringArray("overlay")]
 overlay = NodePath("CanvasLayer/ColorRect")
+
+[node name="Unlit" type="Sprite2D" parent="." index="27" unique_id=146609340]
+modulate = Color(2.8165433, 1.6618701, 0.82175255, 1)
+texture = ExtResource("30_xwdpk")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+script = ExtResource("31_m4dpc")
+metadata/_custom_type_script = "uid://bqvdlb3r03cs0"

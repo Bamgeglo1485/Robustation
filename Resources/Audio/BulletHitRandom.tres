@@ -1,4 +1,4 @@
-[gd_resource type="AudioStreamRandomizer" load_steps=5 format=3 uid="uid://cg0leh0na5lvv"]
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://cg0leh0na5lvv"]
 
 [ext_resource type="AudioStream" uid="uid://clay7hucb8y7s" path="res://Audio/Weapon/Hit/bullet_meat1.ogg" id="1_0cgne"]
 [ext_resource type="AudioStream" uid="uid://cj1dy28y5uqij" path="res://Audio/Weapon/Hit/bullet_meat2.ogg" id="2_oln4l"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://bs5vx8t6thykp" path="res://Audio/Weapon/Hit/bullet_meat4.ogg" id="4_2b5cs"]
 
 [resource]
+random_pitch = 1.1892071
 streams_count = 4
 stream_0/stream = ExtResource("1_0cgne")
 stream_1/stream = ExtResource("2_oln4l")

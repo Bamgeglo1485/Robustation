@@ -12,12 +12,12 @@ class_name ProjectileComponent extends Area2D
 @export var speed_decreasing: int = 0
 @export var damage: int = 10
 @export var rotate_speed: int = 0
-@export var lifetime: float = 3
+@export var lifetime: float = 3.0
 @export var throw_speed: float = 0
 
 var shooter: CharacterBody2D
 var direction: float
-var damage_modifier: float = 1
+var damage_modifier: float = 1.0
 var moving: bool = true
 var deleted: bool = false
 var penetration_damaged_bodies: Array
@@ -44,7 +44,9 @@ func _ready() -> void:
 		return
 	
 	_delete()
-	EventBusManager.projectile_miss.emit(shooter, parent)
+	
+	if penetration_damaged_bodies.is_empty():
+		EventBusManager.projectile_miss.emit(shooter, parent)
 
 func _physics_process(delta: float) -> void:
 	if !moving:
@@ -68,7 +70,7 @@ func _delete() -> void:
 	set_deferred("monitorable", false)
 	self.collision_layer = 0
 	
-	var ignore_component = MeleeAttackIgnoreComponent.new()
+	var ignore_component: MeleeAttackIgnoreComponent = MeleeAttackIgnoreComponent.new()
 	parent.add_child(ignore_component)
 	
 	if parent.has_node("Area2D"):

@@ -1,4 +1,4 @@
-[gd_resource type="AudioStreamRandomizer" load_steps=5 format=3 uid="uid://djwhsufysh1dq"]
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://djwhsufysh1dq"]
 
 [ext_resource type="AudioStream" uid="uid://bsge37vdfk27q" path="res://Audio/Weapon/Hit/punch1.ogg" id="1_l22sv"]
 [ext_resource type="AudioStream" uid="uid://dmqw1ur2twnfo" path="res://Audio/Weapon/Hit/punch2.ogg" id="2_yg4cv"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://cerhguyn1v6i3" path="res://Audio/Weapon/Hit/punch4.ogg" id="4_7egjw"]
 
 [resource]
+random_pitch = 1.1892071
 streams_count = 4
 stream_0/stream = ExtResource("1_l22sv")
 stream_1/stream = ExtResource("2_yg4cv")

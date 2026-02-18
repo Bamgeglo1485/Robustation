@@ -1,0 +1,157 @@
+[gd_scene format=3 uid="uid://8useii0cqwer"]
+
+[ext_resource type="PackedScene" uid="uid://beie4mcfgy8sm" path="res://Scenes/UI/Menu.tscn" id="1_y67r4"]
+[ext_resource type="Script" uid="uid://4io3bm7r86h6" path="res://Components/Interface/Menu/TextPrintingAnimationComponent.gd" id="2_qefsa"]
+[ext_resource type="Script" uid="uid://ccj77qbogyatv" path="res://Components/Entity/TimedSceneAdderComponent.gd" id="4_qefsa"]
+[ext_resource type="Material" uid="uid://bdio1hqqwuopn" path="res://Resources/Shaders/Monitor.tres" id="7_444o2"]
+[ext_resource type="AudioStream" uid="uid://cla3xv7l2yqii" path="res://Audio/Interface/Menu/startup.ogg" id="9_bjiq0"]
+[ext_resource type="Script" uid="uid://gms322u0heem" path="res://Components/Entity/TimedEnablerComponent.gd" id="10_kig3x"]
+[ext_resource type="AudioStream" uid="uid://b3bn8ma2pwwns" path="res://Audio/Interface/Menu/computer_loop.ogg" id="10_li5sn"]
+
+[node name="MainMenu" type="Control" unique_id=1022678340]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Loading" type="Control" parent="." unique_id=808219264]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="Loading" unique_id=1755492658]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="OUTPUT" type="RichTextLabel" parent="Loading" unique_id=180684307]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.019000001
+anchor_top = 0.028
+anchor_right = 0.98
+anchor_bottom = 0.97200006
+offset_left = 0.11199951
+offset_top = -0.144001
+offset_right = 0.040039063
+offset_bottom = 0.14398193
+grow_horizontal = 2
+grow_vertical = 2
+text = "(c) System by Geglo and contributors, more details in credits
+
+[INFO] cfg: Configuration loaded from file
+[DEBG] os: RobustOS
+[DEBG] version: 14.85
+[DEBG] fork: Om-PR
+[DEBG] user: Manager
+[DEBG] root: Processor: 6x Nano(R) Core(TM) g7
+[DEBG] root: Available Memory: 2,93 GiB
+[DEBG] root: Architecture: X8
+Startup initialized
+
+---------------------------------
+OMEGA PROJECT CONTROL SYSTEM
+
+[INFO] Access allowed
+[DEBG] res.mod: Loading module: '/OmegaProj/Omega.Server.dll'
+[DEBG] res.mod: Loading module: '/OmegaProj/Omega.Server.InjectControl.dll'
+[DEBG] res.mod: Loading module: '/OmegaProj/Omega.Data.dll'
+[DEBG] res.mod: Loading module: '/OmegaProj/Omega.Data.Tests.dll'
+[DEBG] res.mod: Loading module: '/OmegaProj/Omega.Interface.dll'
+[DEBG] res.mod: Loading module: '/OmegaProj/Omega.Shared.dll'
+[DEBG] res.mod: DONE loading modules
+
+STARTUP SUCCESSFUL!
+Good morning, Manager!
+
+Print \"omega\" to the console to get system information."
+scroll_active = false
+scroll_following = true
+
+[node name="TextPrintingAnimationComponent" type="Node" parent="Loading/OUTPUT" unique_id=2006426102]
+script = ExtResource("2_qefsa")
+animate_on_ready_delay = 4.0
+metadata/_custom_type_script = "uid://4io3bm7r86h6"
+
+[node name="MonitorOverlay" type="ColorRect" parent="Loading" unique_id=85509353]
+z_index = 20
+material = ExtResource("7_444o2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 1
+
+[node name="Startup" type="AudioStreamPlayer2D" parent="." unique_id=310895021]
+stream = ExtResource("9_bjiq0")
+autoplay = true
+
+[node name="Ambience" type="AudioStreamPlayer2D" parent="." unique_id=1177437461]
+stream = ExtResource("10_li5sn")
+autoplay = true
+parameters/looping = true
+
+[node name="AmbienceEnabler" type="Node" parent="." unique_id=829614945 node_paths=PackedStringArray("targets")]
+script = ExtResource("10_kig3x")
+targets = [NodePath("../Ambience")]
+delay = 22.0
+metadata/_custom_type_script = "uid://gms322u0heem"
+
+[node name="TimedSceneAdderComponent" type="Node" parent="." unique_id=1860549882 node_paths=PackedStringArray("target_parent")]
+script = ExtResource("4_qefsa")
+targets = Array[PackedScene]([ExtResource("1_y67r4")])
+target_parent = NodePath("..")
+delay = 4.5
+metadata/_custom_type_script = "uid://ccj77qbogyatv"
+
+[node name="ROBUSTATION_LOGO" type="RichTextLabel" parent="." unique_id=664433117]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.59900004
+anchor_top = 0.035
+anchor_right = 0.59900004
+anchor_bottom = 0.035
+offset_left = -0.048034668
+offset_top = 0.3199997
+offset_right = 399.95197
+offset_bottom = 443.32
+grow_horizontal = 2
+grow_vertical = 2
+text = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+X                   X                  X
+X                   X                  X
+X   XXXXXXXXX       X   XXXXXXXXXXX    X
+X      X    XX      X    XX      XXX   X
+X      X     XX    XX     XX       X   X
+X     XX     XX    X       XX      X   X
+X     XX     X     X       XXX         X
+X     XX   XX      X         XXX       X
+X     XXXXX        X     X     XXXXX   X
+X     XX  XXX      X     X       XXX   X
+X     XX    XX    XX     X        XX   X
+X     X      XX   X      XX      XXX   X
+X     X       XX  X       XXXXXXXXXX   X
+X     X        XX X           XXXXXX   X
+X                 X                    X
+X                XX                    X
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+scroll_active = false
+horizontal_alignment = 3
+
+[node name="TextPrintingAnimationComponent" type="Node" parent="ROBUSTATION_LOGO" unique_id=1440810342]
+script = ExtResource("2_qefsa")
+animate_on_ready_delay = 2.0
+metadata/_custom_type_script = "uid://4io3bm7r86h6"

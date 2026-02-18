@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://g2ac83tmeyxn"]
+[gd_scene format=3 uid="uid://g2ac83tmeyxn"]
 
 [ext_resource type="Texture2D" uid="uid://bbk76vne52rnv" path="res://Textures/Effects/Particles/blood_big.png" id="1_kgwu6"]
 [ext_resource type="Script" uid="uid://ckngjbi4531ra" path="res://Scripts/Effects/BloodSystem.gd" id="2_7m5ur"]
@@ -46,7 +46,7 @@ scale_over_velocity_max = 230.76999
 scale_over_velocity_curve = SubResource("CurveTexture_s8gfb")
 color = Color(0.5568628, 0, 0.18431373, 1)
 
-[node name="Blood" type="GPUParticles2D"]
+[node name="Blood" type="GPUParticles2D" unique_id=980653200]
 z_index = -1
 texture_filter = 1
 amount = 16
@@ -59,25 +59,25 @@ visibility_rect = Rect2(-1000, -1000, 2000, 2000)
 process_material = SubResource("ParticleProcessMaterial_70dfb")
 script = ExtResource("2_7m5ur")
 
-[node name="PauseTimer" type="Timer" parent="."]
+[node name="PauseTimer" type="Timer" parent="." unique_id=397941844]
 wait_time = 0.2
 one_shot = true
 autostart = true
 
-[node name="Eye" type="CharacterBody2D" parent="."]
+[node name="Eye" type="CharacterBody2D" parent="." unique_id=1571758759]
 z_index = 1
 collision_layer = 16
 collision_mask = 0
 motion_mode = 1
 
-[node name="Texture" type="Sprite2D" parent="Eye"]
+[node name="Texture" type="Sprite2D" parent="Eye" unique_id=2007548951]
 position = Vector2(-3, -3)
 texture = ExtResource("3_si16w")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Eye"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Eye" unique_id=800216896]
 shape = SubResource("CircleShape2D_uu161")
 
-[node name="OrganComponent" type="Node" parent="Eye" node_paths=PackedStringArray("area2d", "step_sound")]
+[node name="OrganComponent" type="Node" parent="Eye" unique_id=792713373 node_paths=PackedStringArray("area2d", "step_sound")]
 script = ExtResource("4_kg6vs")
 area2d = NodePath("../Area2D")
 step_sound = NodePath("StepSound")
@@ -86,41 +86,41 @@ min_acceleration_time = 0.6
 max_acceleration_time = 0.8
 metadata/_custom_type_script = "uid://d2eyb2xe1mh3p"
 
-[node name="StepSound" type="AudioStreamPlayer2D" parent="Eye/OrganComponent"]
+[node name="StepSound" type="AudioStreamPlayer2D" parent="Eye/OrganComponent" unique_id=1718865630]
 stream = ExtResource("11_2ypa8")
 volume_db = -20.0
 playback_type = 1
 
-[node name="Area2D" type="Area2D" parent="Eye"]
+[node name="Area2D" type="Area2D" parent="Eye" unique_id=907852831]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Eye/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Eye/Area2D" unique_id=1226086199]
 shape = SubResource("CircleShape2D_uu161")
 
-[node name="HealthComponent" type="Node" parent="Eye"]
+[node name="HealthComponent" type="Node" parent="Eye" unique_id=1360448571]
 script = ExtResource("6_s8gfb")
 max_health = 5
 health = 5
 gib_effect_scene = ExtResource("4_xdl0o")
 metadata/_custom_type_script = "uid://df356su15y7ow"
 
-[node name="MeleeAttackIgnoreComponent" type="Node" parent="Eye"]
+[node name="MeleeAttackIgnoreComponent" type="Node" parent="Eye" unique_id=1347076098]
 script = ExtResource("9_67tnm")
 metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
 
-[node name="Brain" type="CharacterBody2D" parent="."]
+[node name="Brain" type="CharacterBody2D" parent="." unique_id=1716066439]
 z_index = 1
 collision_layer = 16
 collision_mask = 0
 motion_mode = 1
 
-[node name="Texture" type="Sprite2D" parent="Brain"]
+[node name="Texture" type="Sprite2D" parent="Brain" unique_id=5119715]
 position = Vector2(-3, -3)
 texture = ExtResource("3_s0kwc")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Brain"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Brain" unique_id=2033167977]
 shape = SubResource("CircleShape2D_uu161")
 
-[node name="OrganComponent" type="Node" parent="Brain" node_paths=PackedStringArray("area2d", "step_sound")]
+[node name="OrganComponent" type="Node" parent="Brain" unique_id=42336084 node_paths=PackedStringArray("area2d", "step_sound")]
 script = ExtResource("4_kg6vs")
 area2d = NodePath("../Area2D")
 step_sound = NodePath("StepSound")
@@ -129,41 +129,41 @@ min_acceleration_time = 0.6
 max_acceleration_time = 0.8
 metadata/_custom_type_script = "uid://d2eyb2xe1mh3p"
 
-[node name="StepSound" type="AudioStreamPlayer2D" parent="Brain/OrganComponent"]
+[node name="StepSound" type="AudioStreamPlayer2D" parent="Brain/OrganComponent" unique_id=735999624]
 stream = ExtResource("11_2ypa8")
 volume_db = -20.0
 playback_type = 1
 
-[node name="Area2D" type="Area2D" parent="Brain"]
+[node name="Area2D" type="Area2D" parent="Brain" unique_id=1507963110]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Brain/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Brain/Area2D" unique_id=1731209122]
 shape = SubResource("CircleShape2D_uu161")
 
-[node name="HealthComponent" type="Node" parent="Brain"]
+[node name="HealthComponent" type="Node" parent="Brain" unique_id=1783359334]
 script = ExtResource("6_s8gfb")
 max_health = 5
 health = 5
 gib_effect_scene = ExtResource("4_xdl0o")
 metadata/_custom_type_script = "uid://df356su15y7ow"
 
-[node name="MeleeAttackIgnoreComponent" type="Node" parent="Brain"]
+[node name="MeleeAttackIgnoreComponent" type="Node" parent="Brain" unique_id=1169015921]
 script = ExtResource("9_67tnm")
 metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
 
-[node name="Heart" type="CharacterBody2D" parent="."]
+[node name="Heart" type="CharacterBody2D" parent="." unique_id=523662636]
 z_index = 1
 collision_layer = 16
 collision_mask = 0
 motion_mode = 1
 
-[node name="Texture" type="Sprite2D" parent="Heart"]
+[node name="Texture" type="Sprite2D" parent="Heart" unique_id=1831369204]
 position = Vector2(1, 1)
 texture = ExtResource("5_c12ba")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Heart"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Heart" unique_id=1659958703]
 shape = SubResource("CircleShape2D_uu161")
 
-[node name="OrganComponent" type="Node" parent="Heart" node_paths=PackedStringArray("area2d", "step_sound")]
+[node name="OrganComponent" type="Node" parent="Heart" unique_id=1718823199 node_paths=PackedStringArray("area2d", "step_sound")]
 script = ExtResource("4_kg6vs")
 area2d = NodePath("../Area2D")
 step_sound = NodePath("StepSound")
@@ -172,41 +172,41 @@ min_acceleration_time = 0.6
 max_acceleration_time = 0.8
 metadata/_custom_type_script = "uid://d2eyb2xe1mh3p"
 
-[node name="StepSound" type="AudioStreamPlayer2D" parent="Heart/OrganComponent"]
+[node name="StepSound" type="AudioStreamPlayer2D" parent="Heart/OrganComponent" unique_id=1831453590]
 stream = ExtResource("11_2ypa8")
 volume_db = -20.0
 playback_type = 1
 
-[node name="Area2D" type="Area2D" parent="Heart"]
+[node name="Area2D" type="Area2D" parent="Heart" unique_id=551126066]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Heart/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Heart/Area2D" unique_id=1550565013]
 shape = SubResource("CircleShape2D_uu161")
 
-[node name="HealthComponent" type="Node" parent="Heart"]
+[node name="HealthComponent" type="Node" parent="Heart" unique_id=796035847]
 script = ExtResource("6_s8gfb")
 max_health = 5
 health = 5
 gib_effect_scene = ExtResource("4_xdl0o")
 metadata/_custom_type_script = "uid://df356su15y7ow"
 
-[node name="MeleeAttackIgnoreComponent" type="Node" parent="Heart"]
+[node name="MeleeAttackIgnoreComponent" type="Node" parent="Heart" unique_id=1287796624]
 script = ExtResource("9_67tnm")
 metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
 
-[node name="Stomach" type="CharacterBody2D" parent="."]
+[node name="Stomach" type="CharacterBody2D" parent="." unique_id=2136891988]
 z_index = 1
 collision_layer = 16
 collision_mask = 0
 motion_mode = 1
 
-[node name="Texture" type="Sprite2D" parent="Stomach"]
+[node name="Texture" type="Sprite2D" parent="Stomach" unique_id=1839001961]
 position = Vector2(1, 1)
 texture = ExtResource("6_2ypa8")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Stomach"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stomach" unique_id=28001596]
 shape = SubResource("CircleShape2D_uu161")
 
-[node name="OrganComponent" type="Node" parent="Stomach" node_paths=PackedStringArray("area2d", "step_sound")]
+[node name="OrganComponent" type="Node" parent="Stomach" unique_id=373302802 node_paths=PackedStringArray("area2d", "step_sound")]
 script = ExtResource("4_kg6vs")
 area2d = NodePath("../Area2D")
 step_sound = NodePath("StepSound")
@@ -215,41 +215,41 @@ min_acceleration_time = 0.6
 max_acceleration_time = 0.8
 metadata/_custom_type_script = "uid://d2eyb2xe1mh3p"
 
-[node name="StepSound" type="AudioStreamPlayer2D" parent="Stomach/OrganComponent"]
+[node name="StepSound" type="AudioStreamPlayer2D" parent="Stomach/OrganComponent" unique_id=168627383]
 stream = ExtResource("11_2ypa8")
 volume_db = -20.0
 playback_type = 1
 
-[node name="Area2D" type="Area2D" parent="Stomach"]
+[node name="Area2D" type="Area2D" parent="Stomach" unique_id=1395604457]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Stomach/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stomach/Area2D" unique_id=214789559]
 shape = SubResource("CircleShape2D_uu161")
 
-[node name="HealthComponent" type="Node" parent="Stomach"]
+[node name="HealthComponent" type="Node" parent="Stomach" unique_id=846579537]
 script = ExtResource("6_s8gfb")
 max_health = 5
 health = 5
 gib_effect_scene = ExtResource("4_xdl0o")
 metadata/_custom_type_script = "uid://df356su15y7ow"
 
-[node name="MeleeAttackIgnoreComponent" type="Node" parent="Stomach"]
+[node name="MeleeAttackIgnoreComponent" type="Node" parent="Stomach" unique_id=1061729653]
 script = ExtResource("9_67tnm")
 metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
 
-[node name="Ears" type="CharacterBody2D" parent="."]
+[node name="Ears" type="CharacterBody2D" parent="." unique_id=1370736291]
 z_index = 1
 collision_layer = 16
 collision_mask = 0
 motion_mode = 1
 
-[node name="Texture" type="Sprite2D" parent="Ears"]
+[node name="Texture" type="Sprite2D" parent="Ears" unique_id=1928315991]
 position = Vector2(1, 1)
 texture = ExtResource("7_uu161")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ears"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ears" unique_id=1476008352]
 shape = SubResource("CircleShape2D_uu161")
 
-[node name="OrganComponent" type="Node" parent="Ears" node_paths=PackedStringArray("area2d", "step_sound")]
+[node name="OrganComponent" type="Node" parent="Ears" unique_id=1972706219 node_paths=PackedStringArray("area2d", "step_sound")]
 script = ExtResource("4_kg6vs")
 area2d = NodePath("../Area2D")
 step_sound = NodePath("StepSound")
@@ -258,41 +258,41 @@ min_acceleration_time = 0.6
 max_acceleration_time = 0.8
 metadata/_custom_type_script = "uid://d2eyb2xe1mh3p"
 
-[node name="StepSound" type="AudioStreamPlayer2D" parent="Ears/OrganComponent"]
+[node name="StepSound" type="AudioStreamPlayer2D" parent="Ears/OrganComponent" unique_id=16673741]
 stream = ExtResource("11_2ypa8")
 volume_db = -20.0
 playback_type = 1
 
-[node name="Area2D" type="Area2D" parent="Ears"]
+[node name="Area2D" type="Area2D" parent="Ears" unique_id=1980699648]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ears/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ears/Area2D" unique_id=1311805144]
 shape = SubResource("CircleShape2D_uu161")
 
-[node name="HealthComponent" type="Node" parent="Ears"]
+[node name="HealthComponent" type="Node" parent="Ears" unique_id=1088319972]
 script = ExtResource("6_s8gfb")
 max_health = 5
 health = 5
 gib_effect_scene = ExtResource("4_xdl0o")
 metadata/_custom_type_script = "uid://df356su15y7ow"
 
-[node name="MeleeAttackIgnoreComponent" type="Node" parent="Ears"]
+[node name="MeleeAttackIgnoreComponent" type="Node" parent="Ears" unique_id=1175241147]
 script = ExtResource("9_67tnm")
 metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
 
-[node name="Liver" type="CharacterBody2D" parent="."]
+[node name="Liver" type="CharacterBody2D" parent="." unique_id=145671700]
 z_index = 1
 collision_layer = 16
 collision_mask = 0
 motion_mode = 1
 
-[node name="Texture" type="Sprite2D" parent="Liver"]
+[node name="Texture" type="Sprite2D" parent="Liver" unique_id=1730720956]
 position = Vector2(1, 1)
 texture = ExtResource("8_xdl0o")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Liver"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Liver" unique_id=78013216]
 shape = SubResource("CircleShape2D_uu161")
 
-[node name="OrganComponent" type="Node" parent="Liver" node_paths=PackedStringArray("area2d", "step_sound")]
+[node name="OrganComponent" type="Node" parent="Liver" unique_id=1263163577 node_paths=PackedStringArray("area2d", "step_sound")]
 script = ExtResource("4_kg6vs")
 area2d = NodePath("../Area2D")
 step_sound = NodePath("StepSound")
@@ -301,41 +301,41 @@ min_acceleration_time = 0.6
 max_acceleration_time = 0.8
 metadata/_custom_type_script = "uid://d2eyb2xe1mh3p"
 
-[node name="StepSound" type="AudioStreamPlayer2D" parent="Liver/OrganComponent"]
+[node name="StepSound" type="AudioStreamPlayer2D" parent="Liver/OrganComponent" unique_id=651499424]
 stream = ExtResource("11_2ypa8")
 volume_db = -20.0
 playback_type = 1
 
-[node name="Area2D" type="Area2D" parent="Liver"]
+[node name="Area2D" type="Area2D" parent="Liver" unique_id=1606486923]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Liver/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Liver/Area2D" unique_id=150835588]
 shape = SubResource("CircleShape2D_uu161")
 
-[node name="HealthComponent" type="Node" parent="Liver"]
+[node name="HealthComponent" type="Node" parent="Liver" unique_id=1267080622]
 script = ExtResource("6_s8gfb")
 max_health = 5
 health = 5
 gib_effect_scene = ExtResource("4_xdl0o")
 metadata/_custom_type_script = "uid://df356su15y7ow"
 
-[node name="MeleeAttackIgnoreComponent" type="Node" parent="Liver"]
+[node name="MeleeAttackIgnoreComponent" type="Node" parent="Liver" unique_id=1731311703]
 script = ExtResource("9_67tnm")
 metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
 
-[node name="Kidney" type="CharacterBody2D" parent="."]
+[node name="Kidney" type="CharacterBody2D" parent="." unique_id=1066121005]
 z_index = 1
 collision_layer = 16
 collision_mask = 0
 motion_mode = 1
 
-[node name="Texture" type="Sprite2D" parent="Kidney"]
+[node name="Texture" type="Sprite2D" parent="Kidney" unique_id=949012046]
 position = Vector2(1, 1)
 texture = ExtResource("9_kg6vs")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Kidney"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Kidney" unique_id=704552400]
 shape = SubResource("CircleShape2D_uu161")
 
-[node name="OrganComponent" type="Node" parent="Kidney" node_paths=PackedStringArray("area2d", "step_sound")]
+[node name="OrganComponent" type="Node" parent="Kidney" unique_id=1138604150 node_paths=PackedStringArray("area2d", "step_sound")]
 script = ExtResource("4_kg6vs")
 area2d = NodePath("../Area2D")
 step_sound = NodePath("StepSound")
@@ -344,32 +344,32 @@ min_acceleration_time = 0.6
 max_acceleration_time = 0.8
 metadata/_custom_type_script = "uid://d2eyb2xe1mh3p"
 
-[node name="StepSound" type="AudioStreamPlayer2D" parent="Kidney/OrganComponent"]
+[node name="StepSound" type="AudioStreamPlayer2D" parent="Kidney/OrganComponent" unique_id=1919605887]
 stream = ExtResource("11_2ypa8")
 volume_db = -20.0
 playback_type = 1
 
-[node name="Area2D" type="Area2D" parent="Kidney"]
+[node name="Area2D" type="Area2D" parent="Kidney" unique_id=735714363]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Kidney/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Kidney/Area2D" unique_id=874612772]
 shape = SubResource("CircleShape2D_uu161")
 
-[node name="HealthComponent" type="Node" parent="Kidney"]
+[node name="HealthComponent" type="Node" parent="Kidney" unique_id=1676717118]
 script = ExtResource("6_s8gfb")
 max_health = 5
 health = 5
 gib_effect_scene = ExtResource("4_xdl0o")
 metadata/_custom_type_script = "uid://df356su15y7ow"
 
-[node name="MeleeAttackIgnoreComponent" type="Node" parent="Kidney"]
+[node name="MeleeAttackIgnoreComponent" type="Node" parent="Kidney" unique_id=66168682]
 script = ExtResource("9_67tnm")
 metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
 
-[node name="GibSound" type="AudioStreamPlayer2D" parent="."]
+[node name="GibSound" type="AudioStreamPlayer2D" parent="." unique_id=159409569]
 stream = ExtResource("11_2ypa8")
 autoplay = true
 
-[node name="Blood" parent="." instance=ExtResource("12_uu161")]
+[node name="Blood" parent="." unique_id=1392896896 instance=ExtResource("12_uu161")]
 z_index = 0
 emitting = true
 amount = 32
@@ -379,11 +379,11 @@ speed_scale = 2.94
 visibility_rect = Rect2(-1000, -1000, 2000, 2000)
 process_material = SubResource("ParticleProcessMaterial_67tnm")
 
-[node name="GPUParticles2D2" parent="." instance=ExtResource("14_eb50u")]
+[node name="GPUParticles2D2" parent="." unique_id=776308863 instance=ExtResource("14_eb50u")]
 z_index = 2
 texture = ExtResource("15_s8gfb")
 
-[node name="StepSound" type="AudioStreamPlayer2D" parent="."]
+[node name="StepSound" type="AudioStreamPlayer2D" parent="." unique_id=1206559729]
 stream = ExtResource("11_2ypa8")
 volume_db = -20.0
 autoplay = true

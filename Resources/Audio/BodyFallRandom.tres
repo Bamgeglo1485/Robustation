@@ -1,10 +1,11 @@
-[gd_resource type="AudioStreamRandomizer" load_steps=4 format=3 uid="uid://b7l65hp5rr2pt"]
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://b7l65hp5rr2pt"]
 
 [ext_resource type="AudioStream" uid="uid://3nfj3j6x11pb" path="res://Audio/Effects/bodyfall1.ogg" id="1_d558l"]
 [ext_resource type="AudioStream" uid="uid://dnj2n6iqgufl6" path="res://Audio/Effects/bodyfall2.ogg" id="2_krriv"]
 [ext_resource type="AudioStream" uid="uid://cpg4cq7qmg1st" path="res://Audio/Effects/bodyfall3.ogg" id="3_jpn66"]
 
 [resource]
+random_pitch = 1.1892071
 streams_count = 4
 stream_0/stream = ExtResource("1_d558l")
 stream_1/stream = ExtResource("2_krriv")

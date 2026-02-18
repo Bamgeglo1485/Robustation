@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d2pxx2a2ne1q2"]
 
 [ext_resource type="PackedScene" uid="uid://c0eulucj1dtco" path="res://Scenes/Mobs/Base/BaseEnemy.tscn" id="1_t2qjf"]
-[ext_resource type="Texture2D" uid="uid://l64541252386" path="res://Textures/Mobs/cadet.png" id="2_hnmsv"]
+[ext_resource type="Texture2D" uid="uid://l64541252386" path="res://Textures/Mobs/Mobs/cadet.png" id="2_hnmsv"]
 [ext_resource type="Script" uid="uid://cbn5a10g0d5yr" path="res://Components/Mobs/NPC/MeleeRangeComponent.gd" id="3_qfti7"]
 [ext_resource type="Texture2D" uid="uid://cryexxr4x761f" path="res://Textures/Mobs/Mobs/Hair/undercutright.png" id="4_qcjae"]
 [ext_resource type="Script" uid="uid://bqvdlb3r03cs0" path="res://Components/Visual/DirectionalSpriteComponent.gd" id="5_hmnso"]
@@ -49,7 +49,7 @@ visibility_layer = 3
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
 base_max_speed = 200.0
 acceleration = 150.0
-can_fall = false
+drop_resistance = 2
 
 [node name="Texture" parent="." index="2" unique_id=382857461]
 texture = ExtResource("2_hnmsv")

@@ -28,6 +28,7 @@ var fly_source: Node2D
 
 @export var body_fall_sound: AudioStreamPlayer2D
 @export var fall_effect: PackedScene = preload("res://Scenes/Effects/Particles/Fall.tscn")
+@export var drop_resistance: int = 0
 var fallen: bool = false
 var force_fallen: bool = false
 var standing_delay: float = 0.0
@@ -181,8 +182,8 @@ func _fall_process(delta: float) -> void:
 	if standing_delay <= 0:
 		stand_up()
 
-func drop(delay: float, force: bool = false) -> void:
-	if !can_fall or delay < 0.3 or force_fallen:
+func drop(delay: float, force: bool = false, resistance_force: int = 0) -> void:
+	if !can_fall or delay < 0.3 or force_fallen or drop_resistance > resistance_force:
 		return
 	
 	var modifier: float = 1.0
@@ -216,8 +217,8 @@ func drop(delay: float, force: bool = false) -> void:
 			return
 		
 		var inst: Node = fall_effect.instantiate()
-		scene.add_child(inst)
 		inst.global_position = parent.global_position
+		scene.add_child(inst)
 	if body_fall_sound:
 		body_fall_sound.play()
 

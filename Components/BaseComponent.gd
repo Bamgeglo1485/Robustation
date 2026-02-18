@@ -2,7 +2,7 @@
 class_name Component extends Node
 
 var parent: Node = _get_valid_parent()
-@onready var scene: Node2D = get_tree().get_root().get_node("Game")
+@onready var scene: Node2D = get_tree().get_root().get_node_or_null("Game")
 
 func _init() -> void:
 	name = get_script().get_global_name()

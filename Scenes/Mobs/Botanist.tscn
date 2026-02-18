@@ -19,7 +19,7 @@
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
 base_max_speed = 200.0
-can_fall = false
+drop_resistance = 2
 
 [node name="Texture" parent="." index="2" unique_id=382857461]
 position = Vector2(0, 1)

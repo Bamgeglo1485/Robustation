@@ -12,6 +12,7 @@ class_name MeleeWeapon extends Weapon
 @export var parry_effect: PackedScene = preload("res://Scenes/Effects/Particles/ParryEffect.tscn")
 @export var parry_sound: AudioStreamPlayer2D
 @export var parry_color: Color = Color(5.565, 1.36, 1.878, 1.0)
+@export var play_parried_sound: bool = false
 
 @export var attack_sound: AudioStreamPlayer2D
 @export var miss_sound: AudioStreamPlayer2D
@@ -21,6 +22,8 @@ class_name MeleeWeapon extends Weapon
 
 @export var throw_speed: int = 300
 @export var throw_stop_speed: int = 10
+@export var drop_resistance_force: int = 1
+@export var drop_forced: bool = false
 @export var drop_enemy_delay: float = 0.0
 
 func attack(raiser, npc = true) -> Dictionary:
@@ -156,7 +159,7 @@ func _melee_attack_target(target, direction = null, multiple_attack = false) -> 
 		if throw_speed != 0:
 			target.get_node("MobMoverComponent").throw(direction, throw_speed, parent, throw_stop_speed)
 		if drop_enemy_delay != 0:
-			target.get_node("MobMoverComponent").drop(drop_enemy_delay)
+			target.get_node("MobMoverComponent").drop(drop_enemy_delay, drop_forced, drop_resistance_force)
 	
 	if target.has_node("StaminaComponent") and stamina_damage != 0:
 		target.get_node("StaminaComponent").take_stamina_damage(stamina_damage * damage_modifier, parent)
@@ -171,6 +174,8 @@ func parry_weapon(weapon, target) -> void:
 	EventBusManager.parry.emit(parent, "Weapon")
 	weapon.swinging_cancelled = true
 	parry_effects()
+	if parry_sound and weapon.play_parried_sound:
+		parry_sound.play()
 	
 	if target.has_node("HealthComponent"):
 		target.get_node("HealthComponent").take_damage(damage * 0.5, parent)
@@ -193,6 +198,8 @@ func parry_projectile(target, projectile, direction) -> void:
 		projectile.direction = angle
 		projectile.shooter = parent
 		
+		if parry_sound:
+			parry_sound.play()
 		parry_effects()
 		
 		var trail = TrailEffectComponent.new()
@@ -205,8 +212,6 @@ func parry_projectile(target, projectile, direction) -> void:
 		target.add_child(trail)
 
 func parry_effects():
-	if parry_sound:
-		parry_sound.play()
 	if parry_effect:
 		var inst: Node = parry_effect.instantiate()
 		inst.global_position = parent.global_position

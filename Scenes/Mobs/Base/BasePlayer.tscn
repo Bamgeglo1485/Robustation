@@ -18,6 +18,9 @@
 [ext_resource type="Script" uid="uid://bl4o52tmouk6e" path="res://Components/Perks/Entity/PerkOwnerComponent.gd" id="15_4awd5"]
 [ext_resource type="Script" uid="uid://jqnpe0oqv5il" path="res://Components/Player/RainbowOverlayComponent.gd" id="17_egoq8"]
 [ext_resource type="Material" uid="uid://dm7k2tvshj7cb" path="res://Resources/Shaders/RainbowEffect.tres" id="18_wns57"]
+[ext_resource type="Script" uid="uid://ck3n6ttlwtal7" path="res://Components/Player/IngameMenuComponent.gd" id="19_pd2gv"]
+[ext_resource type="PackedScene" uid="uid://boqce2oysl7a0" path="res://Scenes/UI/IngameInterface/IngameMenu.tscn" id="20_ryxqw"]
+[ext_resource type="Shader" uid="uid://b53pser2tah5a" path="res://Resources/Shaders/Monitor.gdshader" id="21_ryxqw"]
 
 [sub_resource type="Shader" id="Shader_oayod"]
 code = "shader_type canvas_item;
@@ -137,6 +140,30 @@ shader_parameter/hue_shift = 0.0
 shader_parameter/gamma = 1.0
 shader_parameter/alpha = 1.0
 shader_parameter/vignette_strength = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7o513"]
+shader = ExtResource("21_ryxqw")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.70000003325
+shader_parameter/scanlines_width = 0.30000001425
+shader_parameter/grille_opacity = 0.3
+shader_parameter/resolution = Vector2(320, 180)
+shader_parameter/pixelate = false
+shader_parameter/roll = true
+shader_parameter/roll_speed = 8.0
+shader_parameter/roll_size = 10.000000475
+shader_parameter/roll_variation = 3.0000001392401203
+shader_parameter/distort_intensity = 0.05
+shader_parameter/noise_opacity = 0.30000001425
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.0050000002375
+shader_parameter/aberration = 0.015000048212499895
+shader_parameter/brightness = 2.0
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.050000002375
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.3
+shader_parameter/vignette_opacity = 0.5
 
 [node name="Player" unique_id=808070232 instance=ExtResource("1_gq7me")]
 collision_layer = 1
@@ -271,6 +298,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_behavior_recursive = 1
 
 [node name="Panel" type="Panel" parent="PerkOwnerComponent/PerkUI/Control" index="0" unique_id=1414116930]
 self_modulate = Color(0.8283503, 0, 0.34580213, 0.17500001)
@@ -303,3 +331,27 @@ color = Color(1, 1, 1, 0)
 [node name="UniqueShaderComponent" type="Node" parent="RainbowOverlayComponent/CanvasLayer/ColorRect" index="0" unique_id=1428283624]
 script = ExtResource("11_yhquf")
 metadata/_custom_type_script = "uid://qcmegh7138ug"
+
+[node name="IngameMenuComponent" type="Node" parent="." index="24" unique_id=691096378 node_paths=PackedStringArray("menu", "paused_effect")]
+process_mode = 3
+script = ExtResource("19_pd2gv")
+menu = NodePath("CanvasLayer/IngameMenu")
+action_event = "toggle_menu"
+paused_effect = NodePath("CanvasLayer/ColorRect")
+metadata/_custom_type_script = "uid://ck3n6ttlwtal7"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="IngameMenuComponent" index="0" unique_id=977705511]
+
+[node name="ColorRect" type="ColorRect" parent="IngameMenuComponent/CanvasLayer" index="0" unique_id=1738391628]
+visible = false
+material = SubResource("ShaderMaterial_7o513")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="IngameMenu" parent="IngameMenuComponent/CanvasLayer" index="1" unique_id=1644887491 instance=ExtResource("20_ryxqw")]
+visible = false
+z_index = 2

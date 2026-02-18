@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://hdmufly1h3mb" path="res://Audio/Weapon/Hit/genhit3.ogg" id="3_f4q5m"]
 
 [resource]
+random_pitch = 1.1892071
 streams_count = 3
 stream_0/stream = ExtResource("1_8xcnu")
 stream_1/stream = ExtResource("2_v2h3b")

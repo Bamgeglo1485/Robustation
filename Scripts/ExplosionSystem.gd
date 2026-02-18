@@ -10,6 +10,8 @@ extends Node2D
 @export var explosion_duration: float = 0.3
 @export var check_interval: float = 0.05
 @export var ignore_faction: bool = false
+@export var drop_forced: bool = false
+@export var drop_resistance_force: int = 3
 var active: bool = true
 
 var damaged_bodies: Array = []
@@ -89,7 +91,7 @@ func _apply_damage_to_body(body: Node2D) -> void:
 		
 		if body.has_node("MobMoverComponent"):
 			var mob_mover: MobMoverComponent = body.get_node("MobMoverComponent")
-			mob_mover.drop(fall_time * distance_factor)
+			mob_mover.drop(fall_time * distance_factor, drop_forced, drop_resistance_force)
 			var direction: Vector2 = (body.global_position - global_position).normalized()
 			if direction.length_squared() > 0:
 				mob_mover.throw(direction, fly_force * distance_factor)

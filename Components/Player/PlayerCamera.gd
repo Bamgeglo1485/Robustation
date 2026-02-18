@@ -4,6 +4,17 @@ class_name PlayerCamera extends Camera2D
 @onready var parent: Node = get_parent()
 @onready var direction_component: DirectionComponent = get_direction_component()
 
+var config = ConfigFile.new()
+
+func _ready() -> void:
+	var err = config.load("user://settings.cfg")
+	if err != OK:
+		return
+	
+	var fov = config.get_value("VISUAL", "FOV")
+	
+	zoom *= fov/100
+
 func _notification(notif):
 	if notif == NOTIFICATION_PARENTED:
 		parent = get_parent()

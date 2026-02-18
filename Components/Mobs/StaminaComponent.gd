@@ -58,7 +58,7 @@ func stun():
 		mob_mover_component.drop(stun_time, true)
 	if stun_effect:
 		var inst = stun_effect.instantiate()
-		parent.add_child.call_deferred(inst)
+		parent.add_child(inst)
 		if inst.has_node("Delete"):
 			inst.get_node("Delete").wait_time = stun_time
 	get_tree().create_timer(stun_time).timeout.connect(unstun)

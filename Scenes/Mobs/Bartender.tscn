@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c0eulucj1dtco" path="res://Scenes/Mobs/Base/BaseEnemy.tscn" id="1_cs75w"]
 [ext_resource type="Shader" uid="uid://cch5nmhk121wx" path="res://Resources/Shaders/MobShader.gdshader" id="2_11246"]
-[ext_resource type="Texture2D" uid="uid://c3sledmjh2jwl" path="res://Textures/Mobs/Mobs/Hair/bartender.png" id="2_pjus4"]
+[ext_resource type="Texture2D" uid="uid://c3sledmjh2jwl" path="res://Textures/Mobs/Mobs/bartender.png" id="2_pjus4"]
 [ext_resource type="Texture2D" uid="uid://cryexxr4x761f" path="res://Textures/Mobs/Mobs/Hair/undercutright.png" id="3_p0u7e"]
 [ext_resource type="Script" uid="uid://bi1gje1pfokqc" path="res://Components/Weapons/RangeWeaponComponent.gd" id="3_tv8gs"]
 [ext_resource type="Script" uid="uid://bqvdlb3r03cs0" path="res://Components/Visual/DirectionalSpriteComponent.gd" id="4_p2u1y"]
@@ -77,8 +77,8 @@ material = SubResource("ShaderMaterial_biq87")
 metadata/_edit_horizontal_guides_ = [-17.0]
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
-base_max_speed = 200
-can_fall = false
+base_max_speed = 300.0
+drop_resistance = 2
 
 [node name="Texture" parent="." index="2" unique_id=382857461]
 texture = ExtResource("2_pjus4")

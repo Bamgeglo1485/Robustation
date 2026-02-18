@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2fs5eoy7ntgu"]
+[gd_scene format=3 uid="uid://c2fs5eoy7ntgu"]
 
 [ext_resource type="Script" uid="uid://dn05jeqqq5844" path="res://Components/Entity/ProjectileComponent.gd" id="2_wrjq0"]
 [ext_resource type="Script" uid="uid://df356su15y7ow" path="res://Components/Entity/HealthComponent.gd" id="3_88g3b"]
@@ -8,36 +8,37 @@
 radius = 31.0
 height = 68.0
 
-[node name="Projectile" type="CharacterBody2D"]
+[node name="Projectile" type="CharacterBody2D" unique_id=1001723315]
+physics_interpolation_mode = 1
 texture_filter = 1
 collision_layer = 0
 collision_mask = 0
 motion_mode = 1
 
-[node name="ProjectileComponent" type="Area2D" parent="." node_paths=PackedStringArray("hit_sound")]
+[node name="ProjectileComponent" type="Area2D" parent="." unique_id=2058769936 node_paths=PackedStringArray("hit_sound")]
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("2_wrjq0")
 hit_sound = NodePath("HitSound")
 metadata/_custom_type_script = "uid://dn05jeqqq5844"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ProjectileComponent"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ProjectileComponent" unique_id=1391622764]
 
-[node name="HitSound" type="AudioStreamPlayer2D" parent="ProjectileComponent"]
+[node name="HitSound" type="AudioStreamPlayer2D" parent="ProjectileComponent" unique_id=1752295456]
 
-[node name="HealthComponent" type="Node" parent="."]
+[node name="HealthComponent" type="Node" parent="." unique_id=90404297]
 script = ExtResource("3_88g3b")
 max_health = 1
 damage_modifier = 0.0
 metadata/_custom_type_script = "uid://df356su15y7ow"
 
-[node name="TriggerOnDamageComponent" type="Node" parent="."]
+[node name="TriggerOnDamageComponent" type="Node" parent="." unique_id=2104323996]
 script = ExtResource("4_t4pys")
 metadata/_custom_type_script = "uid://n3eddudwlric"
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=757156969]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2139953676]
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_geesq")
 

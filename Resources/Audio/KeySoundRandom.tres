@@ -1,0 +1,20 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://ohsxhj7bjbyx"]
+
+[ext_resource type="AudioStream" uid="uid://14alplxbipj4" path="res://Audio/Interface/Menu/Keyboard/key.wav" id="1_nt5pn"]
+[ext_resource type="AudioStream" uid="uid://c8j24mn5igh27" path="res://Audio/Interface/Menu/Keyboard/key1.wav" id="2_hpoh7"]
+[ext_resource type="AudioStream" uid="uid://bbmr2lsua4uxu" path="res://Audio/Interface/Menu/Keyboard/key2.wav" id="3_qrmk3"]
+[ext_resource type="AudioStream" uid="uid://db6o6bg1ts262" path="res://Audio/Interface/Menu/Keyboard/key3.wav" id="4_5bep4"]
+[ext_resource type="AudioStream" uid="uid://dyopn6uuervxa" path="res://Audio/Interface/Menu/Keyboard/key4.wav" id="5_jg5qw"]
+[ext_resource type="AudioStream" uid="uid://4fbfsivudip3" path="res://Audio/Interface/Menu/Keyboard/key5.wav" id="6_be33n"]
+[ext_resource type="AudioStream" uid="uid://bsj5ij2t4amyj" path="res://Audio/Interface/Menu/Keyboard/key6.wav" id="7_wgsjf"]
+
+[resource]
+random_pitch = 1.005793
+streams_count = 7
+stream_0/stream = ExtResource("1_nt5pn")
+stream_1/stream = ExtResource("2_hpoh7")
+stream_2/stream = ExtResource("3_qrmk3")
+stream_3/stream = ExtResource("4_5bep4")
+stream_4/stream = ExtResource("5_jg5qw")
+stream_5/stream = ExtResource("6_be33n")
+stream_6/stream = ExtResource("7_wgsjf")

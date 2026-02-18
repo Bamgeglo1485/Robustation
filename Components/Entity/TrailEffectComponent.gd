@@ -62,12 +62,12 @@ func _process(delta: float) -> void:
 			children = children.get_node("Texture")
 		
 		var new_sprite: Node = children.duplicate()
-		get_parent().get_parent().add_child(new_sprite)
 		new_sprite.global_position = parent_position
 		new_sprite.global_rotation = parent.global_rotation
 		new_sprite.global_skew = parent.global_skew
 		new_sprite.scale = parent.scale
 		new_sprite.modulate = parent.self_modulate
+		get_parent().get_parent().add_child(new_sprite)
 		var tween: Tween = create_tween()
 		tween.tween_property(new_sprite, "modulate", end_color, trail_lifetime)
 		

@@ -9,18 +9,21 @@
 [ext_resource type="Script" uid="uid://dt5gc1hahr82" path="res://Components/Interface/Menu/Settings/VolumeSettingsComponent.gd" id="7_52qop"]
 [ext_resource type="Script" uid="uid://ci2jd2wcm5sd8" path="res://Components/Interface/Menu/Settings/FOVSettingsComponent.gd" id="8_uo7xn"]
 [ext_resource type="Script" uid="uid://eueqbg2py0bc" path="res://Components/Interface/Menu/Settings/VerticalSyncSettingsComponent.gd" id="9_uujv2"]
+[ext_resource type="Script" uid="uid://b5miclua4wknq" path="res://Components/Interface/Menu/Settings/FullcreenSettingsComponent.gd" id="10_6wdx2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ex7t"]
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mj2lg"]
-bg_color = Color(0.06827141, 0.06489595, 0.052517578, 1)
+bg_color = Color(0.060530342, 0.06053035, 0.060530327, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v5qja"]
 bg_color = Color(0.11286896, 1.469492e-06, 0.08068577, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y60rh"]
-bg_color = Color(0.0068674204, 0, 0.0014345439, 1)
+bg_color = Color(0.14165193, 0.075261734, 0.0927326, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6wdx2"]
 
 [node name="Settings" type="Control" unique_id=727110380]
 z_index = 5
@@ -77,10 +80,12 @@ offset_left = 0.22998047
 offset_top = 0.079999685
 offset_right = -0.048034668
 offset_bottom = -0.024002075
+grow_horizontal = 2
+grow_vertical = 2
 texture_normal = ExtResource("1_v5qja")
 texture_hover = ExtResource("2_y60rh")
 ignore_texture_size = true
-stretch_mode = 0
+stretch_mode = 4
 
 [node name="ToggleVisibleOnPressedComponent" type="Node" parent="OffButton" unique_id=348004630 node_paths=PackedStringArray("toggle_frame")]
 script = ExtResource("3_y60rh")
@@ -98,6 +103,7 @@ offset_top = -0.2159996
 [node name="VolumeHeading" type="Panel" parent="VBoxContainer" unique_id=918725392]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_6wdx2")
 
 [node name="Label" type="Label" parent="VBoxContainer/VolumeHeading" unique_id=1016368367]
 layout_mode = 1
@@ -216,6 +222,7 @@ text = "Music volume"
 [node name="Visual Settings" type="Panel" parent="VBoxContainer" unique_id=298625056]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_6wdx2")
 
 [node name="Label" type="Label" parent="VBoxContainer/Visual Settings" unique_id=1196844900]
 layout_mode = 1
@@ -247,6 +254,7 @@ offset_right = -0.20199585
 offset_bottom = 0.02399826
 min_value = 80.0
 max_value = 200.0
+step = 10.0
 value = 100.0
 
 [node name="Percentage" type="Label" parent="VBoxContainer/FOV/Slider" unique_id=58690936]
@@ -311,3 +319,61 @@ button_pressed = true
 [node name="VerticalSyncComponent" type="Node" parent="VBoxContainer/V-SYNC/CheckButton" unique_id=1847240644]
 script = ExtResource("9_uujv2")
 metadata/_custom_type_script = "uid://eueqbg2py0bc"
+
+[node name="FULLSCREEN" type="Panel" parent="VBoxContainer" unique_id=1793249666]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="VBoxContainer/FULLSCREEN" unique_id=241611133]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.002
+anchor_top = 0.021000002
+anchor_right = 0.202
+anchor_bottom = 0.5
+offset_left = 0.011999965
+offset_top = -0.008000135
+offset_right = 0.21199799
+text = "Fullscreen"
+
+[node name="CheckButton" type="CheckButton" parent="VBoxContainer/FULLSCREEN" unique_id=918200889]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 0.089
+anchor_bottom = 1.0
+offset_right = 0.034000397
+grow_vertical = 2
+button_pressed = true
+
+[node name="FullcreenSettingsComponent" type="Node" parent="VBoxContainer/FULLSCREEN/CheckButton" unique_id=601248986]
+script = ExtResource("10_6wdx2")
+metadata/_custom_type_script = "uid://b5miclua4wknq"
+
+[node name="ReferenceRect" type="ReferenceRect" parent="." unique_id=1098635970]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 1.0
+offset_bottom = 2.0
+mouse_behavior_recursive = 1
+border_color = Color(0.033853278, 0.033853278, 0.033853274, 1)
+border_width = 5.0
+editor_only = false
+
+[node name="ReferenceRect2" type="ReferenceRect" parent="." unique_id=316285321]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 12.0
+mouse_behavior_recursive = 1
+border_color = Color(0.033853278, 0.033853278, 0.033853274, 1)
+border_width = 5.0
+editor_only = false

@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://ck3n6ttlwtal7" path="res://Components/Player/IngameMenuComponent.gd" id="19_pd2gv"]
 [ext_resource type="PackedScene" uid="uid://boqce2oysl7a0" path="res://Scenes/UI/IngameInterface/IngameMenu.tscn" id="20_ryxqw"]
 [ext_resource type="Shader" uid="uid://b53pser2tah5a" path="res://Resources/Shaders/Monitor.gdshader" id="21_ryxqw"]
+[ext_resource type="Script" uid="uid://b5miclua4wknq" path="res://Components/Interface/Menu/Settings/FullcreenSettingsComponent.gd" id="22_7o513"]
 
 [sub_resource type="Shader" id="Shader_oayod"]
 code = "shader_type canvas_item;
@@ -157,7 +158,7 @@ shader_parameter/distort_intensity = 0.05
 shader_parameter/noise_opacity = 0.30000001425
 shader_parameter/noise_speed = 5.0
 shader_parameter/static_noise_intensity = 0.0050000002375
-shader_parameter/aberration = 0.015000048212499895
+shader_parameter/aberration = 0.01500004821249989
 shader_parameter/brightness = 2.0
 shader_parameter/discolor = false
 shader_parameter/warp_amount = 0.050000002375
@@ -182,6 +183,7 @@ script = ExtResource("4_3n0k4")
 metadata/_custom_type_script = "uid://clpuxn7ckkj6f"
 
 [node name="PlayerCamera" type="Camera2D" parent="." index="5" unique_id=2000720665]
+physics_interpolation_mode = 2
 zoom = Vector2(2.25, 2.25)
 position_smoothing_enabled = true
 position_smoothing_speed = 15.0
@@ -341,6 +343,7 @@ paused_effect = NodePath("CanvasLayer/ColorRect")
 metadata/_custom_type_script = "uid://ck3n6ttlwtal7"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="IngameMenuComponent" index="0" unique_id=977705511]
+layer = 20
 
 [node name="ColorRect" type="ColorRect" parent="IngameMenuComponent/CanvasLayer" index="0" unique_id=1738391628]
 visible = false
@@ -355,3 +358,7 @@ color = Color(1, 1, 1, 0)
 [node name="IngameMenu" parent="IngameMenuComponent/CanvasLayer" index="1" unique_id=1644887491 instance=ExtResource("20_ryxqw")]
 visible = false
 z_index = 2
+
+[node name="FullcreenSettingsComponent" type="Node" parent="." index="25" unique_id=1756646197]
+script = ExtResource("22_7o513")
+metadata/_custom_type_script = "uid://b5miclua4wknq"

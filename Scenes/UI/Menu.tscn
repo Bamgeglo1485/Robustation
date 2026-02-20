@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://c6pjjac6n8b47" path="res://Audio/Interface/Menu/computer_off.mp3" id="12_2kl40"]
 [ext_resource type="Script" uid="uid://cxitq7uuw7y6p" path="res://Components/Interface/Menu/RoundstartComponent.gd" id="13_2kl40"]
 [ext_resource type="Material" uid="uid://bdio1hqqwuopn" path="res://Resources/Shaders/Monitor.tres" id="17_bwdcc"]
+[ext_resource type="AudioStream" uid="uid://b3bn8ma2pwwns" path="res://Audio/Interface/Menu/computer_loop.ogg" id="18_2xdyd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_444o2"]
 bg_color = Color(0.10980392, 0, 0.05490196, 1)
@@ -25,15 +26,6 @@ bg_color = Color(0.10980392, 0, 0.05490196, 1)
 bg_color = Color(0.10980392, 0, 0.05490196, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2uogn"]
-
-[sub_resource type="FontVariation" id="FontVariation_nu65f"]
-spacing_glyph = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nu65f"]
-bg_color = Color(0.1882353, 0, 0.105882354, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y67r4"]
-bg_color = Color(0.25682998, 4.9935653e-07, 0.1512529, 1)
 
 [sub_resource type="Shader" id="Shader_r1g08"]
 code = "shader_type canvas_item;
@@ -160,6 +152,15 @@ random_volume_offset_db = 1.0
 streams_count = 1
 stream_0/stream = ExtResource("12_0oyh4")
 
+[sub_resource type="FontVariation" id="FontVariation_nu65f"]
+spacing_glyph = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nu65f"]
+bg_color = Color(0.1882353, 0, 0.105882354, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y67r4"]
+bg_color = Color(0.25682998, 4.9935653e-07, 0.1512529, 1)
+
 [node name="Menu" type="Control" unique_id=1410112745]
 layout_mode = 3
 anchors_preset = 15
@@ -180,8 +181,10 @@ color = Color(0.1882353, 0, 0.105882354, 1)
 [node name="Label" type="ColorRect" parent="." unique_id=411946496]
 layout_mode = 1
 anchors_preset = -1
+anchor_top = 0.012
 anchor_right = 1.0
 anchor_bottom = 0.105000004
+offset_top = 0.22399998
 offset_bottom = -0.040000916
 color = Color(0.1868749, 0, 0.105732545, 1)
 
@@ -278,7 +281,7 @@ cmd_output = NodePath("../../CMD_OUTPUT")
 roundstart_component = NodePath("../../../RoundstartComponent")
 metadata/_custom_type_script = "uid://dlyqiva26n7ka"
 
-[node name="Buttons" type="ColorRect" parent="." unique_id=48031687]
+[node name="ButtonsFrame" type="ColorRect" parent="." unique_id=48031687]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.009000001
@@ -292,119 +295,6 @@ offset_bottom = 0.07196045
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.110646956, 1.1882279e-07, 0.054563418, 1)
-
-[node name="Arena" type="Button" parent="Buttons" unique_id=1129483810]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.024
-anchor_top = 0.126
-anchor_right = 0.98100007
-anchor_bottom = 0.21900001
-offset_left = 0.055999756
-offset_top = 0.054000854
-offset_right = 0.03894043
-offset_bottom = -0.0490036
-theme_override_colors/font_color = Color(1, 0.07450981, 0.4745098, 1)
-theme_override_colors/font_hover_color = Color(1, 0.40945596, 0.57995015, 1)
-theme_override_fonts/font = SubResource("FontVariation_nu65f")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = SubResource("StyleBoxFlat_nu65f")
-theme_override_styles/hover = SubResource("StyleBoxFlat_y67r4")
-text = "Arena"
-
-[node name="TextPrintingAnimationComponent" type="Node" parent="Buttons/Arena" unique_id=1817225005]
-script = ExtResource("2_3hayu")
-animate_on_ready_delay = 1.0
-metadata/_custom_type_script = "uid://4io3bm7r86h6"
-
-[node name="PrintOnButtonPressComponent" type="Node" parent="Buttons/Arena" unique_id=1426117045 node_paths=PackedStringArray("print_frame")]
-script = ExtResource("4_g37sx")
-print_frame = NodePath("../../../CMD/CMD_OUTPUT")
-instant_text = "\\Omega\\Manager>test_system init arena"
-text = "WARN: Purger subject testing procedure initialized...
-Subject loaded
-Area injection: Successful!
-Subject injection: Successful!
-Data verification: Successful!
-
-Have fun!"
-delay = 2.0
-metadata/_custom_type_script = "uid://b0uuawujbqmt4"
-
-[node name="RoundstartOnPressedComponent" type="Node" parent="Buttons/Arena" unique_id=648678141 node_paths=PackedStringArray("roundstart_component")]
-script = ExtResource("5_j8l1p")
-roundstart_component = NodePath("../../../RoundstartComponent")
-type = "arena"
-metadata/_custom_type_script = "uid://b21t14osl1vrf"
-
-[node name="StationRun" type="Button" parent="Buttons" unique_id=662460822]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.024
-anchor_top = 0.014
-anchor_right = 0.98100007
-anchor_bottom = 0.10700001
-offset_left = 0.055999756
-offset_top = 0.005999565
-offset_right = 0.03894043
-offset_bottom = -0.09700394
-theme_override_colors/font_color = Color(1, 0.07450981, 0.4745098, 1)
-theme_override_colors/font_hover_color = Color(1, 0.40945596, 0.57995015, 1)
-theme_override_fonts/font = SubResource("FontVariation_nu65f")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = SubResource("StyleBoxFlat_nu65f")
-theme_override_styles/hover = SubResource("StyleBoxFlat_y67r4")
-text = "Station Run"
-
-[node name="TextPrintingAnimationComponent" type="Node" parent="Buttons/StationRun" unique_id=414728123]
-script = ExtResource("2_3hayu")
-animate_on_ready_delay = 1.0
-metadata/_custom_type_script = "uid://4io3bm7r86h6"
-
-[node name="PrintOnButtonPressComponent" type="Node" parent="Buttons/StationRun" unique_id=809375099 node_paths=PackedStringArray("print_frame")]
-script = ExtResource("4_g37sx")
-print_frame = NodePath("../../../CMD/CMD_OUTPUT")
-instant_text = "\\Omega\\Manager>purge_system init"
-text = "ERROR 213: Access Denied"
-delay = 0.2
-metadata/_custom_type_script = "uid://b0uuawujbqmt4"
-
-[node name="Settings" type="Button" parent="Buttons" unique_id=189026341]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.024
-anchor_top = 0.126
-anchor_right = 0.98100007
-anchor_bottom = 0.21900001
-offset_left = 1.0559998
-offset_top = 65.054
-offset_right = 1.0389404
-offset_bottom = 64.951
-theme_override_colors/font_color = Color(1, 0.07450981, 0.4745098, 1)
-theme_override_colors/font_hover_color = Color(1, 0.40945596, 0.57995015, 1)
-theme_override_fonts/font = SubResource("FontVariation_nu65f")
-theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = SubResource("StyleBoxFlat_nu65f")
-theme_override_styles/hover = SubResource("StyleBoxFlat_y67r4")
-text = "Setup"
-
-[node name="TextPrintingAnimationComponent" type="Node" parent="Buttons/Settings" unique_id=751812909]
-script = ExtResource("2_3hayu")
-animate_on_ready_delay = 1.0
-metadata/_custom_type_script = "uid://4io3bm7r86h6"
-
-[node name="PrintOnButtonPressComponent" type="Node" parent="Buttons/Settings" unique_id=1371301653 node_paths=PackedStringArray("print_frame")]
-script = ExtResource("4_g37sx")
-print_frame = NodePath("../../../CMD/CMD_OUTPUT")
-instant_text = "\\Omega\\Manager>ui_system launch setup"
-text = "Setup menu successfully switched!"
-delay = 0.5
-metadata/_custom_type_script = "uid://b0uuawujbqmt4"
-
-[node name="ToggleVisibleOnPressedComponent" type="Node" parent="Buttons/Settings" unique_id=481991828 node_paths=PackedStringArray("toggle_frame")]
-script = ExtResource("6_vwd2g")
-toggle_frame = NodePath("../../../Settings")
-metadata/_custom_type_script = "uid://bodxsix2kyyy6"
 
 [node name="OffButton" type="TextureButton" parent="." unique_id=959342609]
 layout_mode = 1
@@ -438,7 +328,7 @@ color = Color(0.110646956, 1.1882279e-07, 0.054563418, 1)
 
 [node name="OffOverlay" type="ColorRect" parent="." unique_id=1917864538]
 visible = false
-z_index = 20
+z_index = 40
 material = SubResource("ShaderMaterial_444o2")
 layout_mode = 1
 anchors_preset = -1
@@ -501,6 +391,171 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 19.0
+offset_right = 2.0
+offset_bottom = 19.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_behavior_recursive = 1
+
+[node name="Buttons" type="VBoxContainer" parent="." unique_id=1104287899]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.021000002
+anchor_top = 0.128
+anchor_right = 0.5
+anchor_bottom = 0.96000004
+offset_left = -0.19200134
+offset_top = 0.055999756
+offset_right = -1.0
+offset_bottom = -2.080017
+theme_override_constants/separation = 20
+
+[node name="StationRun" type="Button" parent="Buttons" unique_id=662460822]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.07450981, 0.4745098, 1)
+theme_override_colors/font_hover_color = Color(1, 0.4100209, 0.5802685, 0.855)
+theme_override_fonts/font = SubResource("FontVariation_nu65f")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_nu65f")
+theme_override_styles/hover = SubResource("StyleBoxFlat_y67r4")
+text = "Station Run"
+
+[node name="TextPrintingAnimationComponent" type="Node" parent="Buttons/StationRun" unique_id=414728123]
+script = ExtResource("2_3hayu")
+animate_on_ready_delay = 1.0
+metadata/_custom_type_script = "uid://4io3bm7r86h6"
+
+[node name="PrintOnButtonPressComponent" type="Node" parent="Buttons/StationRun" unique_id=809375099 node_paths=PackedStringArray("print_frame")]
+script = ExtResource("4_g37sx")
+print_frame = NodePath("../../../CMD/CMD_OUTPUT")
+instant_text = "\\Omega\\Manager>purge_system init"
+text = "ERROR 213: Access Denied"
+delay = 0.2
+metadata/_custom_type_script = "uid://b0uuawujbqmt4"
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Buttons/StationRun" unique_id=1279280986]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0050000004
+anchor_top = -0.047000002
+anchor_right = 1.005
+anchor_bottom = 1.047
+offset_left = -2.245
+offset_top = -1.9919999
+offset_right = 2.244995
+offset_bottom = 1.9919968
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 1
+border_color = Color(0.207688, 2.256129e-06, 0.14488864, 1)
+border_width = 2.0
+editor_only = false
+
+[node name="Arena" type="Button" parent="Buttons" unique_id=1129483810]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.07450981, 0.4745098, 1)
+theme_override_colors/font_hover_color = Color(1, 0.4100209, 0.5802685, 0.855)
+theme_override_fonts/font = SubResource("FontVariation_nu65f")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_nu65f")
+theme_override_styles/hover = SubResource("StyleBoxFlat_y67r4")
+text = "Arena"
+
+[node name="TextPrintingAnimationComponent" type="Node" parent="Buttons/Arena" unique_id=1817225005]
+script = ExtResource("2_3hayu")
+animate_on_ready_delay = 1.0
+metadata/_custom_type_script = "uid://4io3bm7r86h6"
+
+[node name="PrintOnButtonPressComponent" type="Node" parent="Buttons/Arena" unique_id=1426117045 node_paths=PackedStringArray("print_frame")]
+script = ExtResource("4_g37sx")
+print_frame = NodePath("../../../CMD/CMD_OUTPUT")
+instant_text = "\\Omega\\Manager>test_system init arena"
+text = "WARN: Purger subject testing procedure initialized...
+Subject loaded
+Area injection: Successful!
+Subject injection: Successful!
+Data verification: Successful!
+
+Have fun!"
+delay = 2.0
+metadata/_custom_type_script = "uid://b0uuawujbqmt4"
+
+[node name="RoundstartOnPressedComponent" type="Node" parent="Buttons/Arena" unique_id=648678141 node_paths=PackedStringArray("roundstart_component")]
+script = ExtResource("5_j8l1p")
+roundstart_component = NodePath("../../../RoundstartComponent")
+type = "arena"
+metadata/_custom_type_script = "uid://b21t14osl1vrf"
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Buttons/Arena" unique_id=1205297080]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0050000004
+anchor_top = -0.047000002
+anchor_right = 1.005
+anchor_bottom = 1.047
+offset_left = -2.245
+offset_top = -1.9919999
+offset_right = 2.244995
+offset_bottom = 1.9919968
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 1
+border_color = Color(0.207688, 2.256129e-06, 0.14488864, 1)
+border_width = 2.0
+editor_only = false
+
+[node name="Settings" type="Button" parent="Buttons" unique_id=189026341]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.07450981, 0.4745098, 1)
+theme_override_colors/font_hover_color = Color(1, 0.4100209, 0.5802685, 0.855)
+theme_override_fonts/font = SubResource("FontVariation_nu65f")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_nu65f")
+theme_override_styles/hover = SubResource("StyleBoxFlat_y67r4")
+text = "Setup"
+
+[node name="TextPrintingAnimationComponent" type="Node" parent="Buttons/Settings" unique_id=751812909]
+script = ExtResource("2_3hayu")
+animate_on_ready_delay = 1.0
+metadata/_custom_type_script = "uid://4io3bm7r86h6"
+
+[node name="PrintOnButtonPressComponent" type="Node" parent="Buttons/Settings" unique_id=1371301653 node_paths=PackedStringArray("print_frame")]
+script = ExtResource("4_g37sx")
+print_frame = NodePath("../../../CMD/CMD_OUTPUT")
+instant_text = "\\Omega\\Manager>ui_system launch setup"
+text = "Setup menu successfully switched!"
+delay = 0.5
+metadata/_custom_type_script = "uid://b0uuawujbqmt4"
+
+[node name="ToggleVisibleOnPressedComponent" type="Node" parent="Buttons/Settings" unique_id=481991828 node_paths=PackedStringArray("toggle_frame")]
+script = ExtResource("6_vwd2g")
+toggle_frame = NodePath("../../../Settings")
+metadata/_custom_type_script = "uid://bodxsix2kyyy6"
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Buttons/Settings" unique_id=724637851]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0050000004
+anchor_top = -0.047000002
+anchor_right = 1.005
+anchor_bottom = 1.047
+offset_left = -2.245
+offset_top = -1.9919999
+offset_right = 2.244995
+offset_bottom = 1.9919968
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 1
+border_color = Color(0.207688, 2.256129e-06, 0.14488864, 1)
+border_width = 2.0
+editor_only = false
+
+[node name="Ambience" type="AudioStreamPlayer2D" parent="." unique_id=2041203327]
+stream = ExtResource("18_2xdyd")
+autoplay = true
+parameters/looping = true

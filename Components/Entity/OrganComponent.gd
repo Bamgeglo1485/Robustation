@@ -18,9 +18,8 @@ func _on_step(_body) -> void:
 	
 	if blood_scene:
 		var _effect: Node = blood_scene.instantiate()
-		scene.add_child(_effect)
-		_effect.emitting = true
 		_effect.global_position = parent.global_position
+		scene.add_child.call_deferred(_effect)
 		if _body.has_node("HealthComponent"):
 			var health_component: HealthComponent = _body.get_node("HealthComponent")
 			_effect.rotation = _body.velocity.angle()

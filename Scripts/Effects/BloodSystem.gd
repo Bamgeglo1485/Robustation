@@ -3,6 +3,10 @@ extends GPUParticles2D
 @export var max_clean_health = 3
 @export var clean_health = max_clean_health
 
+func _ready() -> void:
+	visible = true
+	emitting = true
+
 func is_blood():
 	return true
 

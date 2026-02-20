@@ -6,5 +6,6 @@ class_name TimedEnablerComponent extends Component
 func _ready() -> void:
 	await get_tree().create_timer(delay).timeout
 	for target in targets:
-		target.visible = true
+		if target:
+			target.visible = true
 	queue_free()

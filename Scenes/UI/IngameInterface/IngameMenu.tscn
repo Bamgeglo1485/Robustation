@@ -1,30 +1,28 @@
 [gd_scene format=3 uid="uid://boqce2oysl7a0"]
 
 [ext_resource type="Script" uid="uid://cja3led3n1ehp" path="res://Components/Interface/Menu/DragButtonComponent.gd" id="1_wxoyb"]
+[ext_resource type="Script" uid="uid://bkpb86i444kp8" path="res://Components/Interface/Ingame/GoToMenuOnPressedComponent.gd" id="3_wxoyb"]
+[ext_resource type="PackedScene" uid="uid://beie4mcfgy8sm" path="res://Scenes/UI/Menu.tscn" id="4_36p5r"]
 [ext_resource type="Script" uid="uid://bodxsix2kyyy6" path="res://Components/Interface/Menu/ToggleVisibleOnPressedComponent.gd" id="4_te8x8"]
+[ext_resource type="PackedScene" uid="uid://c7bvqic47gs1y" path="res://Scenes/UI/Settings.tscn" id="5_36p5r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wdhnk"]
 bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ojk4"]
-bg_color = Color(0.06827141, 0.06489595, 0.052517578, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_36p5r"]
+bg_color = Color(0.060530342, 0.06053035, 0.060530327, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fl3v6"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4er1k"]
 bg_color = Color(0.11286896, 1.469492e-06, 0.08068577, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_taxmb"]
-bg_color = Color(0.0068674204, 0, 0.0014345439, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_te8x8"]
+bg_color = Color(0.14165193, 0.075261734, 0.0927326, 1)
 
 [node name="IngameMenu" type="Control" unique_id=1644887491]
 layout_mode = 3
-anchor_left = 0.284
-anchor_top = 0.07700001
-anchor_right = 0.70400006
-anchor_bottom = 0.901
-offset_left = -0.16799927
-offset_top = 0.10399628
-offset_right = -0.008056641
-offset_bottom = 0.15197754
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -32,26 +30,18 @@ size_flags_horizontal = 4
 [node name="Panel" type="Panel" parent="." unique_id=1908736952]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = 0.344
+anchor_top = 0.31500003
+anchor_right = 0.65800005
+anchor_bottom = 0.804
+offset_left = -0.2880249
+offset_top = -0.120010376
+offset_right = -0.016052246
+offset_bottom = 17.007996
 theme_override_styles/panel = SubResource("StyleBoxFlat_wdhnk")
 
-[node name="Button" type="Button" parent="Panel" unique_id=2060123905]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.076000005
-offset_bottom = -0.05600357
-theme_override_styles/normal = SubResource("StyleBoxFlat_3ojk4")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_fl3v6")
-theme_override_styles/hover = SubResource("StyleBoxFlat_taxmb")
-
-[node name="DragButtonComponent" type="Node" parent="Panel/Button" unique_id=2013517171 node_paths=PackedStringArray("frame_to_drag")]
-script = ExtResource("1_wxoyb")
-frame_to_drag = NodePath("../../..")
-metadata/_custom_type_script = "uid://cja3led3n1ehp"
-
 [node name="Label" type="Label" parent="Panel" unique_id=2019499486]
+z_index = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.007
@@ -64,20 +54,109 @@ offset_bottom = -0.23400116
 mouse_behavior_recursive = 1
 text = "Robust-os - replay_menu.exe - ui_system.rbst"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=141232202]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=141232202]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.074
+anchor_top = 0.18100001
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -0.2159996
+offset_top = -15.453999
+theme_override_constants/separation = 7
 
-[node name="Button" type="Button" parent="VBoxContainer" unique_id=217292840]
+[node name="Panel" type="Panel" parent="Panel/VBoxContainer" unique_id=1793951839]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="Return" type="Button" parent="Panel/VBoxContainer" unique_id=217292840]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 text = "RETURN"
 
-[node name="ToggleVisibleOnPressedComponent" type="Node" parent="VBoxContainer/Button" unique_id=40887940 node_paths=PackedStringArray("toggle_frame")]
+[node name="ToggleVisibleOnPressedComponent" type="Node" parent="Panel/VBoxContainer/Return" unique_id=40887940 node_paths=PackedStringArray("toggle_frame")]
 script = ExtResource("4_te8x8")
-toggle_frame = NodePath("../../..")
+toggle_frame = NodePath("../../../..")
 metadata/_custom_type_script = "uid://bodxsix2kyyy6"
+
+[node name="Settings" type="Button" parent="Panel/VBoxContainer" unique_id=195329228]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "SETTINGS"
+
+[node name="ToggleVisibleOnPressedComponent" type="Node" parent="Panel/VBoxContainer/Settings" unique_id=1532459941 node_paths=PackedStringArray("toggle_frame")]
+script = ExtResource("4_te8x8")
+toggle_frame = NodePath("../../../../Settings")
+metadata/_custom_type_script = "uid://bodxsix2kyyy6"
+
+[node name="Menu" type="Button" parent="Panel/VBoxContainer" unique_id=1723291705]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "MENU"
+
+[node name="ChangeSceneOnPressedComponent" type="Node" parent="Panel/VBoxContainer/Menu" unique_id=1256632907]
+script = ExtResource("3_wxoyb")
+new_scene = ExtResource("4_36p5r")
+metadata/_custom_type_script = "uid://bkpb86i444kp8"
+
+[node name="Panel2" type="Panel" parent="Panel/VBoxContainer" unique_id=241953286]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Panel" unique_id=243417798]
+z_index = 3
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 1.0
+offset_bottom = 2.0
+mouse_behavior_recursive = 1
+border_color = Color(0.033853278, 0.033853278, 0.033853274, 1)
+border_width = 5.0
+editor_only = false
+
+[node name="ReferenceRect2" type="ReferenceRect" parent="Panel" unique_id=67249405]
+z_index = 3
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.006
+anchor_top = -0.006
+anchor_right = 1.003
+anchor_bottom = 1.006
+offset_left = -8.828
+offset_top = -8.996
+offset_right = 8.914001
+offset_bottom = 8.995972
+mouse_behavior_recursive = 1
+border_color = Color(0.033853278, 0.033853278, 0.033853274, 1)
+border_width = 5.0
+editor_only = false
+
+[node name="Button" type="Button" parent="Panel" unique_id=236934340]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.008
+anchor_top = -0.009000001
+anchor_right = 1.0
+anchor_bottom = 0.09900001
+offset_left = -0.10399985
+offset_top = 0.0060002804
+offset_right = 2.0
+offset_bottom = -0.06600189
+theme_override_styles/normal = SubResource("StyleBoxFlat_36p5r")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_4er1k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_te8x8")
+
+[node name="DragButtonComponent" type="Node" parent="Panel/Button" unique_id=416544662 node_paths=PackedStringArray("frame_to_drag")]
+script = ExtResource("1_wxoyb")
+frame_to_drag = NodePath("../..")
+metadata/_custom_type_script = "uid://cja3led3n1ehp"
+
+[node name="Settings" parent="." unique_id=727110380 instance=ExtResource("5_36p5r")]
+visible = false
+layout_mode = 1
+offset_left = 449.0
+offset_right = 616.364
+offset_bottom = 0.0

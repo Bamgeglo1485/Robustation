@@ -8,8 +8,8 @@ signal parry(emitter, type: String)
 signal projectile_miss(emitter, projectile)
 signal projectile_hit(emitter, projectile)
 signal melee_miss(emitter, weapon)
-signal on_fall()
 signal stamina_damaged(emitter, damage, damager)
+signal on_fall()
 
 signal projectile_shoot(emitter, weapon, direction, projectile)
 
@@ -20,3 +20,5 @@ signal tendency_section_changed(emitter)
 signal kick_dash_combo(emitter)
 
 signal raged(emitter)
+
+signal field_of_view_changed(value)

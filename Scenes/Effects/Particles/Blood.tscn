@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://fhhycrapltrq"]
+[gd_scene format=3 uid="uid://fhhycrapltrq"]
 
 [ext_resource type="Texture2D" uid="uid://bc4akrjd4yio1" path="res://Textures/Effects/Particles/blood.png" id="1_iq24q"]
 [ext_resource type="Script" uid="uid://ckngjbi4531ra" path="res://Scripts/Effects/BloodSystem.gd" id="2_70dfb"]
@@ -10,9 +10,11 @@ initial_velocity_max = 100.0
 gravity = Vector3(0, 0, 0)
 color = Color(0.5568628, 0, 0.18431373, 1)
 
-[node name="Blood" type="GPUParticles2D"]
+[node name="Blood" type="GPUParticles2D" unique_id=1006355857]
+visible = false
 z_index = -1
 texture_filter = 1
+emitting = false
 amount = 32
 texture = ExtResource("1_iq24q")
 lifetime = 0.2
@@ -21,7 +23,7 @@ visibility_rect = Rect2(-1000, -1000, 2000, 2000)
 process_material = SubResource("ParticleProcessMaterial_ttwd7")
 script = ExtResource("2_70dfb")
 
-[node name="PauseTimer" type="Timer" parent="."]
+[node name="PauseTimer" type="Timer" parent="." unique_id=246633666]
 wait_time = 0.2
 one_shot = true
 autostart = true

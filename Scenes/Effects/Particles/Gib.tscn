@@ -47,6 +47,7 @@ scale_over_velocity_curve = SubResource("CurveTexture_s8gfb")
 color = Color(0.5568628, 0, 0.18431373, 1)
 
 [node name="Blood" type="GPUParticles2D" unique_id=980653200]
+visible = false
 z_index = -1
 texture_filter = 1
 amount = 16

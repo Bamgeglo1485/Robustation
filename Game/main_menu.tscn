@@ -6,7 +6,6 @@
 [ext_resource type="Material" uid="uid://bdio1hqqwuopn" path="res://Resources/Shaders/Monitor.tres" id="7_444o2"]
 [ext_resource type="AudioStream" uid="uid://cla3xv7l2yqii" path="res://Audio/Interface/Menu/startup.ogg" id="9_bjiq0"]
 [ext_resource type="Script" uid="uid://gms322u0heem" path="res://Components/Entity/TimedEnablerComponent.gd" id="10_kig3x"]
-[ext_resource type="AudioStream" uid="uid://b3bn8ma2pwwns" path="res://Audio/Interface/Menu/computer_loop.ogg" id="10_li5sn"]
 
 [node name="MainMenu" type="Control" unique_id=1022678340]
 layout_mode = 3
@@ -99,14 +98,9 @@ mouse_behavior_recursive = 1
 stream = ExtResource("9_bjiq0")
 autoplay = true
 
-[node name="Ambience" type="AudioStreamPlayer2D" parent="." unique_id=1177437461]
-stream = ExtResource("10_li5sn")
-autoplay = true
-parameters/looping = true
-
 [node name="AmbienceEnabler" type="Node" parent="." unique_id=829614945 node_paths=PackedStringArray("targets")]
 script = ExtResource("10_kig3x")
-targets = [NodePath("../Ambience")]
+targets = [NodePath("")]
 delay = 22.0
 metadata/_custom_type_script = "uid://gms322u0heem"
 

@@ -174,7 +174,7 @@ func parry_weapon(weapon, target) -> void:
 	EventBusManager.parry.emit(parent, "Weapon")
 	weapon.swinging_cancelled = true
 	parry_effects()
-	if parry_sound and weapon.play_parried_sound:
+	if parry_sound and weapon is MeleeWeapon and weapon.play_parried_sound:
 		parry_sound.play()
 	
 	if target.has_node("HealthComponent"):

@@ -23,13 +23,14 @@ func activate_ability() -> void:
 	time_tween.tween_property(Engine, "time_scale", 0.35, 0.5)
 	
 	if overdose_effect and overdose_effect.material:
+		overdose_effect.visible = true
 		effect_tween = create_tween()
 		effect_tween.set_trans(Tween.TRANS_SINE)
 		effect_tween.set_ease(Tween.EASE_IN_OUT)
-		effect_tween.tween_property(overdose_effect.material, "shader_parameter/alpha", 1, 0.5)
-		effect_tween.tween_property(overdose_effect.material, "shader_parameter/red_factor", 2, ability_delay)
-		effect_tween.tween_property(overdose_effect.material, "shader_parameter/blue_factor", 2, ability_delay)
-		effect_tween.tween_property(overdose_effect.material, "shader_parameter/green_factor", 1, ability_delay)
+		effect_tween.tween_property(overdose_effect.material, "shader_parameter/alpha", 1.0, 0.5)
+		effect_tween.tween_property(overdose_effect.material, "shader_parameter/red_factor", 2.0, ability_delay)
+		effect_tween.tween_property(overdose_effect.material, "shader_parameter/blue_factor", 2.0, ability_delay)
+		effect_tween.tween_property(overdose_effect.material, "shader_parameter/green_factor", 1.0, ability_delay)
 		effect_tween.tween_property(overdose_effect.material, "shader_parameter/hue_shift", -0.3, ability_delay)
 		effect_tween.set_ignore_time_scale(true)
 		effect_tween.set_loops(100)
@@ -55,8 +56,10 @@ func disable_ability() -> void:
 		var tween: Tween = create_tween()
 		tween.set_trans(Tween.TRANS_SINE)
 		tween.set_ease(Tween.EASE_IN_OUT)
-		tween.tween_property(overdose_effect.material, "shader_parameter/alpha", 0, 0.5)
-		tween.tween_property(overdose_effect.material, "shader_parameter/red_factor", 1, 0.5)
-		tween.tween_property(overdose_effect.material, "shader_parameter/blue_factor", 1, 0.5)
-		tween.tween_property(overdose_effect.material, "shader_parameter/green_factor", 1, 0.5)
-		tween.tween_property(overdose_effect.material, "shader_parameter/hue_shift", 0, 0.5)
+		tween.tween_property(overdose_effect.material, "shader_parameter/alpha", 0.0, 0.5)
+		tween.tween_property(overdose_effect.material, "shader_parameter/red_factor", 1.0, 0.5)
+		tween.tween_property(overdose_effect.material, "shader_parameter/blue_factor", 1.0, 0.5)
+		tween.tween_property(overdose_effect.material, "shader_parameter/green_factor", 1.0, 0.5)
+		tween.tween_property(overdose_effect.material, "shader_parameter/hue_shift", 0.0, 0.5)
+		await tween.finished
+		overdose_effect.visible = false

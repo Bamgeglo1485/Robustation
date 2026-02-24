@@ -28,6 +28,8 @@ class_name Weapon extends Component
 @export var parriable: bool = true
 
 var swinging_cancelled: bool
+var cooldown_timer: Timer
+var swinging_timer: Timer
 
 func _ready() -> void:
 	if parent is not Node2D:
@@ -39,6 +41,16 @@ func _ready() -> void:
 		for child in get_children():
 			if child is AudioStreamPlayer2D:
 				child.reparent(sounds)
+	
+	cooldown_timer = Timer.new()
+	cooldown_timer.ignore_time_scale = !timers_timescaled
+	cooldown_timer.one_shot = true
+	add_child(cooldown_timer)
+	
+	swinging_timer = Timer.new()
+	swinging_timer.ignore_time_scale = !timers_timescaled
+	swinging_timer.one_shot = true
+	add_child(swinging_timer)
 
 func _swing(direction) -> void:
 	if swing_delay != 0:
@@ -48,10 +60,10 @@ func _swing(direction) -> void:
 		if animation_component and swing_rotation_multiplier != 0:
 			animation_component.lean_to_direction(direction, 2, swing_delay, swing_rotation_multiplier)
 		
-		if timers_timescaled:
-			await get_tree().create_timer(swing_delay).timeout
-		else:
-			await get_tree().create_timer(swing_delay, true, false, true).timeout
+		swinging_timer.wait_time = swing_delay
+		swinging_timer.start()
+		EventBusManager.swinging_start.emit(parent, self)
+		await swinging_timer.timeout
 		
 		swinging = false
 
@@ -59,11 +71,19 @@ func _cooldown() -> void:
 	if cooldown_delay != 0:
 		cooldown = true
 		var modified_cooldown = cooldown_delay * cooldown_modifier
-		if timers_timescaled:
-			await get_tree().create_timer(modified_cooldown).timeout
-		else:
-			await get_tree().create_timer(modified_cooldown, true, false, true).timeout
+		cooldown_timer.wait_time = modified_cooldown
+		cooldown_timer.start()
+		EventBusManager.weapon_cooldown.emit(parent, self)
+		await cooldown_timer.timeout
 		cooldown = false
+
+func reset_cooldown() -> void:
+	if !cooldown:
+		return
+	cooldown = false
+	cooldown_timer.stop()
+	
+	EventBusManager.weapon_cooldown_reset.emit(parent, self)
 
 func get_cooldown() -> bool:
 	return cooldown

@@ -2,6 +2,8 @@ extends Node
 
 var config = ConfigFile.new()
 
+var blood_clean_delay: float = 70.0
+
 func _ready() -> void:
 	var err = config.load("user://settings.cfg")
 	if err != OK:
@@ -19,6 +21,8 @@ func _ready() -> void:
 		var audio_bus_id: int
 		audio_bus_id = AudioServer.get_bus_index("Master")
 		AudioServer.set_bus_volume_db(audio_bus_id, volume_db)
+	if config.has_section_key("VISUAL", "Blood_cleaning_delay"):
+		blood_clean_delay = config.get_value("VISUAL", "Blood_cleaning_delay")
 
 static func linear_to_db(linear: float) -> float:
 	if linear <= 0:

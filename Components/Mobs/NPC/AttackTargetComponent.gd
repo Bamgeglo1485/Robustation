@@ -9,6 +9,7 @@ var target: CharacterBody2D
 
 @export var predict_factor: float = 0.1
 @export var update_rate: float = 0.2
+@export var range_attack_distance: int = 256
 var update_timer: Timer
 
 func _ready() -> void:
@@ -53,9 +54,10 @@ func _update() -> void:
 			return
 		weapon_user_component.attack(self)
 	elif weapon.bullets != 0:
-		weapon_user_component.attack(self)
+		if attack_direction.length() < range_attack_distance:
+			weapon_user_component.attack(self)
 
-func _calculate_predicted_target_position() -> Vector2:
+func _calculate_target_position() -> Vector2:
 	if !target or !weapon_user_component.selected_weapon:
 		return target.global_position if target else Vector2.ZERO
 	
@@ -70,7 +72,7 @@ func _calculate_predicted_target_position() -> Vector2:
 
 func get_attack_direction() -> Vector2:
 	if weapon_user_component.selected_weapon is RangeWeapon and target:
-		return _calculate_predicted_target_position() - parent.global_position
+		return _calculate_target_position() - parent.global_position
 	return attack_direction
 
 func get_attack_target() -> CharacterBody2D:

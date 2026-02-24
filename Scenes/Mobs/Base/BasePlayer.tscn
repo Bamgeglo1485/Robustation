@@ -11,7 +11,10 @@
 [ext_resource type="AudioStream" uid="uid://drhi1s5c4ustd" path="res://Audio/Effects/perk_collect.ogg" id="8_4awd5"]
 [ext_resource type="Script" uid="uid://bjb1tak0ajoof" path="res://Components/Player/BattleTendencyComponent.gd" id="8_ljr5e"]
 [ext_resource type="Material" uid="uid://dctvv4tidab2r" path="res://Resources/Shaders/BattleTendency.tres" id="9_d6ik8"]
+[ext_resource type="AudioStream" uid="uid://b3bn8ma2pwwns" path="res://Audio/Interface/Menu/computer_loop.ogg" id="9_gwwhq"]
+[ext_resource type="AudioStream" uid="uid://ohsxhj7bjbyx" path="res://Resources/Audio/KeySoundRandom.tres" id="10_31skc"]
 [ext_resource type="Script" uid="uid://c3d63pm2kikgh" path="res://Components/Player/ImpactFrameComponent.gd" id="10_m2dsc"]
+[ext_resource type="AudioStream" uid="uid://ds80ebrq0wpmg" path="res://Audio/Interface/Menu/Keyboard/mouse.mp3" id="11_bjw4p"]
 [ext_resource type="Material" uid="uid://dufhgddaeqjd4" path="res://Resources/Shaders/ImpactFrame.tres" id="11_oayod"]
 [ext_resource type="Script" uid="uid://qcmegh7138ug" path="res://Components/Entity/UniqueShaderComponent.gd" id="11_yhquf"]
 [ext_resource type="Script" uid="uid://bdxrxakvokr52" path="res://Components/Player/ScreenShakeComponent.gd" id="13_0r3jo"]
@@ -19,9 +22,48 @@
 [ext_resource type="Script" uid="uid://jqnpe0oqv5il" path="res://Components/Player/RainbowOverlayComponent.gd" id="17_egoq8"]
 [ext_resource type="Material" uid="uid://dm7k2tvshj7cb" path="res://Resources/Shaders/RainbowEffect.tres" id="18_wns57"]
 [ext_resource type="Script" uid="uid://ck3n6ttlwtal7" path="res://Components/Player/IngameMenuComponent.gd" id="19_pd2gv"]
+[ext_resource type="Texture2D" uid="uid://dec6jb2slhlda" path="res://Textures/Interface/Ingame/L.png" id="20_855fl"]
 [ext_resource type="PackedScene" uid="uid://boqce2oysl7a0" path="res://Scenes/UI/IngameInterface/IngameMenu.tscn" id="20_ryxqw"]
 [ext_resource type="Shader" uid="uid://b53pser2tah5a" path="res://Resources/Shaders/Monitor.gdshader" id="21_ryxqw"]
 [ext_resource type="Script" uid="uid://b5miclua4wknq" path="res://Components/Interface/Menu/Settings/FullcreenSettingsComponent.gd" id="22_7o513"]
+[ext_resource type="Script" uid="uid://dr8j22vcrypsa" path="res://Components/Interface/Menu/SoundsOnInputComponent.gd" id="25_vn5lk"]
+[ext_resource type="Script" uid="uid://b8ag0xs5wkoy7" path="res://Components/Interface/HealthIndicatorComponent.gd" id="26_7e430"]
+[ext_resource type="Script" uid="uid://rvt8h5qxjw7w" path="res://Components/Player/BattleTendencyMusicComponent.gd" id="27_7qb6q"]
+[ext_resource type="AudioStream" uid="uid://dturkqv281vd3" path="res://Audio/Music/OneAgainstAll/OAA1.ogg" id="28_855fl"]
+[ext_resource type="Texture2D" uid="uid://jfo3oymxo1y7" path="res://Textures/Interface/Ingame/Health/health1.png" id="28_quqo7"]
+[ext_resource type="AudioStream" uid="uid://d353na3okj82w" path="res://Audio/Music/OneAgainstAll/OAA2.ogg" id="29_6gaf5"]
+[ext_resource type="Texture2D" uid="uid://bjo32etknuhpy" path="res://Textures/Interface/Ingame/Health/health2.png" id="29_jsfxc"]
+[ext_resource type="AudioStream" uid="uid://c0nnjupg7sqb8" path="res://Audio/Music/OneAgainstAll/OAA3.ogg" id="30_7e430"]
+[ext_resource type="Texture2D" uid="uid://um0rkv0xfmc6" path="res://Textures/Interface/Ingame/Health/health3.png" id="30_mxiww"]
+[ext_resource type="AudioStream" uid="uid://cvvqawrtrujui" path="res://Audio/Music/OneAgainstAll/OAA4.ogg" id="31_hp12l"]
+[ext_resource type="Texture2D" uid="uid://ctjbdc4vlqntc" path="res://Textures/Interface/Ingame/Health/health4.png" id="31_omg6r"]
+[ext_resource type="Script" uid="uid://b4e4ba2xr3ea7" path="res://Components/Player/MusicComponent.gd" id="32_ak33s"]
+[ext_resource type="Texture2D" uid="uid://bs33le1xplql" path="res://Textures/Interface/Ingame/Stamina/stamina_0.png" id="34_8fti1"]
+[ext_resource type="Script" uid="uid://cd0dtperukumm" path="res://Scripts/LightningSpectrum.gd" id="35_2d3wq"]
+[ext_resource type="Texture2D" uid="uid://brf6y07nehr77" path="res://Textures/Interface/Ingame/Health/health0.png" id="35_hp12l"]
+[ext_resource type="Script" uid="uid://bwcq6hlpavlvl" path="res://Components/Interface/Ingame/WeaponIconComponent.gd" id="38_bdlbc"]
+[ext_resource type="Texture2D" uid="uid://850d8w023ebq" path="res://Textures/Interface/Ingame/Inventory/pocket.png" id="38_wrmeq"]
+[ext_resource type="Texture2D" uid="uid://bh4jj2l0w44nw" path="res://Textures/Interface/Ingame/Inventory/hand_l.png" id="40_mxiww"]
+[ext_resource type="Texture2D" uid="uid://c8by3pd2ow35g" path="res://Textures/Interface/Ingame/Inventory/hand_r.png" id="41_omg6r"]
+[ext_resource type="Texture2D" uid="uid://i5ulgkrfei56" path="res://Textures/Interface/Ingame/Inventory/SlotBackground.png" id="41_setsc"]
+[ext_resource type="Script" uid="uid://bbn66jje1cqhs" path="res://Scripts/Spectrum.gd" id="42_omg6r"]
+[ext_resource type="Material" uid="uid://cqeu03o2ril5g" path="res://Resources/Shaders/Progress.tres" id="44_aq85w"]
+[ext_resource type="Script" uid="uid://bh67jcffdkivf" path="res://Components/Interface/StaminaIndicatorComponent.gd" id="44_svu4j"]
+[ext_resource type="PackedScene" uid="uid://bjjdc8deaiqli" path="res://Scenes/Effects/Particles/Robust.tscn" id="45_aq85w"]
+[ext_resource type="Texture2D" uid="uid://crvhr1fwjc3wu" path="res://Textures/Interface/Ingame/Stamina/stamina_1.png" id="50_2d3wq"]
+[ext_resource type="Texture2D" uid="uid://br3jho2qicoua" path="res://Textures/Interface/Ingame/Stamina/stamina_2.png" id="51_usxup"]
+[ext_resource type="Texture2D" uid="uid://dd542uq0kak83" path="res://Textures/Interface/Ingame/Stamina/stamina_3.png" id="52_2i8o7"]
+[ext_resource type="Texture2D" uid="uid://c6mx7npsbi7s0" path="res://Textures/Interface/Ingame/Stamina/stamina_4.png" id="53_o3dxh"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_p8133"]
+random_pitch = 1.2599211
+random_volume_offset_db = 1.0
+streams_count = 1
+stream_0/stream = ExtResource("11_bjw4p")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ak33s"]
+atlas = ExtResource("35_hp12l")
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="Shader" id="Shader_oayod"]
 code = "shader_type canvas_item;
@@ -192,7 +234,7 @@ metadata/_custom_type_script = "uid://cmmp453ap55cp"
 
 [node name="HealthComponent" parent="." index="6" unique_id=1758373275]
 invinciblitiy_attack_effect = ExtResource("5_oayod")
-heal_for_damage_multiplier = 0.3
+heal_for_damage_multiplier = 0.1
 
 [node name="FactionComponent" parent="." index="7" unique_id=1651473390]
 faction = "Player"
@@ -201,22 +243,428 @@ faction = "Player"
 block_when_fallen = false
 block_when_flying = false
 
-[node name="PlayerWeaponUserComponent" type="Node" parent="." index="10" unique_id=283125688]
+[node name="PlayerWeaponUserComponent" type="Node" parent="." index="10" unique_id=283125688 node_paths=PackedStringArray("weapon_icon")]
 script = ExtResource("5_3n0k4")
+weapon_icon = NodePath("../GUI/Inventory/Hand_R/WeaponIcon")
 metadata/_custom_type_script = "uid://gek7ma2qpdp6"
 
 [node name="PerkCollect" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="1" unique_id=1054597139]
 stream = ExtResource("8_4awd5")
 max_polyphony = 10
 
+[node name="Ambience" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="2" unique_id=128685826]
+process_mode = 3
+stream = ExtResource("9_gwwhq")
+volume_db = -8.0
+parameters/looping = true
+
+[node name="Keyboard" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="3" unique_id=2003015197]
+process_mode = 3
+stream = ExtResource("10_31skc")
+volume_db = -8.0
+
+[node name="Mouse" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="4" unique_id=1983002676]
+process_mode = 3
+stream = SubResource("AudioStreamRandomizer_p8133")
+volume_db = -8.0
+
 [node name="HealthOverlayComponent" type="Node" parent="." index="16" unique_id=490260157 node_paths=PackedStringArray("overlay")]
 script = ExtResource("6_korw6")
-overlay = NodePath("CanvasLayer/ColorRect")
+overlay = NodePath("../GUI/Overlays/Health/Health")
 metadata/_custom_type_script = "uid://djmi5xfppmrii"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="HealthOverlayComponent" index="0" unique_id=1340539651]
+[node name="BattleTendencyComponent" type="Node" parent="." index="17" unique_id=1071898636 node_paths=PackedStringArray("euphoria_effect", "battle_tendency_effect")]
+script = ExtResource("8_ljr5e")
+euphoria_effect = NodePath("../RobustEffect")
+battle_tendency_effect = NodePath("../GUI/Overlays/BattleTendency/BattleTendency")
+metadata/_custom_type_script = "uid://bjb1tak0ajoof"
 
-[node name="ColorRect" type="ColorRect" parent="HealthOverlayComponent/CanvasLayer" index="0" unique_id=657939308]
+[node name="ImpactFrameComponent" type="Node" parent="." index="18" unique_id=462102113 node_paths=PackedStringArray("effect_frame", "color_modify_frame")]
+script = ExtResource("10_m2dsc")
+effect_frame = NodePath("../GUI/Overlays/ImpactFrame/ImpactFrame")
+color_modify_frame = NodePath("../GUI/Overlays/ColorModify/ColorModify")
+metadata/_custom_type_script = "uid://c3d63pm2kikgh"
+
+[node name="ScreenShakeComponent" type="Node" parent="." index="19" unique_id=1270479005]
+script = ExtResource("13_0r3jo")
+metadata/_custom_type_script = "uid://bdxrxakvokr52"
+
+[node name="PerkOwnerComponent" type="Node" parent="." index="21" unique_id=830713071 node_paths=PackedStringArray("perk_ui", "perk_notification_ui", "perk_collect_sound")]
+script = ExtResource("15_4awd5")
+perk_ui = NodePath("../GUI/PerkList/Panel/GridContainer")
+perk_notification_ui = NodePath("../GUI")
+perk_collect_sound = NodePath("../Sounds/PerkCollect")
+metadata/_custom_type_script = "uid://bl4o52tmouk6e"
+
+[node name="RainbowOverlayComponent" type="Node" parent="." index="23" unique_id=1613621018]
+script = ExtResource("17_egoq8")
+metadata/_custom_type_script = "uid://jqnpe0oqv5il"
+
+[node name="IngameMenuComponent" type="Node" parent="." index="24" unique_id=691096378 node_paths=PackedStringArray("menu", "paused_effect", "ambience")]
+process_mode = 3
+script = ExtResource("19_pd2gv")
+menu = NodePath("../GUI/Menu/IngameMenu")
+action_event = "toggle_menu"
+paused_effect = NodePath("../GUI/Overlays/Menu/MenuOverlay")
+ambience = NodePath("../Sounds/Ambience")
+metadata/_custom_type_script = "uid://ck3n6ttlwtal7"
+
+[node name="FullcreenSettingsComponent" type="Node" parent="." index="25" unique_id=1756646197]
+process_mode = 3
+script = ExtResource("22_7o513")
+metadata/_custom_type_script = "uid://b5miclua4wknq"
+
+[node name="BattleTendencyMusicComponent" type="Node" parent="." index="26" unique_id=947169944]
+script = ExtResource("27_7qb6q")
+music_1 = ExtResource("28_855fl")
+music_2 = ExtResource("29_6gaf5")
+music_3 = ExtResource("30_7e430")
+music_4 = ExtResource("31_hp12l")
+metadata/_custom_type_script = "uid://rvt8h5qxjw7w"
+
+[node name="MusicComponent" type="Node" parent="." index="27" unique_id=1410407748 node_paths=PackedStringArray("main_music_player", "main_music_player_staged", "minor_music_player")]
+script = ExtResource("32_ak33s")
+main_music_player = NodePath("Main")
+main_music_player_staged = NodePath("Main_stage")
+minor_music_player = NodePath("Minor")
+metadata/_custom_type_script = "uid://b4e4ba2xr3ea7"
+
+[node name="Main" type="AudioStreamPlayer" parent="MusicComponent" index="0" unique_id=2053893957]
+bus = &"Music"
+
+[node name="Minor" type="AudioStreamPlayer" parent="MusicComponent" index="1" unique_id=19790165]
+bus = &"Music"
+
+[node name="Main_stage" type="AudioStreamPlayer" parent="MusicComponent" index="2" unique_id=1660062971]
+bus = &"Music"
+
+[node name="HealthIndicatorComponent" type="Node" parent="." index="28" unique_id=1026848912 node_paths=PackedStringArray("texture_rect")]
+script = ExtResource("26_7e430")
+health_0 = ExtResource("35_hp12l")
+health_1 = ExtResource("28_quqo7")
+health_2 = ExtResource("29_jsfxc")
+health_3 = ExtResource("30_mxiww")
+health_4 = ExtResource("31_omg6r")
+animation_h_frames = 5
+animation_w_frames = 5
+texture_rect = NodePath("../GUI/Misc/Health_Background/Health_indicator")
+metadata/_custom_type_script = "uid://b8ag0xs5wkoy7"
+
+[node name="GUI" type="CanvasLayer" parent="." index="29" unique_id=1706866694]
+
+[node name="PerkList" type="Control" parent="GUI" index="0" unique_id=1491893049]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 1
+
+[node name="Panel" type="Panel" parent="GUI/PerkList" index="0" unique_id=1414116930]
+self_modulate = Color(1, 0, 0.42358288, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.19800001
+offset_top = 4.0
+offset_bottom = 3.893982
+
+[node name="GridContainer" type="GridContainer" parent="GUI/PerkList/Panel" index="0" unique_id=2074224388]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.998
+offset_left = 16.0
+offset_top = 12.0
+offset_right = -215.99988
+offset_bottom = -13.719383
+grow_horizontal = 2
+grow_vertical = 2
+columns = 16
+
+[node name="L1" type="TextureRect" parent="GUI/PerkList/Panel" index="1" unique_id=1569823241]
+modulate = Color(0.83034676, 3.8023293e-06, 0.38124627, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0017361111
+anchor_top = 0.98285455
+anchor_right = 0.0017361111
+anchor_bottom = 0.98285455
+offset_top = -32.0
+offset_right = 32.0
+grow_vertical = 0
+texture = ExtResource("20_855fl")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="L2" type="TextureRect" parent="GUI/PerkList/Panel" index="2" unique_id=634772733]
+modulate = Color(0.83034676, 3.8023293e-06, 0.38124627, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0017361111
+anchor_top = 0.015600866
+anchor_right = 0.0017361111
+anchor_bottom = 0.015600866
+offset_left = 32.0
+offset_right = 64.0
+offset_bottom = 32.0
+rotation = 1.5707964
+texture = ExtResource("20_855fl")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="L3" type="TextureRect" parent="GUI/PerkList/Panel" index="3" unique_id=480394890]
+modulate = Color(0.83034676, 3.8023293e-06, 0.38124627, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.9982639
+anchor_top = 0.98300004
+anchor_right = 0.9982639
+anchor_bottom = 0.98300004
+offset_left = -32.0
+offset_top = -0.01865387
+offset_bottom = 31.981346
+grow_horizontal = 0
+grow_vertical = 0
+rotation = -1.5707964
+texture = ExtResource("20_855fl")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="L4" type="TextureRect" parent="GUI/PerkList/Panel" index="4" unique_id=497044974]
+modulate = Color(0.83034676, 3.8023293e-06, 0.38124627, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.998
+anchor_top = 0.015600836
+anchor_right = 0.998
+anchor_bottom = 0.016
+offset_left = 0.30395508
+offset_top = 32.000004
+offset_right = 32.303955
+offset_bottom = 63.948833
+grow_horizontal = 0
+rotation = 3.1415927
+texture = ExtResource("20_855fl")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Misc" type="Control" parent="GUI" index="1" unique_id=2073434627]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Spectrum" type="Control" parent="GUI/Misc" index="0" unique_id=1750697326 node_paths=PackedStringArray("color_component")]
+layout_mode = 1
+anchor_left = 0.5451389
+anchor_top = 0.9398148
+anchor_right = 0.5798611
+anchor_bottom = 1.0015432
+script = ExtResource("42_omg6r")
+color_component = NodePath("../../../HealthIndicatorComponent")
+metadata/_custom_type_script = "uid://bbn66jje1cqhs"
+metadata/_edit_use_anchors_ = true
+
+[node name="Health_Background" type="TextureRect" parent="GUI/Misc" index="1" unique_id=651008257]
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5425347
+anchor_top = 0.9212963
+anchor_right = 0.5842014
+anchor_bottom = 0.9953704
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("41_setsc")
+metadata/_edit_use_anchors_ = true
+
+[node name="Health_indicator" type="TextureRect" parent="GUI/Misc/Health_Background" index="0" unique_id=1054240281]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0625
+anchor_top = -0.041666668
+anchor_right = 0.7291667
+anchor_bottom = 0.625
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_ak33s")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Stamina_Background" type="TextureRect" parent="GUI/Misc" index="2" unique_id=686199155]
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.58733153
+anchor_top = 0.92
+anchor_right = 0.628
+anchor_bottom = 0.99500006
+offset_left = -0.605896
+offset_top = 0.8399658
+offset_right = 0.5439453
+offset_bottom = 0.2399292
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("41_setsc")
+metadata/_edit_use_anchors_ = true
+
+[node name="Stamina_indicator" type="TextureRect" parent="GUI/Misc/Stamina_Background" index="0" unique_id=496710786]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.041666668
+anchor_right = 0.33333245
+anchor_bottom = 0.375
+offset_right = 9.000004
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("34_8fti1")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="LightningSpectrum" type="Control" parent="GUI/Misc" index="3" unique_id=444867873 node_paths=PackedStringArray("color_component")]
+layout_mode = 1
+anchor_left = 0.5911458
+anchor_top = 0.9398148
+anchor_right = 0.6258681
+anchor_bottom = 1.0015432
+scale = Vector2(0.9624431, 0.9778382)
+script = ExtResource("35_2d3wq")
+color_component = NodePath("../../../StaminaIndicatorComponent")
+metadata/_custom_type_script = "uid://cd0dtperukumm"
+metadata/_edit_use_anchors_ = true
+
+[node name="Inventory" type="Control" parent="GUI" index="2" unique_id=1069930799]
+layout_mode = 3
+anchor_right = 0.9990001
+anchor_bottom = 1.0
+offset_right = 1.1518555
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Hand_L" type="TextureRect" parent="GUI/Inventory" index="0" unique_id=723434357]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4982639
+anchor_top = 0.9212963
+anchor_right = 0.54
+anchor_bottom = 0.9953704
+offset_right = -0.08001709
+texture = ExtResource("40_mxiww")
+metadata/_edit_use_anchors_ = true
+
+[node name="Hand_R" type="TextureRect" parent="GUI/Inventory" index="1" unique_id=316605288]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.45399305
+anchor_top = 0.9212963
+anchor_right = 0.49613196
+anchor_bottom = 0.9953704
+offset_right = -0.54400635
+texture = ExtResource("41_omg6r")
+metadata/_edit_use_anchors_ = true
+
+[node name="WeaponIcon" type="TextureRect" parent="GUI/Inventory/Hand_R" index="0" unique_id=1696948363]
+material = ExtResource("44_aq85w")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02083373
+anchor_right = 1.021
+anchor_bottom = 1.0
+offset_right = -0.007980347
+offset_bottom = -1.5258789e-05
+metadata/_edit_use_anchors_ = true
+
+[node name="UniqueShaderComponent" type="Node" parent="GUI/Inventory/Hand_R/WeaponIcon" index="0" unique_id=599573053]
+script = ExtResource("11_yhquf")
+metadata/_custom_type_script = "uid://qcmegh7138ug"
+
+[node name="WeaponIconComponent" type="Node" parent="GUI/Inventory/Hand_R/WeaponIcon" index="1" unique_id=1536979129]
+script = ExtResource("38_bdlbc")
+metadata/_custom_type_script = "uid://bwcq6hlpavlvl"
+
+[node name="AttackAbility" type="TextureRect" parent="GUI/Inventory" index="2" unique_id=1284006024]
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4097222
+anchor_top = 0.9212963
+anchor_right = 0.4513889
+anchor_bottom = 0.9953704
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("38_wrmeq")
+metadata/_edit_use_anchors_ = true
+
+[node name="AttackAbilityIcon" type="TextureRect" parent="GUI/Inventory/AttackAbility" index="0" unique_id=33298384]
+material = ExtResource("44_aq85w")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02083373
+anchor_right = 1.021
+anchor_bottom = 1.0
+offset_right = -0.007980347
+offset_bottom = -1.5258789e-05
+metadata/_edit_use_anchors_ = true
+
+[node name="UniqueShaderComponent" type="Node" parent="GUI/Inventory/AttackAbility/AttackAbilityIcon" index="0" unique_id=1196983397]
+script = ExtResource("11_yhquf")
+metadata/_custom_type_script = "uid://qcmegh7138ug"
+
+[node name="MovementAbility" type="TextureRect" parent="GUI/Inventory" index="3" unique_id=899993662]
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3654514
+anchor_top = 0.9212963
+anchor_right = 0.40711805
+anchor_bottom = 0.9953704
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("38_wrmeq")
+metadata/_edit_use_anchors_ = true
+
+[node name="MovementAbilityIcon" type="TextureRect" parent="GUI/Inventory/MovementAbility" index="0" unique_id=1185570272]
+material = ExtResource("44_aq85w")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02083373
+anchor_right = 1.021
+anchor_bottom = 1.0
+offset_right = -0.007980347
+offset_bottom = -1.5258789e-05
+metadata/_edit_use_anchors_ = true
+
+[node name="UniqueShaderComponent" type="Node" parent="GUI/Inventory/MovementAbility/MovementAbilityIcon" index="0" unique_id=1478946136]
+script = ExtResource("11_yhquf")
+metadata/_custom_type_script = "uid://qcmegh7138ug"
+
+[node name="Menu" type="CanvasLayer" parent="GUI" index="3" unique_id=1927357485]
+layer = 4
+
+[node name="IngameMenu" parent="GUI/Menu" index="0" unique_id=1644887491 instance=ExtResource("20_ryxqw")]
+visible = false
+
+[node name="SoundsOnInputComponent2" type="Node" parent="GUI/Menu/IngameMenu" index="2" unique_id=471876940 node_paths=PackedStringArray("keyboard_audio_player", "mouse_audio_player")]
+script = ExtResource("25_vn5lk")
+keyboard_audio_player = NodePath("../../../../Sounds/Keyboard")
+mouse_audio_player = NodePath("../../../../Sounds/Mouse")
+metadata/_custom_type_script = "uid://dr8j22vcrypsa"
+
+[node name="Overlays" type="CanvasLayer" parent="GUI" index="4" unique_id=1713393531]
+layer = 2
+
+[node name="Health" type="CanvasLayer" parent="GUI/Overlays" index="0" unique_id=1783291718]
+
+[node name="Health" type="ColorRect" parent="GUI/Overlays/Health" index="0" unique_id=657939308]
 material = ExtResource("7_5768p")
 anchors_preset = 15
 anchor_right = 1.0
@@ -225,14 +673,9 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
 
-[node name="BattleTendencyComponent" type="Node" parent="." index="17" unique_id=1071898636 node_paths=PackedStringArray("battle_tendency_effect")]
-script = ExtResource("8_ljr5e")
-battle_tendency_effect = NodePath("CanvasLayer/ColorRect")
-metadata/_custom_type_script = "uid://bjb1tak0ajoof"
+[node name="BattleTendency" type="CanvasLayer" parent="GUI/Overlays" index="1" unique_id=1422523169]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="BattleTendencyComponent" index="0" unique_id=1279961535]
-
-[node name="ColorRect" type="ColorRect" parent="BattleTendencyComponent/CanvasLayer" index="0" unique_id=586695650]
+[node name="BattleTendency" type="ColorRect" parent="GUI/Overlays/BattleTendency" index="0" unique_id=586695650]
 material = ExtResource("9_d6ik8")
 anchors_preset = 15
 anchor_right = 1.0
@@ -241,33 +684,9 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
 
-[node name="UniqueShaderComponent" type="Node" parent="BattleTendencyComponent/CanvasLayer/ColorRect" index="0" unique_id=222333645]
-script = ExtResource("11_yhquf")
-metadata/_custom_type_script = "uid://qcmegh7138ug"
+[node name="ColorModify" type="CanvasLayer" parent="GUI/Overlays" index="2" unique_id=1450573894]
 
-[node name="ImpactFrameComponent" type="Node" parent="." index="18" unique_id=462102113 node_paths=PackedStringArray("effect_frame", "color_modify_frame")]
-script = ExtResource("10_m2dsc")
-effect_frame = NodePath("CanvasLayer/ColorRect")
-color_modify_frame = NodePath("CanvasLayer/ColorModify")
-metadata/_custom_type_script = "uid://c3d63pm2kikgh"
-
-[node name="CanvasLayer" type="CanvasLayer" parent="ImpactFrameComponent" index="0" unique_id=892594464]
-
-[node name="ColorRect" type="ColorRect" parent="ImpactFrameComponent/CanvasLayer" index="0" unique_id=1727064910]
-visible = false
-material = ExtResource("11_oayod")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 1, 1, 0)
-
-[node name="UniqueShaderComponent" type="Node" parent="ImpactFrameComponent/CanvasLayer/ColorRect" index="0" unique_id=1883787937]
-script = ExtResource("11_yhquf")
-metadata/_custom_type_script = "uid://qcmegh7138ug"
-
-[node name="ColorModify" type="ColorRect" parent="ImpactFrameComponent/CanvasLayer" index="1" unique_id=395695325]
+[node name="ColorModify" type="ColorRect" parent="GUI/Overlays/ColorModify" index="0" unique_id=395695325]
 z_index = 50
 material = SubResource("ShaderMaterial_dytnj")
 anchors_preset = 15
@@ -277,75 +696,14 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
 
-[node name="UniqueShaderComponent" type="Node" parent="ImpactFrameComponent/CanvasLayer/ColorModify" index="0" unique_id=1795704970]
+[node name="UniqueShaderComponent" type="Node" parent="GUI/Overlays/ColorModify/ColorModify" index="0" unique_id=1795704970]
 script = ExtResource("11_yhquf")
 metadata/_custom_type_script = "uid://qcmegh7138ug"
 
-[node name="ScreenShakeComponent" type="Node" parent="." index="19" unique_id=1270479005]
-script = ExtResource("13_0r3jo")
-metadata/_custom_type_script = "uid://bdxrxakvokr52"
+[node name="Menu" type="CanvasLayer" parent="GUI/Overlays" index="3" unique_id=100970343]
+layer = 3
 
-[node name="PerkOwnerComponent" type="Node" parent="." index="21" unique_id=830713071 node_paths=PackedStringArray("perk_ui", "perk_notification_ui", "perk_collect_sound")]
-script = ExtResource("15_4awd5")
-perk_ui = NodePath("PerkUI/Control/Panel/GridContainer")
-perk_notification_ui = NodePath("PerkUI")
-perk_collect_sound = NodePath("../Sounds/PerkCollect")
-metadata/_custom_type_script = "uid://bl4o52tmouk6e"
-
-[node name="PerkUI" type="CanvasLayer" parent="PerkOwnerComponent" index="0" unique_id=1530233190]
-layer = 17
-
-[node name="Control" type="Control" parent="PerkOwnerComponent/PerkUI" index="0" unique_id=1491893049]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_behavior_recursive = 1
-
-[node name="Panel" type="Panel" parent="PerkOwnerComponent/PerkUI/Control" index="0" unique_id=1414116930]
-self_modulate = Color(0.8283503, 0, 0.34580213, 0.17500001)
-layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 128.0
-
-[node name="GridContainer" type="GridContainer" parent="PerkOwnerComponent/PerkUI/Control/Panel" index="0" unique_id=2074224388]
-layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 128.0
-columns = 17
-
-[node name="RainbowOverlayComponent" type="Node" parent="." index="23" unique_id=1613621018]
-script = ExtResource("17_egoq8")
-metadata/_custom_type_script = "uid://jqnpe0oqv5il"
-
-[node name="CanvasLayer" type="CanvasLayer" parent="RainbowOverlayComponent" index="0" unique_id=1732800132]
-
-[node name="ColorRect" type="ColorRect" parent="RainbowOverlayComponent/CanvasLayer" index="0" unique_id=400252612]
-z_index = -1
-material = ExtResource("18_wns57")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 1, 1, 0)
-
-[node name="UniqueShaderComponent" type="Node" parent="RainbowOverlayComponent/CanvasLayer/ColorRect" index="0" unique_id=1428283624]
-script = ExtResource("11_yhquf")
-metadata/_custom_type_script = "uid://qcmegh7138ug"
-
-[node name="IngameMenuComponent" type="Node" parent="." index="24" unique_id=691096378 node_paths=PackedStringArray("menu", "paused_effect")]
-process_mode = 3
-script = ExtResource("19_pd2gv")
-menu = NodePath("CanvasLayer/IngameMenu")
-action_event = "toggle_menu"
-paused_effect = NodePath("CanvasLayer/ColorRect")
-metadata/_custom_type_script = "uid://ck3n6ttlwtal7"
-
-[node name="CanvasLayer" type="CanvasLayer" parent="IngameMenuComponent" index="0" unique_id=977705511]
-layer = 20
-
-[node name="ColorRect" type="ColorRect" parent="IngameMenuComponent/CanvasLayer" index="0" unique_id=1738391628]
+[node name="MenuOverlay" type="ColorRect" parent="GUI/Overlays/Menu" index="0" unique_id=1738391628]
 visible = false
 material = SubResource("ShaderMaterial_7o513")
 anchors_preset = 15
@@ -355,10 +713,54 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
 
-[node name="IngameMenu" parent="IngameMenuComponent/CanvasLayer" index="1" unique_id=1644887491 instance=ExtResource("20_ryxqw")]
-visible = false
-z_index = 2
+[node name="Rainbow" type="CanvasLayer" parent="GUI/Overlays" index="4" unique_id=1257070989]
 
-[node name="FullcreenSettingsComponent" type="Node" parent="." index="25" unique_id=1756646197]
-script = ExtResource("22_7o513")
-metadata/_custom_type_script = "uid://b5miclua4wknq"
+[node name="Rainbow" type="ColorRect" parent="GUI/Overlays/Rainbow" index="0" unique_id=400252612]
+z_index = -1
+material = ExtResource("18_wns57")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1533.0
+offset_top = 372.0
+offset_right = 1533.0
+offset_bottom = 372.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="UniqueShaderComponent" type="Node" parent="GUI/Overlays/Rainbow/Rainbow" index="0" unique_id=1428283624]
+script = ExtResource("11_yhquf")
+metadata/_custom_type_script = "uid://qcmegh7138ug"
+
+[node name="ImpactFrame" type="CanvasLayer" parent="GUI/Overlays" index="5" unique_id=552674945]
+
+[node name="ImpactFrame" type="ColorRect" parent="GUI/Overlays/ImpactFrame" index="0" unique_id=1727064910]
+visible = false
+material = ExtResource("11_oayod")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="UniqueShaderComponent" type="Node" parent="GUI/Overlays/ImpactFrame/ImpactFrame" index="0" unique_id=1883787937]
+script = ExtResource("11_yhquf")
+metadata/_custom_type_script = "uid://qcmegh7138ug"
+
+[node name="Ability" type="CanvasLayer" parent="GUI/Overlays" index="6" unique_id=614013625]
+
+[node name="RobustEffect" parent="." index="30" unique_id=379104243 instance=ExtResource("45_aq85w")]
+visible = false
+position = Vector2(5, -7)
+
+[node name="StaminaIndicatorComponent" type="Node" parent="." index="31" unique_id=1941687595 node_paths=PackedStringArray("texture_rect")]
+script = ExtResource("44_svu4j")
+stamina_0 = ExtResource("34_8fti1")
+stamina_1 = ExtResource("50_2d3wq")
+stamina_2 = ExtResource("51_usxup")
+stamina_3 = ExtResource("52_2i8o7")
+stamina_4 = ExtResource("53_o3dxh")
+texture_rect = NodePath("../GUI/Misc/Stamina_Background/Stamina_indicator")
+metadata/_custom_type_script = "uid://bh67jcffdkivf"

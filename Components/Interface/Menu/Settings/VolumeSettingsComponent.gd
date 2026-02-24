@@ -37,11 +37,3 @@ func _on_changed(new_value: float) -> void:
 	
 	config.set_value("VOLUME", audio_bus_name + "_volume", new_value)
 	config.save("user://settings.cfg")
-
-static func linear_to_db(linear: float) -> float:
-	if linear <= 0:
-		return -80.0
-	return 20.0 * log(linear) / log(10.0)
-
-static func db_to_linear(db: float) -> float:
-	return pow(10.0, db / 20.0) * 100.0

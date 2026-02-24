@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dufhgddaeqjd4"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dufhgddaeqjd4"]
 
 [ext_resource type="Shader" uid="uid://boy7hlksa7i1s" path="res://Resources/Shaders/ImpactFrame.gdshader" id="1_1eqom"]
 

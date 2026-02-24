@@ -10,6 +10,8 @@ class_name MeleeRangeComponent extends Component
 @export var range_weapons: Array[RangeWeapon]
 @export var range_weapon_distance: int = 64
 @export var update_rate: float = 1
+@export var inverted_logic: bool = false
+@export var retreat_when_no_ammo: bool = false
 
 var update_timer: Timer
 
@@ -43,17 +45,28 @@ func _update() -> void:
 		if weapon_user_component.selected_weapon is RangeWeapon and weapon_user_component.selected_weapon.bullets == 0 and set_alt_weapon_when_cooldown:
 			weapon_user_component.selected_weapon = _pick_weapon(melee_weapons)
 	
+	if weapon_user_component.selected_weapon is RangeWeapon and weapon_user_component.selected_weapon.bullets == 0 and retreat_when_no_ammo:
+		move_to_point_component.run_from_target_range = 300
+		move_to_point_component.run_to_target_range = 250
+		return
+	
 	if move_to_point_component and set_weapon_logic:
-		if weapon_user_component.selected_weapon is MeleeWeapon:
+		if inverted_logic and weapon_user_component.selected_weapon is MeleeWeapon or inverted_logic and weapon_user_component.selected_weapon is RangeWeapon:
 			move_to_point_component.run_from_target_range = 16
 			move_to_point_component.run_to_target_range = 1000
+			if inverted_logic:
+				move_to_point_component.run_from_target_range = 64
+				move_to_point_component.run_to_target_range = 1000
 		else:
 			move_to_point_component.run_from_target_range = 200
 			move_to_point_component.run_to_target_range = 150
 
 func _pick_weapon(weapons: Array) -> Weapon:
-	if weapons.is_empty() or weapons.size() == 1:
+	if weapons.size() == 1:
 		return weapons[0]
+	
+	if weapons.is_empty():
+		return null
 	
 	var valid_weapons: Array[Weapon]
 	for weapon in weapons:
@@ -62,7 +75,10 @@ func _pick_weapon(weapons: Array) -> Weapon:
 		
 		valid_weapons.append(weapon)
 	
-	if valid_weapons.is_empty() or valid_weapons.size() == 1:
+	if valid_weapons.size() == 1:
 		return valid_weapons[0]
+	
+	if valid_weapons.is_empty():
+		return null
 	
 	return valid_weapons.pick_random()

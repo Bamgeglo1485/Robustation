@@ -5,6 +5,7 @@ class_name StaminaComponent extends Component
 @export var stamina_recover: int = 20
 @export var stun_effect: PackedScene = preload("res://Scenes/Effects/Particles/Stun.tscn")
 @export var after_damage_recover_cooldown_delay: float = 3
+
 var stamina: int = max_stamina
 var can_recover: bool = true
 var stunned: bool = false
@@ -43,11 +44,13 @@ func take_stamina_damage(damage, damager):
 		parent.add_child.call_deferred(inst)
 		
 func set_stamina(new_stamina):
+	EventBusManager.stamina_changed.emit(parent, stamina, new_stamina)
 	stamina = new_stamina
 	stamina = clamp(stamina, 0, max_stamina)
 	
 	if mob_mover_component:
 		mob_mover_component.minor_modifiers["stamina_modifier"] = float(stamina) / max_stamina
+	
 	
 	if stamina == 0:
 		stun()

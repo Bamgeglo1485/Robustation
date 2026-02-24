@@ -115,6 +115,6 @@ shader_parameter/saturation = 1.0
 shader_parameter/brightness = 0.0
 shader_parameter/contrast = 1.0
 shader_parameter/hue_shift = 0.0
-shader_parameter/gamma = 0.50000002049012
+shader_parameter/gamma = 1.0
 shader_parameter/alpha = 1.0
 shader_parameter/vignette_strength = 0.0

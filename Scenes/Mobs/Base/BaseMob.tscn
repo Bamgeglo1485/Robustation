@@ -82,16 +82,18 @@ metadata/_custom_type_script = "uid://b770h0bntm0u4"
 
 [node name="FootstepComponent" type="Node" parent="." unique_id=86781683 node_paths=PackedStringArray("footstep_sound")]
 script = ExtResource("15_obr0u")
-footstep_sound = NodePath("FootstepSounds")
+footstep_sound = NodePath("../Sounds/FootstepSounds")
 metadata/_custom_type_script = "uid://cwh8ve85ed8gv"
-
-[node name="FootstepSounds" type="AudioStreamPlayer2D" parent="FootstepComponent" unique_id=1611482403]
-stream = ExtResource("16_g8los")
 
 [node name="Sounds" type="Node2D" parent="." unique_id=1426643006]
 
 [node name="BodyFall" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1649394651]
 stream = ExtResource("17_g8los")
+
+[node name="FootstepSounds" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1611482403]
+stream = ExtResource("16_g8los")
+volume_db = 5.591
+max_polyphony = 10
 
 [node name="Area2D" type="Area2D" parent="." unique_id=151901461]
 collision_layer = 3

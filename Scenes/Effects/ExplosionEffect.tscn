@@ -47,7 +47,6 @@ one_shot = true
 autostart = true
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1543119462]
-z_index = 20
 material = ExtResource("2_cq02y")
 offset_left = -142.0
 offset_top = -136.0

@@ -48,7 +48,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if flying and fly_speed > 0:
 		_fly(delta)
-	
 	_move(delta)
 
 func _process(delta: float) -> void:

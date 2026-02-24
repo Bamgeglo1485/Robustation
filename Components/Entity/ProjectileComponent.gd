@@ -68,7 +68,7 @@ func _delete() -> void:
 	deleted = true
 	set_deferred("monitoring", false)
 	set_deferred("monitorable", false)
-	self.collision_layer = 0
+	parent.collision_layer = 0
 	
 	var ignore_component: MeleeAttackIgnoreComponent = MeleeAttackIgnoreComponent.new()
 	parent.add_child(ignore_component)

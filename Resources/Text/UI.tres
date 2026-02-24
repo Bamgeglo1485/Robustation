@@ -1,0 +1,6 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://cwb2xcovj2h4n"]
+
+[ext_resource type="FontFile" uid="uid://b3dwyq1k4yxxc" path="res://Resources/Text/Fonts/RobotoMono/static/RobotoMono-Light.ttf" id="1_l7x6h"]
+
+[resource]
+font = ExtResource("1_l7x6h")

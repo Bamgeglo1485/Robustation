@@ -20,6 +20,17 @@ class_name RangeWeapon extends Weapon
 @export var bullets_recovery_delay: float = 4
 @export var gun_fire_effect: PackedScene
 
+var bullets_recover_timer: Timer
+
+func _ready() -> void:
+	super._ready()
+	
+	bullets_recover_timer = Timer.new()
+	bullets_recover_timer.ignore_time_scale = !timers_timescaled
+	bullets_recover_timer.timeout.connect(_on_bullets_recover)
+	bullets_recover_timer.one_shot = true
+	add_child(bullets_recover_timer)
+
 func attack(raiser, _npc = true) -> void:
 	if cooldown or !can_attack or swinging or !projectile or not raiser.has_method("get_attack_direction"):
 		return
@@ -62,10 +73,9 @@ func attack(raiser, _npc = true) -> void:
 		shoot_sound.play()
 	
 	if bullets <= 0:
-		if timers_timescaled:
-			get_tree().create_timer(bullets_recovery_delay).timeout.connect(_on_bullets_recover)
-		else:
-			get_tree().create_timer(bullets_recovery_delay, true, false, true).timeout.connect(_on_bullets_recover)
+		bullets_recover_timer.wait_time = bullets_recovery_delay
+		bullets_recover_timer.start()
+		EventBusManager.bullets_end.emit(parent, self)
 		if bullets_end_sound:
 			bullets_end_sound.play()
 	

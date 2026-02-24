@@ -11,7 +11,10 @@ var viewport_rect: Rect2
 func _ready() -> void:
 	viewport_rect = get_viewport().get_visible_rect()
 
-func _process(_delta: float) -> void:
+func _input(_event: InputEvent) -> void:
+	if !parent.visible:
+		return
+	
 	viewport_rect = get_viewport().get_visible_rect()
 	
 	if !parent.button_pressed or !frame_to_drag:

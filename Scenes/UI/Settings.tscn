@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cja3led3n1ehp" path="res://Components/Interface/Menu/DragButtonComponent.gd" id="1_kg15k"]
 [ext_resource type="Texture2D" uid="uid://dqd7xkk5m77ck" path="res://Textures/Interface/Menu/cross.png" id="1_v5qja"]
+[ext_resource type="LabelSettings" uid="uid://cwb2xcovj2h4n" path="res://Resources/Text/UI.tres" id="2_6qgw2"]
 [ext_resource type="Texture2D" uid="uid://ftxxh2qcsb0s" path="res://Textures/Interface/Menu/cross_hovered.png" id="2_y60rh"]
 [ext_resource type="Script" uid="uid://bodxsix2kyyy6" path="res://Components/Interface/Menu/ToggleVisibleOnPressedComponent.gd" id="3_y60rh"]
 [ext_resource type="LabelSettings" uid="uid://nbgfghoq6ado" path="res://Resources/Text/CMDHeading.tres" id="4_hfiyb"]
@@ -10,6 +11,7 @@
 [ext_resource type="Script" uid="uid://ci2jd2wcm5sd8" path="res://Components/Interface/Menu/Settings/FOVSettingsComponent.gd" id="8_uo7xn"]
 [ext_resource type="Script" uid="uid://eueqbg2py0bc" path="res://Components/Interface/Menu/Settings/VerticalSyncSettingsComponent.gd" id="9_uujv2"]
 [ext_resource type="Script" uid="uid://b5miclua4wknq" path="res://Components/Interface/Menu/Settings/FullcreenSettingsComponent.gd" id="10_6wdx2"]
+[ext_resource type="Script" uid="uid://dphs1pxcujmhq" path="res://Components/Interface/Menu/Settings/BloodCleaningSettingsComponent.gd" id="10_r3am3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ex7t"]
 bg_color = Color(0, 0, 0, 1)
@@ -68,6 +70,7 @@ offset_right = 1.0
 offset_bottom = -534.80804
 mouse_behavior_recursive = 1
 text = "Robust-os - setup_panel.exe - ui_system.rbst"
+label_settings = ExtResource("2_6qgw2")
 
 [node name="OffButton" type="TextureButton" parent="." unique_id=68944335]
 layout_mode = 1
@@ -168,6 +171,7 @@ offset_left = 0.011999965
 offset_top = -0.008000135
 offset_right = 0.21199799
 text = "Base volume"
+label_settings = ExtResource("2_6qgw2")
 
 [node name="MusicVolume" type="Panel" parent="VBoxContainer" unique_id=1309854401]
 custom_minimum_size = Vector2(0, 48)
@@ -218,6 +222,7 @@ offset_left = 0.011999965
 offset_top = -0.008000135
 offset_right = 0.21199799
 text = "Music volume"
+label_settings = ExtResource("2_6qgw2")
 
 [node name="Visual Settings" type="Panel" parent="VBoxContainer" unique_id=298625056]
 custom_minimum_size = Vector2(0, 48)
@@ -289,6 +294,59 @@ offset_left = 0.011999965
 offset_top = -0.008000135
 offset_right = 0.21199799
 text = "Field Of View"
+label_settings = ExtResource("2_6qgw2")
+
+[node name="BLOOD" type="Panel" parent="VBoxContainer" unique_id=2142533955]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="Slider" type="HSlider" parent="VBoxContainer/BLOOD" unique_id=720255688]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.60400003
+anchor_right = 0.883
+anchor_bottom = 0.93700004
+offset_left = 2.0
+offset_top = 0.00799942
+offset_right = -0.20199585
+offset_bottom = 0.02399826
+max_value = 200.0
+step = 10.0
+
+[node name="Percentage" type="Label" parent="VBoxContainer/BLOOD/Slider" unique_id=1811130513]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.016
+anchor_top = -0.312
+anchor_right = 1.1340001
+anchor_bottom = 1.125
+offset_left = 0.055999756
+offset_top = -0.007999897
+offset_right = -0.15603638
+text = "100%"
+
+[node name="SliderPercentageComponent" type="Node" parent="VBoxContainer/BLOOD/Slider" unique_id=1062473040 node_paths=PackedStringArray("percentage_frame")]
+script = ExtResource("4_sc1bs")
+percentage_frame = NodePath("../Percentage")
+percentage_symbol = " Sec"
+metadata/_custom_type_script = "uid://bmng32vsmb4mm"
+
+[node name="BloodCleaningSettingsComponent" type="Node" parent="VBoxContainer/BLOOD/Slider" unique_id=209284535]
+script = ExtResource("10_r3am3")
+metadata/_custom_type_script = "uid://dphs1pxcujmhq"
+
+[node name="Name" type="Label" parent="VBoxContainer/BLOOD" unique_id=834396743]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.002
+anchor_top = 0.021000002
+anchor_right = 0.202
+anchor_bottom = 0.5
+offset_left = 0.011999965
+offset_top = -0.008000135
+offset_right = 0.21199799
+text = "Blood cleaning delay (0 - do not clean)"
+label_settings = ExtResource("2_6qgw2")
 
 [node name="V-SYNC" type="Panel" parent="VBoxContainer" unique_id=1771719771]
 custom_minimum_size = Vector2(0, 48)
@@ -305,6 +363,7 @@ offset_left = 0.011999965
 offset_top = -0.008000135
 offset_right = 0.21199799
 text = "Vertical Sync"
+label_settings = ExtResource("2_6qgw2")
 
 [node name="CheckButton" type="CheckButton" parent="VBoxContainer/V-SYNC" unique_id=124478213]
 layout_mode = 1
@@ -335,6 +394,7 @@ offset_left = 0.011999965
 offset_top = -0.008000135
 offset_right = 0.21199799
 text = "Fullscreen"
+label_settings = ExtResource("2_6qgw2")
 
 [node name="CheckButton" type="CheckButton" parent="VBoxContainer/FULLSCREEN" unique_id=918200889]
 layout_mode = 1

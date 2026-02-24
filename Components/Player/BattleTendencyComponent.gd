@@ -1,19 +1,23 @@
 class_name BattleTendencyComponent extends Component
 
-@export var battle_tendency: float = 30
+@export var battle_tendency: float = 30.0
 @export var battle_tendency_on_max_health: float = 50.0
-@export var max_battle_tendency: float = 100
-@export var battle_tendecy_dependency: float = 1
+@export var max_battle_tendency: float = 100.0
+@export var battle_tendecy_dependency: float = 1.0
 @export var battle_tendency_debuff_multiplier: float = 0.15
-@export var battle_tendency_buff_multiplier: float = 1
+@export var battle_tendency_buff_multiplier: float = 1.0
 @export var battle_tendency_bonus: int = 0
 @export var palette_section: int = 2
 @export var section: int = 2
 
+@export var euphoria_effect: GPUParticles2D
+
 @export var battle_tendency_effect: ColorRect
-@onready var material = parent.material
+@onready var material = parent.get("material")
 @onready var health_component: HealthComponent = parent.get_node_or_null("HealthComponent")
 @onready var weapon_user_component: Node = parent.get_node_or_null("WeaponUserComponent")
+
+var last_section: int = 69
 
 func _ready() -> void:
 	EventBusManager.health_changed.connect(_on_health_changed)
@@ -87,11 +91,20 @@ func change_battle_tendency(value) -> int:
 	if section == old_section:
 		return section
 	
-	EventBusManager.tendency_section_changed.emit(parent)
-	set_battle_tendency_modifiers()
-	
+	_on_section_changed()
 	# print("Section: ", section, " (", get_section_name(), ")")
 	return section
+
+func _on_section_changed():
+	await get_tree().create_timer(3).timeout
+	
+	if last_section == section:
+		return
+	
+	last_section = section
+	set_battle_tendency_modifiers()
+	change_palette()
+	EventBusManager.tendency_section_changed.emit(parent)
 
 func get_section_name() -> String:
 	match section:
@@ -131,11 +144,14 @@ func change_palette() -> void:
 	
 	match section:
 		1:
-			tween.tween_property(battle_tendency_effect.material, "shader_parameter/saturation", 0.0, 0.5)
+			tween.tween_property(battle_tendency_effect.material, "shader_parameter/saturation", 0.3, 0.5)
 			tween.tween_property(battle_tendency_effect.material, "shader_parameter/contrast", 0.5, 0.5)
 			tween.tween_property(battle_tendency_effect.material, "shader_parameter/vignette_strength", 0.4, 0.5)
 			tween.tween_property(battle_tendency_effect.material, "shader_parameter/red_factor", 1.0, 0.5)
 			tween.tween_property(battle_tendency_effect.material, "shader_parameter/green_factor", 1.0, 0.5)
+			
+			if euphoria_effect:
+				euphoria_effect.visible = false
 			
 			if material:
 				tween.tween_property(material, "shader_parameter/aura_opacity", 0.0, 0.5)
@@ -147,6 +163,9 @@ func change_palette() -> void:
 			tween.tween_property(battle_tendency_effect.material, "shader_parameter/vignette_strength", 0.1, 0.5)
 			tween.tween_property(battle_tendency_effect.material, "shader_parameter/red_factor", 1.0, 0.5)
 			
+			if euphoria_effect:
+				euphoria_effect.visible = false
+			
 			if material:
 				tween.tween_property(material, "shader_parameter/aura_opacity", 0.0, 0.5)
 		
@@ -157,6 +176,9 @@ func change_palette() -> void:
 			tween.tween_property(battle_tendency_effect.material, "shader_parameter/red_factor", 1.1, 0.5)
 			tween.tween_property(battle_tendency_effect.material, "shader_parameter/vignette_strength", 0.0, 0.5)
 			
+			if euphoria_effect:
+				euphoria_effect.visible = false
+				
 			if material:
 				tween.tween_property(material, "shader_parameter/aura_min_line_width", 0.1, 0.5)
 				tween.tween_property(material, "shader_parameter/aura_max_line_width", 1.4, 0.5)
@@ -168,6 +190,9 @@ func change_palette() -> void:
 			tween.tween_property(battle_tendency_effect.material, "shader_parameter/vignette_strength", 0.0, 0.5)
 			tween.tween_property(battle_tendency_effect.material, "shader_parameter/red_factor", 1.2, 0.5)
 			tween.tween_property(battle_tendency_effect.material, "shader_parameter/green_factor", 0.8, 0.5)
+			
+			if euphoria_effect:
+				euphoria_effect.visible = true
 			
 			if material:
 				tween.tween_property(material, "shader_parameter/aura_min_line_width", 0.1, 0.5)

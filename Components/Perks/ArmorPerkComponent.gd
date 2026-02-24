@@ -12,4 +12,4 @@ func apply_modifiers() -> void:
 	if !health_component:
 		return
 	
-	health_component.armor *= 0.05
+	health_component.armor *= 0.95

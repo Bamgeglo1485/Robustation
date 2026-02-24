@@ -35,3 +35,5 @@ metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
 [node name="ProjectileIgnoreComponent" type="Node" parent="." unique_id=155556482]
 script = ExtResource("4_vsa8m")
 metadata/_custom_type_script = "uid://ch6fjxkr8n5db"
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=843502355]

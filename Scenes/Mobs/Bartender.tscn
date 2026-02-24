@@ -26,6 +26,7 @@
 [ext_resource type="AudioStream" uid="uid://dba5vdenu1s2u" path="res://Audio/Effects/bartender_rage.ogg" id="13_biq87"]
 [ext_resource type="Texture2D" uid="uid://ci84jx3iuyn21" path="res://Textures/Mobs/Mobs/Hair/bobcut.png" id="13_et3ly"]
 [ext_resource type="Texture2D" uid="uid://drxdjuw45awor" path="res://Textures/Mobs/Mobs/Hair/gentle.png" id="14_11246"]
+[ext_resource type="Script" uid="uid://cbn5a10g0d5yr" path="res://Components/Mobs/NPC/MeleeRangeComponent.gd" id="14_lbqxj"]
 [ext_resource type="Texture2D" uid="uid://dpr87culdu5mg" path="res://Textures/Mobs/Mobs/Hair/swept2.png" id="15_biq87"]
 [ext_resource type="Texture2D" uid="uid://b1r30o42v7kyr" path="res://Textures/Mobs/Mobs/Hair/bobcurl.png" id="16_3c5wa"]
 [ext_resource type="Texture2D" uid="uid://dlu5n8uy6npxo" path="res://Textures/Mobs/Mobs/Hair/joestar.png" id="17_coqyf"]
@@ -126,6 +127,17 @@ stream = ExtResource("13_biq87")
 [node name="MoveToPointComponent" parent="AI" parent_id_path=PackedInt32Array(1365591205) index="0" unique_id=395370591]
 run_to_target_range = 150.0
 run_from_target_range = 200.0
+
+[node name="AttackTargetComponent" parent="AI" parent_id_path=PackedInt32Array(1365591205) index="2" unique_id=1357236819]
+range_attack_distance = 128
+
+[node name="MeleeRangeComponent" type="Node" parent="AI" parent_id_path=PackedInt32Array(1365591205) index="3" unique_id=1757706956 node_paths=PackedStringArray("range_weapons")]
+script = ExtResource("14_lbqxj")
+set_alt_weapon_when_cooldown = false
+range_weapons = [NodePath("../../WeaponUserComponent/Shotgun")]
+inverted_logic = true
+retreat_when_no_ammo = true
+metadata/_custom_type_script = "uid://cbn5a10g0d5yr"
 
 [node name="Hair" type="Sprite2D" parent="." index="15" unique_id=510513125]
 texture = ExtResource("3_p0u7e")

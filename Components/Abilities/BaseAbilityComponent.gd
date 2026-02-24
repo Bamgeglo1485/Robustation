@@ -11,6 +11,8 @@ class_name BaseAbilityComponent extends Component
 @export var stop_effect: PackedScene
 @export var stop_sound: AudioStreamPlayer2D
 
+@export var ability_icon: TextureRect
+
 var active: bool = false
 var ability_timer: float = 0.0
 
@@ -25,11 +27,15 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if ability_timer > 0:
 		ability_timer -= delta
+		
+		if ability_icon and ability_delay != 0:
+			var progress_value = 1.0 - (float(ability_timer) / ability_delay)
+			ability_icon.material.set_shader_parameter("progress", progress_value)
+		
 		if ability_timer <= 0:
 			ability_timer = 0
 			if active:
 				on_disable_ability()
-		
 	
 	input()
 
@@ -81,5 +87,10 @@ func disable_ability() -> void:
 
 func _start_cooldown() -> void:
 		cooldown = true
+		if ability_icon:
+			ability_icon.material.set_shader_parameter("progress", 1.0)
+			var progress_tween = create_tween()
+			progress_tween.set_ignore_time_scale()
+			progress_tween.tween_property(ability_icon.material, "shader_parameter/progress", 0.0, cooldown_delay)
 		await get_tree().create_timer(cooldown_delay, true, false, true).timeout
 		cooldown = false

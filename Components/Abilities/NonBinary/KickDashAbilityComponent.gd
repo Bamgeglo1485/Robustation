@@ -4,6 +4,7 @@ class_name KickDashAbilityComponent extends Component
 @export var target_clear_timer: Timer
 @export var can_teleport_timer: Timer
 
+@export var combo_effect: PackedScene = preload("res://Scenes/Effects/Particles/Combo.tscn")
 @export var teleport_sound: AudioStreamPlayer2D
 @export var max_kicks: int = 2
 var kicks: int = 0
@@ -17,12 +18,8 @@ func _ready() -> void:
 		can_teleport_timer.timeout.connect(_on_kick_teleport_timer_timeout)
 	if target_clear_timer:
 		target_clear_timer.timeout.connect(_on_kick_target_timer_timeout)
-		
-func _process(_delta: float) -> void:
-	if parent.has_node("InputMoverComponent"):
-		input()
 	
-func input() -> void:
+func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("movement_ability"):
 		kick()
 
@@ -61,7 +58,9 @@ func kick_teleport() -> void:
 	
 	if kick_target != null and not kick_target.has_node("ProjectileComponent"):
 		var direction = (kick_target.global_position - parent.global_position)
+		kick_weapon.reset_cooldown()
 		kick_weapon._melee_attack_target(kick_target, direction)
+		kick_weapon._cooldown()
 	elif kick_target.has_node("ProjectileComponent"):
 		kick_target = null
 	
@@ -80,6 +79,9 @@ func kick_teleport() -> void:
 	
 	if kicks >= max_kicks and kick_target != null:
 		EventBusManager.kick_dash_combo.emit(parent)
+		if combo_effect:
+			var effect = combo_effect.instantiate()
+			parent.add_child.call_deferred(effect)
 		if kick_target.has_node("HealthComponent"):
 			kick_target.get_node("HealthComponent").take_damage(kick_weapon.damage * 10, parent)
 

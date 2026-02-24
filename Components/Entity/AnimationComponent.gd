@@ -61,7 +61,7 @@ func lean_to_direction(
 	) -> void:
 	
 	var angle: float = direction.angle()
-	var angle_deg: float= rad_to_deg(angle)
+	var angle_deg: float = rad_to_deg(angle)
 	
 	var rotation: Dictionary = get_rotation_from_angle(angle_deg)
 	

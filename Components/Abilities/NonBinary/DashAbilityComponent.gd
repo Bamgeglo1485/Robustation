@@ -5,7 +5,8 @@ class_name DashAbilityComponent extends Component
 @export var overdose_refuel_sound: AudioStreamPlayer2D
 @export var overdose_refuel_damage: int = 5
 @export var overdose_refuel_damage_time: int = 8
-@export var overdose_refuel_count: float = 2.5
+@export var overdose_refuel_count: float = 1.5
+@export var ability_icon: TextureRect
 
 @export var cooldown: bool = false
 @export var cooldown_delay: float = 0.5
@@ -22,6 +23,9 @@ class_name DashAbilityComponent extends Component
 @onready var mob_mover_component: MobMoverComponent = parent.get_node_or_null("MobMoverComponent")
 var recovery_timer: Timer
 var active: bool = false
+var progress_tween: Tween
+var stamina_tween: Tween
+var current_stamina_progress: float = 0.0
 
 func _ready() -> void:
 	recovery_timer = Timer.new()
@@ -33,12 +37,10 @@ func _ready() -> void:
 	
 	if parent.has_node("Area2D"):
 		parent.get_node("Area2D").body_entered.connect(_on_collision)
-		
-func _process(_delta: float) -> void:
-	if parent.has_node("InputMoverComponent"):
-		input()
+	
+	_update_stamina_bar()
 
-func input() -> void:
+func _input(_event: InputEvent) -> void:
 	if !mob_mover_component:
 		return
 	
@@ -49,13 +51,49 @@ func input() -> void:
 		
 		dash(direction)
 
+func _update_stamina_bar():
+	if !ability_icon or !ability_icon.material:
+		return
+	
+	var target_progress = 1.0 - (float(dash_stamina) / float(max(1, max_dash_stamina)))
+	
+	if stamina_tween:
+		stamina_tween.kill()
+		stamina_tween = null
+	
+	stamina_tween = create_tween()
+	stamina_tween.set_ignore_time_scale(true)
+	stamina_tween.set_trans(Tween.TRANS_SINE)
+	stamina_tween.set_ease(Tween.EASE_OUT)
+	stamina_tween.tween_method(_set_stamina_progress, current_stamina_progress, target_progress, 0.3)
+
+func _set_stamina_progress(value: float):
+	current_stamina_progress = value
+	if ability_icon and ability_icon.material:
+		ability_icon.material.set_shader_parameter("progress", value)
+
 func dash(direction) -> void:
 	if !mob_mover_component or parent is not CharacterBody2D:
 		return
 	if dash_stamina == 0 or cooldown or direction == Vector2.ZERO:
 		return
 	
+	var old_stamina = dash_stamina
 	dash_stamina -= 1
+	
+	if ability_icon and ability_icon.material:
+		if progress_tween:
+			progress_tween.kill()
+		
+		var old_progress = 1.0 - (float(old_stamina) / float(max(1, max_dash_stamina)))
+		var new_progress = 1.0 - (float(dash_stamina) / float(max(1, max_dash_stamina)))
+		
+		progress_tween = create_tween()
+		progress_tween.set_ignore_time_scale(true)
+		progress_tween.set_trans(Tween.TRANS_SINE)
+		progress_tween.set_ease(Tween.EASE_OUT)
+		progress_tween.tween_method(_set_stamina_progress, old_progress, new_progress, 0.15)
+		await progress_tween.finished
 	
 	if parent.has_node("OverdoseAbilityComponent") and parent.get_node("OverdoseAbilityComponent").active:
 		parent.get_node("OverdoseAbilityComponent").ability_timer += overdose_refuel_count
@@ -68,6 +106,8 @@ func dash(direction) -> void:
 
 		if parent.has_node("TrailEffectComponent"):
 			parent.get_node("TrailEffectComponent").lifetime_timer += overdose_refuel_count
+		
+		_update_stamina_bar()
 		return
 	
 	if trail_effect and !parent.has_node("TrailEffectComponent"):
@@ -86,17 +126,36 @@ func dash(direction) -> void:
 	_INVINCIBLE()
 
 func _stamina_recovery() -> void:
-	if dash_stamina != max_dash_stamina:
+	if dash_stamina < max_dash_stamina:
+		var old_stamina = dash_stamina
 		dash_stamina += 1
-		recovery_timer.start()
+		
+		if ability_icon and ability_icon.material:
+			if stamina_tween:
+				stamina_tween.kill()
+			
+			var old_progress = 1.0 - (float(old_stamina) / float(max(1, max_dash_stamina)))
+			var new_progress = 1.0 - (float(dash_stamina) / float(max(1, max_dash_stamina)))
+			
+			stamina_tween = create_tween()
+			stamina_tween.set_ignore_time_scale(true)
+			stamina_tween.set_trans(Tween.TRANS_SINE)
+			stamina_tween.set_ease(Tween.EASE_OUT)
+			stamina_tween.tween_method(_set_stamina_progress, old_progress, new_progress, 0.3)
+			await stamina_tween.finished
+		
+		if dash_stamina < max_dash_stamina:
+			recovery_timer.start()
 
 func _cooldown() -> void:
 	if cooldown_delay != 0:
 		cooldown = true
 		recovery_timer.stop()
-		await get_tree().create_timer(cooldown_delay).timeout
+		await get_tree().create_timer(cooldown_delay, true, false, true).timeout
 		cooldown = false
-		recovery_timer.start()
+		
+		if dash_stamina < max_dash_stamina:
+			recovery_timer.start()
 
 func _INVINCIBLE() -> void:
 	if invincibility_delay != 0 and parent.has_node("HealthComponent"):

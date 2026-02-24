@@ -1,5 +1,8 @@
 [gd_resource type="LabelSettings" format=3 uid="uid://nbgfghoq6ado"]
 
+[ext_resource type="FontFile" uid="uid://cmxfvgufpican" path="res://Resources/Text/Fonts/RobotoMono/static/RobotoMono-Medium.ttf" id="1_57npp"]
+
 [resource]
+font = ExtResource("1_57npp")
 font_size = 20
 shadow_size = 0

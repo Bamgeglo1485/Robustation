@@ -31,6 +31,12 @@
 [ext_resource type="Shader" uid="uid://4k7fthwpt7bc" path="res://Resources/Shaders/BattleTendency.gdshader" id="30_v1rwi"]
 [ext_resource type="Texture2D" uid="uid://dc0gdpbk12g5w" path="res://Textures/Mobs/Player/greytide_unlit.png" id="30_xwdpk"]
 [ext_resource type="Script" uid="uid://bqvdlb3r03cs0" path="res://Components/Visual/DirectionalSpriteComponent.gd" id="31_m4dpc"]
+[ext_resource type="Material" uid="uid://cqeu03o2ril5g" path="res://Resources/Shaders/Progress.tres" id="32_m4dpc"]
+[ext_resource type="Texture2D" uid="uid://1wwu1blvl8rt" path="res://Textures/Abilities/hypo.png" id="33_m4dpc"]
+[ext_resource type="Script" uid="uid://qcmegh7138ug" path="res://Components/Entity/UniqueShaderComponent.gd" id="34_t3me0"]
+[ext_resource type="Texture2D" uid="uid://dnsj2opn0s2h2" path="res://Textures/Abilities/telecrystal.png" id="34_vl6aw"]
+[ext_resource type="Script" uid="uid://bwcq6hlpavlvl" path="res://Components/Interface/Ingame/WeaponIconComponent.gd" id="35_u1ecu"]
+[ext_resource type="Texture2D" uid="uid://dikwitqlv30ww" path="res://Textures/Abilities/injector.png" id="36_u1ecu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6fu7j"]
 shader = ExtResource("30_v1rwi")
@@ -45,32 +51,6 @@ shader_parameter/gamma = 1.0
 shader_parameter/alpha = 0.0
 shader_parameter/vignette_strength = 0.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3kfxb"]
-shader = ExtResource("30_v1rwi")
-shader_parameter/red_factor = 1.0
-shader_parameter/green_factor = 1.0
-shader_parameter/blue_factor = 1.0
-shader_parameter/saturation = 1.0
-shader_parameter/brightness = 0.0
-shader_parameter/contrast = 1.0
-shader_parameter/hue_shift = 0.0
-shader_parameter/gamma = 1.0
-shader_parameter/alpha = 1.0
-shader_parameter/vignette_strength = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_v1rwi"]
-shader = ExtResource("30_v1rwi")
-shader_parameter/red_factor = 1.0
-shader_parameter/green_factor = 1.0
-shader_parameter/blue_factor = 1.0
-shader_parameter/saturation = 1.0
-shader_parameter/brightness = 0.0
-shader_parameter/contrast = 1.0
-shader_parameter/hue_shift = 0.0
-shader_parameter/gamma = 1.0
-shader_parameter/alpha = 1.0
-shader_parameter/vignette_strength = 0.0
-
 [node name="Player" unique_id=914217487 instance=ExtResource("1_mq7la")]
 
 [node name="Texture" parent="." index="2" unique_id=382857461]
@@ -78,9 +58,10 @@ texture = ExtResource("4_bvl14")
 
 [node name="HealthComponent" parent="." index="6" unique_id=1758373275]
 ignore_time_scale = true
+heal_for_damage_multiplier = 0.05
 
 [node name="WeaponUserComponent" parent="." index="8" unique_id=2123544057 node_paths=PackedStringArray("selected_weapon")]
-selected_weapon = NodePath("Spear")
+selected_weapon = NodePath("Toolbox")
 timers_timescaled = false
 
 [node name="Spear" type="Node" parent="WeaponUserComponent" index="0" unique_id=1787565286 node_paths=PackedStringArray("shoot_sound")]
@@ -93,7 +74,7 @@ bullets_recover_count = 1
 shots_angle = 0
 shoot_sound = NodePath("ShootSound")
 bullets_recovery_delay = 8.0
-cooldown_delay = 0.0
+cooldown_delay = 0.3
 swing_delay = 0.2
 equipped_texture = ExtResource("13_aa22f")
 icon_texture = ExtResource("24_46s63")
@@ -226,73 +207,21 @@ max_polyphony = 3
 stream = ExtResource("26_27vau")
 max_polyphony = 3
 
-[node name="DashAbilityComponent" type="Node" parent="." index="17" unique_id=991976233 node_paths=PackedStringArray("dash_sound", "overdose_refuel_sound")]
+[node name="DashAbilityComponent" type="Node" parent="." index="17" unique_id=991976233 node_paths=PackedStringArray("dash_sound", "overdose_refuel_sound", "ability_icon")]
 script = ExtResource("25_46s63")
 dash_sound = NodePath("../Sounds/DashSound")
 overdose_refuel_sound = NodePath("../Sounds/OverdoseRefuel")
+ability_icon = NodePath("../GUI/Inventory/MovementAbility/MovementAbilityIcon")
 trail_colors = Array[Color]([Color(0.9866392, 0, 0.3066764, 1), Color(0.8036335, 0.0022644557, 0.98781973, 1)])
 metadata/_custom_type_script = "uid://cmonoqon5s4vx"
 
-[node name="OverdoseAbilityComponent" type="Node" parent="." index="19" unique_id=142273018 node_paths=PackedStringArray("overdose_effect")]
+[node name="OverdoseAbilityComponent" type="Node" parent="." index="19" unique_id=142273018 node_paths=PackedStringArray("ability_icon")]
 script = ExtResource("27_l8jtb")
 trail_colors = Array[Color]([Color(0.8736105, 0, 0.34971508, 1), Color(0, 0.49991995, 0.47274232, 1), Color(0.5611145, 0.44604957, 0, 1)])
-overdose_effect = NodePath("CanvasLayer/ColorRect")
 cooldown_delay = 15.0
 ability_delay = 3.0
+ability_icon = NodePath("../GUI/Inventory/Hand_L/Hypo")
 metadata/_custom_type_script = "uid://b8d56xguabrvi"
-
-[node name="CanvasLayer" type="CanvasLayer" parent="OverdoseAbilityComponent" index="0" unique_id=704449999]
-
-[node name="ColorRect" type="ColorRect" parent="OverdoseAbilityComponent/CanvasLayer" index="0" unique_id=2134329824]
-z_index = 10
-material = SubResource("ShaderMaterial_6fu7j")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 1, 1, 0)
-
-[node name="ColorRect" parent="BattleTendencyComponent/CanvasLayer" parent_id_path=PackedInt32Array(1279961535) index="0" unique_id=586695650]
-z_index = -1
-material = SubResource("ShaderMaterial_3kfxb")
-
-[node name="ColorModify" parent="ImpactFrameComponent/CanvasLayer" parent_id_path=PackedInt32Array(892594464) index="1" unique_id=395695325]
-material = SubResource("ShaderMaterial_v1rwi")
-
-[node name="PerkUI" parent="PerkOwnerComponent" parent_id_path=PackedInt32Array(830713071) index="0" unique_id=1530233190]
-layer = 3
-
-[node name="Control" parent="PerkOwnerComponent/PerkUI" index="0" unique_id=1491893049]
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.19800001
-offset_right = 0.0
-offset_bottom = -0.3040161
-
-[node name="Panel" parent="PerkOwnerComponent/PerkUI/Control" index="0" unique_id=1414116930]
-self_modulate = Color(0.8283503, 0, 0.34580213, 0.187)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = -45.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="GridContainer" parent="PerkOwnerComponent/PerkUI/Control/Panel" index="0" unique_id=2074224388]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = -1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="RainbowOverlayComponent" parent="." index="26" unique_id=1613621018 node_paths=PackedStringArray("overlay")]
-overlay = NodePath("CanvasLayer/ColorRect")
 
 [node name="Unlit" type="Sprite2D" parent="." index="27" unique_id=146609340]
 modulate = Color(2.8165433, 1.6618701, 0.82175255, 1)
@@ -301,3 +230,51 @@ region_enabled = true
 region_rect = Rect2(0, 0, 32, 32)
 script = ExtResource("31_m4dpc")
 metadata/_custom_type_script = "uid://bqvdlb3r03cs0"
+
+[node name="Hypo" type="TextureRect" parent="GUI/Inventory/Hand_L" parent_id_path=PackedInt32Array(723434357) index="0" unique_id=376867296]
+material = ExtResource("32_m4dpc")
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.96
+anchor_bottom = 0.9374997
+offset_right = 1.9199829
+offset_bottom = 3.0
+texture = ExtResource("33_m4dpc")
+metadata/_edit_use_anchors_ = true
+
+[node name="UniqueShaderComponent" type="Node" parent="GUI/Inventory/Hand_L/Hypo" index="0" unique_id=1383160267]
+script = ExtResource("34_t3me0")
+metadata/_custom_type_script = "uid://qcmegh7138ug"
+
+[node name="WeaponIcon" parent="GUI/Inventory/Hand_R" parent_id_path=PackedInt32Array(316605288) index="0" unique_id=1696948363]
+texture = ExtResource("13_4xc88")
+
+[node name="AttackAbilityIcon" parent="GUI/Inventory/AttackAbility" parent_id_path=PackedInt32Array(1284006024) index="0" unique_id=33298384]
+texture = ExtResource("34_vl6aw")
+
+[node name="WeaponIconComponent" type="Node" parent="GUI/Inventory/AttackAbility/AttackAbilityIcon" index="1" unique_id=212640043 node_paths=PackedStringArray("weapon")]
+script = ExtResource("35_u1ecu")
+weapon = NodePath("../../../../../KickDashAbilityComponent/Kick")
+metadata/_custom_type_script = "uid://bwcq6hlpavlvl"
+
+[node name="MovementAbilityIcon" parent="GUI/Inventory/MovementAbility" parent_id_path=PackedInt32Array(899993662) index="0" unique_id=1185570272]
+texture = ExtResource("36_u1ecu")
+
+[node name="BattleTendency" parent="GUI/Overlays/BattleTendency" parent_id_path=PackedInt32Array(1422523169) index="0" unique_id=586695650]
+z_index = 5
+
+[node name="Ability" parent="GUI/Overlays" parent_id_path=PackedInt32Array(1713393531) index="6" unique_id=614013625]
+layer = 2
+
+[node name="Overdose" type="ColorRect" parent="GUI/Overlays/Ability" index="0" unique_id=387714321]
+material = SubResource("ShaderMaterial_6fu7j")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="UniqueShaderComponent" type="Node" parent="GUI/Overlays/Ability/Overdose" index="0" unique_id=2031431245]
+script = ExtResource("34_t3me0")
+metadata/_custom_type_script = "uid://qcmegh7138ug"

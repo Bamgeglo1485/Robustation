@@ -114,7 +114,7 @@ func _notification_update() -> void:
 
 # shitcode yep
 func create_notification(perk: BasePerkComponent) -> void:
-	if !perk:
+	if !perk or !perk_notification_ui:
 		return
 	
 	var inst: Control = perk_notification_unit.instantiate()

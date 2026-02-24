@@ -108,6 +108,8 @@ metadata/_custom_type_script = "uid://df356su15y7ow"
 script = ExtResource("9_67tnm")
 metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
 
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Eye" unique_id=1093164487]
+
 [node name="Brain" type="CharacterBody2D" parent="." unique_id=1716066439]
 z_index = 1
 collision_layer = 16
@@ -150,6 +152,8 @@ metadata/_custom_type_script = "uid://df356su15y7ow"
 [node name="MeleeAttackIgnoreComponent" type="Node" parent="Brain" unique_id=1169015921]
 script = ExtResource("9_67tnm")
 metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Brain" unique_id=1246304406]
 
 [node name="Heart" type="CharacterBody2D" parent="." unique_id=523662636]
 z_index = 1
@@ -194,6 +198,8 @@ metadata/_custom_type_script = "uid://df356su15y7ow"
 script = ExtResource("9_67tnm")
 metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
 
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Heart" unique_id=1572921520]
+
 [node name="Stomach" type="CharacterBody2D" parent="." unique_id=2136891988]
 z_index = 1
 collision_layer = 16
@@ -236,6 +242,8 @@ metadata/_custom_type_script = "uid://df356su15y7ow"
 [node name="MeleeAttackIgnoreComponent" type="Node" parent="Stomach" unique_id=1061729653]
 script = ExtResource("9_67tnm")
 metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Stomach" unique_id=1006325869]
 
 [node name="Ears" type="CharacterBody2D" parent="." unique_id=1370736291]
 z_index = 1
@@ -280,6 +288,8 @@ metadata/_custom_type_script = "uid://df356su15y7ow"
 script = ExtResource("9_67tnm")
 metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
 
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Ears" unique_id=1554298273]
+
 [node name="Liver" type="CharacterBody2D" parent="." unique_id=145671700]
 z_index = 1
 collision_layer = 16
@@ -323,6 +333,8 @@ metadata/_custom_type_script = "uid://df356su15y7ow"
 script = ExtResource("9_67tnm")
 metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
 
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Liver" unique_id=362874860]
+
 [node name="Kidney" type="CharacterBody2D" parent="." unique_id=1066121005]
 z_index = 1
 collision_layer = 16
@@ -365,6 +377,8 @@ metadata/_custom_type_script = "uid://df356su15y7ow"
 [node name="MeleeAttackIgnoreComponent" type="Node" parent="Kidney" unique_id=66168682]
 script = ExtResource("9_67tnm")
 metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Kidney" unique_id=1714102515]
 
 [node name="GibSound" type="AudioStreamPlayer2D" parent="." unique_id=159409569]
 stream = ExtResource("11_2ypa8")

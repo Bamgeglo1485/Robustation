@@ -72,7 +72,7 @@ func attack(raiser, _npc = true) -> void:
 	if shoot_sound:
 		shoot_sound.play()
 	
-	if bullets <= 0:
+	if bullets <= 0 and bullets_recovery_delay != 0:
 		bullets_recover_timer.wait_time = bullets_recovery_delay
 		bullets_recover_timer.start()
 		EventBusManager.bullets_end.emit(parent, self)
@@ -99,7 +99,7 @@ func attack(raiser, _npc = true) -> void:
 		if attack_shift_multiplier != 0:
 			animation_component.shift_to_direction(direction, 0.2, attack_shift_multiplier)
 
-func _projectile_shoot(direction) -> void:
+func _projectile_shoot(direction) -> Node2D:
 	if direction > Vector2(1, 1):
 		direction = direction.normalized()
 	
@@ -138,6 +138,8 @@ func _projectile_shoot(direction) -> void:
 			scene.add_child.call_deferred(instance)
 	else:
 		instance.queue_free()
+	
+	return instance
 
 func _on_bullets_recover() -> void:
 	bullets += bullets_recover_count

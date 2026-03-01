@@ -20,6 +20,8 @@ class_name DashAbilityComponent extends Component
 @export var invincibility_delay: float = 0.3
 @export var trail_colors: Array[Color]
 
+@export var parry_weapon: MeleeWeapon
+
 @onready var mob_mover_component: MobMoverComponent = parent.get_node_or_null("MobMoverComponent")
 var recovery_timer: Timer
 var active: bool = false
@@ -39,11 +41,10 @@ func _ready() -> void:
 		parent.get_node("Area2D").body_entered.connect(_on_collision)
 	
 	_update_stamina_bar()
+	
+	EventBusManager.projectile_shoot.connect(_on_shoot)
 
 func _input(_event: InputEvent) -> void:
-	if !mob_mover_component:
-		return
-	
 	if Input.is_action_just_pressed("dash"):
 		var direction: Vector2 = mob_mover_component.direction
 		if direction == Vector2.ZERO:
@@ -110,6 +111,9 @@ func dash(direction) -> void:
 		_update_stamina_bar()
 		return
 	
+	_cooldown()
+	_INVINCIBLE()
+	
 	if trail_effect and !parent.has_node("TrailEffectComponent"):
 		var trail: TrailEffectComponent = TrailEffectComponent.new()
 		trail.lifetime = 0.5
@@ -121,9 +125,6 @@ func dash(direction) -> void:
 	
 	mob_mover_component.throw(direction, dash_speed, null, 1000, false)
 	mob_mover_component.try_stand_up()
-	
-	_cooldown()
-	_INVINCIBLE()
 
 func _stamina_recovery() -> void:
 	if dash_stamina < max_dash_stamina:
@@ -181,3 +182,13 @@ func _on_collision(body) -> void:
 		
 		mob_mover.drop(1)
 		mob_mover.throw(random_direction, 300, parent)
+
+func _on_shoot(emitter: Node2D, _weapon: Weapon, direction: Vector2, projectile: Node2D) -> void:
+	if !active or !parry_weapon or emitter != parent:
+		return
+	
+	var projectile_component: ProjectileComponent = projectile.get_node_or_null("ProjectileComponent")
+	if !projectile_component:
+		return
+	
+	parry_weapon.parry_projectile(projectile, projectile_component, direction)

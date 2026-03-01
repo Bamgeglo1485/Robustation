@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://pd6wkuo2wfbu"]
+
+[ext_resource type="Shader" uid="uid://ktenloydicp4" path="res://Resources/Shaders/ScreenGlitch.gdshader" id="1_68h12"]
+
+[resource]
+shader = ExtResource("1_68h12")
+shader_parameter/range = 0.0
+shader_parameter/noiseQuality = 250.0
+shader_parameter/noiseIntensity = 0.0088
+shader_parameter/offsetIntensity = 0.03
+shader_parameter/colorOffsetIntensity = 0.50000002375

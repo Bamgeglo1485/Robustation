@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://ebbkkdo5toyh"]
+
+[ext_resource type="PackedScene" uid="uid://c2fs5eoy7ntgu" path="res://Scenes/Projectiles/BaseProjectile.tscn" id="1_7iyqb"]
+[ext_resource type="Texture2D" uid="uid://c6mx7npsbi7s0" path="res://Textures/Interface/Ingame/Stamina/stamina_4.png" id="3_7iyqb"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kf5wp"]
+radius = 15.0
+
+[node name="Projectile" unique_id=676694476 instance=ExtResource("1_7iyqb")]
+
+[node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture")]
+texture = NodePath("../Texture")
+speed = 2000
+damage = 5
+delete_on_hit = false
+embed_on_hit = true
+parriable = false
+
+[node name="CollisionShape2D" parent="ProjectileComponent" index="0" unique_id=1391622764]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_kf5wp")
+
+[node name="Texture" type="Sprite2D" parent="." index="4" unique_id=7943572]
+texture = ExtResource("3_7iyqb")

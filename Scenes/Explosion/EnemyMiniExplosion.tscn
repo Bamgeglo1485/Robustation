@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d1oxi5g6nq4e0"]
+
+[ext_resource type="PackedScene" uid="uid://c03qvua0tf8st" path="res://Scenes/Explosion/MiniExplosion.tscn" id="1_gufj4"]
+
+[node name="MiniExplosion" unique_id=1040504191 instance=ExtResource("1_gufj4")]
+ignore_faction = false

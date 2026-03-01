@@ -11,11 +11,14 @@ class_name ProjectileComponent extends Area2D
 @export var speed: int = 500
 @export var speed_decreasing: int = 0
 @export var damage: int = 10
+@export var stamina_damage: float = 0
 @export var rotate_speed: int = 0
 @export var lifetime: float = 3.0
 @export var throw_speed: float = 0
+@export var delete_on_hit: bool = true
+@export var embed_on_hit: bool = false
 
-var shooter: CharacterBody2D
+var shooter: PhysicsBody2D
 var direction: float
 var damage_modifier: float = 1.0
 var moving: bool = true
@@ -137,13 +140,23 @@ func _on_body_entered(body: Node2D) -> void:
 	else:
 		max_penetrations = 0
 	
+	if body.has_node("StaminaComponent") and stamina_damage != 0:
+		body.get_node("StaminaComponent").take_stamina_damage(stamina_damage * damage_modifier, shooter)
+	
 	if body.has_node("MobMoverComponent") and throw_speed != 0:
 		body.get_node("MobMoverComponent").throw(parent.velocity, throw_speed, shooter)
 	
 	if explode_on_hit:
 		explode()
 	
-	if max_penetrations == 0:
+	if embed_on_hit:
+		parent.reparent.call_deferred(body)
+		deleted = true
+		moving = false
+		parent.velocity = Vector2.ZERO
+		return
+	
+	if max_penetrations == 0 and delete_on_hit:
 		_delete()
 	else:
 		if max_penetrations < penetrations:
@@ -161,6 +174,10 @@ func reflect(target) -> bool:
 		return false
 	
 	var angle = (shooter.global_position - parent.global_position).normalized().angle()
+	
+	if !reflect_component.reflect_to_attacker:
+		angle = -angle
+	
 	parent.modulate = Color(2.658, 2.362, 0.0, 1.0)
 	parent.global_rotation = angle
 	direction = angle

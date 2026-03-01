@@ -1,0 +1,316 @@
+[gd_scene format=3 uid="uid://b4wrn52rfywyx"]
+
+[ext_resource type="Texture2D" uid="uid://bhboacwtvuxvb" path="res://Textures/Structures/Anomalies/Ice/ice_anom.png" id="1_26gti"]
+[ext_resource type="Shader" uid="uid://cch5nmhk121wx" path="res://Resources/Shaders/MobShader.gdshader" id="1_pllkf"]
+[ext_resource type="Texture2D" uid="uid://wlwyiuag10ky" path="res://Textures/Structures/Anomalies/Ice/ice_pulse.png" id="2_7avpl"]
+[ext_resource type="Texture2D" uid="uid://wbxnpjl6pvxb" path="res://Textures/Light/double_light_cone.png" id="4_7avpl"]
+[ext_resource type="Script" uid="uid://qpw7cn2mqx7i" path="res://Components/Entity/RotatingObjectComponent.gd" id="5_fl87i"]
+[ext_resource type="Texture2D" uid="uid://b0b3vncwssou1" path="res://Textures/Light/light_cone.png" id="6_quilc"]
+[ext_resource type="Script" uid="uid://bi21e1bilnee5" path="res://Components/Entity/Structures/Anomalies/AnomalyComponent.gd" id="7_jjvi7"]
+[ext_resource type="Script" uid="uid://bfpmngiw3fvni" path="res://Components/Entity/RotatingToObjectComponent.gd" id="7_ovdva"]
+[ext_resource type="AudioStream" uid="uid://dtxog7i8vbkie" path="res://Audio/Ambience/ambireebe3.ogg" id="9_yxxad"]
+[ext_resource type="Script" uid="uid://df356su15y7ow" path="res://Components/Entity/HealthComponent.gd" id="11_005wy"]
+[ext_resource type="Script" uid="uid://qcmegh7138ug" path="res://Components/Entity/UniqueShaderComponent.gd" id="13_tdfd3"]
+[ext_resource type="Material" uid="uid://cyp3pqnhbfrj3" path="res://Resources/Shaders/Jiggle.tres" id="14_nkwwc"]
+[ext_resource type="Texture2D" uid="uid://8trm1p4ix3id" path="res://Textures/Structures/Anomalies/Ice/ice_opening.png" id="15_8fjpw"]
+[ext_resource type="Texture2D" uid="uid://yjigwd3i118j" path="res://Textures/Light/point_light.jpg" id="15_nkwwc"]
+[ext_resource type="Script" uid="uid://nnac0ng77wfq" path="res://Components/Perks/ReflectPerkComponent.gd" id="16_8fjpw"]
+[ext_resource type="AudioStream" uid="uid://bxwx57y8k3fqt" path="res://Audio/Effects/lightburn.ogg" id="17_riw2h"]
+[ext_resource type="Script" uid="uid://cth8csvhil3ut" path="res://Components/Perks/ReflectMeleePerkComponent.gd" id="18_558ai"]
+[ext_resource type="AudioStream" uid="uid://7wp18isf74u" path="res://Audio/Entites/Anomaly/pulse_anomaly.ogg" id="18_jmfem"]
+[ext_resource type="Script" uid="uid://b2j14u62ikqnw" path="res://Components/Mobs/FactionComponent.gd" id="31_cxvvd"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uq2f5"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hpbaa"]
+noise = SubResource("FastNoiseLite_uq2f5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nkwwc"]
+shader = ExtResource("1_pllkf")
+shader_parameter/blood_noise = SubResource("NoiseTexture2D_hpbaa")
+shader_parameter/blood_noise_shading = 1.0
+shader_parameter/blood_intensity = 1.0
+shader_parameter/blood_color = Color(4.0059752, 4.0059752, 4.0059752, 0.72900003)
+shader_parameter/blood_pixel_scale = 1.0
+shader_parameter/aura_max_line_width = 1.50000007125
+shader_parameter/aura_min_line_width = 0.0
+shader_parameter/aura_speed = 10.0
+shader_parameter/aura_block_size = 1.01200004807
+shader_parameter/aura_outline_color = Color(0.5863426, 0.8744544, 1.7539616, 1)
+shader_parameter/aura_outline_tolerance = 0.0
+shader_parameter/aura_opacity = 0.1950000092625
+shader_parameter/flash_color = Color(1, 1, 1, 0)
+shader_parameter/flash_intensity = 1.0
+shader_parameter/glitch_chance = 0.30000001425
+shader_parameter/glitch_speed = 7.0
+shader_parameter/glitch_slice_density = 14.0
+shader_parameter/glitch_slice_strength = 0.38
+shader_parameter/glitch_shake_strength = 0.02
+shader_parameter/glitch_chroma_offset = 0.016
+shader_parameter/glitch_noise_strength = 0.2
+shader_parameter/glitch_color_flash_strength = 0.4
+shader_parameter/glitch_scanline_strength = 0.18
+shader_parameter/glitch_local_warp_strength = 0.14
+shader_parameter/glitch_flip_chance = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_quilc"]
+atlas = ExtResource("2_7avpl")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_558ai"]
+radius = 14.0
+height = 42.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_riw2h"]
+radius = 19.0
+height = 56.0
+
+[sub_resource type="Animation" id="Animation_riw2h"]
+resource_name = "Closing"
+length = 0.56666666
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animation:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333333, 0.26666668, 0.39999998, 0.53333336),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 3, 2, 1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_558ai"]
+resource_name = "Opening"
+length = 0.56666666
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animation:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666668, 0.4, 0.53333336),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_jmfem"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animation:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rgjwn"]
+_data = {
+&"Closing": SubResource("Animation_riw2h"),
+&"Opening": SubResource("Animation_558ai"),
+&"RESET": SubResource("Animation_jmfem")
+}
+
+[node name="BaseAnomaly" type="StaticBody2D" unique_id=732191651]
+physics_interpolation_mode = 1
+z_index = 10
+material = SubResource("ShaderMaterial_nkwwc")
+collision_layer = 3
+collision_mask = 3
+
+[node name="Base" type="Sprite2D" parent="." unique_id=670514240]
+light_mask = 2
+use_parent_material = true
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_26gti")
+
+[node name="Impulse" type="Sprite2D" parent="." unique_id=1760450205]
+visible = false
+light_mask = 2
+use_parent_material = true
+scale = Vector2(1.5, 1.5)
+texture = SubResource("AtlasTexture_quilc")
+
+[node name="Alarm" type="PointLight2D" parent="." unique_id=2038614544]
+scale = Vector2(1, 0.87431693)
+color = Color(0.3671535, 0.60209715, 1, 1)
+energy = 5.0
+shadow_enabled = true
+texture = ExtResource("4_7avpl")
+
+[node name="RotatingObjectComponent" type="Node" parent="Alarm" unique_id=2001032038]
+script = ExtResource("5_fl87i")
+speed = 5
+metadata/_custom_type_script = "uid://qpw7cn2mqx7i"
+
+[node name="Alarm2" type="PointLight2D" parent="." unique_id=1941499469]
+position = Vector2(0, 0.49999666)
+scale = Vector2(1, 0.5)
+color = Color(0.3671535, 0.60209715, 1, 1)
+energy = 10.0
+texture = ExtResource("6_quilc")
+
+[node name="RotatingToObjectComponent" type="Node" parent="Alarm2" unique_id=1419311538]
+script = ExtResource("7_ovdva")
+metadata/_custom_type_script = "uid://bfpmngiw3fvni"
+
+[node name="AnomalyComponent" type="Node" parent="." unique_id=1774257919 node_paths=PackedStringArray("base_sprite", "animation_sprite", "impulse_sprite", "pulse_lighting", "minor_lighting", "pulse_sound")]
+script = ExtResource("7_jjvi7")
+base_sprite = NodePath("../Base")
+animation_sprite = NodePath("../Animation")
+impulse_sprite = NodePath("../Impulse")
+pulse_lighting = [NodePath("../PulseLighting/Light"), NodePath("../PulseLighting/Light2"), NodePath("../PulseLighting/Light3"), NodePath("../PulseLighting/Light4"), NodePath("../PulseLighting/Light5")]
+minor_lighting = [NodePath("../Alarm"), NodePath("../Alarm2")]
+pulse_sound = NodePath("../Pulse")
+metadata/_custom_type_script = "uid://bi21e1bilnee5"
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1238398039]
+visible = false
+position = Vector2(1, -1)
+shape = SubResource("CapsuleShape2D_558ai")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1394761862]
+collision_layer = 3
+collision_mask = 3
+
+[node name="Collision" type="CollisionShape2D" parent="Area2D" unique_id=740861111]
+shape = SubResource("CapsuleShape2D_riw2h")
+
+[node name="Ambient" type="AudioStreamPlayer2D" parent="." unique_id=536262480]
+stream = ExtResource("9_yxxad")
+volume_db = 3.0
+autoplay = true
+max_distance = 1024.0
+parameters/looping = true
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1851824115]
+script = ExtResource("11_005wy")
+max_health = 700
+INVINCIBLE = true
+metadata/_custom_type_script = "uid://df356su15y7ow"
+
+[node name="UniqueShaderComponent" type="Node" parent="." unique_id=284274789]
+script = ExtResource("13_tdfd3")
+metadata/_custom_type_script = "uid://qcmegh7138ug"
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=571143591]
+material = ExtResource("14_nkwwc")
+position = Vector2(0, 3)
+color = Color(0.36862746, 0.6039216, 1, 1)
+energy = 3.0
+texture = ExtResource("15_nkwwc")
+texture_scale = 0.5
+
+[node name="Animation" type="Sprite2D" parent="." unique_id=2098838438]
+visible = false
+light_mask = 2
+z_index = 2
+use_parent_material = true
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("15_8fjpw")
+hframes = 3
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1396437569]
+libraries/ = SubResource("AnimationLibrary_rgjwn")
+
+[node name="PulseLighting" type="Node2D" parent="." unique_id=968602018]
+
+[node name="Light" type="PointLight2D" parent="PulseLighting" unique_id=454465335]
+light_mask = 3
+position = Vector2(0, 9.536743e-07)
+scale = Vector2(1, 0.27322406)
+color = Color(1.5073988, 3.2045581, 4.3065515, 1)
+energy = 0.0
+range_item_cull_mask = 3
+texture = ExtResource("4_7avpl")
+
+[node name="RotatingObjectComponent" type="Node" parent="PulseLighting/Light" unique_id=161428224]
+script = ExtResource("5_fl87i")
+speed = -8
+metadata/_custom_type_script = "uid://qpw7cn2mqx7i"
+
+[node name="Light2" type="PointLight2D" parent="PulseLighting" unique_id=677395005]
+light_mask = 3
+position = Vector2(0, 9.536743e-07)
+scale = Vector2(1, 0.27322406)
+color = Color(1.5073988, 3.2045581, 4.3065515, 1)
+energy = 0.0
+range_item_cull_mask = 3
+texture = ExtResource("4_7avpl")
+
+[node name="RotatingObjectComponent" type="Node" parent="PulseLighting/Light2" unique_id=251797683]
+script = ExtResource("5_fl87i")
+speed = 4
+metadata/_custom_type_script = "uid://qpw7cn2mqx7i"
+
+[node name="Light3" type="PointLight2D" parent="PulseLighting" unique_id=787106722]
+light_mask = 3
+position = Vector2(0, 9.536743e-07)
+scale = Vector2(1, 0.27322406)
+color = Color(1.5073988, 3.2045581, 4.3065515, 1)
+energy = 0.0
+range_item_cull_mask = 3
+texture = ExtResource("4_7avpl")
+
+[node name="RotatingObjectComponent" type="Node" parent="PulseLighting/Light3" unique_id=1628597004]
+script = ExtResource("5_fl87i")
+speed = -16
+metadata/_custom_type_script = "uid://qpw7cn2mqx7i"
+
+[node name="Light4" type="PointLight2D" parent="PulseLighting" unique_id=1828658825]
+light_mask = 3
+position = Vector2(0, 9.536743e-07)
+scale = Vector2(1, 0.27322406)
+color = Color(1.5073988, 3.2045581, 4.3065515, 1)
+energy = 0.0
+range_item_cull_mask = 3
+texture = ExtResource("4_7avpl")
+
+[node name="RotatingObjectComponent" type="Node" parent="PulseLighting/Light4" unique_id=439961557]
+script = ExtResource("5_fl87i")
+speed = 6
+metadata/_custom_type_script = "uid://qpw7cn2mqx7i"
+
+[node name="Light5" type="PointLight2D" parent="PulseLighting" unique_id=282811590]
+light_mask = 3
+position = Vector2(0, 9.536743e-07)
+scale = Vector2(1, 0.27322406)
+color = Color(1.5073988, 3.2045581, 4.3065515, 1)
+energy = 0.0
+range_item_cull_mask = 3
+texture = ExtResource("4_7avpl")
+
+[node name="RotatingObjectComponent" type="Node" parent="PulseLighting/Light5" unique_id=834225909]
+script = ExtResource("5_fl87i")
+speed = -14
+metadata/_custom_type_script = "uid://qpw7cn2mqx7i"
+
+[node name="ReflectPerkComponent" type="Node" parent="." unique_id=22752871]
+script = ExtResource("16_8fjpw")
+reflect_sound = ExtResource("17_riw2h")
+base_chance = 1.0
+reflect_to_attacker = false
+metadata/_custom_type_script = "uid://nnac0ng77wfq"
+
+[node name="ReflectMeleePerkComponent" type="Node" parent="." unique_id=1708484812]
+script = ExtResource("18_558ai")
+reflect_sound = ExtResource("17_riw2h")
+base_chance = 1.0
+metadata/_custom_type_script = "uid://cth8csvhil3ut"
+
+[node name="Pulse" type="AudioStreamPlayer2D" parent="." unique_id=1255635604]
+stream = ExtResource("18_jmfem")
+
+[node name="FactionComponent" type="Node" parent="." unique_id=312327537]
+script = ExtResource("31_cxvvd")
+faction = "Enemy"
+metadata/_custom_type_script = "uid://b2j14u62ikqnw"

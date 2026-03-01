@@ -1,7 +1,7 @@
 class_name WeaponUserComponent extends Component
 
-@onready var weapon_texture: DirectionalSprite = parent.get_node("WeaponTexture")
-@onready var mob_mover_component: MobMoverComponent = parent.get_node("MobMoverComponent")
+@onready var weapon_texture: DirectionalSprite = parent.get_node_or_null("WeaponTexture")
+@onready var mob_mover_component: MobMoverComponent = parent.get_node_or_null("MobMoverComponent")
 
 @export var selected_weapon: Weapon : set = select_weapon
 @export var timers_timescaled: bool = true
@@ -13,12 +13,9 @@ class_name WeaponUserComponent extends Component
 @export var knockback_modifier: int = 0
 @export var cooldown_modifier: float = 1.0
 
+@export var can_attack: bool = true
+
 func _ready() -> void:
-	if !weapon_texture:
-		weapon_texture = DirectionalSprite.new()
-		weapon_texture.region_enabled = true
-		parent.add_child(weapon_texture)
-	
 	if selected_weapon:
 		select_weapon(selected_weapon)
 
@@ -33,6 +30,8 @@ func select_weapon(new_weapon: Weapon) -> void:
 		weapon_texture.texture = selected_weapon.equipped_texture
 
 func attack(raiser, npc: bool = true) -> void:
+	if !can_attack:
+		return
 	if selected_weapon.get_cooldown():
 		return
 	

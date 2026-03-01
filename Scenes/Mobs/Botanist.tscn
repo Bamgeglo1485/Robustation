@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://cuj7tgh253e14" path="res://Resources/Audio/GenHitRandom.tres" id="6_yt3j5"]
 [ext_resource type="Script" uid="uid://bi1gje1pfokqc" path="res://Components/Weapons/RangeWeaponComponent.gd" id="7_gume5"]
 [ext_resource type="Script" uid="uid://da2q40ragr5wk" path="res://Components/Mobs/NPC/BuddyComponent.gd" id="7_r3gap"]
-[ext_resource type="PackedScene" uid="uid://dpbow47giqahy" path="res://Scenes/Projectiles/Bloonion.tscn" id="8_o6aij"]
+[ext_resource type="PackedScene" uid="uid://d1oxi5g6nq4e0" path="res://Scenes/Explosion/EnemyMiniExplosion.tscn" id="8_yf11o"]
 [ext_resource type="Script" uid="uid://cbn5a10g0d5yr" path="res://Components/Mobs/NPC/MeleeRangeComponent.gd" id="8_yt3j5"]
 [ext_resource type="PackedScene" uid="uid://dn612tntf7on4" path="res://Scenes/Projectiles/Melon.tscn" id="9_yf11o"]
 [ext_resource type="Texture2D" uid="uid://bi5rd4lgfnr63" path="res://Textures/Weapons/Melon/produce-inhand-right.png" id="10_tyrag"]
@@ -50,7 +50,7 @@ stream = ExtResource("6_yt3j5")
 
 [node name="Bloonion" type="Node" parent="WeaponUserComponent" index="1" unique_id=1804540869 node_paths=PackedStringArray("shoot_sound")]
 script = ExtResource("7_gume5")
-projectile = ExtResource("8_o6aij")
+projectile = ExtResource("8_yf11o")
 spread_angle = 5
 bullets_max_count = 1
 bullets = 1

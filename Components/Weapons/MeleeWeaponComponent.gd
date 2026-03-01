@@ -86,7 +86,7 @@ func _try_melee_attack(direction) -> Dictionary:
 		if enemy is Area2D:
 			enemy = enemy.get_parent()
 		
-		if enemy in attacked_enemies:
+		if attacked_enemies.has(enemy):
 			continue
 		
 		if enemy.has_node("MeleeAttackIgnoreComponent"):
@@ -97,7 +97,7 @@ func _try_melee_attack(direction) -> Dictionary:
 		
 		var _attacked = _melee_attack_target(enemy, direction, true)
 		
-		if _attacked and enemy:
+		if enemy:
 			_targets[i] = enemy
 			attacked_enemies.append(enemy)
 	
@@ -106,8 +106,8 @@ func _try_melee_attack(direction) -> Dictionary:
 	
 	return _targets
 
-func _melee_attack_target(target, direction = null, multiple_attack = false) -> bool:
-	if slash_effect:
+func _melee_attack_target(target, direction = null, multiple_attack = false, slash = true) -> bool:
+	if slash_effect and direction and slash:
 		var _slash_effect: Node = slash_effect.instantiate()
 		_slash_effect.global_rotation = direction.angle() + 90
 		parent.add_child(_slash_effect)
@@ -125,7 +125,7 @@ func _melee_attack_target(target, direction = null, multiple_attack = false) -> 
 	if multiple_attack:
 		_cooldown()
 	
-	if animation_component:
+	if animation_component and direction:
 		if attack_rotation_multiplier != 0:
 			animation_component.lean_to_direction(direction, 3, 0.2, attack_rotation_multiplier)
 		if attack_shift_multiplier != 0:
@@ -134,6 +134,12 @@ func _melee_attack_target(target, direction = null, multiple_attack = false) -> 
 	if !target:
 		EventBusManager.melee_miss.emit(parent, self)
 		return false
+	
+	if target.has_node("ReflectMeleePerkComponent") and target != parent:
+		var reflect_component = target.get_node("ReflectMeleePerkComponent")
+		if randf() < reflect_component.chance:
+			reflect_component.reflect(parent, self)
+			return false
 	
 	if target.has_node("ProjectileComponent") and parry_force != 0:
 		var projectile = target.get_node("ProjectileComponent")
@@ -155,7 +161,7 @@ func _melee_attack_target(target, direction = null, multiple_attack = false) -> 
 		if delayed_damage != 0 and delayed_damage_delay != 0:
 			target_health_component.set_delayed_damage(delayed_damage, delayed_damage_delay)
 	
-	if target.has_node("MobMoverComponent"):
+	if target.has_node("MobMoverComponent") and direction:
 		if throw_speed != 0:
 			target.get_node("MobMoverComponent").throw(direction, throw_speed, parent, throw_stop_speed)
 		if drop_enemy_delay != 0:
@@ -164,7 +170,7 @@ func _melee_attack_target(target, direction = null, multiple_attack = false) -> 
 	if target.has_node("StaminaComponent") and stamina_damage != 0:
 		target.get_node("StaminaComponent").take_stamina_damage(stamina_damage * damage_modifier, parent)
 	
-	if parent.has_node("MobMoverComponent"):
+	if parent.has_node("MobMoverComponent")and direction:
 		if self_throw_speed != 0:
 			parent.get_node("MobMoverComponent").throw(-direction, self_throw_speed, parent, self_throw_stop_speed)
 	
@@ -186,17 +192,19 @@ func parry_weapon(weapon, target) -> void:
 		target.get_node("MobMoverComponent").throw(-direction, 300, parent, 50)
 		target.get_node("MobMoverComponent").drop(0.5)
 
-func parry_projectile(target, projectile, direction) -> void:
+func parry_projectile(projectile: Node2D, projectile_component: ProjectileComponent, direction: Vector2) -> void:
 		EventBusManager.parry.emit(parent, "Projectile")
-		var angle = direction.normalized().angle()
-		target.modulate = parry_color
-		target.global_rotation = angle
-		projectile.speed *= projectile.parry_speed_boost
-		projectile.damage *= parry_force
-		projectile.rotate_speed *= projectile.parry_speed_boost
-		projectile.throw_speed *= projectile.parry_speed_boost
-		projectile.direction = angle
-		projectile.shooter = parent
+		var angle = direction.angle()
+		projectile.modulate = parry_color
+		projectile.global_rotation = angle
+		@warning_ignore_start("narrowing_conversion")
+		projectile_component.speed *= projectile_component.parry_speed_boost
+		projectile_component.damage *= parry_force
+		projectile_component.rotate_speed *= projectile_component.parry_speed_boost
+		projectile_component.throw_speed *= projectile_component.parry_speed_boost
+		@warning_ignore_restore("narrowing_conversion")
+		projectile_component.direction = angle
+		projectile_component.shooter = parent
 		
 		if parry_sound:
 			parry_sound.play()
@@ -209,7 +217,11 @@ func parry_projectile(target, projectile, direction) -> void:
 			Color(4.455, 0.0, 0.0, 1.0),
 			Color(3.236, 0.576, 1.751, 1.0)]
 		trail.colors = colors
-		target.add_child(trail)
+		projectile.add_child(trail)
+		
+		await get_tree().physics_frame
+		if projectile.has_node("TriggerOnParryComponent"):
+			projectile.get_node("TriggerOnParryComponent").trigger()
 
 func parry_effects():
 	if parry_effect:

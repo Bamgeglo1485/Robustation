@@ -6,11 +6,14 @@ extends Node2D
 @export var heal_teammates: bool = true
 @export var heal_amount: int = 70
 @export var radius: int = 128
-@export var source: CharacterBody2D
+@export var source: PhysicsBody2D
 @export var lifetime: float = 4.0
 @export var update_rate: float = 0.5
 @export var ignore_faction: bool = false
 @export var rainbow_delay: float = 2.5
+@export var stamina_damage_amount: float = 0.0
+@export var flash: bool = false
+@export var flash_color: Color = Color(0.0, 0.304, 0.516, 1.0)
 
 var active: bool = true
 var check_timer: Timer
@@ -65,4 +68,7 @@ func _update() -> void:
 			body.get_node("HealthComponent").set_delayed_damage(delayed_damage, delayed_time)
 		if body.has_node("RainbowOverlayComponent"):
 			body.get_node("RainbowOverlayComponent").set_rainbow(rainbow_delay)
-			
+		if body.has_node("StaminaComponent") and stamina_damage_amount != 0:
+			body.get_node("StaminaComponent").take_stamina_damage(stamina_damage_amount, source)
+		if body.has_node("AnimationComponent") and flash:
+			body.get_node("AnimationComponent").flash(1, flash_color)

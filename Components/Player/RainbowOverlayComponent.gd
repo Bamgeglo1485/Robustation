@@ -11,6 +11,9 @@ func _process(delta: float) -> void:
 	if !material and overlay:
 		material = overlay.material
 	
+	if !material:
+		return
+	
 	if lifetime <= 0 and !enabled:
 		return
 	elif lifetime <= 0 and enabled:

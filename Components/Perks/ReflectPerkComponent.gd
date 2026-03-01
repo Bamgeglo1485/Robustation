@@ -4,6 +4,7 @@ class_name ReflectPerkComponent extends BasePerkComponent
 var reflect_sound_player: AudioStreamPlayer2D
 
 @export var base_chance: float = 0.025
+@export var reflect_to_attacker: bool = true
 var chance: float = base_chance
 
 func _ready() -> void:
@@ -21,7 +22,7 @@ func free() -> void:
 
 func _init() -> void:
 	perk_name = "Mirror shard"
-	perk_desc = "Increases your reflect chance by 2.5%"
+	perk_desc = "Increases your bullet reflect chance by 2.5%"
 	perk_icon = preload("res://Textures/Perks/mirror_shard.png")
 	perk_equipped_texture = preload("res://Textures/Perks/mirror_shard_equipped.png")
 	rarity = rarity_classes.ROBUST

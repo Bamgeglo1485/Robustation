@@ -7,6 +7,25 @@ impact_frame = false
 damage = 30.0
 fly_force = 500
 radius = 64
+ignore_faction = true
 
 [node name="GPUParticles2D" parent="." index="1" unique_id=668633620]
 amount = 3000
+
+[node name="Light" parent="." index="4" unique_id=1912790245]
+texture_scale = 0.5
+
+[node name="Light2" parent="." index="5" unique_id=1621261214]
+color = Color(1, 1, 1, 1)
+texture = null
+texture_scale = 0.25
+
+[node name="Light3" parent="." index="6" unique_id=443646006]
+color = Color(1, 1, 1, 1)
+texture = null
+texture_scale = 0.25
+
+[node name="Light4" parent="." index="7" unique_id=1808189886]
+color = Color(1, 1, 1, 1)
+texture = null
+texture_scale = 0.25

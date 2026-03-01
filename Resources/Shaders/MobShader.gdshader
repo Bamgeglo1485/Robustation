@@ -33,13 +33,6 @@ uniform float glitch_scanline_strength = 0.18;
 uniform float glitch_local_warp_strength = 0.14;
 uniform float glitch_flip_chance : hint_range(0.0,1.0) = 0.15;
 
-/* ================= VERTEX SHADER ================= */
-void vertex() {
-	float max_width = max(aura_max_line_width, aura_min_line_width);
-	VERTEX = vec2(VERTEX.x * (1.0 + TEXTURE_PIXEL_SIZE.x * max_width * 2.0), 
-				  VERTEX.y * (1.0 + TEXTURE_PIXEL_SIZE.y * max_width * 2.0));
-}
-
 /* ================= UTILITY FUNCTIONS ================= */
 bool border(vec2 uv) {
 	vec2 uvBorder = abs(uv - vec2(0.5));

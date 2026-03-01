@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dn05jeqqq5844" path="res://Components/Entity/ProjectileComponent.gd" id="2_wrjq0"]
 [ext_resource type="Script" uid="uid://df356su15y7ow" path="res://Components/Entity/HealthComponent.gd" id="3_88g3b"]
-[ext_resource type="Script" uid="uid://n3eddudwlric" path="res://Components/Triggers/TriggerOnDamageComponent.gd" id="4_t4pys"]
+[ext_resource type="Script" uid="uid://bqtip02i73xyq" path="res://Components/Triggers/TriggerOnParryComponent.gd" id="3_t4af8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_geesq"]
 radius = 31.0
@@ -32,14 +32,14 @@ max_health = 1
 damage_modifier = 0.0
 metadata/_custom_type_script = "uid://df356su15y7ow"
 
-[node name="TriggerOnDamageComponent" type="Node" parent="." unique_id=2104323996]
-script = ExtResource("4_t4pys")
-metadata/_custom_type_script = "uid://n3eddudwlric"
-
 [node name="Area2D" type="Area2D" parent="." unique_id=757156969]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2139953676]
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_geesq")
+
+[node name="TriggerOnParryComponent" type="Node" parent="." unique_id=1141083762]
+script = ExtResource("3_t4af8")
+metadata/_custom_type_script = "uid://bqtip02i73xyq"
 
 [connection signal="body_entered" from="ProjectileComponent" to="ProjectileComponent" method="_on_body_entered"]

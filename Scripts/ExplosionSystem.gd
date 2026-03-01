@@ -6,12 +6,13 @@ extends Node2D
 @export var fly_force: int = 4000
 @export var fall_time: int = 2
 @export var radius: int = 128
-@export var source: CharacterBody2D
+@export var source: PhysicsBody2D
 @export var explosion_duration: float = 0.3
 @export var check_interval: float = 0.05
 @export var ignore_faction: bool = false
 @export var drop_forced: bool = false
 @export var drop_resistance_force: int = 3
+@export var lightings: Array[PointLight2D]
 var active: bool = true
 
 var damaged_bodies: Array = []
@@ -32,13 +33,15 @@ func _ready() -> void:
 	check_timer.timeout.connect(_check_overlapping_bodies)
 	check_timer.start()
 	
+	_set_lighting()
+	
 	for child in get_children():
 		if child is GPUParticles2D:
 			child.emitting = true
 	
 	EventBusManager.explosion.emit(self)
 	
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.15).timeout
 	_check_overlapping_bodies()
 	
 	await get_tree().create_timer(explosion_duration).timeout
@@ -49,6 +52,17 @@ func _ready() -> void:
 	
 	await get_tree().create_timer(5.0).timeout
 	queue_free()
+
+func _set_lighting():
+	if lightings.is_empty():
+		return
+	
+	for lighting in lightings:
+		var tween: Tween = create_tween()
+		tween.set_trans(Tween.TRANS_SINE)
+		tween.set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(lighting, "energy", 32.0, 0.25)
+		tween.tween_property(lighting, "energy", 0.0, 0.25)
 
 func _check_overlapping_bodies() -> void:
 	if !active:

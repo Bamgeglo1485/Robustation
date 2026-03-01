@@ -4,6 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://bjqvcwxstx8u1" path="res://Scenes/Effects/Particles/Boom.tscn" id="2_a5ua4"]
 [ext_resource type="PackedScene" uid="uid://dmjnaimj7xbw1" path="res://Scenes/Effects/ExplosionEffect.tscn" id="2_cq02y"]
 [ext_resource type="PackedScene" uid="uid://do6wj3407tcik" path="res://Scenes/Effects/Particles/Soot.tscn" id="3_a5ua4"]
+[ext_resource type="Texture2D" uid="uid://yjigwd3i118j" path="res://Textures/Light/point_light.jpg" id="5_jqe0j"]
+[ext_resource type="Script" uid="uid://qpw7cn2mqx7i" path="res://Components/Entity/RotatingObjectComponent.gd" id="6_4t1bi"]
+[ext_resource type="Texture2D" uid="uid://wbxnpjl6pvxb" path="res://Textures/Light/double_light_cone.png" id="7_4t1bi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a5ua4"]
 radius = 132.30646
@@ -32,12 +35,15 @@ scale_over_velocity_curve = SubResource("CurveTexture_c1ng1")
 hue_variation_min = -1.0
 hue_variation_max = -0.67
 
-[node name="BaseExplosion" type="Node2D" unique_id=890470773]
+[node name="BaseExplosion" type="Node2D" unique_id=890470773 node_paths=PackedStringArray("lightings")]
+light_mask = 0
 script = ExtResource("1_cpk21")
 damage = 150.0
 fly_force = 700
 fall_time = 1
 radius = 200
+ignore_faction = true
+lightings = [NodePath("Light"), NodePath("Light2"), NodePath("Light3"), NodePath("Light4")]
 
 [node name="Area2D" type="Area2D" parent="." unique_id=251884086]
 collision_layer = 15
@@ -64,3 +70,49 @@ amount = 16
 lifetime = 125.12
 use_fixed_seed = false
 visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+
+[node name="Light" type="PointLight2D" parent="." unique_id=1912790245]
+position = Vector2(0, 9.536743e-07)
+color = Color(0.9963228, 0.39377716, 3.85046e-07, 1)
+energy = 0.0
+texture = ExtResource("5_jqe0j")
+texture_scale = 1.5
+
+[node name="Light2" type="PointLight2D" parent="." unique_id=1621261214]
+position = Vector2(0, -0.50000095)
+scale = Vector2(1, 0.44262293)
+color = Color(0.99607843, 0.39215687, 0, 1)
+energy = 0.0
+shadow_enabled = true
+texture = ExtResource("7_4t1bi")
+
+[node name="RotatingObjectComponent" type="Node" parent="Light2" unique_id=1376424794]
+script = ExtResource("6_4t1bi")
+speed = 10
+metadata/_custom_type_script = "uid://qpw7cn2mqx7i"
+
+[node name="Light3" type="PointLight2D" parent="." unique_id=443646006]
+position = Vector2(0, -0.50000095)
+scale = Vector2(1, 0.44262293)
+color = Color(0.99607843, 0.39215687, 0, 1)
+energy = 0.0
+shadow_enabled = true
+texture = ExtResource("7_4t1bi")
+
+[node name="RotatingObjectComponent" type="Node" parent="Light3" unique_id=723068101]
+script = ExtResource("6_4t1bi")
+speed = -15
+metadata/_custom_type_script = "uid://qpw7cn2mqx7i"
+
+[node name="Light4" type="PointLight2D" parent="." unique_id=1808189886]
+position = Vector2(0, -0.50000095)
+scale = Vector2(1, 0.44262293)
+color = Color(0.99607843, 0.39215687, 0, 1)
+energy = 0.0
+shadow_enabled = true
+texture = ExtResource("7_4t1bi")
+
+[node name="RotatingObjectComponent" type="Node" parent="Light4" unique_id=1218014301]
+script = ExtResource("6_4t1bi")
+speed = 5
+metadata/_custom_type_script = "uid://qpw7cn2mqx7i"

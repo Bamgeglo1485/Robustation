@@ -29,20 +29,20 @@ scale_over_velocity_curve = SubResource("CurveTexture_c1ng1")
 
 [node name="Projectile" unique_id=1536955502 instance=ExtResource("1_uq5et")]
 
-[node name="ProjectileComponent" parent="." index="0" node_paths=PackedStringArray("texture", "particle_emitter")]
+[node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture", "particle_emitter")]
 collision_layer = 15
 collision_mask = 15
 texture = NodePath("../Texture")
 particle_emitter = NodePath("GPUParticles2D")
 speed = 1500
-damage = 40
+damage = 34
 lifetime = 1.0
 parry_speed_boost = 1.0
 
-[node name="CollisionShape2D" parent="ProjectileComponent" index="0"]
+[node name="CollisionShape2D" parent="ProjectileComponent" index="0" unique_id=1391622764]
 shape = SubResource("CircleShape2D_uq5et")
 
-[node name="HitSound" parent="ProjectileComponent" index="1"]
+[node name="HitSound" parent="ProjectileComponent" index="1" unique_id=1752295456]
 stream = ExtResource("2_box70")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="ProjectileComponent" index="2" unique_id=1108205186]

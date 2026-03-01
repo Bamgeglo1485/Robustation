@@ -12,5 +12,5 @@ void vertex() {
 
 [resource]
 shader = SubResource("Shader_ut4xv")
-shader_parameter/jiggle = 10.0
-shader_parameter/speed = 30.0
+shader_parameter/jiggle = 100.0
+shader_parameter/speed = 10.0

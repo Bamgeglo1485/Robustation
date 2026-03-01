@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://dkhqewofgeh1b"]
+
+[ext_resource type="PackedScene" uid="uid://c2fs5eoy7ntgu" path="res://Scenes/Projectiles/BaseProjectile.tscn" id="1_p5r51"]
+[ext_resource type="Texture2D" uid="uid://bi0qxu6dcayb1" path="res://Textures/Structures/Anomalies/Ice/ice_bullet.png" id="2_fjc66"]
+[ext_resource type="Shader" uid="uid://cch5nmhk121wx" path="res://Resources/Shaders/MobShader.gdshader" id="2_gce4x"]
+[ext_resource type="AudioStream" uid="uid://cuj7tgh253e14" path="res://Resources/Audio/GenHitRandom.tres" id="2_uabfk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p5r51"]
+radius = 17.029387
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uq2f5"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hpbaa"]
+noise = SubResource("FastNoiseLite_uq2f5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uabfk"]
+shader = ExtResource("2_gce4x")
+shader_parameter/blood_noise = SubResource("NoiseTexture2D_hpbaa")
+shader_parameter/blood_noise_shading = 1.0
+shader_parameter/blood_intensity = 1.0
+shader_parameter/blood_color = Color(0.44688815, 0, 0.14078581, 0.7294118)
+shader_parameter/blood_pixel_scale = 1.0
+shader_parameter/aura_max_line_width = 0.0
+shader_parameter/aura_min_line_width = 0.0
+shader_parameter/aura_speed = 10.0
+shader_parameter/aura_block_size = 1.01200004807
+shader_parameter/aura_outline_color = Color(0.86290884, 0, 0.35419908, 1)
+shader_parameter/aura_outline_tolerance = 0.0
+shader_parameter/aura_opacity = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 0)
+shader_parameter/flash_intensity = 1.0
+shader_parameter/glitch_chance = 1.0
+shader_parameter/glitch_speed = 7.0
+shader_parameter/glitch_slice_density = 14.0
+shader_parameter/glitch_slice_strength = 0.38
+shader_parameter/glitch_shake_strength = 0.02
+shader_parameter/glitch_chroma_offset = 0.016
+shader_parameter/glitch_noise_strength = 0.2
+shader_parameter/glitch_color_flash_strength = 0.4
+shader_parameter/glitch_scanline_strength = 0.18
+shader_parameter/glitch_local_warp_strength = 0.14
+shader_parameter/glitch_flip_chance = 0.0
+
+[sub_resource type="Curve" id="Curve_uabfk"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 1.011236), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gce4x"]
+curve = SubResource("Curve_uabfk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2fmhy"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.099999994
+scale_over_velocity_max = 1000.0
+scale_over_velocity_curve = SubResource("CurveTexture_gce4x")
+
+[node name="IceProjectile" unique_id=1001723315 instance=ExtResource("1_p5r51")]
+
+[node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture", "particle_emitter")]
+texture = NodePath("../Texture")
+particle_emitter = NodePath("../GPUParticles2D")
+speed = 300
+damage = 20
+stamina_damage = 60.0
+lifetime = 5.0
+throw_speed = 500.0
+
+[node name="CollisionShape2D" parent="ProjectileComponent" index="0" unique_id=1391622764]
+shape = SubResource("CircleShape2D_p5r51")
+
+[node name="HitSound" parent="ProjectileComponent" index="1" unique_id=1752295456]
+stream = ExtResource("2_uabfk")
+
+[node name="Texture" type="Sprite2D" parent="." index="4" unique_id=212743013]
+material = SubResource("ShaderMaterial_uabfk")
+texture = ExtResource("2_fjc66")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="5" unique_id=478175473]
+modulate = Color(0.8175213, 0.8175213, 0.81752115, 1)
+position = Vector2(-12, 1)
+amount = 100
+lifetime = 2.0
+preprocess = 0.5
+speed_scale = 8.11
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_2fmhy")

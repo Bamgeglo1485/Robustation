@@ -47,11 +47,13 @@ one_shot = true
 autostart = true
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1543119462]
+light_mask = 0
 material = ExtResource("2_cq02y")
 offset_left = -142.0
 offset_top = -136.0
 offset_right = 137.0
 offset_bottom = 136.0
+color = Color(0, 0, 0, 0)
 script = ExtResource("3_a5ua4")
 
 [node name="UniqueShaderComponent" type="Node" parent="ColorRect" unique_id=1245039691]

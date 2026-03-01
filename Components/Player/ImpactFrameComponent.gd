@@ -4,18 +4,20 @@ class_name ImpactFrameComponent extends Component
 @export var color_modify_frame: ColorRect
 
 var color_tween: Tween
+var pitch_tween: Tween
+var pitch: AudioEffectPitchShift = AudioServer.get_bus_effect(0, 1)
 
 func impact_frame(
 	impact_time = 0.3,
 	wait_time = 0.0,
 	modify_color = true
 	) -> void:
+	if modify_color:
+		set_color_modify()
 	if wait_time != 0:
 		await(get_tree().create_timer(wait_time, true, false, true).timeout)
 	effect_frame.visible = true
 	frame_freeze(impact_time)
-	if modify_color:
-		set_color_modify()
 	await(get_tree().create_timer(impact_time, true, false, true).timeout)
 	effect_frame.visible = false
 
@@ -31,6 +33,13 @@ func set_color_modify() -> void:
 	
 	if color_tween:
 		color_tween.kill()
+	if pitch_tween:
+		pitch_tween.kill()
+	
+	if pitch:
+		pitch.pitch_scale = 0.1
+		pitch_tween = create_tween()
+		pitch_tween.tween_property(pitch, "pitch_scale", 1, 1)
 	
 	color_tween = create_tween()
 	color_tween.set_trans(Tween.TRANS_SINE)
@@ -49,11 +58,8 @@ func set_color_modify() -> void:
 		material.set_shader_parameter("hue_shift", randf_range(-1.5, -0.7))
 		return
 	
-	randomize()
 	material.set_shader_parameter("red_factor", randf_range(1, 1.5))
-	randomize()
 	material.set_shader_parameter("green_factor", randf_range(1, 1.5))
-	randomize()
 	material.set_shader_parameter("blue_factor", randf_range(1, 1.5))
 
 func _ready() -> void:

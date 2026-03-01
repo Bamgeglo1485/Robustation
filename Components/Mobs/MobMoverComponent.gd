@@ -49,8 +49,6 @@ func _physics_process(delta: float) -> void:
 	if flying and fly_speed > 0:
 		_fly(delta)
 	_move(delta)
-
-func _process(delta: float) -> void:
 	if animation_component and !flying and !fallen:
 		_walk_animation()
 	if fallen:

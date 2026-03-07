@@ -10,10 +10,11 @@ var pitch: AudioEffectPitchShift = AudioServer.get_bus_effect(0, 1)
 func impact_frame(
 	impact_time = 0.3,
 	wait_time = 0.0,
-	modify_color = true
+	modify_color = true,
+	distort_audio = false
 	) -> void:
 	if modify_color:
-		set_color_modify()
+		set_color_modify(distort_audio)
 	if wait_time != 0:
 		await(get_tree().create_timer(wait_time, true, false, true).timeout)
 	effect_frame.visible = true
@@ -26,7 +27,7 @@ func frame_freeze(impact_time = 0.3) -> void:
 	await(get_tree().create_timer(impact_time, true, false, true).timeout)
 	get_tree().paused = false
 
-func set_color_modify() -> void:
+func set_color_modify(distort_audio = false) -> void:
 	if !color_modify_frame or !color_modify_frame.material:
 		return
 	var material: Material = color_modify_frame.material
@@ -36,7 +37,7 @@ func set_color_modify() -> void:
 	if pitch_tween:
 		pitch_tween.kill()
 	
-	if pitch:
+	if distort_audio and pitch:
 		pitch.pitch_scale = 0.1
 		pitch_tween = create_tween()
 		pitch_tween.tween_property(pitch, "pitch_scale", 1, 1)
@@ -66,11 +67,12 @@ func _ready() -> void:
 	EventBusManager.explosion.connect(_on_exlosion)
 	EventBusManager.kick_dash_combo.connect(_on_kickdash_combo)
 	EventBusManager.parry.connect(_on_parry)
+	EventBusManager.request_impact_frame.connect(impact_frame)
 
 func _on_exlosion(explosion) -> void:
 	if !explosion.impact_frame:
 		return
-	impact_frame()
+	impact_frame(0.3, 0, true, true)
 
 func _on_parry(emitter, type):
 	if emitter == parent and type == "Projectile":

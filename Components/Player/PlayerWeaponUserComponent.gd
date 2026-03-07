@@ -6,11 +6,16 @@ class_name PlayerWeaponUserComponent extends Component
 @export var weapon_2: Weapon
 @export var weapon_3: Weapon
 @export var weapon_icon: TextureRect
+@export var alt_weapon_icon: TextureRect
 var weapon_icon_component: WeaponIconComponent
+var alt_weapon_icon_component: WeaponIconComponent
+var kostil: bool = true
 
 func _ready() -> void:
 	if weapon_icon:
 		weapon_icon_component = weapon_icon.get_node_or_null("WeaponIconComponent")
+	if alt_weapon_icon:
+		alt_weapon_icon_component = alt_weapon_icon.get_node_or_null("WeaponIconComponent")
 
 func _input(_event: InputEvent) -> void:
 	if !weapon_user_component:
@@ -22,6 +27,10 @@ func _weapon_input():
 	var input_weapon_2: bool = Input.is_action_just_pressed("weapon_2")
 	var input_weapon_3: bool = Input.is_action_just_pressed("weapon_3")
 	
+	if kostil:
+		kostil = false
+		input_weapon_1 = true
+	
 	if input_weapon_1:
 		weapon_user_component.select_weapon(weapon_1)
 	elif input_weapon_2:
@@ -30,15 +39,47 @@ func _weapon_input():
 		weapon_user_component.select_weapon(weapon_3)
 	
 	var selected_weapon: Weapon = weapon_user_component.selected_weapon
+	if selected_weapon and (selected_weapon.swinging or !selected_weapon.can_switch):
+		return
 	
 	if weapon_icon and weapon_icon_component and (input_weapon_1 or input_weapon_2 or input_weapon_3) and selected_weapon:
 		weapon_icon.texture = weapon_user_component.selected_weapon.icon_texture
 		weapon_icon_component.weapon = selected_weapon
 		weapon_icon_component._progress_bar()
+		if alt_weapon_icon and alt_weapon_icon_component and selected_weapon.alt_attack:
+			alt_weapon_icon.texture = weapon_user_component.selected_weapon.alt_attack.icon_texture
+			alt_weapon_icon_component.weapon = weapon_user_component.selected_weapon.alt_attack
+			alt_weapon_icon_component._progress_bar()
+	
+	if !weapon_user_component.selected_weapon:
+		return
 	
 	var attack: bool = Input.is_action_just_pressed("attack")
-	if attack and weapon_user_component.selected_weapon:
+	if weapon_user_component.selected_weapon.auto:
+		attack = Input.is_action_pressed("attack")
+	if attack:
 		weapon_user_component.attack(self, false)
+	
+	var release: bool = Input.is_action_just_released("attack")
+	if release:
+		weapon_user_component.selected_weapon.on_release(self)
+	
+	if !weapon_user_component.selected_weapon.alt_attack:
+		return
+	var alt_weapon: Weapon = weapon_user_component.selected_weapon.alt_attack
+	
+	var attack_alt: bool = Input.is_action_just_pressed("alt_attack")
+	if alt_weapon.auto:
+		attack = Input.is_action_pressed("alt_attack")
+	if attack_alt:
+		var current_weapon: Weapon = weapon_user_component.selected_weapon
+		weapon_user_component.force_select_weapon(alt_weapon)
+		weapon_user_component.attack(self, false)
+		weapon_user_component.force_select_weapon(current_weapon)
+	
+	var release_alt: bool = Input.is_action_just_released("alt_attack")
+	if release_alt:
+		alt_weapon.on_release(self)
 
 func get_attack_direction() -> Vector2:
 	if !parent.has_method("get_global_mouse_position"):

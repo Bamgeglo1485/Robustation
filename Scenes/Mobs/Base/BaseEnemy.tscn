@@ -45,3 +45,7 @@ neighbor_distance = 128.0
 time_horizon_agents = 0.5
 avoidance_layers = 3
 avoidance_mask = 3
+
+[node name="VisibleOnScreenEnabler" type="VisibleOnScreenEnabler2D" parent="." index="17" unique_id=2024696900]
+rect = Rect2(-20, -20, 40, 40)
+enable_node_path = NodePath("../Texture")

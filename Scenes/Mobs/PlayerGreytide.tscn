@@ -3,10 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://jg0ru5ss6ppw" path="res://Scenes/Mobs/Base/BasePlayer.tscn" id="1_mq7la"]
 [ext_resource type="AudioStream" uid="uid://djwhsufysh1dq" path="res://Resources/Audio/PunchRandom.tres" id="3_8fokh"]
 [ext_resource type="Texture2D" uid="uid://oeskymbnxvee" path="res://Textures/Mobs/Player/greytide.png" id="4_bvl14"]
+[ext_resource type="PackedScene" uid="uid://dp68l1ivbgils" path="res://Scenes/Projectiles/SpearBoomerang.tscn" id="4_pcu7p"]
 [ext_resource type="AudioStream" uid="uid://eogckfs15aph" path="res://Audio/Weapon/miss.ogg" id="4_pgypf"]
 [ext_resource type="PackedScene" uid="uid://dmokrqrpfaex0" path="res://Scenes/Projectiles/Spear.tscn" id="5_6fu7j"]
 [ext_resource type="AudioStream" uid="uid://c064ooavx7oy1" path="res://Audio/Abilities/Teleport.ogg" id="5_42pyi"]
 [ext_resource type="Texture2D" uid="uid://1yvrhqvfqqus" path="res://Textures/Weapons/Toolbox/toolbox_inhand.png" id="8_42pyi"]
+[ext_resource type="AudioStream" uid="uid://baxotaiac5j8p" path="res://Audio/Effects/spear_eject.ogg" id="8_ba6hk"]
 [ext_resource type="AudioStream" uid="uid://blc0o0577akc7" path="res://Audio/Weapon/Hit/smash.ogg" id="8_pgypf"]
 [ext_resource type="AudioStream" uid="uid://c14ckhtbrb550" path="res://Audio/Weapon/parry.ogg" id="11_si836"]
 [ext_resource type="Script" uid="uid://6b7bcparwq17" path="res://Components/Weapons/MeleeWeaponComponent.gd" id="12_tn3ht"]
@@ -26,20 +28,31 @@
 [ext_resource type="Script" uid="uid://ci5vgg14lkrku" path="res://Components/Weapons/HookComponent.gd" id="22_vx866"]
 [ext_resource type="Script" uid="uid://bi1gje1pfokqc" path="res://Components/Weapons/RangeWeaponComponent.gd" id="23_si836"]
 [ext_resource type="Texture2D" uid="uid://c2wadc7c7e3v3" path="res://Textures/Weapons/Spear/spear.png" id="24_46s63"]
+[ext_resource type="Texture2D" uid="uid://cnd26u5psr454" path="res://Textures/Weapons/Hook/grappling_gun.png" id="24_483ma"]
+[ext_resource type="AudioStream" uid="uid://c7yhulhuc27f4" path="res://Audio/Weapon/Projectile/harpoon.ogg" id="24_e06si"]
 [ext_resource type="Script" uid="uid://cmonoqon5s4vx" path="res://Components/Abilities/NonBinary/DashAbilityComponent.gd" id="25_46s63"]
 [ext_resource type="AudioStream" uid="uid://bxj6l4kb3ei8m" path="res://Audio/Effects/dash.ogg" id="25_hf65o"]
 [ext_resource type="AudioStream" uid="uid://xbdoc0n20dn" path="res://Audio/Effects/hypospray.ogg" id="26_27vau"]
+[ext_resource type="Script" uid="uid://enoou4fskgjn" path="res://Components/Weapons/ChargingMeleeWeaponComponent.gd" id="27_hev03"]
 [ext_resource type="Script" uid="uid://b8d56xguabrvi" path="res://Components/Abilities/OverdoseAbilityComponent.gd" id="27_l8jtb"]
+[ext_resource type="Texture2D" uid="uid://bs33le1xplql" path="res://Textures/Interface/Ingame/Stamina/stamina_0.png" id="28_ssq7n"]
 [ext_resource type="Material" uid="uid://3h52wgl5hfvh" path="res://Resources/Shaders/Fire.tres" id="29_0fohe"]
+[ext_resource type="AudioStream" uid="uid://b3uvy6ds1t6fu" path="res://Audio/Weapon/Hit/heavy_punch.ogg" id="29_gmd4o"]
+[ext_resource type="AudioStream" uid="uid://dvixjlsidryp0" path="res://Audio/Weapon/Hit/reel.ogg" id="30_asuu2"]
 [ext_resource type="Shader" uid="uid://4k7fthwpt7bc" path="res://Resources/Shaders/BattleTendency.gdshader" id="30_v1rwi"]
 [ext_resource type="Texture2D" uid="uid://dc0gdpbk12g5w" path="res://Textures/Mobs/Player/greytide_unlit.png" id="30_xwdpk"]
+[ext_resource type="AudioStream" uid="uid://5ogeuyio4huy" path="res://Audio/Effects/spray.ogg" id="31_c8oai"]
 [ext_resource type="Script" uid="uid://bqvdlb3r03cs0" path="res://Components/Visual/DirectionalSpriteComponent.gd" id="31_m4dpc"]
+[ext_resource type="AudioStream" uid="uid://4e6wsvcw0jrt" path="res://Audio/Ambience/hiss.ogg" id="31_s1a5c"]
 [ext_resource type="Material" uid="uid://cqeu03o2ril5g" path="res://Resources/Shaders/Progress.tres" id="32_m4dpc"]
 [ext_resource type="Texture2D" uid="uid://1wwu1blvl8rt" path="res://Textures/Abilities/hypo.png" id="33_m4dpc"]
 [ext_resource type="Script" uid="uid://qcmegh7138ug" path="res://Components/Entity/UniqueShaderComponent.gd" id="34_t3me0"]
 [ext_resource type="Texture2D" uid="uid://dnsj2opn0s2h2" path="res://Textures/Abilities/telecrystal.png" id="34_vl6aw"]
 [ext_resource type="Script" uid="uid://bwcq6hlpavlvl" path="res://Components/Interface/Ingame/WeaponIconComponent.gd" id="35_u1ecu"]
+[ext_resource type="AudioStream" uid="uid://p0nau7qxcixe" path="res://Components/Weapons/spinning.ogg" id="36_b5xq3"]
 [ext_resource type="Texture2D" uid="uid://dikwitqlv30ww" path="res://Textures/Abilities/injector.png" id="36_u1ecu"]
+[ext_resource type="Material" uid="uid://ddgd2dckacjiv" path="res://Resources/Shaders/Wave.tres" id="44_pcu7p"]
+[ext_resource type="PackedScene" uid="uid://e33tm7nwmy0y" path="res://Scenes/Effects/Particles/Charge.tscn" id="48_ssq7n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6fu7j"]
 shader = ExtResource("30_v1rwi")
@@ -71,28 +84,33 @@ heal_for_damage_multiplier = 0.05
 selected_weapon = NodePath("Toolbox")
 timers_timescaled = false
 
-[node name="Spear" type="Node" parent="WeaponUserComponent" index="0" unique_id=1787565286 node_paths=PackedStringArray("shoot_sound")]
+[node name="Spear" type="Node" parent="WeaponUserComponent" index="0" unique_id=1787565286 node_paths=PackedStringArray("shoot_sound", "bullets_recover_sound", "projectile_can_parry_weapon", "parent_weapon", "alt_attack")]
 script = ExtResource("23_si836")
 projectile = ExtResource("5_6fu7j")
 spread_angle = 3
 bullets_max_count = 1
 bullets = 1
 bullets_recover_count = 1
+shots = 1
 shots_angle = 0
 shoot_sound = NodePath("ShootSound")
+bullets_recover_sound = NodePath("../SpearShared/BulletRecoverSound")
 bullets_recovery_delay = 8.0
+projectile_can_parry_weapon = NodePath("../Toolbox")
 cooldown_delay = 0.3
 swing_delay = 0.2
 equipped_texture = ExtResource("13_aa22f")
 icon_texture = ExtResource("24_46s63")
+parent_weapon = NodePath("../SpearShared")
+alt_attack = NodePath("../SpearBoomerang")
 metadata/_custom_type_script = "uid://bi1gje1pfokqc"
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Spear" index="0" unique_id=23333780]
 stream = ExtResource("18_w1un4")
 
-[node name="Toolbox" type="Node" parent="WeaponUserComponent" index="1" unique_id=140255965 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound")]
+[node name="Toolbox" type="Node" parent="WeaponUserComponent" index="1" unique_id=140255965 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound", "alt_attack")]
 script = ExtResource("12_tn3ht")
-damage = 40
+damage = 60
 ignore_armor = true
 parry_sound = NodePath("ParrySound")
 attack_sound = NodePath("MeleeHitSound")
@@ -100,11 +118,14 @@ miss_sound = NodePath("MeleeMissSound")
 parry_force = 2.0
 throw_speed = 400
 drop_enemy_delay = 0.5
+modify_damage_by_speed = true
 cooldown_delay = 0.35
 swing_delay = 0.1
 equipped_texture = ExtResource("8_42pyi")
 icon_texture = ExtResource("13_4xc88")
+self_throw_speed = 200
 attack_rotation_multiplier = 0.5
+alt_attack = NodePath("../ChargingToolbox")
 metadata/_custom_type_script = "uid://6b7bcparwq17"
 
 [node name="ParrySound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Toolbox" index="0" unique_id=1806672115]
@@ -116,7 +137,7 @@ stream = ExtResource("4_pgypf")
 [node name="MeleeHitSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Toolbox" index="2" unique_id=1721339776]
 stream = ExtResource("8_pgypf")
 
-[node name="Shotgun" type="Node" parent="WeaponUserComponent" index="2" unique_id=1465874377 node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound", "bullets_recover_sound")]
+[node name="Shotgun" type="Node" parent="WeaponUserComponent" index="2" unique_id=1465874377 node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound", "bullets_recover_sound", "alt_attack")]
 script = ExtResource("23_si836")
 projectile = ExtResource("15_o6b1y")
 spread_angle = 2
@@ -136,6 +157,7 @@ icon_texture = ExtResource("18_ger1f")
 swing_rotation_multiplier = 0.0
 attack_rotation_multiplier = -0.6
 attack_shift_multiplier = -0.7
+alt_attack = NodePath("../ShotgunHook")
 metadata/_custom_type_script = "uid://bi1gje1pfokqc"
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Shotgun" index="0" unique_id=1814146600]
@@ -147,27 +169,109 @@ stream = ExtResource("19_kyb4y")
 [node name="BulletRecoverSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Shotgun" index="2" unique_id=673851274]
 stream = ExtResource("20_si836")
 
-[node name="Hook" type="Node" parent="WeaponUserComponent" index="3" unique_id=529278492 node_paths=PackedStringArray("rope")]
+[node name="ShotgunHook" type="Node" parent="WeaponUserComponent" index="3" unique_id=529278492 node_paths=PackedStringArray("reel_sound", "shoot_sound", "rope")]
 script = ExtResource("22_vx866")
-rope = NodePath("../../Rope")
+reel_sound = NodePath("ReelSound")
 projectile = ExtResource("22_pfa82")
 spread_angle = 0
+bullets_max_count = 1
+bullets = 1
+bullets_recover_count = 1
+shots = 1
+shots_angle = 0
+shoot_sound = NodePath("ShootSound")
+bullets_recovery_delay = 2.0
+rope = NodePath("../../Rope")
+cooldown_delay = 0.15
+swing_delay = 0.0
+icon_texture = ExtResource("24_483ma")
+metadata/_custom_type_script = "uid://ci5vgg14lkrku"
+
+[node name="ReelSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/ShotgunHook" index="0" unique_id=1923007938]
+stream = ExtResource("30_asuu2")
+volume_db = 10.0
+parameters/looping = false
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/ShotgunHook" index="1" unique_id=353929796]
+stream = ExtResource("24_e06si")
+
+[node name="SpearBoomerang" type="Node" parent="WeaponUserComponent" index="4" unique_id=1434839515 node_paths=PackedStringArray("shoot_sound", "projectile_can_parry_weapon", "rope", "parent_weapon")]
+script = ExtResource("23_si836")
+projectile = ExtResource("4_pcu7p")
+spread_angle = 40
 bullets_max_count = 1
 bullets = 1
 bullets_recover_count = 0
 shots = 1
 shots_angle = 0
+shoot_sound = NodePath("../Spear/ShootSound")
 bullets_recovery_delay = 0.0
+projectile_can_parry_weapon = NodePath("../Toolbox")
+show_cooldown_on_icon = true
+rope = NodePath("../../SpearRope")
+cooldown_delay = 5.0
+swing_delay = 0.2
+icon_texture = ExtResource("24_483ma")
+parent_weapon = NodePath("../SpearShared")
+metadata/_custom_type_script = "uid://bi1gje1pfokqc"
+
+[node name="SpearShared" type="Node" parent="WeaponUserComponent" index="5" unique_id=2042478328 node_paths=PackedStringArray("bullets_recover_sound", "projectile_can_parry_weapon")]
+script = ExtResource("23_si836")
+spread_angle = 3
+bullets_max_count = 1
+bullets = 1
+bullets_recover_count = 1
+shots = 1
+shots_angle = 0
+bullets_recover_sound = NodePath("BulletRecoverSound")
+bullets_recovery_delay = 8.0
+projectile_can_parry_weapon = NodePath("../Toolbox")
+cooldown_delay = 0.3
+swing_delay = 0.2
+metadata/_custom_type_script = "uid://bi1gje1pfokqc"
+
+[node name="BulletRecoverSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/SpearShared" index="0" unique_id=463305822]
+stream = ExtResource("8_ba6hk")
+
+[node name="ChargingToolbox" type="Node" parent="WeaponUserComponent" index="6" unique_id=1424202148 node_paths=PackedStringArray("charging_effect", "charging_sound", "full_charge_sound", "weapon_inhand_texture", "parry_sound", "attack_sound", "miss_sound")]
+script = ExtResource("27_hev03")
+charging_effect = NodePath("../../ChargingEffect")
+charging_sound = NodePath("ChargingSound")
+full_charge_sound = NodePath("FullChargeSound")
+weapon_inhand_texture = NodePath("../../WeaponTexture")
+damage = 7
+parry_sound = NodePath("ParrySound")
+attack_sound = NodePath("MeleeHitSound")
+miss_sound = NodePath("MeleeMissSound")
+throw_speed = 200
 swing_delay = 0.0
-metadata/_custom_type_script = "uid://ci5vgg14lkrku"
+icon_texture = ExtResource("28_ssq7n")
+self_throw_speed = 300
+metadata/_custom_type_script = "uid://enoou4fskgjn"
+
+[node name="ParrySound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/ChargingToolbox" index="0" unique_id=1728327108]
+stream = ExtResource("11_si836")
+
+[node name="MeleeMissSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/ChargingToolbox" index="1" unique_id=1242064356]
+stream = ExtResource("31_s1a5c")
+
+[node name="MeleeHitSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/ChargingToolbox" index="2" unique_id=1391264693]
+stream = ExtResource("29_gmd4o")
+
+[node name="ChargingSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/ChargingToolbox" index="3" unique_id=804635917]
+stream = ExtResource("36_b5xq3")
+parameters/looping = true
+
+[node name="FullChargeSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/ChargingToolbox" index="4" unique_id=2139762559]
+stream = ExtResource("31_c8oai")
+volume_db = -8.0
 
 [node name="WeaponTexture" parent="." index="9" unique_id=1059769572]
-use_parent_material = true
 texture = ExtResource("13_aa22f")
 region_enabled = true
 
 [node name="PlayerWeaponUserComponent" parent="." index="10" unique_id=283125688 node_paths=PackedStringArray("weapon_1", "weapon_2", "weapon_3")]
-weapon_1 = NodePath("../WeaponUserComponent/Hook")
+weapon_1 = NodePath("../WeaponUserComponent/Toolbox")
 weapon_2 = NodePath("../WeaponUserComponent/Shotgun")
 weapon_3 = NodePath("../WeaponUserComponent/Spear")
 
@@ -187,7 +291,6 @@ script = ExtResource("12_tn3ht")
 parry_sound = NodePath("ParrySound")
 attack_sound = NodePath("MeleeHitSound")
 miss_sound = NodePath("MeleeMissSound")
-can_parry_weapon = false
 parry_force = 1.5
 throw_speed = 500
 drop_enemy_delay = 1.0
@@ -271,6 +374,9 @@ metadata/_custom_type_script = "uid://qcmegh7138ug"
 [node name="WeaponIcon" parent="GUI/Inventory/Hand_R" parent_id_path=PackedInt32Array(316605288) index="0" unique_id=1696948363]
 texture = ExtResource("13_4xc88")
 
+[node name="AltAttackIcon" parent="GUI/Inventory/Hand_R/WeaponIcon" index="2" unique_id=999845627]
+texture = ExtResource("24_483ma")
+
 [node name="AttackAbilityIcon" parent="GUI/Inventory/AttackAbility" parent_id_path=PackedInt32Array(1284006024) index="0" unique_id=33298384]
 texture = ExtResource("34_vl6aw")
 
@@ -302,5 +408,21 @@ script = ExtResource("34_t3me0")
 metadata/_custom_type_script = "uid://qcmegh7138ug"
 
 [node name="Rope" type="Line2D" parent="." index="37" unique_id=867798243]
+material = ExtResource("44_pcu7p")
 points = PackedVector2Array(0, 0, 0, 0)
-width = 1.0
+width = 50.0
+default_color = Color(0.15683922, 0.005713961, 0.03873314, 1)
+texture_mode = 2
+
+[node name="SpearRope" type="Line2D" parent="." index="38" unique_id=1292969267]
+material = ExtResource("44_pcu7p")
+points = PackedVector2Array(0, 0, 0, 0)
+width = 50.0
+default_color = Color(0.15683922, 0.005713961, 0.03873314, 1)
+texture_mode = 2
+
+[node name="ChargingEffect" parent="." index="39" unique_id=379104243 instance=ExtResource("48_ssq7n")]
+visible = false
+modulate = Color(2.844042, 2.844042, 2.844042, 1)
+position = Vector2(0, -1)
+amount = 1

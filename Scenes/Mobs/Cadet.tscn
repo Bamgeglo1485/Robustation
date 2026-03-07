@@ -60,6 +60,7 @@ armor = 0.5
 
 [node name="MoveToPointComponent" parent="AI" parent_id_path=PackedInt32Array(1365591205) index="0" unique_id=395370591]
 pathfind_update_rate = 0.2
+move_update_rate = 0.4
 run_to_target_range = 250.0
 run_from_target_range = 130.0
 

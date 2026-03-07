@@ -14,20 +14,33 @@ class_name WeaponUserComponent extends Component
 @export var cooldown_modifier: float = 1.0
 
 @export var can_attack: bool = true
+var ignore_setter: bool = false
 
 func _ready() -> void:
 	if selected_weapon:
 		select_weapon(selected_weapon)
 
-func select_weapon(new_weapon: Weapon) -> void:
-	if !new_weapon or (selected_weapon and selected_weapon.swinging):
-		return
-	
+func force_select_weapon(new_weapon: Weapon):
+	ignore_setter = true
 	selected_weapon = new_weapon
 	selected_weapon.timers_timescaled = timers_timescaled
 	
 	if selected_weapon.equipped_texture and weapon_texture:
 		weapon_texture.texture = selected_weapon.equipped_texture
+
+func select_weapon(new_weapon: Weapon) -> void:
+	if ignore_setter:
+		ignore_setter = false
+		selected_weapon = new_weapon
+		return
+	if !new_weapon or (selected_weapon and selected_weapon.swinging) or (selected_weapon and !selected_weapon.can_switch):
+		return
+	if (selected_weapon and selected_weapon.alt_attack and selected_weapon.alt_attack.swinging) or (selected_weapon and selected_weapon.alt_attack and !selected_weapon.alt_attack.can_switch):
+		return
+	if selected_weapon:
+		selected_weapon.swapped.emit(new_weapon)
+	
+	force_select_weapon(new_weapon)
 
 func attack(raiser, npc: bool = true) -> void:
 	if !can_attack:
@@ -44,3 +57,6 @@ func attack(raiser, npc: bool = true) -> void:
 	selected_weapon.damage_modifier = damage_modifier
 	selected_weapon.cooldown_modifier = cooldown_modifier
 	selected_weapon.attack(raiser, npc)
+
+func release() -> void:
+	selected_weapon._on_release()

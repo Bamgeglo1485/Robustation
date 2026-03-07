@@ -7,19 +7,19 @@ collision_layer = 1023
 collision_mask = 1023
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=298667584]
-position = Vector2(-1524, 161)
+position = Vector2(-964, 146)
 shape = ExtResource("1_nur7l")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=1939551358]
-position = Vector2(1775, 168)
+position = Vector2(1018.25, 671.5)
 shape = ExtResource("1_nur7l")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="." unique_id=1613722797]
-position = Vector2(245, -1142)
+position = Vector2(300, -526)
 rotation = 1.5707964
 shape = ExtResource("1_nur7l")
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="." unique_id=625874616]
-position = Vector2(31, 1274)
+position = Vector2(40, 631)
 rotation = 1.5707964
 shape = ExtResource("1_nur7l")

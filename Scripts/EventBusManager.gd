@@ -25,6 +25,8 @@ signal tendency_section_changed(emitter: Node2D)
 signal kick_dash_combo(emitter: Node2D)
 
 signal raged(emitter: Node2D)
+signal request_impact_frame(impact_time, wait_time, modify_color, distort_audio)
 
 signal field_of_view_changed(value: int)
 signal fullscreen_changed(fullscreen: bool)
+signal update_weapon_icon(emitter: Node2D, weapon: Weapon)

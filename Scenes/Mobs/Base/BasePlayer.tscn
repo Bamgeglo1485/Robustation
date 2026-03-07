@@ -257,9 +257,10 @@ faction = "Player"
 block_when_fallen = false
 block_when_flying = false
 
-[node name="PlayerWeaponUserComponent" type="Node" parent="." index="10" unique_id=283125688 node_paths=PackedStringArray("weapon_icon")]
+[node name="PlayerWeaponUserComponent" type="Node" parent="." index="10" unique_id=283125688 node_paths=PackedStringArray("weapon_icon", "alt_weapon_icon")]
 script = ExtResource("5_3n0k4")
 weapon_icon = NodePath("../GUI/Inventory/Hand_R/WeaponIcon")
+alt_weapon_icon = NodePath("../GUI/Inventory/Hand_R/WeaponIcon/AltAttackIcon")
 metadata/_custom_type_script = "uid://gek7ma2qpdp6"
 
 [node name="PerkCollect" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="1" unique_id=1054597139]
@@ -620,6 +621,23 @@ metadata/_custom_type_script = "uid://qcmegh7138ug"
 script = ExtResource("38_bdlbc")
 metadata/_custom_type_script = "uid://bwcq6hlpavlvl"
 
+[node name="AltAttackIcon" type="TextureRect" parent="GUI/Inventory/Hand_R/WeaponIcon" index="2" unique_id=999845627]
+material = ExtResource("44_aq85w")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02083373
+anchor_right = 0.5208337
+anchor_bottom = 0.5000002
+metadata/_edit_use_anchors_ = true
+
+[node name="UniqueShaderComponent" type="Node" parent="GUI/Inventory/Hand_R/WeaponIcon/AltAttackIcon" index="0" unique_id=47038527]
+script = ExtResource("11_yhquf")
+metadata/_custom_type_script = "uid://qcmegh7138ug"
+
+[node name="WeaponIconComponent" type="Node" parent="GUI/Inventory/Hand_R/WeaponIcon/AltAttackIcon" index="1" unique_id=1645620849]
+script = ExtResource("38_bdlbc")
+metadata/_custom_type_script = "uid://bwcq6hlpavlvl"
+
 [node name="AttackAbility" type="TextureRect" parent="GUI/Inventory" index="2" unique_id=1284006024]
 z_index = -1
 layout_mode = 1
@@ -773,10 +791,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
-
-[node name="UniqueShaderComponent" type="Node" parent="GUI/Overlays/ImpactFrame/ImpactFrame" index="0" unique_id=1883787937]
-script = ExtResource("11_yhquf")
-metadata/_custom_type_script = "uid://qcmegh7138ug"
 
 [node name="Ability" type="CanvasLayer" parent="GUI/Overlays" index="6" unique_id=614013625]
 

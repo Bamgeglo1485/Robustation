@@ -222,7 +222,6 @@ func drop(delay: float, force: bool = false, resistance_force: int = 0) -> void:
 func try_stand_up() -> void:
 	if force_fallen:
 		return
-	
 	stand_up()
 
 func stand_up() -> void:

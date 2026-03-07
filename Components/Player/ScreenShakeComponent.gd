@@ -49,8 +49,10 @@ func _on_damaged(emitter, damage, damager) -> void:
 
 func _on_projectile_shoot(emitter, weapon, direction, projectile) -> void:
 	if emitter == parent:
-		var projectile_component: ProjectileComponent = projectile.get_node("ProjectileComponent")
+		var projectile_component = projectile.get_node_or_null("ProjectileComponent")
 		if !projectile_component:
-			return
+			projectile_component = projectile.get_node_or_null("HitscanComponent")
+			if !projectile_component:
+				return
 		var power: float = projectile_component.damage * weapon.shots
 		shift_to_direction(-direction, power * 0.1)

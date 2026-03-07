@@ -4,7 +4,7 @@ class_name RangeWeapon extends Weapon
 @export var spread_angle: int = 10
 
 @export var bullets_max_count: int = 2
-@export var bullets: int = bullets_max_count
+@export var bullets: int = bullets_max_count : set = set_bullets, get = get_bullets
 @export var bullets_recover_count: int = 2
 
 @export var shots: int = 3
@@ -19,23 +19,46 @@ class_name RangeWeapon extends Weapon
 
 @export var bullets_recovery_delay: float = 4
 @export var gun_fire_effect: PackedScene
+@export var projectile_can_parry_weapon: Weapon
+
+@export var parent_shared_bullets: bool = true
+
+@export var show_cooldown_on_icon: bool = false
+@export var rope: Line2D
 
 var bullets_recover_timer: Timer
+
+func set_bullets(new_value) -> void:
+	bullets = new_value
+	clamp(bullets, 0, new_value)
+	if parent_weapon:
+		parent_weapon.bullets += new_value - bullets
+
+func get_bullets() -> int:
+	if !parent_weapon:
+		return bullets
+	
+	return parent_weapon.bullets
 
 func _ready() -> void:
 	super._ready()
 	
-	bullets_recover_timer = Timer.new()
-	bullets_recover_timer.ignore_time_scale = !timers_timescaled
-	bullets_recover_timer.timeout.connect(_on_bullets_recover)
-	bullets_recover_timer.one_shot = true
-	add_child(bullets_recover_timer)
+	if !parent_weapon:
+		bullets_recover_timer = Timer.new()
+		bullets_recover_timer.ignore_time_scale = !timers_timescaled
+		bullets_recover_timer.timeout.connect(_on_bullets_recover)
+		bullets_recover_timer.one_shot = true
+		add_child(bullets_recover_timer)
+	else:
+		await parent_weapon.ready
+		if parent_weapon is not RangeWeapon:
+			return
+		bullets_recover_timer = parent_weapon.bullets_recover_timer
 
 func attack(raiser, _npc = true) -> void:
 	if cooldown or !can_attack or swinging or !projectile or not raiser.has_method("get_attack_direction"):
 		return
-	
-	if bullets == 0:
+	if bullets == 0 or parent_weapon and parent_weapon.bullets == 0:
 		if empty_shoot_sound:
 			empty_shoot_sound.play()
 		return
@@ -72,7 +95,7 @@ func attack(raiser, _npc = true) -> void:
 	if shoot_sound:
 		shoot_sound.play()
 	
-	if bullets <= 0 and bullets_recovery_delay != 0:
+	if bullets == 0 and bullets_recovery_delay != 0 and bullets_recover_timer:
 		bullets_recover_timer.wait_time = bullets_recovery_delay
 		bullets_recover_timer.start()
 		EventBusManager.bullets_end.emit(parent, self)
@@ -123,7 +146,18 @@ func _projectile_shoot(direction) -> Node2D:
 		
 		projectile_component.direction = angle
 		projectile_component.shooter = parent
-		
+		projectile_component.weapon = self
+		if projectile_can_parry_weapon:
+			projectile_component.can_parry_weapon = projectile_can_parry_weapon
+		if rope:
+			rope.visible = true
+			projectile_component.rope = rope
+			if rope.material:
+				rope.material.set_shader_parameter("wave_amplitude", 0.5)
+				var tween: Tween = create_tween()
+				tween.set_trans(Tween.TRANS_SINE)
+				tween.set_ease(Tween.EASE_IN_OUT)
+				tween.tween_property(rope.material, "shader_parameter/wave_amplitude", 0, 0.5)
 		if scene:
 			scene.add_child.call_deferred(instance)
 	elif instance.has_node("HitscanComponent"):

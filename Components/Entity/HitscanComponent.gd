@@ -11,7 +11,9 @@ class_name HitscanComponent extends Component
 @export var after_delete_lifetime: float = 2
 
 @export var drop_enemy_delay: float = 0.0
+@export var max_penetrations: int = 1
 
+var penetrations: int = 0
 var shooter: CharacterBody2D
 var direction: float
 var damage_modifier: float = 1
@@ -61,6 +63,10 @@ func damage_collider():
 		inst.global_position = collider_position
 	if hit_sound:
 		hit_sound.play()
+	penetrations += 1
+	if max_penetrations > penetrations:
+		parent.global_position = collider.global_position
+		_ready()
 
 func _ray_appear_effects():
 	if ray_line:
@@ -68,8 +74,10 @@ func _ray_appear_effects():
 		var collider: Object = parent.get_collider()
 		if collider:
 			target_position = ray_line.to_local(collider.global_position)
-		ray_line.points[1] = target_position
+		ray_line.add_point(target_position, 1 + penetrations)
 		
+		if penetrations != 0:
+			return
 		var target_width: float = ray_line.width
 		ray_line.width = 0
 		

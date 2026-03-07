@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://ebbkkdo5toyh"]
 
 [ext_resource type="PackedScene" uid="uid://c2fs5eoy7ntgu" path="res://Scenes/Projectiles/BaseProjectile.tscn" id="1_7iyqb"]
-[ext_resource type="Texture2D" uid="uid://c6mx7npsbi7s0" path="res://Textures/Interface/Ingame/Stamina/stamina_4.png" id="3_7iyqb"]
+[ext_resource type="AudioStream" uid="uid://cuj7tgh253e14" path="res://Resources/Audio/GenHitRandom.tres" id="2_7iyqb"]
+[ext_resource type="Texture2D" uid="uid://g575msxxir52" path="res://Textures/Weapons/Hook/hook.png" id="2_e7j47"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kf5wp"]
 radius = 15.0
@@ -10,8 +11,11 @@ radius = 15.0
 
 [node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture")]
 texture = NodePath("../Texture")
-speed = 2000
-damage = 5
+speed = 1000
+max_damage = 0
+damage = 0
+stamina_damage = 40.0
+lifetime = 0.0
 delete_on_hit = false
 embed_on_hit = true
 parriable = false
@@ -20,5 +24,8 @@ parriable = false
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_kf5wp")
 
+[node name="HitSound" parent="ProjectileComponent" index="1" unique_id=1752295456]
+stream = ExtResource("2_7iyqb")
+
 [node name="Texture" type="Sprite2D" parent="." index="4" unique_id=7943572]
-texture = ExtResource("3_7iyqb")
+texture = ExtResource("2_e7j47")

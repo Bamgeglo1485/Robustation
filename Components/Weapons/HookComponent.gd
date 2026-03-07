@@ -1,19 +1,154 @@
 class_name Hook extends RangeWeapon
 
-@export var rope: Line2D
-var hook: Node2D
+enum hook_states {
+	BASE,
+	FLYING,
+	HOOKED,
+	HOOKING,
+	RETURNING}
+@export var hook_speed: int = 900
+@export var returning_radius: int = 8
+@export var state: hook_states = hook_states.BASE
+@export var drop_force: int = 0
+@export var hook_throw_force: int = 600
 
-func _process(_delta: float) -> void:
-	if !rope or !hook:
+@export var reel_sound: AudioStreamPlayer2D
+
+var hook: Node2D
+var hook_projectile_comp: ProjectileComponent
+var hooked_body: Node2D
+var mob_mover_component
+var hook_enemy: bool = false
+var target_mob_mover: MobMoverComponent
+
+func _ready() -> void:
+	super._ready()
+	EventBusManager.projectile_hit.connect(_on_hit)
+	EventBusManager.gibbed.connect(_on_gibbed)
+	
+	returning_radius *= returning_radius
+	mob_mover_component = parent.get_node_or_null("MobMoverComponent")
+	if main_weapon:
+		main_weapon.swapped.connect(_on_swap)
+
+func attack(raiser, _npc = true) -> void:
+	if cooldown or !can_attack or swinging or !projectile or not raiser.has_method("get_attack_direction"):
 		return
 	
-	rope.points[1] = parent.to_local(hook.global_position)
+	if bullets == 0 and state == hook_states.BASE:
+		return
+	
+	await _swing(raiser.get_attack_direction())
+	bullets = 0
+	var direction = raiser.get_attack_direction()
+	
+	if parent.has_node("MobMoverComponent"):
+		if self_throw_speed != 0:
+			parent.get_node("MobMoverComponent").throw(-direction, self_throw_speed, null, self_throw_stop_speed)
+	
+	attack_logic(direction)
+
+func on_release(_raiser) -> void:
+	if state == hook_states.FLYING:
+		_return()
+	elif state == hook_states.HOOKED:
+		_hook()
+
+func _on_swap(_new_weapon: Weapon) -> void:
+	if state == hook_states.HOOKED:
+		_hook()
+	elif state == hook_states.BASE:
+		return
+	elif state == hook_states.RETURNING:
+		_return()
+
+func attack_logic(direction):
+	if state == hook_states.BASE:
+		_projectile_shoot(direction)
+	else:
+		return
+
+func _hook():
+	state = hook_states.HOOKING
+	target_mob_mover= hooked_body.get_node_or_null("MobMoverComponent")
+	
+	if reel_sound:
+		reel_sound.play()
+	if target_mob_mover and target_mob_mover.drop_resistance < drop_force:
+		hook_enemy = true
+		target_mob_mover.movement_blocked = true
+	else:
+		if mob_mover_component:
+			mob_mover_component.movement_blocked = true
+
+func _return():
+	if cooldown:
+		return
+	state = hook_states.RETURNING
+	if hook_projectile_comp:
+		hook_projectile_comp.moving = true
+		hook_projectile_comp.can_hit = false
+	if hook_enemy and hooked_body:
+		target_mob_mover.movement_blocked = false
+	if reel_sound:
+		reel_sound.play()
+
+func _physics_process(_delta: float) -> void:
+	if !rope or !hook:
+		return
+	var direction = parent.global_position - hook.global_position
+	if state == hook_states.RETURNING and hook_projectile_comp:
+		hook_projectile_comp.direction = direction.angle()
+	elif state == hook_states.FLYING or state == hook_states.HOOKED:
+		return
+	elif state == hook_states.HOOKING:
+		if !hook_enemy:
+			parent.velocity = -direction.normalized() * hook_speed
+		else:
+			hooked_body.velocity = direction.normalized() * hook_speed
+	
+	if direction.length_squared() < returning_radius:
+		_delete_hook()
+		if hooked_body and state == hook_states.HOOKING:
+			var hooked_mob_mover: MobMoverComponent = hooked_body.get_node_or_null("MobMoverComponent")
+			if hooked_mob_mover:
+				hooked_mob_mover.throw(parent.velocity, hook_throw_force, parent)
 
 func _projectile_shoot(direction) -> Node2D:
 	hook = super._projectile_shoot(direction)
 	if !hook:
 		return null
+	hook_projectile_comp = hook.get_node_or_null("ProjectileComponent")
+	state = hook_states.FLYING
+	rope.visible = true
 	
+	if shoot_sound:
+		shoot_sound.play()
 	
-	
+	_cooldown()
 	return hook
+
+func _on_hit(emitter: Node2D, _projectile: Node2D) -> void:
+	if _projectile != hook:
+		return
+	state = hook_states.HOOKED
+	hooked_body = emitter
+
+func _delete_hook():
+	if mob_mover_component and !hook_enemy:
+		mob_mover_component.movement_blocked = false
+	state = hook_states.BASE
+	cooldown_timer.start()
+	hook.queue_free()
+	rope.visible = false
+	bullets_recover_timer.start()
+	parent.velocity /= 2
+	if reel_sound:
+		reel_sound.stop()
+	_cooldown()
+
+func _on_gibbed(emitter):
+	if emitter == hooked_body and is_instance_valid(hook):
+		hook.cancel_free()
+		hook.call_deferred("reparent", scene)
+		_return()

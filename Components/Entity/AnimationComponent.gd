@@ -57,7 +57,8 @@ func lean_to_direction(
 	direction: Vector2,
 	priority,
 	time: float = 0.2,
-	rotation_multiplier: float = 1.0
+	rotation_multiplier: float = 1.0, rewrite: bool = false,
+	return_to_prev_pos: bool = true
 	) -> void:
 	
 	var angle: float = direction.angle()
@@ -69,10 +70,17 @@ func lean_to_direction(
 	_tween.set_trans(Tween.TRANS_SINE)
 	_tween.set_ease(Tween.EASE_IN_OUT)
 	
+	var loops: bool = false
+	if time == 0:
+		time = 0.1
+		loops = true
 	_tween.tween_property(parent, rotation.type, rotation.value * rotation_multiplier, time)
-	_tween.tween_property(parent, rotation.type, 0 , time)
+	if return_to_prev_pos:
+		_tween.tween_property(parent, rotation.type, 0 , time)
+	if loops:
+		_tween.set_loops()
 	
-	set_animation(_tween, priority)
+	set_animation(_tween, priority, rewrite)
 
 func get_rotation_from_angle(angle_deg: float) -> Dictionary:
 	var side: int = get_direction(angle_deg)

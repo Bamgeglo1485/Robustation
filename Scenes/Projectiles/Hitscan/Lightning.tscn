@@ -11,13 +11,17 @@
 material = ExtResource("2_rhhsc")
 position = Vector2(0.05896592, 0.018667966)
 scale = Vector2(1.058966, 1.0186689)
+points = PackedVector2Array(48, 2.0981465e-06)
 
 [node name="HitscanComponent" parent="." index="1" unique_id=993689081 node_paths=PackedStringArray("hit_sound")]
 hit_sound = NodePath("../HitSound")
 hit_effect = ExtResource("3_cxf87")
 tween_speed = 0.3
 damage = 0
+disappear_speed = null
+after_delete_lifetime = null
 drop_enemy_delay = 1.0
+max_penetrations = 3
 
 [node name="HitSound" type="AudioStreamPlayer2D" parent="." index="2" unique_id=1641163860]
 stream = ExtResource("4_hkc4l")

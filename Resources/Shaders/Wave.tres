@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://ddgd2dckacjiv"]
+
+[ext_resource type="Shader" uid="uid://bl4ojx3gaol8" path="res://Resources/Shaders/Wave.gdshader" id="1_nmgcc"]
+
+[resource]
+shader = ExtResource("1_nmgcc")
+shader_parameter/wave_amplitude = 0.25
+shader_parameter/wave_frequency = 40.0
+shader_parameter/wave_speed = 40.0
+shader_parameter/left_falloff = -0.1
+shader_parameter/right_falloff = 1.0
+shader_parameter/color = Color(0.42898262, 0, 0.122340836, 1)

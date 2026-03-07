@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://dp68l1ivbgils"]
+
+[ext_resource type="PackedScene" uid="uid://c2fs5eoy7ntgu" path="res://Scenes/Projectiles/BaseProjectile.tscn" id="1_76f4r"]
+[ext_resource type="AudioStream" uid="uid://cg0leh0na5lvv" path="res://Resources/Audio/BulletHitRandom.tres" id="2_g0bgv"]
+[ext_resource type="Texture2D" uid="uid://c2wadc7c7e3v3" path="res://Textures/Weapons/Spear/spear.png" id="3_g0bgv"]
+[ext_resource type="Script" uid="uid://cslfowwgmffis" path="res://Components/Triggers/ActivateProjectileParticlesOnTriggerComponent.gd" id="7_it4dj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b1bul"]
+radius = 14.0
+
+[sub_resource type="Curve" id="Curve_0hneg"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 1.011236), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_c1ng1"]
+curve = SubResource("Curve_0hneg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oqm3e"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.099999994
+scale_over_velocity_max = 1000.0
+scale_over_velocity_curve = SubResource("CurveTexture_c1ng1")
+hue_variation_min = -1.0
+hue_variation_max = -0.54
+
+[node name="Projectile" unique_id=1574842334 instance=ExtResource("1_76f4r")]
+
+[node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture", "particle_emitter")]
+collision_layer = 519
+collision_mask = 519
+texture = NodePath("../Texture")
+particle_emitter = NodePath("GPUParticles2D")
+speed = 350
+speed_decreasing = 3
+max_damage = 30
+lifetime = 0.0
+delete_on_hit = false
+return_to_sender = true
+max_distance_from_sender = 600
+parry_speed_boost = 1.0
+
+[node name="CollisionShape2D" parent="ProjectileComponent" index="0" unique_id=1391622764]
+rotation = 1.5707964
+shape = SubResource("CircleShape2D_b1bul")
+
+[node name="HitSound" parent="ProjectileComponent" index="1" unique_id=1752295456]
+stream = ExtResource("2_g0bgv")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ProjectileComponent" index="2" unique_id=1206047265]
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
+amount = 40
+preprocess = 0.5
+speed_scale = 4.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_oqm3e")
+
+[node name="Texture" type="Sprite2D" parent="." index="1" unique_id=1723735001]
+use_parent_material = true
+texture = ExtResource("3_g0bgv")
+
+[node name="ActivateProjectileParticlesOnTriggerComponent" type="Node" parent="." index="5" unique_id=791180759]
+script = ExtResource("7_it4dj")
+metadata/_custom_type_script = "uid://cslfowwgmffis"
+
+[connection signal="area_shape_entered" from="ProjectileComponent" to="ProjectileComponent" method="_on_area_shape_entered"]

@@ -41,4 +41,7 @@ wait_time = 0.2
 one_shot = true
 autostart = true
 
+[node name="VisibleOnScreenEnabler" type="VisibleOnScreenEnabler2D" parent="." unique_id=1236946888]
+rect = Rect2(-30, -30, 60, 60)
+
 [connection signal="timeout" from="PauseTimer" to="." method="_on_pause_timer_timeout"]

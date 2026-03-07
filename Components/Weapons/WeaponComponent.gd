@@ -17,6 +17,8 @@ class_name Weapon extends Component
 @export var icon_texture: Texture2D
 
 @export var damage_modifier: float = 1.0
+@export var minor_damage_modifiers: Dictionary
+var minor_damage_modifier: float = 1.0
 
 @export var self_throw_speed: int = 0
 @export var self_throw_stop_speed: int = 300
@@ -26,10 +28,19 @@ class_name Weapon extends Component
 @export var attack_shift_multiplier: float = 1.0
 
 @export var parriable: bool = true
+@export var auto: bool = false
+@export var parent_weapon: Weapon
+@export var alt_attack: Weapon
 
 var swinging_cancelled: bool
 var cooldown_timer: Timer
 var swinging_timer: Timer
+var main_weapon: Weapon
+var child_weapons: Array[Weapon]
+var can_switch: bool = true
+
+@warning_ignore("unused_signal")
+signal swapped(new_weapon: Weapon)
 
 func _ready() -> void:
 	if parent is not Node2D:
@@ -41,16 +52,27 @@ func _ready() -> void:
 		for child in get_children():
 			if child is AudioStreamPlayer2D:
 				child.reparent(sounds)
-	
-	cooldown_timer = Timer.new()
-	cooldown_timer.ignore_time_scale = !timers_timescaled
-	cooldown_timer.one_shot = true
-	add_child(cooldown_timer)
-	
-	swinging_timer = Timer.new()
-	swinging_timer.ignore_time_scale = !timers_timescaled
-	swinging_timer.one_shot = true
-	add_child(swinging_timer)
+	if parent_weapon:
+		parent_weapon.child_weapons.append(self)
+	if !parent_weapon:
+		cooldown_timer = Timer.new()
+		cooldown_timer.ignore_time_scale = !timers_timescaled
+		cooldown_timer.one_shot = true
+		add_child(cooldown_timer)
+		swinging_timer = Timer.new()
+		swinging_timer.ignore_time_scale = !timers_timescaled
+		swinging_timer.one_shot = true
+		add_child(swinging_timer)
+	else:
+		await parent_weapon.ready
+		cooldown_timer = parent_weapon.cooldown_timer
+		swinging_timer = parent_weapon.swinging_timer
+	if alt_attack:
+		alt_attack.main_weapon = self
+
+@warning_ignore("unused_parameter")
+func on_release(raiser) -> void:
+	pass
 
 func _swing(direction) -> void:
 	if swing_delay != 0:
@@ -87,3 +109,14 @@ func reset_cooldown() -> void:
 
 func get_cooldown() -> bool:
 	return cooldown
+
+func _get_minor_modifiers() -> float:
+	var modifier: float = 1.0
+	
+	if minor_damage_modifiers.is_empty():
+		return modifier
+	
+	for minor_mod in minor_damage_modifiers:
+		modifier *= minor_damage_modifiers[minor_mod]
+	
+	return modifier

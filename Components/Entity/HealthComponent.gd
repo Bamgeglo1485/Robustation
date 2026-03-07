@@ -131,7 +131,7 @@ func _death() -> void:
 		gib_effect.global_position = parent.global_position
 		scene.add_child.call_deferred(gib_effect)
 	
-	parent.queue_free()
+	parent.call_deferred("queue_free")
 	EventBusManager.gibbed.emit(parent)
 
 func set_delayed_damage(damage: int, time: int) -> void:

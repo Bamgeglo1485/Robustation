@@ -2,11 +2,31 @@
 
 [ext_resource type="Shader" uid="uid://boy7hlksa7i1s" path="res://Resources/Shaders/ImpactFrame.gdshader" id="1_1eqom"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1eqom"]
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_j1ww4"]
+noise = SubResource("FastNoiseLite_1eqom")
+seamless = true
+normalize = false
+seamless_blend_skirt = 1.0
+
 [resource]
 shader = ExtResource("1_1eqom")
-shader_parameter/threshold = 0.3200000152
-shader_parameter/smoothness = 0.19600000931
+shader_parameter/threshold = 0.050000002375
+shader_parameter/smoothness = 0.0
 shader_parameter/bg_color = Color(0.59717613, 0.59717613, 0.5971761, 1)
 shader_parameter/fg_color = Color(0, 0, 0, 1)
 shader_parameter/invert = false
 shader_parameter/intensity = 1.0
+shader_parameter/mask_softness = 1.50000016625
+shader_parameter/mask_threshold = 0.7290000346275
+shader_parameter/sort = 1.0000000475
+shader_parameter/noise = SubResource("NoiseTexture2D_j1ww4")
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/line_count = 0.5
+shader_parameter/line_density = 0.130000006175
+shader_parameter/line_faloff = 1.0000000475
+shader_parameter/mask_size = 0.0
+shader_parameter/mask_edge = 0.090000004275
+shader_parameter/animation_speed = 20.0

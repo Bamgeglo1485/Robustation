@@ -35,9 +35,9 @@
 [ext_resource type="AudioStream" uid="uid://xbdoc0n20dn" path="res://Audio/Effects/hypospray.ogg" id="26_27vau"]
 [ext_resource type="Script" uid="uid://enoou4fskgjn" path="res://Components/Weapons/ChargingMeleeWeaponComponent.gd" id="27_hev03"]
 [ext_resource type="Script" uid="uid://b8d56xguabrvi" path="res://Components/Abilities/OverdoseAbilityComponent.gd" id="27_l8jtb"]
-[ext_resource type="Texture2D" uid="uid://bs33le1xplql" path="res://Textures/Interface/Ingame/Stamina/stamina_0.png" id="28_ssq7n"]
 [ext_resource type="Material" uid="uid://3h52wgl5hfvh" path="res://Resources/Shaders/Fire.tres" id="29_0fohe"]
 [ext_resource type="AudioStream" uid="uid://b3uvy6ds1t6fu" path="res://Audio/Weapon/Hit/heavy_punch.ogg" id="29_gmd4o"]
+[ext_resource type="Texture2D" uid="uid://b826fwd46tvih" path="res://Textures/Weapons/Toolbox/tank.png" id="30_75g6c"]
 [ext_resource type="AudioStream" uid="uid://dvixjlsidryp0" path="res://Audio/Weapon/Hit/reel.ogg" id="30_asuu2"]
 [ext_resource type="Shader" uid="uid://4k7fthwpt7bc" path="res://Resources/Shaders/BattleTendency.gdshader" id="30_v1rwi"]
 [ext_resource type="Texture2D" uid="uid://dc0gdpbk12g5w" path="res://Textures/Mobs/Player/greytide_unlit.png" id="30_xwdpk"]
@@ -51,6 +51,7 @@
 [ext_resource type="Script" uid="uid://bwcq6hlpavlvl" path="res://Components/Interface/Ingame/WeaponIconComponent.gd" id="35_u1ecu"]
 [ext_resource type="AudioStream" uid="uid://p0nau7qxcixe" path="res://Components/Weapons/spinning.ogg" id="36_b5xq3"]
 [ext_resource type="Texture2D" uid="uid://dikwitqlv30ww" path="res://Textures/Abilities/injector.png" id="36_u1ecu"]
+[ext_resource type="PackedScene" uid="uid://dmrgvirxbiawv" path="res://Scenes/Effects/Particles/Overdose.tscn" id="42_75g6c"]
 [ext_resource type="Material" uid="uid://ddgd2dckacjiv" path="res://Resources/Shaders/Wave.tres" id="44_pcu7p"]
 [ext_resource type="PackedScene" uid="uid://e33tm7nwmy0y" path="res://Scenes/Effects/Particles/Charge.tscn" id="48_ssq7n"]
 
@@ -245,7 +246,7 @@ attack_sound = NodePath("MeleeHitSound")
 miss_sound = NodePath("MeleeMissSound")
 throw_speed = 200
 swing_delay = 0.0
-icon_texture = ExtResource("28_ssq7n")
+icon_texture = ExtResource("30_75g6c")
 self_throw_speed = 300
 metadata/_custom_type_script = "uid://enoou4fskgjn"
 
@@ -339,11 +340,13 @@ trail_colors = Array[Color]([Color(0.9866392, 0, 0.3066764, 1), Color(0.8036335,
 parry_weapon = NodePath("../KickDashAbilityComponent/Kick")
 metadata/_custom_type_script = "uid://cmonoqon5s4vx"
 
-[node name="OverdoseAbilityComponent" type="Node" parent="." index="19" unique_id=142273018 node_paths=PackedStringArray("ability_icon")]
+[node name="OverdoseAbilityComponent" type="Node" parent="." index="19" unique_id=142273018 node_paths=PackedStringArray("overdose_effect", "ability_icon")]
 script = ExtResource("27_l8jtb")
 trail_colors = Array[Color]([Color(0.8736105, 0, 0.34971508, 1), Color(0, 0.49991995, 0.47274232, 1), Color(0.5611145, 0.44604957, 0, 1)])
+overdose_effect = NodePath("../GUI/Overlays/Ability/Overdose")
 cooldown_delay = 15.0
 ability_delay = 3.0
+start_effect = ExtResource("42_75g6c")
 ability_icon = NodePath("../GUI/Inventory/Hand_L/Hypo")
 metadata/_custom_type_script = "uid://b8d56xguabrvi"
 
@@ -395,6 +398,7 @@ z_index = 5
 layer = 2
 
 [node name="Overdose" type="ColorRect" parent="GUI/Overlays/Ability" index="0" unique_id=387714321]
+visible = false
 material = SubResource("ShaderMaterial_6fu7j")
 anchors_preset = 15
 anchor_right = 1.0

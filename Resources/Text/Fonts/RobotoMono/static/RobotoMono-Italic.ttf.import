@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/RobotoMono-Italic.ttf-442faa23e4eb360697c1b8c
 [params]
 
 Rendering=null
-antialiasing=1
+antialiasing=0
 generate_mipmaps=false
 disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false

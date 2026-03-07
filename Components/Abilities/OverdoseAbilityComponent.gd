@@ -8,18 +8,20 @@ class_name OverdoseAbilityComponent extends BaseAbilityComponent
 var friction_modification: float
 
 var effect_tween: Tween
+var pitch: AudioEffectPitchShift = AudioServer.get_bus_effect(0, 2)
 
 func activate_ability() -> void:
 	if !mob_mover_component:
 		return
 	
 	overdose_effects()
-	mob_mover_component.minor_modifiers["Overdose"] = 3.0
+	mob_mover_component.set_minor_speed_modifier("overdose", 3.0)
 	friction_modification = mob_mover_component.acceleration * Engine.time_scale * 30.0
 	mob_mover_component.fly_modifier = 0
 	mob_mover_component.friction += friction_modification
 	
 	var time_tween: Tween = create_tween()
+	time_tween.tween_property(pitch, "pitch_scale", 0.35, 0.5)
 	time_tween.tween_property(Engine, "time_scale", 0.35, 0.5)
 	
 	if overdose_effect and overdose_effect.material:
@@ -33,7 +35,7 @@ func activate_ability() -> void:
 		effect_tween.tween_property(overdose_effect.material, "shader_parameter/green_factor", 1.0, ability_delay)
 		effect_tween.tween_property(overdose_effect.material, "shader_parameter/hue_shift", -0.3, ability_delay)
 		effect_tween.set_ignore_time_scale(true)
-		effect_tween.set_loops(100)
+		effect_tween.set_loops()
 
 func overdose_effects() -> void:
 	var trail = TrailEffectComponent.new()
@@ -45,10 +47,11 @@ func overdose_effects() -> void:
 
 func disable_ability() -> void:
 	var time_tween: Tween = create_tween()
+	time_tween.tween_property(pitch, "pitch_scale", 1, 0.5)
 	time_tween.tween_property(Engine, "time_scale", 1, 0.5)
 	
 	mob_mover_component.fly_modifier = 1
-	mob_mover_component.minor_modifiers["Overdose"] = 1.0
+	mob_mover_component.set_minor_speed_modifier("overdose", 1.0)
 	mob_mover_component.friction -= friction_modification
 	
 	if overdose_effect and overdose_effect.material:

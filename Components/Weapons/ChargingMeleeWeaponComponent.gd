@@ -20,6 +20,8 @@ var fullcharge: bool = false
 func _ready() -> void:
 	super._ready()
 	player_weapon_user = parent.get_node_or_null("PlayerWeaponUserComponent")
+	throw_speed = 0
+	self_throw_speed = 0
 
 func _physics_process(delta: float) -> void:
 	if !charging:

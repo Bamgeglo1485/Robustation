@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/RobotoMono-ExtraLight.ttf-dd85c59659b5b05f8cb
 [params]
 
 Rendering=null
-antialiasing=1
+antialiasing=0
 generate_mipmaps=false
 disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false

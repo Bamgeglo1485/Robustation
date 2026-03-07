@@ -55,13 +55,14 @@ var sender_mob_mover: MobMoverComponent
 
 func _set_damage(new_damage):
 	damage = new_damage
-	clamp(damage, -max_damage, max_damage)
+	damage = clamp(damage, -max_damage, max_damage)
 
 func _ready() -> void:
 	if !parent or parent is not CharacterBody2D:
 		queue_free()
 	
-	shooter_faction = shooter.get_node_or_null("FactionComponent")
+	if shooter:
+		shooter_faction = shooter.get_node_or_null("FactionComponent")
 	
 	if max_distance_from_sender != 0:
 		max_distance_from_sender *= max_distance_from_sender
@@ -95,7 +96,6 @@ func _physics_process(delta: float) -> void:
 				_delete()
 				if weapon:
 					weapon.bullets += instant_bullets_recover_to_sender
-					clamp(weapon.bullets, 0, weapon.bullets_max_count)
 					weapon._cooldown()
 				return
 			elif max_distance_from_sender != 0 and _direction.length_squared() > max_distance_from_sender and sender_mob_mover:
@@ -160,7 +160,7 @@ func _on_body_entered(body: Node2D) -> void:
 			var nearest_enemy = _get_nearest_enemy()
 			if nearest_enemy:
 				_direction = nearest_enemy.global_position - parent.global_position
-		can_parry_weapon.parry_projectile(body, body.get_node("ProjectileComponent"), _direction)
+		can_parry_weapon.parry_projectile(body, body.get_node_or_null("ProjectileComponent"), _direction)
 	if body.has_node("ProjectileIgnoreComponent"):
 		return
 	if max_penetrations != 0 and penetration_damaged_bodies.has(body):
@@ -185,20 +185,26 @@ func _on_body_entered(body: Node2D) -> void:
 	
 	EventBusManager.projectile_hit.emit(body, parent)
 	
-	if body.has_node("HealthComponent"):
+	var health_comp = body.get_node_or_null("HealthComponent")
+	if health_comp:
 		if !shooter:
 			shooter = null
-		body.get_node("HealthComponent").take_damage(modified_damage, shooter)
+		health_comp.take_damage(modified_damage, shooter)
 		if max_penetrations != 0:
 			penetration_damaged_bodies.append(body)
 			penetrations += 1
 	else:
 		max_penetrations = 0
 	
-	if body.has_node("StaminaComponent") and stamina_damage != 0:
-		body.get_node("StaminaComponent").take_stamina_damage(stamina_damage * damage_modifier, shooter)
-	if body.has_node("MobMoverComponent") and throw_speed != 0:
-		body.get_node("MobMoverComponent").throw(parent.velocity, throw_speed, shooter)
+	if stamina_damage != 0:
+		var stamina_comp = body.get_node_or_null("StaminaComponent")
+		if stamina_comp:
+			stamina_comp.take_stamina_damage(stamina_damage * damage_modifier, shooter)
+	
+	if throw_speed != 0:
+		var mover_comp = body.get_node_or_null("MobMoverCompo")
+		if mover_comp:
+			mover_comp.throw(parent.velocity, throw_speed, shooter)
 	if explode_on_hit:
 		explode()
 	if embed_on_hit:
@@ -210,7 +216,7 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	
 	if body.has_node("WeaponUserComponent") and can_parry_weapon:
-		var body_weapon_user_comp: WeaponUserComponent = body.get_node("WeaponUserComponent")
+		var body_weapon_user_comp: WeaponUserComponent = body.get_node_or_null("WeaponUserComponent")
 		if body_weapon_user_comp.selected_weapon and body_weapon_user_comp.selected_weapon.swinging:
 			can_parry_weapon.parry_weapon(body_weapon_user_comp.selected_weapon, body)
 	
@@ -285,14 +291,12 @@ func _get_nearest_enemy() -> CharacterBody2D:
 
 func _get_valid_enemies(check_in_targeted: bool = true) -> Array[CharacterBody2D]:
 	var enemies: Array[CharacterBody2D] = []
-	for child in scene.get_children():
-		if child is not CharacterBody2D:
+	for enemy in get_tree().get_nodes_in_group("Enemies"):
+		if check_in_targeted and targeted_enemies.has(enemy):
 			continue
-		if check_in_targeted and targeted_enemies.has(child):
-			continue
-		var faction_comp: FactionComponent = child.get_node_or_null("FactionComponent")
+		var faction_comp: FactionComponent = enemy.get_node_or_null("FactionComponent")
 		if !faction_comp or faction_comp.faction == shooter_faction.faction:
 			continue
-		enemies.append(child)
+		enemies.append(enemy)
 	
 	return enemies

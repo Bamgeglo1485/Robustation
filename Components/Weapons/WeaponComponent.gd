@@ -8,6 +8,7 @@ class_name Weapon extends Component
 @export var can_attack: bool = true
 @export var cooldown: bool = false
 @export var cooldown_delay: float = 1.0
+# Cooldown delay modifier
 @export var cooldown_modifier: float = 1.0
 
 @export var swing_delay: float = 0.5
@@ -22,19 +23,26 @@ var minor_damage_modifier: float = 1.0
 
 @export var self_throw_speed: int = 0
 @export var self_throw_stop_speed: int = 300
+# check MobMoverComponent > throw to understand
+@export var self_throw_rewrite: bool = false
 
 @export var swing_rotation_multiplier: float = -1.0
 @export var attack_rotation_multiplier: float = 1.0
 @export var attack_shift_multiplier: float = 1.0
 
+# Can weapon be parried?
 @export var parriable: bool = true
+# If true, the attack occurs while the mouse is pressed
 @export var auto: bool = false
+# If there is a parent, it inherits its timers, ammo, and cooldown.
 @export var parent_weapon: Weapon
+# Alternative attack on RMB
 @export var alt_attack: Weapon
 
 var swinging_cancelled: bool
 var cooldown_timer: Timer
 var swinging_timer: Timer
+
 var main_weapon: Weapon
 var child_weapons: Array[Weapon]
 var can_switch: bool = true
@@ -70,8 +78,8 @@ func _ready() -> void:
 	if alt_attack:
 		alt_attack.main_weapon = self
 
-@warning_ignore("unused_parameter")
-func on_release(raiser) -> void:
+# A function to inherit. Called when the mouse button is released.
+func on_release(_raiser) -> void:
 	pass
 
 func _swing(direction) -> void:

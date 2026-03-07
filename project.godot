@@ -40,6 +40,10 @@ window/size/mode=4
 
 project/assembly_name="Robustation-OOP"
 
+[global_group]
+
+Enemies=""
+
 [input]
 
 ui_cancel={

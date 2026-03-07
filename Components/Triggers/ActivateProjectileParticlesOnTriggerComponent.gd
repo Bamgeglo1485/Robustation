@@ -2,8 +2,8 @@ class_name ActivateProjectileParticlesOnTriggerComponent extends BaseXOnTriggerC
 
 @onready var projectile: ProjectileComponent = parent.get_node_or_null("ProjectileComponent")
 
-func _ready() -> void:
-	super._ready()
+func _init() -> void:
+	super._init()
 	
 	if projectile and projectile.particle_emitter:
 		projectile.particle_emitter.emitting = false

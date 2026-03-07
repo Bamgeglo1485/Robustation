@@ -19,6 +19,7 @@ func _ready() -> void:
 	update_timer.wait_time = update_rate
 	update_timer.timeout.connect(_update)
 	update_timer.start()
+	range_attack_distance *= range_attack_distance
 	
 	if !move_to_target_component:
 		move_to_target_component = parent.get_node_or_null("MoveToTargetComponent")
@@ -50,11 +51,11 @@ func _update() -> void:
 	var weapon: Weapon = weapon_user_component.selected_weapon
 	
 	if weapon is MeleeWeapon:
-		if attack_direction.length() > weapon.attack_range:
+		if attack_direction.length_squared() > weapon.attack_range:
 			return
 		weapon_user_component.attack(self)
 	elif weapon.bullets != 0:
-		if attack_direction.length() < range_attack_distance:
+		if attack_direction.length_squared() < range_attack_distance:
 			weapon_user_component.attack(self)
 
 func _calculate_target_position() -> Vector2:

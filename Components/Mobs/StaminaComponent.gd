@@ -24,7 +24,7 @@ func _ready():
 	stamina_recover_timer.start()
 	
 	if mob_mover_component:
-		mob_mover_component.minor_modifiers["stamina_modifier"] = 1.0
+		mob_mover_component.set_minor_speed_modifier("stamina", 1.0)
 
 func _recover_stamina():
 	stamina_recover_timer.start()
@@ -49,7 +49,7 @@ func set_stamina(new_stamina):
 	stamina = clamp(stamina, 0, max_stamina)
 	
 	if mob_mover_component:
-		mob_mover_component.minor_modifiers["stamina_modifier"] = float(stamina) / max_stamina
+		mob_mover_component.set_minor_speed_modifier("stamina", float(stamina) / max_stamina)
 	
 	
 	if stamina == 0:

@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://bv7whrderww4t" path="res://Components/Mobs/NPC/MoveToTargetComponent.gd" id="3_vb81k"]
 [ext_resource type="Script" uid="uid://yxsq46ajfdy4" path="res://Components/Mobs/NPC/AttackTargetComponent.gd" id="4_gb06t"]
 
-[node name="BaseEnemy" unique_id=600669417 instance=ExtResource("1_8ckee")]
+[node name="BaseEnemy" unique_id=600669417 groups=["Enemies"] instance=ExtResource("1_8ckee")]
 collision_layer = 2
 collision_mask = 512
 platform_wall_layers = 512

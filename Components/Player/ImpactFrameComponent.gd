@@ -40,7 +40,7 @@ func set_color_modify(distort_audio = false) -> void:
 	if distort_audio and pitch:
 		pitch.pitch_scale = 0.1
 		pitch_tween = create_tween()
-		pitch_tween.tween_property(pitch, "pitch_scale", 1, 1)
+		pitch_tween.tween_property(pitch, "pitch_scale", 1.0, 0.9)
 	
 	color_tween = create_tween()
 	color_tween.set_trans(Tween.TRANS_SINE)

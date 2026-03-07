@@ -9,6 +9,7 @@ class_name KickDashAbilityComponent extends Component
 @export var max_kicks: int = 2
 var kicks: int = 0
 
+@onready var parent_health_component: HealthComponent = parent.get_node_or_null("HealthComponent")
 var last_kick_target: CharacterBody2D
 var kick_target: CharacterBody2D
 var can_teleport: bool
@@ -51,21 +52,24 @@ func kick_teleport() -> void:
 		kick_target = null
 		return
 	
+	var target_projectile_comp: ProjectileComponent = kick_target.get_node_or_null("ProjectileComponent")
+	if kick_target != null and !target_projectile_comp:
+		var direction = (kick_target.global_position - parent.global_position)
+		kick_weapon.reset_cooldown()
+		kick_weapon._melee_attack_target(kick_target, direction)
+		kick_weapon._cooldown()
+	elif target_projectile_comp:
+		if !target_projectile_comp.delete_on_hit:
+			return
+		kick_target = null
+	
 	var mouse_direction = (parent.get_global_mouse_position() - parent.global_position).normalized()
 	var teleport_position = kick_target.global_position + -mouse_direction * 20
 	
 	parent.global_position = teleport_position
 	
-	if kick_target != null and not kick_target.has_node("ProjectileComponent"):
-		var direction = (kick_target.global_position - parent.global_position)
-		kick_weapon.reset_cooldown()
-		kick_weapon._melee_attack_target(kick_target, direction)
-		kick_weapon._cooldown()
-	elif kick_target.has_node("ProjectileComponent"):
-		kick_target = null
-	
-	if parent.has_node("HealthComponent"):
-		parent.get_node("HealthComponent").INVINCIBLE = true
+	if parent_health_component:
+		parent_health_component.INVINCIBLE = true
 	
 	can_teleport = false
 	kicks += 1
@@ -82,12 +86,13 @@ func kick_teleport() -> void:
 		if combo_effect:
 			var effect = combo_effect.instantiate()
 			parent.add_child.call_deferred(effect)
-		if kick_target.has_node("HealthComponent"):
-			kick_target.get_node("HealthComponent").take_damage(kick_weapon.damage * 10, parent)
+		var target_health: HealthComponent = kick_target.get_node_or_null("HealthComponent")
+		if target_health:
+			target_health.take_damage(kick_weapon.damage * 10, parent)
 
 func _on_kick_teleport_timer_timeout() -> void:
-	if parent.has_node("HealthComponent"):
-		parent.get_node("HealthComponent").INVINCIBLE = false
+	if parent_health_component:
+		parent_health_component.INVINCIBLE = false
 	can_teleport = true
 
 func _on_kick_target_timer_timeout() -> void:

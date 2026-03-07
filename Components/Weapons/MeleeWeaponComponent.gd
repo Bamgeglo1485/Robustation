@@ -27,6 +27,7 @@ class_name MeleeWeapon extends Weapon
 @export var drop_enemy_delay: float = 0.0
 @onready var base_throw_speed: float = throw_speed
 @onready var base_self_throw_speed: float = self_throw_speed
+@onready var parent_mob_mover_component: MobMoverComponent
 
 @export_category("Modify damage by speed")
 @export var modify_damage_by_speed: bool = false
@@ -38,6 +39,8 @@ var base_attack_volume: float = 0.0
 
 func _ready() -> void:
 	super._ready()
+	attack_range *= attack_range
+	parent_mob_mover_component = parent.get_node_or_null("MobMoverComponent")
 	if attack_sound:
 		base_attack_volume = attack_sound.volume_db
 
@@ -100,7 +103,6 @@ func _try_melee_attack(direction) -> Dictionary:
 			continue
 		
 		var enemy = result.collider
-		
 		if enemy is Area2D:
 			enemy = enemy.get_parent()
 		
@@ -109,7 +111,6 @@ func _try_melee_attack(direction) -> Dictionary:
 		
 		if enemy.has_node("MeleeAttackIgnoreComponent"):
 			continue
-		
 		if (enemy.global_position - parent.global_position).length() > attack_range:
 			continue
 		
@@ -121,6 +122,12 @@ func _try_melee_attack(direction) -> Dictionary:
 	
 	if _targets.is_empty():
 		_melee_attack_target(null, direction, true)
+	else:
+		if self_throw_speed != 0:
+			if parent_mob_mover_component and direction:
+				parent_mob_mover_component.throw(-direction, self_throw_speed, parent, self_throw_stop_speed)
+				@warning_ignore("narrowing_conversion")
+				self_throw_speed = base_self_throw_speed
 	
 	return _targets
 
@@ -132,7 +139,7 @@ func _melee_attack_target(target, direction = null, multiple_attack = false, sla
 		if _slash_effect.has_node("AnimationPlayer"):
 			_slash_effect.get_node("AnimationPlayer").play("Slash")
 	
-	if (target and (target.global_position - parent.global_position).length() > attack_range):
+	if (target and (target.global_position - parent.global_position).length_squared() > attack_range):
 		target = null
 	
 	if attack_sound and target:
@@ -155,36 +162,35 @@ func _melee_attack_target(target, direction = null, multiple_attack = false, sla
 		EventBusManager.melee_miss.emit(parent, self)
 		return false
 	
-	if target.has_node("ReflectMeleePerkComponent") and target != parent:
-		var reflect_component = target.get_node("ReflectMeleePerkComponent")
+	var reflect_component = target.get_node_or_null("ReflectMeleePerkComponent")
+	if reflect_component and target != parent:
 		if randf() < reflect_component.chance:
 			reflect_component.reflect(parent, self)
 			return false
 	
-	if target.has_node("ProjectileComponent") and parry_force != 0:
-		var projectile = target.get_node("ProjectileComponent")
+	var projectile = target.get_node_or_null("ProjectileComponent")
+	if parry_force != 0 and projectile:
 		if projectile.parriable == false:
 			return false
 		parry_projectile(target, projectile, direction)
 	
-	if can_parry_weapon and target.has_node("WeaponUserComponent"):
-		var target_weapon_user_component = target.get_node("WeaponUserComponent")
+	var target_weapon_user_component = target.get_node_or_null("WeaponUserComponent")
+	if can_parry_weapon and target_weapon_user_component:
 		if target_weapon_user_component and target_weapon_user_component.selected_weapon:
 			var weapon = target_weapon_user_component.selected_weapon 
 			if weapon.swinging and weapon.parriable:
 				parry_weapon(weapon, target)
 	
-	if target.has_node("HealthComponent"):
-		var target_health_component: HealthComponent = target.get_node("HealthComponent")
+	var target_health_component: HealthComponent = target.get_node_or_null("HealthComponent")
+	if target_health_component:
 		@warning_ignore_start("narrowing_conversion")
 		var mod: float = 1.0
 		if modify_damage_by_speed and parent is CharacterBody2D:
 			var velocity: float = parent.velocity.length()
-			if min_speed_to_impact_frame < velocity:
+			if min_speed_to_impact_frame < velocity and Engine.time_scale >= 1.0:
 				mod = velocity / modify_damage_by_speed_base_speed / modify_damage_by_speed_divider
 				throw_speed = base_throw_speed * mod
 				self_throw_speed = base_self_throw_speed * mod * 1.5
-				print(mod)
 				attack_sound.volume_db = mod * 5
 				attack_sound.play()
 				EventBusManager.request_impact_frame.emit(mod / modify_damage_by_speed_hitscan_divider, 0.0, true, true)
@@ -192,19 +198,20 @@ func _melee_attack_target(target, direction = null, multiple_attack = false, sla
 		if delayed_damage != 0 and delayed_damage_delay != 0:
 			target_health_component.set_delayed_damage(delayed_damage * _get_minor_modifiers(), delayed_damage_delay)
 	
-	if target.has_node("MobMoverComponent") and direction:
+	var target_mover: MobMoverComponent = target.get_node_or_null("MobMoverComponent")
+	if target_mover and direction:
 		if throw_speed != 0:
-			target.get_node("MobMoverComponent").throw(direction, throw_speed * minor_damage_modifier, parent, throw_stop_speed)
+			target_mover.throw(direction, throw_speed * minor_damage_modifier, parent, throw_stop_speed)
 		if drop_enemy_delay != 0:
-			target.get_node("MobMoverComponent").drop(drop_enemy_delay, drop_forced, drop_resistance_force)
+			target_mover.drop(drop_enemy_delay, drop_forced, drop_resistance_force)
 		throw_speed = base_throw_speed
 	
 	if target.has_node("StaminaComponent") and stamina_damage != 0:
 		target.get_node("StaminaComponent").take_stamina_damage(stamina_damage * damage_modifier, parent)
 	
-	if parent.has_node("MobMoverComponent")and direction:
-		if self_throw_speed != 0:
-			parent.get_node("MobMoverComponent").throw(-direction, self_throw_speed, parent, self_throw_stop_speed)
+	if self_throw_speed != 0 and !multiple_attack:
+		if parent_mob_mover_component and direction:
+			parent_mob_mover_component.throw(-direction, self_throw_speed, parent, self_throw_stop_speed)
 			self_throw_speed = base_self_throw_speed
 	
 	return true
@@ -221,9 +228,10 @@ func parry_weapon(weapon, target) -> void:
 	
 	var direction = (target.global_position - parent.global_position)
 	
-	if target.has_node("MobMoverComponent"):
-		target.get_node("MobMoverComponent").throw(-direction, 300, parent, 50)
-		target.get_node("MobMoverComponent").drop(0.5)
+	var target_mob_mover: MobMoverComponent = target.get_node_or_null("MobMoverComponent")
+	if target_mob_mover:
+		target_mob_mover.throw(-direction, 300, parent, 50, true, self_throw_rewrite)
+		target_mob_mover.drop(0.5)
 
 func parry_projectile(projectile: Node2D, projectile_component: ProjectileComponent, direction: Vector2) -> void:
 	if !projectile_component.parriable:
@@ -253,9 +261,9 @@ func parry_projectile(projectile: Node2D, projectile_component: ProjectileCompon
 	trail.colors = colors
 	projectile.add_child(trail)
 	
-	await get_tree().physics_frame
-	if projectile.has_node("TriggerOnParryComponent"):
-		projectile.get_node("TriggerOnParryComponent").trigger()
+	var trigger_on_parry: TriggerOnParryComponent = projectile.get_node("TriggerOnParryComponent")
+	if trigger_on_parry:
+		trigger_on_parry.trigger()
 
 func parry_effects():
 	if parry_effect:

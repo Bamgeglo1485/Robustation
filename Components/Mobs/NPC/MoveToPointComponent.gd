@@ -46,7 +46,7 @@ func _ready() -> void:
 		direction_component = parent.get_node_or_null("DirectionComponent")
 	
 	if mob_mover_component and retreat_speed_modifier != 1:
-		mob_mover_component.minor_modifiers["retreat_modifier"] = 1.0
+		mob_mover_component.set_minor_speed_modifier("retreat", 1.0)
 
 func _update_attack_logic() -> void:
 	if !mob_mover_component or !navigation_agent:
@@ -70,19 +70,19 @@ func _update_attack_logic() -> void:
 		return
 	
 	var direction_to_target_normalized: Vector2 = direction_to_target.normalized()
-	mob_mover_component.minor_modifiers["retreat_modifier"] = 1.0
+	mob_mover_component.set_minor_speed_modifier("retreat", 1.0)
 	
 	if distance_to_target > run_from_target_range:
 		if !navigation_agent.is_navigation_finished():
 			mob_mover_component.direction = parent.global_position.direction_to(navigation_agent.get_next_path_position())
 		else:
-			mob_mover_component.direction = direction_to_target_normalized
+			mob_mover_component.direction = Vector2.ZERO
 		
 		_set_direction()
 		
 	elif distance_to_target < run_to_target_range:
 		var away_direction: Vector2 = -direction_to_target_normalized
-		mob_mover_component.minor_modifiers["retreat_modifier"] = retreat_speed_modifier
+		mob_mover_component.set_minor_speed_modifier("retreat", retreat_speed_modifier)
 		mob_mover_component.direction = away_direction
 		_set_direction()
 		

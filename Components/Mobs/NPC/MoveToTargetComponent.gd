@@ -21,6 +21,9 @@ func _ready() -> void:
 	look_at_target_update_timer.wait_time = look_at_target_update_rate
 	look_at_target_update_timer.timeout.connect(_look_at_target)
 	look_at_target_update_timer.start()
+	
+	if set_player_as_target:
+		EventBusManager.change_player.connect(_player_changed)
 
 func _process(_delta: float) -> void:
 	if set_player_as_target and player != target:
@@ -42,3 +45,9 @@ func _look_at_target() -> void:
 	
 	var direction: Vector2 = (target.global_position - parent.global_position)
 	direction_component.look_at_direction(direction)
+
+func _player_changed(new_player, wait_time) -> void:
+	if wait_time > 0:
+		await get_tree().create_timer(wait_time).timeout
+	player = new_player
+	target = new_player

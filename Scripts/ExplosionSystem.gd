@@ -13,6 +13,7 @@ extends Node2D
 @export var drop_forced: bool = false
 @export var drop_resistance_force: int = 3
 @export var lightings: Array[PointLight2D]
+@export var main_lighting: PointLight2D
 var active: bool = true
 
 var damaged_bodies: Array = []
@@ -56,6 +57,13 @@ func _ready() -> void:
 func _set_lighting():
 	if lightings.is_empty():
 		return
+	main_lighting.scale = Vector2(0.0, 0.0)
+	
+	var main_tween: Tween = create_tween()
+	main_tween.set_trans(Tween.TRANS_SINE)
+	main_tween.set_ease(Tween.EASE_IN_OUT)
+	main_tween.tween_property(main_lighting, "scale", Vector2(1, 1), 0.25)
+	main_tween.tween_property(main_lighting, "scale", Vector2(0, 0), 0.25)
 	
 	for lighting in lightings:
 		var tween: Tween = create_tween()

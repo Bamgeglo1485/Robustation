@@ -7,7 +7,7 @@ func _ready() -> void:
 	_tween.set_trans(Tween.TRANS_SINE)
 	_tween.set_ease(Tween.EASE_IN_OUT)
 	
-	_tween.tween_property(explosion, "shader_parameter/radius", 6 , 1)
+	_tween.tween_property(explosion, "shader_parameter/radius", 2 , 1)
 	
 	await _tween.finished
 	

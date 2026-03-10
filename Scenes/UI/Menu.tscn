@@ -362,6 +362,7 @@ stream = ExtResource("12_2kl40")
 
 [node name="RoundstartComponent" type="Node" parent="." unique_id=1364798108 node_paths=PackedStringArray("output_animation")]
 script = ExtResource("13_2kl40")
+arena = NodePath("res://Game/game.tscn")
 output_animation = NodePath("../CMD/CMD_OUTPUT/TextPrintingAnimationComponent")
 metadata/_custom_type_script = "uid://cxitq7uuw7y6p"
 

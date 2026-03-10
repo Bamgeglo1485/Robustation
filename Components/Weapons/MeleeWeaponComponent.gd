@@ -39,7 +39,6 @@ var base_attack_volume: float = 0.0
 
 func _ready() -> void:
 	super._ready()
-	attack_range *= attack_range
 	parent_mob_mover_component = parent.get_node_or_null("MobMoverComponent")
 	if attack_sound:
 		base_attack_volume = attack_sound.volume_db
@@ -131,7 +130,8 @@ func _try_melee_attack(direction) -> Dictionary:
 	
 	return _targets
 
-func _melee_attack_target(target, direction = null, multiple_attack = false, slash = true) -> bool:
+func _melee_attack_target(target: Node2D, direction: Vector2, 
+multiple_attack: bool = false, slash: bool = true) -> bool:
 	if slash_effect and direction and slash:
 		var _slash_effect: Node = slash_effect.instantiate()
 		_slash_effect.global_rotation = direction.angle() + 90
@@ -139,7 +139,7 @@ func _melee_attack_target(target, direction = null, multiple_attack = false, sla
 		if _slash_effect.has_node("AnimationPlayer"):
 			_slash_effect.get_node("AnimationPlayer").play("Slash")
 	
-	if (target and (target.global_position - parent.global_position).length_squared() > attack_range):
+	if (target and (target.global_position - parent.global_position).length() > attack_range):
 		target = null
 	
 	if attack_sound and target:

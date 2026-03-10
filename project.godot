@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Robustation-OOP"
-config/version="DEMO 0.0.2"
+config/version="DEMO 0.0.9"
 run/main_scene="uid://8useii0cqwer"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
@@ -138,7 +138,8 @@ alt_attack={
 [physics]
 
 2d/run_on_separate_thread=true
-common/physics_ticks_per_second=90
+common/physics_ticks_per_second=50
+common/max_physics_steps_per_frame=7
 2d/default_gravity=0.0
 2d/default_gravity_vector=Vector2(0, 0)
 common/physics_interpolation=true
@@ -148,3 +149,4 @@ common/physics_interpolation=true
 textures/canvas_textures/default_texture_filter=0
 textures/default_filters/anisotropic_filtering_level=0
 viewport/hdr_2d=true
+environment/defaults/default_clear_color=Color(0.01409901, 0, 0.00029968406, 1)

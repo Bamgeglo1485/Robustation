@@ -58,6 +58,7 @@
 [ext_resource type="Texture2D" uid="uid://br3jho2qicoua" path="res://Textures/Interface/Ingame/Stamina/stamina_2.png" id="51_usxup"]
 [ext_resource type="Texture2D" uid="uid://dd542uq0kak83" path="res://Textures/Interface/Ingame/Stamina/stamina_3.png" id="52_2i8o7"]
 [ext_resource type="Texture2D" uid="uid://c6mx7npsbi7s0" path="res://Textures/Interface/Ingame/Stamina/stamina_4.png" id="53_o3dxh"]
+[ext_resource type="Texture2D" uid="uid://1wwu1blvl8rt" path="res://Textures/Abilities/hypo.png" id="59_p5itk"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_p8133"]
 random_pitch = 1.2599211
@@ -810,3 +811,6 @@ metadata/_custom_type_script = "uid://bh67jcffdkivf"
 
 [node name="AudioListener2D" type="AudioListener2D" parent="." index="32" unique_id=826120773]
 current = true
+
+[node name="WeaponSpriteComponent" parent="." index="33" unique_id=1615635183]
+texture = ExtResource("59_p5itk")

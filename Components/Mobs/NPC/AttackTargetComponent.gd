@@ -5,7 +5,7 @@ class_name AttackTargetComponent extends Component
 @onready var mob_mover_component: MobMoverComponent = parent.get_node_or_null("MobMoverComponent")
 
 var attack_direction: Vector2
-var target: CharacterBody2D
+var target: PhysicsBody2D
 
 @export var predict_factor: float = 0.1
 @export var update_rate: float = 0.2
@@ -27,13 +27,16 @@ func _ready() -> void:
 		weapon_user_component = parent.get_node_or_null("WeaponUserComponent")
 	if !mob_mover_component:
 		mob_mover_component = parent.get_node_or_null("MobMoverComponent")
-		
+	
+	if move_to_target_component.set_player_as_target:
+		EventBusManager.change_player.connect(_player_changed)
+
 func _update() -> void:
 	if !move_to_target_component or !weapon_user_component:
 		return
 	
 	# Randomize update times to avoid lags
-	update_timer.wait_time = randf_range(update_rate * 0.8, update_rate * 1.2)
+	update_timer.wait_time = randf_range(update_rate * 0.80, update_rate * 1.20)
 	update_timer.start()
 	
 	if mob_mover_component:
@@ -51,7 +54,7 @@ func _update() -> void:
 	var weapon: Weapon = weapon_user_component.selected_weapon
 	
 	if weapon is MeleeWeapon:
-		if attack_direction.length_squared() > weapon.attack_range:
+		if attack_direction.length() > weapon.attack_range:
 			return
 		weapon_user_component.attack(self)
 	elif weapon.bullets != 0:
@@ -81,3 +84,8 @@ func get_attack_target() -> CharacterBody2D:
 		return target
 	else:
 		return null
+
+func _player_changed(new_player, wait_time) -> void:
+	if wait_time > 0:
+		await get_tree().create_timer(wait_time).timeout
+	target = new_player

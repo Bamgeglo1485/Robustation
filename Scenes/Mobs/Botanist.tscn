@@ -81,6 +81,7 @@ metadata/_custom_type_script = "uid://bi1gje1pfokqc"
 stream = ExtResource("5_gume5")
 
 [node name="MoveToPointComponent" parent="AI" parent_id_path=PackedInt32Array(1365591205) index="0" unique_id=395370591]
+pathfind_update_rate = 0.5
 run_to_target_range = 400.0
 run_from_target_range = 0.0
 

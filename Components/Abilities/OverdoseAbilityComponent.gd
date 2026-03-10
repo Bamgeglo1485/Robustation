@@ -4,18 +4,30 @@ class_name OverdoseAbilityComponent extends BaseAbilityComponent
 
 @export var trail_colors: Array[Color]
 @export var overdose_effect: ColorRect
+## A body that will replace the player so that enemies will shoot at him, like Sandevistan in Cyberpunk
+@export var distraction_scene: PackedScene
+var distraction: CharacterBody2D
 
 var friction_modification: float
 
 var effect_tween: Tween
 var pitch: AudioEffectPitchShift = AudioServer.get_bus_effect(0, 2)
 
+func _init() -> void:
+	ignore_time_scale = true
+
+func _ready() -> void:
+	super._ready()
+	if distraction_scene and scene:
+		distraction = distraction_scene.instantiate()
+		scene.add_child.call_deferred(distraction)
+
 func activate_ability() -> void:
 	if !mob_mover_component:
 		return
 	
 	overdose_effects()
-	mob_mover_component.set_minor_speed_modifier("overdose", 3.0)
+	mob_mover_component.set_minor_speed_modifier("overdose", 2.0)
 	friction_modification = mob_mover_component.acceleration * Engine.time_scale * 30.0
 	mob_mover_component.fly_modifier = 0
 	mob_mover_component.friction += friction_modification
@@ -36,6 +48,12 @@ func activate_ability() -> void:
 		effect_tween.tween_property(overdose_effect.material, "shader_parameter/hue_shift", -0.3, ability_delay)
 		effect_tween.set_ignore_time_scale(true)
 		effect_tween.set_loops()
+	
+	if distraction:
+		distraction.global_position = parent.global_position
+		EventBusManager.change_player.emit(distraction, 0)
+	
+	
 
 func overdose_effects() -> void:
 	var trail = TrailEffectComponent.new()
@@ -43,6 +61,7 @@ func overdose_effects() -> void:
 	trail.colors = trail_colors
 	trail.color_change_delay = ability_delay / trail_colors.size()
 	trail.name = "TrailEffectComponent"
+	trail.ignore_time_scale = true
 	parent.add_child(trail)
 
 func disable_ability() -> void:
@@ -53,6 +72,9 @@ func disable_ability() -> void:
 	mob_mover_component.fly_modifier = 1
 	mob_mover_component.set_minor_speed_modifier("overdose", 1.0)
 	mob_mover_component.friction -= friction_modification
+	
+	if distraction:
+		EventBusManager.change_player.emit(parent, 0.5)
 	
 	if overdose_effect and overdose_effect.material:
 		effect_tween.kill()

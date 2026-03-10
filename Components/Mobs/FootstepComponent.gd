@@ -1,7 +1,7 @@
 class_name FootstepComponent extends Component
 
 @export var footstep_sound: AudioStreamPlayer2D
-@export var footstep_range: int = 4096 # 64^2
+@export var footstep_range: int = 64
 var last_position: Vector2 = Vector2.ZERO
 var update_timer: Timer
 
@@ -12,6 +12,7 @@ func _ready() -> void:
 	update_timer.one_shot = true
 	update_timer.start()
 	update_timer.timeout.connect(_update)
+	footstep_range *= footstep_range
 
 func _update() -> void:
 	update_timer.start()

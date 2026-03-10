@@ -106,7 +106,7 @@ func _pathfinding_update() -> void:
 	navigation_agent.target_position = point
 	
 	# Randomize update times to avoid lags
-	pathfinding_timer.wait_time = randf_range(pathfind_update_rate * 0.8, pathfind_update_rate * 1.2)
+	pathfinding_timer.wait_time = randf_range(pathfind_update_rate * 0.80, pathfind_update_rate * 1.20)
 	pathfinding_timer.start()
 
 func _on_navigation_agent_velocity_computed(safe_velocity: Vector2) -> void:

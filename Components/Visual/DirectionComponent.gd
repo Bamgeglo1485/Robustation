@@ -2,10 +2,9 @@ class_name DirectionComponent extends Component
 
 enum Direction {
 	RIGHT = 1,
-	UP = 2,
+	DOWN = 2,
 	LEFT = 3,
-	DOWN = 4
-	}
+	UP = 4}
 
 @export var direction: Direction = Direction.RIGHT
 
@@ -23,13 +22,13 @@ func look_at_direction(look_direction: Vector2) -> Direction:
 		direction = Direction.RIGHT
 	elif angle_deg >= 45 and angle_deg < 135:
 		rect = Rect2(0, 0, 32, 32)
-		direction = Direction.UP
+		direction = Direction.DOWN
 	elif angle_deg >= 135 and angle_deg < 225:
 		rect = Rect2(32, 32, 32, 32)
 		direction = Direction.LEFT
 	elif angle_deg >= 225 and angle_deg < 315:
 		rect = Rect2(32, 0, 32, 32)
-		direction = Direction.DOWN
+		direction = Direction.UP
 	
 	change_rect(rect)
 	return direction

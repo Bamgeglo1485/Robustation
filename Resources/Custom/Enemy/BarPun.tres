@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Enemy" format=3 uid="uid://cwxeoldtwvel"]
+
+[ext_resource type="PackedScene" uid="uid://crocvdlmk8yr1" path="res://Scenes/Mobs/BartenderPun.tscn" id="1_j8caa"]
+[ext_resource type="Script" uid="uid://di5u0whaqiyjp" path="res://Resources/Custom/Enemy/Base/Enemy.gd" id="2_7vasp"]
+
+[resource]
+script = ExtResource("2_7vasp")
+scene = ExtResource("1_j8caa")
+cost = 4.0
+enemy_type = 3
+metadata/_custom_type_script = "uid://di5u0whaqiyjp"

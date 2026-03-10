@@ -47,20 +47,18 @@
 visibility_layer = 3
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
-base_max_speed = 200.0
-acceleration = 150.0
 drop_resistance = 2
 
 [node name="Texture" parent="." index="2" unique_id=382857461]
 texture = ExtResource("2_hnmsv")
 
-[node name="HealthComponent" parent="." index="4" unique_id=1758373275]
-max_health = 150
-armor = 0.5
+[node name="FootstepSounds" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="1" unique_id=1611482403]
+max_distance = 2000.0
 
 [node name="MoveToPointComponent" parent="AI" parent_id_path=PackedInt32Array(1365591205) index="0" unique_id=395370591]
 pathfind_update_rate = 0.2
 move_update_rate = 0.4
+retreat_speed_modifier = 0.5
 run_to_target_range = 250.0
 run_from_target_range = 130.0
 

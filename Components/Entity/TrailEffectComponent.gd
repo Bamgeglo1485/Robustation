@@ -15,6 +15,7 @@ var duplicates: Array
 @export var lifetime: float = 0.0
 @export var active: bool = true
 
+var ignore_time_scale: bool = false
 var lifetime_timer: float = 0.0
 var clean_timer: float = 0.0
 var autodelete_active: bool = false
@@ -37,7 +38,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if autodelete_active:
 		if lifetime_timer > 0:
-			lifetime_timer -= delta
+			if ignore_time_scale:
+				lifetime_timer -= delta / Engine.time_scale
+			else:
+				lifetime_timer -= delta
 			if lifetime_timer <= 0:
 				_on_lifetime_end()
 		

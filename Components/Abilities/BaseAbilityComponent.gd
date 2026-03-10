@@ -12,6 +12,7 @@ class_name BaseAbilityComponent extends Component
 @export var stop_sound: AudioStreamPlayer2D
 
 @export var ability_icon: TextureRect
+@export var ignore_time_scale: bool = false
 
 var active: bool = false
 var ability_timer: float = 0.0
@@ -26,7 +27,11 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if ability_timer > 0:
-		ability_timer -= delta
+		if ignore_time_scale:
+			var real_delta = delta / Engine.time_scale
+			ability_timer -= real_delta
+		else:
+			ability_timer -= delta
 		
 		if ability_icon and ability_delay != 0:
 			var progress_value = 1.0 - (float(ability_timer) / ability_delay)

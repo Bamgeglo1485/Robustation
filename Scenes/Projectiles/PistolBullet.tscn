@@ -10,13 +10,13 @@ height = 8.0
 
 [node name="Projectile" unique_id=676694476 instance=ExtResource("1_kf5wp")]
 
-[node name="ProjectileComponent" parent="." index="0" node_paths=PackedStringArray("texture")]
+[node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture")]
 texture = NodePath("../Texture")
 speed = 1500
-damage = 5
+damage = 2
 parriable = false
 
-[node name="CollisionShape2D" parent="ProjectileComponent" index="0"]
+[node name="CollisionShape2D" parent="ProjectileComponent" index="0" unique_id=1391622764]
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_kf5wp")
 

@@ -68,7 +68,7 @@ autostart = true
 [node name="Eye" type="CharacterBody2D" parent="." unique_id=1571758759]
 z_index = 1
 collision_layer = 16
-collision_mask = 0
+collision_mask = 512
 motion_mode = 1
 
 [node name="Texture" type="Sprite2D" parent="Eye" unique_id=2007548951]
@@ -111,7 +111,7 @@ metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
 [node name="Brain" type="CharacterBody2D" parent="." unique_id=1716066439]
 z_index = 1
 collision_layer = 16
-collision_mask = 0
+collision_mask = 512
 motion_mode = 1
 
 [node name="Texture" type="Sprite2D" parent="Brain" unique_id=5119715]
@@ -154,7 +154,7 @@ metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
 [node name="Heart" type="CharacterBody2D" parent="." unique_id=523662636]
 z_index = 1
 collision_layer = 16
-collision_mask = 0
+collision_mask = 512
 motion_mode = 1
 
 [node name="Texture" type="Sprite2D" parent="Heart" unique_id=1831369204]
@@ -197,7 +197,7 @@ metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
 [node name="Stomach" type="CharacterBody2D" parent="." unique_id=2136891988]
 z_index = 1
 collision_layer = 16
-collision_mask = 0
+collision_mask = 512
 motion_mode = 1
 
 [node name="Texture" type="Sprite2D" parent="Stomach" unique_id=1839001961]
@@ -240,7 +240,7 @@ metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
 [node name="Ears" type="CharacterBody2D" parent="." unique_id=1370736291]
 z_index = 1
 collision_layer = 16
-collision_mask = 0
+collision_mask = 512
 motion_mode = 1
 
 [node name="Texture" type="Sprite2D" parent="Ears" unique_id=1928315991]
@@ -283,7 +283,7 @@ metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
 [node name="Liver" type="CharacterBody2D" parent="." unique_id=145671700]
 z_index = 1
 collision_layer = 16
-collision_mask = 0
+collision_mask = 512
 motion_mode = 1
 
 [node name="Texture" type="Sprite2D" parent="Liver" unique_id=1730720956]
@@ -326,7 +326,7 @@ metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
 [node name="Kidney" type="CharacterBody2D" parent="." unique_id=1066121005]
 z_index = 1
 collision_layer = 16
-collision_mask = 0
+collision_mask = 512
 motion_mode = 1
 
 [node name="Texture" type="Sprite2D" parent="Kidney" unique_id=949012046]

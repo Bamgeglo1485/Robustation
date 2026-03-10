@@ -24,6 +24,17 @@ func _ready() -> void:
 		texture = random_textures.pick_random()
 	if random_color:
 		self_modulate = Color(randf_range(0,0.4), randf_range(0,0.4), randf_range(0,0.4))
+	
+	#var notifier: VisibleOnScreenNotifier2D = VisibleOnScreenNotifier2D.new()
+	#add_child.call_deferred(notifier)
+	#notifier.screen_entered.connect(_on_screen_entered)
+	#notifier.screen_exited.connect(_on_screen_exited)
 
 func change_sprite_direction(rect: Rect2):
 	region_rect = rect
+
+func _on_screen_entered():
+	visible = true
+
+func _on_screen_exited():
+	visible = false

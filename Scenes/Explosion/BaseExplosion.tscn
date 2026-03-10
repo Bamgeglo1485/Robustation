@@ -2,11 +2,15 @@
 
 [ext_resource type="Script" uid="uid://b8ixjn50v3a88" path="res://Scripts/ExplosionSystem.gd" id="1_cpk21"]
 [ext_resource type="PackedScene" uid="uid://bjqvcwxstx8u1" path="res://Scenes/Effects/Particles/Boom.tscn" id="2_a5ua4"]
-[ext_resource type="PackedScene" uid="uid://dmjnaimj7xbw1" path="res://Scenes/Effects/ExplosionEffect.tscn" id="2_cq02y"]
 [ext_resource type="PackedScene" uid="uid://do6wj3407tcik" path="res://Scenes/Effects/Particles/Soot.tscn" id="3_a5ua4"]
 [ext_resource type="Texture2D" uid="uid://yjigwd3i118j" path="res://Textures/Light/point_light.jpg" id="5_jqe0j"]
 [ext_resource type="Script" uid="uid://qpw7cn2mqx7i" path="res://Components/Entity/RotatingObjectComponent.gd" id="6_4t1bi"]
 [ext_resource type="Texture2D" uid="uid://wbxnpjl6pvxb" path="res://Textures/Light/double_light_cone.png" id="7_4t1bi"]
+[ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts/Effects/TimedDelete.gd" id="7_wv6j5"]
+[ext_resource type="Material" uid="uid://4yrd4354bvw7" path="res://Resources/Shaders/Explosion.tres" id="8_gfupr"]
+[ext_resource type="Script" uid="uid://tjlcu3a27wqd" path="res://Scripts/Effects/ShockwaveEffect.gd" id="9_nkr7b"]
+[ext_resource type="Script" uid="uid://qcmegh7138ug" path="res://Components/Entity/UniqueShaderComponent.gd" id="10_gwo8w"]
+[ext_resource type="AudioStream" uid="uid://ba7j68er83sfy" path="res://Resources/Audio/ExplosionRandom.tres" id="11_2x53i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a5ua4"]
 radius = 132.30646
@@ -19,14 +23,14 @@ point_count = 2
 [sub_resource type="CurveTexture" id="CurveTexture_c1ng1"]
 curve = SubResource("Curve_mgjcw")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_a5ua4"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ou2k1"]
 lifetime_randomness = 1.0
 particle_flag_disable_z = true
 spread = 180.0
 initial_velocity_max = 51.719997
 gravity = Vector3(0, 0, 0)
-linear_accel_min = 130.45
-linear_accel_max = 244.81999
+linear_accel_min = -42.530003
+linear_accel_max = 99.99999
 radial_accel_min = -100.0
 radial_accel_max = 99.99999
 scale_max = 5.0
@@ -35,8 +39,9 @@ scale_over_velocity_curve = SubResource("CurveTexture_c1ng1")
 hue_variation_min = -1.0
 hue_variation_max = -0.67
 
-[node name="BaseExplosion" type="Node2D" unique_id=890470773 node_paths=PackedStringArray("lightings")]
+[node name="BaseExplosion" type="Node2D" unique_id=890470773 node_paths=PackedStringArray("lightings", "main_lighting")]
 light_mask = 0
+z_index = 10
 script = ExtResource("1_cpk21")
 damage = 150.0
 fly_force = 700
@@ -44,6 +49,7 @@ fall_time = 1
 radius = 200
 ignore_faction = true
 lightings = [NodePath("Light"), NodePath("Light2"), NodePath("Light3"), NodePath("Light4")]
+main_lighting = NodePath("Light")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=251884086]
 collision_layer = 15
@@ -53,18 +59,14 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1183762416]
 shape = SubResource("CircleShape2D_a5ua4")
 
-[node name="GPUParticles2D" parent="." unique_id=668633620 instance=ExtResource("2_cq02y")]
-modulate = Color(3.5629182, 3.5629182, 3.5629182, 1)
-amount = 9000
-lifetime = 5.93
-process_material = SubResource("ParticleProcessMaterial_a5ua4")
-
 [node name="GPUParticles2D2" parent="." unique_id=621859249 instance=ExtResource("2_a5ua4")]
+light_mask = 0
 position = Vector2(-1, -1)
 emitting = false
 amount = 3
 
 [node name="GPUParticles2D3" parent="." unique_id=2131820347 instance=ExtResource("3_a5ua4")]
+light_mask = 0
 z_index = 1
 amount = 16
 lifetime = 125.12
@@ -76,7 +78,7 @@ position = Vector2(0, 9.536743e-07)
 color = Color(0.9963228, 0.39377716, 3.85046e-07, 1)
 energy = 0.0
 texture = ExtResource("5_jqe0j")
-texture_scale = 1.5
+texture_scale = 2.1
 
 [node name="Light2" type="PointLight2D" parent="." unique_id=1621261214]
 position = Vector2(0, -0.50000095)
@@ -116,3 +118,40 @@ texture = ExtResource("7_4t1bi")
 script = ExtResource("6_4t1bi")
 speed = 5
 metadata/_custom_type_script = "uid://qpw7cn2mqx7i"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=75207985]
+modulate = Color(16.1889, 16.1889, 16.1889, 1)
+z_index = 10
+amount = 1000
+lifetime = 1.74
+preprocess = 0.5
+speed_scale = 4.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ou2k1")
+script = ExtResource("7_wv6j5")
+
+[node name="Delete" type="Timer" parent="GPUParticles2D" unique_id=654438796]
+wait_time = 0.2
+one_shot = true
+autostart = true
+
+[node name="ColorRect" type="ColorRect" parent="GPUParticles2D" unique_id=1543119462]
+light_mask = 0
+material = ExtResource("8_gfupr")
+offset_left = -272.0
+offset_top = -263.0
+offset_right = 7.0
+offset_bottom = 9.0
+scale = Vector2(2, 2)
+color = Color(0, 0, 0, 0)
+script = ExtResource("9_nkr7b")
+
+[node name="UniqueShaderComponent" type="Node" parent="GPUParticles2D/ColorRect" unique_id=1245039691]
+script = ExtResource("10_gwo8w")
+metadata/_custom_type_script = "uid://qcmegh7138ug"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="GPUParticles2D" unique_id=351949433]
+stream = ExtResource("11_2x53i")
+autoplay = true
+
+[connection signal="timeout" from="GPUParticles2D/Delete" to="GPUParticles2D" method="_on_delete_timeout"]

@@ -19,6 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://b7l65hp5rr2pt" path="res://Resources/Audio/BodyFallRandom.tres" id="17_g8los"]
 [ext_resource type="OccluderPolygon2D" uid="uid://fjhiibh6ji2l" path="res://Resources/Occluders/HumanOccluder.tres" id="18_6uxej"]
 [ext_resource type="Script" uid="uid://bsicagw5u742w" path="res://Components/Mobs/StaminaComponent.gd" id="19_pns3t"]
+[ext_resource type="Script" uid="uid://kxk8t3aa4hjf" path="res://Components/Mobs/WeaponSpriteComponent.gd" id="20_vr1aj"]
 
 [node name="Mob" type="CharacterBody2D" unique_id=660687485]
 physics_interpolation_mode = 1
@@ -93,6 +94,7 @@ stream = ExtResource("17_g8los")
 [node name="FootstepSounds" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1611482403]
 stream = ExtResource("16_g8los")
 volume_db = 5.591
+max_distance = 96.0
 max_polyphony = 10
 
 [node name="Area2D" type="Area2D" parent="." unique_id=151901461]
@@ -110,3 +112,27 @@ occluder = ExtResource("18_6uxej")
 [node name="StaminaComponent" type="Node" parent="." unique_id=859597356]
 script = ExtResource("19_pns3t")
 metadata/_custom_type_script = "uid://bsicagw5u742w"
+
+[node name="WeaponSpriteComponent" type="Sprite2D" parent="." unique_id=1615635183 node_paths=PackedStringArray("up_position", "right_position", "down_position", "left_position")]
+script = ExtResource("20_vr1aj")
+up_position = NodePath("Up")
+right_position = NodePath("Right")
+down_position = NodePath("Down")
+left_position = NodePath("Left")
+up_position_below_texture = true
+left_position_below_texture = true
+metadata/_custom_type_script = "uid://kxk8t3aa4hjf"
+
+[node name="Down" type="Marker2D" parent="WeaponSpriteComponent" unique_id=504906081]
+position = Vector2(-7, 2)
+
+[node name="Up" type="Marker2D" parent="WeaponSpriteComponent" unique_id=520433237]
+position = Vector2(6, 2)
+
+[node name="Left" type="Marker2D" parent="WeaponSpriteComponent" unique_id=1776630653]
+position = Vector2(-5, 2)
+
+[node name="Right" type="Marker2D" parent="WeaponSpriteComponent" unique_id=141043002]
+position = Vector2(-2, 2)
+
+[node name="ArmPoints" type="Node2D" parent="." unique_id=233933637]

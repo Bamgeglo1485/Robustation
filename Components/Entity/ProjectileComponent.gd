@@ -94,9 +94,6 @@ func _physics_process(delta: float) -> void:
 				parent.global_rotation = direction
 			if _direction.length_squared() < 20:
 				_delete()
-				if weapon:
-					weapon.bullets += instant_bullets_recover_to_sender
-					weapon._cooldown()
 				return
 			elif max_distance_from_sender != 0 and _direction.length_squared() > max_distance_from_sender and sender_mob_mover:
 				sender_mob_mover.throw(_direction, parent.velocity.length() * 2)
@@ -110,6 +107,10 @@ func _physics_process(delta: float) -> void:
 	parent.move_and_collide(parent.velocity * delta)
 
 func _delete() -> void:
+	if weapon:
+		weapon.bullets += instant_bullets_recover_to_sender
+		weapon._cooldown()
+	
 	parriable = false
 	moving = false
 	deleted = true
@@ -151,7 +152,7 @@ func explode() -> void:
 		scene.add_child(instance)
 
 func _on_body_entered(body: Node2D) -> void:
-	if !body or !can_hit:
+	if !body or !can_hit or body == parent:
 		return
 	if can_parry_weapon and body.has_node("ProjectileComponent"):
 		var _direction: Vector2 = -body.velocity

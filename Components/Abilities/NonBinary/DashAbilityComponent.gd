@@ -5,7 +5,7 @@ class_name DashAbilityComponent extends Component
 @export var overdose_refuel_sound: AudioStreamPlayer2D
 @export var overdose_refuel_damage: int = 5
 @export var overdose_refuel_damage_time: int = 8
-@export var overdose_refuel_count: float = 1.5
+@export var overdose_refuel_count: float = 3.5
 @export var ability_icon: TextureRect
 
 @export var cooldown: bool = false
@@ -190,5 +190,5 @@ func _on_shoot(emitter: Node2D, _weapon: Weapon, direction: Vector2, projectile:
 	var projectile_component: ProjectileComponent = projectile.get_node_or_null("ProjectileComponent")
 	if !projectile_component:
 		return
-	
+	await projectile.ready
 	parry_weapon.parry_projectile(projectile, projectile_component, direction)

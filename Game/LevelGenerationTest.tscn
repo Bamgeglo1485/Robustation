@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://brrvrfsr8kitx" path="res://Resources/Levels/MaintenceDungeon.tres" id="3_e1wfd"]
 [ext_resource type="TileSet" uid="uid://bc7bghcv8144y" path="res://Resources/TileMaps/Tiles.tres" id="4_82w5q"]
 [ext_resource type="TileSet" uid="uid://c7mk0aiygychu" path="res://Resources/TileMaps/Walls.tres" id="5_e1wfd"]
-[ext_resource type="PackedScene" uid="uid://roeennw572p2" path="res://Scenes/Mobs/PlayerGreytide.tscn" id="6_82w5q"]
+[ext_resource type="PackedScene" uid="uid://roeennw572p2" path="res://Scenes/Mobs/Player/PlayerGreytide.tscn" id="6_82w5q"]
 
 [node name="Game" type="Node2D" unique_id=49398453]
 script = ExtResource("1_n33q2")

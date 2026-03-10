@@ -1,49 +1,50 @@
+## The component responsible for movement, falling, and flight of CharacterBody2D
 class_name MobMoverComponent extends Component
 
-# Component to animate parent with tweens
+## Component to animate parent with tweens
 @onready var animation_component: AnimationComponent = parent.get_node_or_null("AnimationComponent")
 
 @export var base_max_speed: float = 300.0
 @onready var max_speed: float = base_max_speed
 @export var acceleration: float = 100.0
 @export var friction: float = 700.0
-# Minor modifiers. To set just add key to dictionary with modifier value (minor_modifiers["erectile dysfunction"] = 0.5
+## Minor modifiers. To set just add key to dictionary with modifier value (minor_modifiers["erectile dysfunction"] = 0.5
 @export var minor_speed_modifiers: Dictionary
-@export var minor_speed_modifier: float
-# Master speed modifier
+var minor_speed_modifier: float
+## Master speed modifier
 @export var speed_modifier: float = 1.0
-# The direction in which the body goes
+## The direction in which the body goes
 var direction: Vector2 = Vector2.ZERO
 
-# Move speed when fallen
+## Move speed when fallen
 @export var fallen_speed_modifier: float = 0.3
 @export var fall_delay_modifier: float = 1.0
 @export var can_fall: bool = true
-# Can it fall if another body hits it
+## Can it fall if another body hits it
 @export var can_fall_from_body: bool = true
 @export var movement_blocked: bool = false
-# Toggles the ability to bypass other bodies
+## Toggles the ability to bypass other bodies
 @export var set_navigation_velocity: bool = false
 
-# An area to crash into and knock down other bodies while flying.
+## An area to crash into and knock down other bodies while flying.
 @export var fly_impact_area: Area2D
 var flying: bool = false
 var base_fly_speed: float = 0.0
 var fly_speed: float = 0.0
 var fly_direction: Vector2 = Vector2.ZERO
-# The speed at which the flight is forced to end
+## The speed at which the flight is forced to end
 var fly_stop_speed: float = 200.0
 var fly_modifier: float = 1.0
-# The body that made fly, actually damager
+## The body that made fly, actually damager
 var fly_source: Node2D
 
 @export var body_fall_sound: AudioStreamPlayer2D
 @export var fall_effect: PackedScene = preload("res://Scenes/Effects/Particles/Fall.tscn")
-# For example, if the toolbox has drop_force = 3, and the body has drop_resistance = 4, then the toolbox cannot make it fall.
+## For example, if the toolbox has drop_force = 3, and the body has drop_resistance = 4, then the toolbox cannot make it fall.
 @export var drop_resistance: int = 0
 var fallen: bool = false
 var force_fallen: bool = false
-# The time it takes for the body to rise
+## The time it takes for the body to rise
 var standing_delay: float = 0.0
 
 @onready var navigation_agent: NavigationAgent2D = parent.get_node_or_null("NavigationAgent")
@@ -52,6 +53,10 @@ var standing_delay: float = 0.0
 # Non binary animation tweens
 var walking_tween: Tween
 var drop_tween: Tween
+
+# Cache
+var velocity: Vector2
+var speed: float
 
 func _ready() -> void:
 	if fly_impact_area:
@@ -78,8 +83,8 @@ func _move(delta: float) -> void:
 		_fly_movement()
 		return
 	
-	var velocity: Vector2 = parent.velocity
-	var speed: float = velocity.length()
+	velocity = parent.velocity
+	speed = velocity.length()
 	
 	if direction.is_zero_approx():
 		# If the body does not go somewhere, we apply friction

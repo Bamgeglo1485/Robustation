@@ -19,7 +19,7 @@ func _ready() -> void:
 		can_teleport_timer.timeout.connect(_on_kick_teleport_timer_timeout)
 	if target_clear_timer:
 		target_clear_timer.timeout.connect(_on_kick_target_timer_timeout)
-	
+
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("movement_ability"):
 		kick()
@@ -28,22 +28,24 @@ func kick() -> void:
 	var targets = {}
 	targets = await kick_weapon.attack(self, false)
 	if targets and !targets.is_empty():
+		if parent_health_component:
+			parent_health_component.INVINCIBLE = true
+		can_teleport_timer.start()
+		target_clear_timer.start()
+		can_teleport = false
 		for target in targets.values():
 			if target is not CharacterBody2D:
 				continue
+			
+			var projectile_comp: ProjectileComponent = target.get_node_or_null("ProjectileComponent")
+			if projectile_comp and !projectile_comp.parriable:
+				continue
+			
 			kick_target = target
-			if parent.has_node("HealthComponent"):
-				parent.get_node("HealthComponent").INVINCIBLE = true
 			
 			if last_kick_target != target:
 				last_kick_target = target
 				kicks = 0
-			can_teleport = false
-		
-		can_teleport_timer.start()
-		target_clear_timer.start()
-		return
-	
 	elif kick_target and can_teleport and kicks < max_kicks:
 		kick_teleport()
 
@@ -52,6 +54,11 @@ func kick_teleport() -> void:
 		kick_target = null
 		return
 	
+	if kick_target:
+		var mouse_direction = (parent.get_global_mouse_position() - parent.global_position).normalized()
+		var teleport_position = kick_target.global_position + -mouse_direction * 20
+		parent.global_position = teleport_position
+	
 	var target_projectile_comp: ProjectileComponent = kick_target.get_node_or_null("ProjectileComponent")
 	if kick_target != null and !target_projectile_comp:
 		var direction = (kick_target.global_position - parent.global_position)
@@ -59,14 +66,8 @@ func kick_teleport() -> void:
 		kick_weapon._melee_attack_target(kick_target, direction)
 		kick_weapon._cooldown()
 	elif target_projectile_comp:
-		if !target_projectile_comp.delete_on_hit:
-			return
-		kick_target = null
-	
-	var mouse_direction = (parent.get_global_mouse_position() - parent.global_position).normalized()
-	var teleport_position = kick_target.global_position + -mouse_direction * 20
-	
-	parent.global_position = teleport_position
+		if target_projectile_comp.delete_on_hit:
+			kick_target = null
 	
 	if parent_health_component:
 		parent_health_component.INVINCIBLE = true

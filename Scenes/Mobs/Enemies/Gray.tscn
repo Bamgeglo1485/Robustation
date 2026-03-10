@@ -1,0 +1,142 @@
+[gd_scene format=3 uid="uid://dugkdpbsswb2d"]
+
+[ext_resource type="PackedScene" uid="uid://c0eulucj1dtco" path="res://Scenes/Mobs/Base/BaseEnemy.tscn" id="1_j0lau"]
+[ext_resource type="Texture2D" uid="uid://cylw1t8k1agdu" path="res://Textures/Mobs/Mobs/cargo.png" id="2_e8lgp"]
+[ext_resource type="Texture2D" uid="uid://bycgr8sglyoi3" path="res://Textures/Mobs/Mobs/passanger.png" id="3_ei4qd"]
+[ext_resource type="Texture2D" uid="uid://cryexxr4x761f" path="res://Textures/Mobs/Mobs/Hair/undercutright.png" id="4_fb4jx"]
+[ext_resource type="Script" uid="uid://bqvdlb3r03cs0" path="res://Components/Visual/DirectionalSpriteComponent.gd" id="5_6dpsf"]
+[ext_resource type="Texture2D" uid="uid://t8go84dailgi" path="res://Textures/Mobs/Mobs/Hair/shorthairg.png" id="6_nqxm1"]
+[ext_resource type="Texture2D" uid="uid://fx8bg7p2wfff" path="res://Textures/Mobs/Mobs/Hair/80s.png" id="7_umo1f"]
+[ext_resource type="Texture2D" uid="uid://exreeul6rla6" path="res://Textures/Mobs/Mobs/Hair/bald.png" id="8_t6gyr"]
+[ext_resource type="Texture2D" uid="uid://b46je4cwbysn6" path="res://Textures/Mobs/Mobs/Hair/bun3.png" id="9_t6qnj"]
+[ext_resource type="Texture2D" uid="uid://boij24x83l0lv" path="res://Textures/Mobs/Mobs/Hair/afro2.png" id="10_qbu4j"]
+[ext_resource type="Texture2D" uid="uid://b44oghif1lc4g" path="res://Textures/Mobs/Mobs/Hair/curls.png" id="11_ubojo"]
+[ext_resource type="Texture2D" uid="uid://yqtajeusof8p" path="res://Textures/Mobs/Mobs/Hair/flair.png" id="12_vseh5"]
+[ext_resource type="Texture2D" uid="uid://lcbe8war4xp7" path="res://Textures/Mobs/Mobs/Hair/spiky.png" id="13_tbj3n"]
+[ext_resource type="Texture2D" uid="uid://ci84jx3iuyn21" path="res://Textures/Mobs/Mobs/Hair/bobcut.png" id="14_r1g2j"]
+[ext_resource type="Texture2D" uid="uid://drxdjuw45awor" path="res://Textures/Mobs/Mobs/Hair/gentle.png" id="15_c37sb"]
+[ext_resource type="Texture2D" uid="uid://dpr87culdu5mg" path="res://Textures/Mobs/Mobs/Hair/swept2.png" id="16_mn8tn"]
+[ext_resource type="Texture2D" uid="uid://b1r30o42v7kyr" path="res://Textures/Mobs/Mobs/Hair/bobcurl.png" id="17_y14om"]
+[ext_resource type="Texture2D" uid="uid://dlu5n8uy6npxo" path="res://Textures/Mobs/Mobs/Hair/joestar.png" id="18_fgfyo"]
+[ext_resource type="Texture2D" uid="uid://k32gxv505ucy" path="res://Textures/Mobs/Mobs/Hair/sidecut.png" id="19_gyac8"]
+[ext_resource type="Texture2D" uid="uid://dab0prsqfymf6" path="res://Textures/Mobs/Mobs/Hair/halfbang.png" id="20_e85ew"]
+[ext_resource type="Texture2D" uid="uid://c2j84lfhydlo7" path="res://Textures/Mobs/Mobs/Hair/bedheadv2.png" id="21_f5tam"]
+[ext_resource type="Texture2D" uid="uid://4rew8bctbhwt" path="res://Textures/Mobs/Mobs/Hair/undercutleft.png" id="22_cge0e"]
+[ext_resource type="Texture2D" uid="uid://cvtrwkf34me6c" path="res://Textures/Mobs/Mobs/Hair/classicmulder.png" id="23_p4khf"]
+[ext_resource type="Script" uid="uid://hv0g6akh0ftn" path="res://Components/Mobs/RandomizeMobMoverComponent.gd" id="24_vgswd"]
+[ext_resource type="Script" uid="uid://bd0gbdhbjn7xx" path="res://Components/Weapons/RandomWeaponSelectorComponent.gd" id="25_jb7sk"]
+[ext_resource type="Script" uid="uid://6b7bcparwq17" path="res://Components/Weapons/MeleeWeaponComponent.gd" id="26_g4qcg"]
+[ext_resource type="Texture2D" uid="uid://b7qm5y0prnn7g" path="res://Textures/Weapons/Crowbar/inhand-right.png" id="27_4hh67"]
+[ext_resource type="Texture2D" uid="uid://bgixpaxb82hij" path="res://Textures/Weapons/Crowbar/crowbar.png" id="28_f4xur"]
+[ext_resource type="AudioStream" uid="uid://blc0o0577akc7" path="res://Audio/Weapon/Hit/smash.ogg" id="29_6jlyw"]
+[ext_resource type="AudioStream" uid="uid://eogckfs15aph" path="res://Audio/Weapon/miss.ogg" id="30_k5qt2"]
+[ext_resource type="AudioStream" uid="uid://djwhsufysh1dq" path="res://Resources/Audio/PunchRandom.tres" id="31_jhn3y"]
+[ext_resource type="Texture2D" uid="uid://1yvrhqvfqqus" path="res://Textures/Weapons/Toolbox/toolbox_inhand.png" id="32_mlaq1"]
+[ext_resource type="Texture2D" uid="uid://dverpu5mv40au" path="res://Textures/Weapons/Toolbox/toolbox.png" id="33_xklue"]
+[ext_resource type="Script" uid="uid://da2q40ragr5wk" path="res://Components/Mobs/NPC/BuddyComponent.gd" id="34_f5hbr"]
+[ext_resource type="Script" uid="uid://bdca2wo1kubsv" path="res://Components/Mobs/SpawnPerkOnDeathComponent.gd" id="35_tokfx"]
+
+[node name="Assistant" unique_id=1270222458 instance=ExtResource("1_j0lau")]
+visibility_layer = 3
+
+[node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
+base_max_speed = 200
+acceleration = 50
+friction = 1300
+
+[node name="Texture" parent="." index="2" unique_id=382857461]
+random_textures = Array[Texture2D]([ExtResource("2_e8lgp"), ExtResource("3_ei4qd")])
+
+[node name="MoveToPointComponent" parent="AI" parent_id_path=PackedInt32Array(1365591205) index="0" unique_id=395370591]
+pathfind_update_rate = 0.2
+run_to_target_range = 250.0
+run_from_target_range = 130.0
+
+[node name="Hair" type="Sprite2D" parent="." index="15" unique_id=927075308]
+texture = ExtResource("4_fb4jx")
+offset = Vector2(0, -2)
+region_enabled = true
+script = ExtResource("5_6dpsf")
+random_textures = Array[Texture2D]([ExtResource("6_nqxm1"), ExtResource("7_umo1f"), ExtResource("8_t6gyr"), ExtResource("9_t6qnj"), ExtResource("10_qbu4j"), ExtResource("11_ubojo"), ExtResource("12_vseh5"), ExtResource("13_tbj3n"), ExtResource("14_r1g2j"), ExtResource("15_c37sb"), ExtResource("16_mn8tn"), ExtResource("17_y14om"), ExtResource("18_fgfyo"), ExtResource("19_gyac8"), ExtResource("20_e85ew"), ExtResource("21_f5tam"), ExtResource("22_cge0e"), ExtResource("23_p4khf"), ExtResource("4_fb4jx")])
+random_color = true
+metadata/_custom_type_script = "uid://bqvdlb3r03cs0"
+
+[node name="RandomizeMobMoverComponent" type="Node" parent="." index="16" unique_id=831758902]
+script = ExtResource("24_vgswd")
+randomize_multiplier_min = 0.85
+randomize_multiplier_max = 1.2
+metadata/_custom_type_script = "uid://hv0g6akh0ftn"
+
+[node name="RandomWeaponSelectorComponent" type="Node" parent="." index="17" unique_id=1846898249 node_paths=PackedStringArray("weapons_to_select")]
+script = ExtResource("25_jb7sk")
+weapons_to_select = [NodePath("Crowbar"), NodePath("Fist"), NodePath("Toolbox")]
+change_behavior = true
+metadata/_custom_type_script = "uid://bd0gbdhbjn7xx"
+
+[node name="Crowbar" type="Node" parent="RandomWeaponSelectorComponent" index="0" unique_id=30503364 node_paths=PackedStringArray("attack_sound", "miss_sound")]
+script = ExtResource("26_g4qcg")
+damage = 15
+attack_sound = NodePath("HitSound")
+miss_sound = NodePath("MissSound")
+throw_speed = 400
+throw_stop_speed = 300
+cooldown_delay = 0.25
+swing_delay = 0.25
+equipped_texture = ExtResource("27_4hh67")
+icon_texture = ExtResource("28_f4xur")
+attack_rotation_multiplier = 0.5
+attack_shift_multiplier = 0.7
+metadata/_custom_type_script = "uid://6b7bcparwq17"
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/Crowbar" index="0" unique_id=1629730960]
+stream = ExtResource("29_6jlyw")
+
+[node name="MissSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/Crowbar" index="1" unique_id=69188948]
+stream = ExtResource("30_k5qt2")
+
+[node name="Fist" type="Node" parent="RandomWeaponSelectorComponent" index="1" unique_id=1616782744 node_paths=PackedStringArray("attack_sound", "miss_sound")]
+script = ExtResource("26_g4qcg")
+damage = 5
+attack_sound = NodePath("HitSound")
+miss_sound = NodePath("MissSound")
+throw_stop_speed = 200
+cooldown_delay = 0.1
+swing_delay = 0.2
+attack_rotation_multiplier = 0.5
+attack_shift_multiplier = 0.0
+parriable = false
+metadata/_custom_type_script = "uid://6b7bcparwq17"
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/Fist" index="0" unique_id=1360764065]
+stream = ExtResource("31_jhn3y")
+
+[node name="MissSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/Fist" index="1" unique_id=1221566427]
+stream = ExtResource("30_k5qt2")
+
+[node name="Toolbox" type="Node" parent="RandomWeaponSelectorComponent" index="2" unique_id=2011423731 node_paths=PackedStringArray("attack_sound", "miss_sound")]
+script = ExtResource("26_g4qcg")
+damage = 30
+stamina_damage = 20
+attack_sound = NodePath("HitSound")
+miss_sound = NodePath("MissSound")
+cooldown_delay = 0.5
+equipped_texture = ExtResource("32_mlaq1")
+icon_texture = ExtResource("33_xklue")
+metadata/_custom_type_script = "uid://6b7bcparwq17"
+
+[node name="MissSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/Toolbox" index="0" unique_id=1937837893]
+stream = ExtResource("30_k5qt2")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/Toolbox" index="1" unique_id=303361046]
+stream = ExtResource("29_6jlyw")
+
+[node name="BuddyComponent" type="Node" parent="." index="20" unique_id=2046809544]
+script = ExtResource("34_f5hbr")
+buddy_group = "Assistant"
+rage_when_buddy_dead = false
+metadata/_custom_type_script = "uid://da2q40ragr5wk"
+
+[node name="SpawnPerkOnDeathComponent" type="Node" parent="." index="21" unique_id=261117993]
+script = ExtResource("35_tokfx")
+chance = 0.1
+metadata/_custom_type_script = "uid://bdca2wo1kubsv"

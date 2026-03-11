@@ -6,7 +6,7 @@ enum Direction {
 	LEFT = 3,
 	UP = 4}
 
-@export var direction: Direction = Direction.RIGHT
+@export var direction: Direction = Direction.DOWN
 
 signal direction_changed(new_rect: Rect2)
 
@@ -16,6 +16,7 @@ func look_at_direction(look_direction: Vector2) -> Direction:
 	angle_deg = fmod(angle_deg + 360, 360)
 	
 	var rect: Rect2
+	var prev_dir: Direction = direction
 	
 	if angle_deg >= 315 or angle_deg < 45:
 		rect = Rect2(0, 32, 32, 32)
@@ -30,7 +31,8 @@ func look_at_direction(look_direction: Vector2) -> Direction:
 		rect = Rect2(32, 0, 32, 32)
 		direction = Direction.UP
 	
-	change_rect(rect)
+	if direction != prev_dir:
+		change_rect(rect)
 	return direction
 
 func change_rect(rect) -> void:

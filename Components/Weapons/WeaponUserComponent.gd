@@ -1,6 +1,6 @@
 class_name WeaponUserComponent extends Component
 
-@onready var weapon_texture: DirectionalSprite = parent.get_node_or_null("WeaponTexture")
+@onready var weapon_sprite: WeaponSpriteComponent = parent.get_node_or_null("Texture").get_node_or_null("WeaponSpriteComponent")
 @onready var mob_mover_component: MobMoverComponent = parent.get_node_or_null("MobMoverComponent")
 
 @export var selected_weapon: Weapon : set = select_weapon
@@ -25,8 +25,8 @@ func force_select_weapon(new_weapon: Weapon):
 	selected_weapon = new_weapon
 	selected_weapon.timers_timescaled = timers_timescaled
 	
-	if selected_weapon.equipped_texture and weapon_texture:
-		weapon_texture.texture = selected_weapon.equipped_texture
+	if selected_weapon.equipped_texture and weapon_sprite and weapon_sprite.weapon_texture:
+		weapon_sprite.change_weapon_texture(selected_weapon.equipped_texture, selected_weapon.icon_texture, selected_weapon.equipped_scale)
 
 func select_weapon(new_weapon: Weapon) -> void:
 	if ignore_setter:

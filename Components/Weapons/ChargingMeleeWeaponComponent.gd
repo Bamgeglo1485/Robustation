@@ -13,7 +13,7 @@ class_name ChargingMeleeWeaponComponent extends MeleeWeapon
 var charging: bool = false
 var charge: float = 0
 var npc: bool = true
-@export var weapon_inhand_texture: DirectionalSprite
+@export var weapon_inhand_texture: Sprite2D
 var player_weapon_user: PlayerWeaponUserComponent
 var fullcharge: bool = false
 

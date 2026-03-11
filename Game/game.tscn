@@ -4,6 +4,7 @@
 [ext_resource type="Environment" uid="uid://d2fbug66o4pw7" path="res://DemoTrash/environment.tres" id="2_7gi1t"]
 [ext_resource type="PackedScene" uid="uid://roeennw572p2" path="res://Scenes/Mobs/Player/PlayerGreytide.tscn" id="3_fsxsm"]
 [ext_resource type="Script" uid="uid://bo7lklhepnuja" path="res://Scripts/fps.gd" id="4_glinl"]
+[ext_resource type="PackedScene" uid="uid://vjubfbb1hjee" path="res://Scenes/Mobs/Enemies/Tider.tscn" id="4_rpdke"]
 [ext_resource type="Script" uid="uid://clfjtp26jetey" path="res://Components/Player/RestartComponent.gd" id="5_72g0p"]
 [ext_resource type="Texture2D" uid="uid://ctmvqt423d0il" path="res://Textures/Parallax/Space/XenoParallaxNeb.png" id="6_4lqr4"]
 [ext_resource type="TileSet" uid="uid://c7mk0aiygychu" path="res://Resources/TileMaps/Walls.tres" id="7_qlwvw"]
@@ -11,10 +12,37 @@
 [ext_resource type="Texture2D" uid="uid://cf2mkb22grqmy" path="res://Textures/Parallax/Space/layer2.png" id="9_33n3b"]
 [ext_resource type="Script" uid="uid://b1vs1lh4jku4h" path="res://Components/Level/ArenaComponent.gd" id="10_glinl"]
 [ext_resource type="Script" uid="uid://di5u0whaqiyjp" path="res://Resources/Custom/Enemy/Base/Enemy.gd" id="11_72g0p"]
-[ext_resource type="Resource" uid="uid://cou375htkckp8" path="res://Resources/Custom/Enemy/Assistant.tres" id="12_4lqr4"]
-[ext_resource type="Resource" uid="uid://domnm43en2b32" path="res://Resources/Custom/Enemy/Cadet.tres" id="13_72g0p"]
-[ext_resource type="Resource" uid="uid://cwxeoldtwvel" path="res://Resources/Custom/Enemy/BarPun.tres" id="14_rpdke"]
-[ext_resource type="Resource" uid="uid://cy0o6q7rklt6r" path="res://Resources/Custom/Enemy/Botanist.tres" id="15_33n3b"]
+[ext_resource type="PackedScene" uid="uid://d2pxx2a2ne1q2" path="res://Scenes/Mobs/Cadet.tscn" id="13_qlwvw"]
+[ext_resource type="PackedScene" uid="uid://crocvdlmk8yr1" path="res://Scenes/Mobs/BartenderPun.tscn" id="14_rpdke"]
+[ext_resource type="PackedScene" uid="uid://cxi2gla87no36" path="res://Scenes/Mobs/Botanist.tscn" id="15_33n3b"]
+[ext_resource type="PackedScene" uid="uid://dugkdpbsswb2d" path="res://Scenes/Mobs/Enemies/Gray.tscn" id="16_rpdke"]
+
+[sub_resource type="Resource" id="Resource_rxmp4"]
+script = ExtResource("11_72g0p")
+scene = ExtResource("4_rpdke")
+cost = 1.0
+metadata/_custom_type_script = "uid://di5u0whaqiyjp"
+
+[sub_resource type="Resource" id="Resource_qyr8x"]
+script = ExtResource("11_72g0p")
+scene = ExtResource("13_qlwvw")
+cost = 2.0
+enemy_type = 1
+metadata/_custom_type_script = "uid://di5u0whaqiyjp"
+
+[sub_resource type="Resource" id="Resource_ss60k"]
+script = ExtResource("11_72g0p")
+scene = ExtResource("14_rpdke")
+cost = 4.0
+enemy_type = 3
+metadata/_custom_type_script = "uid://di5u0whaqiyjp"
+
+[sub_resource type="Resource" id="Resource_2cxdh"]
+script = ExtResource("11_72g0p")
+scene = ExtResource("15_33n3b")
+cost = 3.0
+enemy_type = 2
+metadata/_custom_type_script = "uid://di5u0whaqiyjp"
 
 [node name="Game" type="Node2D" unique_id=1049691661]
 physics_interpolation_mode = 2
@@ -127,6 +155,9 @@ texture_scale = 7.0
 
 [node name="ArenaComponent" type="Node" parent="." unique_id=1550270859]
 script = ExtResource("10_glinl")
-available_enemies = Array[ExtResource("11_72g0p")]([ExtResource("12_4lqr4"), ExtResource("13_72g0p"), ExtResource("14_rpdke"), ExtResource("15_33n3b")])
+available_enemies = Array[ExtResource("11_72g0p")]([SubResource("Resource_rxmp4"), SubResource("Resource_qyr8x"), SubResource("Resource_ss60k"), SubResource("Resource_2cxdh")])
 spawn_positions = Array[Vector2]([Vector2(-930, 21), Vector2(989, 21)])
 metadata/_custom_type_script = "uid://b1vs1lh4jku4h"
+
+[node name="Assistant" parent="." unique_id=1270222458 instance=ExtResource("16_rpdke")]
+position = Vector2(-201, -222)

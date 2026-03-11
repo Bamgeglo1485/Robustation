@@ -32,7 +32,7 @@ func reflect(attacker: PhysicsBody2D, weapon: MeleeWeapon) -> void:
 	if !attacker or !weapon:
 		return
 	var direction: Vector2 = attacker.global_position - parent.global_position
-	weapon._melee_attack_target(attacker, direction, false, false)
+	weapon._melee_attack_target(attacker, direction, false)
 	
 	if reflect_sound_player:
 		reflect_sound_player.play()

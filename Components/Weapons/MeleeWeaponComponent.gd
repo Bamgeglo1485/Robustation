@@ -3,7 +3,6 @@ class_name MeleeWeapon extends Weapon
 @export var damage: int = 10
 @export var stamina_damage: int = 0
 @export var attack_range: int = 64
-@export var slash_effect: PackedScene = preload("res://Scenes/Effects/Slash.tscn")
 @export var ignore_armor: bool = false
 
 @export var delayed_damage: int = 0
@@ -20,6 +19,7 @@ class_name MeleeWeapon extends Weapon
 @export var can_parry_weapon: bool = true
 @export var parry_force: float = 0
 
+@export var attack_animation_speed: float = 0.3
 @export var throw_speed: int = 300
 @export var throw_stop_speed: int = 10
 @export var drop_resistance_force: int = 1
@@ -28,6 +28,7 @@ class_name MeleeWeapon extends Weapon
 @onready var base_throw_speed: float = throw_speed
 @onready var base_self_throw_speed: float = self_throw_speed
 @onready var parent_mob_mover_component: MobMoverComponent
+@export var straight_attack_animation: bool = false
 
 @export_category("Modify damage by speed")
 @export var modify_damage_by_speed: bool = false
@@ -128,16 +129,14 @@ func _try_melee_attack(direction) -> Dictionary:
 				@warning_ignore("narrowing_conversion")
 				self_throw_speed = base_self_throw_speed
 	
+	_attack_animation(direction)
 	return _targets
 
 func _melee_attack_target(target: Node2D, direction: Vector2, 
-multiple_attack: bool = false, slash: bool = true) -> bool:
-	if slash_effect and direction and slash:
-		var _slash_effect: Node = slash_effect.instantiate()
-		_slash_effect.global_rotation = direction.angle() + 90
-		parent.add_child(_slash_effect)
-		if _slash_effect.has_node("AnimationPlayer"):
-			_slash_effect.get_node("AnimationPlayer").play("Slash")
+multiple_attack: bool = false) -> bool:
+	
+	if !multiple_attack:
+		_attack_animation(direction)
 	
 	if (target and (target.global_position - parent.global_position).length() > attack_range):
 		target = null
@@ -232,6 +231,12 @@ func parry_weapon(weapon, target) -> void:
 	if target_mob_mover:
 		target_mob_mover.throw(-direction, 300, parent, 50, true, self_throw_rewrite)
 		target_mob_mover.drop(0.5)
+
+func _attack_animation(direction):
+	if !weapon_sprite:
+		return
+	
+	weapon_sprite.slash_animation(direction, attack_animation_speed)
 
 func parry_projectile(projectile: Node2D, projectile_component: ProjectileComponent, direction: Vector2) -> void:
 	if !projectile_component.parriable:

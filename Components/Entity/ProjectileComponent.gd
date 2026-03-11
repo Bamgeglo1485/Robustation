@@ -64,7 +64,7 @@ func _ready() -> void:
 	if shooter:
 		shooter_faction = shooter.get_node_or_null("FactionComponent")
 	
-	if max_distance_from_sender != 0:
+	if max_distance_from_sender != 0 and shooter:
 		max_distance_from_sender *= max_distance_from_sender
 		sender_mob_mover = shooter.get_node_or_null("MobMoverComponent")
 	
@@ -107,7 +107,7 @@ func _physics_process(delta: float) -> void:
 	parent.move_and_collide(parent.velocity * delta)
 
 func _delete() -> void:
-	if weapon:
+	if weapon and return_to_sender:
 		weapon.bullets += instant_bullets_recover_to_sender
 		weapon._cooldown()
 	

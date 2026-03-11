@@ -48,6 +48,25 @@ region_rect = Rect2(0, 0, 32, 32)
 script = ExtResource("12_g8los")
 metadata/_custom_type_script = "uid://bqvdlb3r03cs0"
 
+[node name="WeaponSpriteComponent" type="Node2D" parent="Texture" unique_id=567988851 node_paths=PackedStringArray("up_position", "right_position", "down_position", "left_position", "weapon_texture", "attack_texture")]
+script = ExtResource("20_vr1aj")
+up_position = NodePath("../../ArmPoints/Up")
+right_position = NodePath("../../ArmPoints/Right")
+down_position = NodePath("../../ArmPoints/Down")
+left_position = NodePath("../../ArmPoints/Left")
+up_position_below_texture = true
+left_position_below_texture = true
+weapon_texture = NodePath("WeaponSprite")
+attack_texture = NodePath("AttackSprite")
+metadata/_custom_type_script = "uid://kxk8t3aa4hjf"
+
+[node name="WeaponSprite" type="Sprite2D" parent="Texture/WeaponSpriteComponent" unique_id=2109145355]
+region_enabled = true
+
+[node name="AttackSprite" type="Sprite2D" parent="Texture/WeaponSpriteComponent" unique_id=217526619]
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(0.85, 0.85)
+
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=424093742]
 visible = false
 position = Vector2(-1, 1)
@@ -68,10 +87,6 @@ metadata/_custom_type_script = "uid://b2j14u62ikqnw"
 [node name="WeaponUserComponent" type="Node" parent="." unique_id=2123544057]
 script = ExtResource("9_331la")
 metadata/_custom_type_script = "uid://b1p6bdh2vi8b"
-
-[node name="WeaponTexture" type="Sprite2D" parent="." unique_id=1059769572]
-script = ExtResource("12_g8los")
-metadata/_custom_type_script = "uid://bqvdlb3r03cs0"
 
 [node name="UniqueShaderComponent" type="Node" parent="." unique_id=1545334767]
 script = ExtResource("12_aasos")
@@ -113,26 +128,17 @@ occluder = ExtResource("18_6uxej")
 script = ExtResource("19_pns3t")
 metadata/_custom_type_script = "uid://bsicagw5u742w"
 
-[node name="WeaponSpriteComponent" type="Sprite2D" parent="." unique_id=1615635183 node_paths=PackedStringArray("up_position", "right_position", "down_position", "left_position")]
-script = ExtResource("20_vr1aj")
-up_position = NodePath("Up")
-right_position = NodePath("Right")
-down_position = NodePath("Down")
-left_position = NodePath("Left")
-up_position_below_texture = true
-left_position_below_texture = true
-metadata/_custom_type_script = "uid://kxk8t3aa4hjf"
-
-[node name="Down" type="Marker2D" parent="WeaponSpriteComponent" unique_id=504906081]
-position = Vector2(-7, 2)
-
-[node name="Up" type="Marker2D" parent="WeaponSpriteComponent" unique_id=520433237]
-position = Vector2(6, 2)
-
-[node name="Left" type="Marker2D" parent="WeaponSpriteComponent" unique_id=1776630653]
-position = Vector2(-5, 2)
-
-[node name="Right" type="Marker2D" parent="WeaponSpriteComponent" unique_id=141043002]
-position = Vector2(-2, 2)
-
 [node name="ArmPoints" type="Node2D" parent="." unique_id=233933637]
+visible = false
+
+[node name="Down" type="Marker2D" parent="ArmPoints" unique_id=504906081]
+position = Vector2(-7, 3)
+
+[node name="Up" type="Marker2D" parent="ArmPoints" unique_id=520433237]
+position = Vector2(6, 3)
+
+[node name="Left" type="Marker2D" parent="ArmPoints" unique_id=1776630653]
+position = Vector2(-5, 3)
+
+[node name="Right" type="Marker2D" parent="ArmPoints" unique_id=141043002]
+position = Vector2(-2, 3)

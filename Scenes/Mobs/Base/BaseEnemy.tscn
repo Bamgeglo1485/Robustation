@@ -16,9 +16,6 @@ base_max_speed = 150.0
 friction = 10000.0
 set_navigation_velocity = true
 
-[node name="WeaponTexture" parent="." index="7" unique_id=1059769572]
-region_enabled = true
-
 [node name="BodyFall" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="0" unique_id=1649394651]
 max_distance = 150.0
 
@@ -49,5 +46,3 @@ avoidance_enabled = true
 radius = 5.0
 neighbor_distance = 128.0
 time_horizon_agents = 0.5
-avoidance_layers = 3
-avoidance_mask = 3

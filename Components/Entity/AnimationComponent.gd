@@ -52,7 +52,11 @@ func shift_to_direction(
 		_tween.set_ease(Tween.EASE_IN_OUT)
 		
 		_tween.tween_property(child, "position", child.position + direction.normalized() * multiplier * 10, time)
-		_tween.tween_property(child, "position", Vector2.ZERO, time)
+		if child is not WeaponSpriteComponent:
+			_tween.tween_property(child, "position", Vector2.ZERO, time)
+		else:
+			_tween.tween_property(child, "position", child.directed_position, time)
+			child.parent_animation_tween = _tween
 
 func lean_to_direction(
 	direction: Vector2,

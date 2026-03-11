@@ -11,7 +11,7 @@ height = 68.0
 [node name="Projectile" type="CharacterBody2D" unique_id=1001723315]
 physics_interpolation_mode = 1
 texture_filter = 1
-collision_layer = 0
+collision_layer = 2048
 collision_mask = 0
 motion_mode = 1
 

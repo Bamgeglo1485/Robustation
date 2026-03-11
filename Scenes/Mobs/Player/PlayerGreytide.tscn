@@ -75,6 +75,25 @@ shader_parameter/vignette_strength = 0.0
 [node name="Texture" parent="." index="2" unique_id=382857461]
 texture = ExtResource("4_bvl14")
 
+[node name="WeaponSprite" parent="Texture/WeaponSpriteComponent" parent_id_path=PackedInt32Array(567988851) index="0" unique_id=2109145355]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("8_42pyi")
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Rope" type="Line2D" parent="Texture/WeaponSpriteComponent" parent_id_path=PackedInt32Array(567988851) index="2" unique_id=867798243]
+material = ExtResource("44_pcu7p")
+points = PackedVector2Array(0, 0, 0, 0)
+width = 50.0
+default_color = Color(0.15683922, 0.005713961, 0.03873314, 1)
+texture_mode = 2
+
+[node name="SpearRope" type="Line2D" parent="Texture/WeaponSpriteComponent" parent_id_path=PackedInt32Array(567988851) index="3" unique_id=1292969267]
+material = ExtResource("44_pcu7p")
+points = PackedVector2Array(0, 0, 0, 0)
+width = 50.0
+default_color = Color(0.15683922, 0.005713961, 0.03873314, 1)
+texture_mode = 2
+
 [node name="Flashlight" parent="PlayerCamera" parent_id_path=PackedInt32Array(2000720665) index="0" unique_id=1075954047]
 physics_interpolation_mode = 1
 energy = 0.0
@@ -125,6 +144,7 @@ modify_damage_by_speed = true
 cooldown_delay = 0.35
 swing_delay = 0.1
 equipped_texture = ExtResource("8_42pyi")
+equipped_scale = Vector2(0.6, 0.6)
 icon_texture = ExtResource("13_4xc88")
 self_throw_speed = 200
 attack_rotation_multiplier = 0.5
@@ -156,6 +176,7 @@ gun_fire_effect = ExtResource("16_w1un4")
 cooldown_delay = 0.5
 swing_delay = 0.0
 equipped_texture = ExtResource("17_w1un4")
+equipped_scale = Vector2(0.75, 0.75)
 icon_texture = ExtResource("18_ger1f")
 swing_rotation_multiplier = 0.0
 attack_rotation_multiplier = -0.6
@@ -184,7 +205,7 @@ shots = 1
 shots_angle = 0
 shoot_sound = NodePath("ShootSound")
 bullets_recovery_delay = 2.0
-rope = NodePath("../../Rope")
+rope = NodePath("../../Texture/WeaponSpriteComponent/Rope")
 cooldown_delay = 0.15
 swing_delay = 0.0
 icon_texture = ExtResource("24_483ma")
@@ -211,7 +232,7 @@ shoot_sound = NodePath("../Spear/ShootSound")
 bullets_recovery_delay = 0.0
 projectile_can_parry_weapon = NodePath("../Toolbox")
 show_cooldown_on_icon = true
-rope = NodePath("../../SpearRope")
+rope = NodePath("../../Texture/WeaponSpriteComponent/SpearRope")
 cooldown_delay = 5.0
 swing_delay = 0.2
 icon_texture = ExtResource("24_483ma")
@@ -241,7 +262,7 @@ script = ExtResource("27_hev03")
 charging_effect = NodePath("../../ChargingEffect")
 charging_sound = NodePath("ChargingSound")
 full_charge_sound = NodePath("FullChargeSound")
-weapon_inhand_texture = NodePath("../../WeaponTexture")
+weapon_inhand_texture = NodePath("../../Texture/WeaponSpriteComponent/WeaponSprite")
 damage = 7
 parry_sound = NodePath("ParrySound")
 attack_sound = NodePath("MeleeHitSound")
@@ -269,17 +290,29 @@ parameters/looping = true
 stream = ExtResource("31_c8oai")
 volume_db = -8.0
 
-[node name="WeaponTexture" parent="." index="9" unique_id=1059769572]
-texture = ExtResource("13_aa22f")
-region_enabled = true
-
 [node name="PlayerWeaponUserComponent" parent="." index="10" unique_id=283125688 node_paths=PackedStringArray("weapon_1", "weapon_2", "weapon_3")]
 weapon_1 = NodePath("../WeaponUserComponent/Toolbox")
 weapon_2 = NodePath("../WeaponUserComponent/Shotgun")
 weapon_3 = NodePath("../WeaponUserComponent/Spear")
 
-[node name="AnimationComponent" parent="." index="12" unique_id=1054272185]
+[node name="AnimationComponent" parent="." index="11" unique_id=1054272185]
 ignore_time_scale = true
+
+[node name="Teleport" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="0" unique_id=2115506269]
+stream = ExtResource("5_42pyi")
+
+[node name="DashSound" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="1" unique_id=789210605]
+stream = ExtResource("25_hf65o")
+max_polyphony = 3
+
+[node name="OverdoseRefuel" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="3" unique_id=1750222133]
+stream = ExtResource("26_27vau")
+max_polyphony = 3
+
+[node name="Overdose" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="11" unique_id=1431786301]
+stream = ExtResource("40_sp3tm")
+max_polyphony = 3
+bus = &"OverdoseIgnore"
 
 [node name="KickDashAbilityComponent" type="Node" parent="." index="14" unique_id=1855025226 node_paths=PackedStringArray("kick_weapon", "target_clear_timer", "can_teleport_timer", "teleport_sound")]
 script = ExtResource("20_0p1r7")
@@ -322,22 +355,6 @@ ignore_time_scale = true
 one_shot = true
 ignore_time_scale = true
 
-[node name="Teleport" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="0" unique_id=2115506269]
-stream = ExtResource("5_42pyi")
-
-[node name="DashSound" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="1" unique_id=789210605]
-stream = ExtResource("25_hf65o")
-max_polyphony = 3
-
-[node name="OverdoseRefuel" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="3" unique_id=1750222133]
-stream = ExtResource("26_27vau")
-max_polyphony = 3
-
-[node name="Overdose" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="11" unique_id=1431786301]
-stream = ExtResource("40_sp3tm")
-max_polyphony = 3
-bus = &"OverdoseIgnore"
-
 [node name="DashAbilityComponent" type="Node" parent="." index="17" unique_id=991976233 node_paths=PackedStringArray("dash_sound", "overdose_refuel_sound", "ability_icon", "parry_weapon")]
 script = ExtResource("25_46s63")
 dash_sound = NodePath("../Sounds/DashSound")
@@ -360,6 +377,7 @@ ability_icon = NodePath("../GUI/Inventory/Hand_L/Hypo")
 metadata/_custom_type_script = "uid://b8d56xguabrvi"
 
 [node name="Unlit" type="Sprite2D" parent="." index="27" unique_id=146609340]
+visible = false
 modulate = Color(2.8165433, 1.6618701, 0.82175255, 1)
 material = ExtResource("29_0fohe")
 texture = ExtResource("30_xwdpk")
@@ -420,21 +438,7 @@ color = Color(1, 1, 1, 0)
 script = ExtResource("34_t3me0")
 metadata/_custom_type_script = "uid://qcmegh7138ug"
 
-[node name="Rope" type="Line2D" parent="." index="37" unique_id=867798243]
-material = ExtResource("44_pcu7p")
-points = PackedVector2Array(0, 0, 0, 0)
-width = 50.0
-default_color = Color(0.15683922, 0.005713961, 0.03873314, 1)
-texture_mode = 2
-
-[node name="SpearRope" type="Line2D" parent="." index="38" unique_id=1292969267]
-material = ExtResource("44_pcu7p")
-points = PackedVector2Array(0, 0, 0, 0)
-width = 50.0
-default_color = Color(0.15683922, 0.005713961, 0.03873314, 1)
-texture_mode = 2
-
-[node name="ChargingEffect" parent="." index="39" unique_id=379104243 instance=ExtResource("48_ssq7n")]
+[node name="ChargingEffect" parent="." index="37" unique_id=379104243 instance=ExtResource("48_ssq7n")]
 visible = false
 modulate = Color(2.844042, 2.844042, 2.844042, 1)
 position = Vector2(0, -1)

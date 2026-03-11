@@ -58,7 +58,6 @@
 [ext_resource type="Texture2D" uid="uid://br3jho2qicoua" path="res://Textures/Interface/Ingame/Stamina/stamina_2.png" id="51_usxup"]
 [ext_resource type="Texture2D" uid="uid://dd542uq0kak83" path="res://Textures/Interface/Ingame/Stamina/stamina_3.png" id="52_2i8o7"]
 [ext_resource type="Texture2D" uid="uid://c6mx7npsbi7s0" path="res://Textures/Interface/Ingame/Stamina/stamina_4.png" id="53_o3dxh"]
-[ext_resource type="Texture2D" uid="uid://1wwu1blvl8rt" path="res://Textures/Abilities/hypo.png" id="59_p5itk"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_p8133"]
 random_pitch = 1.2599211
@@ -221,6 +220,12 @@ script = ExtResource("8_ljr5e")
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
 friction = 500.0
 can_fall_from_body = false
+
+[node name="WeaponSpriteComponent" parent="Texture" parent_id_path=PackedInt32Array(382857461) index="0" unique_id=567988851]
+ignore_time_scale = true
+
+[node name="AttackSprite" parent="Texture/WeaponSpriteComponent" index="1" unique_id=217526619]
+region_enabled = false
 
 [node name="Collision" parent="." index="3" unique_id=424093742]
 shape = ExtResource("2_7ipmw")
@@ -811,6 +816,3 @@ metadata/_custom_type_script = "uid://bh67jcffdkivf"
 
 [node name="AudioListener2D" type="AudioListener2D" parent="." index="32" unique_id=826120773]
 current = true
-
-[node name="WeaponSpriteComponent" parent="." index="33" unique_id=1615635183]
-texture = ExtResource("59_p5itk")

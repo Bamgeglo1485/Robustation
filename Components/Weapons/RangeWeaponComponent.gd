@@ -26,6 +26,9 @@ class_name RangeWeapon extends Weapon
 @export var show_cooldown_on_icon: bool = false
 @export var rope: Line2D
 
+@export var flip_after_shoot: bool = true
+@export var reload_animation: bool = true
+
 var bullets_recover_timer: Timer
 
 func set_bullets(new_value) -> void:
@@ -67,6 +70,9 @@ func attack(raiser, _npc = true) -> void:
 	
 	var direction = raiser.get_attack_direction()
 	
+	if flip_after_shoot and weapon_sprite:
+		weapon_sprite.flip_hell_yeah()
+	
 	if parent.has_node("MobMoverComponent"):
 		if self_throw_speed != 0:
 			parent.get_node("MobMoverComponent").throw(-direction, self_throw_speed, null, self_throw_stop_speed, true, self_throw_rewrite)
@@ -83,6 +89,7 @@ func attack(raiser, _npc = true) -> void:
 			possible_shots = shots
 		
 		bullets -= possible_shots
+		bullets = clamp(bullets, 0, bullets_max_count)
 		
 		for i in range(possible_shots):
 			var shot_direction = direction.rotated(start_angle + angle_step * i)
@@ -176,6 +183,8 @@ func _projectile_shoot(direction) -> Node2D:
 	return instance
 
 func _on_bullets_recover() -> void:
+	if weapon_sprite and weapon_sprite.weapon_texture.texture == equipped_texture and reload_animation:
+		weapon_sprite.reload()
 	bullets += bullets_recover_count
 	if bullets_recover_sound:
 		bullets_recover_sound.play()

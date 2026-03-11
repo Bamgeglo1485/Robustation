@@ -15,6 +15,7 @@ class_name Weapon extends Component
 @export var swinging: bool = false
 
 @export var equipped_texture: Texture2D
+@export var equipped_scale: Vector2 = Vector2(0.8, 0.8)
 @export var icon_texture: Texture2D
 
 @export var damage_modifier: float = 1.0
@@ -47,6 +48,8 @@ var main_weapon: Weapon
 var child_weapons: Array[Weapon]
 var can_switch: bool = true
 
+@onready var weapon_sprite: WeaponSpriteComponent
+
 @warning_ignore("unused_signal")
 signal swapped(new_weapon: Weapon)
 
@@ -54,6 +57,8 @@ func _ready() -> void:
 	if parent is not Node2D:
 		parent = parent.get_parent()
 		animation_component = parent.get_node_or_null("AnimationComponent")
+	
+	weapon_sprite = parent.get_node_or_null("Texture").get_node_or_null("WeaponSpriteComponent")
 	
 	if parent.has_node("Sounds"):
 		var sounds: Node = parent.get_node("Sounds")

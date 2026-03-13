@@ -2,9 +2,12 @@ class_name ArenaComponent extends Component
 
 @export_category("Settings")
 @export var available_enemies: Array[Enemy]
-@export var budget_per_wave: float = 10
+@export var budget_per_wave: float = 1
 @export var spawn_positions: Array[Vector2]
 @export var difficulty: int = 2
+
+@export var max_range: int = 10
+@export var melee_range: int = 15
 
 @export_category("Variables")
 @export var wave: int = 0
@@ -38,12 +41,13 @@ func _ready() -> void:
 
 #-----------------------PROCESS-----------------------
 func start_game() -> void:
-	pass
+	start_new_wave()
 
 func start_new_wave() -> void:
 	wave += 1
 	budget = budget_per_wave * wave
 	
+	current_enemies.append_array(_spawn_enemies(_choose_enemies(budget, available_enemies)))
 
 #-----------------------ASSIST FUNCTIONS-----------------------
 func _spawn_enemies(enemies: Array[PackedScene]) -> Array[PhysicsBody2D]:
@@ -106,3 +110,5 @@ func _weighted_random_enemy(enemies: Array[Enemy]) -> Enemy:
 func _on_gibbed(emitter: Node2D) -> void:
 	if current_enemies.has(emitter):
 		current_enemies.erase(emitter)
+		if current_enemies.is_empty():
+			start_new_wave()

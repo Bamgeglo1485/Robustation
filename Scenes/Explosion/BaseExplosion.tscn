@@ -47,6 +47,7 @@ damage = 150.0
 fly_force = 700
 fall_time = 1
 radius = 200
+check_interval = 0.1
 ignore_faction = true
 lightings = [NodePath("Light"), NodePath("Light2"), NodePath("Light3"), NodePath("Light4")]
 main_lighting = NodePath("Light")
@@ -63,7 +64,8 @@ shape = SubResource("CircleShape2D_a5ua4")
 light_mask = 0
 position = Vector2(-1, -1)
 emitting = false
-amount = 3
+amount = 10
+lifetime = 0.8
 
 [node name="GPUParticles2D3" parent="." unique_id=2131820347 instance=ExtResource("3_a5ua4")]
 light_mask = 0
@@ -122,18 +124,18 @@ metadata/_custom_type_script = "uid://qpw7cn2mqx7i"
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=75207985]
 modulate = Color(16.1889, 16.1889, 16.1889, 1)
 z_index = 10
-amount = 1000
-lifetime = 1.74
+emitting = false
+amount = 500
+lifetime = 1.7
+one_shot = true
 preprocess = 0.5
 speed_scale = 4.0
 randomness = 1.0
+interpolate = false
+fract_delta = false
 process_material = SubResource("ParticleProcessMaterial_ou2k1")
 script = ExtResource("7_wv6j5")
-
-[node name="Delete" type="Timer" parent="GPUParticles2D" unique_id=654438796]
-wait_time = 0.2
-one_shot = true
-autostart = true
+_lifetime = 2.0
 
 [node name="ColorRect" type="ColorRect" parent="GPUParticles2D" unique_id=1543119462]
 light_mask = 0
@@ -153,5 +155,3 @@ metadata/_custom_type_script = "uid://qcmegh7138ug"
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="GPUParticles2D" unique_id=351949433]
 stream = ExtResource("11_2x53i")
 autoplay = true
-
-[connection signal="timeout" from="GPUParticles2D/Delete" to="GPUParticles2D" method="_on_delete_timeout"]

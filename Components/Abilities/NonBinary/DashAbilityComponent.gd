@@ -123,8 +123,8 @@ func dash(direction) -> void:
 	if dash_sound:
 		dash_sound.play()
 	
-	mob_mover_component.throw(direction, dash_speed, null, 1000, false)
 	mob_mover_component.try_stand_up()
+	mob_mover_component.throw(direction, dash_speed, null, 1000, false, true, false)
 
 func _stamina_recovery() -> void:
 	if dash_stamina < max_dash_stamina:

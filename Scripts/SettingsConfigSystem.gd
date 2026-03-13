@@ -3,6 +3,7 @@ extends Node
 var config = ConfigFile.new()
 
 var blood_clean_delay: float = 70.0
+var glow: bool = true
 
 func _ready() -> void:
 	var err = config.load("user://settings.cfg")
@@ -15,6 +16,8 @@ func _ready() -> void:
 			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 		else:
 			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+	if config.has_section_key("VISUAL", "glow"):
+		glow = config.get_value("VISUAL", "glow")
 	if config.has_section_key("VOLUME", "Master_volume"):
 		var volume: float = config.get_value("VOLUME", "Master_volume")
 		var volume_db = linear_to_db(volume / 100.0)

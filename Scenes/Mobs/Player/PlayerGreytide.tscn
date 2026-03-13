@@ -35,7 +35,6 @@
 [ext_resource type="AudioStream" uid="uid://xbdoc0n20dn" path="res://Audio/Effects/hypospray.ogg" id="26_27vau"]
 [ext_resource type="Script" uid="uid://enoou4fskgjn" path="res://Components/Weapons/ChargingMeleeWeaponComponent.gd" id="27_hev03"]
 [ext_resource type="Script" uid="uid://b8d56xguabrvi" path="res://Components/Abilities/OverdoseAbilityComponent.gd" id="27_l8jtb"]
-[ext_resource type="Material" uid="uid://3h52wgl5hfvh" path="res://Resources/Shaders/Fire.tres" id="29_0fohe"]
 [ext_resource type="AudioStream" uid="uid://b3uvy6ds1t6fu" path="res://Audio/Weapon/Hit/heavy_punch.ogg" id="29_gmd4o"]
 [ext_resource type="Texture2D" uid="uid://b826fwd46tvih" path="res://Textures/Weapons/Toolbox/tank.png" id="30_75g6c"]
 [ext_resource type="AudioStream" uid="uid://dvixjlsidryp0" path="res://Audio/Weapon/Hit/reel.ogg" id="30_asuu2"]
@@ -259,7 +258,11 @@ stream = ExtResource("8_ba6hk")
 
 [node name="ChargingToolbox" type="Node" parent="WeaponUserComponent" index="6" unique_id=1424202148 node_paths=PackedStringArray("charging_effect", "charging_sound", "full_charge_sound", "weapon_inhand_texture", "parry_sound", "attack_sound", "miss_sound")]
 script = ExtResource("27_hev03")
+max_charge_time = 1.5
+base_charge_time = 0.5
+exponent_divider = 1.0
 charging_effect = NodePath("../../ChargingEffect")
+hitstop_divider = 1.0
 charging_sound = NodePath("ChargingSound")
 full_charge_sound = NodePath("FullChargeSound")
 weapon_inhand_texture = NodePath("../../Texture/WeaponSpriteComponent/WeaponSprite")
@@ -270,7 +273,7 @@ miss_sound = NodePath("MeleeMissSound")
 throw_speed = 200
 swing_delay = 0.0
 icon_texture = ExtResource("30_75g6c")
-self_throw_speed = 300
+self_throw_speed = 200
 metadata/_custom_type_script = "uid://enoou4fskgjn"
 
 [node name="ParrySound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/ChargingToolbox" index="0" unique_id=1728327108]
@@ -377,9 +380,7 @@ ability_icon = NodePath("../GUI/Inventory/Hand_L/Hypo")
 metadata/_custom_type_script = "uid://b8d56xguabrvi"
 
 [node name="Unlit" type="Sprite2D" parent="." index="27" unique_id=146609340]
-visible = false
 modulate = Color(2.8165433, 1.6618701, 0.82175255, 1)
-material = ExtResource("29_0fohe")
 texture = ExtResource("30_xwdpk")
 region_enabled = true
 region_rect = Rect2(0, 0, 32, 32)

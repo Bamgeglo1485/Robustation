@@ -17,6 +17,10 @@ damage = 30.0
 fly_force = 500
 radius = 64
 
+[node name="GPUParticles2D2" parent="." index="1" unique_id=621859249]
+amount = 2
+lifetime = 0.4
+
 [node name="Light" parent="." index="3" unique_id=1912790245]
 texture_scale = 1.2
 

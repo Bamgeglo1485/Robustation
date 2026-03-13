@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cojqvrho1er60"]
+
+[ext_resource type="Shader" uid="uid://ikjyfwabn3is" path="res://Resources/Shaders/Glow.gdshader" id="1_6xxlf"]
+
+[resource]
+shader = ExtResource("1_6xxlf")
+shader_parameter/rect_size = Vector2(0.1, 0.1)
+shader_parameter/bness = 1.0
+shader_parameter/fall_off_scale = 3.0
+shader_parameter/b_offset = 0.0

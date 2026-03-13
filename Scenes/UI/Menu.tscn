@@ -159,6 +159,17 @@ bg_color = Color(0.1882353, 0, 0.105882354, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y67r4"]
 bg_color = Color(0.25682998, 4.9935653e-07, 0.1512529, 1)
 
+[sub_resource type="Environment" id="Environment_kkc8k"]
+background_mode = 3
+ssr_depth_tolerance = 128.0
+ssao_intensity = 16.45
+ssao_detail = 5.0
+ssao_horizon = 1.0
+ssao_light_affect = 1.0
+ssao_ao_channel_affect = 1.0
+glow_enabled = true
+glow_bloom = 0.25
+
 [node name="Menu" type="Control" unique_id=1410112745]
 layout_mode = 3
 anchors_preset = 15
@@ -417,7 +428,7 @@ offset_bottom = 1.9919968
 grow_horizontal = 2
 grow_vertical = 2
 mouse_behavior_recursive = 1
-border_color = Color(0.207688, 2.256129e-06, 0.14488864, 1)
+border_color = Color(0.21948546, 0, 0.15063176, 1)
 border_width = 2.0
 editor_only = false
 
@@ -471,7 +482,7 @@ offset_bottom = 1.9919968
 grow_horizontal = 2
 grow_vertical = 2
 mouse_behavior_recursive = 1
-border_color = Color(0.207688, 2.256129e-06, 0.14488864, 1)
+border_color = Color(0.21948546, 0, 0.15063176, 1)
 border_width = 2.0
 editor_only = false
 
@@ -518,7 +529,7 @@ offset_bottom = 1.9919968
 grow_horizontal = 2
 grow_vertical = 2
 mouse_behavior_recursive = 1
-border_color = Color(0.207688, 2.256129e-06, 0.14488864, 1)
+border_color = Color(0.21948546, 0, 0.15063176, 1)
 border_width = 2.0
 editor_only = false
 
@@ -565,7 +576,7 @@ offset_bottom = 1.9919968
 grow_horizontal = 2
 grow_vertical = 2
 mouse_behavior_recursive = 1
-border_color = Color(0.207688, 2.256129e-06, 0.14488864, 1)
+border_color = Color(0.21948546, 0, 0.15063176, 1)
 border_width = 2.0
 editor_only = false
 
@@ -593,3 +604,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 8
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2110844953]
+environment = SubResource("Environment_kkc8k")

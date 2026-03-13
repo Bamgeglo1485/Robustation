@@ -28,11 +28,13 @@ func clear_animation(kill_tween = true) -> void:
 
 func _clear_tween() -> void:
 	var _tween: Tween = create_tween()
+	_tween.set_trans(Tween.TRANS_BACK)
+	_tween.set_ease(Tween.EASE_IN_OUT)
 	
-	_tween.tween_property(parent, "global_rotation", 0.0, 0.2)
-	_tween.tween_property(parent, "rotation", 0.0, 0.2)
-	_tween.tween_property(parent, "scale", Vector2(1, 1), 0.2)
-	_tween.tween_property(parent, "skew", 0.0, 0.2)
+	_tween.tween_property(parent, "global_rotation", 0.0, 0.3)
+	_tween.tween_property(parent, "rotation", 0.0, 0.3)
+	_tween.tween_property(parent, "scale", Vector2(1, 1), 0.3)
+	_tween.tween_property(parent, "skew", 0.0, 0.3)
 
 func shift_to_direction(
 	direction: Vector2,

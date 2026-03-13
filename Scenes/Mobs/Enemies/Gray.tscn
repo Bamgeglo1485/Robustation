@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://t8go84dailgi" path="res://Textures/Mobs/Mobs/Hair/shorthairg.png" id="6_nqxm1"]
 [ext_resource type="Texture2D" uid="uid://fx8bg7p2wfff" path="res://Textures/Mobs/Mobs/Hair/80s.png" id="7_umo1f"]
 [ext_resource type="Texture2D" uid="uid://exreeul6rla6" path="res://Textures/Mobs/Mobs/Hair/bald.png" id="8_t6gyr"]
+[ext_resource type="AudioStream" uid="uid://0durbeo6lc4n" path="res://Audio/Weapon/spear_flip.ogg" id="8_umo1f"]
+[ext_resource type="AudioStream" uid="uid://c2enn441tmky8" path="res://Audio/Effects/rush.ogg" id="9_t6gyr"]
 [ext_resource type="Texture2D" uid="uid://b46je4cwbysn6" path="res://Textures/Mobs/Mobs/Hair/bun3.png" id="9_t6qnj"]
 [ext_resource type="Texture2D" uid="uid://boij24x83l0lv" path="res://Textures/Mobs/Mobs/Hair/afro2.png" id="10_qbu4j"]
 [ext_resource type="Texture2D" uid="uid://b44oghif1lc4g" path="res://Textures/Mobs/Mobs/Hair/curls.png" id="11_ubojo"]
@@ -27,17 +29,30 @@
 [ext_resource type="Script" uid="uid://6b7bcparwq17" path="res://Components/Weapons/MeleeWeaponComponent.gd" id="26_g4qcg"]
 [ext_resource type="Texture2D" uid="uid://c2wadc7c7e3v3" path="res://Textures/Weapons/Spear/spear.png" id="27_nl1i8"]
 [ext_resource type="AudioStream" uid="uid://cg0leh0na5lvv" path="res://Resources/Audio/BulletHitRandom.tres" id="28_5yr2p"]
+[ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="29_36vv1"]
 [ext_resource type="AudioStream" uid="uid://eogckfs15aph" path="res://Audio/Weapon/miss.ogg" id="30_k5qt2"]
+[ext_resource type="Script" uid="uid://c6fapai3prk4g" path="res://Components/Mobs/AI/Actions/SetPlayerToBlackboardAction.gd" id="30_nl1i8"]
+[ext_resource type="Script" uid="uid://dl1x4qw4skabi" path="res://Components/Mobs/AI/Actions/SetMoveToKeyAction.gd" id="31_5yr2p"]
 [ext_resource type="Script" uid="uid://da2q40ragr5wk" path="res://Components/Mobs/NPC/BuddyComponent.gd" id="34_f5hbr"]
+[ext_resource type="Script" uid="uid://8hn4kne15ac5" path="res://addons/beehave/nodes/composites/selector.gd" id="34_j0lau"]
+[ext_resource type="Script" uid="uid://wlnghjnvdlyn" path="res://Components/Mobs/AI/Actions/MoveToPointAction.gd" id="34_qkn30"]
+[ext_resource type="Script" uid="uid://d1v7cmsrg6uvj" path="res://Components/Mobs/AI/Conditions/IsNotRusingCondition.gd" id="35_fb4jx"]
 [ext_resource type="Script" uid="uid://bdca2wo1kubsv" path="res://Components/Mobs/SpawnPerkOnDeathComponent.gd" id="35_tokfx"]
+[ext_resource type="Script" uid="uid://ttwxxcce2i4p" path="res://Components/Mobs/AI/Actions/LookAtPointAction.gd" id="36_6dpsf"]
+[ext_resource type="Script" uid="uid://djnlrq07s5frw" path="res://Components/Mobs/AI/Actions/RushAction.gd" id="36_e8lgp"]
+[ext_resource type="Script" uid="uid://b2bu3qqcql0lk" path="res://Components/Mobs/AI/Conditions/PointInRangeCondition.gd" id="36_ei4qd"]
 
-[node name="Assistant" unique_id=1270222458 instance=ExtResource("1_j0lau")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_fb4jx"]
+radius = 40.0
+
+[node name="Gray" unique_id=1270222458 instance=ExtResource("1_j0lau")]
 visibility_layer = 3
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
-base_max_speed = 200
-acceleration = 50
-friction = 1300
+base_max_speed = 180.0
+acceleration = 140.0
+friction = 700.0
+drop_resistance = 2
 
 [node name="Texture" parent="." index="2" unique_id=382857461]
 position = Vector2(0, 1)
@@ -48,12 +63,13 @@ selected_weapon = NodePath("Spear")
 
 [node name="Spear" type="Node" parent="WeaponUserComponent" index="0" unique_id=30503364 node_paths=PackedStringArray("attack_sound", "miss_sound")]
 script = ExtResource("26_g4qcg")
-damage = 15
+damage = 20
 attack_sound = NodePath("HitSound")
 miss_sound = NodePath("MissSound")
-throw_speed = 400
+throw_speed = 600
 throw_stop_speed = 300
-cooldown_delay = 0.25
+drop_resistance_force = 5
+drop_enemy_delay = 0.7
 swing_delay = 0.25
 equipped_texture = ExtResource("26_36vv1")
 icon_texture = ExtResource("27_nl1i8")
@@ -67,10 +83,17 @@ stream = ExtResource("28_5yr2p")
 [node name="MissSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Spear" index="1" unique_id=69188948]
 stream = ExtResource("30_k5qt2")
 
-[node name="MoveToPointComponent" parent="AI" parent_id_path=PackedInt32Array(1365591205) index="0" unique_id=395370591]
-pathfind_update_rate = 0.2
-run_to_target_range = 250.0
-run_from_target_range = 0.0
+[node name="Rush_Prepare" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="2" unique_id=750446342]
+stream = ExtResource("8_umo1f")
+max_distance = 300.0
+
+[node name="Rush" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="3" unique_id=1832481696]
+stream = ExtResource("9_t6gyr")
+volume_db = 1.0
+max_distance = 300.0
+
+[node name="NavigationAgent" parent="." index="13" unique_id=1358139639]
+target_desired_distance = 96.0
 
 [node name="Hair" type="Sprite2D" parent="." index="15" unique_id=927075308]
 texture = ExtResource("4_fb4jx")
@@ -81,19 +104,81 @@ random_textures = Array[Texture2D]([ExtResource("6_nqxm1"), ExtResource("7_umo1f
 random_color = true
 metadata/_custom_type_script = "uid://bqvdlb3r03cs0"
 
-[node name="RandomizeMobMoverComponent" type="Node" parent="." index="16" unique_id=831758902]
-script = ExtResource("24_vgswd")
-randomize_multiplier_min = 0.85
-randomize_multiplier_max = 1.2
-metadata/_custom_type_script = "uid://hv0g6akh0ftn"
-
-[node name="BuddyComponent" type="Node" parent="." index="19" unique_id=2046809544]
+[node name="BuddyComponent" type="Node" parent="." index="16" unique_id=2046809544]
 script = ExtResource("34_f5hbr")
 buddy_group = "Assistant"
 rage_when_buddy_dead = false
 metadata/_custom_type_script = "uid://da2q40ragr5wk"
 
-[node name="SpawnPerkOnDeathComponent" type="Node" parent="." index="20" unique_id=261117993]
+[node name="SpawnPerkOnDeathComponent" type="Node" parent="." index="17" unique_id=261117993]
 script = ExtResource("35_tokfx")
 chance = 0.1
 metadata/_custom_type_script = "uid://bdca2wo1kubsv"
+
+[node name="RandomizeMobMoverComponent" type="Node" parent="." index="18" unique_id=831758902]
+script = ExtResource("24_vgswd")
+randomize_multiplier_min = 0.85
+randomize_multiplier_max = 1.2
+metadata/_custom_type_script = "uid://hv0g6akh0ftn"
+
+[node name="BeehaveTree" parent="." index="20" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
+blackboard = NodePath("@Node@18994")
+
+[node name="SelectorComposite" type="Node" parent="BeehaveTree" index="0" unique_id=102813076]
+script = ExtResource("34_j0lau")
+metadata/_custom_type_script = "uid://8hn4kne15ac5"
+
+[node name="MoveToPlayer" type="Node" parent="BeehaveTree/SelectorComposite" index="0" unique_id=478688837]
+script = ExtResource("29_36vv1")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="SetPlayerToBlackboardAction" type="Node" parent="BeehaveTree/SelectorComposite/MoveToPlayer" index="0" unique_id=1764438182]
+script = ExtResource("30_nl1i8")
+metadata/_custom_type_script = "uid://c6fapai3prk4g"
+
+[node name="SetMoveToKeyAction" type="Node" parent="BeehaveTree/SelectorComposite/MoveToPlayer" index="1" unique_id=1930580778]
+script = ExtResource("31_5yr2p")
+key = "Target"
+metadata/_custom_type_script = "uid://dl1x4qw4skabi"
+
+[node name="MoveToPointAction" type="Node" parent="BeehaveTree/SelectorComposite/MoveToPlayer" index="2" unique_id=1364976193]
+script = ExtResource("34_qkn30")
+metadata/_custom_type_script = "uid://wlnghjnvdlyn"
+
+[node name="Rush" type="Node" parent="BeehaveTree/SelectorComposite/MoveToPlayer" index="3" unique_id=1372211728]
+script = ExtResource("29_36vv1")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="PointInRangeCondition" type="Node" parent="BeehaveTree/SelectorComposite/MoveToPlayer/Rush" index="0" unique_id=1980552494]
+script = ExtResource("36_ei4qd")
+max_distance = 96
+metadata/_custom_type_script = "uid://b2bu3qqcql0lk"
+
+[node name="RushAction" type="Node" parent="BeehaveTree/SelectorComposite/MoveToPlayer/Rush" index="1" unique_id=192250588 node_paths=PackedStringArray("damage_area2d", "rush_weapon", "weapon_sprite", "rush_sound", "rush_prepare_sound")]
+script = ExtResource("36_e8lgp")
+key = "Target"
+damage_area2d = NodePath("../../../../../Rush")
+rush_weapon = NodePath("../../../../../WeaponUserComponent/Spear")
+weapon_sprite = NodePath("../../../../../Texture/WeaponSpriteComponent")
+rush_sound = NodePath("../../../../../Sounds/Rush")
+rush_prepare_sound = NodePath("../../../../../Sounds/Rush_Prepare")
+metadata/_custom_type_script = "uid://djnlrq07s5frw"
+
+[node name="LookAtPoint" type="Node" parent="BeehaveTree/SelectorComposite" index="1" unique_id=1002675121]
+script = ExtResource("29_36vv1")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="IsNotRusingCondition" type="Node" parent="BeehaveTree/SelectorComposite/LookAtPoint" index="0" unique_id=1254968681 node_paths=PackedStringArray("rush_action")]
+script = ExtResource("35_fb4jx")
+rush_action = NodePath("../../MoveToPlayer/Rush/RushAction")
+metadata/_custom_type_script = "uid://d1v7cmsrg6uvj"
+
+[node name="LookAtDirectionAction" type="Node" parent="BeehaveTree/SelectorComposite/LookAtPoint" index="1" unique_id=1358597805]
+script = ExtResource("36_6dpsf")
+key = "MovePoint"
+metadata/_custom_type_script = "uid://ttwxxcce2i4p"
+
+[node name="Rush" type="Area2D" parent="." index="22" unique_id=429380638]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rush" index="0" unique_id=1679646748]
+shape = SubResource("CircleShape2D_fb4jx")

@@ -29,7 +29,10 @@ class_name RangeWeapon extends Weapon
 @export var flip_after_shoot: bool = true
 @export var reload_animation: bool = true
 
+@export var random_bullet_recover_delay_coef: float = 0.0
+
 var bullets_recover_timer: Timer
+var projectile_speed: float
 
 func set_bullets(new_value) -> void:
 	bullets = new_value
@@ -57,6 +60,15 @@ func _ready() -> void:
 		if parent_weapon is not RangeWeapon:
 			return
 		bullets_recover_timer = parent_weapon.bullets_recover_timer
+	
+	if projectile:
+		var inst: Node2D = projectile.instantiate()
+		var projectile_comp: ProjectileComponent = inst.get_node_or_null("ProjectileComponent")
+		if !projectile_comp:
+			inst.queue_free()
+			return
+		projectile_speed = projectile_comp.speed
+		inst.queue_free()
 
 func attack(raiser, _npc = true) -> void:
 	if cooldown or !can_attack or swinging or !projectile or not raiser.has_method("get_attack_direction"):
@@ -103,7 +115,12 @@ func attack(raiser, _npc = true) -> void:
 		shoot_sound.play()
 	
 	if bullets == 0 and bullets_recovery_delay != 0 and bullets_recover_timer:
-		bullets_recover_timer.wait_time = bullets_recovery_delay
+		if !parent_weapon:
+			bullets_recover_timer.wait_time = bullets_recovery_delay
+		else:
+			bullets_recover_timer.wait_time = parent_weapon.bullets_recovery_delay
+		if random_bullet_recover_delay_coef != 0:
+			bullets_recover_timer.wait_time *= randf_range(1 - random_bullet_recover_delay_coef, 1 + random_bullet_recover_delay_coef)
 		bullets_recover_timer.start()
 		EventBusManager.bullets_end.emit(parent, self)
 		if bullets_end_sound:

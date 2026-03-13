@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://eueqbg2py0bc" path="res://Components/Interface/Menu/Settings/VerticalSyncSettingsComponent.gd" id="9_uujv2"]
 [ext_resource type="Script" uid="uid://b5miclua4wknq" path="res://Components/Interface/Menu/Settings/FullcreenSettingsComponent.gd" id="10_6wdx2"]
 [ext_resource type="Script" uid="uid://dphs1pxcujmhq" path="res://Components/Interface/Menu/Settings/BloodCleaningSettingsComponent.gd" id="10_r3am3"]
+[ext_resource type="Script" uid="uid://cnotog8ol8m7h" path="res://Components/Interface/Menu/Settings/GlowSettingsComponent.gd" id="13_7aci1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ex7t"]
 bg_color = Color(0, 0, 0, 1)
@@ -409,6 +410,37 @@ button_pressed = true
 [node name="FullcreenSettingsComponent" type="Node" parent="VBoxContainer/FULLSCREEN/CheckButton" unique_id=601248986]
 script = ExtResource("10_6wdx2")
 metadata/_custom_type_script = "uid://b5miclua4wknq"
+
+[node name="GLOW" type="Panel" parent="VBoxContainer" unique_id=1793715202]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="VBoxContainer/GLOW" unique_id=2054199400]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.002
+anchor_top = 0.021000002
+anchor_right = 0.202
+anchor_bottom = 0.5
+offset_left = 0.011999965
+offset_top = -0.008000135
+offset_right = 0.21199799
+text = "Glow"
+label_settings = ExtResource("2_6qgw2")
+
+[node name="CheckButton" type="CheckButton" parent="VBoxContainer/GLOW" unique_id=1879809181]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 0.089
+anchor_bottom = 1.0
+offset_right = 0.034000397
+grow_vertical = 2
+button_pressed = true
+
+[node name="GlowSettingsComponent" type="Node" parent="VBoxContainer/GLOW/CheckButton" unique_id=1252601733]
+script = ExtResource("13_7aci1")
+metadata/_custom_type_script = "uid://cnotog8ol8m7h"
 
 [node name="ReferenceRect" type="ReferenceRect" parent="." unique_id=1098635970]
 layout_mode = 1

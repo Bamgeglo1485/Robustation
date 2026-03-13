@@ -14,7 +14,7 @@ var minor_speed_modifier: float
 ## Master speed modifier
 @export var speed_modifier: float = 1.0
 ## The direction in which the body goes
-var direction: Vector2 = Vector2.ZERO
+@export var direction: Vector2 = Vector2.ZERO
 
 ## Move speed when fallen
 @export var fallen_speed_modifier: float = 0.3
@@ -32,6 +32,7 @@ var flying: bool = false
 var base_fly_speed: float = 0.0
 var fly_speed: float = 0.0
 var fly_direction: Vector2 = Vector2.ZERO
+var fly_throw_off: bool = false
 ## The speed at which the flight is forced to end
 var fly_stop_speed: float = 200.0
 var fly_modifier: float = 1.0
@@ -168,7 +169,8 @@ func throw(
 	throw_source: Node2D = null,
 	throw_stop_speed: float = 10,
 	animation = true,
-	rewrite = false
+	rewrite = true,
+	throw_throw_off = true
 	) -> void:
 	if rewrite and throw_speed <= fly_speed:
 		return
@@ -179,16 +181,17 @@ func throw(
 	if actual_speed * fly_modifier > 100 and throw_direction.normalized() != Vector2.ZERO:
 		flying = true
 		fly_source = throw_source
+		fly_throw_off = throw_throw_off
 		if !rewrite:
-			fly_speed = actual_speed * fly_modifier
-			base_fly_speed = actual_speed * fly_modifier
-			fly_stop_speed = throw_stop_speed * fly_modifier
-			fly_direction = throw_direction.normalized()
-		else:
 			fly_speed += actual_speed * fly_modifier
 			base_fly_speed += actual_speed * fly_modifier
 			fly_direction += throw_direction.normalized()
 			fly_stop_speed = throw_stop_speed * fly_modifier
+		else:
+			fly_speed = actual_speed * fly_modifier
+			base_fly_speed = actual_speed * fly_modifier
+			fly_stop_speed = throw_stop_speed * fly_modifier
+			fly_direction = throw_direction.normalized()
 		if animation:
 			var tween: Tween = create_tween()
 			tween.set_trans(Tween.TRANS_SINE)
@@ -261,6 +264,8 @@ func stand_up() -> void:
  
 # When flying body hits another body
 func on_fly_impact(body: Node) -> void:
+	if !fly_throw_off or !is_instance_valid(body):
+		return
 	if body == fly_source:
 		return
 	if !flying or !body.has_node("MobMoverComponent") or fly_speed < 200 or body is Area2D or body == parent:

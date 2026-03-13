@@ -1,10 +1,8 @@
 [gd_scene format=3 uid="uid://c0eulucj1dtco"]
 
 [ext_resource type="PackedScene" uid="uid://c0elisnkry0s6" path="res://Scenes/Mobs/Base/BaseMob.tscn" id="1_8ckee"]
-[ext_resource type="Script" uid="uid://crchnvrl7mcdd" path="res://Components/ComponentFolder.gd" id="2_4xxt2"]
-[ext_resource type="Script" uid="uid://vaff4lwkvrc7" path="res://Components/Mobs/NPC/MoveToPointComponent.gd" id="2_i6wsw"]
-[ext_resource type="Script" uid="uid://bv7whrderww4t" path="res://Components/Mobs/NPC/MoveToTargetComponent.gd" id="3_vb81k"]
-[ext_resource type="Script" uid="uid://yxsq46ajfdy4" path="res://Components/Mobs/NPC/AttackTargetComponent.gd" id="4_gb06t"]
+[ext_resource type="Script" uid="uid://bb0t2ovl7wifo" path="res://addons/beehave/nodes/beehave_tree.gd" id="2_8me6v"]
+[ext_resource type="Script" uid="uid://dme5f24l0edsf" path="res://addons/beehave/blackboard.gd" id="6_c4r08"]
 
 [node name="BaseEnemy" unique_id=600669417 groups=["Enemies"] instance=ExtResource("1_8ckee")]
 collision_layer = 258
@@ -16,33 +14,23 @@ base_max_speed = 150.0
 friction = 10000.0
 set_navigation_velocity = true
 
-[node name="BodyFall" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="0" unique_id=1649394651]
-max_distance = 150.0
-
-[node name="FootstepSounds" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="1" unique_id=1611482403]
-max_distance = 150.0
-
-[node name="AI" type="Node" parent="." index="13" unique_id=1365591205]
-script = ExtResource("2_4xxt2")
-metadata/_custom_type_script = "uid://crchnvrl7mcdd"
-
-[node name="MoveToPointComponent" type="Node" parent="AI" index="0" unique_id=395370591 node_paths=PackedStringArray("navigation_agent")]
-script = ExtResource("2_i6wsw")
-navigation_agent = NodePath("../../NavigationAgent")
-metadata/_custom_type_script = "uid://vaff4lwkvrc7"
-
-[node name="MoveToTargetComponent" type="Node" parent="AI" index="1" unique_id=1800782744]
-script = ExtResource("3_vb81k")
-metadata/_custom_type_script = "uid://bv7whrderww4t"
-
-[node name="AttackTargetComponent" type="Node" parent="AI" index="2" unique_id=1357236819]
-script = ExtResource("4_gb06t")
-metadata/_custom_type_script = "uid://yxsq46ajfdy4"
-
-[node name="NavigationAgent" type="NavigationAgent2D" parent="." index="14" unique_id=1358139639]
+[node name="NavigationAgent" type="NavigationAgent2D" parent="." index="13" unique_id=1358139639]
 target_desired_distance = 32.0
 path_postprocessing = 2
 avoidance_enabled = true
 radius = 5.0
 neighbor_distance = 128.0
 time_horizon_agents = 0.5
+
+[node name="BeehaveTree" type="Node" parent="." index="16" unique_id=448616328 node_paths=PackedStringArray("blackboard", "actor")]
+physics_interpolation_mode = 2
+script = ExtResource("2_8me6v")
+tick_rate = 10
+blackboard = NodePath("@Node@88247")
+custom_monitor = true
+actor = NodePath("..")
+metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
+
+[node name="Blackboard" type="Node" parent="." index="17" unique_id=891781907]
+script = ExtResource("6_c4r08")
+metadata/_custom_type_script = "uid://dme5f24l0edsf"

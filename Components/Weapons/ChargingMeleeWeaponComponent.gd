@@ -1,7 +1,7 @@
 class_name ChargingMeleeWeaponComponent extends MeleeWeapon
 
 @export var max_charge_time: float = 3
-@export var base_charge_time: = 1
+@export var base_charge_time: float = 1
 @export var min_charge: float = 0.3
 @export var exponential: bool = true
 @export var exponent_divider: float = 1.2

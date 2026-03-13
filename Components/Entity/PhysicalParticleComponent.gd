@@ -3,8 +3,8 @@ class_name PhysicalParticleComponent extends Component
 @export var fall_sound: AudioStreamPlayer2D
 @export var min_acceleration_time: float = 0.3
 @export var max_acceleration_time: float = 0.6
-@export var min_lifetime: float = 60
-@export var max_lifetime: float = 70
+@export var min_lifetime: float = 20
+@export var max_lifetime: float = 30
 @export var speed: float = 200
 
 @onready var sprite: Sprite2D = parent.get_node("Texture")

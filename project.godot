@@ -31,6 +31,8 @@ buses/default_bus_layout="uid://cdeyk4q7utxqy"
 
 EventBusManager="*res://Scripts/EventBusManager.gd"
 SettingsConfigSystem="*uid://c86gbf2xo8vfy"
+BeehaveGlobalMetrics="*uid://c3ktl6ontsdt7"
+BeehaveGlobalDebugger="*uid://bl3ma400hpvsh"
 
 [display]
 
@@ -40,9 +42,14 @@ window/size/mode=4
 
 project/assembly_name="Robustation-OOP"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/beehave/plugin.cfg")
+
 [global_group]
 
 Enemies=""
+Blood=""
 
 [input]
 
@@ -139,14 +146,20 @@ alt_attack={
 
 2d/run_on_separate_thread=true
 common/physics_ticks_per_second=50
-common/max_physics_steps_per_frame=7
+common/max_physics_steps_per_frame=6
 2d/default_gravity=0.0
 2d/default_gravity_vector=Vector2(0, 0)
+2d/solver/solver_iterations=14
 common/physics_interpolation=true
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+global_illumination/gi/use_half_resolution=true
 textures/default_filters/anisotropic_filtering_level=0
+camera/depth_of_field/depth_of_field_bokeh_shape=0
 viewport/hdr_2d=true
+lightmapping/probe_capture/update_speed=30.0
+global_illumination/sdfgi/frames_to_converge=2
 environment/defaults/default_clear_color=Color(0.01409901, 0, 0.00029968406, 1)
+occlusion_culling/use_occlusion_culling=true

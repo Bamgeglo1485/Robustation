@@ -144,7 +144,7 @@ func change_palette() -> void:
 	
 	match section:
 		1:
-			tween.tween_property(battle_tendency_effect.material, "shader_parameter/saturation", 0.3, 0.5)
+			tween.tween_property(battle_tendency_effect.material, "shader_parameter/saturation", 0.5, 0.5)
 			tween.tween_property(battle_tendency_effect.material, "shader_parameter/contrast", 0.5, 0.5)
 			tween.tween_property(battle_tendency_effect.material, "shader_parameter/vignette_strength", 0.2, 0.5)
 			tween.tween_property(battle_tendency_effect.material, "shader_parameter/red_factor", 1.0, 0.5)

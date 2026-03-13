@@ -211,11 +211,12 @@ shader_parameter/warp_amount = 0.050000002375
 shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.3
 shader_parameter/vignette_opacity = 0.5
+shader_parameter/edge_darken = 0.8
+shader_parameter/edge_softness = 0.1
 
 [node name="Player" unique_id=808070232 instance=ExtResource("1_gq7me")]
 collision_layer = 1
 collision_mask = 1
-script = ExtResource("8_ljr5e")
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
 friction = 500.0
@@ -223,9 +224,6 @@ can_fall_from_body = false
 
 [node name="WeaponSpriteComponent" parent="Texture" parent_id_path=PackedInt32Array(382857461) index="0" unique_id=567988851]
 ignore_time_scale = true
-
-[node name="AttackSprite" parent="Texture/WeaponSpriteComponent" index="1" unique_id=217526619]
-region_enabled = false
 
 [node name="Collision" parent="." index="3" unique_id=424093742]
 shape = ExtResource("2_7ipmw")
@@ -253,6 +251,7 @@ texture = ExtResource("6_2i8o7")
 texture_scale = 0.5
 
 [node name="HealthComponent" parent="." index="6" unique_id=1758373275]
+max_health = 200
 invinciblitiy_attack_effect = ExtResource("5_oayod")
 heal_for_damage_multiplier = 0.1
 

@@ -40,6 +40,8 @@ var minor_damage_modifier: float = 1.0
 # Alternative attack on RMB
 @export var alt_attack: Weapon
 
+@export var random_cooldown_delay_coef: float = 0.0
+
 var swinging_cancelled: bool
 var cooldown_timer: Timer
 var swinging_timer: Timer
@@ -106,6 +108,8 @@ func _cooldown() -> void:
 	if cooldown_delay != 0:
 		cooldown = true
 		var modified_cooldown = cooldown_delay * cooldown_modifier
+		if random_cooldown_delay_coef != 0:
+			modified_cooldown *= randf_range(1.0 - random_cooldown_delay_coef, 1 + random_cooldown_delay_coef)
 		cooldown_timer.wait_time = modified_cooldown
 		cooldown_timer.start()
 		EventBusManager.weapon_cooldown.emit(parent, self)

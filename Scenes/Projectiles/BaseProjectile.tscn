@@ -25,6 +25,7 @@ metadata/_custom_type_script = "uid://dn05jeqqq5844"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ProjectileComponent" unique_id=1391622764]
 
 [node name="HitSound" type="AudioStreamPlayer2D" parent="ProjectileComponent" unique_id=1752295456]
+max_distance = 600.0
 
 [node name="HealthComponent" type="Node" parent="." unique_id=90404297]
 script = ExtResource("3_88g3b")

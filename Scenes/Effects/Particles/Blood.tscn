@@ -10,14 +10,16 @@ initial_velocity_max = 100.0
 gravity = Vector3(0, 0, 0)
 color = Color(0.5568628, 0, 0.18431373, 1)
 
-[node name="Blood" type="GPUParticles2D" unique_id=1006355857]
+[node name="Blood" type="GPUParticles2D" unique_id=1006355857 groups=["Blood"]]
 visible = false
 z_index = -1
 texture_filter = 1
-amount = 32
+amount = 16
 texture = ExtResource("1_iq24q")
 lifetime = 0.2
 explosiveness = 1.0
+interpolate = false
+fract_delta = false
 visibility_rect = Rect2(-1000, -1000, 2000, 2000)
 process_material = SubResource("ParticleProcessMaterial_ttwd7")
 script = ExtResource("2_70dfb")

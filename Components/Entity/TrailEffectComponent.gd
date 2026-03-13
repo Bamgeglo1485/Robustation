@@ -95,7 +95,7 @@ func _clean() -> void:
 		dupl.queue_free()
 	duplicates.clear()
 
-func free() -> void:
+func _exit_tree() -> void:
 	for dupl in duplicates:
 		if !dupl:
 			continue

@@ -1,0 +1,14 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://bxovm2xahbdet"]
+
+[ext_resource type="AudioStream" uid="uid://4ed2tic61pd8" path="res://Audio/Weapon/bullet_miss1.ogg" id="1_eyptv"]
+[ext_resource type="AudioStream" uid="uid://ddn8886ip5hp5" path="res://Audio/Weapon/bullet_miss2.ogg" id="2_kr2h2"]
+[ext_resource type="AudioStream" uid="uid://d0ejoqf2jig5n" path="res://Audio/Weapon/bullet_miss3.ogg" id="3_27agh"]
+[ext_resource type="AudioStream" uid="uid://cvyd4fpruyqs6" path="res://Audio/Weapon/bullet_miss4.ogg" id="4_pvh7u"]
+
+[resource]
+random_pitch = 1.1892071
+streams_count = 4
+stream_0/stream = ExtResource("1_eyptv")
+stream_1/stream = ExtResource("2_kr2h2")
+stream_2/stream = ExtResource("3_27agh")
+stream_3/stream = ExtResource("4_pvh7u")

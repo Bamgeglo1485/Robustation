@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Enemy" format=3 uid="uid://cou375htkckp8"]
+
+[ext_resource type="PackedScene" uid="uid://3pb6o41pv8wh" path="res://Scenes/Mobs/Enemies/Assistant.tscn" id="1_i3fi5"]
+[ext_resource type="Script" uid="uid://di5u0whaqiyjp" path="res://Resources/Custom/Enemy/Base/Enemy.gd" id="2_vnuyf"]
+
+[resource]
+script = ExtResource("2_vnuyf")
+scene = ExtResource("1_i3fi5")
+cost = 3.0
+weight = 0.5
+enemy_type = 1
+metadata/_custom_type_script = "uid://di5u0whaqiyjp"

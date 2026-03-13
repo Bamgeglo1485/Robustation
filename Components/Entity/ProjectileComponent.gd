@@ -12,6 +12,8 @@ class_name ProjectileComponent extends Area2D
 @export var speed_decreasing: int = 0
 @export var max_damage: int = 200
 @export var damage: int = 10 : set = _set_damage
+@export var delayed_damage: int = 0
+@export var delayed_damage_delay: int = 0
 @export var stamina_damage: float = 0
 @export var rotate_speed: int = 0
 @export var lifetime: float = 3.0
@@ -191,6 +193,8 @@ func _on_body_entered(body: Node2D) -> void:
 		if !shooter:
 			shooter = null
 		health_comp.take_damage(modified_damage, shooter)
+		if delayed_damage != 0 and delayed_damage_delay != 0:
+			health_comp.set_delayed_damage(delayed_damage * damage_modifier, delayed_damage_delay)
 		if max_penetrations != 0:
 			penetration_damaged_bodies.append(body)
 			penetrations += 1
@@ -203,7 +207,7 @@ func _on_body_entered(body: Node2D) -> void:
 			stamina_comp.take_stamina_damage(stamina_damage * damage_modifier, shooter)
 	
 	if throw_speed != 0:
-		var mover_comp = body.get_node_or_null("MobMoverCompo")
+		var mover_comp = body.get_node_or_null("MobMoverComponent")
 		if mover_comp:
 			mover_comp.throw(parent.velocity, throw_speed, shooter)
 	if explode_on_hit:

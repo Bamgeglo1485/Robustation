@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://tu5db2wve0ca"]
+
+[ext_resource type="PackedScene" uid="uid://c2fs5eoy7ntgu" path="res://Scenes/Projectiles/BaseProjectile.tscn" id="1_5axxq"]
+[ext_resource type="AudioStream" uid="uid://cg0leh0na5lvv" path="res://Resources/Audio/BulletHitRandom.tres" id="2_doom2"]
+[ext_resource type="Texture2D" uid="uid://c0w1acal2twly" path="res://Textures/Weapons/Bow/arrow.png" id="3_doom2"]
+[ext_resource type="Script" uid="uid://dfahm1hamvt58" path="res://Components/Entity/TrailEffectComponent.gd" id="4_1lymg"]
+
+[sub_resource type="Shader" id="Shader_ut4xv"]
+code = "shader_type canvas_item;
+
+uniform float jiggle = 5.0;
+uniform float speed = 30.0;
+
+void vertex() {
+	VERTEX.y += VERTEX_ID % 2 == 0 ? cos((TIME * speed) + VERTEX.x + float(VERTEX_ID * 10)) * jiggle : sin((TIME * speed) + VERTEX.x + float(VERTEX_ID * 10)) * jiggle;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_doom2"]
+shader = SubResource("Shader_ut4xv")
+shader_parameter/jiggle = 2.5
+shader_parameter/speed = 20.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i6uow"]
+radius = 5.0
+height = 26.0
+
+[node name="Projectile" unique_id=1269485508 instance=ExtResource("1_5axxq")]
+material = SubResource("ShaderMaterial_doom2")
+
+[node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture")]
+texture = NodePath("../Texture")
+speed = 1500
+delayed_damage = 3
+delayed_damage_delay = 3
+
+[node name="CollisionShape2D" parent="ProjectileComponent" index="0" unique_id=1391622764]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_i6uow")
+
+[node name="HitSound" parent="ProjectileComponent" index="1" unique_id=1752295456]
+stream = ExtResource("2_doom2")
+
+[node name="CollisionShape2D" parent="Area2D" parent_id_path=PackedInt32Array(757156969) index="0" unique_id=2139953676]
+disabled = true
+
+[node name="Texture" type="Sprite2D" parent="." index="4" unique_id=1806190901]
+use_parent_material = true
+texture = ExtResource("3_doom2")
+
+[node name="TrailEffectComponent" type="Node" parent="." index="6" unique_id=15597664]
+script = ExtResource("4_1lymg")
+colors = Array[Color]([Color(0.8164007, 0, 0, 1), Color(0.7808727, 0.00017808378, 0.689379, 1)])
+clean_delay = 1.0
+trail_lifetime = 0.2
+metadata/_custom_type_script = "uid://dfahm1hamvt58"

@@ -1,19 +1,10 @@
 extends GPUParticles2D
 
-var deleting = false
-var _lifetime: float = 4
+@export var _lifetime: float = 0.5
+
+func _ready() -> void:
+	emitting = true
 
 func _physics_process(_delta: float) -> void:
-	if deleting == true:
-		return
-	if global_position == Vector2.ZERO:
-		emitting = false
-	else:
-		emitting = true
-	_lifetime -= _delta
-	if _lifetime <= 0:
-		queue_free()
-
-func _on_delete_timeout() -> void:
-	self.emitting = false
-	deleting = true
+	await get_tree().create_timer(_lifetime).timeout
+	queue_free()

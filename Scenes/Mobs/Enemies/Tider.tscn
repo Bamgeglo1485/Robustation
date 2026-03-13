@@ -34,34 +34,31 @@
 [ext_resource type="Texture2D" uid="uid://1yvrhqvfqqus" path="res://Textures/Weapons/Toolbox/toolbox_inhand.png" id="33_fg1co"]
 [ext_resource type="Script" uid="uid://da2q40ragr5wk" path="res://Components/Mobs/NPC/BuddyComponent.gd" id="34_fg1co"]
 [ext_resource type="Script" uid="uid://bdca2wo1kubsv" path="res://Components/Mobs/SpawnPerkOnDeathComponent.gd" id="35_23y4n"]
+[ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="36_tw04h"]
 [ext_resource type="Script" uid="uid://bdcq7y2ek222e" path="res://Components/Mobs/NPC/DodgerComponent.gd" id="36_wxygg"]
+[ext_resource type="Script" uid="uid://c6fapai3prk4g" path="res://Components/Mobs/AI/Actions/SetPlayerToBlackboardAction.gd" id="37_r4sff"]
+[ext_resource type="Script" uid="uid://dl1x4qw4skabi" path="res://Components/Mobs/AI/Actions/SetMoveToKeyAction.gd" id="38_gib8l"]
+[ext_resource type="Script" uid="uid://wlnghjnvdlyn" path="res://Components/Mobs/AI/Actions/MoveToPointAction.gd" id="39_emno0"]
+[ext_resource type="Script" uid="uid://dua6hp8ir5tiu" path="res://Components/Mobs/AI/Actions/AttackTargetAction.gd" id="40_eljyk"]
+[ext_resource type="Script" uid="uid://ttwxxcce2i4p" path="res://Components/Mobs/AI/Actions/LookAtPointAction.gd" id="40_r4sff"]
 
 [node name="Tider" unique_id=1270222458 instance=ExtResource("1_bk7ip")]
 visibility_layer = 3
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
-base_max_speed = 200
-acceleration = 50
-friction = 1300
+base_max_speed = 200.0
+acceleration = 150.0
+friction = 700.0
 
 [node name="Texture" parent="." index="2" unique_id=382857461]
 position = Vector2(0, 1)
 texture = ExtResource("2_20t8h")
 
-[node name="MoveToPointComponent" parent="AI" parent_id_path=PackedInt32Array(1365591205) index="0" unique_id=395370591]
-pathfind_update_rate = 0.2
-run_to_target_range = 250.0
-run_from_target_range = 130.0
-
-[node name="DodgerComponent" type="Node" parent="AI" parent_id_path=PackedInt32Array(1365591205) index="3" unique_id=1540090055]
-script = ExtResource("36_wxygg")
-metadata/_custom_type_script = "uid://bdcq7y2ek222e"
-
-[node name="NavigationAgent" parent="." index="14" unique_id=1358139639]
+[node name="NavigationAgent" parent="." index="13" unique_id=1358139639]
 avoidance_layers = 3
 avoidance_mask = 3
 
-[node name="Hair" type="Sprite2D" parent="." index="15" unique_id=927075308]
+[node name="Hair" type="Sprite2D" parent="." index="14" unique_id=927075308]
 texture = ExtResource("30_qavuh")
 offset = Vector2(0, -2)
 region_enabled = true
@@ -70,27 +67,26 @@ random_textures = Array[Texture2D]([ExtResource("25_1l0qo"), ExtResource("12_kqv
 random_color = true
 metadata/_custom_type_script = "uid://bqvdlb3r03cs0"
 
-[node name="RandomizeMobMoverComponent" type="Node" parent="." index="16" unique_id=831758902]
+[node name="RandomizeMobMoverComponent" type="Node" parent="." index="15" unique_id=831758902]
 script = ExtResource("24_nl1i0")
 randomize_multiplier_min = 0.85
 randomize_multiplier_max = 1.2
 metadata/_custom_type_script = "uid://hv0g6akh0ftn"
 
-[node name="RandomWeaponSelectorComponent" type="Node" parent="." index="17" unique_id=1846898249 node_paths=PackedStringArray("weapons_to_select")]
+[node name="RandomWeaponSelectorComponent" type="Node" parent="." index="16" unique_id=1846898249 node_paths=PackedStringArray("weapons_to_select")]
 script = ExtResource("25_urnpk")
 weapons_to_select = [NodePath("Crowbar"), NodePath("Fist"), NodePath("Toolbox")]
-change_behavior = true
 metadata/_custom_type_script = "uid://bd0gbdhbjn7xx"
 
 [node name="Crowbar" type="Node" parent="RandomWeaponSelectorComponent" index="0" unique_id=30503364 node_paths=PackedStringArray("attack_sound", "miss_sound")]
 script = ExtResource("26_kqv0r")
-damage = 15
+damage = 6
 attack_range = 83
 attack_sound = NodePath("HitSound")
 miss_sound = NodePath("MissSound")
 throw_speed = 400
 throw_stop_speed = 300
-cooldown_delay = 0.25
+cooldown_delay = 0.7
 swing_delay = 0.1
 equipped_texture = ExtResource("27_pjvyl")
 icon_texture = ExtResource("28_mmn5l")
@@ -106,7 +102,7 @@ stream = ExtResource("30_fg1co")
 
 [node name="Fist" type="Node" parent="RandomWeaponSelectorComponent" index="1" unique_id=1616782744 node_paths=PackedStringArray("attack_sound", "miss_sound")]
 script = ExtResource("26_kqv0r")
-damage = 5
+damage = 3
 attack_range = 83
 attack_sound = NodePath("HitSound")
 miss_sound = NodePath("MissSound")
@@ -126,13 +122,13 @@ stream = ExtResource("30_fg1co")
 
 [node name="Toolbox" type="Node" parent="RandomWeaponSelectorComponent" index="2" unique_id=2011423731 node_paths=PackedStringArray("attack_sound", "miss_sound")]
 script = ExtResource("26_kqv0r")
-damage = 30
+damage = 15
 stamina_damage = 20
 attack_range = 83
 attack_sound = NodePath("HitSound")
 miss_sound = NodePath("MissSound")
 cooldown_delay = 0.5
-swing_delay = 0.2
+swing_delay = 0.3
 equipped_texture = ExtResource("33_fg1co")
 equipped_scale = Vector2(0.6, 0.6)
 icon_texture = ExtResource("32_8jwui")
@@ -144,13 +140,50 @@ stream = ExtResource("30_fg1co")
 [node name="HitSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/Toolbox" index="1" unique_id=303361046]
 stream = ExtResource("29_8jwui")
 
-[node name="BuddyComponent" type="Node" parent="." index="20" unique_id=2046809544]
+[node name="BuddyComponent" type="Node" parent="." index="19" unique_id=2046809544]
 script = ExtResource("34_fg1co")
 buddy_group = "Assistant"
 rage_when_buddy_dead = false
 metadata/_custom_type_script = "uid://da2q40ragr5wk"
 
-[node name="SpawnPerkOnDeathComponent" type="Node" parent="." index="21" unique_id=261117993]
+[node name="SpawnPerkOnDeathComponent" type="Node" parent="." index="20" unique_id=261117993]
 script = ExtResource("35_23y4n")
 chance = 0.1
 metadata/_custom_type_script = "uid://bdca2wo1kubsv"
+
+[node name="BeehaveTree" parent="." index="21" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
+blackboard = NodePath("@Node@18989")
+
+[node name="MoveToPlayer" type="Node" parent="BeehaveTree" index="0" unique_id=723485805]
+script = ExtResource("36_tw04h")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="SetPlayerToBlackboardAction" type="Node" parent="BeehaveTree/MoveToPlayer" index="0" unique_id=24196700]
+script = ExtResource("37_r4sff")
+metadata/_custom_type_script = "uid://c6fapai3prk4g"
+
+[node name="SetMoveToKeyAction" type="Node" parent="BeehaveTree/MoveToPlayer" index="1" unique_id=1480803383]
+script = ExtResource("38_gib8l")
+key = "Target"
+metadata/_custom_type_script = "uid://dl1x4qw4skabi"
+
+[node name="LookAtDirectionAction" type="Node" parent="BeehaveTree/MoveToPlayer" index="2" unique_id=1199766504]
+script = ExtResource("40_r4sff")
+key = "MovePoint"
+metadata/_custom_type_script = "uid://ttwxxcce2i4p"
+
+[node name="MoveToPointAction" type="Node" parent="BeehaveTree/MoveToPlayer" index="3" unique_id=527773040]
+script = ExtResource("39_emno0")
+metadata/_custom_type_script = "uid://wlnghjnvdlyn"
+
+[node name="AttackTargetAction" type="Node" parent="BeehaveTree/MoveToPlayer" index="4" unique_id=1184888530]
+script = ExtResource("40_eljyk")
+prediction_coef = null
+metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
+
+[node name="DodgerComponent" type="Node" parent="." index="23" unique_id=936312115]
+script = ExtResource("36_wxygg")
+move_priority = null
+dash_force = null
+dash_stop_speed = null
+metadata/_custom_type_script = "uid://bdcq7y2ek222e"

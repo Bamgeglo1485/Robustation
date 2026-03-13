@@ -29,5 +29,7 @@ signal request_impact_frame(impact_time, wait_time, modify_color, distort_audio)
 
 signal field_of_view_changed(value: int)
 signal fullscreen_changed(fullscreen: bool)
+signal glow_changed(glow: bool)
+
 signal update_weapon_icon(emitter: Node2D, weapon: Weapon)
 signal change_player(new_player: Node2D, wait_time: float)

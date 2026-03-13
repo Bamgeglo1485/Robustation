@@ -71,6 +71,19 @@ func _clear_tween() -> void:
 	_tween.tween_property(weapon_texture, "position", Vector2.ZERO, 0.1)
 	_tween.tween_property(weapon_texture, "skew", 0.0, 0.1)
 
+func piercing_animation(attack_direction: Vector2, attack_delay: float) -> void:
+	attack_texture.texture = weapon_icon
+	attack_texture.position = Vector2.ZERO
+	var _modulate_tween: Tween = create_tween()
+	_modulate_tween.tween_property(attack_texture, "modulate", Color(1.0, 1.0, 1.0, 0.45), 0.2)
+	_modulate_tween.tween_property(attack_texture, "modulate", Color(1.0, 1.0, 1.0, 0.0), attack_delay + 0.2)
+	
+	var _tween: Tween = create_tween()
+	_tween.set_trans(Tween.TRANS_SINE)
+	_tween.set_ease(Tween.EASE_IN_OUT)
+	_tween.tween_property(attack_texture, "position", to_local(global_position + attack_direction), attack_delay)
+	_tween.tween_property(attack_texture, "position", position, 0.2)
+
 func slash_animation(attack_direction: Vector2, attack_length: float = 1.5, arc_angle: float = 130.0, offset: float = 25.0) -> void:
 	swing_left = !swing_left
 	

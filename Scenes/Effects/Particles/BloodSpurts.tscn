@@ -21,16 +21,18 @@ scale_over_velocity_max = 230.76999
 scale_over_velocity_curve = SubResource("CurveTexture_6ugap")
 color = Color(0.5568628, 0, 0.18431373, 1)
 
-[node name="Blood" type="GPUParticles2D" unique_id=1787277679]
+[node name="Blood" type="GPUParticles2D" unique_id=1787277679 groups=["Blood"]]
 visible = false
 z_index = -2
 texture_filter = 1
 emitting = false
-amount = 64
+amount = 24
 texture = ExtResource("1_nr0qg")
 lifetime = 0.2
 one_shot = true
 explosiveness = 1.0
+interpolate = false
+fract_delta = false
 process_material = SubResource("ParticleProcessMaterial_70dfb")
 script = ExtResource("2_nr0qg")
 

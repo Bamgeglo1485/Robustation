@@ -1,8 +1,6 @@
 shader_type canvas_item;
 
-
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
-
 
 uniform bool overlay = false;
 
@@ -34,7 +32,9 @@ uniform bool clip_warp = false;
 uniform float vignette_intensity = 0.4;
 uniform float vignette_opacity : hint_range(0.0, 1.0) = 0.5;
 
-
+// НОВЫЕ ПАРАМЕТРЫ ДЛЯ КОНТРОЛЯ ГРАНИЦ
+uniform float edge_darken : hint_range(0.0, 2.0) = 0.8;
+uniform float edge_softness : hint_range(0.0, 0.5) = 0.1;
 
 vec2 random(vec2 uv){
     uv = vec2(dot(uv, vec2(127.1,311.7)), dot(uv, vec2(269.5,183.3)));
@@ -63,21 +63,53 @@ vec2 warp(vec2 uv){
     return uv + delta * delta_offset;
 }
 
-float border (vec2 uv){
-    float radius = min(warp_amount, 0.08);
-    radius = max(min(min(abs(radius * 2.0), abs(1.0)), abs(1.0)), 1e-5);
-    vec2 abs_uv = abs(uv * 2.0 - 1.0) - vec2(1.0, 1.0) + radius;
-    float dist = length(max(vec2(0.0), abs_uv)) / radius;
-    float square = smoothstep(0.96, 1.0, dist);
-    return clamp(1.0 - square, 0.0, 1.0);
+// УЛУЧШЕННАЯ ФУНКЦИЯ ГРАНИЦЫ
+float border(vec2 uv) {
+    float radius = min(warp_amount, 0.15); // Увеличил радиус для более плавного перехода
+    radius = max(radius, 0.02);
+    
+    // Расстояние до края экрана
+    vec2 dist_to_edge = min(uv, 1.0 - uv);
+    float min_dist = min(dist_to_edge.x, dist_to_edge.y);
+    
+    // Плавное затухание у краев
+    return smoothstep(0.0, radius, min_dist);
 }
 
-float vignette(vec2 uv){
-    uv *= 1.0 - uv.xy;
-    float vignette = uv.x * uv.y * 15.0;
-    return pow(vignette, vignette_intensity * vignette_opacity);
+// УЛУЧШЕННАЯ ФУНКЦИЯ ВИНЬЕТКИ
+float vignette(vec2 uv) {
+    // Нормализованное расстояние от центра
+    vec2 center_dist = uv - 0.5;
+    float dist = length(center_dist) * 2.0; // *2 чтобы покрыть всю область
+    
+    // Более мягкая винъетка
+    float vignette = 1.0 - dist * vignette_intensity;
+    vignette = clamp(vignette, 0.0, 1.0);
+    
+    // Применяем opacity
+    return mix(1.0, vignette, vignette_opacity);
 }
 
+// КОМБИНИРОВАННАЯ ФУНКЦИЯ ДЛЯ КРАЕВ
+float edge_mask(vec2 uv) {
+    // Получаем маску границы
+    float border_mask = border(uv);
+    
+    // Получаем винъетку
+    float vignette_mask = vignette(uv);
+    
+    // Комбинируем: используем минимальное значение чтобы избежать ярких краев
+    // и применяем дополнительное затемнение
+    float edge = min(border_mask, vignette_mask);
+    
+    // Дополнительное затемнение у самых краев
+    vec2 dist_to_edge = min(uv, 1.0 - uv);
+    float edge_dark = min(dist_to_edge.x, dist_to_edge.y);
+    edge_dark = smoothstep(0.0, edge_softness, edge_dark);
+    edge_dark = mix(edge_dark, 1.0, edge_darken);
+    
+    return edge * edge_dark;
+}
 
 void fragment()
 {
@@ -147,11 +179,12 @@ void fragment()
         text.rgb += clamp(random((ceil(uv * resolution) / resolution) + fract(TIME)).x, 0.0, 1.0) * static_noise_intensity;
     }
 
-    text.rgb *= border(uv);
-    text.rgb *= vignette(uv);
+    // ИСПРАВЛЕНО: Используем комбинированную маску вместо отдельных функций
+    float edge = edge_mask(uv);
+    text.rgb *= edge;
 
     if (clip_warp){
-        text.a = border(uv);
+        text.a = edge;
     }
 
     if (discolor){

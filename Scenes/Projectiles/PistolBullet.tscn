@@ -23,6 +23,7 @@ shape = SubResource("CapsuleShape2D_kf5wp")
 [node name="TrailEffectComponent" type="Node" parent="." index="4" unique_id=1469260940]
 script = ExtResource("2_i6635")
 colors = Array[Color]([Color(2.152293, 0, 1.0783726, 0.50600004), Color(1.8964944, 0, 2.0369349, 0.536)])
+clean_delay = 1.0
 trail_lifetime = 0.2
 required_position_length = 1
 metadata/_custom_type_script = "uid://dfahm1hamvt58"

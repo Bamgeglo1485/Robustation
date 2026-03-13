@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Enemy" format=3 uid="uid://c7ill5kgubqqa"]
+
+[ext_resource type="PackedScene" uid="uid://vjubfbb1hjee" path="res://Scenes/Mobs/Enemies/Tider.tscn" id="1_fc7h2"]
+[ext_resource type="Script" uid="uid://di5u0whaqiyjp" path="res://Resources/Custom/Enemy/Base/Enemy.gd" id="2_qbu2u"]
+
+[resource]
+script = ExtResource("2_qbu2u")
+scene = ExtResource("1_fc7h2")
+cost = 1.0
+weight = 1.5
+metadata/_custom_type_script = "uid://di5u0whaqiyjp"

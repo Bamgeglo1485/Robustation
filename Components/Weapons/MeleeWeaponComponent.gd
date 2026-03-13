@@ -28,7 +28,7 @@ class_name MeleeWeapon extends Weapon
 @onready var base_throw_speed: float = throw_speed
 @onready var base_self_throw_speed: float = self_throw_speed
 @onready var parent_mob_mover_component: MobMoverComponent
-@export var straight_attack_animation: bool = false
+@export var piercing_attack_animation: bool = false
 
 @export_category("Modify damage by speed")
 @export var modify_damage_by_speed: bool = false
@@ -236,7 +236,10 @@ func _attack_animation(direction):
 	if !weapon_sprite:
 		return
 	
-	weapon_sprite.slash_animation(direction, attack_animation_speed)
+	if !piercing_attack_animation:
+		weapon_sprite.slash_animation(direction, attack_animation_speed)
+	else:
+		weapon_sprite.piercing_animation(direction, attack_animation_speed)
 
 func parry_projectile(projectile: Node2D, projectile_component: ProjectileComponent, direction: Vector2) -> void:
 	if !projectile_component.parriable:

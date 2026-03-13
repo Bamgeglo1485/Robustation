@@ -1,24 +1,25 @@
 class_name DodgerComponent extends Component
 
-@onready var move_to_point: MoveToPointComponent = get_parent().get_node_or_null("MoveToPointComponent")
-@onready var attack_target_component: AttackTargetComponent = get_parent().get_node_or_null("AttackTargetComponent")
 @onready var navigation: NavigationAgent2D = parent.get_node_or_null("NavigationAgent")
 @onready var mob_mover: MobMoverComponent = parent.get_node_or_null("MobMoverComponent")
+@onready var faction: FactionComponent = parent.get_node_or_null("FactionComponent")
 
 @export var move_priority: int = 5
-@export var dash: bool = true
 @export var dash_force: float = 400.0
 @export var dash_stop_speed: float = 300.0
 
 func _ready() -> void:
-	if !attack_target_component:
-		return
-	
 	EventBusManager.projectile_shoot.connect(_on_shoot)
 
 func _on_shoot(emitter: Node2D, _weapon: Weapon, direction: Vector2, _projectile: Node2D) -> void:
-	if emitter != attack_target_component.target:
+	if !emitter or !owner:
 		return
+	if !faction:
+		push_error(("DODGER " + str(parent) + "HAS NOT FACTION COMPONENT!"))
+	var emitter_faction: FactionComponent = emitter.get_node_or_null("FactionComponent")
+	if faction.faction == emitter_faction.faction:
+		return
+	
 	if mob_mover.fallen:
 		return
 	
@@ -61,8 +62,4 @@ func _on_shoot(emitter: Node2D, _weapon: Weapon, direction: Vector2, _projectile
 	if randf() >= 0.5:
 		dodge_direction = dodge_direction.rotated(deg_to_rad(180))
 	
-	if !dash:
-		var position: Vector2 = navigation.get_next_path_position() + dodge_direction
-		move_to_point.set_point(position, move_priority)
-	else:
-		mob_mover.throw(dodge_direction, dash_force, parent, dash_stop_speed)
+	mob_mover.throw(dodge_direction, dash_force, parent, dash_stop_speed, false, true, true)

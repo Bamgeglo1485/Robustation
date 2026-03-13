@@ -105,11 +105,12 @@ metadata/_custom_type_script = "uid://cwh8ve85ed8gv"
 
 [node name="BodyFall" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1649394651]
 stream = ExtResource("17_g8los")
+max_distance = 400.0
 
 [node name="FootstepSounds" type="AudioStreamPlayer2D" parent="Sounds" unique_id=1611482403]
 stream = ExtResource("16_g8los")
 volume_db = 5.591
-max_distance = 96.0
+max_distance = 400.0
 max_polyphony = 10
 
 [node name="Area2D" type="Area2D" parent="." unique_id=151901461]

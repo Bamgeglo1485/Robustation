@@ -42,21 +42,23 @@ func select_weapon(new_weapon: Weapon) -> void:
 	
 	force_select_weapon(new_weapon)
 
-func attack(raiser, npc: bool = true) -> void:
+func attack(raiser, npc: bool = true) -> bool:
 	if !can_attack:
-		return
+		return false
 	if selected_weapon.get_cooldown():
-		return
+		return false
 	
 	if mob_mover_component:
 		if mob_mover_component.fallen and block_when_fallen:
-			return
+			return false
 		if mob_mover_component.flying and block_when_flying:
-			return
+			return false
 	
 	selected_weapon.damage_modifier = damage_modifier
 	selected_weapon.cooldown_modifier = cooldown_modifier
 	selected_weapon.attack(raiser, npc)
+	
+	return true
 
 func release() -> void:
 	selected_weapon._on_release()

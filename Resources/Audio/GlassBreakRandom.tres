@@ -1,0 +1,14 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://cwegkx2i1iohu"]
+
+[ext_resource type="AudioStream" uid="uid://bkd5hxbcrnvam" path="res://Audio/Effects/glass_break1.ogg" id="1_ph7rc"]
+[ext_resource type="AudioStream" uid="uid://dpkn6cuubf1j2" path="res://Audio/Effects/glass_break2.ogg" id="2_k1k8a"]
+[ext_resource type="AudioStream" uid="uid://cco0fiago68fu" path="res://Audio/Effects/glass_break3.ogg" id="3_1fy0h"]
+[ext_resource type="AudioStream" uid="uid://c7s3rp6tja2vd" path="res://Audio/Effects/glass_break4.ogg" id="4_6hxpd"]
+
+[resource]
+random_pitch = 1.1892071
+streams_count = 4
+stream_0/stream = ExtResource("1_ph7rc")
+stream_1/stream = ExtResource("2_k1k8a")
+stream_2/stream = ExtResource("3_1fy0h")
+stream_3/stream = ExtResource("4_6hxpd")

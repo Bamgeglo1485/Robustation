@@ -941,4 +941,6 @@ terrain_set_0/terrain_0/color = Color(0.059032753, 0.014387485, 0.1642423, 1)
 terrain_set_0/terrain_1/name = "Glass"
 terrain_set_0/terrain_1/color = Color(0, 0.42233464, 0.87559897, 1)
 navigation_layer_0/layers = 1
+custom_data_layer_0/name = ""
+custom_data_layer_0/type = 0
 sources/2 = SubResource("TileSetAtlasSource_8ftkc")

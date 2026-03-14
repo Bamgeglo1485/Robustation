@@ -29,6 +29,8 @@ func force_select_weapon(new_weapon: Weapon):
 		weapon_sprite.change_weapon_texture(selected_weapon.equipped_texture, selected_weapon.icon_texture, selected_weapon.equipped_scale)
 
 func select_weapon(new_weapon: Weapon) -> void:
+	if selected_weapon:
+		selected_weapon.swapped.emit(new_weapon)
 	if ignore_setter:
 		ignore_setter = false
 		selected_weapon = new_weapon
@@ -37,8 +39,6 @@ func select_weapon(new_weapon: Weapon) -> void:
 		return
 	if (selected_weapon and selected_weapon.alt_attack and selected_weapon.alt_attack.swinging) or (selected_weapon and selected_weapon.alt_attack and !selected_weapon.alt_attack.can_switch):
 		return
-	if selected_weapon:
-		selected_weapon.swapped.emit(new_weapon)
 	
 	force_select_weapon(new_weapon)
 

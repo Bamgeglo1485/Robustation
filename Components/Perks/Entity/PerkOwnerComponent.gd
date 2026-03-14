@@ -9,6 +9,8 @@ var perk_notification_queue: Array[BasePerkComponent]
 @export var perk_notification_unit: PackedScene = preload("res://Scenes/UI/IngameInterface/Perks/PerkNotification.tscn")
 @export var perk_collect_sound: AudioStreamPlayer2D
 
+@export var can_collect: bool = false
+
 func add_perk(new_perk, amount = 1) -> void:
 	if perk_collect_sound:
 		perk_collect_sound.play()

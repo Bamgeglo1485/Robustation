@@ -132,6 +132,7 @@ stream = ExtResource("18_w1un4")
 [node name="Toolbox" type="Node" parent="WeaponUserComponent" index="1" unique_id=140255965 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound", "alt_attack")]
 script = ExtResource("12_tn3ht")
 damage = 60
+attack_range = 80
 ignore_armor = true
 parry_sound = NodePath("ParrySound")
 attack_sound = NodePath("MeleeHitSound")
@@ -172,7 +173,8 @@ empty_shoot_sound = NodePath("EmptySound")
 bullets_recover_sound = NodePath("BulletRecoverSound")
 bullets_recovery_delay = 2.0
 gun_fire_effect = ExtResource("16_w1un4")
-cooldown_delay = 0.5
+overheat_enabled = true
+cooldown_delay = 0.2
 swing_delay = 0.0
 equipped_texture = ExtResource("17_w1un4")
 equipped_scale = Vector2(0.75, 0.75)
@@ -256,17 +258,18 @@ metadata/_custom_type_script = "uid://bi1gje1pfokqc"
 [node name="BulletRecoverSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/SpearShared" index="0" unique_id=463305822]
 stream = ExtResource("8_ba6hk")
 
-[node name="ChargingToolbox" type="Node" parent="WeaponUserComponent" index="6" unique_id=1424202148 node_paths=PackedStringArray("charging_effect", "charging_sound", "full_charge_sound", "weapon_inhand_texture", "parry_sound", "attack_sound", "miss_sound")]
+[node name="ChargingToolbox" type="Node" parent="WeaponUserComponent" index="6" unique_id=1424202148 node_paths=PackedStringArray("charging_effect", "charging_sound", "full_charge_sound", "parry_sound", "attack_sound", "miss_sound")]
 script = ExtResource("27_hev03")
 max_charge_time = 1.5
 base_charge_time = 0.5
 exponent_divider = 1.0
 charging_effect = NodePath("../../ChargingEffect")
+hitstop_charge = 0.75
 hitstop_divider = 1.0
 charging_sound = NodePath("ChargingSound")
 full_charge_sound = NodePath("FullChargeSound")
-weapon_inhand_texture = NodePath("../../Texture/WeaponSpriteComponent/WeaponSprite")
 damage = 7
+attack_range = 80
 parry_sound = NodePath("ParrySound")
 attack_sound = NodePath("MeleeHitSound")
 miss_sound = NodePath("MeleeMissSound")

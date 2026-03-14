@@ -1,5 +1,6 @@
 class_name HealthComponent extends Component
 
+@export var do_not_delete_after_gib: bool = false
 @export var max_health: int = 100
 @export var INVINCIBLE: bool = false
 var base_max_health: int = max_health
@@ -39,11 +40,11 @@ func _ready():
 	delayed_damage_timer.start()
 	
 	health = max_health
+	if parent.has_node("UniqueShaderComponent"):
+		await parent.get_node("UniqueShaderComponent").ready
+	shader = parent.material
 
 func set_health(new_health: int) -> void:
-	if (!shader and parent and parent.material) or shader and parent.material and shader != parent.material:
-		shader = parent.material
-	
 	EventBusManager.health_changed.emit(parent, health, new_health)
 	
 	if new_health < health:
@@ -131,8 +132,18 @@ func _death() -> void:
 		gib_effect.global_position = parent.global_position
 		scene.add_child.call_deferred(gib_effect)
 	
-	parent.call_deferred("queue_free")
 	EventBusManager.gibbed.emit(parent)
+	if !do_not_delete_after_gib:
+		parent.call_deferred("queue_free")
+	else:
+		for child in parent.get_children():
+			if child == self or child is HealthOverlayComponent:
+				continue
+			if child is PlayerCamera:
+				continue
+			if child is CanvasLayer:
+				continue
+			child.queue_free()
 
 func set_delayed_damage(damage: int, time: int) -> void:
 	delayed_damage_queue.append({"damage": damage, "time": time})

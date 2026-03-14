@@ -36,14 +36,14 @@ collision_layer = 519
 collision_mask = 519
 texture = NodePath("../Texture")
 particle_emitter = NodePath("GPUParticles2D")
-speed = 350
-speed_decreasing = 3
-max_damage = 50
-damage = 20
+speed_decreasing = 6
+max_damage = 80
+damage = 30
 lifetime = 0.0
 delete_on_hit = false
 return_to_sender = true
 max_distance_from_sender = 600
+parry_speed_boost = 1.0
 
 [node name="CollisionShape2D" parent="ProjectileComponent" index="0" unique_id=1391622764]
 rotation = 1.5707964

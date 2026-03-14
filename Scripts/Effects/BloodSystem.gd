@@ -2,7 +2,7 @@ extends GPUParticles2D
 
 @export var max_clean_health = 3
 @export var clean_health = max_clean_health
-
+@export var do_not_delete: bool = false
 func _ready() -> void:
 	visible = true
 	emitting = true
@@ -11,6 +11,8 @@ func _ready() -> void:
 	if clean_delay == 0:
 		return
 	
+	if do_not_delete:
+		return
 	await get_tree().create_timer(clean_delay - 5).timeout
 	var tween: Tween = create_tween()
 	tween.set_trans(Tween.TRANS_SINE)

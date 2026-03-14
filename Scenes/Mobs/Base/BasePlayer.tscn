@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b0b3vncwssou1" path="res://Textures/Light/light_cone.png" id="6_2i8o7"]
 [ext_resource type="Script" uid="uid://djmi5xfppmrii" path="res://Components/Visual/HealthOverlayComponent.gd" id="6_korw6"]
 [ext_resource type="Material" uid="uid://bx7piwibywxgi" path="res://Resources/Shaders/DamageScreen.tres" id="7_5768p"]
+[ext_resource type="PackedScene" uid="uid://dbvva6n0vkfu2" path="res://Scenes/Effects/Particles/PlayerGib.tscn" id="7_nnp87"]
 [ext_resource type="AudioStream" uid="uid://drhi1s5c4ustd" path="res://Audio/Effects/perk_collect.ogg" id="8_4awd5"]
 [ext_resource type="Script" uid="uid://bjb1tak0ajoof" path="res://Components/Player/BattleTendencyComponent.gd" id="8_ljr5e"]
 [ext_resource type="Material" uid="uid://dctvv4tidab2r" path="res://Resources/Shaders/BattleTendency.tres" id="9_d6ik8"]
@@ -21,7 +22,7 @@
 [ext_resource type="Script" uid="uid://bdxrxakvokr52" path="res://Components/Player/ScreenShakeComponent.gd" id="13_0r3jo"]
 [ext_resource type="AudioStream" uid="uid://bm4puq01g5yws" path="res://Audio/Effects/flashlight_on.ogg" id="13_dxps5"]
 [ext_resource type="AudioStream" uid="uid://4fxhy8fsdcb1" path="res://Audio/Effects/flashlight_off.ogg" id="14_p5itk"]
-[ext_resource type="Script" uid="uid://bl4o52tmouk6e" path="res://Components/Perks/Entity/PerkOwnerComponent.gd" id="15_4awd5"]
+[ext_resource type="PackedScene" uid="uid://dxkngv1mfm6mc" path="res://Scenes/UI/IngameInterface/DeathScreen.tscn" id="16_nnp87"]
 [ext_resource type="Script" uid="uid://jqnpe0oqv5il" path="res://Components/Player/RainbowOverlayComponent.gd" id="17_egoq8"]
 [ext_resource type="Material" uid="uid://dm7k2tvshj7cb" path="res://Resources/Shaders/RainbowEffect.tres" id="18_wns57"]
 [ext_resource type="Script" uid="uid://ck3n6ttlwtal7" path="res://Components/Player/IngameMenuComponent.gd" id="19_pd2gv"]
@@ -57,6 +58,8 @@
 [ext_resource type="Texture2D" uid="uid://crvhr1fwjc3wu" path="res://Textures/Interface/Ingame/Stamina/stamina_1.png" id="50_2d3wq"]
 [ext_resource type="Texture2D" uid="uid://br3jho2qicoua" path="res://Textures/Interface/Ingame/Stamina/stamina_2.png" id="51_usxup"]
 [ext_resource type="Texture2D" uid="uid://dd542uq0kak83" path="res://Textures/Interface/Ingame/Stamina/stamina_3.png" id="52_2i8o7"]
+[ext_resource type="PackedScene" uid="uid://cgp4m68yb8wfe" path="res://Scenes/UI/IngameInterface/Perks/PerkChoose.tscn" id="52_dxps5"]
+[ext_resource type="Shader" uid="uid://boy7hlksa7i1s" path="res://Resources/Shaders/ImpactFrame.gdshader" id="52_p5itk"]
 [ext_resource type="Texture2D" uid="uid://c6mx7npsbi7s0" path="res://Textures/Interface/Ingame/Stamina/stamina_4.png" id="53_o3dxh"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_p8133"]
@@ -214,6 +217,25 @@ shader_parameter/vignette_opacity = 0.5
 shader_parameter/edge_darken = 0.8
 shader_parameter/edge_softness = 0.1
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wm8ym"]
+shader = ExtResource("52_p5itk")
+shader_parameter/threshold = 0.10000000475
+shader_parameter/smoothness = 0.05
+shader_parameter/bg_color = Color(0, 0, 0, 0)
+shader_parameter/fg_color = Color(1, 1, 1, 0)
+shader_parameter/invert = false
+shader_parameter/intensity = 1.0
+shader_parameter/mask_softness = 1.50000016625
+shader_parameter/mask_threshold = 0.70000003325
+shader_parameter/sort = 1.0000000475
+shader_parameter/line_color = Color(0, 0, 0, 0)
+shader_parameter/line_count = 0.5
+shader_parameter/line_density = 0.5
+shader_parameter/line_faloff = 0.25
+shader_parameter/mask_size = 0.400000019
+shader_parameter/mask_edge = 1.0
+shader_parameter/animation_speed = 0.5
+
 [node name="Player" unique_id=808070232 instance=ExtResource("1_gq7me")]
 collision_layer = 1
 collision_mask = 1
@@ -251,8 +273,9 @@ texture = ExtResource("6_2i8o7")
 texture_scale = 0.5
 
 [node name="HealthComponent" parent="." index="6" unique_id=1758373275]
-max_health = 200
+do_not_delete_after_gib = true
 invinciblitiy_attack_effect = ExtResource("5_oayod")
+gib_effect_scene = ExtResource("7_nnp87")
 heal_for_damage_multiplier = 0.1
 
 [node name="FactionComponent" parent="." index="7" unique_id=1651473390]
@@ -298,9 +321,12 @@ process_mode = 3
 stream = ExtResource("14_p5itk")
 volume_db = -8.0
 
-[node name="HealthOverlayComponent" type="Node" parent="." index="16" unique_id=490260157 node_paths=PackedStringArray("overlay")]
+[node name="HealthOverlayComponent" type="Node" parent="." index="16" unique_id=490260157 node_paths=PackedStringArray("overlay", "death_effect", "death_screen_parent")]
 script = ExtResource("6_korw6")
 overlay = NodePath("../GUI/Overlays/Health/Health")
+death_effect = NodePath("../GUI/Overlays/Death/Death")
+death_screen = ExtResource("16_nnp87")
+death_screen_parent = NodePath("../GUI")
 metadata/_custom_type_script = "uid://djmi5xfppmrii"
 
 [node name="BattleTendencyComponent" type="Node" parent="." index="17" unique_id=1071898636 node_paths=PackedStringArray("euphoria_effect", "battle_tendency_effect")]
@@ -319,19 +345,12 @@ metadata/_custom_type_script = "uid://c3d63pm2kikgh"
 script = ExtResource("13_0r3jo")
 metadata/_custom_type_script = "uid://bdxrxakvokr52"
 
-[node name="PerkOwnerComponent" type="Node" parent="." index="21" unique_id=830713071 node_paths=PackedStringArray("perk_ui", "perk_notification_ui", "perk_collect_sound")]
-script = ExtResource("15_4awd5")
-perk_ui = NodePath("../GUI/PerkList/Panel/GridContainer")
-perk_notification_ui = NodePath("../GUI")
-perk_collect_sound = NodePath("../Sounds/PerkCollect")
-metadata/_custom_type_script = "uid://bl4o52tmouk6e"
-
-[node name="RainbowOverlayComponent" type="Node" parent="." index="23" unique_id=1613621018 node_paths=PackedStringArray("overlay")]
+[node name="RainbowOverlayComponent" type="Node" parent="." index="22" unique_id=1613621018 node_paths=PackedStringArray("overlay")]
 script = ExtResource("17_egoq8")
 overlay = NodePath("../GUI/Overlays/Rainbow/Rainbow")
 metadata/_custom_type_script = "uid://jqnpe0oqv5il"
 
-[node name="IngameMenuComponent" type="Node" parent="." index="24" unique_id=691096378 node_paths=PackedStringArray("menu", "paused_effect", "ambience")]
+[node name="IngameMenuComponent" type="Node" parent="." index="23" unique_id=691096378 node_paths=PackedStringArray("menu", "paused_effect", "ambience")]
 process_mode = 3
 script = ExtResource("19_pd2gv")
 menu = NodePath("../GUI/Menu/IngameMenu")
@@ -340,12 +359,12 @@ paused_effect = NodePath("../GUI/Overlays/Menu/MenuOverlay")
 ambience = NodePath("../Sounds/Ambience")
 metadata/_custom_type_script = "uid://ck3n6ttlwtal7"
 
-[node name="FullcreenSettingsComponent" type="Node" parent="." index="25" unique_id=1756646197]
+[node name="FullcreenSettingsComponent" type="Node" parent="." index="24" unique_id=1756646197]
 process_mode = 3
 script = ExtResource("22_7o513")
 metadata/_custom_type_script = "uid://b5miclua4wknq"
 
-[node name="BattleTendencyMusicComponent" type="Node" parent="." index="26" unique_id=947169944]
+[node name="BattleTendencyMusicComponent" type="Node" parent="." index="25" unique_id=947169944]
 script = ExtResource("27_7qb6q")
 music_1 = ExtResource("28_855fl")
 music_2 = ExtResource("29_6gaf5")
@@ -353,7 +372,7 @@ music_3 = ExtResource("30_7e430")
 music_4 = ExtResource("31_hp12l")
 metadata/_custom_type_script = "uid://rvt8h5qxjw7w"
 
-[node name="MusicComponent" type="Node" parent="." index="27" unique_id=1410407748 node_paths=PackedStringArray("main_music_player", "main_music_player_staged", "minor_music_player")]
+[node name="MusicComponent" type="Node" parent="." index="26" unique_id=1410407748 node_paths=PackedStringArray("main_music_player", "main_music_player_staged", "minor_music_player")]
 script = ExtResource("32_ak33s")
 main_music_player = NodePath("Main")
 main_music_player_staged = NodePath("Main_stage")
@@ -369,7 +388,7 @@ bus = &"Music"
 [node name="Main_stage" type="AudioStreamPlayer" parent="MusicComponent" index="2" unique_id=1660062971]
 bus = &"Music"
 
-[node name="HealthIndicatorComponent" type="Node" parent="." index="28" unique_id=1026848912 node_paths=PackedStringArray("texture_rect")]
+[node name="HealthIndicatorComponent" type="Node" parent="." index="27" unique_id=1026848912 node_paths=PackedStringArray("texture_rect")]
 script = ExtResource("26_7e430")
 health_0 = ExtResource("35_hp12l")
 health_1 = ExtResource("28_quqo7")
@@ -379,7 +398,8 @@ health_4 = ExtResource("31_omg6r")
 texture_rect = NodePath("../GUI/Misc/Health_Background/Health_indicator")
 metadata/_custom_type_script = "uid://b8ag0xs5wkoy7"
 
-[node name="GUI" type="CanvasLayer" parent="." index="29" unique_id=1706866694]
+[node name="GUI" type="CanvasLayer" parent="." index="28" unique_id=1706866694]
+layer = 2
 
 [node name="PerkList" type="Control" parent="GUI" index="0" unique_id=1491893049]
 layout_mode = 3
@@ -799,11 +819,30 @@ color = Color(1, 1, 1, 0)
 
 [node name="Ability" type="CanvasLayer" parent="GUI/Overlays" index="6" unique_id=614013625]
 
-[node name="RobustEffect" parent="." index="30" unique_id=379104243 instance=ExtResource("45_aq85w")]
+[node name="PerkList" type="CanvasLayer" parent="GUI/Overlays" index="7" unique_id=1605192126]
+
+[node name="Death" type="CanvasLayer" parent="GUI/Overlays" index="8" unique_id=452867960]
+
+[node name="Death" type="ColorRect" parent="GUI/Overlays/Death" index="0" unique_id=568475295]
+material = SubResource("ShaderMaterial_wm8ym")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="PerkChoose" type="CanvasLayer" parent="GUI" index="5" unique_id=387688815]
+layer = 3
+
+[node name="PerkChoose" parent="GUI/PerkChoose" index="0" unique_id=1852449319 instance=ExtResource("52_dxps5")]
+modulate = Color(0, 0, 0, 0)
+
+[node name="RobustEffect" parent="." index="29" unique_id=379104243 instance=ExtResource("45_aq85w")]
 visible = false
 position = Vector2(5, -7)
 
-[node name="StaminaIndicatorComponent" type="Node" parent="." index="31" unique_id=1941687595 node_paths=PackedStringArray("texture_rect")]
+[node name="StaminaIndicatorComponent" type="Node" parent="." index="30" unique_id=1941687595 node_paths=PackedStringArray("texture_rect")]
 script = ExtResource("44_svu4j")
 stamina_0 = ExtResource("34_8fti1")
 stamina_1 = ExtResource("50_2d3wq")
@@ -813,5 +852,11 @@ stamina_4 = ExtResource("53_o3dxh")
 texture_rect = NodePath("../GUI/Misc/Stamina_Background/Stamina_indicator")
 metadata/_custom_type_script = "uid://bh67jcffdkivf"
 
-[node name="AudioListener2D" type="AudioListener2D" parent="." index="32" unique_id=826120773]
+[node name="AudioListener2D" type="AudioListener2D" parent="." index="31" unique_id=826120773]
 current = true
+
+[node name="PerkOwnerComponent" parent="." index="32" unique_id=1121886740 node_paths=PackedStringArray("perk_ui", "perk_notification_ui", "perk_collect_sound")]
+perk_ui = NodePath("../GUI/PerkList/Panel/GridContainer")
+perk_notification_ui = NodePath("../GUI/Menu")
+perk_collect_sound = NodePath("../Sounds/PerkCollect")
+can_collect = true

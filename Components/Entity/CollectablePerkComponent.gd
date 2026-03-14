@@ -33,7 +33,8 @@ func _ready() -> void:
 		tween.set_loops()
 
 func _on_collide(body) -> void:
-	if !perk or !body.has_node("PerkOwnerComponent"):
+	var perk_comp: PerkOwnerComponent = body.get_node("PerkOwnerComponent")
+	if !perk or !perk_comp or !perk_comp.can_collect:
 		return
 	
 	var tween: Tween = create_tween()
@@ -41,9 +42,9 @@ func _on_collide(body) -> void:
 	tween.tween_property(parent, "scale", Vector2(0, 0), 0.1)
 	tween.tween_property(parent, "modulate", Color(0.904, 1.0, 0.0, 1.0), 0.1)
 	
-	await get_tree().create_timer(0.1).timeout
+	await tween.finished
 	
-	body.get_node("PerkOwnerComponent").add_perk(perk, amount)
+	perk_comp.add_perk(perk, amount)
 	parent.queue_free()
 
 func _get_random_perk():

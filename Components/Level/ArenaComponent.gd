@@ -1,16 +1,19 @@
 class_name ArenaComponent extends Component
 
 @export_category("Settings")
+@export var area_info: RichTextLabel
+@export var choosable_perk_count_per_wave: int = 4
 @export var available_enemies: Array[Enemy]
 @export var budget_per_wave: float = 1
 @export var spawn_positions: Array[Vector2]
 @export var difficulty: int = 2
 
-@export var max_range: int = 10
-@export var melee_range: int = 15
+@export var max_melee_enemies: int = 8
+@export var max_range_enemies: int = 8
 
 @export_category("Variables")
 @export var wave: int = 0
+
 var budget: float = budget_per_wave
 
 var melee_enemies: Array[Enemy]
@@ -18,9 +21,21 @@ var range_enemies: Array[Enemy]
 var assist_enemies: Array[Enemy]
 var universal_enemies: Array[Enemy]
 var boss_enemies: Array[Enemy]
+var time: float
+var loose: bool = false
+
+@onready var player: Node2D = scene.get_node_or_null("Player")
+@onready var weapon_user_component: WeaponUserComponent = player.get_node_or_null("WeaponUserComponent")
+@onready var health_component: HealthComponent = player.get_node_or_null("HealthComponent")
+@onready var player_perk_ui: Control = player.get_node("GUI").get_node("PerkChoose").get_node("PerkChoose")
+@onready var player_perk_ui_list: VBoxContainer = player_perk_ui.get_node("Panel").get_node("VBoxContainer")
+var perk_list_unit: PackedScene = preload("res://Scenes/UI/IngameInterface/Perks/PerkChooseUnit.tscn")
 
 @export_category("Operational")
+var wave_active: bool = false
 var current_enemies: Array[PhysicsBody2D]
+
+const MAX_ATTEMPTS: int = 100
 
 #-----------------------READY-----------------------
 func _ready() -> void:
@@ -40,14 +55,34 @@ func _ready() -> void:
 	start_game()
 
 #-----------------------PROCESS-----------------------
-func start_game() -> void:
-	start_new_wave()
+func _physics_process(delta: float) -> void:
+	if !wave_active:
+		return
+	time += delta
+	if area_info:
+		area_info.text = "Wave: " + str(wave) + "\nTime: " + str(round(time * 10) / 10.0)
 
-func start_new_wave() -> void:
+func start_game() -> void:
+	time = 0.0
+	start_new_wave(true)
+
+func start_new_wave(new_game: bool = false) -> void:
+	if !new_game:
+		await _open_perk_choose()
+		health_component.set_health(health_component.max_health)
+	wave_active = true
 	wave += 1
 	budget = budget_per_wave * wave
 	
-	current_enemies.append_array(_spawn_enemies(_choose_enemies(budget, available_enemies)))
+	current_enemies.append_array(_spawn_enemies(_choose_enemies(available_enemies)))
+	
+	if budget < 2:
+		return
+	
+	var attempts: int = 0
+	while budget >= 2 and attempts < MAX_ATTEMPTS:
+		attempts += 1
+		_add_perks(current_enemies)
 
 #-----------------------ASSIST FUNCTIONS-----------------------
 func _spawn_enemies(enemies: Array[PackedScene]) -> Array[PhysicsBody2D]:
@@ -61,18 +96,30 @@ func _spawn_enemies(enemies: Array[PackedScene]) -> Array[PhysicsBody2D]:
 	
 	return spawned_enemies
 
-func _choose_enemies(choose_budget: float, enemies: Array[Enemy]) -> Array[PackedScene]:
+func _choose_enemies(enemies: Array[Enemy]) -> Array[PackedScene]:
 	var choosed_enemies: Array[PackedScene]
-	var remaining_budget: float = choose_budget
+	var remaining_budget: float = budget
 	var attempts: int = 0
-	const MAX_ATTEMPTS: int = 100
 	
 	var _available_enemies: Array[Enemy] = enemies.duplicate()
+	var melee_enemies_count: int = 0
+	var range_enemies_count: int = 0
 	
 	while remaining_budget > 0.1 and attempts < MAX_ATTEMPTS and _available_enemies.size() > 0:
 		attempts += 1
 		
-		var enemy: Enemy = _weighted_random_enemy(_available_enemies)
+		var enemy: Enemy = _random_enemy(_available_enemies)
+		
+		if enemy.enemy_type == enemy.enemy_types.MELEE :
+			if melee_enemies_count + 1 >= max_melee_enemies:
+				continue
+			else:
+				melee_enemies_count += 1
+		elif enemy.enemy_type == enemy.enemy_types.RANGE :
+			if range_enemies_count + 1 >= max_range_enemies:
+				continue
+			else:
+				range_enemies_count += 1
 		
 		var max_count: int = floor(remaining_budget / enemy.cost)
 		if max_count <= 0:
@@ -89,9 +136,11 @@ func _choose_enemies(choose_budget: float, enemies: Array[Enemy]) -> Array[Packe
 			choosed_enemies.append(enemy.scene)
 		remaining_budget -= enemy.cost * count_to_spawn
 	
+	budget = remaining_budget
+	
 	return choosed_enemies
 
-func _weighted_random_enemy(enemies: Array[Enemy]) -> Enemy:
+func _random_enemy(enemies: Array[Enemy]) -> Enemy:
 	var total_weight: float = 0.0
 	for enemy in enemies:
 		total_weight += enemy.weight
@@ -106,9 +155,120 @@ func _weighted_random_enemy(enemies: Array[Enemy]) -> Enemy:
 	
 	return enemies.back()
 
+func _add_perks(enemies: Array[PhysicsBody2D]):
+	for enemy in enemies:
+		if !is_instance_valid(enemy):
+			continue
+		var perk_owner_comp: PerkOwnerComponent = enemy.get_node_or_null("PerkOwnerComponent")
+		if !perk_owner_comp:
+			continue
+		
+		perk_owner_comp.add_perk(_get_random_perk())
+		budget -= 2
+
+func _get_random_perk():
+		var perks: Array[String] = _get_all_file_paths("res://Components/Perks")
+		var valid_perks: Array[Script] = []
+		for potential_perk in perks:
+			var loaded_perk = load(potential_perk)
+			if loaded_perk is Script:
+				valid_perks.append(loaded_perk)
+		
+		if valid_perks.is_empty():
+			return
+		
+		return valid_perks.pick_random()
+
+func _get_all_file_paths(path: String) -> Array[String]:  
+	var file_paths: Array[String] = []  
+	var dir = DirAccess.open(path)  
+	
+	if dir == null:
+		return file_paths
+	
+	dir.list_dir_begin()  
+	var file_name = dir.get_next()  
+	while file_name != "":  
+		if file_name.ends_with(".gd"):
+			var file_path = path + "/" + file_name  
+			file_paths.append(file_path)  
+		file_name = dir.get_next()  
+	dir.list_dir_end()
+	return file_paths
+
+func _open_perk_choose() -> void:
+	if loose:
+		return
+	weapon_user_component.can_attack = false
+	player_perk_ui.visible = true
+	var tween: Tween = create_tween()
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(player_perk_ui, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.5)
+	await tween.finished
+	var perk_units: Array[Panel]
+	var perk_units_buttons: Array[Button]
+	for i in choosable_perk_count_per_wave:
+		var perk = _get_random_perk()
+		var inst_perk: BasePerkComponent = perk.new()
+		
+		var perk_unit: Panel = perk_list_unit.instantiate()
+		player_perk_ui_list.add_child.call_deferred(perk_unit)
+		perk_unit.modulate = Color(0.0, 0.0, 0.0, 0.0)
+		perk_units.append(perk_unit)
+		perk_unit.get_node("TextureRect").texture = inst_perk.perk_icon
+		perk_unit.get_node("Desc").text = inst_perk.perk_desc
+		var perk_name_label: Label = perk_unit.get_node("Name")
+		perk_name_label.text = inst_perk.perk_name
+		if inst_perk.rarity == inst_perk.rarity_classes.COMMON:
+			perk_name_label.modulate = Color(0.744, 0.188, 0.0, 1.0)
+		elif inst_perk.rarity == inst_perk.rarity_classes.SHITTY:
+			perk_name_label.modulate = Color(0.348, 0.197, 0.0, 1.0)
+		elif inst_perk.rarity == inst_perk.rarity_classes.ROBUST:
+			perk_name_label.modulate = Color(0.931, 0.0, 0.323, 1.0)
+		elif inst_perk.rarity == inst_perk.rarity_classes.ADMINABUSE:
+			perk_name_label.modulate = Color(0.613, 0.003, 0.899, 1.0)
+		inst_perk.queue_free()
+		var perk_unit_button: Button = perk_unit.get_node("Button")
+		perk_unit_button.disabled = true
+		perk_units_buttons.append(perk_unit_button)
+		perk_unit_button.get_node("PerkChooseOnPressedComponent").perk = perk
+	
+	for perk in perk_units:
+		var perk_tween: Tween = create_tween()
+		perk_tween.set_trans(Tween.TRANS_SINE)
+		perk_tween.set_ease(Tween.EASE_IN_OUT)
+		perk_tween.tween_property(perk, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.3)
+		await perk_tween.finished
+	
+	for button in perk_units_buttons:
+		button.disabled = false
+	
+	await EventBusManager.on_perk_choosed
+	_close_perk_choose()
+
+func _close_perk_choose() -> void:
+	weapon_user_component.can_attack = true
+	var tween: Tween = create_tween()
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(player_perk_ui, "modulate", Color(0.0, 0.0, 0.0, 0.0), 0.5)
+	await tween.finished
+	player_perk_ui.visible = false
+	for child in player_perk_ui_list.get_children():
+		child.queue_free()
+
+func _on_player_death() -> void:
+	wave_active = false
+	loose = true
+
 #-----------------------SIGNALS-----------------------
 func _on_gibbed(emitter: Node2D) -> void:
+	if emitter == player:
+		_on_player_death()
+		return
 	if current_enemies.has(emitter):
 		current_enemies.erase(emitter)
 		if current_enemies.is_empty():
-			start_new_wave()
+			wave_active = false
+			await start_new_wave()

@@ -50,7 +50,9 @@ var main_weapon: Weapon
 var child_weapons: Array[Weapon]
 var can_switch: bool = true
 
-@onready var weapon_sprite: WeaponSpriteComponent
+var player_weapon_user: PlayerWeaponUserComponent
+var weapon_inhand_texture: Sprite2D
+var weapon_sprite: WeaponSpriteComponent
 
 @warning_ignore("unused_signal")
 signal swapped(new_weapon: Weapon)
@@ -60,7 +62,9 @@ func _ready() -> void:
 		parent = parent.get_parent()
 		animation_component = parent.get_node_or_null("AnimationComponent")
 	
+	player_weapon_user = parent.get_node_or_null("PlayerWeaponUserComponent")
 	weapon_sprite = parent.get_node_or_null("Texture").get_node_or_null("WeaponSpriteComponent")
+	weapon_inhand_texture = weapon_sprite.weapon_texture
 	
 	if parent.has_node("Sounds"):
 		var sounds: Node = parent.get_node("Sounds")

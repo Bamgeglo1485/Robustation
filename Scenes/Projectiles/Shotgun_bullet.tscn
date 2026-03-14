@@ -35,7 +35,7 @@ collision_mask = 15
 texture = NodePath("../Texture")
 particle_emitter = NodePath("GPUParticles2D")
 speed = 1000
-damage = 34
+damage = 45
 lifetime = 1.0
 parry_speed_boost = 1.0
 

@@ -18,8 +18,11 @@ func tick(_actor: Node, blackboard: Blackboard) -> int:
 	
 	if !player:
 		player = scene.get_node_or_null("Player")
+		if !player.has_node("MobMoverComponent"):
+			player = null
 	
 	if !player or !is_instance_valid(player):
+		blackboard.set_value(key, null)
 		return FAILURE
 	
 	blackboard.set_value(key, player)

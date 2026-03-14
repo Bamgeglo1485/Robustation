@@ -151,7 +151,7 @@ func explode() -> void:
 		instance.global_position = global_position
 		if shooter:
 			instance.source = shooter
-		scene.add_child(instance)
+		scene.add_child.call_deferred(instance)
 
 func _on_body_entered(body: Node2D) -> void:
 	if !body or !can_hit or body == parent:

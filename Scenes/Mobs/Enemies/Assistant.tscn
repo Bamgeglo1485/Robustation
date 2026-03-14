@@ -33,7 +33,6 @@
 [ext_resource type="Texture2D" uid="uid://dfrqsbt71ss31" path="res://Textures/Weapons/Bow/bow_inhands.png" id="33_hjwmf"]
 [ext_resource type="Script" uid="uid://da2q40ragr5wk" path="res://Components/Mobs/NPC/BuddyComponent.gd" id="33_ndq0p"]
 [ext_resource type="AudioStream" uid="uid://byyinwd23qdiy" path="res://Audio/Weapon/trashbag2.ogg" id="33_xiial"]
-[ext_resource type="Script" uid="uid://bdca2wo1kubsv" path="res://Components/Mobs/SpawnPerkOnDeathComponent.gd" id="34_42ix1"]
 [ext_resource type="AudioStream" uid="uid://bxovm2xahbdet" path="res://Resources/Audio/BulletMissRandom.tres" id="34_x7a73"]
 [ext_resource type="Script" uid="uid://8hn4kne15ac5" path="res://addons/beehave/nodes/composites/selector.gd" id="35_45scd"]
 [ext_resource type="AudioStream" uid="uid://ii51ruio4r4v" path="res://Audio/Weapon/bow_pull.ogg" id="35_ayjuv"]
@@ -106,13 +105,16 @@ metadata/_custom_type_script = "uid://bi1gje1pfokqc"
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/PneumaticCannon" index="0" unique_id=983846066]
 stream = ExtResource("31_7ct2p")
+max_distance = 600.0
 max_polyphony = 3
 
 [node name="EmptySound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/PneumaticCannon" index="1" unique_id=1682556098]
 stream = ExtResource("32_3s8e1")
+max_distance = 600.0
 
 [node name="BulletRecoverSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/PneumaticCannon" index="2" unique_id=191518879]
 stream = ExtResource("33_xiial")
+max_distance = 600.0
 
 [node name="Bow" type="Node" parent="RandomWeaponSelectorComponent" index="1" unique_id=858114854 node_paths=PackedStringArray("shoot_sound", "bullets_recover_sound")]
 script = ExtResource("25_f6ny4")
@@ -136,10 +138,12 @@ metadata/_custom_type_script = "uid://bi1gje1pfokqc"
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/Bow" index="0" unique_id=716717373]
 stream = ExtResource("34_x7a73")
+max_distance = 600.0
 max_polyphony = 3
 
 [node name="BulletRecoverSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/Bow" index="1" unique_id=932472733]
 stream = ExtResource("35_ayjuv")
+max_distance = 600.0
 
 [node name="BuddyComponent" type="Node" parent="." index="19" unique_id=2046809544]
 script = ExtResource("33_ndq0p")
@@ -147,13 +151,8 @@ buddy_group = "Assistant"
 rage_when_buddy_dead = false
 metadata/_custom_type_script = "uid://da2q40ragr5wk"
 
-[node name="SpawnPerkOnDeathComponent" type="Node" parent="." index="20" unique_id=261117993]
-script = ExtResource("34_42ix1")
-chance = 0.1
-metadata/_custom_type_script = "uid://bdca2wo1kubsv"
-
-[node name="BeehaveTree" parent="." index="21" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@251217")
+[node name="BeehaveTree" parent="." index="20" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
+blackboard = NodePath("@Node@18962")
 
 [node name="SequenceComposite" type="Node" parent="BeehaveTree" index="0" unique_id=2054169643]
 script = ExtResource("36_k3vsn")

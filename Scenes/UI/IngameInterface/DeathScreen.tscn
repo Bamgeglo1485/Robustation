@@ -1,0 +1,133 @@
+[gd_scene format=3 uid="uid://dxkngv1mfm6mc"]
+
+[ext_resource type="LabelSettings" uid="uid://cwb2xcovj2h4n" path="res://Resources/Text/UI.tres" id="1_8111n"]
+[ext_resource type="Texture2D" uid="uid://dqd7xkk5m77ck" path="res://Textures/Interface/Menu/cross.png" id="2_to71l"]
+[ext_resource type="FontFile" uid="uid://dichq2si55q4b" path="res://Resources/Text/Fonts/RobotoMono/static/RobotoMono-ExtraLight.ttf" id="4_n5c8n"]
+[ext_resource type="AudioStream" uid="uid://clyex8ro7ia8c" path="res://Audio/Effects/adminhelp.ogg" id="5_8111n"]
+[ext_resource type="Script" uid="uid://cja3led3n1ehp" path="res://Components/Interface/Menu/DragButtonComponent.gd" id="6_biumy"]
+[ext_resource type="Script" uid="uid://dt8oc1tntsxju" path="res://Components/Interface/Ingame/DeathScreenComponent.gd" id="6_n5c8n"]
+[ext_resource type="Script" uid="uid://ccj77qbogyatv" path="res://Components/Entity/TimedSceneAdderComponent.gd" id="7_3me48"]
+[ext_resource type="PackedScene" uid="uid://bfiiciqf8e8w1" path="res://Scenes/UI/IngameInterface/RestartScreen.tscn" id="8_yrqcn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3me48"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yrqcn"]
+bg_color = Color(0.060530342, 0.06053035, 0.060530327, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pjvv6"]
+bg_color = Color(0.11286896, 1.469492e-06, 0.08068577, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gjbiy"]
+bg_color = Color(0.14165193, 0.075261734, 0.0927326, 1)
+
+[node name="DeathScreen" type="Control" unique_id=1644887491]
+process_mode = 3
+layout_mode = 3
+anchor_left = -0.4887153
+anchor_top = -0.55401236
+anchor_right = 0.5112847
+anchor_bottom = 0.44598764
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Error" type="Panel" parent="." unique_id=1254627263]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.344
+anchor_top = 0.31500003
+anchor_right = 0.65800005
+anchor_bottom = 0.804
+offset_left = -0.2880249
+offset_top = -0.120010376
+offset_right = -0.016052246
+offset_bottom = -182.992
+theme_override_styles/panel = SubResource("StyleBoxFlat_3me48")
+
+[node name="Label" type="Label" parent="Error" unique_id=977774462]
+z_index = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.07734807
+anchor_top = 0.01197603
+anchor_right = 0.8232044
+anchor_bottom = 0.0778443
+mouse_behavior_recursive = 1
+text = "taskmgr.exe - ui_system.rbst"
+label_settings = ExtResource("1_8111n")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Error/Label" unique_id=1616202151]
+modulate = Color(0.86477405, 0, 0.27292433, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.1
+anchor_right = -0.011111111
+anchor_bottom = 1.2727271
+texture = ExtResource("2_to71l")
+expand_mode = 1
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="Error" unique_id=658363291]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.008955223
+anchor_right = 1.0
+anchor_bottom = 0.21641788
+theme_override_styles/normal = SubResource("StyleBoxFlat_yrqcn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pjvv6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gjbiy")
+metadata/_edit_use_anchors_ = true
+
+[node name="DragButtonComponent" type="Node" parent="Error/Button" unique_id=405906314 node_paths=PackedStringArray("frame_to_drag")]
+script = ExtResource("6_biumy")
+frame_to_drag = NodePath("../..")
+metadata/_custom_type_script = "uid://cja3led3n1ehp"
+
+[node name="Label2" type="Label" parent="Error" unique_id=29536534]
+modulate = Color(0.89739907, 0, 0.22079071, 1)
+z_index = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.002762431
+anchor_top = 0.2761194
+anchor_right = 0.13812155
+anchor_bottom = 0.4402985
+mouse_behavior_recursive = 1
+text = "ERROR"
+label_settings = ExtResource("1_8111n")
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Error" unique_id=614685570]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.005524862
+anchor_top = 0.4402985
+anchor_right = 1.0
+anchor_bottom = 1.0149254
+theme_override_fonts/normal_font = ExtResource("4_n5c8n")
+text = "The service did not respond to the start or control request in a timely fashion"
+scroll_active = false
+metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Error" unique_id=1725480344]
+stream = ExtResource("5_8111n")
+volume_db = -10.0
+autoplay = true
+
+[node name="DeathScreenComponent" type="Node" parent="." unique_id=1865606873 node_paths=PackedStringArray("error_panel")]
+script = ExtResource("6_n5c8n")
+error_panel = NodePath("../Error")
+metadata/_custom_type_script = "uid://dt8oc1tntsxju"
+
+[node name="TimedSceneAdderComponent" type="Node" parent="." unique_id=1993291813 node_paths=PackedStringArray("target_parent")]
+script = ExtResource("7_3me48")
+targets = Array[PackedScene]([ExtResource("8_yrqcn")])
+target_parent = NodePath("..")
+delay = 2.75
+parent_of_target = true
+metadata/_custom_type_script = "uid://ccj77qbogyatv"

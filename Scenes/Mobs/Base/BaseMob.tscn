@@ -20,6 +20,7 @@
 [ext_resource type="OccluderPolygon2D" uid="uid://fjhiibh6ji2l" path="res://Resources/Occluders/HumanOccluder.tres" id="18_6uxej"]
 [ext_resource type="Script" uid="uid://bsicagw5u742w" path="res://Components/Mobs/StaminaComponent.gd" id="19_pns3t"]
 [ext_resource type="Script" uid="uid://kxk8t3aa4hjf" path="res://Components/Mobs/WeaponSpriteComponent.gd" id="20_vr1aj"]
+[ext_resource type="Script" uid="uid://bl4o52tmouk6e" path="res://Components/Perks/Entity/PerkOwnerComponent.gd" id="21_1lf4d"]
 
 [node name="Mob" type="CharacterBody2D" unique_id=660687485]
 physics_interpolation_mode = 1
@@ -143,3 +144,7 @@ position = Vector2(-5, 3)
 
 [node name="Right" type="Marker2D" parent="ArmPoints" unique_id=141043002]
 position = Vector2(-2, 3)
+
+[node name="PerkOwnerComponent" type="Node" parent="." unique_id=1121886740]
+script = ExtResource("21_1lf4d")
+metadata/_custom_type_script = "uid://bl4o52tmouk6e"

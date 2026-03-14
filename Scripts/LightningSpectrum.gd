@@ -9,6 +9,8 @@ var spectrum: AudioEffectSpectrumAnalyzerInstance
 var energy_history: Array[float] = []
 var history_size: int = 100
 
+@export var disable_when_player_death: bool = true
+@export var enabled: bool = true
 @export var color_component: Component
 @export var sensivity: float = 2.0 
 @export var jaggedness: float = 1.0
@@ -21,6 +23,9 @@ func _ready():
 	
 	for i in range(history_size):
 		energy_history.append(0.0)
+	
+	if disable_when_player_death:
+		EventBusManager.player_death.connect(_disable)
 
 func _process(delta: float) -> void:
 	time += delta
@@ -81,3 +86,6 @@ func _draw_lightning(control_size: Vector2, mid_height: float):
 		var glow_color = base_color
 		glow_color.a = 0.1 - i * 0.03
 		draw_polyline(points, glow_color, LINE_WIDTH * (3 + i), true)
+
+func _disable():
+	enabled = false

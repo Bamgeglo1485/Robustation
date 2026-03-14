@@ -31,6 +31,16 @@ class_name RangeWeapon extends Weapon
 
 @export var random_bullet_recover_delay_coef: float = 0.0
 
+@export_category("Overheat")
+@export var overheat_enabled: bool = false
+@export var max_overheat: float = 6.0
+@export var overheat_per_shoot: float = 2.0
+@export var cool_delay: float = 0.1
+@export var cool_count: float = 0.1
+@export var min_overheat_damage_debuff: float = 0.3
+var cool_timer: Timer
+var overheat: float
+
 var bullets_recover_timer: Timer
 var projectile_speed: float
 
@@ -50,6 +60,15 @@ func _ready() -> void:
 	super._ready()
 	
 	if !parent_weapon:
+		if overheat_enabled:
+			cool_timer = Timer.new()
+			cool_timer.ignore_time_scale = !timers_timescaled
+			cool_timer.timeout.connect(_on_cool)
+			cool_timer.one_shot = true
+			cool_timer.wait_time = cool_delay
+			cool_timer.autostart = true
+			add_child(cool_timer)
+		
 		bullets_recover_timer = Timer.new()
 		bullets_recover_timer.ignore_time_scale = !timers_timescaled
 		bullets_recover_timer.timeout.connect(_on_bullets_recover)
@@ -60,6 +79,10 @@ func _ready() -> void:
 		if parent_weapon is not RangeWeapon:
 			return
 		bullets_recover_timer = parent_weapon.bullets_recover_timer
+		if overheat_enabled:
+			cool_timer = parent_weapon.cool_timer
+			cool_timer.timeout.connect(_on_cool)
+			_overheat_visuals()
 	
 	if projectile:
 		var inst: Node2D = projectile.instantiate()
@@ -69,6 +92,8 @@ func _ready() -> void:
 			return
 		projectile_speed = projectile_comp.speed
 		inst.queue_free()
+	
+	swapped.connect(_on_swap)
 
 func attack(raiser, _npc = true) -> void:
 	if cooldown or !can_attack or swinging or !projectile or not raiser.has_method("get_attack_direction"):
@@ -79,6 +104,11 @@ func attack(raiser, _npc = true) -> void:
 		return
 	
 	await _swing(raiser.get_attack_direction())
+	
+	if overheat_enabled:
+		overheat += overheat_per_shoot
+		overheat = clamp(overheat, 0, max_overheat)
+		_overheat_visuals()
 	
 	var direction = raiser.get_attack_direction()
 	
@@ -184,6 +214,10 @@ func _projectile_shoot(direction) -> Node2D:
 				tween.tween_property(rope.material, "shader_parameter/wave_amplitude", 0, 0.5)
 		if scene:
 			scene.add_child.call_deferred(instance)
+		if overheat_enabled:
+			var heat_factor: float = overheat / max_overheat
+			var damage_multiplier: float = 1.0 - pow(heat_factor, 2) * (1.0 - min_overheat_damage_debuff)
+			projectile_component.damage = int(projectile_component.damage * damage_multiplier)
 	elif instance.has_node("HitscanComponent"):
 		var hitscan_component: HitscanComponent = instance.get_node("HitscanComponent")
 		instance.global_position = parent.global_position
@@ -199,9 +233,45 @@ func _projectile_shoot(direction) -> Node2D:
 	
 	return instance
 
+func _on_swap(_new_weapon: Weapon) -> void:
+	if !overheat_enabled:
+		return
+	if _new_weapon == self:
+		_overheat_visuals()
+	else:
+		weapon_inhand_texture.modulate = Color(1.0, 1.0, 1.0, 1.0)
+		if player_weapon_user:
+			player_weapon_user.weapon_icon.modulate = Color(1.0, 1.0, 1.0, 1.0)
+
 func _on_bullets_recover() -> void:
 	if weapon_sprite and weapon_sprite.weapon_texture.texture == equipped_texture and reload_animation:
 		weapon_sprite.reload()
 	bullets += bullets_recover_count
 	if bullets_recover_sound:
 		bullets_recover_sound.play()
+
+func _on_cool() -> void:
+	cool_timer.start()
+	overheat -= cool_count
+	overheat = clamp(overheat, 0, max_overheat)
+	_overheat_visuals()
+
+func _overheat_visuals() -> void:
+	if !weapon_inhand_texture:
+		return
+	if overheat == 0 or weapon_inhand_texture.texture != equipped_texture:
+		return
+	
+	var t: float = overheat / max_overheat
+	var base: float = 5.0
+	var overheat_factor: float = 1.0 + pow(t, base) * 2.0
+	
+	overheat_factor = clamp(overheat_factor, 1.0, 3.0)
+	
+	var red: float = overheat_factor
+	var green: float = 1.0 / overheat_factor
+	var blue: float = 1.0 / overheat_factor
+	
+	weapon_inhand_texture.modulate = Color(red, green, blue, 1.0)
+	if player_weapon_user:
+		player_weapon_user.weapon_icon.modulate = Color(red, green, blue, 1.0)

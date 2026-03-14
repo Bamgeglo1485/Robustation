@@ -1,0 +1,153 @@
+[gd_scene format=3 uid="uid://bfiiciqf8e8w1"]
+
+[ext_resource type="Script" uid="uid://clfjtp26jetey" path="res://Components/Player/RestartComponent.gd" id="2_ee1ry"]
+[ext_resource type="Script" uid="uid://4io3bm7r86h6" path="res://Components/Interface/Menu/TextPrintingAnimationComponent.gd" id="2_udu1i"]
+[ext_resource type="Material" uid="uid://bdio1hqqwuopn" path="res://Resources/Shaders/Monitor.tres" id="3_uu8do"]
+[ext_resource type="FontFile" uid="uid://dichq2si55q4b" path="res://Resources/Text/Fonts/RobotoMono/static/RobotoMono-ExtraLight.ttf" id="4_i5qfg"]
+[ext_resource type="AudioStream" uid="uid://c72v78medgu4t" path="res://Audio/Music/SpaceAssholeLOFI.ogg" id="4_udu1i"]
+[ext_resource type="AudioStream" uid="uid://b1hijj0a6bn4s" path="res://Audio/Effects/hahaha.ogg" id="6_3ffbk"]
+[ext_resource type="Script" uid="uid://q6vb3j07d62t" path="res://Components/Entity/FadeInComponent.gd" id="7_u8k2u"]
+
+[node name="IngameMenu" type="Control" unique_id=1644887491]
+process_mode = 3
+z_index = 100
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=446870106]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3576158, 0, 0.113307424, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect" unique_id=1291140237]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 8.0
+offset_right = 25.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("4_i5qfg")
+text = "A problem has been detected and RobustOS has been shut down to prevent damage
+to your computer.
+
+The problem seems to be caused by the following file: replay_menu.exe
+
+FATAL ERROR
+
+If this is the first time you've seen this stop error screen,
+restart your computer. If this screen appears again, follow
+these steps:
+
+Check to make sure any new hardware or software is properly installed.
+If this is a new installation, ask your hardware or software manufacturer
+for any RobustOS updates you might need.
+
+If problems continue, disable or remove any newly installed hardware
+or software. Disable BIOS memory options such as caching or shadowing.
+If you need to use safe mode to remove or disable components, restart
+your computer, press F8 to select Advanced Startup Options, and then
+select Safe Mode.
+
+Technical Information:
+
+*** STOP: 0x1000007e (0xffffffffc0000005, 0xfffff80002e55151, 0xfffff880009a99d8,
+0xfffff880009a9230)
+
+*** replay_menu.exe - Address 0xfffff80002e55151 base at 0xfffff80002e0d000 DateStamp
+0x4ce7951a"
+
+[node name="TextPrintingAnimationComponent" type="Node" parent="ColorRect/RichTextLabel" unique_id=1497740228]
+script = ExtResource("2_udu1i")
+metadata/_custom_type_script = "uid://4io3bm7r86h6"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="ColorRect" unique_id=217874683]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5104167
+anchor_top = 0.046296295
+anchor_right = 0.9861111
+anchor_bottom = 0.7484568
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("4_i5qfg")
+text = "                                                         
+                                                         
+                                                         
+                                                         
+                                                         
+                                                         
+                                                         
+                                                         
+                   #**##        #**#                     
+                 ##*+***#     #***++*#             ###   
+                 ##=:-+*%%%#%@%#+=:=*#    @@@    #####   
+                 ##+=*%@@%#**#%@%#++*#    @@@    *##     
+                 --+#**#*-----+#**#*=-          ####     
+                 ==++-.::::.::::::=+==         ####      
+                 ++=:::::-=-==-::::-++         #####     
+                 ++=:::-========:::-=+    @@@    *##     
+                 ##*+--==-::::=+--=+**    @@@    ####*   
+                   ##=::--------:-*#               ###   
+                   ##-..        .:*#                     
+                                                         
+                                                         
+                                                         
+                                                         
+                                                         
+                                                         
+                                                         
+                                                         
+                                                         
+                                                         
+                                                         
+                                                         "
+scroll_active = false
+metadata/_edit_use_anchors_ = true
+
+[node name="TextPrintingAnimationComponent" type="Node" parent="ColorRect/RichTextLabel2" unique_id=107704517]
+script = ExtResource("2_udu1i")
+metadata/_custom_type_script = "uid://4io3bm7r86h6"
+
+[node name="RestartComponent" type="Node" parent="." unique_id=1913306004]
+script = ExtResource("2_ee1ry")
+metadata/_custom_type_script = "uid://clfjtp26jetey"
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1875520062]
+z_index = 2
+material = ExtResource("3_uu8do")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1556919247]
+stream = ExtResource("4_udu1i")
+volume_db = 3.0
+autoplay = true
+parameters/looping = true
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=501109570]
+stream = ExtResource("6_3ffbk")
+volume_db = 4.0
+autoplay = true
+parameters/looping = false
+
+[node name="FadeInComponent" type="Node" parent="." unique_id=1642707965]
+script = ExtResource("7_u8k2u")
+delay = 0.5
+metadata/_custom_type_script = "uid://q6vb3j07d62t"

@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://cgp4m68yb8wfe"]
+
+[ext_resource type="LabelSettings" uid="uid://cwb2xcovj2h4n" path="res://Resources/Text/UI.tres" id="1_7xmf0"]
+[ext_resource type="Script" uid="uid://cja3led3n1ehp" path="res://Components/Interface/Menu/DragButtonComponent.gd" id="2_p5g6t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7xmf0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wm5bs"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5k8qu"]
+bg_color = Color(0.060530342, 0.06053035, 0.060530327, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kc4h2"]
+bg_color = Color(0.11286896, 1.469492e-06, 0.08068577, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qgk7c"]
+bg_color = Color(0.14165193, 0.075261734, 0.0927326, 1)
+
+[node name="PerkChoose" type="Control" unique_id=1852449319]
+material = SubResource("ShaderMaterial_7xmf0")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=447570471]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.24479167
+anchor_top = 0.15277778
+anchor_right = 0.7378472
+anchor_bottom = 0.8132716
+theme_override_styles/panel = SubResource("StyleBoxFlat_wm5bs")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Panel" unique_id=760190648]
+z_index = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.01056338
+anchor_top = 0.007009338
+anchor_right = 1.0088028
+anchor_bottom = 0.06807476
+mouse_behavior_recursive = 1
+text = "raider_conf.exe - ui_system.rbst"
+label_settings = ExtResource("1_7xmf0")
+metadata/_edit_use_anchors_ = true
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Panel" unique_id=1949970034]
+z_index = 3
+use_parent_material = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0017605633
+anchor_top = -0.004672897
+anchor_right = 1.0017606
+anchor_bottom = 0.99766356
+mouse_behavior_recursive = 1
+border_color = Color(0.033853278, 0.033853278, 0.033853274, 1)
+border_width = 5.0
+editor_only = false
+metadata/_edit_use_anchors_ = true
+
+[node name="ReferenceRect2" type="ReferenceRect" parent="Panel" unique_id=1618311338]
+z_index = 3
+use_parent_material = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.002
+anchor_top = -0.010000001
+anchor_right = 1.006
+anchor_bottom = 1.003
+offset_left = -11.1
+offset_top = -7.284
+offset_right = 7.210022
+offset_bottom = 10.279999
+mouse_behavior_recursive = 1
+border_color = Color(0.033853278, 0.033853278, 0.033853274, 1)
+border_width = 5.0
+editor_only = false
+
+[node name="Button" type="Button" parent="Panel" unique_id=1030127113]
+z_index = 1
+use_parent_material = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0052817087
+anchor_top = -0.008985981
+anchor_right = 1.0035211
+anchor_bottom = 0.098845795
+theme_override_styles/normal = SubResource("StyleBoxFlat_5k8qu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kc4h2")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qgk7c")
+metadata/_edit_use_anchors_ = true
+
+[node name="DragButtonComponent" type="Node" parent="Panel/Button" unique_id=1032271927 node_paths=PackedStringArray("frame_to_drag")]
+script = ExtResource("2_p5g6t")
+frame_to_drag = NodePath("../..")
+metadata/_custom_type_script = "uid://cja3led3n1ehp"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1307386154]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.017605634
+anchor_top = 0.11915888
+anchor_right = 0.99647886
+anchor_bottom = 1.0023365
+offset_bottom = -3.0517578e-05
+theme_override_constants/separation = 8
+metadata/_edit_use_anchors_ = true

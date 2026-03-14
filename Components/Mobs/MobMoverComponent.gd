@@ -238,7 +238,6 @@ func drop(delay: float, force: bool = false, resistance_force: int = 0) -> void:
 	if fall_effect:
 		if health_component and health_component.health <= 0:
 			return
-		
 		var inst: Node = fall_effect.instantiate()
 		inst.global_position = parent.global_position
 		scene.add_child(inst)
@@ -275,5 +274,7 @@ func on_fly_impact(body: Node) -> void:
 		return
 	mob_mover.throw(parent.velocity, fly_speed/1.5)
 	mob_mover.drop(1)
-	if body.has_node("HealthComponent"):
-		body.get_node("HealthComponent").take_damage(fly_speed/50, fly_source)
+	var body_health_component: HealthComponent = body.get_node("HealthComponent")
+	if body_health_component:
+		@warning_ignore("narrowing_conversion")
+		body_health_component.take_damage(fly_speed/50.0, fly_source)

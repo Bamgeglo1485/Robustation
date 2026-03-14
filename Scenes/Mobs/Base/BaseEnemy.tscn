@@ -22,11 +22,23 @@ radius = 5.0
 neighbor_distance = 128.0
 time_horizon_agents = 0.5
 
+[node name="Down" parent="ArmPoints" parent_id_path=PackedInt32Array(233933637) index="0" unique_id=504906081]
+position = Vector2(-7, 2)
+
+[node name="Up" parent="ArmPoints" parent_id_path=PackedInt32Array(233933637) index="1" unique_id=520433237]
+position = Vector2(6, 2)
+
+[node name="Left" parent="ArmPoints" parent_id_path=PackedInt32Array(233933637) index="2" unique_id=1776630653]
+position = Vector2(-5, 2)
+
+[node name="Right" parent="ArmPoints" parent_id_path=PackedInt32Array(233933637) index="3" unique_id=141043002]
+position = Vector2(-2, 2)
+
 [node name="BeehaveTree" type="Node" parent="." index="16" unique_id=448616328 node_paths=PackedStringArray("blackboard", "actor")]
 physics_interpolation_mode = 2
 script = ExtResource("2_8me6v")
 tick_rate = 10
-blackboard = NodePath("@Node@88247")
+blackboard = NodePath("@Node@18959")
 custom_monitor = true
 actor = NodePath("..")
 metadata/_custom_type_script = "uid://bb0t2ovl7wifo"

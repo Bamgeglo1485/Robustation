@@ -13,13 +13,10 @@ class_name ChargingMeleeWeaponComponent extends MeleeWeapon
 var charging: bool = false
 var charge: float = 0
 var npc: bool = true
-@export var weapon_inhand_texture: Sprite2D
-var player_weapon_user: PlayerWeaponUserComponent
 var fullcharge: bool = false
 
 func _ready() -> void:
 	super._ready()
-	player_weapon_user = parent.get_node_or_null("PlayerWeaponUserComponent")
 	throw_speed = 0
 	self_throw_speed = 0
 

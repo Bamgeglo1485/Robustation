@@ -210,7 +210,7 @@ multiple_attack: bool = false) -> bool:
 	
 	if self_throw_speed != 0 and !multiple_attack:
 		if parent_mob_mover_component and direction:
-			parent_mob_mover_component.throw(-direction, self_throw_speed, parent, self_throw_stop_speed)
+			parent_mob_mover_component.throw(-direction, self_throw_speed, parent, self_throw_stop_speed, true, false)
 			self_throw_speed = base_self_throw_speed
 	
 	return true

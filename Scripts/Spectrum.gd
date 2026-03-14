@@ -11,6 +11,8 @@ var spectrum: AudioEffectSpectrumAnalyzerInstance
 var energy_history: Array[float] = []
 var history_size: int = 100
 
+@export var disable_when_player_death: bool = true
+@export var enabled: bool = true
 @export var color_component: Component
 @export var sensivity: float = 2
 
@@ -19,6 +21,9 @@ func _ready():
 	
 	for i in range(history_size):
 		energy_history.append(0.0)
+	
+	if disable_when_player_death:
+		EventBusManager.player_death.connect(_disable)
 
 func _process(_delta: float) -> void:
 	queue_redraw()
@@ -42,7 +47,8 @@ func _draw():
 		prev_hz = hz
 	
 	var avg_energy = total_energy / VU_COUNT
-	
+	if !enabled:
+		avg_energy = 0 
 	energy_history.push_back(avg_energy)
 	if energy_history.size() > history_size:
 		energy_history.pop_front()
@@ -61,3 +67,6 @@ func _draw():
 		color = color_component.color
 	
 	draw_polyline(points, color, LINE_WIDTH, true)
+
+func _disable():
+	enabled = false

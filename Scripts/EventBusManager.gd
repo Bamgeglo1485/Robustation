@@ -33,3 +33,6 @@ signal glow_changed(glow: bool)
 
 signal update_weapon_icon(emitter: Node2D, weapon: Weapon)
 signal change_player(new_player: Node2D, wait_time: float)
+
+signal on_perk_choosed()
+signal player_death()

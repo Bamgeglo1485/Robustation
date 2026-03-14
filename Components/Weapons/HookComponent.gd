@@ -7,7 +7,7 @@ enum hook_states {
 	HOOKING,
 	RETURNING}
 @export var hook_speed: int = 900
-@export var returning_radius: int = 8
+@export var returning_radius: int = 24
 @export var state: hook_states = hook_states.BASE
 @export var drop_force: int = 0
 @export var hook_throw_force: int = 600
@@ -42,9 +42,9 @@ func attack(raiser, _npc = true) -> void:
 	bullets = 0
 	var direction = raiser.get_attack_direction()
 	
-	if parent.has_node("MobMoverComponent"):
+	if mob_mover_component:
 		if self_throw_speed != 0:
-			parent.get_node("MobMoverComponent").throw(-direction, self_throw_speed, null, self_throw_stop_speed)
+			mob_mover_component.throw(-direction, self_throw_speed, null, self_throw_stop_speed)
 	
 	attack_logic(direction)
 
@@ -70,7 +70,7 @@ func attack_logic(direction):
 
 func _hook():
 	state = hook_states.HOOKING
-	target_mob_mover= hooked_body.get_node_or_null("MobMoverComponent")
+	target_mob_mover = hooked_body.get_node_or_null("MobMoverComponent")
 	
 	if reel_sound:
 		reel_sound.play()

@@ -1,11 +1,12 @@
 class_name ScreenShakeComponent extends Component
 
 @onready var camera: PlayerCamera = parent.get_node_or_null("PlayerCamera")
+@export var force: float = 1.5
 
 func shift_to_direction(direction, power) -> void:
 	if !camera:
 		return
-	
+	power *= force
 	var _tween: Tween = create_tween()
 	_tween.set_trans(Tween.TRANS_SINE)
 	_tween.set_ease(Tween.EASE_IN_OUT)
@@ -15,7 +16,7 @@ func shift_to_direction(direction, power) -> void:
 func shake(power, delay) -> void:
 	if !camera:
 		return
-	
+	power *= force
 	var _tween: Tween = create_tween()
 	_tween.set_trans(Tween.TRANS_SINE)
 	_tween.set_ease(Tween.EASE_IN_OUT)

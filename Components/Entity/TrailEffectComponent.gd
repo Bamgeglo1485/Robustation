@@ -19,6 +19,7 @@ var ignore_time_scale: bool = false
 var lifetime_timer: float = 0.0
 var clean_timer: float = 0.0
 var autodelete_active: bool = false
+var enabled: bool = true
 
 func _ready() -> void:
 	color = Color(1.0, 1.0, 1.0, 1.0)
@@ -36,6 +37,8 @@ func _ready() -> void:
 		autodelete_active = true
 
 func _process(delta: float) -> void:
+	if !enabled:
+		return
 	if autodelete_active:
 		if lifetime_timer > 0:
 			if ignore_time_scale:

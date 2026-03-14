@@ -161,5 +161,4 @@ camera/depth_of_field/depth_of_field_bokeh_shape=0
 viewport/hdr_2d=true
 lightmapping/probe_capture/update_speed=30.0
 global_illumination/sdfgi/frames_to_converge=2
-environment/defaults/default_clear_color=Color(0.01409901, 0, 0.00029968406, 1)
 occlusion_culling/use_occlusion_culling=true

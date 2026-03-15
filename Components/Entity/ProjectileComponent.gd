@@ -3,6 +3,7 @@ class_name ProjectileComponent extends Area2D
 @onready var scene: Node2D = get_tree().get_root().get_node("Game")
 @onready var parent: Node = get_parent()
 
+@export var can_penetrate: bool = true
 @export var max_penetrations: int = 0
 @export var texture: Sprite2D
 @export var hit_sound: AudioStreamPlayer2D
@@ -46,11 +47,11 @@ var targeted_enemies: Array[CharacterBody2D]
 var can_parry_weapon: MeleeWeapon
 
 @export_category("Explosion")
-
 @export var explosion_scene: PackedScene
 @export var explode_on_delete: bool = false
 @export var explode_on_hit: bool = false
 @export var explode_on_damage: bool = false
+
 var sploded: bool = false
 var rope: Line2D
 var sender_mob_mover: MobMoverComponent
@@ -105,8 +106,9 @@ func _physics_process(delta: float) -> void:
 		_delete()
 	
 	parent.velocity = Vector2(speed, 0).rotated(direction)
-	parent.rotation += rotate_speed * delta
 	parent.move_and_collide(parent.velocity * delta)
+	if rotate_speed != 0:
+		parent.rotation += rotate_speed * delta
 
 func _delete() -> void:
 	if weapon and return_to_sender:
@@ -151,7 +153,7 @@ func explode() -> void:
 		instance.global_position = global_position
 		if shooter:
 			instance.source = shooter
-		scene.add_child.call_deferred(instance)
+		scene.add_child(instance)
 
 func _on_body_entered(body: Node2D) -> void:
 	if !body or !can_hit or body == parent:
@@ -195,7 +197,7 @@ func _on_body_entered(body: Node2D) -> void:
 		health_comp.take_damage(modified_damage, shooter)
 		if delayed_damage != 0 and delayed_damage_delay != 0:
 			health_comp.set_delayed_damage(delayed_damage * damage_modifier, delayed_damage_delay)
-		if max_penetrations != 0:
+		if max_penetrations != 0 and can_penetrate:
 			penetration_damaged_bodies.append(body)
 			penetrations += 1
 	else:
@@ -227,9 +229,8 @@ func _on_body_entered(body: Node2D) -> void:
 	
 	if max_penetrations == 0 and delete_on_hit:
 		_delete()
-	else:
-		if max_penetrations < penetrations:
-			_delete()
+	elif max_penetrations < penetrations and can_penetrate:
+		_delete()
 
 func reflect(target) -> bool:
 	if !parriable:

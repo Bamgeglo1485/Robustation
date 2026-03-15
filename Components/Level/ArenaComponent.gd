@@ -1,7 +1,9 @@
 class_name ArenaComponent extends Component
 
 @export_category("Settings")
+@export_file_path() var perks: Array[String]
 @export var area_info: RichTextLabel
+@export var start_budget: float = 5
 @export var choosable_perk_count_per_wave: int = 4
 @export var available_enemies: Array[Enemy]
 @export var budget_per_wave: float = 1
@@ -14,7 +16,7 @@ class_name ArenaComponent extends Component
 @export_category("Variables")
 @export var wave: int = 0
 
-var budget: float = budget_per_wave
+var budget: float = start_budget + budget_per_wave
 
 var melee_enemies: Array[Enemy]
 var range_enemies: Array[Enemy]
@@ -72,7 +74,7 @@ func start_new_wave(new_game: bool = false) -> void:
 		health_component.set_health(health_component.max_health)
 	wave_active = true
 	wave += 1
-	budget = budget_per_wave * wave
+	budget = start_budget + budget_per_wave * wave
 	
 	current_enemies.append_array(_spawn_enemies(_choose_enemies(available_enemies)))
 	
@@ -163,11 +165,10 @@ func _add_perks(enemies: Array[PhysicsBody2D]):
 		if !perk_owner_comp:
 			continue
 		
-		perk_owner_comp.add_perk(_get_random_perk())
+		perk_owner_comp.add_perk(_get_random_perk(), 2)
 		budget -= 2
 
 func _get_random_perk():
-		var perks: Array[String] = _get_all_file_paths("res://Components/Perks")
 		var valid_perks: Array[Script] = []
 		for potential_perk in perks:
 			var loaded_perk = load(potential_perk)
@@ -179,22 +180,13 @@ func _get_random_perk():
 		
 		return valid_perks.pick_random()
 
-func _get_all_file_paths(path: String) -> Array[String]:  
-	var file_paths: Array[String] = []  
-	var dir = DirAccess.open(path)  
-	
-	if dir == null:
-		return file_paths
-	
-	dir.list_dir_begin()  
-	var file_name = dir.get_next()  
-	while file_name != "":  
-		if file_name.ends_with(".gd"):
-			var file_path = path + "/" + file_name  
-			file_paths.append(file_path)  
-		file_name = dir.get_next()  
-	dir.list_dir_end()
-	return file_paths
+func _clean_blood():
+	var blood_pools: Array[Node] = get_tree().get_nodes_in_group("Blood")
+	for blood in blood_pools:
+		blood.clean()
+	var phys_particles: Array[Node] = get_tree().get_nodes_in_group("PhysicalParticle")
+	for particle in phys_particles:
+		particle.clean()
 
 func _open_perk_choose() -> void:
 	if loose:
@@ -271,4 +263,5 @@ func _on_gibbed(emitter: Node2D) -> void:
 		current_enemies.erase(emitter)
 		if current_enemies.is_empty():
 			wave_active = false
+			_clean_blood()
 			await start_new_wave()

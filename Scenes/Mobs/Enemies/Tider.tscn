@@ -105,8 +105,9 @@ damage = 3
 attack_range = 83
 attack_sound = NodePath("HitSound")
 miss_sound = NodePath("MissSound")
+can_parry_weapon = false
 throw_speed = 0
-cooldown_delay = 0.1
+cooldown_delay = 0.2
 swing_delay = 0.0
 attack_rotation_multiplier = 0.5
 attack_shift_multiplier = 0.0
@@ -146,7 +147,7 @@ rage_when_buddy_dead = false
 metadata/_custom_type_script = "uid://da2q40ragr5wk"
 
 [node name="BeehaveTree" parent="." index="20" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@759334")
+blackboard = NodePath("@Node@117931")
 
 [node name="MoveToPlayer" type="Node" parent="BeehaveTree" index="0" unique_id=723485805]
 script = ExtResource("36_tw04h")

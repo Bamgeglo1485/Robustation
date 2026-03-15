@@ -11,8 +11,8 @@ class_name HealthIndicatorComponent extends Component
 var color: Color = Color(0.0, 0.706, 0.237, 1.0)
 
 func _ready() -> void:
-	
 	EventBusManager.health_changed.connect(_on_health_changed)
+	_on_health_changed(parent, health_component.health, health_component.health)
 
 func _on_health_changed(emitter, _health, new_health) -> void:
 	if emitter != parent:

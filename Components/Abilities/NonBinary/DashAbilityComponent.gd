@@ -11,18 +11,21 @@ class_name DashAbilityComponent extends Component
 @export var cooldown: bool = false
 @export var cooldown_delay: float = 0.5
 
-@export var dash_speed: int = 1050
+@export var dash_speed: int = 1500
 
 @export var max_dash_stamina: int = 3
 @export var dash_stamina: int = max_dash_stamina
-@export var dash_stamina_recovery_delay: float = 3.0
+@export var dash_stamina_recovery_delay: float = 1.5
 
 @export var invincibility_delay: float = 0.3
 @export var trail_colors: Array[Color]
 
 @export var parry_weapon: MeleeWeapon
 
+@onready var health_component: HealthComponent = parent.get_node_or_null("HealthComponent")
+@onready var overdose_component: OverdoseAbilityComponent = parent.get_node_or_null("OverdoseAbilityComponent")
 @onready var mob_mover_component: MobMoverComponent = parent.get_node_or_null("MobMoverComponent")
+
 var recovery_timer: Timer
 var active: bool = false
 var progress_tween: Tween
@@ -96,14 +99,13 @@ func dash(direction) -> void:
 		progress_tween.tween_method(_set_stamina_progress, old_progress, new_progress, 0.15)
 		await progress_tween.finished
 	
-	if parent.has_node("OverdoseAbilityComponent") and parent.get_node("OverdoseAbilityComponent").active:
-		parent.get_node("OverdoseAbilityComponent").ability_timer += overdose_refuel_count
+	if overdose_component and overdose_component.active:
+		overdose_component.ability_timer += overdose_refuel_count
 		if overdose_refuel_sound:
 			overdose_refuel_sound.play()
 
-		if parent.has_node("HealthComponent"):
-			var health: HealthComponent = parent.get_node("HealthComponent")
-			health.set_delayed_damage(overdose_refuel_damage, overdose_refuel_damage_time)
+		if health_component:
+			health_component.set_delayed_damage(overdose_refuel_damage, overdose_refuel_damage_time)
 
 		if parent.has_node("TrailEffectComponent"):
 			parent.get_node("TrailEffectComponent").lifetime_timer += overdose_refuel_count
@@ -124,7 +126,7 @@ func dash(direction) -> void:
 		dash_sound.play()
 	
 	mob_mover_component.try_stand_up()
-	mob_mover_component.throw(direction, dash_speed, null, 1000, false, true, false)
+	mob_mover_component.throw(direction, dash_speed, null, 1450, false, true, false, 10)
 
 func _stamina_recovery() -> void:
 	if dash_stamina < max_dash_stamina:
@@ -159,8 +161,7 @@ func _cooldown() -> void:
 			recovery_timer.start()
 
 func _INVINCIBLE() -> void:
-	if invincibility_delay != 0 and parent.has_node("HealthComponent"):
-		var health_component = parent.get_node("HealthComponent")
+	if invincibility_delay != 0 and health_component:
 		health_component.INVINCIBLE = true
 		active = true
 		await get_tree().create_timer(invincibility_delay).timeout

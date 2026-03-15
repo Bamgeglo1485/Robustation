@@ -5,6 +5,7 @@ var animation_tween: Tween = null
 
 var last_time_scale: float
 
+@export var flash_frame: ColorRect
 @export var ignore_time_scale: bool = false
 @onready var shader: ShaderMaterial
 
@@ -28,8 +29,6 @@ func clear_animation(kill_tween = true) -> void:
 
 func _clear_tween() -> void:
 	var _tween: Tween = create_tween()
-	_tween.set_trans(Tween.TRANS_BACK)
-	_tween.set_ease(Tween.EASE_IN_OUT)
 	
 	_tween.tween_property(parent, "global_rotation", 0.0, 0.3)
 	_tween.tween_property(parent, "rotation", 0.0, 0.3)
@@ -128,3 +127,7 @@ func flash(
 		var _tween: Tween = create_tween()
 		_tween.tween_property(shader, "shader_parameter/flash_color", color, 0.1 * speed_multiplier)
 		_tween.tween_property(shader, "shader_parameter/flash_color", Color(0.7, 0.0, 0.3, 0.0), 0.2 * speed_multiplier)
+		if flash_frame:
+			var _frame_tween: Tween = create_tween()
+			_frame_tween.tween_property(flash_frame.material, "shader_parameter/flash_color", color, 0.1 * speed_multiplier)
+			_frame_tween.tween_property(flash_frame.material, "shader_parameter/flash_color", Color(0.7, 0.0, 0.3, 0.0), 0.2 * speed_multiplier)

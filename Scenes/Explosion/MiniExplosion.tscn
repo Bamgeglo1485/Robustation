@@ -24,19 +24,10 @@ lifetime = 0.4
 [node name="Light" parent="." index="3" unique_id=1912790245]
 texture_scale = 1.2
 
-[node name="Light2" parent="." index="4" unique_id=1621261214]
-texture_scale = 0.25
+[node name="GPUParticles2D" parent="." index="4" unique_id=250018996]
+lifetime = 0.9
 
-[node name="Light3" parent="." index="5" unique_id=443646006]
-texture_scale = 0.25
-
-[node name="Light4" parent="." index="6" unique_id=1808189886]
-texture_scale = 0.25
-
-[node name="GPUParticles2D" parent="." index="7" unique_id=75207985]
-amount = 500
-
-[node name="ColorRect" parent="GPUParticles2D" index="1" unique_id=1543119462]
+[node name="ColorRect" parent="GPUParticles2D" index="0" unique_id=1543119462]
 material = SubResource("ShaderMaterial_u3mfi")
 offset_left = -136.0
 offset_top = -140.0

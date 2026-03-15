@@ -51,7 +51,6 @@ func set_stamina(new_stamina):
 	if mob_mover_component:
 		mob_mover_component.set_minor_speed_modifier("stamina", float(stamina) / max_stamina)
 	
-	
 	if stamina == 0:
 		stun()
 

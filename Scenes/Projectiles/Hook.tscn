@@ -10,6 +10,7 @@ radius = 15.0
 [node name="Projectile" unique_id=676694476 instance=ExtResource("1_7iyqb")]
 
 [node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture")]
+can_penetrate = false
 texture = NodePath("../Texture")
 speed = 2000
 max_damage = 0

@@ -34,6 +34,7 @@ hue_variation_max = -0.54
 [node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture", "particle_emitter")]
 collision_layer = 519
 collision_mask = 519
+can_penetrate = false
 texture = NodePath("../Texture")
 particle_emitter = NodePath("GPUParticles2D")
 speed_decreasing = 6

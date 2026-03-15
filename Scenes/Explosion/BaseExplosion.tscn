@@ -4,26 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://bjqvcwxstx8u1" path="res://Scenes/Effects/Particles/Boom.tscn" id="2_a5ua4"]
 [ext_resource type="PackedScene" uid="uid://do6wj3407tcik" path="res://Scenes/Effects/Particles/Soot.tscn" id="3_a5ua4"]
 [ext_resource type="Texture2D" uid="uid://yjigwd3i118j" path="res://Textures/Light/point_light.jpg" id="5_jqe0j"]
-[ext_resource type="Script" uid="uid://qpw7cn2mqx7i" path="res://Components/Entity/RotatingObjectComponent.gd" id="6_4t1bi"]
-[ext_resource type="Texture2D" uid="uid://wbxnpjl6pvxb" path="res://Textures/Light/double_light_cone.png" id="7_4t1bi"]
-[ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts/Effects/TimedDelete.gd" id="7_wv6j5"]
 [ext_resource type="Material" uid="uid://4yrd4354bvw7" path="res://Resources/Shaders/Explosion.tres" id="8_gfupr"]
 [ext_resource type="Script" uid="uid://tjlcu3a27wqd" path="res://Scripts/Effects/ShockwaveEffect.gd" id="9_nkr7b"]
 [ext_resource type="Script" uid="uid://qcmegh7138ug" path="res://Components/Entity/UniqueShaderComponent.gd" id="10_gwo8w"]
 [ext_resource type="AudioStream" uid="uid://ba7j68er83sfy" path="res://Resources/Audio/ExplosionRandom.tres" id="11_2x53i"]
+[ext_resource type="Script" uid="uid://blngddal1vmwe" path="res://Components/Entity/TimedDeleteComponent.gd" id="11_wv6j5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a5ua4"]
 radius = 132.30646
 
-[sub_resource type="Curve" id="Curve_mgjcw"]
-_limits = [0.0, 3.0, 0.0, 1.0]
-_data = [Vector2(0, 1.011236), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_c1ng1"]
-curve = SubResource("Curve_mgjcw")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ou2k1"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nkr7b"]
 lifetime_randomness = 1.0
 particle_flag_disable_z = true
 spread = 180.0
@@ -34,12 +24,10 @@ linear_accel_max = 99.99999
 radial_accel_min = -100.0
 radial_accel_max = 99.99999
 scale_max = 5.0
-scale_over_velocity_max = 218.39
-scale_over_velocity_curve = SubResource("CurveTexture_c1ng1")
 hue_variation_min = -1.0
 hue_variation_max = -0.67
 
-[node name="BaseExplosion" type="Node2D" unique_id=890470773 node_paths=PackedStringArray("lightings", "main_lighting")]
+[node name="BaseExplosion" type="Node2D" unique_id=890470773 node_paths=PackedStringArray("main_lighting")]
 light_mask = 0
 z_index = 10
 script = ExtResource("1_cpk21")
@@ -49,13 +37,13 @@ fall_time = 1
 radius = 200
 check_interval = 0.1
 ignore_faction = true
-lightings = [NodePath("Light"), NodePath("Light2"), NodePath("Light3"), NodePath("Light4")]
 main_lighting = NodePath("Light")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=251884086]
 collision_layer = 15
 collision_mask = 15
 monitorable = false
+priority = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1183762416]
 shape = SubResource("CircleShape2D_a5ua4")
@@ -66,13 +54,16 @@ position = Vector2(-1, -1)
 emitting = false
 amount = 10
 lifetime = 0.8
+interpolate = false
+fract_delta = false
 
 [node name="GPUParticles2D3" parent="." unique_id=2131820347 instance=ExtResource("3_a5ua4")]
 light_mask = 0
-z_index = 1
-amount = 16
-lifetime = 125.12
+amount = 20
+lifetime = 125.0
 use_fixed_seed = false
+interpolate = false
+fract_delta = false
 visibility_rect = Rect2(-1000, -1000, 2000, 2000)
 
 [node name="Light" type="PointLight2D" parent="." unique_id=1912790245]
@@ -82,60 +73,21 @@ energy = 0.0
 texture = ExtResource("5_jqe0j")
 texture_scale = 2.1
 
-[node name="Light2" type="PointLight2D" parent="." unique_id=1621261214]
-position = Vector2(0, -0.50000095)
-scale = Vector2(1, 0.44262293)
-color = Color(0.99607843, 0.39215687, 0, 1)
-energy = 0.0
-shadow_enabled = true
-texture = ExtResource("7_4t1bi")
-
-[node name="RotatingObjectComponent" type="Node" parent="Light2" unique_id=1376424794]
-script = ExtResource("6_4t1bi")
-speed = 10
-metadata/_custom_type_script = "uid://qpw7cn2mqx7i"
-
-[node name="Light3" type="PointLight2D" parent="." unique_id=443646006]
-position = Vector2(0, -0.50000095)
-scale = Vector2(1, 0.44262293)
-color = Color(0.99607843, 0.39215687, 0, 1)
-energy = 0.0
-shadow_enabled = true
-texture = ExtResource("7_4t1bi")
-
-[node name="RotatingObjectComponent" type="Node" parent="Light3" unique_id=723068101]
-script = ExtResource("6_4t1bi")
-speed = -15
-metadata/_custom_type_script = "uid://qpw7cn2mqx7i"
-
-[node name="Light4" type="PointLight2D" parent="." unique_id=1808189886]
-position = Vector2(0, -0.50000095)
-scale = Vector2(1, 0.44262293)
-color = Color(0.99607843, 0.39215687, 0, 1)
-energy = 0.0
-shadow_enabled = true
-texture = ExtResource("7_4t1bi")
-
-[node name="RotatingObjectComponent" type="Node" parent="Light4" unique_id=1218014301]
-script = ExtResource("6_4t1bi")
-speed = 5
-metadata/_custom_type_script = "uid://qpw7cn2mqx7i"
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=75207985]
-modulate = Color(16.1889, 16.1889, 16.1889, 1)
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=250018996]
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
 z_index = 10
 emitting = false
-amount = 500
+amount = 200
 lifetime = 1.7
 one_shot = true
 preprocess = 0.5
 speed_scale = 4.0
 randomness = 1.0
-interpolate = false
 fract_delta = false
-process_material = SubResource("ParticleProcessMaterial_ou2k1")
-script = ExtResource("7_wv6j5")
-_lifetime = 2.0
+trail_enabled = true
+trail_sections = 2
+trail_section_subdivisions = 1
+process_material = SubResource("ParticleProcessMaterial_nkr7b")
 
 [node name="ColorRect" type="ColorRect" parent="GPUParticles2D" unique_id=1543119462]
 light_mask = 0
@@ -152,6 +104,12 @@ script = ExtResource("9_nkr7b")
 script = ExtResource("10_gwo8w")
 metadata/_custom_type_script = "uid://qcmegh7138ug"
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="GPUParticles2D" unique_id=351949433]
+[node name="TimedDeleteComponent" type="Node" parent="GPUParticles2D" unique_id=1044138641 node_paths=PackedStringArray("targets")]
+script = ExtResource("11_wv6j5")
+targets = [null]
+delay = 1.0
+metadata/_custom_type_script = "uid://blngddal1vmwe"
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="." unique_id=351949433]
 stream = ExtResource("11_2x53i")
 autoplay = true

@@ -51,16 +51,19 @@ func rush() -> void:
 	if rushing or preparing_to_rush or mob_mover_component.fallen:
 		return
 	mob_mover_component.movement_blocked = true
-	mob_mover_component.can_fall = false
 	preparing_to_rush = true
 	if weapon_sprite:
 		weapon_sprite.flip_hell_yeah()
 	if rush_prepare_sound:
 		rush_prepare_sound.play()
-	
 	await get_tree().create_timer(delay_before_rush).timeout
-	if !blackboard.get_value(key):
+	if mob_mover_component.fallen:
+		unrush()
 		return
+	if !blackboard.get_value(key) or mob_mover_component.fallen:
+		unrush()
+		return
+	mob_mover_component.can_fall = false
 	rush_weapon.swinging = true
 	if rush_sound:
 		rush_sound.play()
@@ -77,6 +80,7 @@ func rush() -> void:
 func unrush() -> void:
 	rush_weapon.swinging = false
 	mob_mover_component.movement_blocked = false
+	preparing_to_rush = false
 	rushing = false
 	mob_mover_component.can_fall = true
 	if rush_weapon:

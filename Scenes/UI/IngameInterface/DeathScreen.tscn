@@ -46,8 +46,23 @@ offset_right = -0.016052246
 offset_bottom = -182.992
 theme_override_styles/panel = SubResource("StyleBoxFlat_3me48")
 
+[node name="Button" type="Button" parent="Error" unique_id=658363291]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.008955223
+anchor_right = 1.0
+anchor_bottom = 0.21641788
+theme_override_styles/normal = SubResource("StyleBoxFlat_yrqcn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pjvv6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_gjbiy")
+metadata/_edit_use_anchors_ = true
+
+[node name="DragButtonComponent" type="Node" parent="Error/Button" unique_id=405906314 node_paths=PackedStringArray("frame_to_drag")]
+script = ExtResource("6_biumy")
+frame_to_drag = NodePath("../..")
+metadata/_custom_type_script = "uid://cja3led3n1ehp"
+
 [node name="Label" type="Label" parent="Error" unique_id=977774462]
-z_index = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.07734807
@@ -70,23 +85,6 @@ texture = ExtResource("2_to71l")
 expand_mode = 1
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
-
-[node name="Button" type="Button" parent="Error" unique_id=658363291]
-z_index = 1
-layout_mode = 1
-anchors_preset = -1
-anchor_top = -0.008955223
-anchor_right = 1.0
-anchor_bottom = 0.21641788
-theme_override_styles/normal = SubResource("StyleBoxFlat_yrqcn")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_pjvv6")
-theme_override_styles/hover = SubResource("StyleBoxFlat_gjbiy")
-metadata/_edit_use_anchors_ = true
-
-[node name="DragButtonComponent" type="Node" parent="Error/Button" unique_id=405906314 node_paths=PackedStringArray("frame_to_drag")]
-script = ExtResource("6_biumy")
-frame_to_drag = NodePath("../..")
-metadata/_custom_type_script = "uid://cja3led3n1ehp"
 
 [node name="Label2" type="Label" parent="Error" unique_id=29536534]
 modulate = Color(0.89739907, 0, 0.22079071, 1)

@@ -38,6 +38,7 @@ var fly_stop_speed: float = 200.0
 var fly_modifier: float = 1.0
 ## The body that made fly, actually damager
 var fly_source: Node2D
+var fly_priority: int = 0
 
 @export var body_fall_sound: AudioStreamPlayer2D
 @export var fall_effect: PackedScene = preload("res://Scenes/Effects/Particles/Fall.tscn")
@@ -161,6 +162,7 @@ func _fly(delta) -> void:
 		fly_direction = Vector2.ZERO
 		parent.velocity = Vector2.ZERO
 		flying = false
+		fly_priority = 0
 
 # Make body fly
 func throw(
@@ -168,13 +170,13 @@ func throw(
 	throw_speed: float,
 	throw_source: Node2D = null,
 	throw_stop_speed: float = 10,
-	animation = true,
-	rewrite = true,
-	throw_throw_off = true
+	animation: bool = true,
+	_rewrite: bool = true,
+	throw_throw_off: bool = true,
+	priority: int = 0
 	) -> void:
-	if rewrite and throw_speed <= fly_speed:
+	if priority < fly_priority:
 		return
-	
 	var max_throw_speed: int = 2000
 	var actual_speed = min(throw_speed, max_throw_speed)
 	
@@ -182,26 +184,21 @@ func throw(
 		flying = true
 		fly_source = throw_source
 		fly_throw_off = throw_throw_off
-		if !rewrite:
-			fly_speed += actual_speed * fly_modifier
-			base_fly_speed += actual_speed * fly_modifier
-			fly_direction += throw_direction.normalized()
-			fly_stop_speed = throw_stop_speed * fly_modifier
-		else:
-			fly_speed = actual_speed * fly_modifier
-			base_fly_speed = actual_speed * fly_modifier
-			fly_stop_speed = throw_stop_speed * fly_modifier
-			fly_direction = throw_direction.normalized()
-		if animation:
-			var tween: Tween = create_tween()
-			tween.set_trans(Tween.TRANS_SINE)
-			tween.set_ease(Tween.EASE_IN_OUT)
-			tween.tween_property(parent, "scale", Vector2(1.35, 1.35), 0.2)
+		fly_priority = priority
+		fly_speed = actual_speed * fly_modifier
+		base_fly_speed = actual_speed * fly_modifier
+		fly_stop_speed = throw_stop_speed * fly_modifier
+		fly_direction = throw_direction.normalized()
+	if animation:
+		var tween: Tween = create_tween()
+		tween.set_trans(Tween.TRANS_SINE)
+		tween.set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(parent, "scale", Vector2(1.35, 1.35), 0.2)
 
 func _fall_process(delta: float) -> void:
 	if !flying:
 		standing_delay -= delta
-	if standing_delay <= 0:
+	if standing_delay <= 0 and fallen:
 		stand_up()
 
 # Causes the body to fall
@@ -222,19 +219,19 @@ func drop(delay: float, force: bool = false, resistance_force: int = 0) -> void:
 	parent.velocity = Vector2.ZERO
 	force_fallen = force
 	
-	if fallen:
-		return
-	
-	fallen = true
-	set_minor_speed_modifier("fallen", fallen_speed_modifier)
-	
 	if animation_component:
 		drop_tween = create_tween()
 		drop_tween.set_trans(Tween.TRANS_SINE)
 		drop_tween.set_ease(Tween.EASE_IN_OUT)
 		drop_tween.tween_property(parent, "global_rotation", -1.55, 0.2)
 		drop_tween.tween_property(parent, "global_rotation", -1.55, 690)
-		animation_component.set_animation(drop_tween, 69)
+		animation_component.set_animation(drop_tween, 69, true)
+	
+	if fallen:
+		return
+	
+	fallen = true
+	set_minor_speed_modifier("fallen", fallen_speed_modifier)
 	if fall_effect:
 		if health_component and health_component.health <= 0:
 			return
@@ -254,12 +251,15 @@ func stand_up() -> void:
 	
 	if animation_component:
 		animation_component.clear_animation()
+	fallen = false
+	force_fallen = false
 	
 	await get_tree().create_timer(0.3).timeout
 	
+	if animation_component:
+		animation_component.clear_animation()
+	
 	set_minor_speed_modifier("fallen", 1.0)
-	fallen = false
-	force_fallen = false
  
 # When flying body hits another body
 func on_fly_impact(body: Node) -> void:

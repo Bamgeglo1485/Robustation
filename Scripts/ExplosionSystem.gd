@@ -12,7 +12,6 @@ extends Node2D
 @export var ignore_faction: bool = false
 @export var drop_forced: bool = false
 @export var drop_resistance_force: int = 3
-@export var lightings: Array[PointLight2D]
 @export var main_lighting: PointLight2D
 var active: bool = true
 
@@ -20,12 +19,9 @@ var damaged_bodies: Array = []
 var check_timer: Timer
 
 func _ready() -> void:
-	if area2d.has_node("CollisionShape2D"):
-		var shape = CircleShape2D.new()
-		shape.radius = radius
-		area2d.get_node("CollisionShape2D").shape = shape
-	
-	area2d.body_entered.connect(_on_body_entered)
+	var collision_shape = area2d.get_node("CollisionShape2D").shape
+	if collision_shape is CircleShape2D:
+		collision_shape.radius = radius
 	
 	check_timer = Timer.new()
 	add_child(check_timer)
@@ -55,8 +51,6 @@ func _ready() -> void:
 	queue_free()
 
 func _set_lighting():
-	if lightings.is_empty():
-		return
 	main_lighting.scale = Vector2(0.0, 0.0)
 	
 	var main_tween: Tween = create_tween()
@@ -64,13 +58,6 @@ func _set_lighting():
 	main_tween.set_ease(Tween.EASE_IN_OUT)
 	main_tween.tween_property(main_lighting, "scale", Vector2(1, 1), 0.25)
 	main_tween.tween_property(main_lighting, "scale", Vector2(0, 0), 0.25)
-	
-	for lighting in lightings:
-		var tween: Tween = create_tween()
-		tween.set_trans(Tween.TRANS_SINE)
-		tween.set_ease(Tween.EASE_IN_OUT)
-		tween.tween_property(lighting, "energy", 32.0, 0.25)
-		tween.tween_property(lighting, "energy", 0.0, 0.25)
 
 func _check_overlapping_bodies() -> void:
 	if !active:
@@ -81,18 +68,11 @@ func _check_overlapping_bodies() -> void:
 		if is_instance_valid(body) and body not in damaged_bodies and body.has_node("HealthComponent"):
 			_apply_damage_to_body(body)
 
-func _on_body_entered(body: Node2D) -> void:
-	if !active:
-		return
-	if is_instance_valid(body) and body not in damaged_bodies:
-		_apply_damage_to_body(body)
-
 func _apply_damage_to_body(body: Node2D) -> void:
-	if not is_instance_valid(body) or body in damaged_bodies:
+	if !is_instance_valid(body) or body in damaged_bodies:
 		return
 	if (!ignore_faction and source and source.has_node("FactionComponent") and 
 		body.has_node("FactionComponent")):
-		
 		var source_faction: Node = source.get_node("FactionComponent")
 		var body_faction: Node = body.get_node("FactionComponent")
 		
@@ -105,20 +85,19 @@ func _apply_damage_to_body(body: Node2D) -> void:
 	if distance_factor > 0.1:
 		var modifier: float = 1
 		
-		if body.has_node("ExplosionResistanceComponent"):
-			modifier = body.get_node("ExplosionResistanceComponent").resistance
+		var explosion_resist: ExplosionResistanceComponent = body.get_node_or_null("ExplosionResistanceComponent")
+		if explosion_resist:
+			modifier = explosion_resist.resistance
 		
-		if body.has_node("HealthComponent"):
-			body.get_node("HealthComponent").take_damage(damage * distance_factor * modifier, source)
+		var health: HealthComponent = body.get_node_or_null("HealthComponent")
+		if health:
+			health.take_damage(damage * distance_factor * modifier, source)
 		
-		if body.has_node("MobMoverComponent"):
-			var mob_mover: MobMoverComponent = body.get_node("MobMoverComponent")
+		var mob_mover: MobMoverComponent = body.get_node_or_null("MobMoverComponent")
+		if mob_mover:
 			mob_mover.drop(fall_time * distance_factor, drop_forced, drop_resistance_force)
 			var direction: Vector2 = (body.global_position - global_position).normalized()
 			if direction.length_squared() > 0:
 				mob_mover.throw(direction, fly_force * distance_factor)
-		
-		if body.has_node("OrganComponent"):
-			body.get_node("OrganComponent")._on_step(body)
 		
 		damaged_bodies.append(body)

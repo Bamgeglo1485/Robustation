@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dvl4m2chpcne3"]
 
 [ext_resource type="Texture2D" uid="uid://csjs5ggnfnuhm" path="res://Textures/Weapons/Beer/beer.png" id="1_7555o"]
-[ext_resource type="LabelSettings" uid="uid://dblchlsmqjas1" path="res://Resources/Text/PerkText.tres" id="2_yhas7"]
 [ext_resource type="LabelSettings" uid="uid://ckvx27ngndofk" path="res://Resources/Text/PerkHeading.tres" id="3_emb1s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_emb1s"]
@@ -38,17 +37,6 @@ offset_right = 107.0
 offset_bottom = 107.0
 texture = ExtResource("1_7555o")
 
-[node name="Desc" type="Label" parent="Panel" unique_id=30639874]
-layout_mode = 0
-offset_left = 108.0
-offset_top = 20.0
-offset_right = 563.0
-offset_bottom = 128.0
-text = "Bla bla bla bla bla bla bla bla bla bla bla bla bla bla che blya"
-label_settings = ExtResource("2_yhas7")
-vertical_alignment = 1
-autowrap_trim_flags = 128
-
 [node name="Name" type="Label" parent="Panel" unique_id=2113371782]
 layout_mode = 0
 offset_left = 109.0
@@ -59,3 +47,17 @@ text = "Pivo"
 label_settings = ExtResource("3_emb1s")
 vertical_alignment = 1
 autowrap_trim_flags = 128
+
+[node name="Desc" type="RichTextLabel" parent="Panel" unique_id=1446182682]
+modulate = Color(0.6378432, 0.6378432, 0.63784313, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 109.0
+offset_top = 46.0
+offset_right = -9.999939
+offset_bottom = 101.99997
+bbcode_enabled = true
+text = "sdasdas"
+scroll_active = false
+metadata/_edit_use_anchors_ = true

@@ -10,6 +10,8 @@ class_name WeaponUserComponent extends Component
 @export var block_when_flying: bool = true
 
 @export var damage_modifier: float = 1.0
+@export var minor_damage_modifiers: Dictionary[String, float]
+@export var minor_damage_modifier: float = 1.0
 @export var knockback_modifier: int = 0
 @export var cooldown_modifier: float = 1.0
 
@@ -54,7 +56,7 @@ func attack(raiser, npc: bool = true) -> bool:
 		if mob_mover_component.flying and block_when_flying:
 			return false
 	
-	selected_weapon.damage_modifier = damage_modifier
+	selected_weapon.damage_modifier = damage_modifier * minor_damage_modifier
 	selected_weapon.cooldown_modifier = cooldown_modifier
 	selected_weapon.attack(raiser, npc)
 	
@@ -62,3 +64,10 @@ func attack(raiser, npc: bool = true) -> bool:
 
 func release() -> void:
 	selected_weapon._on_release()
+
+func set_minor_modifier(key: String, value: float):
+	minor_damage_modifiers[key] = value
+	var minor_mod: float = 1.0
+	for modifier in minor_damage_modifiers.values():
+		minor_mod *= modifier
+	minor_damage_modifier = minor_mod

@@ -4,7 +4,7 @@ class_name AdditionalStaminaPerkComponent extends BasePerkComponent
 
 func _init() -> void:
 	perk_name = "Student Diet"
-	perk_desc = "Increases your stamina by 20 units"
+	perk_desc = "[color=green]Increases your stamina by 20 units[/color]"
 	perk_icon = preload("res://Textures/Perks/student_diet.png")
 	
 @onready var stamina_component: StaminaComponent = parent.get_node_or_null("StaminaComponent")

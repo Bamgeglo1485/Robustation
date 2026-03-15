@@ -1,45 +1,31 @@
 [gd_scene format=3 uid="uid://dmjnaimj7xbw1"]
 
-[ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts/Effects/TimedDelete.gd" id="1_kodbr"]
 [ext_resource type="Material" uid="uid://4yrd4354bvw7" path="res://Resources/Shaders/Explosion.tres" id="2_cq02y"]
 [ext_resource type="Script" uid="uid://tjlcu3a27wqd" path="res://Scripts/Effects/ShockwaveEffect.gd" id="3_a5ua4"]
 [ext_resource type="AudioStream" uid="uid://ba7j68er83sfy" path="res://Resources/Audio/ExplosionRandom.tres" id="4_a5ua4"]
 [ext_resource type="Script" uid="uid://qcmegh7138ug" path="res://Components/Entity/UniqueShaderComponent.gd" id="4_w3f1l"]
 
-[sub_resource type="Curve" id="Curve_mgjcw"]
-_limits = [0.0, 3.0, 0.0, 1.0]
-_data = [Vector2(0, 1.011236), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_c1ng1"]
-curve = SubResource("Curve_mgjcw")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ou2k1"]
-lifetime_randomness = 1.0
-particle_flag_disable_z = true
-spread = 180.0
-initial_velocity_max = 51.719997
-gravity = Vector3(0, 0, 0)
-linear_accel_min = -42.530003
-linear_accel_max = 99.99999
-radial_accel_min = -100.0
-radial_accel_max = 99.99999
-scale_max = 5.0
-scale_over_velocity_max = 218.39
-scale_over_velocity_curve = SubResource("CurveTexture_c1ng1")
-hue_variation_min = -1.0
-hue_variation_max = -0.67
-
-[node name="GPUParticles2D" type="GPUParticles2D" unique_id=75207985]
+[node name="GPUParticles2D" type="CPUParticles2D" unique_id=1656280505]
 modulate = Color(16.1889, 16.1889, 16.1889, 1)
 z_index = 10
-amount = 17000
+amount = 1000
 lifetime = 1.74
 preprocess = 0.5
 speed_scale = 4.0
 randomness = 1.0
-process_material = SubResource("ParticleProcessMaterial_ou2k1")
-script = ExtResource("1_kodbr")
+lifetime_randomness = 1.0
+fixed_fps = 30
+draw_order = 1
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 51.719997
+linear_accel_min = -42.530003
+linear_accel_max = 99.99999
+radial_accel_min = -100.0
+radial_accel_max = 99.99999
+scale_amount_max = 5.0
+hue_variation_min = -1.0
+hue_variation_max = -0.67
 
 [node name="Delete" type="Timer" parent="." unique_id=654438796]
 wait_time = 0.2
@@ -63,5 +49,3 @@ metadata/_custom_type_script = "uid://qcmegh7138ug"
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=351949433]
 stream = ExtResource("4_a5ua4")
 autoplay = true
-
-[connection signal="timeout" from="Delete" to="." method="_on_delete_timeout"]

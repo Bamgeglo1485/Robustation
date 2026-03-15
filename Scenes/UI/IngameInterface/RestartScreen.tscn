@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://bfiiciqf8e8w1"]
 
+[ext_resource type="FontFile" uid="uid://4xw2o0e2j051" path="res://Resources/Text/Fonts/RobotoMono/static/RobotoMono-Regular.ttf" id="2_4eipc"]
 [ext_resource type="Script" uid="uid://clfjtp26jetey" path="res://Components/Player/RestartComponent.gd" id="2_ee1ry"]
 [ext_resource type="Script" uid="uid://4io3bm7r86h6" path="res://Components/Interface/Menu/TextPrintingAnimationComponent.gd" id="2_udu1i"]
 [ext_resource type="Material" uid="uid://bdio1hqqwuopn" path="res://Resources/Shaders/Monitor.tres" id="3_uu8do"]
 [ext_resource type="FontFile" uid="uid://dichq2si55q4b" path="res://Resources/Text/Fonts/RobotoMono/static/RobotoMono-ExtraLight.ttf" id="4_i5qfg"]
-[ext_resource type="AudioStream" uid="uid://c72v78medgu4t" path="res://Audio/Music/SpaceAssholeLOFI.ogg" id="4_udu1i"]
 [ext_resource type="AudioStream" uid="uid://b1hijj0a6bn4s" path="res://Audio/Effects/hahaha.ogg" id="6_3ffbk"]
+[ext_resource type="AudioStream" uid="uid://b3bn8ma2pwwns" path="res://Audio/Interface/Menu/computer_loop.ogg" id="7_4eipc"]
 [ext_resource type="Script" uid="uid://q6vb3j07d62t" path="res://Components/Entity/FadeInComponent.gd" id="7_u8k2u"]
 
 [node name="IngameMenu" type="Control" unique_id=1644887491]
@@ -40,6 +41,8 @@ offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/normal_font = ExtResource("4_i5qfg")
+theme_override_fonts/bold_font = ExtResource("2_4eipc")
+bbcode_enabled = true
 text = "A problem has been detected and RobustOS has been shut down to prevent damage
 to your computer.
 
@@ -66,8 +69,8 @@ Technical Information:
 *** STOP: 0x1000007e (0xffffffffc0000005, 0xfffff80002e55151, 0xfffff880009a99d8,
 0xfffff880009a9230)
 
-*** replay_menu.exe - Address 0xfffff80002e55151 base at 0xfffff80002e0d000 DateStamp
-0x4ce7951a"
+*** 
+[color=green][b]PRESS \"W/A/S/D\" TO RETURN TO THE BOOTLOADER, OR \"R\" TO TRY RESTART THE SESSION."
 
 [node name="TextPrintingAnimationComponent" type="Node" parent="ColorRect/RichTextLabel" unique_id=1497740228]
 script = ExtResource("2_udu1i")
@@ -135,13 +138,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1556919247]
-stream = ExtResource("4_udu1i")
-volume_db = 3.0
-autoplay = true
-parameters/looping = true
-
-[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=501109570]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=501109570]
 stream = ExtResource("6_3ffbk")
 volume_db = 4.0
 autoplay = true
@@ -151,3 +148,9 @@ parameters/looping = false
 script = ExtResource("7_u8k2u")
 delay = 0.5
 metadata/_custom_type_script = "uid://q6vb3j07d62t"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." unique_id=903202302]
+stream = ExtResource("7_4eipc")
+volume_db = 3.0
+autoplay = true
+parameters/looping = true

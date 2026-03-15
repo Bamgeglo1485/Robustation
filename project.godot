@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Robustation-OOP"
-config/version="DEMO 0.0.9"
+config/version="0.0.9"
 run/main_scene="uid://8useii0cqwer"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
@@ -50,6 +50,7 @@ enabled=PackedStringArray("res://addons/beehave/plugin.cfg")
 
 Enemies=""
 Blood=""
+PhysicalParticle=""
 
 [input]
 
@@ -60,6 +61,14 @@ ui_cancel={
 ui_home={
 "deadzone": 0.5,
 "events": []
+}
+movement={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":87,"key_label":0,"unicode":119,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"key_label":0,"unicode":97,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":115,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":100,"location":0,"echo":false,"script":null)
+]
 }
 movement_right={
 "deadzone": 0.2,
@@ -118,7 +127,7 @@ dash={
 }
 Restart={
 "deadzone": 0.2,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":78,"key_label":0,"unicode":1090,"location":0,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":82,"key_label":0,"unicode":114,"location":0,"echo":false,"script":null)
 ]
 }
 toggle_menu={
@@ -145,8 +154,6 @@ alt_attack={
 [physics]
 
 2d/run_on_separate_thread=true
-common/physics_ticks_per_second=50
-common/max_physics_steps_per_frame=6
 2d/default_gravity=0.0
 2d/default_gravity_vector=Vector2(0, 0)
 2d/solver/solver_iterations=14
@@ -154,7 +161,9 @@ common/physics_interpolation=true
 
 [rendering]
 
+occlusion_culling/bvh_build_quality=1
 textures/canvas_textures/default_texture_filter=0
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=1
 global_illumination/gi/use_half_resolution=true
 textures/default_filters/anisotropic_filtering_level=0
 camera/depth_of_field/depth_of_field_bokeh_shape=0

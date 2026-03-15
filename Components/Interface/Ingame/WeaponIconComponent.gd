@@ -37,6 +37,8 @@ func _progress_bar() -> void:
 				_start_progress_tween(1.0, 0.15)
 				modifier = 0.15
 				await progress_tween.finished
+			if !is_instance_valid(weapon):
+				return
 			var progress_value = weapon.cooldown_timer.time_left / weapon.cooldown_timer.wait_time + modifier
 			parent.material.set_shader_parameter("progress", progress_value)
 			_start_progress_tween(0.0, weapon.cooldown_timer.time_left)
@@ -56,6 +58,8 @@ func _progress_bar() -> void:
 						_start_progress_tween(1.0, 0.15)
 						modifier = 0.15
 						await progress_tween.finished
+					if !is_instance_valid(weapon):
+						return
 					@warning_ignore("confusable_local_declaration")
 					var progress_value = weapon.cooldown_timer.time_left / weapon.cooldown_timer.wait_time + modifier
 					parent.material.set_shader_parameter("progress", progress_value)
@@ -77,6 +81,8 @@ func _progress_bar() -> void:
 				_start_progress_tween(1.0, cooldown_time)
 				modifier = cooldown_time
 				await progress_tween.finished
+			if !is_instance_valid(weapon):
+				return
 			var progress_value = weapon.bullets_recover_timer.time_left / weapon.bullets_recover_timer.wait_time + modifier
 			parent.material.set_shader_parameter("progress", progress_value)
 			_start_progress_tween(0.0, weapon.bullets_recover_timer.time_left)

@@ -2,7 +2,7 @@ class_name AdditionalKnockbackPerkComponent extends BasePerkComponent
 
 func _init() -> void:
 	perk_name = "Pushorn"
-	perk_desc = "Increases your selected weapon knockback power"
+	perk_desc = "[color=green]Increases your selected weapon knockback power[/color]"
 	perk_icon = preload("res://Textures/Perks/pushorn.png")
 	rarity = rarity_classes.ROBUST
 

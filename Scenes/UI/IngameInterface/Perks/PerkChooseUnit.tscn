@@ -2,22 +2,21 @@
 
 [ext_resource type="Texture2D" uid="uid://exsef6crft3y" path="res://Textures/Perks/bitch_ball.png" id="1_7cvpm"]
 [ext_resource type="LabelSettings" uid="uid://ckvx27ngndofk" path="res://Resources/Text/PerkHeading.tres" id="2_lrwcv"]
-[ext_resource type="LabelSettings" uid="uid://dblchlsmqjas1" path="res://Resources/Text/PerkText.tres" id="3_0cfrd"]
 [ext_resource type="Script" uid="uid://bch3dta3tsrbs" path="res://Components/Interface/Ingame/PerkChooseOnPressedComponent.gd" id="4_hdsew"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hdsew"]
 
-[node name="PerkListUnit" type="Panel" unique_id=780741405]
+[node name="PerkListUnit" type="Panel" unique_id=2073390009]
 custom_minimum_size = Vector2(0, 64)
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=848345886]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=370793442]
 layout_mode = 0
 offset_right = 65.0
 offset_bottom = 64.0
 texture = ExtResource("1_7cvpm")
 stretch_mode = 4
 
-[node name="ReferenceRect2" type="ReferenceRect" parent="TextureRect" unique_id=1028465687]
+[node name="ReferenceRect2" type="ReferenceRect" parent="TextureRect" unique_id=519550510]
 z_index = 3
 layout_mode = 1
 anchors_preset = -1
@@ -31,7 +30,7 @@ border_width = 2.5
 editor_only = false
 metadata/_edit_use_anchors_ = true
 
-[node name="Name" type="Label" parent="." unique_id=1618548110]
+[node name="Name" type="Label" parent="." unique_id=766591089]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.113074206
@@ -44,18 +43,20 @@ text = "BITCH BALL"
 label_settings = ExtResource("2_lrwcv")
 metadata/_edit_use_anchors_ = true
 
-[node name="Desc" type="Label" parent="." unique_id=114238261]
+[node name="Desc" type="RichTextLabel" parent="." unique_id=646860177]
+modulate = Color(0.80049086, 0.80049074, 0.80049074, 1)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.11837456
-anchor_top = 0.53125
-anchor_right = 0.99116606
-anchor_bottom = 0.921875
-text = "DEFAUL TOOLBOX SHALAVA"
-label_settings = ExtResource("3_0cfrd")
+anchor_left = 0.11510792
+anchor_top = 0.46875
+anchor_right = 0.9856115
+anchor_bottom = 0.96875
+bbcode_enabled = true
+text = "increases goon power"
+scroll_active = false
 metadata/_edit_use_anchors_ = true
 
-[node name="Button" type="Button" parent="." unique_id=866166028]
+[node name="Button" type="Button" parent="." unique_id=51861340]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -66,6 +67,6 @@ mouse_default_cursor_shape = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_hdsew")
 metadata/_edit_use_anchors_ = true
 
-[node name="PerkChooseOnPressedComponent" type="Node" parent="Button" unique_id=1657040931]
+[node name="PerkChooseOnPressedComponent" type="Node" parent="Button" unique_id=1610138895]
 script = ExtResource("4_hdsew")
 metadata/_custom_type_script = "uid://bch3dta3tsrbs"

@@ -3,6 +3,7 @@
 [ext_resource type="LabelSettings" uid="uid://nbgfghoq6ado" path="res://Resources/Text/CMDHeading.tres" id="1_v3kjt"]
 [ext_resource type="Script" uid="uid://4io3bm7r86h6" path="res://Components/Interface/Menu/TextPrintingAnimationComponent.gd" id="2_3hayu"]
 [ext_resource type="Script" uid="uid://dlyqiva26n7ka" path="res://Components/Interface/Menu/CMDInputComponent.gd" id="3_vlcut"]
+[ext_resource type="FontFile" uid="uid://4xw2o0e2j051" path="res://Resources/Text/Fonts/RobotoMono/static/RobotoMono-Regular.ttf" id="4_87s68"]
 [ext_resource type="Script" uid="uid://b0uuawujbqmt4" path="res://Components/Interface/Menu/PrintOnButtonPressComponent.gd" id="4_g37sx"]
 [ext_resource type="Texture2D" uid="uid://dqd7xkk5m77ck" path="res://Textures/Interface/Menu/cross.png" id="5_0oyh4"]
 [ext_resource type="Script" uid="uid://b21t14osl1vrf" path="res://Components/Interface/Menu/RoundstartOnPressedComponent.gd" id="5_j8l1p"]
@@ -19,6 +20,8 @@
 [ext_resource type="FontFile" uid="uid://dichq2si55q4b" path="res://Resources/Text/Fonts/RobotoMono/static/RobotoMono-ExtraLight.ttf" id="15_kkc8k"]
 [ext_resource type="Material" uid="uid://bdio1hqqwuopn" path="res://Resources/Shaders/Monitor.tres" id="17_bwdcc"]
 [ext_resource type="AudioStream" uid="uid://b3bn8ma2pwwns" path="res://Audio/Interface/Menu/computer_loop.ogg" id="18_2xdyd"]
+[ext_resource type="AudioStream" uid="uid://c72v78medgu4t" path="res://Audio/Music/SpaceAssholeLOFI.ogg" id="20_nbqb1"]
+[ext_resource type="Script" uid="uid://q6vb3j07d62t" path="res://Components/Entity/FadeInComponent.gd" id="21_bn6sp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_444o2"]
 bg_color = Color(0.10980392, 0, 0.05490196, 1)
@@ -27,6 +30,29 @@ bg_color = Color(0.10980392, 0, 0.05490196, 1)
 bg_color = Color(0.10980392, 0, 0.05490196, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2uogn"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2kl40"]
+random_pitch = 1.2599211
+random_volume_offset_db = 1.0
+streams_count = 1
+stream_0/stream = ExtResource("12_0oyh4")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nu65f"]
+bg_color = Color(0.1882353, 0, 0.105882354, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y67r4"]
+bg_color = Color(0.25682998, 4.9935653e-07, 0.1512529, 1)
+
+[sub_resource type="Environment" id="Environment_kkc8k"]
+background_mode = 3
+ssr_depth_tolerance = 128.0
+ssao_intensity = 16.45
+ssao_detail = 5.0
+ssao_horizon = 1.0
+ssao_light_affect = 1.0
+ssao_ao_channel_affect = 1.0
+glow_enabled = true
+glow_bloom = 0.25
 
 [sub_resource type="Shader" id="Shader_r1g08"]
 code = "shader_type canvas_item;
@@ -147,30 +173,8 @@ shader_parameter/gamma = 1.0
 shader_parameter/alpha = 1.0
 shader_parameter/vignette_strength = 0.0
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2kl40"]
-random_pitch = 1.2599211
-random_volume_offset_db = 1.0
-streams_count = 1
-stream_0/stream = ExtResource("12_0oyh4")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nu65f"]
-bg_color = Color(0.1882353, 0, 0.105882354, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y67r4"]
-bg_color = Color(0.25682998, 4.9935653e-07, 0.1512529, 1)
-
-[sub_resource type="Environment" id="Environment_kkc8k"]
-background_mode = 3
-ssr_depth_tolerance = 128.0
-ssao_intensity = 16.45
-ssao_detail = 5.0
-ssao_horizon = 1.0
-ssao_light_affect = 1.0
-ssao_ao_channel_affect = 1.0
-glow_enabled = true
-glow_bloom = 0.25
-
 [node name="Menu" type="Control" unique_id=1410112745]
+z_index = 10
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -179,6 +183,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Background" type="ColorRect" parent="." unique_id=412135731]
+z_index = -3
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -213,7 +218,7 @@ label_settings = ExtResource("1_v3kjt")
 
 [node name="TextPrintingAnimationComponent" type="Node" parent="Label/Label" unique_id=462373065]
 script = ExtResource("2_3hayu")
-animate_on_ready_delay = 2.0
+animate_on_ready_delay = 1.0
 metadata/_custom_type_script = "uid://4io3bm7r86h6"
 
 [node name="CMD" type="ColorRect" parent="." unique_id=2043084885]
@@ -240,7 +245,10 @@ offset_left = 0.24399948
 offset_top = 0.14799976
 offset_right = -0.23602295
 offset_bottom = -0.20501709
-text = "NanoTrasen Robust OS [Version 14.85-Om-PR]
+theme_override_fonts/normal_font = ExtResource("15_kkc8k")
+theme_override_fonts/bold_font = ExtResource("4_87s68")
+bbcode_enabled = true
+text = "NanoTrasen Robust OS {Version 14.85-Om-PR}
 (c) Digital Development Department (NanoTrasen Corporation).
 All rights reserved."
 scroll_active = false
@@ -248,8 +256,8 @@ scroll_following = true
 
 [node name="TextPrintingAnimationComponent" type="Node" parent="CMD/CMD_OUTPUT" unique_id=2143056546 node_paths=PackedStringArray("block_frame")]
 script = ExtResource("2_3hayu")
-animate_on_ready_delay = 2.0
-block_frame = NodePath("../../../MonitorOverlay")
+animate_on_ready_delay = 1.0
+block_frame = NodePath("../../../MONITOR/MonitorOverlay")
 metadata/_custom_type_script = "uid://4io3bm7r86h6"
 
 [node name="Input_text" type="RichTextLabel" parent="CMD" unique_id=846682761]
@@ -291,6 +299,7 @@ roundstart_component = NodePath("../../../RoundstartComponent")
 metadata/_custom_type_script = "uid://dlyqiva26n7ka"
 
 [node name="ButtonsFrame" type="ColorRect" parent="." unique_id=48031687]
+z_index = -2
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.009000001
@@ -335,20 +344,10 @@ grow_vertical = 2
 mouse_behavior_recursive = 1
 color = Color(0.110646956, 1.1882279e-07, 0.054563418, 1)
 
-[node name="OffOverlay" type="ColorRect" parent="." unique_id=1917864538]
-visible = false
-z_index = 40
-material = SubResource("ShaderMaterial_444o2")
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_behavior_recursive = 1
-
 [node name="OffScreenComponent" type="Node" parent="." unique_id=1507739008 node_paths=PackedStringArray("button", "effect", "off_sound")]
 script = ExtResource("8_ahnea")
 button = NodePath("../OffButton")
-effect = NodePath("../OffOverlay")
+effect = NodePath("../OFF/OffOverlay")
 off_sound = NodePath("../OffSound")
 metadata/_custom_type_script = "uid://c2sd6xsycjtn1"
 
@@ -373,7 +372,6 @@ stream = ExtResource("12_2kl40")
 
 [node name="RoundstartComponent" type="Node" parent="." unique_id=1364798108 node_paths=PackedStringArray("output_animation")]
 script = ExtResource("13_2kl40")
-arena = NodePath("res://Game/game.tscn")
 output_animation = NodePath("../CMD/CMD_OUTPUT/TextPrintingAnimationComponent")
 metadata/_custom_type_script = "uid://cxitq7uuw7y6p"
 
@@ -403,14 +401,14 @@ text = "Station Run"
 
 [node name="TextPrintingAnimationComponent" type="Node" parent="Buttons/StationRun" unique_id=414728123]
 script = ExtResource("2_3hayu")
-animate_on_ready_delay = 1.0
+animate_on_ready_delay = 0.7
 metadata/_custom_type_script = "uid://4io3bm7r86h6"
 
 [node name="PrintOnButtonPressComponent" type="Node" parent="Buttons/StationRun" unique_id=809375099 node_paths=PackedStringArray("print_frame")]
 script = ExtResource("4_g37sx")
 print_frame = NodePath("../../../CMD/CMD_OUTPUT")
 instant_text = "\\Omega\\Manager>purge_system init"
-text = "ERROR 213: Access Denied"
+text = "[color=red]ERROR 213: Access Denied[/color]"
 delay = 0.2
 metadata/_custom_type_script = "uid://b0uuawujbqmt4"
 
@@ -445,21 +443,20 @@ text = "Arena"
 
 [node name="TextPrintingAnimationComponent" type="Node" parent="Buttons/Arena" unique_id=1817225005]
 script = ExtResource("2_3hayu")
-animate_on_ready_delay = 1.0
+animate_on_ready_delay = 0.5
 metadata/_custom_type_script = "uid://4io3bm7r86h6"
 
 [node name="PrintOnButtonPressComponent" type="Node" parent="Buttons/Arena" unique_id=1426117045 node_paths=PackedStringArray("print_frame")]
 script = ExtResource("4_g37sx")
 print_frame = NodePath("../../../CMD/CMD_OUTPUT")
 instant_text = "\\Omega\\Manager>test_system init arena"
-text = "WARN: Purger subject testing procedure initialized...
-Subject loaded
+text = "[color=yellow]WARN: Purger subject testing procedure initialized...[/color]
+[color=green]Subject loaded
 Area injection: Successful!
 Subject injection: Successful!
-Data verification: Successful!
+Data verification: Successful![/color]
 
-Have fun!"
-delay = 2.0
+[color=red]Have fun![/color]"
 metadata/_custom_type_script = "uid://b0uuawujbqmt4"
 
 [node name="RoundstartOnPressedComponent" type="Node" parent="Buttons/Arena" unique_id=648678141 node_paths=PackedStringArray("roundstart_component")]
@@ -499,15 +496,15 @@ text = "Setup"
 
 [node name="TextPrintingAnimationComponent" type="Node" parent="Buttons/Settings" unique_id=751812909]
 script = ExtResource("2_3hayu")
-animate_on_ready_delay = 1.0
+animate_on_ready_delay = 0.5
 metadata/_custom_type_script = "uid://4io3bm7r86h6"
 
 [node name="PrintOnButtonPressComponent" type="Node" parent="Buttons/Settings" unique_id=1371301653 node_paths=PackedStringArray("print_frame")]
 script = ExtResource("4_g37sx")
 print_frame = NodePath("../../../CMD/CMD_OUTPUT")
 instant_text = "\\Omega\\Manager>ui_system launch setup"
-text = "Setup menu successfully switched!"
-delay = 0.5
+text = "[color=green]Setup menu successfully switched![/color]"
+delay = 0.1
 metadata/_custom_type_script = "uid://b0uuawujbqmt4"
 
 [node name="ToggleVisibleOnPressedComponent" type="Node" parent="Buttons/Settings" unique_id=481991828 node_paths=PackedStringArray("toggle_frame")]
@@ -546,18 +543,19 @@ text = "Credits"
 
 [node name="TextPrintingAnimationComponent" type="Node" parent="Buttons/Credits" unique_id=522289675]
 script = ExtResource("2_3hayu")
-animate_on_ready_delay = 1.0
+animate_on_ready_delay = 0.5
 metadata/_custom_type_script = "uid://4io3bm7r86h6"
 
 [node name="PrintOnButtonPressComponent" type="Node" parent="Buttons/Credits" unique_id=1443914418 node_paths=PackedStringArray("print_frame")]
 script = ExtResource("4_g37sx")
 print_frame = NodePath("../../../CMD/CMD_OUTPUT")
 instant_text = "\\Omega\\Manager>credits"
-text = "Geglo1485 — Head developer / Maintainer
-_pixar4ik_ — Contributor / Programmer
-MrJajkes — Composer
-LaCote — 3D Animator
-
+text = "[color=crimson]Geglo1485 — Head developer / Maintainer[/color]
+[color=violet]_pixar4ik_ — Contributor / Programmer[/color]
+[color=orange]MrJajkes — Composer[/color]
+------------
+Most sprites taken from Space Station 14
+Space asshole menu remix by Slend32
 "
 delay = 0.5
 metadata/_custom_type_script = "uid://b0uuawujbqmt4"
@@ -594,10 +592,24 @@ offset_top = 29.0
 offset_right = 251.0
 offset_bottom = 29.0
 
-[node name="MonitorOverlay" type="ColorRect" parent="." unique_id=672900642]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2110844953]
+environment = SubResource("Environment_kkc8k")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=665693760]
+stream = ExtResource("20_nbqb1")
+volume_db = 3.0
+autoplay = true
+parameters/looping = true
+
+[node name="FadeInComponent" type="Node" parent="AudioStreamPlayer" unique_id=1631964528]
+script = ExtResource("21_bn6sp")
+metadata/_custom_type_script = "uid://q6vb3j07d62t"
+
+[node name="MONITOR" type="CanvasLayer" parent="." unique_id=1652074137]
+
+[node name="MonitorOverlay" type="ColorRect" parent="MONITOR" unique_id=672900642]
 z_index = 20
 material = ExtResource("17_bwdcc")
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -605,5 +617,14 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 8
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2110844953]
-environment = SubResource("Environment_kkc8k")
+[node name="OFF" type="CanvasLayer" parent="." unique_id=712874794]
+layer = 2
+
+[node name="OffOverlay" type="ColorRect" parent="OFF" unique_id=1917864538]
+visible = false
+z_index = 40
+material = SubResource("ShaderMaterial_444o2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_behavior_recursive = 1

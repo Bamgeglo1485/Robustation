@@ -27,12 +27,15 @@ modulate = Color(10.034221, 4.298072, 4.201102, 1)
 z_index = -2
 texture_filter = 1
 emitting = false
-amount = 48
+amount = 20
 one_shot = true
 speed_scale = 5.53
 explosiveness = 1.0
 use_fixed_seed = true
 seed = 4246352849
+trail_enabled = true
+trail_sections = 2
+trail_section_subdivisions = 1
 process_material = SubResource("ParticleProcessMaterial_0sbr1")
 script = ExtResource("1_h4vrm")
 

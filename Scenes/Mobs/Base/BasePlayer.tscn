@@ -68,6 +68,10 @@ random_volume_offset_db = 1.0
 streams_count = 1
 stream_0/stream = ExtResource("11_bjw4p")
 
+[sub_resource type="Curve" id="Curve_nnp87"]
+_data = [Vector2(0.21830988, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ak33s"]
 atlas = ExtResource("35_hp12l")
 region = Rect2(0, 0, 32, 32)
@@ -291,6 +295,9 @@ weapon_icon = NodePath("../GUI/Inventory/Hand_R/WeaponIcon")
 alt_weapon_icon = NodePath("../GUI/Inventory/Hand_R/WeaponIcon/AltAttackIcon")
 metadata/_custom_type_script = "uid://gek7ma2qpdp6"
 
+[node name="AnimationComponent" parent="." index="11" unique_id=1054272185 node_paths=PackedStringArray("flash_frame")]
+flash_frame = NodePath("../GUI/Overlays/DamageFlash/DamageFlash")
+
 [node name="PerkCollect" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="1" unique_id=1054597139]
 stream = ExtResource("8_4awd5")
 max_polyphony = 10
@@ -324,6 +331,7 @@ volume_db = -8.0
 [node name="HealthOverlayComponent" type="Node" parent="." index="16" unique_id=490260157 node_paths=PackedStringArray("overlay", "death_effect", "death_screen_parent")]
 script = ExtResource("6_korw6")
 overlay = NodePath("../GUI/Overlays/Health/Health")
+curve = SubResource("Curve_nnp87")
 death_effect = NodePath("../GUI/Overlays/Death/Death")
 death_screen = ExtResource("16_nnp87")
 death_screen_parent = NodePath("../GUI")
@@ -720,10 +728,11 @@ script = ExtResource("11_yhquf")
 metadata/_custom_type_script = "uid://qcmegh7138ug"
 
 [node name="Menu" type="CanvasLayer" parent="GUI" index="3" unique_id=1927357485]
-layer = 4
+layer = 10
 
 [node name="IngameMenu" parent="GUI/Menu" index="0" unique_id=1644887491 instance=ExtResource("20_ryxqw")]
 visible = false
+z_index = 50
 
 [node name="SoundsOnInputComponent2" type="Node" parent="GUI/Menu/IngameMenu" index="2" unique_id=471876940 node_paths=PackedStringArray("keyboard_audio_player", "mouse_audio_player")]
 script = ExtResource("25_vn5lk")
@@ -755,6 +764,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
+
+[node name="UniqueShaderComponent" type="Node" parent="GUI/Overlays/BattleTendency/BattleTendency" index="0" unique_id=942703649]
+script = ExtResource("11_yhquf")
+metadata/_custom_type_script = "uid://qcmegh7138ug"
 
 [node name="ColorModify" type="CanvasLayer" parent="GUI/Overlays" index="2" unique_id=1450573894]
 
@@ -831,6 +844,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
+
+[node name="UniqueShaderComponent" type="Node" parent="GUI/Overlays/Death/Death" index="0" unique_id=322135712]
+script = ExtResource("11_yhquf")
+metadata/_custom_type_script = "uid://qcmegh7138ug"
+
+[node name="DamageFlash" type="CanvasLayer" parent="GUI/Overlays" index="9" unique_id=924204243]
+
+[node name="DamageFlash" type="ColorRect" parent="GUI/Overlays/DamageFlash" index="0" unique_id=1157850152]
+material = ExtResource("7_5768p")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="UniqueShaderComponent" type="Node" parent="GUI/Overlays/DamageFlash/DamageFlash" index="0" unique_id=104124287]
+script = ExtResource("11_yhquf")
+metadata/_custom_type_script = "uid://qcmegh7138ug"
 
 [node name="PerkChoose" type="CanvasLayer" parent="GUI" index="5" unique_id=387688815]
 layer = 3

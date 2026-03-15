@@ -1,7 +1,7 @@
 class_name BloodCleaningSettingsComponent extends Component
 
 var config = ConfigFile.new()
-var default_delay: float = 70.0
+var default_delay: float = 20.0
 
 func _ready() -> void:
 	parent.value_changed.connect(_save_to_config)

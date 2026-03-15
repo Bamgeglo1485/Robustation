@@ -4,7 +4,7 @@ class_name CooldownModifierPerkComponent extends BasePerkComponent
 
 func _init() -> void:
 	perk_name = "Combat Glove"
-	perk_desc = "Reduces weapon cooldown by 5%"
+	perk_desc = "[color=green]Reduces weapon cooldown by 5%[/color]"
 	perk_icon = preload("res://Textures/Perks/combat_glove.png")
 	perk_equipped_texture = preload("res://Textures/Perks/combat_glove_equipped.png")
 

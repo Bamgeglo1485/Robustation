@@ -14,7 +14,6 @@
 [ext_resource type="Script" uid="uid://di5u0whaqiyjp" path="res://Resources/Custom/Enemy/Base/Enemy.gd" id="11_72g0p"]
 [ext_resource type="Environment" uid="uid://r1a7fr7x6en8" path="res://DemoTrash/Light.tres" id="15_qlwvw"]
 [ext_resource type="Script" uid="uid://dptr5blvqsgks" path="res://Components/Interface/Menu/Settings/WorldEnvComponent.gd" id="15_rpdke"]
-[ext_resource type="PackedScene" uid="uid://vjubfbb1hjee" path="res://Scenes/Mobs/Enemies/Tider.tscn" id="16_rpdke"]
 
 [node name="Game" type="Node2D" unique_id=1459948473]
 physics_interpolation_mode = 2
@@ -108,6 +107,7 @@ texture_scale = 10.0
 
 [node name="ArenaComponent" type="Node" parent="." unique_id=1165337052 node_paths=PackedStringArray("area_info")]
 script = ExtResource("10_glinl")
+perks = Array[String](["res://Components/Perks/AdditionalHealthPerkComponent.gd", "res://Components/Perks/AdditionalKnockbackPerkComponent.gd", "res://Components/Perks/AdditionalStaminaPerkComponent.gd", "res://Components/Perks/ArmorPerkComponent.gd", "res://Components/Perks/CooldownModifierPerkComponent.gd", "res://Components/Perks/DelayedDamageModifierPerkComponent.gd", "res://Components/Perks/PenetrationModifierPerkComponent.gd", "res://Components/Perks/ReflectMeleePerkComponent.gd", "res://Components/Perks/ReflectPerkComponent.gd", "res://Components/Perks/RegenerationPerkComponent.gd", "res://Components/Perks/SpeedModifierPerkComponent.gd"])
 area_info = NodePath("../Player/DEBUG/Control/RichTextLabel")
 available_enemies = Array[ExtResource("11_72g0p")]([ExtResource("8_33n3b"), ExtResource("9_rxmp4"), ExtResource("10_qyr8x")])
 spawn_positions = Array[Vector2]([Vector2(-930, 21), Vector2(989, 21)])
@@ -156,15 +156,3 @@ environment = ExtResource("15_qlwvw")
 [node name="WorldEnvComponent" type="Node" parent="WorldEnvironment" unique_id=658048459]
 script = ExtResource("15_rpdke")
 metadata/_custom_type_script = "uid://dptr5blvqsgks"
-
-[node name="Tider" parent="." unique_id=1270222458 instance=ExtResource("16_rpdke")]
-position = Vector2(-247, 68)
-
-[node name="Tider2" parent="." unique_id=71824981 instance=ExtResource("16_rpdke")]
-position = Vector2(16, 62)
-
-[node name="Tider3" parent="." unique_id=230962901 instance=ExtResource("16_rpdke")]
-position = Vector2(-10, 31)
-
-[node name="Tider4" parent="." unique_id=2030858975 instance=ExtResource("16_rpdke")]
-position = Vector2(-28, 10)

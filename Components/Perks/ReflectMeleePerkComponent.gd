@@ -3,7 +3,7 @@ class_name ReflectMeleePerkComponent extends BasePerkComponent
 @export var reflect_sound: AudioStream = preload("res://Audio/Weapon/parry.ogg")
 var reflect_sound_player: AudioStreamPlayer2D
 
-@export var base_chance: float = 0.025
+@export var base_chance: float = 0.03
 var chance: float = base_chance
 
 func _ready() -> void:
@@ -21,7 +21,7 @@ func free() -> void:
 
 func _init() -> void:
 	perk_name = "Bitch Ball"
-	perk_desc = "Increases your melee attack reflect chance by 2.5%"
+	perk_desc = "[color=green]Increases your melee attack reflect chance by 3%[/color]"
 	perk_icon = preload("res://Textures/Perks/bitch_ball.png")
 	rarity = rarity_classes.ROBUST
 

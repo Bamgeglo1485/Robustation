@@ -152,7 +152,7 @@ rage_when_buddy_dead = false
 metadata/_custom_type_script = "uid://da2q40ragr5wk"
 
 [node name="BeehaveTree" parent="." index="20" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@18962")
+blackboard = NodePath("@Node@93514")
 
 [node name="SequenceComposite" type="Node" parent="BeehaveTree" index="0" unique_id=2054169643]
 script = ExtResource("36_k3vsn")
@@ -210,4 +210,5 @@ metadata/_custom_type_script = "uid://wlnghjnvdlyn"
 
 [node name="AttackTargetAction" type="Node" parent="BeehaveTree/SequenceComposite" index="3" unique_id=1184888530]
 script = ExtResource("41_i5qxx")
+prediction_coef = 0.95
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"

@@ -14,11 +14,15 @@ var direction: float = 0.0
 var lifetime: float
 var acceleration_time: float
 
+var cleaning: bool = false
+
 func _ready() -> void:
 	if parent is not CharacterBody2D:
 		queue_free()
 		return
 	
+	if !parent.is_in_group("PhysicalParticle"):
+		add_to_group("PhysicalParticle")
 	direction = randf_range(0, 360)
 	
 	lifetime = randf_range(min_lifetime, max_lifetime)
@@ -26,11 +30,17 @@ func _ready() -> void:
 	parent.rotation = randf_range(0, 360)
 	
 	await get_tree().create_timer(lifetime - 5).timeout
+	clean()
+
+func clean() -> void:
+	if cleaning:
+		return
+	cleaning = true
 	var tween: Tween = create_tween()
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(parent, "modulate", Color(1.0, 1.0, 1.0, 0.0), 5)
-	await get_tree().create_timer(5).timeout
+	tween.tween_property(parent, "modulate", Color(1.0, 1.0, 1.0, 0.0), 3)
+	await get_tree().create_timer(3).timeout
 	parent.queue_free()
 
 func _physics_process(_delta: float) -> void:

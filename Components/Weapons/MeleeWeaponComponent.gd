@@ -32,8 +32,8 @@ class_name MeleeWeapon extends Weapon
 
 @export_category("Modify damage by speed")
 @export var modify_damage_by_speed: bool = false
-@export var modify_damage_by_speed_base_speed: float = 380.0
-@export var min_speed_to_impact_frame: float = 400
+@export var modify_damage_by_speed_base_speed: float = 440.0
+@export var min_speed_to_impact_frame: float = 440
 @export var modify_damage_by_speed_divider: float = 1
 @export var modify_damage_by_speed_hitscan_divider: float = 4
 var base_attack_volume: float = 0.0
@@ -190,7 +190,7 @@ multiple_attack: bool = false) -> bool:
 				mod = velocity / modify_damage_by_speed_base_speed / modify_damage_by_speed_divider
 				throw_speed = base_throw_speed * mod
 				self_throw_speed = base_self_throw_speed * mod * 1.5
-				attack_sound.volume_db = mod * 5
+				attack_sound.volume_db = mod * 2.5
 				attack_sound.play()
 				EventBusManager.request_impact_frame.emit(mod / modify_damage_by_speed_hitscan_divider, 0.0, true, true)
 		target_health_component.take_damage(damage * damage_modifier * _get_minor_modifiers() * mod, parent, ignore_armor)

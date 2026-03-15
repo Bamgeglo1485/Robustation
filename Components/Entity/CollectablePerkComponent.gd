@@ -1,6 +1,7 @@
 class_name CollectablePerkComponent extends Component
 
 @export var random_perk: bool = true
+@export_file_path() var random_perks: Array[String]
 @export var perk: Script
 @export var area: Area2D
 @export var sprite: Sprite2D
@@ -48,9 +49,8 @@ func _on_collide(body) -> void:
 	parent.queue_free()
 
 func _get_random_perk():
-		var perks: Array[String] = _get_all_file_paths("res://Components/Perks")
 		var valid_perks: Array[Script] = []
-		for potential_perk in perks:
+		for potential_perk in random_perks:
 			var loaded_perk = load(potential_perk)
 			if loaded_perk is Script:
 				valid_perks.append(loaded_perk)
@@ -59,20 +59,3 @@ func _get_random_perk():
 			return
 		
 		return valid_perks.pick_random()
-
-func _get_all_file_paths(path: String) -> Array[String]:  
-	var file_paths: Array[String] = []  
-	var dir = DirAccess.open(path)  
-	
-	if dir == null:
-		return file_paths
-	
-	dir.list_dir_begin()  
-	var file_name = dir.get_next()  
-	while file_name != "":  
-		if file_name.ends_with(".gd"):
-			var file_path = path + "/" + file_name  
-			file_paths.append(file_path)  
-		file_name = dir.get_next()  
-	dir.list_dir_end()
-	return file_paths

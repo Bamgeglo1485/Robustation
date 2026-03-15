@@ -25,3 +25,5 @@ shader_parameter/warp_amount = 0.050000002375
 shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.3
 shader_parameter/vignette_opacity = 1.0
+shader_parameter/edge_darken = 0.8
+shader_parameter/edge_softness = 0.1

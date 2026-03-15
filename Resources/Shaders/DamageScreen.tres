@@ -1,11 +1,11 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bx7piwibywxgi"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bx7piwibywxgi"]
 
 [ext_resource type="Shader" uid="uid://cnfinf47k6eqp" path="res://Resources/Shaders/DamageScreen.gdshader" id="1_1nufq"]
 
 [resource]
 shader = ExtResource("1_1nufq")
-shader_parameter/flash_color = Color(0.98742217, 0, 0.2978719, 1)
+shader_parameter/flash_color = Color(1, 0, 0, 1)
 shader_parameter/intensity = 0.0
-shader_parameter/edge_power = 4.0
-shader_parameter/inner_ratio = 0.6710000318725
-shader_parameter/feather = 0.5250000242389801
+shader_parameter/edge_power = 1.67200007616012
+shader_parameter/inner_ratio = 0.7030000333925
+shader_parameter/feather = 0.47700002195897995

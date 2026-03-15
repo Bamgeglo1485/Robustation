@@ -2,7 +2,7 @@ class_name RegenerationPerkComponent extends BasePerkComponent
 
 func _init() -> void:
 	perk_name = "Medical Belt"
-	perk_desc = "Increases your regeneration by 2 units per second"
+	perk_desc = "[color=green]Increases your regeneration by 2 units per second[/color]"
 	perk_icon = preload("res://Textures/Perks/med_belt.png")
 	perk_equipped_texture = preload("res://Textures/Perks/med_belt_equipped.png")
 	rarity = rarity_classes.COMMON
@@ -16,10 +16,10 @@ var cooldown: bool = false
 var regeneration_timer: Timer
 
 var regeneration: int = 2
+var additive_regeneration: int = 0
 
 func apply_modifiers() -> void:
-	regeneration = base_regeneration * amount
-
+	regeneration = base_regeneration * amount + additive_regeneration
 
 func _ready() -> void:
 	super._ready()

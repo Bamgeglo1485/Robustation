@@ -6,14 +6,14 @@ class_name OrganComponent extends PhysicalParticleComponent
 @export var health_bonus: int = 2
 
 func _ready() -> void:
-	super._ready()
 	parent.reparent.call_deferred(scene)
 	
 	if area2d:
 		area2d.body_entered.connect(_on_step)
+	super._ready()
 
 func _on_step(_body) -> void:
-	if accelerating:
+	if accelerating or cleaning:
 		return
 	
 	if blood_scene:

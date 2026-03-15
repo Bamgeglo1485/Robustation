@@ -99,7 +99,6 @@ energy = 0.0
 
 [node name="HealthComponent" parent="." index="6" unique_id=1758373275]
 ignore_time_scale = true
-heal_for_damage_multiplier = 0.05
 
 [node name="WeaponUserComponent" parent="." index="8" unique_id=2123544057 node_paths=PackedStringArray("selected_weapon")]
 selected_weapon = NodePath("Toolbox")
@@ -131,7 +130,7 @@ stream = ExtResource("18_w1un4")
 
 [node name="Toolbox" type="Node" parent="WeaponUserComponent" index="1" unique_id=140255965 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound", "alt_attack")]
 script = ExtResource("12_tn3ht")
-damage = 60
+damage = 45
 attack_range = 80
 ignore_armor = true
 parry_sound = NodePath("ParrySound")
@@ -171,7 +170,7 @@ case_scene = ExtResource("15_lx2yc")
 shoot_sound = NodePath("ShootSound")
 empty_shoot_sound = NodePath("EmptySound")
 bullets_recover_sound = NodePath("BulletRecoverSound")
-bullets_recovery_delay = 2.0
+bullets_recovery_delay = 1.5
 gun_fire_effect = ExtResource("16_w1un4")
 overheat_enabled = true
 cooldown_delay = 0.2

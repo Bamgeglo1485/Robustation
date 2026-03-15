@@ -2,8 +2,9 @@
 
 [ext_resource type="LabelSettings" uid="uid://cwb2xcovj2h4n" path="res://Resources/Text/UI.tres" id="1_7xmf0"]
 [ext_resource type="Script" uid="uid://cja3led3n1ehp" path="res://Components/Interface/Menu/DragButtonComponent.gd" id="2_p5g6t"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7xmf0"]
+[ext_resource type="Texture2D" uid="uid://dqd7xkk5m77ck" path="res://Textures/Interface/Menu/cross.png" id="3_wm5bs"]
+[ext_resource type="Texture2D" uid="uid://ftxxh2qcsb0s" path="res://Textures/Interface/Menu/cross_hovered.png" id="4_5k8qu"]
+[ext_resource type="Script" uid="uid://bch3dta3tsrbs" path="res://Components/Interface/Ingame/PerkChooseOnPressedComponent.gd" id="5_qgk7c"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wm5bs"]
 bg_color = Color(0, 0, 0, 1)
@@ -18,7 +19,6 @@ bg_color = Color(0.11286896, 1.469492e-06, 0.08068577, 1)
 bg_color = Color(0.14165193, 0.075261734, 0.0927326, 1)
 
 [node name="PerkChoose" type="Control" unique_id=1852449319]
-material = SubResource("ShaderMaterial_7xmf0")
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -113,3 +113,24 @@ anchor_bottom = 1.0023365
 offset_bottom = -3.0517578e-05
 theme_override_constants/separation = 8
 metadata/_edit_use_anchors_ = true
+
+[node name="OffButton" type="TextureButton" parent="Panel" unique_id=59769164]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.94014084
+anchor_top = 0.018691586
+anchor_right = 0.9883944
+anchor_bottom = 0.07892522
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("3_wm5bs")
+texture_hover = ExtResource("4_5k8qu")
+ignore_texture_size = true
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="PerkChooseOnPressedComponent" type="Node" parent="Panel/OffButton" unique_id=803102239]
+script = ExtResource("5_qgk7c")
+delete = false
+metadata/_custom_type_script = "uid://bch3dta3tsrbs"

@@ -17,6 +17,7 @@ motion_mode = 1
 [node name="ProjectileComponent" type="Area2D" parent="." unique_id=2058769936 node_paths=PackedStringArray("hit_sound")]
 collision_layer = 7
 collision_mask = 7
+priority = 2
 script = ExtResource("2_wrjq0")
 hit_sound = NodePath("HitSound")
 metadata/_custom_type_script = "uid://dn05jeqqq5844"

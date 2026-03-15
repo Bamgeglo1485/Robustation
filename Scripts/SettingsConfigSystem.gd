@@ -2,7 +2,7 @@ extends Node
 
 var config = ConfigFile.new()
 
-var blood_clean_delay: float = 70.0
+var blood_clean_delay: float = 20.0
 var glow: bool = true
 
 func _ready() -> void:

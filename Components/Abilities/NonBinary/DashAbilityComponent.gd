@@ -40,9 +40,6 @@ func _ready() -> void:
 	recovery_timer.start()
 	recovery_timer.timeout.connect(_stamina_recovery)
 	
-	if parent.has_node("Area2D"):
-		parent.get_node("Area2D").body_entered.connect(_on_collision)
-	
 	_update_stamina_bar()
 	
 	EventBusManager.projectile_shoot.connect(_on_shoot)
@@ -97,7 +94,6 @@ func dash(direction) -> void:
 		progress_tween.set_trans(Tween.TRANS_SINE)
 		progress_tween.set_ease(Tween.EASE_OUT)
 		progress_tween.tween_method(_set_stamina_progress, old_progress, new_progress, 0.15)
-		await progress_tween.finished
 	
 	if overdose_component and overdose_component.active:
 		overdose_component.ability_timer += overdose_refuel_count
@@ -126,7 +122,7 @@ func dash(direction) -> void:
 		dash_sound.play()
 	
 	mob_mover_component.try_stand_up()
-	mob_mover_component.throw(direction, dash_speed, null, 1450, false, true, false, 10)
+	mob_mover_component.throw(direction, dash_speed, null, 1460, false, true, false, 10)
 
 func _stamina_recovery() -> void:
 	if dash_stamina < max_dash_stamina:
@@ -156,7 +152,6 @@ func _cooldown() -> void:
 		recovery_timer.stop()
 		await get_tree().create_timer(cooldown_delay, true, false, true).timeout
 		cooldown = false
-		
 		if dash_stamina < max_dash_stamina:
 			recovery_timer.start()
 
@@ -167,22 +162,6 @@ func _INVINCIBLE() -> void:
 		await get_tree().create_timer(invincibility_delay).timeout
 		health_component.INVINCIBLE = false
 		active = false
-
-func _on_collision(body) -> void:
-	if !active:
-		return
-	if body is Area2D or body == parent:
-		return
-	if body.has_node("MobMoverComponent"):
-		var mob_mover = body.get_node("MobMoverComponent")
-		if mob_mover.flying:
-			return
-		
-		var angle: float = deg_to_rad(randf_range(-90, 90))
-		var random_direction = parent.velocity.rotated(angle).normalized()
-		
-		mob_mover.drop(1)
-		mob_mover.throw(random_direction, 300, parent)
 
 func _on_shoot(emitter: Node2D, _weapon: Weapon, direction: Vector2, projectile: Node2D) -> void:
 	if !active or !parry_weapon or emitter != parent:

@@ -7,7 +7,6 @@ class_name ChargingMeleeWeaponComponent extends MeleeWeapon
 @export var exponent_divider: float = 1.2
 @export var charging_effect: Node2D
 @export var hitstop_charge: float = 1.5
-@export var hitstop_divider: float = 2.5
 @export var charging_sound: AudioStreamPlayer2D
 @export var full_charge_sound: AudioStreamPlayer2D
 var charging: bool = false
@@ -68,9 +67,10 @@ func on_release(raiser) -> void:
 	if targets.is_empty():
 		return
 	if hitstop_charge != 0 and hitstop_charge < charge:
-		var hitstop_cof = charge / hitstop_charge / hitstop_divider
-		attack_sound.volume_db = hitstop_cof * 6
-		EventBusManager.request_impact_frame.emit(hitstop_cof / modify_damage_by_speed_hitscan_divider, 0.0, true, false)
+		var hitstop_cof = charge / hitstop_charge * 0.2
+		attack_sound.volume_db = hitstop_cof
+		print(hitstop_cof)
+		EventBusManager.request_impact_frame.emit(hitstop_cof, 0.0, true, false)
 
 func attack(_raiser, _npc = true) -> Dictionary:
 	if charging:

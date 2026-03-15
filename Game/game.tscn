@@ -2,6 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://bc7bghcv8144y" path="res://Resources/TileMaps/Tiles.tres" id="1_kul4i"]
 [ext_resource type="PackedScene" uid="uid://roeennw572p2" path="res://Scenes/Mobs/Player/PlayerGreytide.tscn" id="3_fsxsm"]
+[ext_resource type="Script" uid="uid://dx2huqcgxe3sr" path="res://Components/Perks/CooldownModifierPerkComponent.gd" id="3_qlwvw"]
 [ext_resource type="Script" uid="uid://bo7lklhepnuja" path="res://Scripts/fps.gd" id="4_glinl"]
 [ext_resource type="Texture2D" uid="uid://ctmvqt423d0il" path="res://Textures/Parallax/Space/XenoParallaxNeb.png" id="6_4lqr4"]
 [ext_resource type="TileSet" uid="uid://c7mk0aiygychu" path="res://Resources/TileMaps/Walls.tres" id="7_qlwvw"]
@@ -89,6 +90,11 @@ color = Color(0.0134198945, 0, 0.002004301, 1)
 
 [node name="AreaUI" type="CanvasLayer" parent="Player" unique_id=1227182301]
 layer = 0
+
+[node name="CooldownModifierPerkComponent" type="Node" parent="Player" unique_id=632863115]
+script = ExtResource("3_qlwvw")
+amount = 20
+metadata/_custom_type_script = "uid://dx2huqcgxe3sr"
 
 [node name="Walls" type="TileMapLayer" parent="." unique_id=418777059]
 position = Vector2(158, -75)

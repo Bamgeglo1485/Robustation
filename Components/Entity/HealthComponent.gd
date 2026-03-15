@@ -5,6 +5,7 @@ class_name HealthComponent extends Component
 @export var INVINCIBLE: bool = false
 var base_max_health: int = max_health
 @export var health: int = max_health: set = set_health, get = get_health
+@export var damage_type_modifiers: Dictionary[String, float]
 @export var damage_modifier: float = 1
 @export var armor: float = 1 # I'm too lazy to integrate armor perk with other systems.
 @export var gibbed: bool = false
@@ -64,15 +65,17 @@ func get_health() -> int:
 	return health
 
 # Наносит урон и создаёт эффекты
-func take_damage(damage: int, damager: Node2D, ignore_damage: bool = false) -> void:
+func take_damage(damage: int, damager: Node2D, damage_type: String = "Generic", ignore_damage_modifier: bool = false) -> void:
 	if INVINCIBLE:
 		if invinciblitiy_attack_effect:
-			var inst: Node = invinciblitiy_attack_effect.instantiate()
+			var inst: Node2D = invinciblitiy_attack_effect.instantiate()
 			inst.global_position = parent.global_position
 			scene.add_child(inst)
 		return
-	var modifier = armor
-	if ignore_damage:
+	var modifier = armor * damage_modifier
+	if !damage_type_modifiers.is_empty() and damage_type_modifiers.has(damage_type):
+		modifier *= damage_type_modifiers[damage_type]
+	if ignore_damage_modifier:
 		modifier = 1
 	
 	var modified_damage: float = damage * damage_modifier * modifier

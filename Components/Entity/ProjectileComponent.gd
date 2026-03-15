@@ -22,6 +22,7 @@ class_name ProjectileComponent extends Area2D
 @export var delete_on_hit: bool = true
 @export var embed_on_hit: bool = false
 @export var ignore_faction: bool = false
+@export var ignore_armor: float = false
 
 var shooter: PhysicsBody2D
 var direction: float
@@ -194,7 +195,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if health_comp:
 		if !shooter:
 			shooter = null
-		health_comp.take_damage(modified_damage, shooter)
+		health_comp.take_damage(modified_damage, shooter, "Projectile" ,ignore_armor)
 		if delayed_damage != 0 and delayed_damage_delay != 0:
 			health_comp.set_delayed_damage(delayed_damage * damage_modifier, delayed_damage_delay)
 		if max_penetrations != 0 and can_penetrate:

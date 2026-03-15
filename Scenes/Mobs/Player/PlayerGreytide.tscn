@@ -48,7 +48,7 @@
 [ext_resource type="Script" uid="uid://qcmegh7138ug" path="res://Components/Entity/UniqueShaderComponent.gd" id="34_t3me0"]
 [ext_resource type="Texture2D" uid="uid://dnsj2opn0s2h2" path="res://Textures/Abilities/telecrystal.png" id="34_vl6aw"]
 [ext_resource type="Script" uid="uid://bwcq6hlpavlvl" path="res://Components/Interface/Ingame/WeaponIconComponent.gd" id="35_u1ecu"]
-[ext_resource type="AudioStream" uid="uid://p0nau7qxcixe" path="res://Components/Weapons/spinning.ogg" id="36_b5xq3"]
+[ext_resource type="AudioStream" uid="uid://p0nau7qxcixe" path="res://Audio/Effects/spinning.ogg" id="36_b5xq3"]
 [ext_resource type="Texture2D" uid="uid://dikwitqlv30ww" path="res://Textures/Abilities/injector.png" id="36_u1ecu"]
 [ext_resource type="AudioStream" uid="uid://pdbtg3ie1ptb" path="res://Audio/Effects/ephedrine_overdose.ogg" id="40_sp3tm"]
 [ext_resource type="PackedScene" uid="uid://dmrgvirxbiawv" path="res://Scenes/Effects/Particles/Overdose.tscn" id="42_75g6c"]
@@ -139,7 +139,6 @@ miss_sound = NodePath("MeleeMissSound")
 parry_force = 2.0
 throw_speed = 400
 drop_enemy_delay = 0.5
-modify_damage_by_speed = true
 cooldown_delay = 0.35
 swing_delay = 0.1
 equipped_texture = ExtResource("8_42pyi")
@@ -264,7 +263,6 @@ base_charge_time = 0.5
 exponent_divider = 1.0
 charging_effect = NodePath("../../ChargingEffect")
 hitstop_charge = 0.75
-hitstop_divider = 1.0
 charging_sound = NodePath("ChargingSound")
 full_charge_sound = NodePath("FullChargeSound")
 damage = 7

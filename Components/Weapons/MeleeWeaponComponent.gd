@@ -30,19 +30,9 @@ class_name MeleeWeapon extends Weapon
 @onready var parent_mob_mover_component: MobMoverComponent
 @export var piercing_attack_animation: bool = false
 
-@export_category("Modify damage by speed")
-@export var modify_damage_by_speed: bool = false
-@export var modify_damage_by_speed_base_speed: float = 440.0
-@export var min_speed_to_impact_frame: float = 440
-@export var modify_damage_by_speed_divider: float = 1
-@export var modify_damage_by_speed_hitscan_divider: float = 4
-var base_attack_volume: float = 0.0
-
 func _ready() -> void:
 	super._ready()
 	parent_mob_mover_component = parent.get_node_or_null("MobMoverComponent")
-	if attack_sound:
-		base_attack_volume = attack_sound.volume_db
 
 func attack(raiser, npc = true) -> Dictionary:
 	if !raiser.has_method("get_attack_direction"):
@@ -142,7 +132,6 @@ multiple_attack: bool = false) -> bool:
 		target = null
 	
 	if attack_sound and target:
-		attack_sound.volume_db = base_attack_volume
 		attack_sound.play()
 		
 	elif miss_sound:
@@ -183,17 +172,7 @@ multiple_attack: bool = false) -> bool:
 	var target_health_component: HealthComponent = target.get_node_or_null("HealthComponent")
 	if target_health_component:
 		@warning_ignore_start("narrowing_conversion")
-		var mod: float = 1.0
-		if modify_damage_by_speed and parent is CharacterBody2D:
-			var velocity: float = parent.velocity.length()
-			if min_speed_to_impact_frame < velocity and Engine.time_scale >= 1.0:
-				mod = velocity / modify_damage_by_speed_base_speed / modify_damage_by_speed_divider
-				throw_speed = base_throw_speed * mod
-				self_throw_speed = base_self_throw_speed * mod * 1.5
-				attack_sound.volume_db = mod * 2.5
-				attack_sound.play()
-				EventBusManager.request_impact_frame.emit(mod / modify_damage_by_speed_hitscan_divider, 0.0, true, true)
-		target_health_component.take_damage(damage * damage_modifier * _get_minor_modifiers() * mod, parent, ignore_armor)
+		target_health_component.take_damage(damage * damage_modifier * _get_minor_modifiers(), parent, "Melee", ignore_armor)
 		if delayed_damage != 0 and delayed_damage_delay != 0:
 			target_health_component.set_delayed_damage(delayed_damage * _get_minor_modifiers(), delayed_damage_delay)
 	

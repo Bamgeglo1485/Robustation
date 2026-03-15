@@ -1,8 +1,9 @@
 @tool
 class_name MoveToPointAction extends ActionLeaf
 
-@export var retreat: bool = false
+@export var retreat: bool = false : set = set_retreat
 @export var retreat_distance: float = 60
+@export var retreat_speed_modifier: float = 0.7
 @export var stop_range_min: int = 0
 @export var stop_range_max: int = 0
 @export var pathfind_update_rate: float = 0.4
@@ -99,3 +100,11 @@ func _pathfinding_update() -> void:
 func _on_navigation_agent_velocity_computed(safe_velocity: Vector2) -> void:
 	if mob_mover_component and safe_velocity.length_squared() > 0.1 and not target_reached:
 		mob_mover_component.direction = safe_velocity.normalized()
+
+func set_retreat(new_value) -> void:
+	retreat = new_value
+	if mob_mover_component:
+		if retreat:
+			mob_mover_component.set_minor_speed_modifier("retreat", retreat_speed_modifier)
+		else:
+			mob_mover_component.set_minor_speed_modifier("retreat", 1.0)

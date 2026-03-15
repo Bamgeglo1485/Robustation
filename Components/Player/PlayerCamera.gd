@@ -5,8 +5,8 @@ class_name PlayerCamera extends Camera2D
 @export var flashlight: PointLight2D
 
 @onready var parent: Node = get_parent()
-@onready var direction_component: DirectionComponent = get_direction_component()
-
+@onready var direction_component: DirectionComponent = parent.get_node_or_null("DirectionComponent")
+@onready var audio_listener: AudioListener2D
 @export var flashlight_min_scale: float = 0.15
 @export var flashlight_max_scale: float = 3.0
 
@@ -27,6 +27,9 @@ func _ready() -> void:
 	
 	zoom = base_zoom * (fov / 100.0)
 	EventBusManager.field_of_view_changed.connect(_field_of_view_changed)
+	
+	if audio_listener:
+		audio_listener.make_current()
 
 func _field_of_view_changed(value: float) -> void:
 	zoom = base_zoom * (value / 100.0)
@@ -34,10 +37,7 @@ func _field_of_view_changed(value: float) -> void:
 func _notification(notif: int) -> void:
 	if notif == NOTIFICATION_PARENTED:
 		parent = get_parent()
-		direction_component = get_direction_component()
-
-func get_direction_component() -> Node:
-	return parent.get_node("DirectionComponent") if parent.has_node("DirectionComponent") else null
+		direction_component = parent.get_node_or_null("DirectionComponent")
 	
 func _physics_process(_delta: float) -> void:
 	var mouse_position: Vector2 = get_global_mouse_position()

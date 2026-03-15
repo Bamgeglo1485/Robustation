@@ -55,6 +55,11 @@ friction = 700.0
 [node name="Texture" parent="." index="2" unique_id=382857461]
 texture = ExtResource("2_qkn30")
 
+[node name="HealthComponent" parent="." index="4" unique_id=1758373275]
+damage_type_modifiers = Dictionary[String, float]({
+"Projectile": 2.0
+})
+
 [node name="WeaponUserComponent" parent="." index="6" unique_id=2123544057 node_paths=PackedStringArray("selected_weapon")]
 selected_weapon = NodePath("Spear")
 
@@ -117,7 +122,7 @@ randomize_multiplier_max = 1.2
 metadata/_custom_type_script = "uid://hv0g6akh0ftn"
 
 [node name="BeehaveTree" parent="." index="19" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@18979")
+blackboard = NodePath("@Node@18964")
 
 [node name="SelectorComposite" type="Node" parent="BeehaveTree" index="0" unique_id=102813076]
 script = ExtResource("34_j0lau")
@@ -138,6 +143,7 @@ metadata/_custom_type_script = "uid://dl1x4qw4skabi"
 
 [node name="MoveToPointAction" type="Node" parent="BeehaveTree/SelectorComposite/MoveToPlayer" index="2" unique_id=1364976193]
 script = ExtResource("34_qkn30")
+retreat_speed_modifier = null
 metadata/_custom_type_script = "uid://wlnghjnvdlyn"
 
 [node name="Rush" type="Node" parent="BeehaveTree/SelectorComposite/MoveToPlayer" index="3" unique_id=1372211728]

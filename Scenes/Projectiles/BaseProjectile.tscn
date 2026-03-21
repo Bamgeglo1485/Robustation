@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bqtip02i73xyq" path="res://Components/Triggers/TriggerOnParryComponent.gd" id="3_t4af8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t4af8"]
-radius = 61.0
+radius = 96.0
 
 [node name="Projectile" type="CharacterBody2D" unique_id=1001723315]
 physics_interpolation_mode = 1

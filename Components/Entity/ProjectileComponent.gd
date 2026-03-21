@@ -74,7 +74,7 @@ func _ready() -> void:
 	
 	if lifetime == 0:
 		return
-	await get_tree().create_timer(lifetime).timeout
+	await get_tree().create_timer(lifetime, false).timeout
 	if deleted:
 		return
 	
@@ -189,20 +189,25 @@ func _on_body_entered(body: Node2D) -> void:
 	
 	var modified_damage: float = damage * damage_modifier
 	
-	EventBusManager.projectile_hit.emit(body, parent)
 	
-	var health_comp = body.get_node_or_null("HealthComponent")
+	var health_comp: HealthComponent = body.get_node_or_null("HealthComponent")
 	if health_comp:
+		if health_comp.INVINCIBLE:
+			return
 		if !shooter:
 			shooter = null
+		@warning_ignore("narrowing_conversion")
 		health_comp.take_damage(modified_damage, shooter, "Projectile" ,ignore_armor)
 		if delayed_damage != 0 and delayed_damage_delay != 0:
+			@warning_ignore("narrowing_conversion")
 			health_comp.set_delayed_damage(delayed_damage * damage_modifier, delayed_damage_delay)
 		if max_penetrations != 0 and can_penetrate:
 			penetration_damaged_bodies.append(body)
 			penetrations += 1
 	else:
 		max_penetrations = 0
+	
+	EventBusManager.projectile_hit.emit(body, parent)
 	
 	if stamina_damage != 0:
 		var stamina_comp = body.get_node_or_null("StaminaComponent")

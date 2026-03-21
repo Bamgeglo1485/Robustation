@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://b5miclua4wknq" path="res://Components/Interface/Menu/Settings/FullcreenSettingsComponent.gd" id="10_6wdx2"]
 [ext_resource type="Script" uid="uid://dphs1pxcujmhq" path="res://Components/Interface/Menu/Settings/BloodCleaningSettingsComponent.gd" id="10_r3am3"]
 [ext_resource type="Script" uid="uid://cnotog8ol8m7h" path="res://Components/Interface/Menu/Settings/GlowSettingsComponent.gd" id="13_7aci1"]
+[ext_resource type="Script" uid="uid://dtwnltgcrxp1v" path="res://Components/Interface/Menu/Settings/ResetIntroductionsSettingComponent.gd" id="14_m7hwe"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ex7t"]
 bg_color = Color(0, 0, 0, 1)
@@ -34,7 +35,7 @@ layout_mode = 3
 anchor_right = 0.42900002
 anchor_bottom = 0.901
 offset_right = -0.20800781
-offset_bottom = 0.15197754
+offset_bottom = 92.15198
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -441,6 +442,57 @@ button_pressed = true
 [node name="GlowSettingsComponent" type="Node" parent="VBoxContainer/GLOW/CheckButton" unique_id=1252601733]
 script = ExtResource("13_7aci1")
 metadata/_custom_type_script = "uid://cnotog8ol8m7h"
+
+[node name="Gameplay" type="Panel" parent="VBoxContainer" unique_id=4741265]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_6wdx2")
+
+[node name="Label" type="Label" parent="VBoxContainer/Gameplay" unique_id=1088447179]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48900002
+anchor_top = 0.16700001
+anchor_right = 0.48900002
+anchor_bottom = 0.75000006
+offset_left = -90.56601
+offset_top = -0.016000748
+offset_right = 90.43399
+text = "GAMEPLAY SETTINGS"
+label_settings = ExtResource("4_hfiyb")
+horizontal_alignment = 1
+
+[node name="Introduction" type="Panel" parent="VBoxContainer" unique_id=1979653834]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="VBoxContainer/Introduction" unique_id=742670701]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.002
+anchor_top = 0.021000002
+anchor_right = 0.202
+anchor_bottom = 0.5
+offset_left = 1.012
+offset_top = 12.184016
+offset_right = 143.212
+offset_bottom = 12.192017
+text = "Clear enemy introductions"
+label_settings = ExtResource("2_6qgw2")
+
+[node name="Button" type="Button" parent="VBoxContainer/Introduction" unique_id=296404227]
+layout_mode = 0
+anchor_left = 0.8117409
+anchor_top = 0.0040003457
+anchor_right = 1.0
+anchor_bottom = 0.98716736
+text = "CLEAR"
+icon = ExtResource("1_v5qja")
+metadata/_edit_use_anchors_ = true
+
+[node name="ResetIntroductionsSettingComponent" type="Node" parent="VBoxContainer/Introduction/Button" unique_id=127771468]
+script = ExtResource("14_m7hwe")
+metadata/_custom_type_script = "uid://dtwnltgcrxp1v"
 
 [node name="ReferenceRect" type="ReferenceRect" parent="." unique_id=1098635970]
 layout_mode = 1

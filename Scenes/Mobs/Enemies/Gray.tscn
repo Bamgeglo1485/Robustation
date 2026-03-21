@@ -40,6 +40,7 @@
 [ext_resource type="Script" uid="uid://ttwxxcce2i4p" path="res://Components/Mobs/AI/Actions/LookAtPointAction.gd" id="36_6dpsf"]
 [ext_resource type="Script" uid="uid://djnlrq07s5frw" path="res://Components/Mobs/AI/Actions/RushAction.gd" id="36_e8lgp"]
 [ext_resource type="Script" uid="uid://b2bu3qqcql0lk" path="res://Components/Mobs/AI/Conditions/PointInRangeCondition.gd" id="36_ei4qd"]
+[ext_resource type="AudioStream" uid="uid://x11c2lqv8483" path="res://Audio/EnemyThemes/GreytideFollower.ogg" id="41_umo1f"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fb4jx"]
 radius = 40.0
@@ -122,7 +123,7 @@ randomize_multiplier_max = 1.2
 metadata/_custom_type_script = "uid://hv0g6akh0ftn"
 
 [node name="BeehaveTree" parent="." index="19" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@18964")
+blackboard = NodePath("@Node@75236")
 
 [node name="SelectorComposite" type="Node" parent="BeehaveTree" index="0" unique_id=102813076]
 script = ExtResource("34_j0lau")
@@ -143,7 +144,6 @@ metadata/_custom_type_script = "uid://dl1x4qw4skabi"
 
 [node name="MoveToPointAction" type="Node" parent="BeehaveTree/SelectorComposite/MoveToPlayer" index="2" unique_id=1364976193]
 script = ExtResource("34_qkn30")
-retreat_speed_modifier = null
 metadata/_custom_type_script = "uid://wlnghjnvdlyn"
 
 [node name="Rush" type="Node" parent="BeehaveTree/SelectorComposite/MoveToPlayer" index="3" unique_id=1372211728]
@@ -186,3 +186,11 @@ metadata/_custom_type_script = "uid://ttwxxcce2i4p"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rush" index="0" unique_id=1679646748]
 visible = false
 shape = SubResource("CircleShape2D_fb4jx")
+
+[node name="IntroductionSubjectComponent" parent="." index="24" unique_id=776935428]
+group = "Gray"
+subject_name = "Gray"
+subject_desc = "A SPEARMAN WHO ATTACKS WITH A DASH.
+[color=purple]WEAK TO THE BULLETS[/color]"
+subject_prefix = "GREYTIDE'S FOLLOWER"
+theme = ExtResource("41_umo1f")

@@ -69,7 +69,6 @@ func on_release(raiser) -> void:
 	if hitstop_charge != 0 and hitstop_charge < charge:
 		var hitstop_cof = charge / hitstop_charge * 0.2
 		attack_sound.volume_db = hitstop_cof
-		print(hitstop_cof)
 		EventBusManager.request_impact_frame.emit(hitstop_cof, 0.0, true, false)
 
 func attack(_raiser, _npc = true) -> Dictionary:

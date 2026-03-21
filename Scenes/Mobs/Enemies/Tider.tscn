@@ -45,6 +45,7 @@
 [ext_resource type="Script" uid="uid://ttwxxcce2i4p" path="res://Components/Mobs/AI/Actions/LookAtPointAction.gd" id="40_r4sff"]
 [ext_resource type="Script" uid="uid://b2bu3qqcql0lk" path="res://Components/Mobs/AI/Conditions/PointInRangeCondition.gd" id="41_4eyt8"]
 [ext_resource type="Script" uid="uid://bkci3rnyy7sqn" path="res://Components/Mobs/AI/Actions/SetRetreatAction.gd" id="42_i7083"]
+[ext_resource type="AudioStream" uid="uid://x11c2lqv8483" path="res://Audio/EnemyThemes/GreytideFollower.ogg" id="46_51p2b"]
 
 [node name="Tider" unique_id=1270222458 instance=ExtResource("1_bk7ip")]
 visibility_layer = 3
@@ -62,10 +63,6 @@ texture = ExtResource("2_20t8h")
 damage_type_modifiers = Dictionary[String, float]({
 "Melee": 2.0
 })
-
-[node name="NavigationAgent" parent="." index="13" unique_id=1358139639]
-avoidance_layers = 3
-avoidance_mask = 3
 
 [node name="Hair" type="Sprite2D" parent="." index="14" unique_id=927075308]
 texture = ExtResource("30_qavuh")
@@ -95,10 +92,10 @@ shots = 1
 shoot_sound = NodePath("ShootSound")
 empty_shoot_sound = NodePath("EmptySound")
 bullets_recover_sound = NodePath("BulletRecoverSound")
-bullets_recovery_delay = 5.0
+bullets_recovery_delay = 4.5
 random_bullet_recover_delay_coef = 0.2
 cooldown_delay = 0.5
-swing_delay = 0.0
+swing_delay = 0.3
 equipped_texture = ExtResource("27_8rngm")
 equipped_scale = Vector2(0.75, 0.75)
 swing_rotation_multiplier = 0.0
@@ -118,6 +115,7 @@ max_distance = 600.0
 
 [node name="BulletRecoverSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/PneumaticCannon" index="2" unique_id=1969150131]
 stream = ExtResource("30_8uqky")
+volume_db = 5.0
 max_distance = 600.0
 
 [node name="Bow" type="Node" parent="RandomWeaponSelectorComponent" index="1" unique_id=1626683323 node_paths=PackedStringArray("shoot_sound", "bullets_recover_sound")]
@@ -130,9 +128,10 @@ bullets_recover_count = 1
 shots = 1
 shoot_sound = NodePath("ShootSound")
 bullets_recover_sound = NodePath("BulletRecoverSound")
+bullets_recovery_delay = 3.5
 random_bullet_recover_delay_coef = 0.2
 cooldown_delay = 0.5
-swing_delay = 0.0
+swing_delay = 0.3
 equipped_texture = ExtResource("32_xi1qu")
 equipped_scale = Vector2(0.5, 0.55)
 swing_rotation_multiplier = 0.0
@@ -147,6 +146,7 @@ max_polyphony = 3
 
 [node name="BulletRecoverSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/Bow" index="1" unique_id=1931960566]
 stream = ExtResource("34_nqd62")
+volume_db = 5.0
 max_distance = 600.0
 
 [node name="BuddyComponent" type="Node" parent="." index="19" unique_id=2046809544]
@@ -156,7 +156,7 @@ rage_when_buddy_dead = false
 metadata/_custom_type_script = "uid://da2q40ragr5wk"
 
 [node name="BeehaveTree" parent="." index="20" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@32658")
+blackboard = NodePath("@Node@75394")
 
 [node name="SequenceComposite" type="Node" parent="BeehaveTree" index="0" unique_id=1348709416]
 script = ExtResource("36_tw04h")
@@ -207,7 +207,6 @@ metadata/_custom_type_script = "uid://bkci3rnyy7sqn"
 [node name="MoveToPointAction" type="Node" parent="BeehaveTree/SequenceComposite" index="2" unique_id=352693110]
 script = ExtResource("39_emno0")
 retreat_distance = 256.0
-retreat_speed_modifier = null
 stop_range_min = 80
 stop_range_max = 300
 pathfind_update_rate = 0.5
@@ -215,9 +214,21 @@ metadata/_custom_type_script = "uid://wlnghjnvdlyn"
 
 [node name="AttackTargetAction" type="Node" parent="BeehaveTree/SequenceComposite" index="3" unique_id=1357816782]
 script = ExtResource("40_eljyk")
-prediction_coef = 0.95
+prediction_coef = 1.0
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 
 [node name="DodgerComponent" type="Node" parent="." index="23" unique_id=342231048]
 script = ExtResource("36_wxygg")
+dash_force = 800.0
+dash_stop_speed = 700.0
 metadata/_custom_type_script = "uid://bdcq7y2ek222e"
+
+[node name="IntroductionSubjectComponent" parent="." index="25" unique_id=776935428]
+group = "Tider"
+subject_name = "Tider"
+subject_desc = "TIDE TECHNIQUE USER. 
+DODGES BULLETS AND ATTACKS WITH 
+A MAKESHIFT RANGE WEAPON.
+[color=purple]WEAKS TO THE MELEE WEAPONS[/color]"
+subject_prefix = "GREYTIDE'S FOLLOWER"
+theme = ExtResource("46_51p2b")

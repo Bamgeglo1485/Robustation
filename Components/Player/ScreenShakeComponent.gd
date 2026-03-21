@@ -38,7 +38,7 @@ func _ready() -> void:
 func _on_explosion(explosion):
 	var direction: Vector2 = (parent.global_position - explosion.global_position)
 	shift_to_direction(direction, explosion.damage * 0.5)
-	shake(explosion.damage / 3, 2)
+	shake(explosion.damage / 3, 3)
 
 func _on_damaged(emitter, damage, damager) -> void:
 	if emitter != parent:

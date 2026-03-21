@@ -1,9 +1,11 @@
 extends Node
 
-var config = ConfigFile.new()
+var config: ConfigFile = ConfigFile.new()
 
 var blood_clean_delay: float = 20.0
 var glow: bool = true
+
+var introductiones_enemies: Array[String]
 
 func _ready() -> void:
 	var err = config.load("user://settings.cfg")
@@ -24,6 +26,9 @@ func _ready() -> void:
 		var audio_bus_id: int
 		audio_bus_id = AudioServer.get_bus_index("Master")
 		AudioServer.set_bus_volume_db(audio_bus_id, volume_db)
+	if config.has_section("INTRODUCTION"):
+		for intr in config.get_section_keys("INTRODUCTION"):
+			introductiones_enemies.append(intr)
 	if config.has_section_key("VISUAL", "Blood_cleaning_delay"):
 		blood_clean_delay = config.get_value("VISUAL", "Blood_cleaning_delay")
 

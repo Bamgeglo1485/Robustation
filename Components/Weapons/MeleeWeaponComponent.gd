@@ -28,11 +28,79 @@ class_name MeleeWeapon extends Weapon
 @onready var base_throw_speed: float = throw_speed
 @onready var base_self_throw_speed: float = self_throw_speed
 @onready var parent_mob_mover_component: MobMoverComponent
+@onready var parent_faction: FactionComponent
 @export var piercing_attack_animation: bool = false
+
+@export_category("QTE")
+@export var qte_icon: Range
+@export var qte_icon_perfect_frame: Panel
+@export var qte_enabled: bool = false
+@export var qte_max_time: float = 1.5
+@export var base_qte_perfect_time_min: float = 0.5
+@export var base_qte_perfect_time_max: float = 0.9
+@export var qte_time_mod: float = 3
+@export var qte_perfect_damage_modifier: float = 4
+@export var qte_perfect_heal_modifier_from_max: float = 0.3
+@export var qte_perfect_sound: AudioStreamPlayer2D
+@export var qte_perfect_effect: PackedScene
+@export var qte_icon_random_perfect_range_min: float = -0.2
+@export var qte_icon_random_perfect_range_max: float = 0.4
+var qte_perfect_time_min: float = base_qte_perfect_time_min
+var qte_perfect_time_max: float = base_qte_perfect_time_max
+var health_component: HealthComponent
+var qte_time: float = 0.0
+var qte_move_back: bool = false
+var qte_active: bool = false
+var qte_tween: Tween
+
+func _physics_process(delta: float) -> void:
+	if qte_enabled and qte_active:
+		if !qte_move_back:
+			qte_time += delta * qte_time_mod / Engine.time_scale
+			if qte_time >= qte_max_time:
+				qte_time = qte_max_time
+				qte_move_back = true
+		else:
+			qte_time -= delta * qte_time_mod / Engine.time_scale
+			if qte_time <= 0:
+				qte_time = 0
+				qte_move_back = false
+		if qte_icon:
+			qte_icon.value = qte_time
+
+func on_release(_raiser) -> void:
+	if qte_enabled and qte_active:
+		if qte_tween:
+			qte_tween.kill()
+		qte_tween = create_tween()
+		qte_tween.set_parallel()
+		if qte_time > qte_perfect_time_min and qte_time < qte_perfect_time_max:
+			minor_damage_modifiers["qte_perfect"] = qte_perfect_damage_modifier
+			qte_tween.tween_property(qte_icon, "modulate:g", 4.0, 0.1)
+			qte_active = false
+			if health_component:
+				@warning_ignore("narrowing_conversion")
+				health_component.take_damage(-health_component.max_health * qte_perfect_heal_modifier_from_max, null, "Heal", true)
+			if qte_perfect_sound:
+				qte_perfect_sound.play()
+			if qte_perfect_effect:
+				var inst: Node2D = qte_perfect_effect.instantiate()
+				inst.global_position = parent.global_position
+				scene.add_child.call_deferred(inst)
+		else:
+			qte_tween.tween_property(qte_icon, "modulate:r", 4.0, 0.1)
+		qte_tween.tween_property(qte_icon, "modulate:a", 0.0, 0.2)
+		qte_active = false
+		
+		await _try_melee_attack(_raiser.get_attack_direction())
+		minor_damage_modifiers["qte_perfect"] = 1.0
 
 func _ready() -> void:
 	super._ready()
 	parent_mob_mover_component = parent.get_node_or_null("MobMoverComponent")
+	parent_faction = parent.get_node_or_null("FactionComponent")
+	if qte_enabled:
+		health_component = parent.get_node_or_null("HealthComponent")
 
 func attack(raiser, npc = true) -> Dictionary:
 	if !raiser.has_method("get_attack_direction"):
@@ -42,6 +110,23 @@ func attack(raiser, npc = true) -> Dictionary:
 		return {}
 	
 	if parent_weapon and parent_weapon is RangeWeapon and parent_weapon.bullets == 0:
+		return {}
+	
+	EventBusManager.try_melee_attack.emit(parent, self)
+	
+	if qte_enabled:
+		qte_time = 0
+		qte_active = true
+		if qte_tween:
+			qte_tween.kill()
+		qte_tween = create_tween()
+		qte_tween.tween_property(qte_icon, "modulate:a", 1.0, 0.1)
+		qte_icon.modulate.g = 1.0
+		qte_icon.modulate.r = 1.0
+		var range_of_perfect: float = randf_range(qte_icon_random_perfect_range_min, qte_icon_random_perfect_range_max)
+		qte_perfect_time_max = base_qte_perfect_time_max + range_of_perfect
+		qte_perfect_time_min = base_qte_perfect_time_min + range_of_perfect
+		qte_icon_perfect_frame.position.x = _get_thumb_global_position(qte_icon, (qte_perfect_time_max + qte_perfect_time_min) / 2).x - qte_icon.global_position.x
 		return {}
 	
 	if npc:
@@ -233,6 +318,7 @@ func parry_projectile(projectile: Node2D, projectile_component: ProjectileCompon
 	projectile_component.throw_speed *= projectile_component.parry_speed_boost
 	projectile_component.direction = angle
 	projectile_component.shooter = parent
+	projectile_component.shooter_faction = parent_faction
 	projectile_component.on_parried()
 		
 	if parry_sound:
@@ -257,3 +343,13 @@ func parry_effects():
 		var inst: Node = parry_effect.instantiate()
 		inst.global_position = parent.global_position
 		scene.add_child(inst)
+
+func _get_thumb_global_position(slider: HSlider, value: float) -> Vector2:
+	var global_pos = slider.global_position
+	
+	var percent = (value - slider.min_value) / (slider.max_value - slider.min_value)
+	
+	var thumb_global_x = global_pos.x + (slider.size.x * percent)
+	var thumb_global_y = global_pos.y + slider.size.y / 2
+	
+	return Vector2(thumb_global_x, thumb_global_y)

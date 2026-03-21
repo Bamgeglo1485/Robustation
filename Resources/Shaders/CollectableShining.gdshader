@@ -3,7 +3,7 @@ render_mode blend_premul_alpha;
 
 // ───────── Visual controls ─────────
 uniform float Angle_deg : hint_range(-90.0, 90.0) = 30.0;   // base band angle (degrees)
-uniform float Brightness : hint_range(0.0, 10.0) = 10.0;      // white intensity added over sprite
+uniform float Brightness : hint_range(0.0, 50.0) = 50.0;      // white intensity added over sprite
 
 // Feather (softness). Set to 0.0 for hard edges.
 uniform float Band_Soft  : hint_range(0.0, 0.3) = 0.06;     

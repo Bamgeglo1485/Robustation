@@ -6,6 +6,6 @@
 shader = ExtResource("1_68h12")
 shader_parameter/range = 0.0
 shader_parameter/noiseQuality = 250.0
-shader_parameter/noiseIntensity = 0.0088
+shader_parameter/noiseIntensity = 0.0010000047056399897
 shader_parameter/offsetIntensity = 0.03
-shader_parameter/colorOffsetIntensity = 0.50000002375
+shader_parameter/colorOffsetIntensity = 0.2000000095

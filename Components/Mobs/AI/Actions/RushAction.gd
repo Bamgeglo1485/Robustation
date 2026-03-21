@@ -9,7 +9,6 @@ var blackboard: Blackboard
 @export var stamina_damage_after_wall_hit: float = 100
 @export var rush_weapon: MeleeWeapon
 @export var weapon_sprite: WeaponSpriteComponent
-@export var select_rush_weapon: bool = true
 @export var fall_delay_after_wall_hit: float = 2
 @export var delay_before_rush: float = 0.4
 @export var fall_after_rush_delay: float = 0.3
@@ -17,8 +16,11 @@ var blackboard: Blackboard
 @export var rush_sound: AudioStreamPlayer2D
 @export var rush_prepare_sound: AudioStreamPlayer2D
 
-@export var throw_speed: float = 700
+@export var throw_speed: float = 800
 @export var throw_stop_speed: float = 500
+
+@export var rush_combo: int = 1
+var combos: int = 0
 
 @onready var weapon_user_component: WeaponUserComponent = owner.get_node_or_null("WeaponUserComponent")
 @onready var direction_component: DirectionComponent = owner.get_node_or_null("DirectionComponent")
@@ -50,6 +52,7 @@ func tick(_actor: Node, _blackboard: Blackboard) -> int:
 func rush() -> void:
 	if rushing or preparing_to_rush or mob_mover_component.fallen:
 		return
+	weapon_user_component.select_weapon(rush_weapon)
 	mob_mover_component.movement_blocked = true
 	preparing_to_rush = true
 	if weapon_sprite:
@@ -63,6 +66,7 @@ func rush() -> void:
 	if !blackboard.get_value(key) or mob_mover_component.fallen:
 		unrush()
 		return
+	rushing = true
 	mob_mover_component.can_fall = false
 	rush_weapon.swinging = true
 	if rush_sound:
@@ -70,7 +74,6 @@ func rush() -> void:
 	var attack_direction: Vector2 = (blackboard.get_value(key).global_position - owner.global_position)
 	direction_component.look_at_direction(attack_direction)
 	mob_mover_component.throw(attack_direction, throw_speed, owner, throw_stop_speed, false, true, false)
-	rushing = true
 	preparing_to_rush = false
 	if weapon_sprite:
 		weapon_sprite.piercing_animation(attack_direction.normalized() * 48, rush_delay - 0.2)
@@ -83,6 +86,13 @@ func unrush() -> void:
 	preparing_to_rush = false
 	rushing = false
 	mob_mover_component.can_fall = true
+	if rush_combo > 1:
+		combos += 1
+		if rush_combo > combos:
+			rush()
+			return
+		else:
+			combos = 0
 	if rush_weapon:
 		rush_weapon._cooldown()
 	if mob_mover_component and fall_after_rush_delay != 0:
@@ -91,15 +101,15 @@ func unrush() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if !rushing or !body:
 		return
-	if body != blackboard.get_value(key):
+	var target: Node2D = blackboard.get_value(key)
+	if body != target:
 		if body is not PhysicsBody2D:
 			unrush()
 			if stamina_component and stamina_damage_after_wall_hit != 0:
 				stamina_component.take_stamina_damage(stamina_damage_after_wall_hit, owner)
 			if mob_mover_component and fall_delay_after_wall_hit != 0:
 				mob_mover_component.drop(fall_delay_after_wall_hit, true, 100)
-			return
 		return
 	
-	var attack_direction: Vector2 = (blackboard.get_value(key).global_position - owner.global_position)
+	var attack_direction: Vector2 = (target.global_position - owner.global_position)
 	rush_weapon._melee_attack_target(body, attack_direction)

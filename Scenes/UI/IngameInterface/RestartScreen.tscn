@@ -74,6 +74,7 @@ Technical Information:
 
 [node name="TextPrintingAnimationComponent" type="Node" parent="ColorRect/RichTextLabel" unique_id=1497740228]
 script = ExtResource("2_udu1i")
+play_sound = false
 metadata/_custom_type_script = "uid://4io3bm7r86h6"
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="ColorRect" unique_id=217874683]
@@ -122,6 +123,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="TextPrintingAnimationComponent" type="Node" parent="ColorRect/RichTextLabel2" unique_id=107704517]
 script = ExtResource("2_udu1i")
+play_sound = false
 metadata/_custom_type_script = "uid://4io3bm7r86h6"
 
 [node name="RestartComponent" type="Node" parent="." unique_id=1913306004]

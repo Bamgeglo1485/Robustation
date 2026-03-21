@@ -3,7 +3,7 @@ class_name OrganComponent extends PhysicalParticleComponent
 @export var area2d: Area2D
 @export var step_sound: AudioStreamPlayer2D
 @export var blood_scene: PackedScene = preload("res://Scenes/Effects/Particles/Blood.tscn")
-@export var health_bonus: int = 2
+@export var health_bonus: int = 4
 
 func _ready() -> void:
 	parent.reparent.call_deferred(scene)

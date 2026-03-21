@@ -4,6 +4,7 @@ class_name IngameMenuComponent extends Component
 @export var action_event: String
 @export var paused_effect: ColorRect
 @export var ambience: AudioStreamPlayer2D
+var prev_pause_state: bool = false
 
 func _ready() -> void:
 	menu.visibility_changed.connect(_visibility_changed)
@@ -20,7 +21,11 @@ func _toggle():
 	menu.visible = !menu.visible
 
 func _visibility_changed():
-	get_tree().paused = menu.visible
+	if menu.visible:
+		prev_pause_state = get_tree().paused
+		get_tree().paused = true
+	else:
+		get_tree().paused = prev_pause_state
 	if paused_effect:
 		paused_effect.visible = menu.visible
 	if menu.visible and ambience:

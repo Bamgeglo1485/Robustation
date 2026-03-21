@@ -35,7 +35,7 @@ var fly_direction: Vector2 = Vector2.ZERO
 var fly_throw_off: bool = false
 ## The speed at which the flight is forced to end
 var fly_stop_speed: float = 200.0
-var fly_modifier: float = 1.0
+@export var fly_modifier: float = 1.0
 ## The body that made fly, actually damager
 var fly_source: Node2D
 var fly_priority: int = 0

@@ -2,7 +2,6 @@
 
 [ext_resource type="TileSet" uid="uid://bc7bghcv8144y" path="res://Resources/TileMaps/Tiles.tres" id="1_kul4i"]
 [ext_resource type="PackedScene" uid="uid://roeennw572p2" path="res://Scenes/Mobs/Player/PlayerGreytide.tscn" id="3_fsxsm"]
-[ext_resource type="Script" uid="uid://dx2huqcgxe3sr" path="res://Components/Perks/CooldownModifierPerkComponent.gd" id="3_qlwvw"]
 [ext_resource type="Script" uid="uid://bo7lklhepnuja" path="res://Scripts/fps.gd" id="4_glinl"]
 [ext_resource type="Texture2D" uid="uid://ctmvqt423d0il" path="res://Textures/Parallax/Space/XenoParallaxNeb.png" id="6_4lqr4"]
 [ext_resource type="TileSet" uid="uid://c7mk0aiygychu" path="res://Resources/TileMaps/Walls.tres" id="7_qlwvw"]
@@ -12,7 +11,11 @@
 [ext_resource type="Resource" uid="uid://c7ill5kgubqqa" path="res://Resources/Custom/Enemy/Tider.tres" id="9_rxmp4"]
 [ext_resource type="Script" uid="uid://b1vs1lh4jku4h" path="res://Components/Level/ArenaComponent.gd" id="10_glinl"]
 [ext_resource type="Resource" uid="uid://cou375htkckp8" path="res://Resources/Custom/Enemy/Assistant.tres" id="10_qyr8x"]
+[ext_resource type="AudioStream" uid="uid://1qnhfchhf4jb" path="res://Audio/Effects/voteding.ogg" id="10_rpdke"]
+[ext_resource type="AudioStream" uid="uid://14o4e8msndow" path="res://Audio/Weapon/Projectile/mk58_shoot.ogg" id="11_33n3b"]
 [ext_resource type="Script" uid="uid://di5u0whaqiyjp" path="res://Resources/Custom/Enemy/Base/Enemy.gd" id="11_72g0p"]
+[ext_resource type="AudioStream" uid="uid://b2utqxvujdi7f" path="res://Audio/Ambience/box_deploy.ogg" id="12_33n3b"]
+[ext_resource type="PackedScene" uid="uid://c57uvonk05yy8" path="res://Scenes/Mobs/Enemies/Greytide.tscn" id="15_33n3b"]
 [ext_resource type="Environment" uid="uid://r1a7fr7x6en8" path="res://DemoTrash/Light.tres" id="15_qlwvw"]
 [ext_resource type="Script" uid="uid://dptr5blvqsgks" path="res://Components/Interface/Menu/Settings/WorldEnvComponent.gd" id="15_rpdke"]
 
@@ -61,7 +64,7 @@ anchor_right = 28.475002
 anchor_bottom = 1.9000001
 offset_left = -0.00012207031
 offset_right = -0.00012207031
-text = "DEMO 0.0.9"
+text = "DEMO 0.1"
 metadata/_edit_use_anchors_ = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Player/DEBUG/Control" unique_id=2124141107]
@@ -91,11 +94,6 @@ color = Color(0.0134198945, 0, 0.002004301, 1)
 [node name="AreaUI" type="CanvasLayer" parent="Player" unique_id=1227182301]
 layer = 0
 
-[node name="CooldownModifierPerkComponent" type="Node" parent="Player" unique_id=632863115]
-script = ExtResource("3_qlwvw")
-amount = 20
-metadata/_custom_type_script = "uid://dx2huqcgxe3sr"
-
 [node name="Walls" type="TileMapLayer" parent="." unique_id=418777059]
 position = Vector2(158, -75)
 tile_map_data = PackedByteArray("AAAbABMAAgAPAAIAAAAbABIAAgAPAAEAAAAbABEAAgAPAAEAAAAbABAAAgAPAAEAAAAbAA8AAgAPAAEAAAAbAA4AAgAPAAEAAAAbAA0AAgAPAAEAAAAbAAwAAgAPAAEAAAAbAAsAAgAPAAEAAAAbAAoAAgAPAAEAAAAbAAkAAgAPAAEAAAAbAAgAAgAPAAEAAAAbAAcAAgAPAAEAAAAbAAYAAgAPAAAAAAAbAAAAAgAPAAIAAAAbAP//AgAPAAEAAAAbAP7/AgAPAAEAAAAbAP3/AgAPAAEAAAAbAPz/AgAPAAEAAAAbAPv/AgAPAAEAAAAbAPr/AgAPAAEAAAAbAPn/AgAPAAEAAAAbAPj/AgAPAAEAAAAbAPf/AgAPAAEAAAAbAPb/AgAPAAEAAAAbAPX/AgAPAAEAAAAbAPT/AgAPAAAAAAAZAPL/AgAOAAMAAAAYAPL/AgANAAMAAAAXAPL/AgANAAMAAAAWAPL/AgANAAMAAAAVAPL/AgANAAMAAAAUAPL/AgANAAMAAAATAPL/AgANAAMAAAASAPL/AgANAAMAAAARAPL/AgANAAMAAAAQAPL/AgANAAMAAAAPAPL/AgANAAMAAAAOAPL/AgANAAMAAAANAPL/AgANAAMAAAAMAPL/AgANAAMAAAALAPL/AgANAAMAAAAKAPL/AgANAAMAAAAJAPL/AgANAAMAAAAIAPL/AgANAAMAAAAHAPL/AgANAAMAAAAGAPL/AgANAAMAAAAFAPL/AgANAAMAAAAEAPL/AgANAAMAAAADAPL/AgANAAMAAAACAPL/AgANAAMAAAABAPL/AgANAAMAAAAAAPL/AgANAAMAAAD///L/AgANAAMAAAD+//L/AgANAAMAAAD9//L/AgANAAMAAAD8//L/AgANAAMAAAD7//L/AgANAAMAAAD6//L/AgANAAMAAAD5//L/AgANAAMAAAD4//L/AgANAAMAAAD3//L/AgANAAMAAAD2//L/AgANAAMAAAD1//L/AgANAAMAAAD0//L/AgANAAMAAADz//L/AgANAAMAAADy//L/AgANAAMAAADx//L/AgANAAMAAADw//L/AgANAAMAAADv//L/AgANAAMAAADu//L/AgANAAMAAADt//L/AgANAAMAAADs//L/AgANAAMAAADr//L/AgANAAMAAADq//L/AgANAAMAAADp//L/AgANAAMAAADo//L/AgANAAMAAADn//L/AgANAAMAAADm//L/AgANAAMAAADl//L/AgANAAMAAADk//L/AgANAAMAAADj//L/AgANAAMAAADi//L/AgANAAMAAADh//L/AgANAAMAAADg//L/AgANAAMAAADf//L/AgAMAAMAAADd//T/AgAPAAAAAADd//X/AgAPAAEAAADd//b/AgAPAAEAAADd//f/AgAPAAEAAADd//j/AgAPAAEAAADd//n/AgAPAAEAAADd//r/AgAPAAEAAADd//v/AgAPAAEAAADd//z/AgAPAAEAAADd//3/AgAPAAEAAADd//7/AgAPAAEAAADd////AgAPAAEAAADd/wAAAgAPAAIAAADd/wYAAgAPAAAAAADd/wcAAgAPAAEAAADd/wgAAgAPAAEAAADd/wkAAgAPAAEAAADd/woAAgAPAAEAAADd/wsAAgAPAAEAAADd/wwAAgAPAAEAAADd/w0AAgAPAAEAAADd/w4AAgAPAAEAAADd/w8AAgAPAAEAAADd/xAAAgAPAAEAAADd/xEAAgAPAAEAAADd/xIAAgAPAAEAAADd/xMAAgAPAAIAAADf/xUAAgAMAAMAAADg/xUAAgANAAMAAADh/xUAAgANAAMAAADi/xUAAgANAAMAAADj/xUAAgANAAMAAADk/xUAAgANAAMAAADl/xUAAgANAAMAAADm/xUAAgANAAMAAADn/xUAAgANAAMAAADo/xUAAgANAAMAAADp/xUAAgANAAMAAADq/xUAAgANAAMAAADr/xUAAgANAAMAAADs/xUAAgANAAMAAADt/xUAAgANAAMAAADu/xUAAgANAAMAAADv/xUAAgANAAMAAADw/xUAAgANAAMAAADx/xUAAgANAAMAAADy/xUAAgANAAMAAADz/xUAAgANAAMAAAD0/xUAAgANAAMAAAD1/xUAAgANAAMAAAD2/xUAAgANAAMAAAD3/xUAAgANAAMAAAD4/xUAAgANAAMAAAD5/xUAAgANAAMAAAD6/xUAAgANAAMAAAD7/xUAAgANAAMAAAD8/xUAAgANAAMAAAD9/xUAAgANAAMAAAD+/xUAAgANAAMAAAD//xUAAgANAAMAAAAAABUAAgANAAMAAAABABUAAgANAAMAAAACABUAAgANAAMAAAADABUAAgANAAMAAAAEABUAAgANAAMAAAAFABUAAgANAAMAAAAGABUAAgANAAMAAAAHABUAAgANAAMAAAAIABUAAgANAAMAAAAJABUAAgANAAMAAAAKABUAAgANAAMAAAALABUAAgANAAMAAAAMABUAAgANAAMAAAANABUAAgANAAMAAAAOABUAAgANAAMAAAAPABUAAgANAAMAAAAQABUAAgANAAMAAAARABUAAgANAAMAAAASABUAAgANAAMAAAATABUAAgANAAMAAAAUABUAAgANAAMAAAAVABUAAgANAAMAAAAWABUAAgANAAMAAAAXABUAAgANAAMAAAAYABUAAgANAAMAAAAZABUAAgAOAAMAAAAbABQAAgADAAAAAAAbABUAAgAHAAMAAAAaABUAAgAAAAMAAADe/xUAAgACAAMAAADd/xUAAgAEAAMAAADd/xQAAgADAAAAAADe//L/AgACAAMAAADd//L/AgAEAAAAAADd//P/AgADAAIAAAAaAPL/AgAAAAMAAAAbAPL/AgAHAAAAAAAbAPP/AgADAAIAAADd/wMAAgADAAEAAADd/wQAAgADAAEAAAAbAAQAAgADAAEAAAAbAAMAAgADAAEAAAAbAAIAAgADAAEAAADd/wIAAgADAAEAAADd/wEAAgADAAAAAADd/wUAAgADAAIAAAAbAAUAAgADAAIAAAAbAAEAAgADAAAAAAA=")
@@ -111,13 +109,29 @@ energy = 2.0
 texture = ExtResource("8_rpdke")
 texture_scale = 10.0
 
-[node name="ArenaComponent" type="Node" parent="." unique_id=1165337052 node_paths=PackedStringArray("area_info")]
+[node name="ArenaComponent" type="Node" parent="." unique_id=1165337052 node_paths=PackedStringArray("area_info", "perk_choice_start_sound", "perk_choice_sound", "perk_selected_sound")]
 script = ExtResource("10_glinl")
+enabled = false
 perks = Array[String](["res://Components/Perks/AdditionalHealthPerkComponent.gd", "res://Components/Perks/AdditionalKnockbackPerkComponent.gd", "res://Components/Perks/AdditionalStaminaPerkComponent.gd", "res://Components/Perks/ArmorPerkComponent.gd", "res://Components/Perks/CooldownModifierPerkComponent.gd", "res://Components/Perks/DelayedDamageModifierPerkComponent.gd", "res://Components/Perks/PenetrationModifierPerkComponent.gd", "res://Components/Perks/ReflectMeleePerkComponent.gd", "res://Components/Perks/ReflectPerkComponent.gd", "res://Components/Perks/RegenerationPerkComponent.gd", "res://Components/Perks/SpeedModifierPerkComponent.gd"])
 area_info = NodePath("../Player/DEBUG/Control/RichTextLabel")
+start_budget = 2.0
 available_enemies = Array[ExtResource("11_72g0p")]([ExtResource("8_33n3b"), ExtResource("9_rxmp4"), ExtResource("10_qyr8x")])
 spawn_positions = Array[Vector2]([Vector2(-930, 21), Vector2(989, 21)])
+perk_choice_start_sound = NodePath("PerkStart")
+perk_choice_sound = NodePath("PerkChoice")
+perk_selected_sound = NodePath("PerkSelected")
 metadata/_custom_type_script = "uid://b1vs1lh4jku4h"
+
+[node name="PerkStart" type="AudioStreamPlayer" parent="ArenaComponent" unique_id=1933734283]
+stream = ExtResource("10_rpdke")
+
+[node name="PerkChoice" type="AudioStreamPlayer" parent="ArenaComponent" unique_id=163725975]
+stream = ExtResource("11_33n3b")
+volume_db = -10.0
+pitch_scale = 2.0
+
+[node name="PerkSelected" type="AudioStreamPlayer" parent="ArenaComponent" unique_id=1048082223]
+stream = ExtResource("12_33n3b")
 
 [node name="Node2D" type="Node2D" parent="." unique_id=248863710]
 position = Vector2(1213, 681)
@@ -162,3 +176,6 @@ environment = ExtResource("15_qlwvw")
 [node name="WorldEnvComponent" type="Node" parent="WorldEnvironment" unique_id=658048459]
 script = ExtResource("15_rpdke")
 metadata/_custom_type_script = "uid://dptr5blvqsgks"
+
+[node name="Greytide" parent="." unique_id=1270222458 instance=ExtResource("15_33n3b")]
+position = Vector2(952, 72)

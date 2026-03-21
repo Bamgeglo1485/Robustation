@@ -42,6 +42,7 @@ var minor_damage_modifier: float = 1.0
 
 @export var random_cooldown_delay_coef: float = 0.0
 
+@export var swinging_sound: AudioStreamPlayer2D
 var swinging_cancelled: bool
 var cooldown_timer: Timer
 var swinging_timer: Timer
@@ -97,6 +98,8 @@ func _swing(direction) -> void:
 	if swing_delay != 0:
 		swinging = true
 		swinging_cancelled = false
+		if swinging_sound:
+			swinging_sound.play()
 		
 		if animation_component and swing_rotation_multiplier != 0:
 			animation_component.lean_to_direction(direction, 2, swing_delay, swing_rotation_multiplier)

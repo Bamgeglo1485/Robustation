@@ -10,6 +10,12 @@ var minor_priority: int = -1
 func _ready() -> void:
 	main_music_player.finished.connect(_on_main_music_end)
 
+func _process(_delta: float) -> void:
+	if get_tree().paused:
+		main_music_player_staged.volume_db = -40
+	else:
+		main_music_player_staged.volume_db = 0
+
 func set_main(new_stream: AudioStream, priority: int) -> void:
 	if priority < main_priority:
 		return
@@ -38,6 +44,16 @@ func set_main(new_stream: AudioStream, priority: int) -> void:
 		main_music_player.play()
 	
 	main_priority = priority
+
+func reset_main():
+		var tween: Tween = create_tween()
+		tween.tween_property(main_music_player, "volume_db", -40, 1.0)
+		
+		await tween.finished
+		
+		main_music_player.stop()
+		main_music_player.stream = null
+		main_priority = -1
 
 func _on_main_music_end():
 	main_priority = -1

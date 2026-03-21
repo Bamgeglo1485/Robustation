@@ -219,6 +219,7 @@ label_settings = ExtResource("1_v3kjt")
 [node name="TextPrintingAnimationComponent" type="Node" parent="Label/Label" unique_id=462373065]
 script = ExtResource("2_3hayu")
 animate_on_ready_delay = 1.0
+play_sound = false
 metadata/_custom_type_script = "uid://4io3bm7r86h6"
 
 [node name="CMD" type="ColorRect" parent="." unique_id=2043084885]
@@ -292,8 +293,9 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_2uogn")
 context_menu_enabled = false
 emoji_menu_enabled = false
 
-[node name="CMDInputComponent" type="Node" parent="CMD/CMD_INPUT" unique_id=703720052 node_paths=PackedStringArray("cmd_output", "roundstart_component")]
+[node name="CMDInputComponent" type="Node" parent="CMD/CMD_INPUT" unique_id=703720052 node_paths=PackedStringArray("off_screen", "cmd_output", "roundstart_component")]
 script = ExtResource("3_vlcut")
+off_screen = NodePath("../../../OffScreenComponent")
 cmd_output = NodePath("../../CMD_OUTPUT")
 roundstart_component = NodePath("../../../RoundstartComponent")
 metadata/_custom_type_script = "uid://dlyqiva26n7ka"
@@ -403,6 +405,7 @@ text = "Station Run"
 [node name="TextPrintingAnimationComponent" type="Node" parent="Buttons/StationRun" unique_id=414728123]
 script = ExtResource("2_3hayu")
 animate_on_ready_delay = 0.7
+play_sound = false
 metadata/_custom_type_script = "uid://4io3bm7r86h6"
 
 [node name="PrintOnButtonPressComponent" type="Node" parent="Buttons/StationRun" unique_id=809375099 node_paths=PackedStringArray("print_frame")]
@@ -445,6 +448,7 @@ text = "Arena"
 [node name="TextPrintingAnimationComponent" type="Node" parent="Buttons/Arena" unique_id=1817225005]
 script = ExtResource("2_3hayu")
 animate_on_ready_delay = 0.5
+play_sound = false
 metadata/_custom_type_script = "uid://4io3bm7r86h6"
 
 [node name="PrintOnButtonPressComponent" type="Node" parent="Buttons/Arena" unique_id=1426117045 node_paths=PackedStringArray("print_frame")]
@@ -498,6 +502,7 @@ text = "Setup"
 [node name="TextPrintingAnimationComponent" type="Node" parent="Buttons/Settings" unique_id=751812909]
 script = ExtResource("2_3hayu")
 animate_on_ready_delay = 0.5
+play_sound = false
 metadata/_custom_type_script = "uid://4io3bm7r86h6"
 
 [node name="PrintOnButtonPressComponent" type="Node" parent="Buttons/Settings" unique_id=1371301653 node_paths=PackedStringArray("print_frame")]
@@ -545,6 +550,7 @@ text = "Credits"
 [node name="TextPrintingAnimationComponent" type="Node" parent="Buttons/Credits" unique_id=522289675]
 script = ExtResource("2_3hayu")
 animate_on_ready_delay = 0.5
+play_sound = false
 metadata/_custom_type_script = "uid://4io3bm7r86h6"
 
 [node name="PrintOnButtonPressComponent" type="Node" parent="Buttons/Credits" unique_id=1443914418 node_paths=PackedStringArray("print_frame")]

@@ -23,6 +23,8 @@ func _on_health_changed(health) -> void:
 	
 	if health <= 0 and !dead:
 		dead = true
+		if get_tree().paused:
+			get_tree().paused = false
 		if death_effect:
 			var _effect_tween = create_tween()
 			_effect_tween.set_parallel()

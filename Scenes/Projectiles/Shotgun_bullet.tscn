@@ -34,7 +34,7 @@ collision_layer = 15
 collision_mask = 15
 texture = NodePath("../Texture")
 particle_emitter = NodePath("GPUParticles2D")
-speed = 1000
+speed = 1300
 damage = 45
 lifetime = 1.0
 parry_speed_boost = 1.0
@@ -52,6 +52,10 @@ lifetime = 2.0
 preprocess = 0.5
 speed_scale = 8.11
 randomness = 1.0
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+trail_enabled = true
+trail_sections = 2
+trail_section_subdivisions = 1
 process_material = SubResource("ParticleProcessMaterial_nkfxt")
 
 [node name="Texture" type="Sprite2D" parent="." index="1" unique_id=1813040051]

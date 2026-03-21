@@ -18,11 +18,14 @@ func _ready() -> void:
 	_on_section_changed(parent, false)
 
 func _on_section_changed(_emitter, timer: bool = true):
-	if timer:
-		await get_tree().create_timer(3).timeout
-	
 	if last_section == battle_tendency_component.section:
 		return
+	
+	force_change(timer)
+
+func force_change(timer: bool = true):
+	if timer:
+		await get_tree().create_timer(3).timeout
 	
 	last_section = battle_tendency_component.section
 	

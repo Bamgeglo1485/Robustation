@@ -46,8 +46,12 @@
 [ext_resource type="Script" uid="uid://b2pqseaw3bym7" path="res://Components/Entity/AnimatedSpriteComponent.gd" id="34_usxup"]
 [ext_resource type="Script" uid="uid://cd0dtperukumm" path="res://Scripts/LightningSpectrum.gd" id="35_2d3wq"]
 [ext_resource type="Texture2D" uid="uid://brf6y07nehr77" path="res://Textures/Interface/Ingame/Health/health0.png" id="35_hp12l"]
+[ext_resource type="Script" uid="uid://4io3bm7r86h6" path="res://Components/Interface/Menu/TextPrintingAnimationComponent.gd" id="36_cyhxq"]
+[ext_resource type="FontFile" uid="uid://dichq2si55q4b" path="res://Resources/Text/Fonts/RobotoMono/static/RobotoMono-ExtraLight.ttf" id="36_gydjs"]
 [ext_resource type="Script" uid="uid://bwcq6hlpavlvl" path="res://Components/Interface/Ingame/WeaponIconComponent.gd" id="38_bdlbc"]
 [ext_resource type="Texture2D" uid="uid://850d8w023ebq" path="res://Textures/Interface/Ingame/Inventory/pocket.png" id="38_wrmeq"]
+[ext_resource type="Texture2D" uid="uid://dmexxjudhnscg" path="res://Textures/Mobs/Mobs/greytide.png" id="39_gq100"]
+[ext_resource type="Material" uid="uid://bv4yjgl2k8vnk" path="res://Resources/Shaders/Sorting.tres" id="40_72v2j"]
 [ext_resource type="Texture2D" uid="uid://bh4jj2l0w44nw" path="res://Textures/Interface/Ingame/Inventory/hand_l.png" id="40_mxiww"]
 [ext_resource type="Texture2D" uid="uid://c8by3pd2ow35g" path="res://Textures/Interface/Ingame/Inventory/hand_r.png" id="41_omg6r"]
 [ext_resource type="Texture2D" uid="uid://i5ulgkrfei56" path="res://Textures/Interface/Ingame/Inventory/SlotBackground.png" id="41_setsc"]
@@ -61,6 +65,13 @@
 [ext_resource type="PackedScene" uid="uid://cgp4m68yb8wfe" path="res://Scenes/UI/IngameInterface/Perks/PerkChoose.tscn" id="52_dxps5"]
 [ext_resource type="Shader" uid="uid://boy7hlksa7i1s" path="res://Resources/Shaders/ImpactFrame.gdshader" id="52_p5itk"]
 [ext_resource type="Texture2D" uid="uid://c6mx7npsbi7s0" path="res://Textures/Interface/Ingame/Stamina/stamina_4.png" id="53_o3dxh"]
+[ext_resource type="Script" uid="uid://btswtn6r4uh8e" path="res://Components/Player/PlayerIntroductionComponent.gd" id="62_bvsa3"]
+[ext_resource type="PackedScene" uid="uid://qvb8sosioeoe" path="res://Scenes/UI/IngameInterface/Scan.tscn" id="64_y8oi8"]
+[ext_resource type="AudioStream" uid="uid://4pohta766hgy" path="res://Audio/Interface/Scan/alarm.ogg" id="66_vxvnu"]
+[ext_resource type="AudioStream" uid="uid://ilhlu2455v6e" path="res://Audio/Interface/Scan/scan.ogg" id="67_wil4v"]
+[ext_resource type="AudioStream" uid="uid://b8xcri6rn3s2n" path="res://Audio/Interface/Scan/scan_loop.ogg" id="68_gq100"]
+[ext_resource type="AudioStream" uid="uid://btugbm8vvjp4n" path="res://Audio/Interface/Scan/return.ogg" id="69_72v2j"]
+[ext_resource type="Script" uid="uid://cl7jwvure8bl6" path="res://Components/Interface/BossHealthBarsControllerComponent.gd" id="72_72v2j"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_p8133"]
 random_pitch = 1.2599211
@@ -71,6 +82,47 @@ stream_0/stream = ExtResource("11_bjw4p")
 [sub_resource type="Curve" id="Curve_nnp87"]
 _data = [Vector2(0.21830988, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="Shader" id="Shader_ut4xv"]
+code = "shader_type canvas_item;
+
+uniform float jiggle = 5.0;
+uniform float speed = 30.0;
+
+void vertex() {
+	VERTEX.y += VERTEX_ID % 2 == 0 ? cos((TIME * speed) + VERTEX.x + float(VERTEX_ID * 10)) * jiggle : sin((TIME * speed) + VERTEX.x + float(VERTEX_ID * 10)) * jiggle;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gq100"]
+shader = SubResource("Shader_ut4xv")
+shader_parameter/jiggle = 2.0
+shader_parameter/speed = 10.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cyhxq"]
+shader = ExtResource("21_ryxqw")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.50000002375
+shader_parameter/scanlines_width = 0.5
+shader_parameter/grille_opacity = 0.3
+shader_parameter/resolution = Vector2(320, 100)
+shader_parameter/pixelate = false
+shader_parameter/roll = false
+shader_parameter/roll_speed = 8.0
+shader_parameter/roll_size = 0.0
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.05
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.0050000002375
+shader_parameter/aberration = 0.00300004764250005
+shader_parameter/brightness = 2.0
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.050000002375
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.5
+shader_parameter/vignette_opacity = 1.0
+shader_parameter/edge_darken = 0.5170000245575
+shader_parameter/edge_softness = 0.5
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ak33s"]
 atlas = ExtResource("35_hp12l")
@@ -318,6 +370,9 @@ process_mode = 3
 stream = SubResource("AudioStreamRandomizer_p8133")
 volume_db = -8.0
 
+[node name="FootstepSounds" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="5" unique_id=1611482403]
+volume_db = 6.0
+
 [node name="FlashlightOn" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="6" unique_id=1466874043]
 process_mode = 3
 stream = ExtResource("13_dxps5")
@@ -409,7 +464,87 @@ metadata/_custom_type_script = "uid://b8ag0xs5wkoy7"
 [node name="GUI" type="CanvasLayer" parent="." index="28" unique_id=1706866694]
 layer = 2
 
-[node name="PerkList" type="Control" parent="GUI" index="0" unique_id=1491893049]
+[node name="EnemyIntroduction" type="Control" parent="GUI" index="0" unique_id=1741703015]
+process_mode = 3
+visible = false
+z_index = 50
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Information" type="RichTextLabel" parent="GUI/EnemyIntroduction" index="0" unique_id=2104700922]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.027777778
+anchor_top = 0.16512346
+anchor_right = 0.5034722
+anchor_bottom = 0.7993827
+theme_override_fonts/normal_font = ExtResource("36_gydjs")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+scroll_active = false
+scroll_following = true
+metadata/_edit_use_anchors_ = true
+
+[node name="TextPrintingAnimationComponent" type="Node" parent="GUI/EnemyIntroduction/Information" index="2" unique_id=1994754091]
+script = ExtResource("36_cyhxq")
+animate_on_ready = false
+metadata/_custom_type_script = "uid://4io3bm7r86h6"
+
+[node name="Texture" type="TextureRect" parent="GUI/EnemyIntroduction" index="1" unique_id=875388742]
+modulate = Color(0.42091367, 0.70000815, 0, 0.711)
+material = SubResource("ShaderMaterial_gq100")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7222222
+anchor_top = 0.22222222
+anchor_right = 0.8472222
+anchor_bottom = 0.44444445
+offset_bottom = 1.5258789e-05
+scale = Vector2(2, 2)
+texture = ExtResource("39_gq100")
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="ReferenceRect" type="ReferenceRect" parent="GUI/EnemyIntroduction/Texture" index="0" unique_id=1695458180]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.013888889
+anchor_right = 1.0
+anchor_bottom = 1.0
+border_color = Color(0, 0, 0, 1)
+border_width = 5.0
+editor_only = false
+metadata/_edit_use_anchors_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="GUI/EnemyIntroduction" index="2" unique_id=472201971]
+visible = false
+
+[node name="Matrix" type="ColorRect" parent="GUI/EnemyIntroduction/CanvasLayer" index="0" unique_id=272548798]
+top_level = true
+z_index = -5
+material = ExtResource("40_72v2j")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Overlay" type="ColorRect" parent="GUI/EnemyIntroduction" index="3" unique_id=1296748238]
+z_index = 1
+material = SubResource("ShaderMaterial_cyhxq")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="PerkList" type="Control" parent="GUI" index="1" unique_id=1491893049]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -508,7 +643,7 @@ texture = ExtResource("20_855fl")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Misc" type="Control" parent="GUI" index="1" unique_id=2073434627]
+[node name="Misc" type="Control" parent="GUI" index="2" unique_id=2073434627]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -604,7 +739,26 @@ color_component = NodePath("../../../StaminaIndicatorComponent")
 metadata/_custom_type_script = "uid://cd0dtperukumm"
 metadata/_edit_use_anchors_ = true
 
-[node name="Inventory" type="Control" parent="GUI" index="2" unique_id=1069930799]
+[node name="BossHealthBars" type="Control" parent="GUI" index="3" unique_id=1699387203]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Container" type="VBoxContainer" parent="GUI/BossHealthBars" index="0" unique_id=81065373]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.055555556
+anchor_top = 0.041666668
+anchor_right = 0.9444444
+anchor_bottom = 0.2978395
+offset_bottom = 1.5258789e-05
+metadata/_edit_use_anchors_ = true
+
+[node name="Inventory" type="Control" parent="GUI" index="4" unique_id=1069930799]
 layout_mode = 3
 anchor_right = 0.9990001
 anchor_bottom = 1.0
@@ -727,7 +881,7 @@ metadata/_edit_use_anchors_ = true
 script = ExtResource("11_yhquf")
 metadata/_custom_type_script = "uid://qcmegh7138ug"
 
-[node name="Menu" type="CanvasLayer" parent="GUI" index="3" unique_id=1927357485]
+[node name="Menu" type="CanvasLayer" parent="GUI" index="5" unique_id=1927357485]
 layer = 10
 
 [node name="IngameMenu" parent="GUI/Menu" index="0" unique_id=1644887491 instance=ExtResource("20_ryxqw")]
@@ -740,7 +894,7 @@ keyboard_audio_player = NodePath("../../../../Sounds/Keyboard")
 mouse_audio_player = NodePath("../../../../Sounds/Mouse")
 metadata/_custom_type_script = "uid://dr8j22vcrypsa"
 
-[node name="Overlays" type="CanvasLayer" parent="GUI" index="4" unique_id=1713393531]
+[node name="Overlays" type="CanvasLayer" parent="GUI" index="6" unique_id=1713393531]
 layer = 2
 
 [node name="Health" type="CanvasLayer" parent="GUI/Overlays" index="0" unique_id=1783291718]
@@ -864,7 +1018,7 @@ color = Color(1, 1, 1, 0)
 script = ExtResource("11_yhquf")
 metadata/_custom_type_script = "uid://qcmegh7138ug"
 
-[node name="PerkChoose" type="CanvasLayer" parent="GUI" index="5" unique_id=387688815]
+[node name="PerkChoose" type="CanvasLayer" parent="GUI" index="7" unique_id=387688815]
 layer = 3
 
 [node name="PerkChoose" parent="GUI/PerkChoose" index="0" unique_id=1852449319 instance=ExtResource("52_dxps5")]
@@ -892,3 +1046,72 @@ perk_ui = NodePath("../GUI/PerkList/Panel/GridContainer")
 perk_notification_ui = NodePath("../GUI/Menu")
 perk_collect_sound = NodePath("../Sounds/PerkCollect")
 can_collect = true
+
+[node name="PlayerIntroductionComponent" type="Node" parent="." index="33" unique_id=2031283859 node_paths=PackedStringArray("control", "alarm_sound", "scan_start_sound", "scan_loop_sound", "computer_loop_sound", "return_sound", "enemy_theme")]
+script = ExtResource("62_bvsa3")
+placeholder_text = "> SCAN_INITIATED________________________________
+[color=crimson]TARGET_ACQUIRED[/color]: !UNREGISTERED_REMNANT_ENTITY!
+> INITIALIZING SCAN PROTOCOL...
+
+[color=yellow][DEBG][/color] scan.engine: Loading scan modules...
+[color=yellow][DEBG][/color] scan.module: '/Scanner/External_scan.dll' LOADED
+[color=yellow][DEBG][/color] scan.module: '/Scanner/Egregore_scan.dll' LOADED
+[color=yellow][DEBG][/color] scan.module: '/Scanner/Database_seeker.dll' LOADED
+[color=yellow][DEBG][/color] scan.engine: 3/3 modules initialized
+
+> GETTING ENTITY ID...
+[color=yellow][DEBG][/color] entity.parse: Database research
+[color=yellow][DEBG][/color] entity.id: [0x7F3A8C2E]
+[color=yellow][DEBG][/color] entity.class: REMNANT MERGE ANOMALY
+
+>> TARGET NAME [color=green]RECEIVED[/color]
+>> TARGET PREFIX [color=green]RECEIVED[/color]
+>> TARGET DESC [color=green]RECEIVED[/color]
+
+>> HEALTH STATS [color=green]RECEIVED[/color]
+[color=yellow][DEBG][/color] health.scan: Performing information stability analysis...
+[color=yellow][DEBG][/color] health.scan: Health stats received!
+
+>> MOVE SPEED STATS [color=green]RECEIVED[/color]
+[color=yellow][DEBG][/color] speed.calc: Tracking movement patterns...
+[color=yellow][DEBG][/color] speed.calc: Movement speed ​​calculated!
+[color=yellow][DEBG][/color] speed.calc: Unit maneuverability ​​calculated!
+
+> [color=green]TARGET DATA LOADED![/color]
+> SCAN_COMPLETE_______________________________"
+control = NodePath("../GUI/EnemyIntroduction")
+scan_scene = ExtResource("64_y8oi8")
+alarm_sound = NodePath("Alarm")
+scan_start_sound = NodePath("Scan")
+scan_loop_sound = NodePath("Loop")
+computer_loop_sound = NodePath("Loop_2")
+return_sound = NodePath("Return")
+enemy_theme = NodePath("Theme")
+metadata/_custom_type_script = "uid://btswtn6r4uh8e"
+
+[node name="Alarm" type="AudioStreamPlayer" parent="PlayerIntroductionComponent" index="0" unique_id=756489535]
+stream = ExtResource("66_vxvnu")
+volume_db = 3.0
+
+[node name="Scan" type="AudioStreamPlayer" parent="PlayerIntroductionComponent" index="1" unique_id=691722866]
+stream = ExtResource("67_wil4v")
+
+[node name="Loop" type="AudioStreamPlayer" parent="PlayerIntroductionComponent" index="2" unique_id=1635099021]
+stream = ExtResource("68_gq100")
+volume_db = -15.0
+parameters/looping = true
+
+[node name="Return" type="AudioStreamPlayer" parent="PlayerIntroductionComponent" index="3" unique_id=1236690895]
+stream = ExtResource("69_72v2j")
+
+[node name="Loop_2" type="AudioStreamPlayer" parent="PlayerIntroductionComponent" index="4" unique_id=1243099162]
+stream = ExtResource("9_gwwhq")
+volume_db = 3.0
+
+[node name="Theme" type="AudioStreamPlayer" parent="PlayerIntroductionComponent" index="5" unique_id=823117514]
+bus = &"Music"
+
+[node name="BossHealthBarsControllerComponent" type="Node" parent="." index="34" unique_id=1245703980 node_paths=PackedStringArray("container")]
+script = ExtResource("72_72v2j")
+container = NodePath("../GUI/BossHealthBars/Container")
+metadata/_custom_type_script = "uid://cl7jwvure8bl6"

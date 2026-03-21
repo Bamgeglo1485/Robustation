@@ -29,7 +29,8 @@ material = SubResource("ShaderMaterial_doom2")
 
 [node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture")]
 texture = NodePath("../Texture")
-speed = 1500
+speed = 1000
+damage = 6
 delayed_damage = 3
 delayed_damage_delay = 3
 
@@ -40,7 +41,7 @@ shape = SubResource("CapsuleShape2D_i6uow")
 [node name="HitSound" parent="ProjectileComponent" index="1" unique_id=1752295456]
 stream = ExtResource("2_doom2")
 
-[node name="CollisionShape2D" parent="Area2D" parent_id_path=PackedInt32Array(757156969) index="0" unique_id=2139953676]
+[node name="CollisionShape2D" parent="Parry" parent_id_path=PackedInt32Array(757156969) index="0" unique_id=2139953676]
 disabled = true
 
 [node name="Texture" type="Sprite2D" parent="." index="4" unique_id=1806190901]

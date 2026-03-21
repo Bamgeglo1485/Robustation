@@ -42,6 +42,7 @@ body_fall_sound = NodePath("../Sounds/BodyFall")
 metadata/_custom_type_script = "uid://dfs78nrhukxbl"
 
 [node name="Texture" type="Sprite2D" parent="." unique_id=382857461]
+process_mode = 3
 use_parent_material = true
 texture = ExtResource("11_obr0u")
 region_enabled = true

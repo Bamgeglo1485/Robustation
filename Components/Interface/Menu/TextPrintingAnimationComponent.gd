@@ -4,14 +4,22 @@ class_name TextPrintingAnimationComponent extends Component
 @export var animate_on_ready_delay: float = 3
 @export var block_frame: Control
 var tween: Tween
+@export var play_sound: bool = true
+var text_sound: AudioStream = preload("res://Audio/Interface/Menu/Keyboard/text.ogg")
+var text_audio: AudioStreamPlayer
 
 func _ready() -> void:
+	if play_sound:
+		text_audio = AudioStreamPlayer.new()
+		add_child(text_audio)
+		text_audio.stream = text_sound
 	if animate_on_ready:
 		animate(parent.text, animate_on_ready_delay, true)
 
 func animate(new_text: String, delay: float, clear: bool = false, double_line: bool = true) -> void:
 	var target_text: String
-	
+	if play_sound:
+		text_audio.play()
 	var line: String = "\n"
 	if clear:
 		parent.text = ""
@@ -35,7 +43,7 @@ func animate(new_text: String, delay: float, clear: bool = false, double_line: b
 	var visible_chars = 0
 	for part in parts:
 		var part_text = part.get_string()
-		if not part_text.begins_with("["):
+		if !part_text.begins_with("["):
 			visible_chars += part_text.length()
 	
 	@warning_ignore("incompatible_ternary")
@@ -47,7 +55,7 @@ func animate(new_text: String, delay: float, clear: bool = false, double_line: b
 	
 	var current_text = parent.text
 	
-	if not clear:
+	if !clear:
 		current_text += line
 		tween.tween_property(parent, "text", current_text, 0)
 	
@@ -63,6 +71,9 @@ func animate(new_text: String, delay: float, clear: bool = false, double_line: b
 				tween.tween_property(parent, "text", current_text, time_per_char)
 	
 	_block()
+	if play_sound:
+		await tween.finished
+		text_audio.stop()
 
 func _block() -> void:
 	if !block_frame:

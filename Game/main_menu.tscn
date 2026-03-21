@@ -23,7 +23,7 @@ shader_parameter/distort_intensity = 0.05
 shader_parameter/noise_opacity = 0.4
 shader_parameter/noise_speed = 5.0
 shader_parameter/static_noise_intensity = 0.0050000002375
-shader_parameter/aberration = 0.0050000477375000685
+shader_parameter/aberration = 0.00500004773750006
 shader_parameter/brightness = 2.0
 shader_parameter/discolor = false
 shader_parameter/warp_amount = 0.050000002375
@@ -108,6 +108,7 @@ scroll_following = true
 [node name="TextPrintingAnimationComponent" type="Node" parent="Loading/OUTPUT" unique_id=2006426102]
 script = ExtResource("2_qefsa")
 animate_on_ready_delay = 2.5
+play_sound = false
 metadata/_custom_type_script = "uid://4io3bm7r86h6"
 
 [node name="MONITOR" type="CanvasLayer" parent="Loading" unique_id=498291134]
@@ -185,4 +186,5 @@ horizontal_alignment = 3
 [node name="TextPrintingAnimationComponent" type="Node" parent="ROBUSTATION_LOGO" unique_id=1440810342]
 script = ExtResource("2_qefsa")
 animate_on_ready_delay = 1.5
+play_sound = false
 metadata/_custom_type_script = "uid://4io3bm7r86h6"

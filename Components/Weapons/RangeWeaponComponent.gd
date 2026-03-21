@@ -119,7 +119,7 @@ func attack(raiser, _npc = true) -> void:
 		if self_throw_speed != 0:
 			parent.get_node("MobMoverComponent").throw(-direction, self_throw_speed, null, self_throw_stop_speed, true, self_throw_rewrite)
 	
-	if shots > 1:
+	if shots > 1 and bullets >= shots:
 		var total_spread: float = deg_to_rad(shots_angle)
 		var angle_step: float = total_spread / (shots - 1) if shots > 1 else 0.0
 		var start_angle: float = -total_spread * 0.5

@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bv4yjgl2k8vnk"]
+
+[ext_resource type="Shader" uid="uid://cnqeyyw384nd0" path="res://Resources/Shaders/Sorting.gdshader" id="1_t8d75"]
+
+[resource]
+shader = ExtResource("1_t8d75")
+shader_parameter/mask_softness = 0.0
+shader_parameter/mask_threshold = 0.0
+shader_parameter/sort = 0.8490000403275

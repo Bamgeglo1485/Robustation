@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://d1wo6qimr2ikg"]
+
+[ext_resource type="Shader" uid="uid://cga6bubr1i3vp" path="res://Resources/Shaders/Scan.gdshader" id="1_w3eaq"]
+
+[resource]
+shader = ExtResource("1_w3eaq")
+shader_parameter/fill_color = Color(0, 0, 0, 0.1764706)
+shader_parameter/use_texture_alpha = false
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/line_thickness = 0.01
+shader_parameter/speed = 10.000000475
+shader_parameter/x_line_bounds = Vector2(0, 1)
+shader_parameter/y_line_bounds = Vector2(0, 1)

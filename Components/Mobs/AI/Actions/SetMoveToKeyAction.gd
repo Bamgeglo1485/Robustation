@@ -8,4 +8,5 @@ func tick(_actor: Node, blackboard: Blackboard) -> int:
 	if value:
 		blackboard.set_value("MovePoint", value.global_position)
 		return SUCCESS
+	blackboard.set_value("MovePoint", Vector2.ZERO)
 	return FAILURE

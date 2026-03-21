@@ -2,6 +2,7 @@
 class_name SetPlayerToBlackboardAction extends ActionLeaf
 
 @export var key: String = "Target"
+@export var ignore_player_change: bool = false
 
 @onready var scene = get_tree().get_root().get_node_or_null("Game")
 var player: Node2D
@@ -10,7 +11,9 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 	
-	EventBusManager.change_player.connect(_player_changed)
+	if !ignore_player_change:
+		EventBusManager.change_player.connect(_player_changed)
+	EventBusManager.player_death.connect(_player_death)
 
 func tick(_actor: Node, blackboard: Blackboard) -> int:
 	if !scene:
@@ -22,7 +25,7 @@ func tick(_actor: Node, blackboard: Blackboard) -> int:
 			player = null
 	
 	if !player or !is_instance_valid(player):
-		blackboard.set_value(key, null)
+		blackboard.erase_value(key)
 		return FAILURE
 	
 	blackboard.set_value(key, player)
@@ -33,3 +36,6 @@ func _player_changed(new_player, wait_time) -> void:
 	if wait_time > 0:
 		await get_tree().create_timer(wait_time).timeout
 	player = new_player
+
+func _player_death() -> void:
+	player = null

@@ -1,0 +1,188 @@
+[gd_scene format=3 uid="uid://qvb8sosioeoe"]
+
+[ext_resource type="Material" uid="uid://d1wo6qimr2ikg" path="res://Resources/Shaders/Scan.tres" id="2_b6g0r"]
+[ext_resource type="Texture2D" uid="uid://djaoxf43237wl" path="res://Textures/Interface/Ingame/L_square.png" id="3_y7cuo"]
+[ext_resource type="Shader" uid="uid://cga6bubr1i3vp" path="res://Resources/Shaders/Scan.gdshader" id="4_4qa2o"]
+[ext_resource type="Script" uid="uid://bjc8qk1aollxn" path="res://Components/Interface/Ingame/RandomOffsetComponent.gd" id="5_tw6qg"]
+[ext_resource type="Texture2D" uid="uid://dqd7xkk5m77ck" path="res://Textures/Interface/Menu/cross.png" id="6_b7peu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tw6qg"]
+shader = ExtResource("4_4qa2o")
+shader_parameter/fill_color = Color(0, 0, 0, 0.46400002)
+shader_parameter/use_texture_alpha = false
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/line_thickness = 0.01
+shader_parameter/speed = 2.000000095
+shader_parameter/x_line_bounds = Vector2(0, 1)
+shader_parameter/y_line_bounds = Vector2(0, 1)
+
+[node name="ReferenceRect" type="ReferenceRect" unique_id=1698799301]
+process_mode = 3
+z_index = 100
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(20, 20)
+border_color = Color(1, 1, 1, 1)
+editor_only = false
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1478369938]
+material = ExtResource("2_b6g0r")
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(19, 19)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1378710539]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.025
+anchor_top = -0.025
+anchor_right = 1.025
+anchor_bottom = 1.025
+offset_right = 4.5776367e-05
+offset_bottom = 1.1444092e-05
+pivot_offset = Vector2(21, 21)
+texture = ExtResource("3_y7cuo")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1546366963]
+material = SubResource("ShaderMaterial_tw6qg")
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(19, 19)
+
+[node name="Square" type="ColorRect" parent="." unique_id=688422926]
+layout_mode = 0
+offset_right = 17.0
+offset_bottom = 10.0
+color = Color(0, 0, 0, 1)
+
+[node name="RandomOffsetComponent" type="Node" parent="Square" unique_id=900085013]
+script = ExtResource("5_tw6qg")
+min_offset = -8
+max_offset = 8
+metadata/_custom_type_script = "uid://bjc8qk1aollxn"
+
+[node name="Square2" type="ColorRect" parent="." unique_id=1439888839]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 25.0
+offset_right = 47.0
+offset_bottom = 35.0
+color = Color(0, 0, 0, 1)
+
+[node name="RandomOffsetComponent" type="Node" parent="Square2" unique_id=374970136]
+script = ExtResource("5_tw6qg")
+min_offset = -8
+max_offset = 8
+metadata/_custom_type_script = "uid://bjc8qk1aollxn"
+
+[node name="Square3" type="ColorRect" parent="." unique_id=669628331]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 5.0
+offset_right = 44.0
+offset_bottom = 15.0
+
+[node name="RandomOffsetComponent" type="Node" parent="Square3" unique_id=358131358]
+script = ExtResource("5_tw6qg")
+min_offset = -8
+max_offset = 8
+metadata/_custom_type_script = "uid://bjc8qk1aollxn"
+
+[node name="Square4" type="ColorRect" parent="." unique_id=642977812]
+layout_mode = 0
+offset_top = 29.0
+offset_right = 17.0
+offset_bottom = 39.0
+
+[node name="RandomOffsetComponent" type="Node" parent="Square4" unique_id=1944574067]
+script = ExtResource("5_tw6qg")
+min_offset = -8
+max_offset = 8
+metadata/_custom_type_script = "uid://bjc8qk1aollxn"
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=350876512]
+layout_mode = 0
+offset_right = 12.0
+offset_bottom = 12.0
+texture = ExtResource("6_b7peu")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="RandomOffsetComponent" type="Node" parent="TextureRect2" unique_id=1502792924]
+script = ExtResource("5_tw6qg")
+min_offset = -8
+max_offset = 8
+metadata/_custom_type_script = "uid://bjc8qk1aollxn"
+
+[node name="TextureRect3" type="TextureRect" parent="." unique_id=1420092418]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 12.0
+offset_right = 53.0
+offset_bottom = 24.0
+texture = ExtResource("6_b7peu")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="RandomOffsetComponent" type="Node" parent="TextureRect3" unique_id=1146509283]
+script = ExtResource("5_tw6qg")
+min_offset = -8
+max_offset = 8
+metadata/_custom_type_script = "uid://bjc8qk1aollxn"
+
+[node name="TextureRect4" type="TextureRect" parent="." unique_id=1772360129]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 40.0
+offset_right = 10.0
+offset_bottom = 52.0
+texture = ExtResource("3_y7cuo")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="RandomOffsetComponent" type="Node" parent="TextureRect4" unique_id=1269082146]
+script = ExtResource("5_tw6qg")
+min_offset = -8
+max_offset = 8
+metadata/_custom_type_script = "uid://bjc8qk1aollxn"
+
+[node name="TextureRect5" type="TextureRect" parent="." unique_id=811153125]
+layout_mode = 0
+offset_left = 33.0
+offset_top = -12.0
+offset_right = 45.0
+texture = ExtResource("3_y7cuo")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="RandomOffsetComponent" type="Node" parent="TextureRect5" unique_id=1832977078]
+script = ExtResource("5_tw6qg")
+min_offset = -8
+max_offset = 8
+metadata/_custom_type_script = "uid://bjc8qk1aollxn"
+
+[node name="Square5" type="ColorRect" parent="." unique_id=1894714587]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 13.0
+offset_right = 27.0
+offset_bottom = 23.0
+color = Color(0, 0, 0, 1)
+
+[node name="RandomOffsetComponent" type="Node" parent="Square5" unique_id=434394124]
+script = ExtResource("5_tw6qg")
+min_offset = -8
+max_offset = 8
+metadata/_custom_type_script = "uid://bjc8qk1aollxn"
+
+[node name="RandomOffsetComponent" type="Node" parent="." unique_id=1511655971]
+script = ExtResource("5_tw6qg")
+min_offset = 0
+max_offset = 0
+max_scale = 0.7
+metadata/_custom_type_script = "uid://bjc8qk1aollxn"

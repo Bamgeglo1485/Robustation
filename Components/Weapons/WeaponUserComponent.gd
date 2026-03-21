@@ -41,13 +41,17 @@ func select_weapon(new_weapon: Weapon) -> void:
 		return
 	if (selected_weapon and selected_weapon.alt_attack and selected_weapon.alt_attack.swinging) or (selected_weapon and selected_weapon.alt_attack and !selected_weapon.alt_attack.can_switch):
 		return
+	if selected_weapon and selected_weapon is MeleeWeapon and selected_weapon.qte_active:
+		return
 	
 	force_select_weapon(new_weapon)
 
-func attack(raiser, npc: bool = true) -> bool:
+func attack(raiser, npc: bool = true, weapon: Weapon = null) -> bool:
 	if !can_attack:
 		return false
-	if selected_weapon.get_cooldown():
+	if !weapon:
+		weapon = selected_weapon
+	if weapon.get_cooldown():
 		return false
 	
 	if mob_mover_component:
@@ -56,9 +60,9 @@ func attack(raiser, npc: bool = true) -> bool:
 		if mob_mover_component.flying and block_when_flying:
 			return false
 	
-	selected_weapon.damage_modifier = damage_modifier * minor_damage_modifier
-	selected_weapon.cooldown_modifier = cooldown_modifier
-	selected_weapon.attack(raiser, npc)
+	weapon.damage_modifier = damage_modifier * minor_damage_modifier
+	weapon.cooldown_modifier = cooldown_modifier
+	weapon.attack(raiser, npc)
 	
 	return true
 

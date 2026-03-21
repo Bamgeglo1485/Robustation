@@ -69,6 +69,9 @@ func _ready() -> void:
 	move_logic_timer.wait_time = randf_range(move_update_rate * 0.8, move_update_rate * 1.2)
 	move_logic_timer.timeout.connect(_update_move_logic)
 	move_logic_timer.start()
+	
+	if navigation_agent:
+		navigation_agent.velocity_computed.connect(_on_navigation_agent_velocity_computed)
 
 func _update_move_logic() -> void:
 	if !mob_mover_component or !navigation_agent:
@@ -98,7 +101,7 @@ func _pathfinding_update() -> void:
 	pathfinding_timer.start()
 
 func _on_navigation_agent_velocity_computed(safe_velocity: Vector2) -> void:
-	if mob_mover_component and safe_velocity.length_squared() > 0.1 and not target_reached:
+	if mob_mover_component and safe_velocity.length_squared() > 0.1 and !target_reached:
 		mob_mover_component.direction = safe_velocity.normalized()
 
 func set_retreat(new_value) -> void:

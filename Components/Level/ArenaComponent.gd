@@ -1,6 +1,7 @@
 class_name ArenaComponent extends Component
 
 @export_category("Settings")
+@export var enabled: bool = true
 @export_file_path() var perks: Array[String]
 @export var area_info: RichTextLabel
 @export var start_budget: float = 5
@@ -33,6 +34,10 @@ var loose: bool = false
 @onready var player_perk_ui_list: VBoxContainer = player_perk_ui.get_node("Panel").get_node("VBoxContainer")
 var perk_list_unit: PackedScene = preload("res://Scenes/UI/IngameInterface/Perks/PerkChooseUnit.tscn")
 
+@export var perk_choice_start_sound: AudioStreamPlayer
+@export var perk_choice_sound: AudioStreamPlayer
+@export var perk_selected_sound: AudioStreamPlayer
+
 @export_category("Operational")
 var wave_active: bool = false
 var current_enemies: Array[PhysicsBody2D]
@@ -41,6 +46,8 @@ const MAX_ATTEMPTS: int = 100
 
 #-----------------------READY-----------------------
 func _ready() -> void:
+	if !enabled:
+		return
 	EventBusManager.gibbed.connect(_on_gibbed)
 	for enemy in available_enemies:
 		if enemy.enemy_type == enemy.enemy_types.MELEE:
@@ -191,6 +198,7 @@ func _clean_blood():
 func _open_perk_choose() -> void:
 	if loose:
 		return
+	perk_choice_start_sound.play()
 	weapon_user_component.can_attack = false
 	player_perk_ui.visible = true
 	var tween: Tween = create_tween()
@@ -227,6 +235,7 @@ func _open_perk_choose() -> void:
 		perk_unit_button.get_node("PerkChooseOnPressedComponent").perk = perk
 	
 	for perk in perk_units:
+		perk_choice_sound.play()
 		var perk_tween: Tween = create_tween()
 		perk_tween.set_trans(Tween.TRANS_SINE)
 		perk_tween.set_ease(Tween.EASE_IN_OUT)
@@ -240,6 +249,7 @@ func _open_perk_choose() -> void:
 	_close_perk_choose()
 
 func _close_perk_choose() -> void:
+	perk_selected_sound.play()
 	weapon_user_component.can_attack = true
 	var tween: Tween = create_tween()
 	tween.set_trans(Tween.TRANS_SINE)

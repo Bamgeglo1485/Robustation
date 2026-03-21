@@ -57,8 +57,7 @@ texture = ExtResource("2_f6ny4")
 max_health = 50
 
 [node name="NavigationAgent" parent="." index="13" unique_id=1358139639]
-avoidance_layers = 3
-avoidance_mask = 3
+max_speed = 0.01
 
 [node name="Hair" type="Sprite2D" parent="." index="14" unique_id=927075308]
 texture = ExtResource("3_7ct2p")
@@ -150,7 +149,7 @@ rage_when_buddy_dead = false
 metadata/_custom_type_script = "uid://da2q40ragr5wk"
 
 [node name="BeehaveTree" parent="." index="20" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@18969")
+blackboard = NodePath("@Node@18985")
 
 [node name="MoveToPlayer" type="Node" parent="BeehaveTree" index="0" unique_id=1542265017]
 script = ExtResource("36_k3vsn")
@@ -172,7 +171,6 @@ metadata/_custom_type_script = "uid://ttwxxcce2i4p"
 
 [node name="MoveToPointAction" type="Node" parent="BeehaveTree/MoveToPlayer" index="3" unique_id=113185966]
 script = ExtResource("39_x3h0m")
-retreat_speed_modifier = null
 metadata/_custom_type_script = "uid://wlnghjnvdlyn"
 
 [node name="AttackTargetAction" type="Node" parent="BeehaveTree/MoveToPlayer" index="4" unique_id=1821364524]
@@ -183,3 +181,10 @@ metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 script = ExtResource("40_2q2qw")
 resistance = 2.0
 metadata/_custom_type_script = "uid://clr7jbioge17t"
+
+[node name="IntroductionSubjectComponent" parent="." index="25" unique_id=776935428]
+group = "Assistant"
+subject_name = "Assistant"
+subject_desc = "WEAK CRAZED  ASSISTANTS USING MELEE WEAPONS
+[color=purple]WEAK TO EVERYTHING[/color]"
+subject_prefix = "Melee Fodder"

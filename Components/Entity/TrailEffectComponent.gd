@@ -20,6 +20,8 @@ var lifetime_timer: float = 0.0
 var clean_timer: float = 0.0
 var autodelete_active: bool = false
 var enabled: bool = true
+@export var active_delete: bool = false
+var cleanup_timer: Timer
 
 func _ready() -> void:
 	color = Color(1.0, 1.0, 1.0, 1.0)
@@ -35,6 +37,13 @@ func _ready() -> void:
 	if lifetime > 0:
 		lifetime_timer = lifetime
 		autodelete_active = true
+	if active_delete:
+		cleanup_timer = Timer.new()
+		add_child(cleanup_timer)
+		cleanup_timer.wait_time = 5
+		cleanup_timer.one_shot = true
+		cleanup_timer.timeout.connect(_clean_up)
+		cleanup_timer.start()
 
 func _process(delta: float) -> void:
 	if !enabled:
@@ -103,3 +112,10 @@ func _exit_tree() -> void:
 		if !dupl:
 			continue
 		dupl.queue_free()
+
+func _clean_up():
+	for dupl in duplicates:
+		if !dupl or dupl.modulate != end_color:
+			continue
+		dupl.queue_free()
+	duplicates.clear()

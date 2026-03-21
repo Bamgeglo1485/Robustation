@@ -7,5 +7,5 @@
 script = ExtResource("1_oy78i")
 scene = ExtResource("1_vd5mi")
 cost = 2.0
-weight = 1.0
+weight = 0.7
 metadata/_custom_type_script = "uid://di5u0whaqiyjp"

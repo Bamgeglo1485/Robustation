@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://roeennw572p2"]
 
 [ext_resource type="PackedScene" uid="uid://jg0ru5ss6ppw" path="res://Scenes/Mobs/Base/BasePlayer.tscn" id="1_mq7la"]
-[ext_resource type="AudioStream" uid="uid://djwhsufysh1dq" path="res://Resources/Audio/PunchRandom.tres" id="3_8fokh"]
 [ext_resource type="Texture2D" uid="uid://oeskymbnxvee" path="res://Textures/Mobs/Player/greytide.png" id="4_bvl14"]
 [ext_resource type="PackedScene" uid="uid://dp68l1ivbgils" path="res://Scenes/Projectiles/SpearBoomerang.tscn" id="4_pcu7p"]
 [ext_resource type="AudioStream" uid="uid://eogckfs15aph" path="res://Audio/Weapon/miss.ogg" id="4_pgypf"]
@@ -11,18 +10,19 @@
 [ext_resource type="AudioStream" uid="uid://baxotaiac5j8p" path="res://Audio/Effects/spear_eject.ogg" id="8_ba6hk"]
 [ext_resource type="AudioStream" uid="uid://blc0o0577akc7" path="res://Audio/Weapon/Hit/smash.ogg" id="8_pgypf"]
 [ext_resource type="AudioStream" uid="uid://c14ckhtbrb550" path="res://Audio/Weapon/parry.ogg" id="11_si836"]
+[ext_resource type="PackedScene" uid="uid://co34sclxdwctu" path="res://Scenes/Effects/Particles/Perfect.tscn" id="11_u615k"]
 [ext_resource type="Script" uid="uid://6b7bcparwq17" path="res://Components/Weapons/MeleeWeaponComponent.gd" id="12_tn3ht"]
 [ext_resource type="Texture2D" uid="uid://dverpu5mv40au" path="res://Textures/Weapons/Toolbox/toolbox.png" id="13_4xc88"]
 [ext_resource type="Texture2D" uid="uid://fiix6iyke3n3" path="res://Textures/Weapons/Spear/spear_inhand.png" id="13_aa22f"]
 [ext_resource type="PackedScene" uid="uid://vj6mn42tufxs" path="res://Scenes/Effects/Particles/Case/ShotgunCase.tscn" id="15_lx2yc"]
 [ext_resource type="PackedScene" uid="uid://8u8crosi4th3" path="res://Scenes/Projectiles/Shotgun_bullet.tscn" id="15_o6b1y"]
+[ext_resource type="AudioStream" uid="uid://c7qffjnnscmnt" path="res://Audio/Weapon/soup.ogg" id="15_wl2js"]
 [ext_resource type="PackedScene" uid="uid://cowxlra6ogbp0" path="res://Scenes/Effects/Particles/ShotgunFire.tscn" id="16_w1un4"]
 [ext_resource type="AudioStream" uid="uid://cenp8snm2kjdm" path="res://Audio/Weapon/Projectile/shotgun_shoot.ogg" id="17_lx2yc"]
 [ext_resource type="Texture2D" uid="uid://3st8a6jvfl4i" path="res://Textures/Weapons/Shotgun/shotgun-inhand.png" id="17_w1un4"]
 [ext_resource type="Texture2D" uid="uid://b60x76q21cp5u" path="res://Textures/Weapons/Shotgun/shotgun_icon.png" id="18_ger1f"]
 [ext_resource type="AudioStream" uid="uid://cln64q1fo5f86" path="res://Audio/Weapon/Projectile/spear_throw.ogg" id="18_w1un4"]
 [ext_resource type="AudioStream" uid="uid://2r0y32cx4e8s" path="res://Audio/Weapon/empty.ogg" id="19_kyb4y"]
-[ext_resource type="Script" uid="uid://dhxtoiim76o2t" path="res://Components/Abilities/NonBinary/KickDashAbilityComponent.gd" id="20_0p1r7"]
 [ext_resource type="AudioStream" uid="uid://dhwn1xi06keaf" path="res://Audio/Weapon/shotgun_insert.ogg" id="20_si836"]
 [ext_resource type="PackedScene" uid="uid://ebbkkdo5toyh" path="res://Scenes/Projectiles/Hook.tscn" id="22_pfa82"]
 [ext_resource type="Script" uid="uid://ci5vgg14lkrku" path="res://Components/Weapons/HookComponent.gd" id="22_vx866"]
@@ -55,6 +55,41 @@
 [ext_resource type="PackedScene" uid="uid://dahjv32y84ofv" path="res://Scenes/Mobs/Player/AbstractPlayer.tscn" id="42_isbls"]
 [ext_resource type="Material" uid="uid://ddgd2dckacjiv" path="res://Resources/Shaders/Wave.tres" id="44_pcu7p"]
 [ext_resource type="PackedScene" uid="uid://e33tm7nwmy0y" path="res://Scenes/Effects/Particles/Charge.tscn" id="48_ssq7n"]
+[ext_resource type="Script" uid="uid://d35ly1kbt1uf" path="res://Components/Interface/AnchorToCursorComponent.gd" id="56_sp3tm"]
+
+[sub_resource type="DPITexture" id="DPITexture_wl2js"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"4\" height=\"8\"><path fill=\"#fff\" fill-opacity=\".25\" d=\"M1 0h2v16H1z\"/></svg>
+"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wl2js"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sp3tm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u615k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u615k"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.12156863, 0.11372549, 0.14509805, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c8gs6"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.583302, 0, 0.082717575, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6fu7j"]
 shader = ExtResource("30_v1rwi")
@@ -72,6 +107,7 @@ shader_parameter/vignette_strength = 0.0
 [node name="Player" unique_id=914217487 instance=ExtResource("1_mq7la")]
 
 [node name="Texture" parent="." index="2" unique_id=382857461]
+process_mode = 0
 texture = ExtResource("4_bvl14")
 
 [node name="WeaponSprite" parent="Texture/WeaponSpriteComponent" parent_id_path=PackedInt32Array(567988851) index="0" unique_id=2109145355]
@@ -128,18 +164,23 @@ metadata/_custom_type_script = "uid://bi1gje1pfokqc"
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Spear" index="0" unique_id=23333780]
 stream = ExtResource("18_w1un4")
 
-[node name="Toolbox" type="Node" parent="WeaponUserComponent" index="1" unique_id=140255965 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound", "alt_attack")]
+[node name="Toolbox" type="Node" parent="WeaponUserComponent" index="1" unique_id=140255965 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound", "qte_icon", "qte_icon_perfect_frame", "qte_perfect_sound", "alt_attack")]
 script = ExtResource("12_tn3ht")
-damage = 45
+damage = 30
 attack_range = 80
 ignore_armor = true
 parry_sound = NodePath("ParrySound")
 attack_sound = NodePath("MeleeHitSound")
 miss_sound = NodePath("MeleeMissSound")
-parry_force = 2.0
+parry_force = 1.5
 throw_speed = 400
 drop_enemy_delay = 0.5
-cooldown_delay = 0.35
+qte_icon = NodePath("../../GUI/Misc/QTE/HSlider")
+qte_icon_perfect_frame = NodePath("../../GUI/Misc/QTE/HSlider/Panel/Panel2")
+qte_enabled = true
+qte_perfect_sound = NodePath("PerfectSound")
+qte_perfect_effect = ExtResource("11_u615k")
+cooldown_delay = 0.5
 swing_delay = 0.1
 equipped_texture = ExtResource("8_42pyi")
 equipped_scale = Vector2(0.6, 0.6)
@@ -157,6 +198,10 @@ stream = ExtResource("4_pgypf")
 
 [node name="MeleeHitSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Toolbox" index="2" unique_id=1721339776]
 stream = ExtResource("8_pgypf")
+
+[node name="PerfectSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Toolbox" index="3" unique_id=210837960]
+stream = ExtResource("15_wl2js")
+volume_db = 16.0
 
 [node name="Shotgun" type="Node" parent="WeaponUserComponent" index="2" unique_id=1465874377 node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound", "bullets_recover_sound", "alt_attack")]
 script = ExtResource("23_si836")
@@ -221,7 +266,7 @@ stream = ExtResource("24_e06si")
 [node name="SpearBoomerang" type="Node" parent="WeaponUserComponent" index="4" unique_id=1434839515 node_paths=PackedStringArray("shoot_sound", "projectile_can_parry_weapon", "rope", "parent_weapon")]
 script = ExtResource("23_si836")
 projectile = ExtResource("4_pcu7p")
-spread_angle = 40
+spread_angle = 0
 bullets_max_count = 1
 bullets = 1
 bullets_recover_count = 0
@@ -293,10 +338,11 @@ parameters/looping = true
 stream = ExtResource("31_c8oai")
 volume_db = -8.0
 
-[node name="PlayerWeaponUserComponent" parent="." index="10" unique_id=283125688 node_paths=PackedStringArray("weapon_1", "weapon_2", "weapon_3")]
+[node name="PlayerWeaponUserComponent" parent="." index="10" unique_id=283125688 node_paths=PackedStringArray("weapon_1", "weapon_2", "weapon_3", "melee_weapon")]
 weapon_1 = NodePath("../WeaponUserComponent/Toolbox")
 weapon_2 = NodePath("../WeaponUserComponent/Shotgun")
 weapon_3 = NodePath("../WeaponUserComponent/Spear")
+melee_weapon = NodePath("../WeaponUserComponent/Toolbox")
 
 [node name="AnimationComponent" parent="." index="11" unique_id=1054272185]
 ignore_time_scale = true
@@ -317,57 +363,16 @@ stream = ExtResource("40_sp3tm")
 max_polyphony = 3
 bus = &"OverdoseIgnore"
 
-[node name="KickDashAbilityComponent" type="Node" parent="." index="14" unique_id=1855025226 node_paths=PackedStringArray("kick_weapon", "target_clear_timer", "can_teleport_timer", "teleport_sound")]
-script = ExtResource("20_0p1r7")
-kick_weapon = NodePath("Kick")
-target_clear_timer = NodePath("TargetClearTimer")
-can_teleport_timer = NodePath("CanTeleportTimer")
-teleport_sound = NodePath("../Sounds/Teleport")
-metadata/_custom_type_script = "uid://dhxtoiim76o2t"
-
-[node name="Kick" type="Node" parent="KickDashAbilityComponent" index="0" unique_id=649844006 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound")]
-script = ExtResource("12_tn3ht")
-parry_sound = NodePath("ParrySound")
-attack_sound = NodePath("MeleeHitSound")
-miss_sound = NodePath("MeleeMissSound")
-parry_force = 1.5
-throw_speed = 500
-drop_enemy_delay = 1.0
-timers_timescaled = false
-cooldown_delay = 2.0
-swing_delay = 0.0
-attack_rotation_multiplier = -1.0
-attack_shift_multiplier = -1.0
-metadata/_custom_type_script = "uid://6b7bcparwq17"
-
-[node name="MeleeMissSound" type="AudioStreamPlayer2D" parent="KickDashAbilityComponent/Kick" index="0" unique_id=127789785]
-stream = ExtResource("4_pgypf")
-
-[node name="MeleeHitSound" type="AudioStreamPlayer2D" parent="KickDashAbilityComponent/Kick" index="1" unique_id=132109416]
-stream = ExtResource("3_8fokh")
-
-[node name="ParrySound" type="AudioStreamPlayer2D" parent="KickDashAbilityComponent/Kick" index="2" unique_id=700810465]
-stream = ExtResource("11_si836")
-
-[node name="CanTeleportTimer" type="Timer" parent="KickDashAbilityComponent" index="1" unique_id=201506909]
-wait_time = 0.5
-one_shot = true
-ignore_time_scale = true
-
-[node name="TargetClearTimer" type="Timer" parent="KickDashAbilityComponent" index="2" unique_id=476256053]
-one_shot = true
-ignore_time_scale = true
-
-[node name="DashAbilityComponent" type="Node" parent="." index="17" unique_id=991976233 node_paths=PackedStringArray("dash_sound", "overdose_refuel_sound", "ability_icon", "parry_weapon")]
+[node name="DashAbilityComponent" type="Node" parent="." index="16" unique_id=991976233 node_paths=PackedStringArray("dash_sound", "overdose_refuel_sound", "ability_icon", "parry_weapon")]
 script = ExtResource("25_46s63")
 dash_sound = NodePath("../Sounds/DashSound")
 overdose_refuel_sound = NodePath("../Sounds/OverdoseRefuel")
 ability_icon = NodePath("../GUI/Inventory/MovementAbility/MovementAbilityIcon")
 trail_colors = Array[Color]([Color(0.9866392, 0, 0.3066764, 1), Color(0.8036335, 0.0022644557, 0.98781973, 1)])
-parry_weapon = NodePath("../KickDashAbilityComponent/Kick")
+parry_weapon = NodePath("../WeaponUserComponent/Toolbox")
 metadata/_custom_type_script = "uid://cmonoqon5s4vx"
 
-[node name="OverdoseAbilityComponent" type="Node" parent="." index="19" unique_id=142273018 node_paths=PackedStringArray("overdose_effect", "start_sound", "ability_icon")]
+[node name="OverdoseAbilityComponent" type="Node" parent="." index="18" unique_id=142273018 node_paths=PackedStringArray("overdose_effect", "start_sound", "ability_icon")]
 script = ExtResource("27_l8jtb")
 trail_colors = Array[Color]([Color(0.8736105, 0, 0.34971508, 1), Color(0, 0.49991995, 0.47274232, 1), Color(0.5611145, 0.44604957, 0, 1)])
 overdose_effect = NodePath("../GUI/Overlays/Ability/Overdose")
@@ -379,13 +384,79 @@ start_sound = NodePath("../Sounds/Overdose")
 ability_icon = NodePath("../GUI/Inventory/Hand_L/Hypo")
 metadata/_custom_type_script = "uid://b8d56xguabrvi"
 
-[node name="Unlit" type="Sprite2D" parent="." index="27" unique_id=146609340]
+[node name="Unlit" type="Sprite2D" parent="." index="26" unique_id=146609340]
 modulate = Color(2.8165433, 1.6618701, 0.82175255, 1)
 texture = ExtResource("30_xwdpk")
 region_enabled = true
 region_rect = Rect2(0, 0, 32, 32)
 script = ExtResource("31_m4dpc")
 metadata/_custom_type_script = "uid://bqvdlb3r03cs0"
+
+[node name="QTE" type="Control" parent="GUI/Misc" parent_id_path=PackedInt32Array(2073434627) index="4" unique_id=8522509]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="HSlider" type="HSlider" parent="GUI/Misc/QTE" index="0" unique_id=359058549]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.095000006
+anchor_top = 0.11400001
+anchor_right = 0.14400001
+anchor_bottom = 0.11400001
+offset_left = -0.44001007
+offset_top = -11.872002
+offset_right = 25.111984
+offset_bottom = 4.1279984
+scale = Vector2(0.7, 1.5)
+theme_override_icons/grabber_disabled = SubResource("DPITexture_wl2js")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_wl2js")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_sp3tm")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_u615k")
+max_value = 1.5
+step = 0.05
+value = 0.55
+editable = false
+scrollable = false
+metadata/_edit_use_anchors_ = true
+
+[node name="AnchorToCursorComponent" type="Node" parent="GUI/Misc/QTE/HSlider" index="0" unique_id=1470941797]
+script = ExtResource("56_sp3tm")
+offset = Vector2(-96, 10)
+metadata/_custom_type_script = "uid://d35ly1kbt1uf"
+
+[node name="Panel" type="Panel" parent="GUI/Misc/QTE/HSlider" index="1" unique_id=1997067010]
+z_index = -2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.07300001
+anchor_top = 0.5
+anchor_right = 1.0731708
+anchor_bottom = 0.5
+offset_left = -0.013999462
+offset_top = -4.0
+offset_bottom = 4.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_u615k")
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel2" type="Panel" parent="GUI/Misc/QTE/HSlider/Panel" index="0" unique_id=2124100979]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.42886937
+anchor_top = 0.5
+anchor_right = 0.58054715
+anchor_bottom = 0.5
+offset_left = -0.028003693
+offset_top = -4.0
+offset_bottom = 4.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_c8gs6")
+metadata/_edit_use_anchors_ = true
 
 [node name="Hypo" type="TextureRect" parent="GUI/Inventory/Hand_L" parent_id_path=PackedInt32Array(723434357) index="0" unique_id=376867296]
 material = ExtResource("32_m4dpc")
@@ -411,9 +482,8 @@ texture = ExtResource("24_483ma")
 [node name="AttackAbilityIcon" parent="GUI/Inventory/AttackAbility" parent_id_path=PackedInt32Array(1284006024) index="0" unique_id=33298384]
 texture = ExtResource("34_vl6aw")
 
-[node name="WeaponIconComponent" type="Node" parent="GUI/Inventory/AttackAbility/AttackAbilityIcon" index="1" unique_id=212640043 node_paths=PackedStringArray("weapon")]
+[node name="WeaponIconComponent" type="Node" parent="GUI/Inventory/AttackAbility/AttackAbilityIcon" index="1" unique_id=212640043]
 script = ExtResource("35_u1ecu")
-weapon = NodePath("../../../../../KickDashAbilityComponent/Kick")
 metadata/_custom_type_script = "uid://bwcq6hlpavlvl"
 
 [node name="MovementAbilityIcon" parent="GUI/Inventory/MovementAbility" parent_id_path=PackedInt32Array(899993662) index="0" unique_id=1185570272]
@@ -439,7 +509,13 @@ color = Color(1, 1, 1, 0)
 script = ExtResource("34_t3me0")
 metadata/_custom_type_script = "uid://qcmegh7138ug"
 
-[node name="ChargingEffect" parent="." index="37" unique_id=379104243 instance=ExtResource("48_ssq7n")]
+[node name="PerkChoose" parent="GUI/PerkChoose" parent_id_path=PackedInt32Array(387688815) index="0" unique_id=1852449319]
+offset_left = -7.0
+offset_top = 15.0
+offset_right = -7.0
+offset_bottom = 15.0
+
+[node name="ChargingEffect" parent="." index="36" unique_id=379104243 instance=ExtResource("48_ssq7n")]
 visible = false
 modulate = Color(2.844042, 2.844042, 2.844042, 1)
 position = Vector2(0, -1)

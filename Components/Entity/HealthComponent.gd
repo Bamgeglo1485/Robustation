@@ -1,5 +1,6 @@
 class_name HealthComponent extends Component
 
+@export var hitstop_on_death: bool = false
 @export var do_not_delete_after_gib: bool = false
 @export var max_health: int = 100
 @export var INVINCIBLE: bool = false
@@ -141,13 +142,17 @@ func _death() -> void:
 		parent.call_deferred("queue_free")
 	else:
 		for child in parent.get_children():
-			if child == self or child is HealthOverlayComponent:
+			if !is_instance_valid(child) or child == self or child is HealthOverlayComponent:
 				continue
 			if child is PlayerCamera:
 				continue
 			if child is CanvasLayer:
 				continue
+			if child is BaseAbilityComponent:
+				await child.disable_ability()
 			child.queue_free()
+	if hitstop_on_death:
+		EventBusManager.request_impact_frame.emit(0.5, 0, true, true)
 
 func set_delayed_damage(damage: int, time: int) -> void:
 	delayed_damage_queue.append({"damage": damage, "time": time})

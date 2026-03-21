@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://c2whxof4auk8r"]
+
+[ext_resource type="FontFile" uid="uid://d4c4rbwq6pcq2" path="res://Resources/Text/Fonts/RobotoMono/static/RobotoMono-ExtraLightItalic.ttf" id="1_78x4q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q2pbf"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.22376983, 0, 0.03876, 0.46400002)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="Panel" type="Panel" unique_id=988132628]
+custom_minimum_size = Vector2(0, 64)
+theme_override_styles/panel = SubResource("StyleBoxFlat_q2pbf")
+
+[node name="Text" type="RichTextLabel" parent="." unique_id=1492826188]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_78x4q")
+theme_override_font_sizes/normal_font_size = 23
+bbcode_enabled = true
+scroll_active = false
+scroll_following = true
+horizontal_alignment = 1
+vertical_alignment = 1

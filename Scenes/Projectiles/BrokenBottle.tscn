@@ -12,7 +12,7 @@ height = 26.0
 
 [node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture")]
 texture = NodePath("../Texture")
-speed = 1000
+speed = 700
 rotate_speed = 15
 
 [node name="CollisionShape2D" parent="ProjectileComponent" index="0" unique_id=1391622764]
@@ -22,7 +22,7 @@ shape = SubResource("CapsuleShape2D_i6uow")
 [node name="HitSound" parent="ProjectileComponent" index="1" unique_id=1752295456]
 stream = ExtResource("2_wr6qi")
 
-[node name="CollisionShape2D" parent="Area2D" parent_id_path=PackedInt32Array(757156969) index="0" unique_id=2139953676]
+[node name="CollisionShape2D" parent="Parry" parent_id_path=PackedInt32Array(757156969) index="0" unique_id=2139953676]
 disabled = true
 
 [node name="Texture" type="Sprite2D" parent="." index="4" unique_id=1806190901]

@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://3b8p72nb6mq7"]
+
+[ext_resource type="PackedScene" uid="uid://c2fs5eoy7ntgu" path="res://Scenes/Projectiles/BaseProjectile.tscn" id="1_bwogs"]
+[ext_resource type="AudioStream" uid="uid://bav5mv1pp8fmq" path="res://Audio/Weapon/slip.ogg" id="2_bwogs"]
+[ext_resource type="Texture2D" uid="uid://dvc23f5sx8l7s" path="res://Textures/Weapons/Banana/peel.png" id="3_bwogs"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i6uow"]
+radius = 5.0
+height = 26.0
+
+[node name="Projectile" unique_id=1269485508 instance=ExtResource("1_bwogs")]
+
+[node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture")]
+texture = NodePath("../Texture")
+speed = 700
+speed_decreasing = 10
+stop_when_null_speed = true
+max_damage = 0
+damage = 0
+stamina_damage = 25.0
+lifetime = 10.0
+fade_out_delete = true
+fall_time = 1.0
+parriable = false
+parry_projectile_to_enemy = false
+
+[node name="CollisionShape2D" parent="ProjectileComponent" index="0" unique_id=1391622764]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_i6uow")
+
+[node name="HitSound" parent="ProjectileComponent" index="1" unique_id=1752295456]
+stream = ExtResource("2_bwogs")
+
+[node name="CollisionShape2D" parent="Parry" parent_id_path=PackedInt32Array(757156969) index="0" unique_id=2139953676]
+disabled = true
+
+[node name="Texture" type="Sprite2D" parent="." index="4" unique_id=1806190901]
+texture = ExtResource("3_bwogs")

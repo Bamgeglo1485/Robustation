@@ -113,18 +113,22 @@ func introduction(target: Node2D) -> void:
 	
 	information_animation.animate(placeholder_text, 1, true, false)
 	await information_animation.tween.finished
-	var info_text: String = (
-	"[color=crimson]NEW TARGET DETECTED. LOADING INFORMATION FROM THE DATABASE[/color]" +
-	"\n.................." +
-	"\n[color=green]LOADING SUCCESSFUL[/color]:" +
-	"\n" +
-	"\nTARGET_NAME: [color=crimson]" + target_introduction.subject_name + 
-	"\n[/color]TARGET_PREFIX: [color=crimson]" + target_introduction.subject_prefix +
-	"\n[/color]TARGET_DESC: [color=crimson]" + target_introduction.subject_desc +
-	"\n[/color]TARGET_HEALTH: [color=crimson]" + str(target_health.max_health) +
-	"\n[/color]TARGET_SPEED: [color=crimson]" + str(roundf(target_mob_mover.max_speed)) +
-	"\n---------------------" +
-	"\n[color=green]INPUT 'R' TO RESUME REPLAY[/color]"
+	var info_text: String = tr(
+		tr("[color=crimson]NEW TARGET DETECTED. LOADING INFORMATION FROM THE DATABASE[/color]") +
+		"\n.................." +
+		"\n" + tr("[color=green]LOADING SUCCESSFUL[/color]:") +
+		"\n" +
+		tr("TARGET_NAME: [color=crimson]") + tr(target_introduction.subject_name) + "[/color]" +
+		"\n" +
+		tr("TARGET_PREFIX: [color=crimson]") + tr(target_introduction.subject_prefix) + "[/color]" +
+		"\n" +
+		tr("TARGET_DESC: [color=crimson]") + tr(target_introduction.subject_desc) + "[/color]" +
+		"\n" +
+		tr("TARGET_HEALTH: [color=crimson]") + str(target_health.max_health) + "[/color]" +
+		"\n" +
+		tr("TARGET_SPEED: [color=crimson]") + str(roundf(target_mob_mover.max_speed)) + "[/color]" +
+		"\n---------------------" +
+		"\n" + tr("[color=green]INPUT 'R' TO RESUME REPLAY[/color]")
 	)
 	information_animation.animate(info_text, 1, true, false)
 	

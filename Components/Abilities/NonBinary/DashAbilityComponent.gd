@@ -95,6 +95,8 @@ func dash(direction) -> void:
 		progress_tween.set_ease(Tween.EASE_OUT)
 		progress_tween.tween_method(_set_stamina_progress, old_progress, new_progress, 0.15)
 	
+	_cooldown()
+	
 	if overdose_component and overdose_component.active:
 		overdose_component.ability_timer += overdose_refuel_count
 		if overdose_refuel_sound:
@@ -109,12 +111,13 @@ func dash(direction) -> void:
 		_update_stamina_bar()
 		return
 	
-	_cooldown()
 	_INVINCIBLE()
 	
 	if trail_effect and !parent.has_node("TrailEffectComponent"):
 		var trail: TrailEffectComponent = TrailEffectComponent.new()
-		trail.lifetime = 0.5
+		trail.lifetime = 0.3
+		trail.trail_lifetime = 0.3
+		trail.clean_delay = 0.3
 		trail.colors = trail_colors
 		parent.add_child(trail)
 	

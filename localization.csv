@@ -1,0 +1,124 @@
+,ru
+
+"[color=crimson]NEW TARGET DETECTED. LOADING INFORMATION FROM THE DATABASE[/color]","[color=crimson]ОБНАРУЖЕНА НОВАЯ ЦЕЛЬ. ЗАГРУЗКА ИНФОРМАЦИИ С БАЗЫ ДАННЫХ[/color]"
+
+"[color=green]LOADING SUCCESSFUL[/color]:","[color=green]ЗАГРУЗКА ПРОШЛА УСПЕШНО[/color]:"
+
+"TARGET_NAME: [color=crimson]","НАЗВАНИЕ_ЦЕЛИ: [color=crimson]"
+
+"TARGET_PREFIX: [color=crimson]","ПРЕФИКС_ЦЕЛИ: [color=crimson]"
+
+"TARGET_DESC: [color=crimson]","ОПИСАНИЕ_ЦЕЛИ: [color=crimson]"
+
+"TARGET_HEALTH: [color=crimson]","ЗДОРОВЬЕ_ЦЕЛИ: [color=crimson]"
+
+"TARGET_SPEED: [color=crimson]","СКОРОСТЬ_ЦЕЛИ: [color=crimson]"
+
+"[color=green]INPUT 'R' TO RESUME REPLAY[/color]","[color=green]ВВЕДИТЕ 'R' ЧТОБЫ ПРОДОЛЖИТЬ РЕПЛЕЙ[/color]"
+
+GRAYTIDER,ГРЕЙТАЙДЕР
+"AFTER THE DEATH OF WARDEN OF INSULS, THE MAINTS 
+WERE FILLED WITH MUNCHKINS, 
+LEADING TO THE EMERGENCE OF MORE
+ADVANCED FOLLOWERS OF GREYTIDE.
+[color=purple]WEAK TO THE BULLETS. QUICKLY LOSE DASH STAMINA.[/color]","ПОСЛЕ СМЕРТИ ХРАНИТЕЛЯ ИЗОЛЕЙ ТЕХИ ЗАПОЛОНИЛИ МАНЧЕРЫ, 
+ЧТО ПРИВЕЛО К ПОЯВЛЕНИЮ БОЛЕЕ ПРОДВИНУТЫХ ПОСЛЕДОВАТЕЛЕЙ ГРЕЙТАЙДА.
+[color=purple]УЯЗВИМ К ПУЛЯМ. БЫСТРО УСТАЮТ ОТ РЫВКОВ.[/color]"
+SUPERIOR GREYTIDE'S FOLLOWER,ВЫСШИЙ ПОСЛЕДОВАТЕЛЬ ГРЕЙТАЙДА
+
+GRAY, ГРЕЙ
+GREYTIDE'S FOLLOWER, ПОСЛЕДОВАТЕЛЬ ГРЕЙТАЙДА
+"A GRAYTIDE SPEARMAN WHO ATTACKS WITH A DASH.
+[color=purple]WEAK TO THE BULLETS AND GETS STUN WHEN HITTING A WALL[/color]","КОПЕЙЩИК ГРЕЙТАЙД, АТАКУЮЩИЙ РЫВКАМИ.
+[color=purple]УЯЗВИМ К ПУЛЯМ И ПОЛУЧАЕТ ОГЛУШЕНИЕ ПРИ УДАРЕ ОБ СТЕНУ[/color]"
+
+TIDER, ТАЙДЕР
+"TIDE TECHNIQUE USER. 
+DODGES BULLETS AND ATTACKS WITH 
+A MAKESHIFT RANGE WEAPON.
+[color=purple]WEAKS TO THE MELEE WEAPONS[/color]","ПОЛЬЗОВАТЕЛЬ ТЕХНИКИ ПОТОКА. 
+УКЛОНЯЕТСЯ ОТ ПУЛЬ И АТАКУЕТ 
+САМОДЕЛЬНЫМ ДАЛЬНИМ ОРУЖИЕМ.
+[color=purple]УЯЗВИМ К БЛИЖНЕМУ ОРУЖИЮ[/color]"
+
+ASSISTANT, АССИСТЕНТ
+MELEE PAWN, БЛИЖНЯЯ ПЕШКА
+"WEAK INSANE ASSISTANT USING MELEE WEAPON.
+[color=purple]WEAK TO EVERYTHING[/color]","НЕМОЩНЫЙ ОБЕЗУМЕВШИЙ АССИСТЕНТ, ИСПОЛЬЗУЮЩИЙ БЛИЖНЕЕ ОРУЖИЕ
+[color=purple]УЯЗВИМ КО ВСЕМУ[/color]"
+
+GREYTIDE, ГРЕЙТАЙД
+WARDEN OF INSULS, ХРАНИТЕЛЬ ИЗОЛЕЙ
+"USE OF THE ADVANCED TIDE TECHNIQUE 
+TO DODGE RANGE AND MELEE ATTACKS. 
+MASTER OF SPEAR, MELEE AND RANGE WEAPONS.
+[color=purple]WEAK TO THE BULLETS.[/color]","ИСПОЛЬЗУЕТ ПРОДВИНУТУЮ ТЕХНИКУ ПОТОКА ЧТОБЫ УКЛОНЯТЬСЯ
+ОТ БЛИЖНИХ И ДАЛЬНИХ АТАК.
+МАСТЕР КОПЬЯ, БЛИЖНЕГО И ДАЛЬНЕГО ОРУЖИЯ.
+[color=purple]УЯЗВИМ К ПУЛЯМ.[/color]"
+
+"I will help you get rid of these posers, Brother","Я помогу тебе избавиться от этих позеров, Братец"
+"You fought well","Достойно ты сражался"
+"Die with honor, Brother","С честью умри, Братец"
+"Only one can rule the maints","Только один может властвовать над техами"
+"Now, let's dance, [color=crimson]Brother","А теперь, давай станцуем, [color=crimson]Братец"
+"Dash quickly, Brother","Делай рывок скорее, Братец"
+"Dodge this","Уклонись от этого"
+"Keep maneuvering","Продолжай маневрировать"
+"How about dash this?","Как насчёт уклониться от этого?"
+"You'll overdose","Ты передознёшься"
+"A shotgun for casuals","Дробовик - для казуалов"
+"Don't go far, Brother","Не убегай далеко, Братец"
+"Stop running away","Прекрати убегать"
+"Closer to me","Ближе ко мне"
+"Blood is more visible on blue","Кровь лучше виднеется на синем"
+"Try pairing now","Попробуй спарировать сейчас"
+"Pay attention, Brother","Внимательнее, Братец"
+"Bang","Бам"
+"Take this, Brother!","Получай, Братец!"
+
+"Bandage and (Toxic) Marker","Бинт и (Токсичный) Маркер"
+"[color=green]Increases your maximum health by 5 unit[/color], but [color=crimson]decreases passive regeneration by 4 unit[/color]","[color=green]Повышает твоё максимальное здоровье на 5 единиц[/color], но [color=crimson]снижает пассивную регенерацию на 4 единицы[/color]"
+
+"[color=green]Increases your attack knockback power[/color]","[color=green]Повышает силу толкания при атаках[/color]"
+
+"Student Diet","Студенческая Диета"
+"[color=green]Increases your stamina by 20 units[/color]","[color=green]Повышает вашу стамину на 20 единиц[/color]"
+
+"Goliath Plate","Пластина Голиафа"
+"[color=green]Increases your armor by 5%[/color], but [color=crimson]decreases heal for damage by 5%[/color]","[color=green]Усиливает вашу броню на 5%[/color], но [color=crimson]уменьшает лечение от урона на 5%[/color]"
+
+"Combat Glove","Боевые Перчатки"
+"[color=green]Reduces weapon cooldown by 5%[/color]","[color=green]Понижает кулдаун оружия на 5%[/color]"
+
+"Galaxythistle","Галакточертополох"
+"[color=green]Reduces delayed damage by 10%[/color]","[color=green]Уменьшает отложенный урон на 10%[/color]"
+
+"Double Penetration Bullets","Пули Двойного Проникновения"
+"[color=green]Increases projectile penetration[/color], but [color=crimson]decreases damage by 4%[/color]","[color=green]Повышает количество прострелов проджектайлов[/color], но [color=crimson]понижает урон на 4%[/color]"
+
+"Bitch Ball","Бляжный Мяч"
+"[color=green]Increases your melee attack reflect chance by 3%[/color]","[color=green]Повышает шанс отражения ближних атак на 3%[/color]"
+
+"Mirror Shard or (Shard of Mirror)","Стеклянный Осколок или же (Осколок Стекла)"
+"[color=green]Increases your bullet reflect chance by 3%[/color]","[color=green]Повышает шанс отражения пуль на 3%[/color]"
+
+"Practice Medicine","Практическая Медицина"
+"[color=green]Increases your passive regeneration by 2 units per second[/color]","[color=green]Повышает пассивную регенерацию на 2 единицы[/color]"
+
+"Ephedrine Cigarette","Эфедриновая Сигаретка"
+"[color=green]Increases your movement speed by 5%[/color], but [color=crimson]decreases Ephedrine Overdose delay by 5%[/color]","[color=green]Повышает скорость на 5%[/color], но [color=crimson]уменьшает длительность Эфедринового Передоза на 5%[/color]"
+
+"Rocket Jumpers","Рокет Джамперы"
+"[color=green]Increases your explosion resistance by 10%[/color]","[color=green]Уменьшает урон от взрывов на 10%[/color]"
+
+"Shiny Green Bullets","Блестящие Зелёные Пули"
+"[color=green]Increases the amount of shotgun pellets by 1[/color], but [color=crimson]increases overheat per shot by 40%[/color]","[color=green]Увеличивает дробь дробовика на 1[/color], но [color=crimson]увеличивает перегрев за выстрел на 40%[/color]"
+
+"Opened Plasma Tank","Открытый Баллон Плазмы"
+"[color=green]Increases explosion damage by 10%[/color], but [color=crimson]increases also for enemies[/color]","[color=green]Повышает урон взрывов на 10%[/color], но [color=crimson]это работает также для взрывов противников[/color]"
+
+"[color=green]Increases HP recovery from a perfect hit by 10%[/color], but [color=crimson]speeds up the arrow by 10%[/color]","[color=green]Повышает восстановление здоровья от идеального удара на 10%[/color], но [color=crimson]ускоряет стрелку на 10%[/color]"
+
+"Rubber Bullets(Without jokes about dildos pls)","Резиновые Пули(Пж без шуток о дилдаках)"
+"[color=green]Increases projectile bounce[/color], but [color=crimson]decreases projectile penetration[/color]","[color=green]Повышает отскакиваемость проджектайлов[/color], но [color=crimson]уменьшает пробиваемость проджектайлов[/color]"

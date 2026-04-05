@@ -15,6 +15,7 @@ enum rarity_classes {
 @export var amount: int = 1: set = set_amount, get = get_amount
 @export var rarity: rarity_classes = rarity_classes.COMMON
 
+var untranslated_perk_name: String
 var sprite: DirectionalSprite
 
 func _ready() -> void:
@@ -23,7 +24,7 @@ func _ready() -> void:
 	
 	if perk_equipped_texture:
 		sprite = DirectionalSprite.new()
-		sprite.name = perk_name
+		sprite.name = untranslated_perk_name
 		sprite.texture = perk_equipped_texture
 		sprite.region_enabled = true
 		parent.add_child.call_deferred(sprite)
@@ -43,4 +44,4 @@ func apply_modifiers() -> void:
 	pass
 
 func get_perk_name() -> String:
-	return perk_name
+	return untranslated_perk_name

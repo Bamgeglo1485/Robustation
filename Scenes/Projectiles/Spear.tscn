@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bbqpmpj4ntyg" path="res://Scenes/Explosion/BaseExplosion.tscn" id="3_oqm3e"]
 [ext_resource type="Script" uid="uid://0qaedvb6js57" path="res://Components/Triggers/SetProjectileExplosionOnTriggerComponent.gd" id="5_65omb"]
 [ext_resource type="Script" uid="uid://cslfowwgmffis" path="res://Components/Triggers/ActivateProjectileParticlesOnTriggerComponent.gd" id="7_bm2fd"]
+[ext_resource type="PackedScene" uid="uid://bflbsvm3fukj6" path="res://Scenes/Explosion/BiggerExplosion.tscn" id="7_lqmm4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oqm3e"]
 shader = ExtResource("2_0hneg")
@@ -14,7 +15,7 @@ shader_parameter/jiggle = 2.0
 shader_parameter/speed = 50.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vpryf"]
-radius = 5.0
+radius = 9.0
 height = 56.0
 
 [sub_resource type="Curve" id="Curve_0hneg"]
@@ -42,7 +43,7 @@ hue_variation_max = -0.54
 material = SubResource("ShaderMaterial_oqm3e")
 
 [node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture", "particle_emitter")]
-max_penetrations = 1
+max_penetrations = 2
 texture = NodePath("../Texture")
 particle_emitter = NodePath("GPUParticles2D")
 speed = 100
@@ -50,6 +51,8 @@ speed_decreasing = -5
 damage = 150
 lifetime = 5.0
 parry_speed_boost = 4.0
+explosion_scene = ExtResource("3_oqm3e")
+explode_on_hit = true
 
 [node name="CollisionShape2D" parent="ProjectileComponent" index="0" unique_id=1391622764]
 rotation = 1.5707964
@@ -74,12 +77,15 @@ texture = ExtResource("2_l3ous")
 
 [node name="SetProjectileExplosionOnTriggerComponent2" type="Node" parent="." index="4" unique_id=1322456650]
 script = ExtResource("5_65omb")
-explosion_scene = ExtResource("3_oqm3e")
+explosion_scene = ExtResource("7_lqmm4")
 explode_on_delete = true
 explode_on_hit = true
+explode_on_damage = true
 explode_lifetime = 0.5
 metadata/_custom_type_script = "uid://0qaedvb6js57"
 
 [node name="ActivateProjectileParticlesOnTriggerComponent" type="Node" parent="." index="6" unique_id=791180759]
 script = ExtResource("7_bm2fd")
 metadata/_custom_type_script = "uid://cslfowwgmffis"
+
+[connection signal="area_shape_entered" from="ProjectileComponent" to="ProjectileComponent" method="_on_area_shape_entered"]

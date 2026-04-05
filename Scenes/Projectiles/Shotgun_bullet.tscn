@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://c2fs5eoy7ntgu" path="res://Scenes/Projectiles/BaseProjectile.tscn" id="1_uq5et"]
 [ext_resource type="AudioStream" uid="uid://cg0leh0na5lvv" path="res://Resources/Audio/BulletHitRandom.tres" id="2_box70"]
 [ext_resource type="Texture2D" uid="uid://cjw2xf8pptrke" path="res://Textures/Weapons/Shotgun/Bullet.png" id="3_1uto6"]
-[ext_resource type="Script" uid="uid://0qaedvb6js57" path="res://Components/Triggers/SetProjectileExplosionOnTriggerComponent.gd" id="4_1uto6"]
-[ext_resource type="PackedScene" uid="uid://c03qvua0tf8st" path="res://Scenes/Explosion/MiniExplosion.tscn" id="5_1uto6"]
+[ext_resource type="Script" uid="uid://cg2q0h3wyjldl" path="res://Components/Triggers/HitscanOnTriggerComponent.gd" id="4_1uto6"]
+[ext_resource type="PackedScene" uid="uid://eqnbc74kh4cu" path="res://Scenes/Projectiles/Hitscan/ShotgunHitscan.tscn" id="5_mjd5c"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uq5et"]
 
@@ -35,7 +35,7 @@ collision_mask = 15
 texture = NodePath("../Texture")
 particle_emitter = NodePath("GPUParticles2D")
 speed = 1300
-damage = 45
+damage = 40
 lifetime = 1.0
 parry_speed_boost = 1.0
 
@@ -61,9 +61,7 @@ process_material = SubResource("ParticleProcessMaterial_nkfxt")
 [node name="Texture" type="Sprite2D" parent="." index="1" unique_id=1813040051]
 texture = ExtResource("3_1uto6")
 
-[node name="SetProjectileExplosionOnTriggerComponent2" type="Node" parent="." index="5" unique_id=1333599605]
+[node name="HitscanOnTriggerComponent" type="Node" parent="." index="5" unique_id=1557179025]
 script = ExtResource("4_1uto6")
-explosion_scene = ExtResource("5_1uto6")
-explode_on_hit = true
-explode_lifetime = 3.0
-metadata/_custom_type_script = "uid://0qaedvb6js57"
+hitscan_scene = ExtResource("5_mjd5c")
+metadata/_custom_type_script = "uid://cg2q0h3wyjldl"

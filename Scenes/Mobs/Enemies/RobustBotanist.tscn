@@ -1,0 +1,129 @@
+[gd_scene format=3 uid="uid://4llvxkt6c25h"]
+
+[ext_resource type="PackedScene" uid="uid://c0eulucj1dtco" path="res://Scenes/Mobs/Base/BaseEnemy.tscn" id="1_iilgu"]
+[ext_resource type="Texture2D" uid="uid://chtqguq0vv2xn" path="res://Textures/Mobs/Mobs/robust_botanist.png" id="2_ppp0o"]
+[ext_resource type="AudioStream" uid="uid://0durbeo6lc4n" path="res://Audio/Weapon/spear_flip.ogg" id="8_hnyna"]
+[ext_resource type="AudioStream" uid="uid://c2enn441tmky8" path="res://Audio/Effects/rush.ogg" id="9_n0gmn"]
+[ext_resource type="Texture2D" uid="uid://cryexxr4x761f" path="res://Textures/Mobs/Mobs/Hair/undercutright.png" id="10_kbubp"]
+[ext_resource type="Script" uid="uid://bqvdlb3r03cs0" path="res://Components/Visual/DirectionalSpriteComponent.gd" id="11_wxdv0"]
+[ext_resource type="Texture2D" uid="uid://t8go84dailgi" path="res://Textures/Mobs/Mobs/Hair/shorthairg.png" id="12_fvh3j"]
+[ext_resource type="Texture2D" uid="uid://fx8bg7p2wfff" path="res://Textures/Mobs/Mobs/Hair/80s.png" id="13_o0fhq"]
+[ext_resource type="Texture2D" uid="uid://exreeul6rla6" path="res://Textures/Mobs/Mobs/Hair/bald.png" id="14_vhilj"]
+[ext_resource type="Texture2D" uid="uid://b46je4cwbysn6" path="res://Textures/Mobs/Mobs/Hair/bun3.png" id="15_kin7b"]
+[ext_resource type="Texture2D" uid="uid://boij24x83l0lv" path="res://Textures/Mobs/Mobs/Hair/afro2.png" id="16_mpdfq"]
+[ext_resource type="Texture2D" uid="uid://b44oghif1lc4g" path="res://Textures/Mobs/Mobs/Hair/curls.png" id="17_tvl5k"]
+[ext_resource type="Texture2D" uid="uid://yqtajeusof8p" path="res://Textures/Mobs/Mobs/Hair/flair.png" id="18_8y4ly"]
+[ext_resource type="Texture2D" uid="uid://lcbe8war4xp7" path="res://Textures/Mobs/Mobs/Hair/spiky.png" id="19_4hmtb"]
+[ext_resource type="Texture2D" uid="uid://ci84jx3iuyn21" path="res://Textures/Mobs/Mobs/Hair/bobcut.png" id="20_xjfq3"]
+[ext_resource type="Texture2D" uid="uid://drxdjuw45awor" path="res://Textures/Mobs/Mobs/Hair/gentle.png" id="21_n0ymd"]
+[ext_resource type="Texture2D" uid="uid://dpr87culdu5mg" path="res://Textures/Mobs/Mobs/Hair/swept2.png" id="22_80vw6"]
+[ext_resource type="Texture2D" uid="uid://b1r30o42v7kyr" path="res://Textures/Mobs/Mobs/Hair/bobcurl.png" id="23_cmneq"]
+[ext_resource type="Texture2D" uid="uid://dlu5n8uy6npxo" path="res://Textures/Mobs/Mobs/Hair/joestar.png" id="24_ra333"]
+[ext_resource type="Texture2D" uid="uid://k32gxv505ucy" path="res://Textures/Mobs/Mobs/Hair/sidecut.png" id="25_qhbec"]
+[ext_resource type="Texture2D" uid="uid://dab0prsqfymf6" path="res://Textures/Mobs/Mobs/Hair/halfbang.png" id="26_bkpgr"]
+[ext_resource type="Texture2D" uid="uid://c2j84lfhydlo7" path="res://Textures/Mobs/Mobs/Hair/bedheadv2.png" id="27_uc36l"]
+[ext_resource type="Texture2D" uid="uid://4rew8bctbhwt" path="res://Textures/Mobs/Mobs/Hair/undercutleft.png" id="28_ino3e"]
+[ext_resource type="Texture2D" uid="uid://cvtrwkf34me6c" path="res://Textures/Mobs/Mobs/Hair/classicmulder.png" id="29_j5puv"]
+[ext_resource type="Script" uid="uid://hv0g6akh0ftn" path="res://Components/Mobs/RandomizeMobMoverComponent.gd" id="30_rgebx"]
+[ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="32_4lepi"]
+[ext_resource type="Script" uid="uid://c6fapai3prk4g" path="res://Components/Mobs/AI/Actions/SetPlayerToBlackboardAction.gd" id="33_f38ot"]
+[ext_resource type="Script" uid="uid://dl1x4qw4skabi" path="res://Components/Mobs/AI/Actions/SetMoveToKeyAction.gd" id="34_bl32t"]
+[ext_resource type="Script" uid="uid://wlnghjnvdlyn" path="res://Components/Mobs/AI/Actions/MoveToPointAction.gd" id="35_fld7f"]
+[ext_resource type="Script" uid="uid://ttwxxcce2i4p" path="res://Components/Mobs/AI/Actions/LookAtPointAction.gd" id="39_arh56"]
+[ext_resource type="AudioStream" uid="uid://x11c2lqv8483" path="res://Audio/EnemyThemes/GreytideFollower.ogg" id="40_xhxaq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fb4jx"]
+radius = 40.0
+
+[node name="RobustBotanist" unique_id=1270222458 instance=ExtResource("1_iilgu")]
+visibility_layer = 3
+
+[node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
+base_max_speed = 250.0
+acceleration = 250.0
+friction = 700.0
+
+[node name="Texture" parent="." index="2" unique_id=382857461]
+texture = ExtResource("2_ppp0o")
+
+[node name="HealthComponent" parent="." index="4" unique_id=1758373275]
+max_health = 1500
+damage_type_modifiers = Dictionary[String, float]({
+"Projectile": 2.0
+})
+
+[node name="WeaponUserComponent" parent="." index="6" unique_id=2123544057 node_paths=PackedStringArray("selected_weapon")]
+selected_weapon = NodePath("")
+
+[node name="Rush_Prepare" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="2" unique_id=750446342]
+stream = ExtResource("8_hnyna")
+max_distance = 300.0
+
+[node name="Rush" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="3" unique_id=1832481696]
+stream = ExtResource("9_n0gmn")
+volume_db = 1.0
+max_distance = 300.0
+
+[node name="LightOccluder2D" parent="." index="12" unique_id=364816313]
+position = Vector2(0, -1)
+
+[node name="NavigationAgent" parent="." index="13" unique_id=1358139639]
+target_desired_distance = 96.0
+
+[node name="Hair" type="Sprite2D" parent="." index="15" unique_id=927075308]
+texture = ExtResource("10_kbubp")
+offset = Vector2(0, -2)
+region_enabled = true
+script = ExtResource("11_wxdv0")
+random_textures = Array[Texture2D]([ExtResource("12_fvh3j"), ExtResource("13_o0fhq"), ExtResource("14_vhilj"), ExtResource("15_kin7b"), ExtResource("16_mpdfq"), ExtResource("17_tvl5k"), ExtResource("18_8y4ly"), ExtResource("19_4hmtb"), ExtResource("20_xjfq3"), ExtResource("21_n0ymd"), ExtResource("22_80vw6"), ExtResource("23_cmneq"), ExtResource("24_ra333"), ExtResource("25_qhbec"), ExtResource("26_bkpgr"), ExtResource("27_uc36l"), ExtResource("28_ino3e"), ExtResource("29_j5puv"), ExtResource("10_kbubp")])
+random_color = true
+metadata/_custom_type_script = "uid://bqvdlb3r03cs0"
+
+[node name="RandomizeMobMoverComponent" type="Node" parent="." index="16" unique_id=831758902]
+script = ExtResource("30_rgebx")
+randomize_multiplier_min = 0.85
+randomize_multiplier_max = 1.2
+metadata/_custom_type_script = "uid://hv0g6akh0ftn"
+
+[node name="BeehaveTree" parent="." index="18" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
+blackboard = NodePath("@Node@25645")
+
+[node name="SequenceComposite" type="Node" parent="BeehaveTree" index="0" unique_id=139081716]
+script = ExtResource("32_4lepi")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="MoveToPlayer" type="Node" parent="BeehaveTree/SequenceComposite" index="0" unique_id=478688837]
+script = ExtResource("32_4lepi")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="SetPlayerToBlackboardAction" type="Node" parent="BeehaveTree/SequenceComposite/MoveToPlayer" index="0" unique_id=1764438182]
+script = ExtResource("33_f38ot")
+metadata/_custom_type_script = "uid://c6fapai3prk4g"
+
+[node name="SetMoveToKeyAction" type="Node" parent="BeehaveTree/SequenceComposite/MoveToPlayer" index="1" unique_id=1930580778]
+script = ExtResource("34_bl32t")
+key = "Target"
+metadata/_custom_type_script = "uid://dl1x4qw4skabi"
+
+[node name="MoveToPointAction" type="Node" parent="BeehaveTree/SequenceComposite/MoveToPlayer" index="2" unique_id=1364976193]
+script = ExtResource("35_fld7f")
+metadata/_custom_type_script = "uid://wlnghjnvdlyn"
+
+[node name="LookAtDirectionAction" type="Node" parent="BeehaveTree/SequenceComposite/MoveToPlayer" index="3" unique_id=1358597805]
+script = ExtResource("39_arh56")
+key = "MovePoint"
+metadata/_custom_type_script = "uid://ttwxxcce2i4p"
+
+[node name="Rush" type="Area2D" parent="." index="20" unique_id=429380638]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rush" index="0" unique_id=1679646748]
+visible = false
+shape = SubResource("CircleShape2D_fb4jx")
+
+[node name="IntroductionSubjectComponent" parent="." index="23" unique_id=776935428]
+group = "Gray"
+subject_name = "GRAY"
+subject_desc = "A GRAYTIDE SPEARMAN WHO ATTACKS WITH A DASH.
+[color=purple]WEAK TO THE BULLETS AND GETS STUN WHEN HITTING A WALL[/color]"
+subject_prefix = "GREYTIDE'S FOLLOWER"
+theme = ExtResource("40_xhxaq")

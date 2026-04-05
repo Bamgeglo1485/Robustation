@@ -1,5 +1,6 @@
 class_name ChatterComponent extends Component
 
+@export var enabled: bool = true
 @export var typing_speed: float = 0.05
 @export var typing_sound: AudioStreamPlayer2D
 @export var bubble_template: PackedScene
@@ -11,7 +12,7 @@ func can_say() -> bool:
 	return !cooldown
 
 func say(text: String) -> void:
-	if cooldown or !chat:
+	if cooldown or !chat or !enabled:
 		return
 	var message: Control = bubble_template.instantiate()
 	chat.add_child.call_deferred(message)
@@ -24,7 +25,7 @@ func say(text: String) -> void:
 	tween.tween_property(message, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.3)
 	tween.tween_property(message, "modulate", Color(1.0, 1.0, 1.0, 1.0), delay)
 	tween.tween_property(message, "modulate", Color(0.0, 0.0, 0.0, 0.0), 0.3)
-	animate(text_control, text, delay)
+	animate(text_control, tr(text), delay)
 	_cooldown()
 	if typing_sound:
 		typing_sound.play()

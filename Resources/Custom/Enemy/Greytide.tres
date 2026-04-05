@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Enemy" format=3 uid="uid://cmem6nmbosaiy"]
+
+[ext_resource type="PackedScene" uid="uid://c57uvonk05yy8" path="res://Scenes/Mobs/Enemies/Greytide.tscn" id="1_qf4gu"]
+[ext_resource type="Script" uid="uid://di5u0whaqiyjp" path="res://Resources/Custom/Enemy/Base/Enemy.gd" id="2_24qx8"]
+
+[resource]
+script = ExtResource("2_24qx8")
+scene = ExtResource("1_qf4gu")
+cost = 6.0
+weight = 0.5
+enemy_type = 4
+metadata/_custom_type_script = "uid://di5u0whaqiyjp"

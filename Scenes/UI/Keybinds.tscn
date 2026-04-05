@@ -1,32 +1,52 @@
 [gd_scene format=3 uid="uid://dpxlm72aq8ofl"]
 
+[ext_resource type="FontFile" uid="uid://dichq2si55q4b" path="res://Resources/Text/Fonts/RobotoMono/static/RobotoMono-ExtraLight.ttf" id="1_2ejn7"]
 [ext_resource type="Script" uid="uid://cja3led3n1ehp" path="res://Components/Interface/Menu/DragButtonComponent.gd" id="1_sqco4"]
 [ext_resource type="Texture2D" uid="uid://dqd7xkk5m77ck" path="res://Textures/Interface/Menu/cross.png" id="2_3amt8"]
 [ext_resource type="Texture2D" uid="uid://ftxxh2qcsb0s" path="res://Textures/Interface/Menu/cross_hovered.png" id="3_t1u3q"]
 [ext_resource type="Script" uid="uid://bodxsix2kyyy6" path="res://Components/Interface/Menu/ToggleVisibleOnPressedComponent.gd" id="4_7gt23"]
 [ext_resource type="LabelSettings" uid="uid://nbgfghoq6ado" path="res://Resources/Text/CMDHeading.tres" id="5_e8rmg"]
+[ext_resource type="Script" uid="uid://5tnk7at8us3g" path="res://Components/Interface/Menu/Settings/KeybindComponent.gd" id="6_aeqpk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ex7t"]
 bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mj2lg"]
-bg_color = Color(0.06827141, 0.06489595, 0.052517578, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ejn7"]
+bg_color = Color(0.060530342, 0.06053035, 0.060530327, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v5qja"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dxep6"]
 bg_color = Color(0.11286896, 1.469492e-06, 0.08068577, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y60rh"]
-bg_color = Color(0.0068674204, 0, 0.0014345439, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sqco4"]
+bg_color = Color(0.14165193, 0.075261734, 0.0927326, 1)
 
-[node name="Settings" type="Control" unique_id=727110380]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aeqpk"]
+bg_color = Color(0.06469653, 0.064696535, 0.0646965, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5us0c"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.14044744, 0.14044744, 0.14044744, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="Keybinds" type="Control" unique_id=727110380]
 z_index = 5
 layout_mode = 3
-anchor_right = 0.42900002
-anchor_bottom = 0.901
-offset_right = -0.20800781
-offset_bottom = 0.15197754
+anchor_left = 0.21400002
+anchor_right = 0.21400002
+anchor_bottom = 0.34
+offset_left = -246.52802
+offset_right = 247.47198
+offset_bottom = 220.68
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="Panel" parent="." unique_id=1765621037]
 layout_mode = 1
@@ -35,32 +55,39 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_7ex7t")
 
-[node name="Button" type="Button" parent="Panel" unique_id=1408473027]
+[node name="Label" type="Label" parent="Panel" unique_id=889542511]
+z_index = 1
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.048
-offset_bottom = 14.896
-theme_override_styles/normal = SubResource("StyleBoxFlat_mj2lg")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_v5qja")
-theme_override_styles/hover = SubResource("StyleBoxFlat_y60rh")
+anchor_left = 0.0020242915
+anchor_top = 0.006849315
+anchor_right = 1.1700405
+anchor_bottom = 0.046232875
+mouse_behavior_recursive = 1
+theme_override_fonts/font = ExtResource("1_2ejn7")
+text = "Robust-os - control_setup.exe - ui_system.rbst"
+metadata/_edit_use_anchors_ = true
 
-[node name="DragButtonComponent" type="Node" parent="Panel/Button" unique_id=1204231945 node_paths=PackedStringArray("frame_to_drag")]
+[node name="Button2" type="Button" parent="Panel" unique_id=653985524]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.008
+anchor_top = -0.009000001
+anchor_right = 1.0
+anchor_bottom = 0.09900001
+offset_left = -0.103999615
+offset_top = 0.006000519
+offset_right = 2.0
+offset_bottom = -9.855003
+mouse_default_cursor_shape = 6
+theme_override_styles/normal = SubResource("StyleBoxFlat_2ejn7")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_dxep6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_sqco4")
+
+[node name="DragButtonComponent" type="Node" parent="Panel/Button2" unique_id=1291505395 node_paths=PackedStringArray("frame_to_drag")]
 script = ExtResource("1_sqco4")
 frame_to_drag = NodePath("../../..")
 metadata/_custom_type_script = "uid://cja3led3n1ehp"
-
-[node name="Label" type="Label" parent="Panel" unique_id=889542511]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.9620001
-offset_left = 1.0
-offset_top = 4.0
-offset_right = 1.0
-offset_bottom = -534.80804
-mouse_behavior_recursive = 1
-text = "Robust-os - raider-test-control-setup.exe - ui_system.rbst"
 
 [node name="OffButton" type="TextureButton" parent="." unique_id=68944335]
 layout_mode = 1
@@ -68,72 +95,715 @@ anchors_preset = -1
 anchor_left = 0.95500004
 anchor_top = 0.0050000004
 anchor_right = 0.99200004
-anchor_bottom = 0.036000002
+anchor_bottom = 0.045
 offset_left = 0.22998047
 offset_top = 0.079999685
 offset_right = -0.048034668
-offset_bottom = -0.024002075
+offset_bottom = 0.15499878
 texture_normal = ExtResource("2_3amt8")
 texture_hover = ExtResource("3_t1u3q")
 ignore_texture_size = true
-stretch_mode = 0
+stretch_mode = 4
 
 [node name="ToggleVisibleOnPressedComponent" type="Node" parent="OffButton" unique_id=348004630 node_paths=PackedStringArray("toggle_frame")]
 script = ExtResource("4_7gt23")
 toggle_frame = NodePath("../..")
 metadata/_custom_type_script = "uid://bodxsix2kyyy6"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1585434421]
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1628349254]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.074
+anchor_top = 0.093023255
+anchor_right = 1.0
+anchor_bottom = 1.0015504
+offset_bottom = -6.1035156e-05
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=1585434421]
+custom_minimum_size = Vector2(484, 1000)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 6
+
+[node name="MovementHeading" type="Panel" parent="ScrollContainer/VBoxContainer" unique_id=918725392]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_aeqpk")
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/MovementHeading" unique_id=1016368367]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.30188018
+anchor_top = 0.16666667
+anchor_right = 0.67584705
+anchor_bottom = 0.75000006
+theme_override_fonts/font = ExtResource("1_2ejn7")
+text = "MOVEMENT"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="MoveUp" type="Panel" parent="ScrollContainer/VBoxContainer" unique_id=1421368372]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="Bind" type="Button" parent="ScrollContainer/VBoxContainer/MoveUp" unique_id=1411653309]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8684211
+anchor_right = 0.9676113
+anchor_bottom = 0.9791667
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+toggle_mode = true
+text = "SEX"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/MoveUp/Bind" unique_id=1705795666]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -7.868937
+anchor_top = 0.21276596
+anchor_right = -4.17506
+anchor_bottom = 0.796532
+offset_right = 1.5258789e-05
+theme_override_fonts/font = ExtResource("1_2ejn7")
+text = "MOVE UP"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="KeybindComponent" type="Node" parent="ScrollContainer/VBoxContainer/MoveUp/Bind" unique_id=54487843]
+script = ExtResource("6_aeqpk")
+action = &"movement_up"
+metadata/_custom_type_script = "uid://5tnk7at8us3g"
+
+[node name="Reset" type="Button" parent="ScrollContainer/VBoxContainer/MoveUp/Bind" unique_id=579522564]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.5918367
+anchor_right = -0.1632653
+anchor_bottom = 0.97916675
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+disabled = true
+toggle_mode = true
+text = "RESET"
+metadata/_edit_use_anchors_ = true
+
+[node name="MoveLeft" type="Panel" parent="ScrollContainer/VBoxContainer" unique_id=806962348]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="Bind" type="Button" parent="ScrollContainer/VBoxContainer/MoveLeft" unique_id=65511040]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8684211
+anchor_right = 0.9676113
+anchor_bottom = 0.9791667
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+toggle_mode = true
+text = "SEX"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/MoveLeft/Bind" unique_id=1132013769]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -7.868937
+anchor_top = 0.21276596
+anchor_right = -4.17506
+anchor_bottom = 0.796532
+offset_right = 1.5258789e-05
+theme_override_fonts/font = ExtResource("1_2ejn7")
+text = "MOVE LEFT"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="KeybindComponent" type="Node" parent="ScrollContainer/VBoxContainer/MoveLeft/Bind" unique_id=803976978]
+script = ExtResource("6_aeqpk")
+action = &"movement_left"
+metadata/_custom_type_script = "uid://5tnk7at8us3g"
+
+[node name="Reset" type="Button" parent="ScrollContainer/VBoxContainer/MoveLeft/Bind" unique_id=1705985139]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.5918367
+anchor_right = -0.1632653
+anchor_bottom = 0.97916675
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+disabled = true
+toggle_mode = true
+text = "RESET"
+metadata/_edit_use_anchors_ = true
+
+[node name="MoveDown" type="Panel" parent="ScrollContainer/VBoxContainer" unique_id=1298515736]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="Bind" type="Button" parent="ScrollContainer/VBoxContainer/MoveDown" unique_id=1412367713]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8684211
+anchor_right = 0.9676113
+anchor_bottom = 0.9791667
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+toggle_mode = true
+text = "SEX"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/MoveDown/Bind" unique_id=2087467391]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -7.868937
+anchor_top = 0.21276596
+anchor_right = -4.17506
+anchor_bottom = 0.796532
+offset_right = 1.5258789e-05
+theme_override_fonts/font = ExtResource("1_2ejn7")
+text = "MOVE DOWN"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="KeybindComponent" type="Node" parent="ScrollContainer/VBoxContainer/MoveDown/Bind" unique_id=82460268]
+script = ExtResource("6_aeqpk")
+action = &"movement_down"
+metadata/_custom_type_script = "uid://5tnk7at8us3g"
+
+[node name="Reset" type="Button" parent="ScrollContainer/VBoxContainer/MoveDown/Bind" unique_id=25384822]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.5918367
+anchor_right = -0.1632653
+anchor_bottom = 0.97916675
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+disabled = true
+toggle_mode = true
+text = "RESET"
+metadata/_edit_use_anchors_ = true
+
+[node name="MoveRight" type="Panel" parent="ScrollContainer/VBoxContainer" unique_id=1935202265]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="Bind" type="Button" parent="ScrollContainer/VBoxContainer/MoveRight" unique_id=842848222]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8684211
+anchor_right = 0.9676113
+anchor_bottom = 0.9791667
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+toggle_mode = true
+text = "SEX"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/MoveRight/Bind" unique_id=629722651]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -7.868937
+anchor_top = 0.21276596
+anchor_right = -4.17506
+anchor_bottom = 0.796532
+offset_right = 1.5258789e-05
+theme_override_fonts/font = ExtResource("1_2ejn7")
+text = "MOVE RIGHT"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="KeybindComponent" type="Node" parent="ScrollContainer/VBoxContainer/MoveRight/Bind" unique_id=888175809]
+script = ExtResource("6_aeqpk")
+action = &"movement_right"
+metadata/_custom_type_script = "uid://5tnk7at8us3g"
+
+[node name="Reset" type="Button" parent="ScrollContainer/VBoxContainer/MoveRight/Bind" unique_id=1723994032]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.5918367
+anchor_right = -0.1632653
+anchor_bottom = 0.97916675
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+disabled = true
+toggle_mode = true
+text = "RESET"
+metadata/_edit_use_anchors_ = true
+
+[node name="Dash" type="Panel" parent="ScrollContainer/VBoxContainer" unique_id=2061434320]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="Bind" type="Button" parent="ScrollContainer/VBoxContainer/Dash" unique_id=1709316114]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8684211
+anchor_right = 0.9676113
+anchor_bottom = 0.9791667
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+toggle_mode = true
+text = "SEX"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Dash/Bind" unique_id=2019797707]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -7.868937
+anchor_top = 0.21276596
+anchor_right = -4.17506
+anchor_bottom = 0.796532
+offset_right = 1.5258789e-05
+theme_override_fonts/font = ExtResource("1_2ejn7")
+text = "DASH"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="KeybindComponent" type="Node" parent="ScrollContainer/VBoxContainer/Dash/Bind" unique_id=197733253]
+script = ExtResource("6_aeqpk")
+action = &"dash"
+metadata/_custom_type_script = "uid://5tnk7at8us3g"
+
+[node name="Reset" type="Button" parent="ScrollContainer/VBoxContainer/Dash/Bind" unique_id=525701031]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.5918367
+anchor_right = -0.1632653
+anchor_bottom = 0.97916675
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+disabled = true
+toggle_mode = true
+text = "RESET"
+metadata/_edit_use_anchors_ = true
+
+[node name="BattleHeading" type="Panel" parent="ScrollContainer/VBoxContainer" unique_id=1791540845]
+custom_minimum_size = Vector2(0, 48.025)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_aeqpk")
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/BattleHeading" unique_id=2094283785]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.30188018
+anchor_top = 0.16666667
+anchor_right = 0.67584705
+anchor_bottom = 0.75000006
+theme_override_fonts/font = ExtResource("1_2ejn7")
+text = "BATTLE"
+label_settings = ExtResource("5_e8rmg")
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Attack" type="Panel" parent="ScrollContainer/VBoxContainer" unique_id=186634722]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="Bind" type="Button" parent="ScrollContainer/VBoxContainer/Attack" unique_id=301826452]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8684211
+anchor_right = 0.9676113
+anchor_bottom = 0.9791667
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+toggle_mode = true
+text = "SEX"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Attack/Bind" unique_id=714644785]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -7.868937
+anchor_top = 0.21276596
+anchor_right = -4.17506
+anchor_bottom = 0.796532
+offset_right = 1.5258789e-05
+theme_override_fonts/font = ExtResource("1_2ejn7")
+text = "ATTACK"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="KeybindComponent" type="Node" parent="ScrollContainer/VBoxContainer/Attack/Bind" unique_id=1273107881]
+script = ExtResource("6_aeqpk")
+action = &"attack"
+metadata/_custom_type_script = "uid://5tnk7at8us3g"
+
+[node name="Reset" type="Button" parent="ScrollContainer/VBoxContainer/Attack/Bind" unique_id=411293854]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.5918367
+anchor_right = -0.1632653
+anchor_bottom = 0.97916675
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+disabled = true
+toggle_mode = true
+text = "RESET"
+metadata/_edit_use_anchors_ = true
+
+[node name="AltAttack" type="Panel" parent="ScrollContainer/VBoxContainer" unique_id=906267228]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="Bind" type="Button" parent="ScrollContainer/VBoxContainer/AltAttack" unique_id=348586815]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8684211
+anchor_right = 0.9676113
+anchor_bottom = 0.9791667
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+toggle_mode = true
+text = "SEX"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/AltAttack/Bind" unique_id=998895228]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -7.868937
+anchor_top = 0.21276596
+anchor_right = -4.17506
+anchor_bottom = 0.796532
+offset_right = 1.5258789e-05
+theme_override_fonts/font = ExtResource("1_2ejn7")
+text = "ALT ATTACK"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="KeybindComponent" type="Node" parent="ScrollContainer/VBoxContainer/AltAttack/Bind" unique_id=899824166]
+script = ExtResource("6_aeqpk")
+action = &"alt_attack"
+metadata/_custom_type_script = "uid://5tnk7at8us3g"
+
+[node name="Reset" type="Button" parent="ScrollContainer/VBoxContainer/AltAttack/Bind" unique_id=164875580]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.5918367
+anchor_right = -0.1632653
+anchor_bottom = 0.97916675
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+disabled = true
+toggle_mode = true
+text = "RESET"
+metadata/_edit_use_anchors_ = true
+
+[node name="Melee" type="Panel" parent="ScrollContainer/VBoxContainer" unique_id=737694793]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="Bind" type="Button" parent="ScrollContainer/VBoxContainer/Melee" unique_id=748823758]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8684211
+anchor_right = 0.9676113
+anchor_bottom = 0.9791667
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+toggle_mode = true
+text = "SEX"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Melee/Bind" unique_id=343656013]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -7.868937
+anchor_top = 0.21276596
+anchor_right = -4.17506
+anchor_bottom = 0.796532
+offset_right = 1.5258789e-05
+theme_override_fonts/font = ExtResource("1_2ejn7")
+text = "MELEE ATTACK"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="KeybindComponent" type="Node" parent="ScrollContainer/VBoxContainer/Melee/Bind" unique_id=129839063]
+script = ExtResource("6_aeqpk")
+action = &"melee_attack"
+metadata/_custom_type_script = "uid://5tnk7at8us3g"
+
+[node name="Reset" type="Button" parent="ScrollContainer/VBoxContainer/Melee/Bind" unique_id=144118372]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.5918367
+anchor_right = -0.1632653
+anchor_bottom = 0.97916675
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+disabled = true
+toggle_mode = true
+text = "RESET"
+metadata/_edit_use_anchors_ = true
+
+[node name="Ability" type="Panel" parent="ScrollContainer/VBoxContainer" unique_id=1059864065]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="Bind" type="Button" parent="ScrollContainer/VBoxContainer/Ability" unique_id=797560315]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8684211
+anchor_right = 0.9676113
+anchor_bottom = 0.9791667
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+toggle_mode = true
+text = "SEX"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Ability/Bind" unique_id=798485661]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -7.868937
+anchor_top = 0.21276596
+anchor_right = -4.17506
+anchor_bottom = 0.796532
+offset_right = 1.5258789e-05
+theme_override_fonts/font = ExtResource("1_2ejn7")
+text = "ABILITY"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="KeybindComponent" type="Node" parent="ScrollContainer/VBoxContainer/Ability/Bind" unique_id=879480102]
+script = ExtResource("6_aeqpk")
+action = &"ability"
+metadata/_custom_type_script = "uid://5tnk7at8us3g"
+
+[node name="Reset" type="Button" parent="ScrollContainer/VBoxContainer/Ability/Bind" unique_id=1093522075]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.5918367
+anchor_right = -0.1632653
+anchor_bottom = 0.97916675
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+disabled = true
+toggle_mode = true
+text = "RESET"
+metadata/_edit_use_anchors_ = true
+
+[node name="WeaponHeading" type="Panel" parent="ScrollContainer/VBoxContainer" unique_id=1777351755]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_aeqpk")
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/WeaponHeading" unique_id=55134640]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.30188018
+anchor_top = 0.16666667
+anchor_right = 0.67584705
+anchor_bottom = 0.75000006
+theme_override_fonts/font = ExtResource("1_2ejn7")
+text = "WEAPON"
+label_settings = ExtResource("5_e8rmg")
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Weapon1" type="Panel" parent="ScrollContainer/VBoxContainer" unique_id=1291395880]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="Bind" type="Button" parent="ScrollContainer/VBoxContainer/Weapon1" unique_id=1090194735]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8684211
+anchor_right = 0.9676113
+anchor_bottom = 0.9791667
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+toggle_mode = true
+text = "SEX"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Weapon1/Bind" unique_id=1181942450]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -7.868937
+anchor_top = 0.21276596
+anchor_right = -4.17506
+anchor_bottom = 0.796532
+offset_right = 1.5258789e-05
+theme_override_fonts/font = ExtResource("1_2ejn7")
+text = "WEAPON 1"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="KeybindComponent" type="Node" parent="ScrollContainer/VBoxContainer/Weapon1/Bind" unique_id=788939112]
+script = ExtResource("6_aeqpk")
+action = &"weapon_1"
+metadata/_custom_type_script = "uid://5tnk7at8us3g"
+
+[node name="Reset" type="Button" parent="ScrollContainer/VBoxContainer/Weapon1/Bind" unique_id=211061328]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.5918367
+anchor_right = -0.1632653
+anchor_bottom = 0.97916675
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+disabled = true
+toggle_mode = true
+text = "RESET"
+metadata/_edit_use_anchors_ = true
+
+[node name="Weapon2" type="Panel" parent="ScrollContainer/VBoxContainer" unique_id=1333399528]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="Bind" type="Button" parent="ScrollContainer/VBoxContainer/Weapon2" unique_id=1012158111]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8684211
+anchor_right = 0.9676113
+anchor_bottom = 0.9791667
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+toggle_mode = true
+text = "SEX"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Weapon2/Bind" unique_id=753242956]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -7.868937
+anchor_top = 0.21276596
+anchor_right = -4.17506
+anchor_bottom = 0.796532
+offset_right = 1.5258789e-05
+theme_override_fonts/font = ExtResource("1_2ejn7")
+text = "WEAPON 2"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="KeybindComponent" type="Node" parent="ScrollContainer/VBoxContainer/Weapon2/Bind" unique_id=1998572415]
+script = ExtResource("6_aeqpk")
+action = &"weapon_2"
+metadata/_custom_type_script = "uid://5tnk7at8us3g"
+
+[node name="Reset" type="Button" parent="ScrollContainer/VBoxContainer/Weapon2/Bind" unique_id=1691044879]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.5918367
+anchor_right = -0.1632653
+anchor_bottom = 0.97916675
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+disabled = true
+toggle_mode = true
+text = "RESET"
+metadata/_edit_use_anchors_ = true
+
+[node name="Weapon3" type="Panel" parent="ScrollContainer/VBoxContainer" unique_id=1218915972]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="Bind" type="Button" parent="ScrollContainer/VBoxContainer/Weapon3" unique_id=2123379131]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8684211
+anchor_right = 0.9676113
+anchor_bottom = 0.9791667
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+toggle_mode = true
+text = "SEX"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Weapon3/Bind" unique_id=579570095]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -7.868937
+anchor_top = 0.21276596
+anchor_right = -4.17506
+anchor_bottom = 0.796532
+offset_right = 1.5258789e-05
+theme_override_fonts/font = ExtResource("1_2ejn7")
+text = "WEAPON 3"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="KeybindComponent" type="Node" parent="ScrollContainer/VBoxContainer/Weapon3/Bind" unique_id=876930829]
+script = ExtResource("6_aeqpk")
+action = &"weapon_3"
+metadata/_custom_type_script = "uid://5tnk7at8us3g"
+
+[node name="Reset" type="Button" parent="ScrollContainer/VBoxContainer/Weapon3/Bind" unique_id=1680819375]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.5918367
+anchor_right = -0.1632653
+anchor_bottom = 0.97916675
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+disabled = true
+toggle_mode = true
+text = "RESET"
+metadata/_edit_use_anchors_ = true
+
+[node name="Weapon4" type="Panel" parent="ScrollContainer/VBoxContainer" unique_id=521820564]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="Bind" type="Button" parent="ScrollContainer/VBoxContainer/Weapon4" unique_id=867500362]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8684211
+anchor_right = 0.9676113
+anchor_bottom = 0.9791667
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+toggle_mode = true
+text = "SEX"
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Weapon4/Bind" unique_id=261689915]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -7.868937
+anchor_top = 0.21276596
+anchor_right = -4.17506
+anchor_bottom = 0.796532
+offset_right = 1.5258789e-05
+theme_override_fonts/font = ExtResource("1_2ejn7")
+text = "WEAPON 4"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="KeybindComponent" type="Node" parent="ScrollContainer/VBoxContainer/Weapon4/Bind" unique_id=173094006]
+script = ExtResource("6_aeqpk")
+action = &"weapon_4"
+metadata/_custom_type_script = "uid://5tnk7at8us3g"
+
+[node name="Reset" type="Button" parent="ScrollContainer/VBoxContainer/Weapon4/Bind" unique_id=1108217902]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.5918367
+anchor_right = -0.1632653
+anchor_bottom = 0.97916675
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+disabled = true
+toggle_mode = true
+text = "RESET"
+metadata/_edit_use_anchors_ = true
+
+[node name="ReferenceRect" type="ReferenceRect" parent="." unique_id=820045600]
+z_index = 3
+layout_mode = 1
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -0.2159996
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 1.0
+offset_bottom = 2.0
+mouse_behavior_recursive = 1
+border_color = Color(0.033853278, 0.033853278, 0.033853274, 1)
+border_width = 5.0
+editor_only = false
 
-[node name="VolumeHeading" type="Panel" parent="VBoxContainer" unique_id=918725392]
-custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VBoxContainer/VolumeHeading" unique_id=1016368367]
+[node name="ReferenceRect2" type="ReferenceRect" parent="." unique_id=85971735]
+z_index = 3
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.48900002
-anchor_top = 0.16700001
-anchor_right = 0.48900002
-anchor_bottom = 0.75000006
-offset_left = -90.56601
-offset_top = -0.016000748
-offset_right = 90.43399
-text = "MOVEMENT"
-label_settings = ExtResource("5_e8rmg")
-horizontal_alignment = 1
-
-[node name="Panel" type="Panel" parent="VBoxContainer" unique_id=1421368372]
-custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VBoxContainer/Panel" unique_id=1705795666]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.014
-anchor_top = 0.187
-anchor_right = 0.014
-anchor_bottom = 0.75000006
-offset_left = 0.083999634
-offset_top = 0.024000168
-offset_right = 181.084
-offset_bottom = 1.0
-text = "MOVEMENT"
-label_settings = ExtResource("5_e8rmg")
-horizontal_alignment = 1
-
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Panel" unique_id=1215739537]
-layout_mode = 0
-offset_left = 317.0
-offset_right = 385.5
-offset_bottom = 49.0
-placeholder_text = "Ф"
-alignment = 1
-max_length = 1
-keep_editing_on_text_submit = true
+anchor_left = -0.006
+anchor_top = -0.006
+anchor_right = 1.003
+anchor_bottom = 1.006
+offset_left = -8.828
+offset_top = -8.996
+offset_right = 8.914001
+offset_bottom = 8.995972
+mouse_behavior_recursive = 1
+border_color = Color(0.033853278, 0.033853278, 0.033853274, 1)
+border_width = 5.0
+editor_only = false

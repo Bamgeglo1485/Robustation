@@ -4,10 +4,12 @@ class_name SpeedModifierPerkComponent extends BasePerkComponent
 @onready var ephedrine_overdose: OverdoseAbilityComponent = parent.get_node_or_null("OverdoseAbilityComponent")
 
 func _init() -> void:
-	perk_name = "Ephedrine Cigarette"
+	untranslated_perk_name = "Ephedrine Cigarette"
 	perk_desc = "[color=green]Increases your movement speed by 5%[/color], but [color=crimson]decreases Ephedrine Overdose delay by 5%[/color]"
 	perk_icon = preload("res://Textures/Perks/ephderine_cigarette.png")
 	perk_equipped_texture = preload("res://Textures/Perks/cigarette_equipped.png")
+	perk_name = tr(untranslated_perk_name)
+	perk_desc = tr(perk_desc)
 
 @export var base_speed_modifier = 1.05
 @export var base_overdose_modifier = 0.95

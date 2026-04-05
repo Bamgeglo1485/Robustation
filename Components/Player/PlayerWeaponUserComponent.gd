@@ -5,12 +5,14 @@ class_name PlayerWeaponUserComponent extends Component
 @export var weapon_1: Weapon
 @export var weapon_2: Weapon
 @export var weapon_3: Weapon
+@export var weapon_4: Weapon
 @export var melee_weapon: Weapon
 @export var weapon_icon: TextureRect
 @export var alt_weapon_icon: TextureRect
 var weapon_icon_component: WeaponIconComponent
 var alt_weapon_icon_component: WeaponIconComponent
 var kostil: bool = true
+var position: int = 1
 
 func _ready() -> void:
 	if weapon_icon:
@@ -27,28 +29,42 @@ func _weapon_input():
 	var input_weapon_1: bool = Input.is_action_just_pressed("weapon_1")
 	var input_weapon_2: bool = Input.is_action_just_pressed("weapon_2")
 	var input_weapon_3: bool = Input.is_action_just_pressed("weapon_3")
+	var input_weapon_4: bool = Input.is_action_just_pressed("weapon_4")
 	var melee_attack: bool = Input.is_action_just_pressed("melee_attack")
-	var melee_release_attack: bool = Input.is_action_just_released("melee_attack")
+	var weapon_up: bool = Input.is_action_just_pressed("weapon_up")
+	var weapon_down: bool = Input.is_action_just_pressed("weapon_down")
+	var position_changed: bool = false
+	if weapon_up:
+		position += 1
+		position_changed = true
+		if position > 4:
+			position = 1
+	elif weapon_down:
+		position -= 1
+		position_changed = true
+		if position < 1:
+			position = 4
 	
 	if kostil:
 		kostil = false
 		input_weapon_1 = true
 	
 	var weapon_selected: bool = false
-	if input_weapon_1:
+	if input_weapon_1 or (position_changed and position == 1):
 		weapon_user_component.select_weapon(weapon_1)
 		weapon_selected = true
-	elif input_weapon_2:
+	elif input_weapon_2 or (position_changed and position == 2):
 		weapon_user_component.select_weapon(weapon_2)
 		weapon_selected = true
-	elif input_weapon_3:
+	elif input_weapon_3 or (position_changed and position == 3):
 		weapon_user_component.select_weapon(weapon_3)
 		weapon_selected = true
+	elif input_weapon_4 or (position_changed and position == 4):
+		weapon_user_component.select_weapon(weapon_4)
+		weapon_selected = true
 	elif melee_attack:
-		_attack(true, "melee_attack", melee_weapon, false)
-		return
-	elif melee_release_attack:
-		_attack(true, "melee_attack", melee_weapon, false)
+		weapon_user_component.attack(self, false, melee_weapon)
+		melee_weapon.on_release(self)
 		return
 	_attack(weapon_selected)
 

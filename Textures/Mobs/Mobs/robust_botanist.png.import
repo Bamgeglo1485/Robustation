@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://o5wu13lbtyrh"
-path="res://.godot/imported/sausage.png-0112d81d03131907e752acee0332f321.ctex"
+uid="uid://chtqguq0vv2xn"
+path="res://.godot/imported/robust_botanist.png-3346ead5682df2729ee01108956f72b6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sausage.png"
-dest_files=["res://.godot/imported/sausage.png-0112d81d03131907e752acee0332f321.ctex"]
+source_file="res://Textures/Mobs/Mobs/robust_botanist.png"
+dest_files=["res://.godot/imported/robust_botanist.png-3346ead5682df2729ee01108956f72b6.ctex"]
 
 [params]
 

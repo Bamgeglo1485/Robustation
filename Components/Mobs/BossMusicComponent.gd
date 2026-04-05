@@ -12,6 +12,9 @@ var pitch_tween: Tween
 var player_pitch: float = 0.3
 var pitch: float = 0.3
 
+func change_music(new_music: AudioStream):
+	player_music.set_main(new_music, 2)
+
 func _ready() -> void:
 	if health:
 		health.health_changed.connect(_health_changed)
@@ -31,8 +34,6 @@ func _player_health_changed(_new_health: float) -> void:
 	if _new_health <= 0:
 		if pitch_tween and pitch_tween.is_valid():
 			pitch_tween.kill()
-		pitch_tween = create_tween()
-		pitch_tween.tween_property(player_music.main_music_player, "pitch_scale", 0.1, 1.5)
 		return
 	_update_boss_pitch()
 
@@ -44,7 +45,7 @@ func _update_boss_pitch() -> void:
 	if player_health:
 		player_pitch = 1.0 - (float(player_health.health) / player_health.max_health)
 	
-	var target_pitch = 1.0 + (pitch + player_pitch) / 2
+	var target_pitch = 1.0 + (pitch + player_pitch) / 4
 	
 	if pitch_tween and pitch_tween.is_valid():
 		pitch_tween.kill()

@@ -9,8 +9,12 @@ class_name ProjectileComponent extends Area2D
 @export var hit_sound: AudioStreamPlayer2D
 @export var particle_emitter: GPUParticles2D
 
+@export var max_bounces: int = 0
+var bounces: int = 0
+
 @export var speed: int = 500
 @export var speed_decreasing: int = 0
+@export var stop_when_null_speed: bool = false
 @export var max_damage: int = 200
 @export var damage: int = 10 : set = _set_damage
 @export var delayed_damage: int = 0
@@ -18,11 +22,13 @@ class_name ProjectileComponent extends Area2D
 @export var stamina_damage: float = 0
 @export var rotate_speed: int = 0
 @export var lifetime: float = 3.0
+@export var fade_out_delete: bool = false
 @export var throw_speed: float = 0
 @export var delete_on_hit: bool = true
 @export var embed_on_hit: bool = false
 @export var ignore_faction: bool = false
 @export var ignore_armor: float = false
+@export var fall_time: float = 0.0
 
 var shooter: PhysicsBody2D
 var direction: float
@@ -74,7 +80,13 @@ func _ready() -> void:
 	
 	if lifetime == 0:
 		return
-	await get_tree().create_timer(lifetime, false).timeout
+	if fade_out_delete:
+		await get_tree().create_timer(lifetime - 1, false).timeout
+		var _tween = create_tween()
+		_tween.tween_property(parent, "modulate:a", 0, 1)
+		await get_tree().create_timer(1, false).timeout
+	else:
+		await get_tree().create_timer(lifetime, false).timeout
 	if deleted:
 		return
 	
@@ -92,7 +104,7 @@ func _physics_process(delta: float) -> void:
 		speed -= speed_decreasing
 	elif return_to_sender:
 		if shooter:
-			var _direction: Vector2 = (global_position-shooter.global_position)
+			var _direction: Vector2 = (global_position - shooter.global_position)
 			direction = _direction.angle()
 			if rotate_speed == 0:
 				parent.global_rotation = direction
@@ -102,8 +114,10 @@ func _physics_process(delta: float) -> void:
 			elif max_distance_from_sender != 0 and _direction.length_squared() > max_distance_from_sender and sender_mob_mover:
 				sender_mob_mover.throw(_direction, parent.velocity.length() * 2)
 		speed -= speed_decreasing
+	elif stop_when_null_speed:
+		pass
 	
-	if speed <= 0 and !return_to_sender:
+	if speed <= 0 and !return_to_sender and !stop_when_null_speed:
 		_delete()
 	
 	parent.velocity = Vector2(speed, 0).rotated(direction)
@@ -128,8 +142,9 @@ func _delete() -> void:
 	var ignore_component: MeleeAttackIgnoreComponent = MeleeAttackIgnoreComponent.new()
 	parent.add_child(ignore_component)
 	
-	if parent.has_node("Area2D"):
-		parent.get_node("Area2D").queue_free()
+	var area2d: Area2D = parent.get_node_or_null("Area2D")
+	if area2d:
+		area2d.queue_free()
 	
 	if texture:
 		texture.texture = null
@@ -159,26 +174,30 @@ func explode() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if !body or !can_hit or body == parent:
 		return
-	if can_parry_weapon and body.has_node("ProjectileComponent"):
-		var _direction: Vector2 = -body.velocity
-		body.get_node("ProjectileComponent").speed *= 2
-		if shooter_faction:
-			var nearest_enemy = _get_nearest_enemy()
-			if nearest_enemy:
-				_direction = nearest_enemy.global_position - parent.global_position
-		can_parry_weapon.parry_projectile(body, body.get_node_or_null("ProjectileComponent"), _direction)
 	if body.has_node("ProjectileIgnoreComponent"):
 		return
+	var projectile_comp: ProjectileComponent = body.get_node_or_null("ProjectileComponent")
+	if projectile_comp and shooter_faction and projectile_comp.shooter_faction and projectile_comp.shooter_faction.faction == shooter_faction.faction:
+		if explode_on_hit:
+			explode_on_delete = true
+			_delete()
+			return
+		elif can_parry_weapon:
+			var _direction: Vector2 = -body.velocity
+			projectile_comp.speed *= 2
+			if shooter_faction:
+				var nearest_enemy = _get_nearest_enemy()
+				if nearest_enemy:
+					_direction = nearest_enemy.global_position - parent.global_position
+			can_parry_weapon.parry_projectile(body, projectile_comp, _direction)
 	if max_penetrations != 0 and penetration_damaged_bodies.has(body):
 		return
 	if shooter and shooter_faction:
 		if shooter == body:
 			return
+		var body_faction: FactionComponent = body.get_node_or_null("FactionComponent")
 		if (!ignore_faction and 
-			body.has_node("FactionComponent")):
-			
-			var body_faction: FactionComponent = body.get_node_or_null("FactionComponent")
-			
+			body_faction):
 			if shooter_faction.faction == body_faction.faction:
 				return
 	
@@ -188,8 +207,6 @@ func _on_body_entered(body: Node2D) -> void:
 		hit_sound.play()
 	
 	var modified_damage: float = damage * damage_modifier
-	
-	
 	var health_comp: HealthComponent = body.get_node_or_null("HealthComponent")
 	if health_comp:
 		if health_comp.INVINCIBLE:
@@ -210,28 +227,43 @@ func _on_body_entered(body: Node2D) -> void:
 	EventBusManager.projectile_hit.emit(body, parent)
 	
 	if stamina_damage != 0:
-		var stamina_comp = body.get_node_or_null("StaminaComponent")
+		var stamina_comp: StaminaComponent = body.get_node_or_null("StaminaComponent")
 		if stamina_comp:
 			stamina_comp.take_stamina_damage(stamina_damage * damage_modifier, shooter)
 	
-	if throw_speed != 0:
-		var mover_comp = body.get_node_or_null("MobMoverComponent")
-		if mover_comp:
+	var mover_comp: MobMoverComponent = body.get_node_or_null("MobMoverComponent")
+	if mover_comp:
+		if throw_speed != 0:
 			mover_comp.throw(parent.velocity, throw_speed, shooter)
-	if explode_on_hit:
-		explode()
+		if fall_time != 0:
+			mover_comp.drop(fall_time)
+		
 	if embed_on_hit:
 		parent.reparent.call_deferred(body)
 		deleted = true
 		moving = false
 		parent.velocity = Vector2.ZERO
 		can_hit = false
+		if body is PhysicsBody2D:
+			await tree_entered
+			var _tween = create_tween()
+			_tween.tween_property(parent, "position", Vector2.ZERO, 0.2)
 		return
 	
-	if body.has_node("WeaponUserComponent") and can_parry_weapon:
-		var body_weapon_user_comp: WeaponUserComponent = body.get_node_or_null("WeaponUserComponent")
+	var body_weapon_user_comp: WeaponUserComponent = body.get_node_or_null("WeaponUserComponent")
+	if body_weapon_user_comp and can_parry_weapon:
 		if body_weapon_user_comp.selected_weapon and body_weapon_user_comp.selected_weapon.swinging:
 			can_parry_weapon.parry_weapon(body_weapon_user_comp.selected_weapon, body)
+	
+	if bounces < max_bounces and body is not PhysicsBody2D:
+		bounces += 1
+		var bounce_direction = (parent.global_position - body.global_position).normalized()
+		var velocity = parent.velocity
+		var dot = velocity.dot(bounce_direction)
+		var final_rotation: float = (velocity - 2 * dot * bounce_direction).angle()
+		direction = final_rotation
+		parent.rotation = final_rotation
+		return
 	
 	if max_penetrations == 0 and delete_on_hit:
 		_delete()

@@ -6,7 +6,7 @@ class_name MoveToPointAction extends ActionLeaf
 @export var retreat_speed_modifier: float = 0.7
 @export var stop_range_min: int = 0
 @export var stop_range_max: int = 0
-@export var pathfind_update_rate: float = 0.4
+@export var pathfind_update_rate: float = 0.15
 @export var move_update_rate: float = 0.1
 
 @onready var parent = owner

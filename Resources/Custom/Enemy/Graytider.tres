@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Enemy" format=3 uid="uid://btivhod77cnen"]
+
+[ext_resource type="PackedScene" uid="uid://dfjdyg6lvqksp" path="res://Scenes/Mobs/Enemies/Graytider.tscn" id="1_sa4bh"]
+[ext_resource type="Script" uid="uid://di5u0whaqiyjp" path="res://Resources/Custom/Enemy/Base/Enemy.gd" id="2_ta270"]
+
+[resource]
+script = ExtResource("2_ta270")
+scene = ExtResource("1_sa4bh")
+cost = 6.0
+weight = 0.2
+enemy_type = 3
+metadata/_custom_type_script = "uid://di5u0whaqiyjp"

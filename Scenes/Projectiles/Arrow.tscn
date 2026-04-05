@@ -32,7 +32,7 @@ texture = NodePath("../Texture")
 speed = 1000
 damage = 6
 delayed_damage = 3
-delayed_damage_delay = 3
+delayed_damage_delay = 5
 
 [node name="CollisionShape2D" parent="ProjectileComponent" index="0" unique_id=1391622764]
 rotation = 1.5707964

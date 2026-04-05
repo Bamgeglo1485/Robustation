@@ -20,10 +20,12 @@ func free() -> void:
 		reflect_sound_player.queue_free()
 
 func _init() -> void:
-	perk_name = "Bitch Ball"
+	untranslated_perk_name = "Bitch Ball"
 	perk_desc = "[color=green]Increases your melee attack reflect chance by 3%[/color]"
 	perk_icon = preload("res://Textures/Perks/bitch_ball.png")
 	rarity = rarity_classes.ROBUST
+	perk_name = tr(untranslated_perk_name)
+	perk_desc = tr(perk_desc)
 
 func apply_modifiers() -> void:
 	chance = base_chance * amount

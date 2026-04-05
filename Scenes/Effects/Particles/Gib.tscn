@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://e0hwtjesuk50" path="res://Textures/Effects/Organs/liver.png" id="8_xdl0o"]
 [ext_resource type="Script" uid="uid://b4ckmc2py8cmg" path="res://Components/Entity/MeleeAttackIgnoreComponent.gd" id="9_67tnm"]
 [ext_resource type="Texture2D" uid="uid://ybqrx04pn6uh" path="res://Textures/Effects/Organs/kidney-l.png" id="9_kg6vs"]
+[ext_resource type="Script" uid="uid://ch6fjxkr8n5db" path="res://Components/Entity/ProjectileIgnoreComponent.gd" id="10_ie3oi"]
 [ext_resource type="AudioStream" uid="uid://di1m6qfvfmk8i" path="res://Resources/Audio/GibRandom.tres" id="11_2ypa8"]
 [ext_resource type="PackedScene" uid="uid://40fiorxrk4xk" path="res://Scenes/Effects/Particles/BloodSpurts.tscn" id="12_uu161"]
 [ext_resource type="PackedScene" uid="uid://deq4t84d81wnb" path="res://Scenes/Effects/Particles/Dodge.tscn" id="14_eb50u"]
@@ -110,6 +111,10 @@ metadata/_custom_type_script = "uid://df356su15y7ow"
 script = ExtResource("9_67tnm")
 metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
 
+[node name="ProjectileIgnoreComponent" type="Node" parent="Eye" unique_id=459283965]
+script = ExtResource("10_ie3oi")
+metadata/_custom_type_script = "uid://ch6fjxkr8n5db"
+
 [node name="Brain" type="CharacterBody2D" parent="." unique_id=1716066439]
 z_index = 1
 collision_layer = 16
@@ -152,6 +157,10 @@ metadata/_custom_type_script = "uid://df356su15y7ow"
 [node name="MeleeAttackIgnoreComponent" type="Node" parent="Brain" unique_id=1169015921]
 script = ExtResource("9_67tnm")
 metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
+
+[node name="ProjectileIgnoreComponent" type="Node" parent="Brain" unique_id=1440773236]
+script = ExtResource("10_ie3oi")
+metadata/_custom_type_script = "uid://ch6fjxkr8n5db"
 
 [node name="Heart" type="CharacterBody2D" parent="." unique_id=523662636]
 z_index = 1
@@ -196,6 +205,10 @@ metadata/_custom_type_script = "uid://df356su15y7ow"
 script = ExtResource("9_67tnm")
 metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
 
+[node name="ProjectileIgnoreComponent" type="Node" parent="Heart" unique_id=1569622017]
+script = ExtResource("10_ie3oi")
+metadata/_custom_type_script = "uid://ch6fjxkr8n5db"
+
 [node name="Stomach" type="CharacterBody2D" parent="." unique_id=2136891988]
 z_index = 1
 collision_layer = 16
@@ -238,6 +251,10 @@ metadata/_custom_type_script = "uid://df356su15y7ow"
 [node name="MeleeAttackIgnoreComponent" type="Node" parent="Stomach" unique_id=1061729653]
 script = ExtResource("9_67tnm")
 metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
+
+[node name="ProjectileIgnoreComponent" type="Node" parent="Stomach" unique_id=1122297622]
+script = ExtResource("10_ie3oi")
+metadata/_custom_type_script = "uid://ch6fjxkr8n5db"
 
 [node name="Ears" type="CharacterBody2D" parent="." unique_id=1370736291]
 z_index = 1
@@ -282,6 +299,10 @@ metadata/_custom_type_script = "uid://df356su15y7ow"
 script = ExtResource("9_67tnm")
 metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
 
+[node name="ProjectileIgnoreComponent" type="Node" parent="Ears" unique_id=369082494]
+script = ExtResource("10_ie3oi")
+metadata/_custom_type_script = "uid://ch6fjxkr8n5db"
+
 [node name="Liver" type="CharacterBody2D" parent="." unique_id=145671700]
 z_index = 1
 collision_layer = 16
@@ -325,6 +346,10 @@ metadata/_custom_type_script = "uid://df356su15y7ow"
 script = ExtResource("9_67tnm")
 metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
 
+[node name="ProjectileIgnoreComponent" type="Node" parent="Liver" unique_id=1899709291]
+script = ExtResource("10_ie3oi")
+metadata/_custom_type_script = "uid://ch6fjxkr8n5db"
+
 [node name="Kidney" type="CharacterBody2D" parent="." unique_id=1066121005]
 z_index = 1
 collision_layer = 16
@@ -367,6 +392,10 @@ metadata/_custom_type_script = "uid://df356su15y7ow"
 [node name="MeleeAttackIgnoreComponent" type="Node" parent="Kidney" unique_id=66168682]
 script = ExtResource("9_67tnm")
 metadata/_custom_type_script = "uid://b4ckmc2py8cmg"
+
+[node name="ProjectileIgnoreComponent" type="Node" parent="Kidney" unique_id=846342291]
+script = ExtResource("10_ie3oi")
+metadata/_custom_type_script = "uid://ch6fjxkr8n5db"
 
 [node name="GibSound" type="AudioStreamPlayer2D" parent="." unique_id=159409569]
 stream = ExtResource("11_2ypa8")

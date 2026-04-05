@@ -32,7 +32,6 @@
 [ext_resource type="AudioStream" uid="uid://djwhsufysh1dq" path="res://Resources/Audio/PunchRandom.tres" id="30_7ct2p"]
 [ext_resource type="Texture2D" uid="uid://1yvrhqvfqqus" path="res://Textures/Weapons/Toolbox/toolbox_inhand.png" id="31_3s8e1"]
 [ext_resource type="Texture2D" uid="uid://dverpu5mv40au" path="res://Textures/Weapons/Toolbox/toolbox.png" id="32_xiial"]
-[ext_resource type="Script" uid="uid://da2q40ragr5wk" path="res://Components/Mobs/NPC/BuddyComponent.gd" id="33_ndq0p"]
 [ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="36_k3vsn"]
 [ext_resource type="Script" uid="uid://c6fapai3prk4g" path="res://Components/Mobs/AI/Actions/SetPlayerToBlackboardAction.gd" id="37_utm0k"]
 [ext_resource type="Script" uid="uid://dl1x4qw4skabi" path="res://Components/Mobs/AI/Actions/SetMoveToKeyAction.gd" id="38_pe42x"]
@@ -45,8 +44,8 @@
 visibility_layer = 3
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
-base_max_speed = 200.0
-acceleration = 150.0
+base_max_speed = 250.0
+acceleration = 250.0
 friction = 1000.0
 
 [node name="Texture" parent="." index="2" unique_id=382857461]
@@ -57,6 +56,7 @@ texture = ExtResource("2_f6ny4")
 max_health = 50
 
 [node name="NavigationAgent" parent="." index="13" unique_id=1358139639]
+avoidance_enabled = false
 max_speed = 0.01
 
 [node name="Hair" type="Sprite2D" parent="." index="14" unique_id=927075308]
@@ -81,7 +81,7 @@ metadata/_custom_type_script = "uid://bd0gbdhbjn7xx"
 
 [node name="Crowbar" type="Node" parent="RandomWeaponSelectorComponent" index="0" unique_id=1903842277 node_paths=PackedStringArray("attack_sound", "miss_sound")]
 script = ExtResource("25_ipqlo")
-damage = 6
+damage = 12
 attack_range = 83
 attack_sound = NodePath("HitSound")
 miss_sound = NodePath("MissSound")
@@ -103,7 +103,7 @@ stream = ExtResource("29_f6ny4")
 
 [node name="Fist" type="Node" parent="RandomWeaponSelectorComponent" index="1" unique_id=2029928507 node_paths=PackedStringArray("attack_sound", "miss_sound")]
 script = ExtResource("25_ipqlo")
-damage = 3
+damage = 6
 attack_range = 83
 attack_sound = NodePath("HitSound")
 miss_sound = NodePath("MissSound")
@@ -124,7 +124,7 @@ stream = ExtResource("29_f6ny4")
 
 [node name="Toolbox" type="Node" parent="RandomWeaponSelectorComponent" index="2" unique_id=1243054908 node_paths=PackedStringArray("attack_sound", "miss_sound")]
 script = ExtResource("25_ipqlo")
-damage = 15
+damage = 30
 stamina_damage = 20
 attack_range = 83
 attack_sound = NodePath("HitSound")
@@ -142,14 +142,8 @@ stream = ExtResource("29_f6ny4")
 [node name="HitSound" type="AudioStreamPlayer2D" parent="RandomWeaponSelectorComponent/Toolbox" index="1" unique_id=1299856442]
 stream = ExtResource("28_mbwmj")
 
-[node name="BuddyComponent" type="Node" parent="." index="19" unique_id=2046809544]
-script = ExtResource("33_ndq0p")
-buddy_group = "Assistant"
-rage_when_buddy_dead = false
-metadata/_custom_type_script = "uid://da2q40ragr5wk"
-
-[node name="BeehaveTree" parent="." index="20" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@18985")
+[node name="BeehaveTree" parent="." index="19" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
+blackboard = NodePath("@Node@47204")
 
 [node name="MoveToPlayer" type="Node" parent="BeehaveTree" index="0" unique_id=1542265017]
 script = ExtResource("36_k3vsn")
@@ -171,20 +165,21 @@ metadata/_custom_type_script = "uid://ttwxxcce2i4p"
 
 [node name="MoveToPointAction" type="Node" parent="BeehaveTree/MoveToPlayer" index="3" unique_id=113185966]
 script = ExtResource("39_x3h0m")
+pathfind_update_rate = 0.2
 metadata/_custom_type_script = "uid://wlnghjnvdlyn"
 
 [node name="AttackTargetAction" type="Node" parent="BeehaveTree/MoveToPlayer" index="4" unique_id=1821364524]
 script = ExtResource("41_i5qxx")
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 
-[node name="ExplosionResistanceComponent" type="Node" parent="." index="23" unique_id=857423690]
+[node name="ExplosionResistanceComponent" type="Node" parent="." index="22" unique_id=857423690]
 script = ExtResource("40_2q2qw")
 resistance = 2.0
 metadata/_custom_type_script = "uid://clr7jbioge17t"
 
-[node name="IntroductionSubjectComponent" parent="." index="25" unique_id=776935428]
+[node name="IntroductionSubjectComponent" parent="." index="24" unique_id=776935428]
 group = "Assistant"
-subject_name = "Assistant"
-subject_desc = "WEAK CRAZED  ASSISTANTS USING MELEE WEAPONS
+subject_name = "ASSISTANT"
+subject_desc = "WEAK INSANE ASSISTANT USING MELEE WEAPON.
 [color=purple]WEAK TO EVERYTHING[/color]"
-subject_prefix = "Melee Fodder"
+subject_prefix = "MELEE PAWN"

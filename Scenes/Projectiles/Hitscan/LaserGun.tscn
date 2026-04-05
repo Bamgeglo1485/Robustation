@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cc30l120jqrpr"]
+
+[ext_resource type="PackedScene" uid="uid://ckfxwjnv84i2l" path="res://Scenes/Projectiles/Hitscan/BaseHitscan.tscn" id="1_6wk5s"]
+[ext_resource type="Shader" uid="uid://bl4ojx3gaol8" path="res://Resources/Shaders/Wave.gdshader" id="2_0oitm"]
+[ext_resource type="AudioStream" uid="uid://bxwx57y8k3fqt" path="res://Audio/Effects/lightburn.ogg" id="3_c1744"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c1744"]
+shader = ExtResource("2_0oitm")
+shader_parameter/wave_amplitude = 0.1
+shader_parameter/wave_frequency = 40.0
+shader_parameter/wave_speed = 100.0
+shader_parameter/left_falloff = 0.0
+shader_parameter/right_falloff = 0.0
+shader_parameter/color = Color(6.330253, 0, 2.2960641, 1)
+
+[node name="BaseHitscan" unique_id=1219814461 instance=ExtResource("1_6wk5s")]
+
+[node name="RayLine" parent="." index="0" unique_id=1153845673]
+material = SubResource("ShaderMaterial_c1744")
+position = Vector2(0.05896592, 0.018667966)
+scale = Vector2(1.058966, 1.0186689)
+points = PackedVector2Array()
+width = 30.0
+texture_mode = 2
+
+[node name="HitscanComponent" parent="." index="1" unique_id=993689081]
+damage = 70
+disappear_speed = 0.3
+modify_by_range_base_range = 300
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="." index="2" unique_id=1641163860]
+stream = ExtResource("3_c1744")

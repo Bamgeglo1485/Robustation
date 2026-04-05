@@ -126,6 +126,7 @@ shape = ExtResource("2_vbbsq")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=364816313]
 occluder = ExtResource("18_6uxej")
+sdf_collision = false
 
 [node name="StaminaComponent" type="Node" parent="." unique_id=859597356]
 script = ExtResource("19_pns3t")

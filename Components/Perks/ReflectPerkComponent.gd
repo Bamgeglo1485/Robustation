@@ -21,11 +21,13 @@ func free() -> void:
 		reflect_sound_player.queue_free()
 
 func _init() -> void:
-	perk_name = "Mirror shard"
+	untranslated_perk_name = "Mirror Shard or (Shard of Mirror)"
 	perk_desc = "[color=green]Increases your bullet reflect chance by 3%[/color]"
 	perk_icon = preload("res://Textures/Perks/mirror_shard.png")
 	perk_equipped_texture = preload("res://Textures/Perks/mirror_shard_equipped.png")
 	rarity = rarity_classes.ROBUST
+	perk_name = tr(untranslated_perk_name)
+	perk_desc = tr(perk_desc)
 
 func apply_modifiers() -> void:
 	chance = base_chance * amount

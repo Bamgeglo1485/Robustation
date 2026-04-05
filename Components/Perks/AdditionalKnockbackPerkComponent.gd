@@ -1,10 +1,12 @@
 class_name AdditionalKnockbackPerkComponent extends BasePerkComponent
 
 func _init() -> void:
-	perk_name = "Pushorn"
-	perk_desc = "[color=green]Increases your selected weapon knockback power[/color]"
+	untranslated_perk_name = "Git Push"
+	perk_desc = "[color=green]Increases your attack knockback power[/color]"
 	perk_icon = preload("res://Textures/Perks/pushorn.png")
 	rarity = rarity_classes.ROBUST
+	perk_name = tr(untranslated_perk_name)
+	perk_desc = tr(perk_desc)
 
 func _ready() -> void:
 	EventBusManager.damaged.connect(_on_damaged)

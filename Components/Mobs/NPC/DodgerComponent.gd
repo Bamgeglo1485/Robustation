@@ -2,7 +2,6 @@ class_name DodgerComponent extends Component
 
 @onready var navigation: NavigationAgent2D = parent.get_node_or_null("NavigationAgent")
 @onready var mob_mover: MobMoverComponent = parent.get_node_or_null("MobMoverComponent")
-@onready var health: HealthComponent = parent.get_node_or_null("HealthComponent")
 @onready var faction: FactionComponent = parent.get_node_or_null("FactionComponent")
 
 @export var dodge_melee: bool = false
@@ -58,12 +57,13 @@ func _on_shoot(emitter: Node2D, _weapon: Weapon, direction: Vector2, _projectile
 		var ray_end: Vector2 = ray_start + ray_direction * ray_length
 		
 		var query: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.create(ray_start, ray_end)
-		query.collision_mask = parent.collision_layer
 		query.collide_with_areas = true
+		query.collide_with_bodies = true
+		query.exclude = [emitter]
 		
 		var result = space_state.intersect_ray(query)
 		
-		if !result.is_empty() and result.collider == parent:
+		if !result.is_empty():
 			hit_detected = true
 			break
 	
@@ -82,7 +82,6 @@ func _check(emitter) -> bool:
 	var emitter_faction: FactionComponent = emitter.get_node_or_null("FactionComponent")
 	if faction.faction == emitter_faction.faction:
 		return false
-	
 	if mob_mover.fallen:
 		return false
 	return true
@@ -100,4 +99,5 @@ func _dodge() -> void:
 		recovery_timer.start()
 
 func _stamina_recovery():
+	recovery_timer.start()
 	stamina += 1

@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://beie4mcfgy8sm" path="res://Scenes/UI/Menu.tscn" id="4_36p5r"]
 [ext_resource type="Script" uid="uid://bodxsix2kyyy6" path="res://Components/Interface/Menu/ToggleVisibleOnPressedComponent.gd" id="4_te8x8"]
 [ext_resource type="PackedScene" uid="uid://c7bvqic47gs1y" path="res://Scenes/UI/Settings.tscn" id="5_36p5r"]
+[ext_resource type="PackedScene" uid="uid://dpxlm72aq8ofl" path="res://Scenes/UI/Keybinds.tscn" id="8_wdhnk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wdhnk"]
 bg_color = Color(0, 0, 0, 1)
@@ -93,6 +94,17 @@ script = ExtResource("4_te8x8")
 toggle_frame = NodePath("../../../../Settings")
 metadata/_custom_type_script = "uid://bodxsix2kyyy6"
 
+[node name="Keybind" type="Button" parent="Panel/VBoxContainer" unique_id=712265820]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_te8x8")
+text = "KEYBINDS"
+
+[node name="ToggleVisibleOnPressedComponent" type="Node" parent="Panel/VBoxContainer/Keybind" unique_id=1123777992 node_paths=PackedStringArray("toggle_frame")]
+script = ExtResource("4_te8x8")
+toggle_frame = NodePath("../../../../Keybinds")
+metadata/_custom_type_script = "uid://bodxsix2kyyy6"
+
 [node name="Menu" type="Button" parent="Panel/VBoxContainer" unique_id=1723291705]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
@@ -152,6 +164,7 @@ offset_left = -0.10399985
 offset_top = 0.0060002804
 offset_right = 2.0
 offset_bottom = -0.06600189
+mouse_default_cursor_shape = 6
 theme_override_styles/normal = SubResource("StyleBoxFlat_36p5r")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_4er1k")
 theme_override_styles/hover = SubResource("StyleBoxFlat_te8x8")
@@ -161,9 +174,21 @@ script = ExtResource("1_wxoyb")
 frame_to_drag = NodePath("../..")
 metadata/_custom_type_script = "uid://cja3led3n1ehp"
 
-[node name="Settings" parent="." unique_id=727110380 instance=ExtResource("5_36p5r")]
+[node name="Settings" parent="." unique_id=1190863104 instance=ExtResource("5_36p5r")]
 visible = false
 layout_mode = 1
 offset_left = 449.0
 offset_right = 616.364
 offset_bottom = 0.0
+
+[node name="Keybinds" parent="." unique_id=727110380 instance=ExtResource("8_wdhnk")]
+visible = false
+layout_mode = 1
+anchor_left = 0.289
+anchor_top = 0.026
+anchor_right = 0.289
+anchor_bottom = 0.69500005
+offset_left = -246.92801
+offset_top = 0.15200043
+offset_right = 247.07199
+offset_bottom = 211.63995

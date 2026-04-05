@@ -23,7 +23,13 @@
 [ext_resource type="AudioStream" uid="uid://ii51ruio4r4v" path="res://Audio/Weapon/bow_pull.ogg" id="18_hwx0f"]
 [ext_resource type="AudioStream" uid="uid://dgpvog22fnchp" path="res://Audio/Barks/GreytideBark.ogg" id="22_mlgtv"]
 [ext_resource type="Script" uid="uid://dua6hp8ir5tiu" path="res://Components/Mobs/AI/Actions/AttackTargetAction.gd" id="23_7am8w"]
+[ext_resource type="Script" uid="uid://bankaictwkjye" path="res://Components/Mobs/AI/Actions/SetEnemyToBlackboardAction.gd" id="25_mjvbd"]
+[ext_resource type="Script" uid="uid://bpstodpkpmrij" path="res://Components/Mobs/AI/Actions/SetInvincibleAction.gd" id="26_y3v4h"]
+[ext_resource type="Script" uid="uid://dhld8uqg4kclp" path="res://Components/Mobs/AI/Actions/AddHealthBarAction.gd" id="26_yu0nk"]
+[ext_resource type="Script" uid="uid://dvlxidwdsh8wr" path="res://Components/Mobs/AI/Actions/ChangeFactionAction.gd" id="27_y3v4h"]
 [ext_resource type="Script" uid="uid://bdcq7y2ek222e" path="res://Components/Mobs/NPC/DodgerComponent.gd" id="28_k2qsy"]
+[ext_resource type="Script" uid="uid://ccgru3u2j6mvr" path="res://Components/Mobs/AI/Actions/ChangeBossMusicAction.gd" id="30_87nj8"]
+[ext_resource type="AudioStream" uid="uid://cmbk6sgoqxr3v" path="res://Audio/Music/BossThemes/GreytideStage2.ogg" id="31_pu5ij"]
 [ext_resource type="Script" uid="uid://8hn4kne15ac5" path="res://addons/beehave/nodes/composites/selector.gd" id="32_h82ij"]
 [ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="33_8bpma"]
 [ext_resource type="Script" uid="uid://6xpj3gw1krkd" path="res://Components/Mobs/AI/Actions/SayAction.gd" id="33_da6d8"]
@@ -31,6 +37,7 @@
 [ext_resource type="Script" uid="uid://dl1x4qw4skabi" path="res://Components/Mobs/AI/Actions/SetMoveToKeyAction.gd" id="35_3vykv"]
 [ext_resource type="Script" uid="uid://blhgdac0hd1cw" path="res://Components/Mobs/ChatterComponent.gd" id="35_hwx0f"]
 [ext_resource type="PackedScene" uid="uid://c2whxof4auk8r" path="res://Scenes/UI/IngameInterface/Message.tscn" id="36_da6d8"]
+[ext_resource type="Script" uid="uid://f7y13beg1thb" path="res://Components/Mobs/AI/Conditions/FactionCondition.gd" id="36_q07ed"]
 [ext_resource type="Script" uid="uid://wlnghjnvdlyn" path="res://Components/Mobs/AI/Actions/MoveToPointAction.gd" id="36_tpxmi"]
 [ext_resource type="Script" uid="uid://b2bu3qqcql0lk" path="res://Components/Mobs/AI/Conditions/PointInRangeCondition.gd" id="37_qa3jp"]
 [ext_resource type="Script" uid="uid://djnlrq07s5frw" path="res://Components/Mobs/AI/Actions/RushAction.gd" id="38_4nys4"]
@@ -45,7 +52,7 @@
 [ext_resource type="AudioStream" uid="uid://cbvwpjhebv7sv" path="res://Audio/EnemyThemes/Greytide.ogg" id="44_yuitr"]
 [ext_resource type="Script" uid="uid://c3hn1oustp3t1" path="res://Components/Mobs/BossMusicComponent.gd" id="45_fe6br"]
 [ext_resource type="Script" uid="uid://bckogt6ht7r64" path="res://Components/Mobs/SayOnSpawnComponent.gd" id="45_yuitr"]
-[ext_resource type="AudioStream" uid="uid://22rd7r75dkgv" path="res://Audio/Music/BossThemes/motive.ogg" id="46_fe6br"]
+[ext_resource type="AudioStream" uid="uid://cnq58n55g1vm2" path="res://Audio/Music/BossThemes/GreytideStage1.ogg" id="51_yu0nk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jkj8r"]
 shader = ExtResource("3_20obr")
@@ -97,8 +104,8 @@ corner_detail = 6
 visibility_layer = 3
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
-base_max_speed = 300.0
-acceleration = 200.0
+base_max_speed = 350.0
+acceleration = 350.0
 friction = 700.0
 can_fall_from_body = false
 set_navigation_velocity = false
@@ -114,18 +121,21 @@ material = SubResource("ShaderMaterial_jkj8r")
 [node name="HealthComponent" parent="." index="4" unique_id=1758373275]
 hitstop_on_death = true
 max_health = 1800
+INVINCIBLE = true
 damage_type_modifiers = Dictionary[String, float]({
-"Projectile": 2.0
+"Projectile": 1.5
 })
 invinciblitiy_attack_effect = ExtResource("4_mhxqn")
-heal_for_damage_multiplier = 0.1
+
+[node name="FactionComponent" parent="." index="5" unique_id=1651473390]
+faction = "Player"
 
 [node name="WeaponUserComponent" parent="." index="6" unique_id=2123544057 node_paths=PackedStringArray("selected_weapon")]
 selected_weapon = NodePath("Spear")
 
 [node name="Spear" type="Node" parent="WeaponUserComponent" index="0" unique_id=30503364 node_paths=PackedStringArray("attack_sound", "miss_sound")]
 script = ExtResource("3_tryy6")
-damage = 15
+damage = 30
 attack_sound = NodePath("HitSound")
 miss_sound = NodePath("MissSound")
 throw_speed = 600
@@ -148,6 +158,7 @@ stream = ExtResource("7_fe6br")
 
 [node name="Toolbox" type="Node" parent="WeaponUserComponent" index="1" unique_id=1309996882 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound", "swinging_sound")]
 script = ExtResource("3_tryy6")
+damage = 30
 attack_range = 96
 ignore_armor = true
 parry_sound = NodePath("../../Sounds/ParrySound")
@@ -158,7 +169,7 @@ parry_force = 1.5
 throw_speed = 400
 drop_enemy_delay = 0.5
 cooldown_delay = 0.5
-swing_delay = 0.3
+swing_delay = 0.2
 equipped_texture = ExtResource("9_20obr")
 equipped_scale = Vector2(0.6, 0.6)
 icon_texture = ExtResource("10_k2qsy")
@@ -230,24 +241,52 @@ stream = ExtResource("13_jkj8r")
 volume_db = 9.0
 max_distance = 600.0
 
-[node name="LightOccluder2D" parent="." index="12" unique_id=364816313]
-position = Vector2(0, -1)
-
 [node name="NavigationAgent" parent="." index="13" unique_id=1358139639]
 target_desired_distance = 0.1
 avoidance_enabled = false
 radius = 64.0
 
 [node name="BeehaveTree" parent="." index="16" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@18993")
+blackboard = NodePath("@Node@18973")
 
 [node name="MoveToPlayer" type="Node" parent="BeehaveTree" index="0" unique_id=478688837]
 script = ExtResource("33_8bpma")
 metadata/_custom_type_script = "uid://cg016dbe7gs1x"
 
-[node name="SetPlayerToBlackboardAction" type="Node" parent="BeehaveTree/MoveToPlayer" index="0" unique_id=1764438182]
+[node name="SelectorComposite2" type="Node" parent="BeehaveTree/MoveToPlayer" index="0" unique_id=1789014730]
+script = ExtResource("32_h82ij")
+metadata/_custom_type_script = "uid://8hn4kne15ac5"
+
+[node name="SetEnemyToBlackboardAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite2" index="0" unique_id=1812927448]
+script = ExtResource("25_mjvbd")
+metadata/_custom_type_script = "uid://bankaictwkjye"
+
+[node name="AddHealthBarAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite2" index="1" unique_id=2061937914 node_paths=PackedStringArray("target")]
+script = ExtResource("26_yu0nk")
+target = NodePath("../../../../CanvasLayer/ProgressBar/HealthBarComponent")
+metadata/_custom_type_script = "uid://dhld8uqg4kclp"
+
+[node name="SayAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite2" index="2" unique_id=2016893830]
+script = ExtResource("33_da6d8")
+lines = Array[String](["Now, let's dance, [color=crimson]Brother"])
+chance = 1.0
+metadata/_custom_type_script = "uid://6xpj3gw1krkd"
+
+[node name="SetInvincibleAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite2" index="3" unique_id=1925821088]
+script = ExtResource("26_y3v4h")
+metadata/_custom_type_script = "uid://bpstodpkpmrij"
+
+[node name="ChangeFactionAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite2" index="4" unique_id=1786691476]
+script = ExtResource("27_y3v4h")
+metadata/_custom_type_script = "uid://dvlxidwdsh8wr"
+
+[node name="ChangeBossMusicAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite2" index="5" unique_id=1205896409]
+script = ExtResource("30_87nj8")
+new_track = ExtResource("31_pu5ij")
+metadata/_custom_type_script = "uid://ccgru3u2j6mvr"
+
+[node name="SetPlayerToBlackboardAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite2" index="6" unique_id=1570595781]
 script = ExtResource("34_lwv53")
-ignore_player_change = true
 metadata/_custom_type_script = "uid://c6fapai3prk4g"
 
 [node name="SetMoveToKeyAction" type="Node" parent="BeehaveTree/MoveToPlayer" index="1" unique_id=1930580778]
@@ -299,11 +338,17 @@ delay_before_rush = 0.25
 fall_after_rush_delay = 0.0
 rush_sound = NodePath("../../../../../Sounds/Rush")
 rush_prepare_sound = NodePath("../../../../../Sounds/Rush_Prepare")
+throw_speed = 900.0
 throw_stop_speed = 700.0
 rush_combo = 2
 metadata/_custom_type_script = "uid://djnlrq07s5frw"
 
-[node name="SayAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/Rush" index="2" unique_id=907702664]
+[node name="FactionCondition" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/Rush" index="2" unique_id=1007761788]
+script = ExtResource("36_q07ed")
+target_faction = "GreyTide"
+metadata/_custom_type_script = "uid://f7y13beg1thb"
+
+[node name="SayAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/Rush" index="3" unique_id=907702664]
 script = ExtResource("33_da6d8")
 lines = Array[String](["Dash quickly, Brother", "Dodge this", "Keep moving", "How about dash this?"])
 chance = 0.1
@@ -321,7 +366,7 @@ metadata/_custom_type_script = "uid://d1v7cmsrg6uvj"
 [node name="PointInRangeCondition" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/Bow" index="1" unique_id=1906021259]
 script = ExtResource("37_qa3jp")
 negative = true
-max_distance = 160
+max_distance = 130
 metadata/_custom_type_script = "uid://b2bu3qqcql0lk"
 
 [node name="AttackTargetAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/Bow" index="2" unique_id=1997944300 node_paths=PackedStringArray("weapon")]
@@ -330,7 +375,12 @@ weapon = NodePath("../../../../../WeaponUserComponent/Bow")
 prediction_coef = 1.0
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 
-[node name="SayAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/Bow" index="3" unique_id=31308056]
+[node name="FactionCondition" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/Bow" index="3" unique_id=1317504172]
+script = ExtResource("36_q07ed")
+target_faction = "GreyTide"
+metadata/_custom_type_script = "uid://f7y13beg1thb"
+
+[node name="SayAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/Bow" index="4" unique_id=31308056]
 script = ExtResource("33_da6d8")
 lines = Array[String](["You'll overdose.", "A shotgun for casuals", "Don't go far, Brother", "Stop running away", "Closer to me"])
 chance = 0.1
@@ -350,7 +400,12 @@ script = ExtResource("23_7am8w")
 weapon = NodePath("../../../../../WeaponUserComponent/Toolbox")
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 
-[node name="SayAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/Toolbox" index="2" unique_id=980012619]
+[node name="FactionCondition" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/Toolbox" index="2" unique_id=525506974]
+script = ExtResource("36_q07ed")
+target_faction = "GreyTide"
+metadata/_custom_type_script = "uid://f7y13beg1thb"
+
+[node name="SayAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/Toolbox" index="3" unique_id=980012619]
 script = ExtResource("33_da6d8")
 lines = Array[String](["Blood is more visible on blue", "Try pairing now", "Pay attention, Brother", "Bang", "Take this, Brother!"])
 chance = 0.1
@@ -365,6 +420,8 @@ max_stamina = 0
 metadata/_custom_type_script = "uid://bdcq7y2ek222e"
 
 [node name="Rush" type="Area2D" parent="." index="19" unique_id=429380638]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rush" index="0" unique_id=1679646748]
 visible = false
@@ -402,6 +459,7 @@ grow_vertical = 2
 alignment = 2
 
 [node name="ProgressBar" type="ProgressBar" parent="CanvasLayer" index="1" unique_id=1863333061]
+visible = false
 custom_minimum_size = Vector2(0, 48)
 theme_override_styles/background = SubResource("StyleBoxFlat_fe6br")
 theme_override_styles/fill = SubResource("StyleBoxFlat_mjvbd")
@@ -425,8 +483,7 @@ grow_vertical = 2
 theme_override_fonts/normal_font = ExtResource("40_aeccw")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "[color=grey]Greytide[/color] [color=yellow]「WARDEN OF INSULS」
-"
+text = "[color=grey]Greytide[/color] [color=yellow]「WARDEN OF INSULS」"
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -434,10 +491,11 @@ metadata/_edit_use_anchors_ = true
 
 [node name="TextPrintingAnimationComponent" type="Node" parent="CanvasLayer/ProgressBar/RichTextLabel" index="2" unique_id=1187470841]
 script = ExtResource("41_1wq5k")
-animate_on_ready_delay = 1.0
+animate_on_ready_delay = 5.0
+play_sound = false
 metadata/_custom_type_script = "uid://4io3bm7r86h6"
 
-[node name="HealthBarComponent" type="Node" parent="CanvasLayer/ProgressBar" index="1" unique_id=1084435449]
+[node name="HealthBarComponent" type="Node" parent="CanvasLayer/ProgressBar" index="1" unique_id=1176883866]
 script = ExtResource("43_aeccw")
 metadata/_custom_type_script = "uid://b1stcr2j1euvf"
 
@@ -455,13 +513,13 @@ metadata/_custom_type_script = "uid://dfahm1hamvt58"
 
 [node name="SayOnSpawnComponent" type="Node" parent="." index="25" unique_id=1307918026]
 script = ExtResource("45_yuitr")
-lines = Array[String](["[color=crimson]Let's dance[/color], Brother"])
+lines = Array[String](["I will help you get rid of these posers, Brother"])
 metadata/_custom_type_script = "uid://bckogt6ht7r64"
 
 [node name="IntroductionSubjectComponent" parent="." index="27" unique_id=776935428]
 group = "Greytide"
-subject_name = "GreyTide"
-subject_desc = "USE OF THE TIDE TECHNIQUE 
+subject_name = "GREYTIDE"
+subject_desc = "USE OF THE ADVANCED TIDE TECHNIQUE 
 TO DODGE RANGE AND MELEE ATTACKS. 
 MASTER OF SPEAR, MELEE AND RANGE WEAPONS.
 [color=purple]WEAK TO THE BULLETS.[/color]"
@@ -470,5 +528,5 @@ theme = ExtResource("44_yuitr")
 
 [node name="BossMusicComponent" type="Node" parent="." index="28" unique_id=1014498355]
 script = ExtResource("45_fe6br")
-music = ExtResource("46_fe6br")
+music = ExtResource("51_yu0nk")
 metadata/_custom_type_script = "uid://c3hn1oustp3t1"

@@ -15,6 +15,12 @@ class_name WeaponUserComponent extends Component
 @export var knockback_modifier: int = 0
 @export var cooldown_modifier: float = 1.0
 
+@export var overheat_per_shoot_modifier: float = 1.0
+@export var extra_shots: int = 0
+
+@export var qte_perfect_heal_modifier_from_max_modifier: float = 1.0
+@export var qte_time_mod: float = 3.0
+
 @export var can_attack: bool = true
 var ignore_setter: bool = false
 
@@ -23,6 +29,14 @@ func _ready() -> void:
 		select_weapon(selected_weapon)
 
 func force_select_weapon(new_weapon: Weapon):
+	if new_weapon and new_weapon is RangeWeapon:
+		if overheat_per_shoot_modifier != 1.0 and new_weapon.overheat_enabled:
+			new_weapon.overheat_per_shoot_modifier = overheat_per_shoot_modifier
+		if extra_shots != 0 and new_weapon and new_weapon.shots != 1:
+			new_weapon.extra_shots = extra_shots
+	elif new_weapon and new_weapon is MeleeWeapon:
+		new_weapon.qte_time_mod = qte_time_mod
+		new_weapon.qte_perfect_heal_modifier_from_max_modifier = qte_perfect_heal_modifier_from_max_modifier
 	ignore_setter = true
 	selected_weapon = new_weapon
 	selected_weapon.timers_timescaled = timers_timescaled

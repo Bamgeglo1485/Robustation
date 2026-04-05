@@ -39,7 +39,7 @@ position = Vector2(-2, 2)
 physics_interpolation_mode = 2
 script = ExtResource("2_8me6v")
 tick_rate = 10
-blackboard = NodePath("@Node@18968")
+blackboard = NodePath("@Node@66095")
 custom_monitor = true
 actor = NodePath("..")
 metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
@@ -49,6 +49,7 @@ script = ExtResource("6_c4r08")
 metadata/_custom_type_script = "uid://dme5f24l0edsf"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." index="19" unique_id=1507614233]
+show_rect = false
 
 [node name="IntroductionSubjectComponent" type="Node" parent="." index="20" unique_id=776935428]
 script = ExtResource("4_gb06t")

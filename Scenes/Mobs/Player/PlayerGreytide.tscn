@@ -18,12 +18,14 @@
 [ext_resource type="PackedScene" uid="uid://8u8crosi4th3" path="res://Scenes/Projectiles/Shotgun_bullet.tscn" id="15_o6b1y"]
 [ext_resource type="AudioStream" uid="uid://c7qffjnnscmnt" path="res://Audio/Weapon/soup.ogg" id="15_wl2js"]
 [ext_resource type="PackedScene" uid="uid://cowxlra6ogbp0" path="res://Scenes/Effects/Particles/ShotgunFire.tscn" id="16_w1un4"]
+[ext_resource type="AudioStream" uid="uid://d2kkvggv8yiry" path="res://Audio/Effects/shine.ogg" id="17_ia5h3"]
 [ext_resource type="AudioStream" uid="uid://cenp8snm2kjdm" path="res://Audio/Weapon/Projectile/shotgun_shoot.ogg" id="17_lx2yc"]
 [ext_resource type="Texture2D" uid="uid://3st8a6jvfl4i" path="res://Textures/Weapons/Shotgun/shotgun-inhand.png" id="17_w1un4"]
 [ext_resource type="Texture2D" uid="uid://b60x76q21cp5u" path="res://Textures/Weapons/Shotgun/shotgun_icon.png" id="18_ger1f"]
 [ext_resource type="AudioStream" uid="uid://cln64q1fo5f86" path="res://Audio/Weapon/Projectile/spear_throw.ogg" id="18_w1un4"]
 [ext_resource type="AudioStream" uid="uid://2r0y32cx4e8s" path="res://Audio/Weapon/empty.ogg" id="19_kyb4y"]
 [ext_resource type="AudioStream" uid="uid://dhwn1xi06keaf" path="res://Audio/Weapon/shotgun_insert.ogg" id="20_si836"]
+[ext_resource type="PackedScene" uid="uid://bbqpmpj4ntyg" path="res://Scenes/Explosion/BaseExplosion.tscn" id="20_wl2js"]
 [ext_resource type="PackedScene" uid="uid://ebbkkdo5toyh" path="res://Scenes/Projectiles/Hook.tscn" id="22_pfa82"]
 [ext_resource type="Script" uid="uid://ci5vgg14lkrku" path="res://Components/Weapons/HookComponent.gd" id="22_vx866"]
 [ext_resource type="Script" uid="uid://bi1gje1pfokqc" path="res://Components/Weapons/RangeWeaponComponent.gd" id="23_si836"]
@@ -33,6 +35,7 @@
 [ext_resource type="Script" uid="uid://cmonoqon5s4vx" path="res://Components/Abilities/NonBinary/DashAbilityComponent.gd" id="25_46s63"]
 [ext_resource type="AudioStream" uid="uid://bxj6l4kb3ei8m" path="res://Audio/Effects/dash.ogg" id="25_hf65o"]
 [ext_resource type="AudioStream" uid="uid://xbdoc0n20dn" path="res://Audio/Effects/hypospray.ogg" id="26_27vau"]
+[ext_resource type="AudioStream" uid="uid://bxwx57y8k3fqt" path="res://Audio/Effects/lightburn.ogg" id="26_u615k"]
 [ext_resource type="Script" uid="uid://enoou4fskgjn" path="res://Components/Weapons/ChargingMeleeWeaponComponent.gd" id="27_hev03"]
 [ext_resource type="Script" uid="uid://b8d56xguabrvi" path="res://Components/Abilities/OverdoseAbilityComponent.gd" id="27_l8jtb"]
 [ext_resource type="AudioStream" uid="uid://b3uvy6ds1t6fu" path="res://Audio/Weapon/Hit/heavy_punch.ogg" id="29_gmd4o"]
@@ -50,10 +53,18 @@
 [ext_resource type="Script" uid="uid://bwcq6hlpavlvl" path="res://Components/Interface/Ingame/WeaponIconComponent.gd" id="35_u1ecu"]
 [ext_resource type="AudioStream" uid="uid://p0nau7qxcixe" path="res://Audio/Effects/spinning.ogg" id="36_b5xq3"]
 [ext_resource type="Texture2D" uid="uid://dikwitqlv30ww" path="res://Textures/Abilities/injector.png" id="36_u1ecu"]
+[ext_resource type="PackedScene" uid="uid://cc30l120jqrpr" path="res://Scenes/Projectiles/Hitscan/LaserGun.tscn" id="40_c8gs6"]
 [ext_resource type="AudioStream" uid="uid://pdbtg3ie1ptb" path="res://Audio/Effects/ephedrine_overdose.ogg" id="40_sp3tm"]
+[ext_resource type="PackedScene" uid="uid://dwm5ay00kaqqf" path="res://Scenes/Effects/Particles/LaserFire.tscn" id="41_q84mv"]
+[ext_resource type="AudioStream" uid="uid://b5y2urbnmjr2b" path="res://Audio/Music/laser_cannon2.ogg" id="41_vcq5s"]
 [ext_resource type="PackedScene" uid="uid://dmrgvirxbiawv" path="res://Scenes/Effects/Particles/Overdose.tscn" id="42_75g6c"]
 [ext_resource type="PackedScene" uid="uid://dahjv32y84ofv" path="res://Scenes/Mobs/Player/AbstractPlayer.tscn" id="42_isbls"]
+[ext_resource type="Texture2D" uid="uid://oyppmxey67oa" path="res://Textures/Weapons/LaserGun/lasergun-inhand.png" id="42_mjqyx"]
+[ext_resource type="Texture2D" uid="uid://xklko5ub50xq" path="res://Textures/Weapons/LaserGun/lasergun_icon.png" id="43_rhd25"]
 [ext_resource type="Material" uid="uid://ddgd2dckacjiv" path="res://Resources/Shaders/Wave.tres" id="44_pcu7p"]
+[ext_resource type="PackedScene" uid="uid://dxdbd68ghao8p" path="res://Scenes/Projectiles/Hitscan/LaserGunUnlethal.tscn" id="45_rhd25"]
+[ext_resource type="AudioStream" uid="uid://brnrtg3y0uvbr" path="res://Audio/Weapon/Hit/laser3.ogg" id="46_rfjqm"]
+[ext_resource type="Texture2D" uid="uid://pe7a4yj0c7rq" path="res://Textures/Weapons/LaserGun/unlethal_icon.png" id="46_xvfrh"]
 [ext_resource type="PackedScene" uid="uid://e33tm7nwmy0y" path="res://Scenes/Effects/Particles/Charge.tscn" id="48_ssq7n"]
 [ext_resource type="Script" uid="uid://d35ly1kbt1uf" path="res://Components/Interface/AnchorToCursorComponent.gd" id="56_sp3tm"]
 
@@ -140,7 +151,7 @@ ignore_time_scale = true
 selected_weapon = NodePath("Toolbox")
 timers_timescaled = false
 
-[node name="Spear" type="Node" parent="WeaponUserComponent" index="0" unique_id=1787565286 node_paths=PackedStringArray("shoot_sound", "bullets_recover_sound", "projectile_can_parry_weapon", "parent_weapon", "alt_attack")]
+[node name="Spear" type="Node" parent="WeaponUserComponent" index="0" unique_id=1787565286 node_paths=PackedStringArray("shoot_sound", "bullets_recover_sound", "parent_weapon", "alt_attack")]
 script = ExtResource("23_si836")
 projectile = ExtResource("5_6fu7j")
 spread_angle = 3
@@ -152,7 +163,6 @@ shots_angle = 0
 shoot_sound = NodePath("ShootSound")
 bullets_recover_sound = NodePath("../SpearShared/BulletRecoverSound")
 bullets_recovery_delay = 8.0
-projectile_can_parry_weapon = NodePath("../Toolbox")
 cooldown_delay = 0.3
 swing_delay = 0.2
 equipped_texture = ExtResource("13_aa22f")
@@ -164,9 +174,9 @@ metadata/_custom_type_script = "uid://bi1gje1pfokqc"
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Spear" index="0" unique_id=23333780]
 stream = ExtResource("18_w1un4")
 
-[node name="Toolbox" type="Node" parent="WeaponUserComponent" index="1" unique_id=140255965 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound", "qte_icon", "qte_icon_perfect_frame", "qte_perfect_sound", "alt_attack")]
+[node name="Toolbox" type="Node" parent="WeaponUserComponent" index="1" unique_id=140255965 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound", "qte_icon", "qte_icon_perfect_frame", "qte_perfect_sound", "qte_perfect_time_sound", "alt_attack")]
 script = ExtResource("12_tn3ht")
-damage = 30
+damage = 20
 attack_range = 80
 ignore_armor = true
 parry_sound = NodePath("ParrySound")
@@ -179,6 +189,7 @@ qte_icon = NodePath("../../GUI/Misc/QTE/HSlider")
 qte_icon_perfect_frame = NodePath("../../GUI/Misc/QTE/HSlider/Panel/Panel2")
 qte_enabled = true
 qte_perfect_sound = NodePath("PerfectSound")
+qte_perfect_time_sound = NodePath("PerfectTimeSound")
 qte_perfect_effect = ExtResource("11_u615k")
 cooldown_delay = 0.5
 swing_delay = 0.1
@@ -203,13 +214,17 @@ stream = ExtResource("8_pgypf")
 stream = ExtResource("15_wl2js")
 volume_db = 16.0
 
-[node name="Shotgun" type="Node" parent="WeaponUserComponent" index="2" unique_id=1465874377 node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound", "bullets_recover_sound", "alt_attack")]
+[node name="PerfectTimeSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Toolbox" index="4" unique_id=1496786274]
+stream = ExtResource("17_ia5h3")
+
+[node name="Shotgun" type="Node" parent="WeaponUserComponent" index="2" unique_id=1465874377 node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound", "bullets_recover_sound", "overheat_alert", "alt_attack")]
 script = ExtResource("23_si836")
 projectile = ExtResource("15_o6b1y")
 spread_angle = 2
 bullets_max_count = 6
 bullets = 6
 bullets_recover_count = 6
+shots_angle = 45
 case_scene = ExtResource("15_lx2yc")
 shoot_sound = NodePath("ShootSound")
 empty_shoot_sound = NodePath("EmptySound")
@@ -217,6 +232,8 @@ bullets_recover_sound = NodePath("BulletRecoverSound")
 bullets_recovery_delay = 1.5
 gun_fire_effect = ExtResource("16_w1un4")
 overheat_enabled = true
+explosion_on_max_heat = ExtResource("20_wl2js")
+overheat_alert = NodePath("Overheat")
 cooldown_delay = 0.2
 swing_delay = 0.0
 equipped_texture = ExtResource("17_w1un4")
@@ -237,8 +254,13 @@ stream = ExtResource("19_kyb4y")
 [node name="BulletRecoverSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Shotgun" index="2" unique_id=673851274]
 stream = ExtResource("20_si836")
 
-[node name="ShotgunHook" type="Node" parent="WeaponUserComponent" index="3" unique_id=529278492 node_paths=PackedStringArray("reel_sound", "shoot_sound", "rope")]
+[node name="Overheat" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Shotgun" index="3" unique_id=629968633]
+stream = ExtResource("26_u615k")
+volume_db = 20.0
+
+[node name="ShotgunHook" type="Node" parent="WeaponUserComponent" index="3" unique_id=529278492 node_paths=PackedStringArray("weapon_to_reload", "reel_sound", "shoot_sound", "rope")]
 script = ExtResource("22_vx866")
+weapon_to_reload = NodePath("../Shotgun")
 reel_sound = NodePath("ReelSound")
 projectile = ExtResource("22_pfa82")
 spread_angle = 0
@@ -248,7 +270,7 @@ bullets_recover_count = 1
 shots = 1
 shots_angle = 0
 shoot_sound = NodePath("ShootSound")
-bullets_recovery_delay = 2.0
+bullets_recovery_delay = 3.0
 rope = NodePath("../../Texture/WeaponSpriteComponent/Rope")
 cooldown_delay = 0.15
 swing_delay = 0.0
@@ -338,10 +360,65 @@ parameters/looping = true
 stream = ExtResource("31_c8oai")
 volume_db = -8.0
 
-[node name="PlayerWeaponUserComponent" parent="." index="10" unique_id=283125688 node_paths=PackedStringArray("weapon_1", "weapon_2", "weapon_3", "melee_weapon")]
+[node name="Lasergun" type="Node" parent="WeaponUserComponent" index="7" unique_id=705566024 node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound", "alt_attack")]
+script = ExtResource("23_si836")
+projectile = ExtResource("40_c8gs6")
+spread_angle = 1
+bullets_max_count = 1
+bullets_recover_count = 1
+shots_angle = 0
+shoot_sound = NodePath("ShootSound")
+empty_shoot_sound = NodePath("EmptySound")
+bullets_recovery_delay = 0.5
+gun_fire_effect = ExtResource("41_q84mv")
+cooldown_delay = 0.2
+swing_delay = 0.0
+equipped_texture = ExtResource("42_mjqyx")
+equipped_scale = Vector2(0.75, 0.75)
+icon_texture = ExtResource("43_rhd25")
+swing_rotation_multiplier = 0.0
+attack_rotation_multiplier = -0.6
+attack_shift_multiplier = -0.7
+alt_attack = NodePath("../LasergunUnlethal")
+metadata/_custom_type_script = "uid://bi1gje1pfokqc"
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Lasergun" index="0" unique_id=1326117712]
+stream = ExtResource("41_vcq5s")
+
+[node name="EmptySound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Lasergun" index="1" unique_id=754160362]
+stream = ExtResource("19_kyb4y")
+
+[node name="LasergunUnlethal" type="Node" parent="WeaponUserComponent" index="8" unique_id=679740801 node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound")]
+script = ExtResource("23_si836")
+projectile = ExtResource("45_rhd25")
+spread_angle = 1
+bullets_max_count = 1
+bullets_recover_count = 1
+shots_angle = 0
+shoot_sound = NodePath("ShootSound")
+empty_shoot_sound = NodePath("EmptySound")
+bullets_recovery_delay = 1.5
+gun_fire_effect = ExtResource("41_q84mv")
+cooldown_delay = 0.2
+swing_delay = 0.0
+equipped_scale = Vector2(0.75, 0.75)
+icon_texture = ExtResource("46_xvfrh")
+swing_rotation_multiplier = 0.0
+attack_rotation_multiplier = -0.6
+attack_shift_multiplier = -0.7
+metadata/_custom_type_script = "uid://bi1gje1pfokqc"
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/LasergunUnlethal" index="0" unique_id=1520883337]
+stream = ExtResource("46_rfjqm")
+
+[node name="EmptySound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/LasergunUnlethal" index="1" unique_id=895204182]
+stream = ExtResource("19_kyb4y")
+
+[node name="PlayerWeaponUserComponent" parent="." index="10" unique_id=283125688 node_paths=PackedStringArray("weapon_1", "weapon_2", "weapon_3", "weapon_4", "melee_weapon")]
 weapon_1 = NodePath("../WeaponUserComponent/Toolbox")
 weapon_2 = NodePath("../WeaponUserComponent/Shotgun")
-weapon_3 = NodePath("../WeaponUserComponent/Spear")
+weapon_3 = NodePath("../WeaponUserComponent/Lasergun")
+weapon_4 = NodePath("../WeaponUserComponent/Spear")
 melee_weapon = NodePath("../WeaponUserComponent/Toolbox")
 
 [node name="AnimationComponent" parent="." index="11" unique_id=1054272185]
@@ -362,6 +439,9 @@ max_polyphony = 3
 stream = ExtResource("40_sp3tm")
 max_polyphony = 3
 bus = &"OverdoseIgnore"
+
+[node name="LightOccluder2D" parent="." index="15" unique_id=364816313]
+sdf_collision = true
 
 [node name="DashAbilityComponent" type="Node" parent="." index="16" unique_id=991976233 node_paths=PackedStringArray("dash_sound", "overdose_refuel_sound", "ability_icon", "parry_weapon")]
 script = ExtResource("25_46s63")
@@ -405,14 +485,12 @@ metadata/_edit_use_anchors_ = true
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.095000006
-anchor_top = 0.11400001
-anchor_right = 0.14400001
-anchor_bottom = 0.11400001
-offset_left = -0.44001007
-offset_top = -11.872002
-offset_right = 25.111984
-offset_bottom = 4.1279984
+anchor_left = 0.09461805
+anchor_top = 0.095679015
+anchor_right = 0.15538195
+anchor_bottom = 0.13425925
+offset_right = 30.0
+offset_bottom = -8.333336
 scale = Vector2(0.7, 1.5)
 theme_override_icons/grabber_disabled = SubResource("DPITexture_wl2js")
 theme_override_styles/slider = SubResource("StyleBoxEmpty_wl2js")

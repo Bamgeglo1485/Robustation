@@ -1,0 +1,10 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://b21hluxqt2tlt"]
+
+[ext_resource type="AudioStream" uid="uid://n3f4d3rdp62g" path="res://Audio/Effects/sitcom_laugh.ogg" id="1_iqkjp"]
+[ext_resource type="AudioStream" uid="uid://cdhiw5dn0st0r" path="res://Audio/Effects/sitcom_laugh2.ogg" id="2_f1oxc"]
+
+[resource]
+random_pitch = 1.3348398
+streams_count = 2
+stream_0/stream = ExtResource("1_iqkjp")
+stream_1/stream = ExtResource("2_f1oxc")

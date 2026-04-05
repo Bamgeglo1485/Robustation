@@ -5,10 +5,9 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_apuoa"]
 
 [node name="BaseHitscan" type="RayCast2D" unique_id=1219814461]
-rotation = -1.5707964
 exclude_parent = false
 target_position = Vector2(1000, 0)
-collision_mask = 15
+collision_mask = 2
 
 [node name="RayLine" type="Line2D" parent="." unique_id=1153845673]
 material = SubResource("ShaderMaterial_apuoa")

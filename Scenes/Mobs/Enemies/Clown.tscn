@@ -1,0 +1,205 @@
+[gd_scene format=3 uid="uid://d2fhub84qhvc4"]
+
+[ext_resource type="PackedScene" uid="uid://c0eulucj1dtco" path="res://Scenes/Mobs/Base/BaseEnemy.tscn" id="1_14t3u"]
+[ext_resource type="Texture2D" uid="uid://bc0aned0j1b1h" path="res://Textures/Mobs/Mobs/clown.png" id="2_0svj0"]
+[ext_resource type="Script" uid="uid://bi1gje1pfokqc" path="res://Components/Weapons/RangeWeaponComponent.gd" id="3_d7x3a"]
+[ext_resource type="AudioStream" uid="uid://bh5d1i55lrqja" path="res://Resources/Audio/ClownStepRandom.tres" id="3_hsaj4"]
+[ext_resource type="PackedScene" uid="uid://3b8p72nb6mq7" path="res://Scenes/Projectiles/Banana.tscn" id="4_0612y"]
+[ext_resource type="Texture2D" uid="uid://bp8sxlw3mrm4y" path="res://Textures/Weapons/Banana/peel-inhand-right.png" id="5_gork3"]
+[ext_resource type="AudioStream" uid="uid://eogckfs15aph" path="res://Audio/Weapon/miss.ogg" id="6_ribf1"]
+[ext_resource type="Script" uid="uid://6b7bcparwq17" path="res://Components/Weapons/MeleeWeaponComponent.gd" id="7_0m0ai"]
+[ext_resource type="Texture2D" uid="uid://5csj6f542jrk" path="res://Textures/Weapons/Horn/pushorn_inhand_right.png" id="8_0m0ai"]
+[ext_resource type="Texture2D" uid="uid://bnx2ug4ecd0xd" path="res://Textures/Perks/pushorn.png" id="9_iqm8m"]
+[ext_resource type="AudioStream" uid="uid://btaybld712qks" path="res://Audio/Weapon/Hit/pushHornHonk.ogg" id="10_5q41g"]
+[ext_resource type="AudioStream" uid="uid://b21hluxqt2tlt" path="res://Resources/Audio/LaughRandom.tres" id="12_ku322"]
+[ext_resource type="Script" uid="uid://dua6hp8ir5tiu" path="res://Components/Mobs/AI/Actions/AttackTargetAction.gd" id="17_0m0ai"]
+[ext_resource type="Script" uid="uid://da2q40ragr5wk" path="res://Components/Mobs/NPC/BuddyComponent.gd" id="30_djxbv"]
+[ext_resource type="Script" uid="uid://hv0g6akh0ftn" path="res://Components/Mobs/RandomizeMobMoverComponent.gd" id="31_nhx7t"]
+[ext_resource type="Script" uid="uid://8hn4kne15ac5" path="res://addons/beehave/nodes/composites/selector.gd" id="32_wbqi6"]
+[ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="33_1ursc"]
+[ext_resource type="Script" uid="uid://c6fapai3prk4g" path="res://Components/Mobs/AI/Actions/SetPlayerToBlackboardAction.gd" id="34_x4770"]
+[ext_resource type="Script" uid="uid://dl1x4qw4skabi" path="res://Components/Mobs/AI/Actions/SetMoveToKeyAction.gd" id="35_xwvb0"]
+[ext_resource type="Script" uid="uid://wlnghjnvdlyn" path="res://Components/Mobs/AI/Actions/MoveToPointAction.gd" id="36_yghj4"]
+[ext_resource type="Script" uid="uid://b2bu3qqcql0lk" path="res://Components/Mobs/AI/Conditions/PointInRangeCondition.gd" id="37_q5dki"]
+[ext_resource type="Script" uid="uid://ttwxxcce2i4p" path="res://Components/Mobs/AI/Actions/LookAtPointAction.gd" id="40_rjjt5"]
+[ext_resource type="AudioStream" uid="uid://x11c2lqv8483" path="res://Audio/EnemyThemes/GreytideFollower.ogg" id="41_o15ms"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0svj0"]
+polygon = PackedVector2Array(-13, 15, -1, 15, -1, 11, 0, 15, 12, 15, 10, 12, 4, 12, 9, 8, 8, 4, 8, -2, 4, -7, 2, -7, 8, -12, 8, -14, 6, -16, 3, -16, 1, -15, -2, -15, -4, -16, -7, -16, -9, -14, -9, -12, -3, -7, -5, -7, -9, -2, -9, 4, -10, 8, -5, 12, -11, 12)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fb4jx"]
+radius = 40.0
+
+[node name="Clown" unique_id=1270222458 instance=ExtResource("1_14t3u")]
+visibility_layer = 3
+
+[node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
+base_max_speed = 300.0
+acceleration = 200.0
+friction = 700.0
+moving_animation_lean = 0.4
+
+[node name="Texture" parent="." index="2" unique_id=382857461]
+position = Vector2(0, -1)
+texture = ExtResource("2_0svj0")
+
+[node name="HealthComponent" parent="." index="4" unique_id=1758373275]
+damage_type_modifiers = Dictionary[String, float]({
+"Projectile": 2.0
+})
+
+[node name="WeaponUserComponent" parent="." index="6" unique_id=2123544057 node_paths=PackedStringArray("selected_weapon")]
+selected_weapon = NodePath("Banana")
+
+[node name="Banana" type="Node" parent="WeaponUserComponent" index="0" unique_id=1367294396 node_paths=PackedStringArray("shoot_sound")]
+script = ExtResource("3_d7x3a")
+projectile = ExtResource("4_0612y")
+spread_angle = 0
+bullets_max_count = 3
+bullets = 3
+bullets_recover_count = 3
+shots = 2
+shoot_sound = NodePath("ShootSound")
+bullets_recovery_delay = 3.0
+random_bullet_recover_delay_coef = 0.2
+cooldown_delay = 0.1
+swing_delay = 0.3
+equipped_texture = ExtResource("5_gork3")
+equipped_scale = Vector2(0.5, 0.55)
+swing_rotation_multiplier = 0.0
+attack_rotation_multiplier = -0.6
+attack_shift_multiplier = -0.7
+metadata/_custom_type_script = "uid://bi1gje1pfokqc"
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Banana" index="0" unique_id=1640108391]
+stream = ExtResource("6_ribf1")
+max_distance = 600.0
+max_polyphony = 3
+
+[node name="Horn" type="Node" parent="WeaponUserComponent" index="1" unique_id=604576999 node_paths=PackedStringArray("attack_sound", "miss_sound")]
+script = ExtResource("7_0m0ai")
+damage = 0
+attack_range = 96
+ignore_armor = true
+play_parried_sound = true
+attack_sound = NodePath("MeleeHitSound")
+miss_sound = NodePath("MeleeMissSound")
+throw_speed = 700
+drop_enemy_delay = 0.5
+cooldown_delay = 4.0
+swing_delay = 0.3
+equipped_texture = ExtResource("8_0m0ai")
+equipped_scale = Vector2(0.6, 0.6)
+icon_texture = ExtResource("9_iqm8m")
+self_throw_speed = 200
+attack_rotation_multiplier = 0.5
+metadata/_custom_type_script = "uid://6b7bcparwq17"
+
+[node name="MeleeMissSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Horn" index="0" unique_id=1123478274]
+stream = ExtResource("6_ribf1")
+max_distance = 600.0
+
+[node name="MeleeHitSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Horn" index="1" unique_id=1563806651]
+stream = ExtResource("10_5q41g")
+max_distance = 600.0
+
+[node name="FootstepComponent" parent="." index="9" unique_id=86781683]
+footstep_range = 16
+
+[node name="FootstepSounds" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="1" unique_id=1611482403]
+stream = ExtResource("3_hsaj4")
+
+[node name="Laugh" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="2" unique_id=1846564547]
+stream = ExtResource("12_ku322")
+
+[node name="LightOccluder2D" parent="." index="12" unique_id=364816313]
+position = Vector2(0, -1)
+occluder = SubResource("OccluderPolygon2D_0svj0")
+sdf_collision = true
+
+[node name="NavigationAgent" parent="." index="13" unique_id=1358139639]
+target_desired_distance = 0.1
+
+[node name="BuddyComponent" type="Node" parent="." index="15" unique_id=2046809544]
+script = ExtResource("30_djxbv")
+buddy_group = "Assistant"
+rage_when_buddy_dead = false
+metadata/_custom_type_script = "uid://da2q40ragr5wk"
+
+[node name="RandomizeMobMoverComponent" type="Node" parent="." index="16" unique_id=831758902]
+script = ExtResource("31_nhx7t")
+randomize_multiplier_min = 0.85
+randomize_multiplier_max = 1.2
+metadata/_custom_type_script = "uid://hv0g6akh0ftn"
+
+[node name="BeehaveTree" parent="." index="18" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
+blackboard = NodePath("@Node@18987")
+
+[node name="SequenceComposite" type="Node" parent="BeehaveTree" index="0" unique_id=772322784]
+script = ExtResource("33_1ursc")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="MoveToPlayer" type="Node" parent="BeehaveTree/SequenceComposite" index="0" unique_id=478688837]
+script = ExtResource("33_1ursc")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="SetPlayerToBlackboardAction" type="Node" parent="BeehaveTree/SequenceComposite/MoveToPlayer" index="0" unique_id=1764438182]
+script = ExtResource("34_x4770")
+metadata/_custom_type_script = "uid://c6fapai3prk4g"
+
+[node name="SetMoveToKeyAction" type="Node" parent="BeehaveTree/SequenceComposite/MoveToPlayer" index="1" unique_id=1930580778]
+script = ExtResource("35_xwvb0")
+key = "Target"
+metadata/_custom_type_script = "uid://dl1x4qw4skabi"
+
+[node name="MoveToPointAction" type="Node" parent="BeehaveTree/SequenceComposite/MoveToPlayer" index="2" unique_id=1364976193]
+script = ExtResource("36_yghj4")
+move_update_rate = 0.2
+metadata/_custom_type_script = "uid://wlnghjnvdlyn"
+
+[node name="LookAtDirectionAction" type="Node" parent="BeehaveTree/SequenceComposite/MoveToPlayer" index="3" unique_id=1358597805]
+script = ExtResource("40_rjjt5")
+key = "MovePoint"
+metadata/_custom_type_script = "uid://ttwxxcce2i4p"
+
+[node name="Attack" type="Node" parent="BeehaveTree/SequenceComposite" index="1" unique_id=2013463721]
+script = ExtResource("32_wbqi6")
+metadata/_custom_type_script = "uid://8hn4kne15ac5"
+
+[node name="Banana" type="Node" parent="BeehaveTree/SequenceComposite/Attack" index="0" unique_id=1371964999]
+script = ExtResource("33_1ursc")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="PointInRangeCondition" type="Node" parent="BeehaveTree/SequenceComposite/Attack/Banana" index="0" unique_id=2137151987]
+script = ExtResource("37_q5dki")
+negative = true
+max_distance = 64
+metadata/_custom_type_script = "uid://b2bu3qqcql0lk"
+
+[node name="AttackTargetAction" type="Node" parent="BeehaveTree/SequenceComposite/Attack/Banana" index="1" unique_id=959716645 node_paths=PackedStringArray("weapon")]
+script = ExtResource("17_0m0ai")
+weapon = NodePath("../../../../../WeaponUserComponent/Banana")
+metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
+
+[node name="Horn" type="Node" parent="BeehaveTree/SequenceComposite/Attack" index="1" unique_id=1839476681]
+script = ExtResource("33_1ursc")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="AttackTargetAction" type="Node" parent="BeehaveTree/SequenceComposite/Attack/Horn" index="0" unique_id=1805989312 node_paths=PackedStringArray("weapon")]
+script = ExtResource("17_0m0ai")
+weapon = NodePath("../../../../../WeaponUserComponent/Horn")
+metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
+
+[node name="Rush" type="Area2D" parent="." index="20" unique_id=429380638]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rush" index="0" unique_id=1679646748]
+visible = false
+shape = SubResource("CircleShape2D_fb4jx")
+
+[node name="IntroductionSubjectComponent" parent="." index="23" unique_id=776935428]
+group = "Gray"
+subject_name = "GRAY"
+subject_desc = "A GRAYTIDE SPEARMAN WHO ATTACKS WITH A DASH.
+[color=purple]WEAK TO THE BULLETS AND GETS STUN WHEN HITTING A WALL[/color]"
+subject_prefix = "GREYTIDE'S FOLLOWER"
+theme = ExtResource("41_o15ms")

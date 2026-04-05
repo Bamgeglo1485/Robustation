@@ -26,6 +26,8 @@ var minor_speed_modifier: float
 ## Toggles the ability to bypass other bodies
 @export var set_navigation_velocity: bool = false
 
+@export var moving_animation_lean: float = 0.08
+
 ## An area to crash into and knock down other bodies while flying.
 @export var fly_impact_area: Area2D
 var flying: bool = false
@@ -53,6 +55,8 @@ var standing_delay: float = 0.0
 @onready var health_component: HealthComponent = parent.get_node_or_null("HealthComponent")
 
 # Non binary animation tweens
+var unfly_animation_tween: Tween
+var fly_animation_tween: Tween
 var walking_tween: Tween
 var drop_tween: Tween
 
@@ -78,7 +82,7 @@ func _physics_process(delta: float) -> void:
 
 # Movement logic
 func _move(delta: float) -> void:
-	if not parent is CharacterBody2D:
+	if !parent is CharacterBody2D:
 		return
 	
 	if flying:
@@ -129,8 +133,8 @@ func _walk_animation() -> void:
 		
 		var modified_time: float = 0.2 * max_speed / base_max_speed
 		
-		walking_tween.tween_property(parent, "global_rotation", -0.08, modified_time)
-		walking_tween.tween_property(parent, "global_rotation", 0.08, modified_time)
+		walking_tween.tween_property(parent, "global_rotation", -moving_animation_lean, modified_time)
+		walking_tween.tween_property(parent, "global_rotation", moving_animation_lean, modified_time)
 		
 		animation_component.set_animation(walking_tween, 1)
 
@@ -152,10 +156,10 @@ func _fly(delta) -> void:
 	fly_speed -= 400 * delta
 	
 	if fly_speed < fly_stop_speed * 20:
-		var tween: Tween = create_tween()
-		tween.set_trans(Tween.TRANS_SINE)
-		tween.set_ease(Tween.EASE_IN_OUT)
-		tween.tween_property(parent, "scale", Vector2(1, 1), 0.2)
+		unfly_animation_tween = create_tween()
+		unfly_animation_tween.set_trans(Tween.TRANS_SINE)
+		unfly_animation_tween.set_ease(Tween.EASE_IN_OUT)
+		unfly_animation_tween.tween_property(parent, "scale", Vector2(1, 1), 0.2)
 	
 	if fly_speed < fly_stop_speed:
 		fly_speed = 0
@@ -190,10 +194,10 @@ func throw(
 		fly_stop_speed = throw_stop_speed * fly_modifier
 		fly_direction = throw_direction.normalized()
 	if animation:
-		var tween: Tween = create_tween()
-		tween.set_trans(Tween.TRANS_SINE)
-		tween.set_ease(Tween.EASE_IN_OUT)
-		tween.tween_property(parent, "scale", Vector2(1.35, 1.35), 0.2)
+		fly_animation_tween = create_tween()
+		fly_animation_tween.set_trans(Tween.TRANS_SINE)
+		fly_animation_tween.set_ease(Tween.EASE_IN_OUT)
+		fly_animation_tween.tween_property(parent, "scale", Vector2(1.35, 1.35), 0.2)
 
 func _fall_process(delta: float) -> void:
 	if !flying:
@@ -209,7 +213,7 @@ func drop(delay: float, force: bool = false, resistance_force: int = 0) -> void:
 	var modifier: float = 1.0
 	if !force:
 		modifier = fall_delay_modifier
-		
+	
 	standing_delay += delay * modifier
 	
 	if standing_delay <= 0.2:
@@ -267,14 +271,14 @@ func on_fly_impact(body: Node) -> void:
 		return
 	if body == fly_source:
 		return
-	if !flying or !body.has_node("MobMoverComponent") or fly_speed < 200 or body is Area2D or body == parent:
+	if !flying or fly_speed < 200 or body is Area2D or body == parent:
 		return
-	var mob_mover: MobMoverComponent = body.get_node("MobMoverComponent")
-	if !mob_mover.can_fall_from_body:
+	var mob_mover: MobMoverComponent = body.get_node_or_null("MobMoverComponent")
+	if !mob_mover or !mob_mover.can_fall_from_body:
 		return
 	mob_mover.throw(parent.velocity, fly_speed/1.5)
 	mob_mover.drop(1)
-	var body_health_component: HealthComponent = body.get_node("HealthComponent")
+	var body_health_component: HealthComponent = body.get_node_or_null("HealthComponent")
 	if body_health_component:
 		@warning_ignore("narrowing_conversion")
 		body_health_component.take_damage(fly_speed/50.0, fly_source)

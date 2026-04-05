@@ -1,0 +1,14 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://5e1gmo3icdwn"]
+
+[ext_resource type="AudioStream" uid="uid://b8x0gygi0eig0" path="res://Audio/Footstep/slime1.ogg" id="1_8vbod"]
+[ext_resource type="AudioStream" uid="uid://csqsrfop2u1j7" path="res://Audio/Footstep/slime2.ogg" id="2_hy247"]
+[ext_resource type="AudioStream" uid="uid://5t6bp1l0ll44" path="res://Audio/Footstep/slime3.ogg" id="3_rfxja"]
+[ext_resource type="AudioStream" uid="uid://dhmhrdy0i6t5y" path="res://Audio/Footstep/slime4.ogg" id="4_fqrf2"]
+
+[resource]
+random_pitch = 1.3348398
+streams_count = 4
+stream_0/stream = ExtResource("1_8vbod")
+stream_1/stream = ExtResource("2_hy247")
+stream_2/stream = ExtResource("3_rfxja")
+stream_3/stream = ExtResource("4_fqrf2")

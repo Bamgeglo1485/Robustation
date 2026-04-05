@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://dwm5ay00kaqqf"]
+
+[ext_resource type="Texture2D" uid="uid://bc4akrjd4yio1" path="res://Textures/Effects/Particles/blood.png" id="1_ict16"]
+[ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts/Effects/TimedDelete.gd" id="1_rox0a"]
+
+[sub_resource type="Curve" id="Curve_gec8y"]
+_limits = [0.0, 1.6853933, 0.0, 1.0]
+_data = [Vector2(0, 1.6853933), 0.0, 0.0, 0, 0, Vector2(0.77205884, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6ugap"]
+curve = SubResource("Curve_gec8y")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0sbr1"]
+lifetime_randomness = 0.48
+particle_flag_disable_z = true
+spread = 25.0
+initial_velocity_min = 59.77
+initial_velocity_max = 234.48
+gravity = Vector3(0, 0, 0)
+scale_over_velocity_max = 230.76999
+scale_over_velocity_curve = SubResource("CurveTexture_6ugap")
+
+[node name="GPUParticles2D" type="GPUParticles2D" unique_id=1567534584]
+modulate = Color(1.8352373, 0, 0.4968328, 1)
+z_index = 5
+texture_filter = 1
+emitting = false
+amount = 40
+texture = ExtResource("1_ict16")
+one_shot = true
+speed_scale = 3.0
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 4246352849
+trail_enabled = true
+trail_sections = 2
+trail_section_subdivisions = 1
+process_material = SubResource("ParticleProcessMaterial_0sbr1")
+script = ExtResource("1_rox0a")
+
+[node name="PauseTimer" type="Timer" parent="." unique_id=1815170734]
+wait_time = 0.2
+one_shot = true
+autostart = true
+
+[node name="VisibleOnScreenEnabler" type="VisibleOnScreenEnabler2D" parent="." unique_id=1236946888]
+rect = Rect2(-30, -30, 60, 60)
+
+[connection signal="timeout" from="PauseTimer" to="." method="_on_pause_timer_timeout"]

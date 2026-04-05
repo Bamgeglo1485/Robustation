@@ -297,6 +297,7 @@ collision_layer = 1
 collision_mask = 1
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
+acceleration = 200.0
 friction = 500.0
 can_fall_from_body = false
 
@@ -474,6 +475,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_behavior_recursive = 1
 
 [node name="Information" type="RichTextLabel" parent="GUI/EnemyIntroduction" index="0" unique_id=2104700922]
 layout_mode = 1
@@ -650,6 +652,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_behavior_recursive = 1
 
 [node name="Spectrum" type="Control" parent="GUI/Misc" index="0" unique_id=1750697326 node_paths=PackedStringArray("color_component")]
 layout_mode = 1
@@ -746,7 +749,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
+mouse_behavior_recursive = 1
 
 [node name="Container" type="VBoxContainer" parent="GUI/BossHealthBars" index="0" unique_id=81065373]
 layout_mode = 1
@@ -765,7 +768,7 @@ anchor_bottom = 1.0
 offset_right = 1.1518555
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
+mouse_behavior_recursive = 1
 
 [node name="Hand_L" type="TextureRect" parent="GUI/Inventory" index="0" unique_id=723434357]
 layout_mode = 1
@@ -906,6 +909,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_behavior_recursive = 1
 color = Color(1, 1, 1, 0)
 
 [node name="BattleTendency" type="CanvasLayer" parent="GUI/Overlays" index="1" unique_id=1422523169]
@@ -917,6 +921,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_behavior_recursive = 1
 color = Color(1, 1, 1, 0)
 
 [node name="UniqueShaderComponent" type="Node" parent="GUI/Overlays/BattleTendency/BattleTendency" index="0" unique_id=942703649]
@@ -933,6 +938,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_behavior_recursive = 1
 color = Color(1, 1, 1, 0)
 
 [node name="UniqueShaderComponent" type="Node" parent="GUI/Overlays/ColorModify/ColorModify" index="0" unique_id=1795704970]
@@ -950,6 +956,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_behavior_recursive = 1
 color = Color(1, 1, 1, 0)
 
 [node name="Rainbow" type="CanvasLayer" parent="GUI/Overlays" index="4" unique_id=1257070989]
@@ -966,6 +973,7 @@ offset_right = 1533.0
 offset_bottom = 372.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_behavior_recursive = 1
 color = Color(1, 1, 1, 0)
 
 [node name="UniqueShaderComponent" type="Node" parent="GUI/Overlays/Rainbow/Rainbow" index="0" unique_id=1428283624]
@@ -982,6 +990,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_behavior_recursive = 1
 color = Color(1, 1, 1, 0)
 
 [node name="Ability" type="CanvasLayer" parent="GUI/Overlays" index="6" unique_id=614013625]
@@ -997,6 +1006,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_behavior_recursive = 1
 color = Color(1, 1, 1, 0)
 
 [node name="UniqueShaderComponent" type="Node" parent="GUI/Overlays/Death/Death" index="0" unique_id=322135712]
@@ -1012,6 +1022,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_behavior_recursive = 1
 color = Color(1, 1, 1, 0)
 
 [node name="UniqueShaderComponent" type="Node" parent="GUI/Overlays/DamageFlash/DamageFlash" index="0" unique_id=104124287]

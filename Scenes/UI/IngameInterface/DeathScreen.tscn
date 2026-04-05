@@ -31,6 +31,7 @@ anchor_bottom = 0.44598764
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
+mouse_behavior_recursive = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Error" type="Panel" parent="." unique_id=1254627263]

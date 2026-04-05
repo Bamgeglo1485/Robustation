@@ -20,10 +20,14 @@ var base_max_health: int = max_health
 
 @onready var shader: ShaderMaterial
 @onready var animation_component: AnimationComponent = parent.get_node_or_null("AnimationComponent")
+@onready var trigger_on_damage_component: TriggerOnDamageComponent = parent.get_node_or_null("TriggerOnDamageComponent")
 
 @export_category("Heal For Damage")
 @export var heal_for_damage_multiplier: float = 0.0
 @export var heal_for_damage_range: int = 64
+@export var max_heal_for_damage_health_percent: float = 0.7
+@warning_ignore("narrowing_conversion")
+@onready var max_heal_for_damage_health: int = max_health * max_heal_for_damage_health_percent
 
 @export_category("Delayed damage")
 @export var delayed_damage_modifier: float = 1.0
@@ -92,14 +96,15 @@ func take_damage(damage: int, damager: Node2D, damage_type: String = "Generic", 
 		return
 	var direction = (damager.global_position-parent.global_position)
 	
-	if parent.has_node("AnimationComponent"):
-		parent.get_node("AnimationComponent").lean_to_direction(-direction, 4)
-	if parent.has_node("TriggerOnDamageComponent"):
-		parent.get_node("TriggerOnDamageComponent").trigger()
-	if damager.has_node("HealthComponent") and damager != parent and damage > 0:
-		var damager_health = damager.get_node("HealthComponent")
-		if direction.length() <= damager_health.heal_for_damage_range:
-			damager_health.set_health(damager_health.health + damage * damager_health.heal_for_damage_multiplier)
+	if animation_component:
+		animation_component.lean_to_direction(-direction, 4)
+	if trigger_on_damage_component:
+		trigger_on_damage_component.trigger()
+	var damager_health_component: HealthComponent = damager.get_node_or_null("HealthComponent")
+	if damager_health_component and damager_health_component.heal_for_damage_multiplier != 0 and damager != parent and damage > 0 and damager_health_component.health < damager_health_component.max_heal_for_damage_health:
+		if direction.length() <= damager_health_component.heal_for_damage_range:
+			@warning_ignore("narrowing_conversion")
+			damager_health_component.set_health(damager_health_component.health + damage * damager_health_component.heal_for_damage_multiplier)
 
 func damage_effects(damager) -> void:
 	if !parent or !damager:
@@ -144,9 +149,11 @@ func _death() -> void:
 		for child in parent.get_children():
 			if !is_instance_valid(child) or child == self or child is HealthOverlayComponent:
 				continue
-			if child is PlayerCamera:
+			if child is PlayerCamera or child is CanvasLayer:
 				continue
-			if child is CanvasLayer:
+			if child is MusicComponent:
+				var pitch_tween = create_tween()
+				pitch_tween.tween_property(child.main_music_player, "pitch_scale", 0.1, 1.5)
 				continue
 			if child is BaseAbilityComponent:
 				await child.disable_ability()
@@ -183,3 +190,8 @@ func _delayed_damage_process() -> void:
 		_flash(0.5, Color(0.0, 0.694, 0.508, 0.188))
 	
 	delayed_damage_timer.start()
+
+func set_max_health(new_value) -> void:
+	if heal_for_damage_multiplier != 0:
+		max_heal_for_damage_health = new_value * max_heal_for_damage_health_percent
+	max_health = new_value

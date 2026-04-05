@@ -8,8 +8,10 @@
 [ext_resource type="AudioStream" uid="uid://b1hijj0a6bn4s" path="res://Audio/Effects/hahaha.ogg" id="6_3ffbk"]
 [ext_resource type="AudioStream" uid="uid://b3bn8ma2pwwns" path="res://Audio/Interface/Menu/computer_loop.ogg" id="7_4eipc"]
 [ext_resource type="Script" uid="uid://q6vb3j07d62t" path="res://Components/Entity/FadeInComponent.gd" id="7_u8k2u"]
+[ext_resource type="Script" uid="uid://ccj77qbogyatv" path="res://Components/Entity/TimedSceneAdderComponent.gd" id="9_745y4"]
+[ext_resource type="PackedScene" uid="uid://br3psb1b4g3sy" path="res://Scenes/UI/ArenaResults.tscn" id="9_i5qfg"]
 
-[node name="IngameMenu" type="Control" unique_id=1644887491]
+[node name="RestartScreen" type="Control" unique_id=1644887491]
 process_mode = 3
 z_index = 100
 layout_mode = 3
@@ -19,6 +21,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
+mouse_behavior_recursive = 2
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=446870106]
 layout_mode = 1
@@ -27,6 +30,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_behavior_recursive = 1
 color = Color(0.3576158, 0, 0.113307424, 1)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="ColorRect" unique_id=1291140237]
@@ -139,6 +143,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_behavior_recursive = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=501109570]
 stream = ExtResource("6_3ffbk")
@@ -156,3 +161,10 @@ stream = ExtResource("7_4eipc")
 volume_db = 3.0
 autoplay = true
 parameters/looping = true
+
+[node name="TimedSceneAdderComponent" type="Node" parent="." unique_id=1119392703 node_paths=PackedStringArray("target_parent")]
+script = ExtResource("9_745y4")
+targets = Array[PackedScene]([ExtResource("9_i5qfg")])
+target_parent = NodePath("..")
+delay = 1.0
+metadata/_custom_type_script = "uid://ccj77qbogyatv"

@@ -3,10 +3,12 @@ class_name AdditionalStaminaPerkComponent extends BasePerkComponent
 @export var base_stamina: int = 20
 
 func _init() -> void:
-	perk_name = "Student Diet"
+	untranslated_perk_name = "Student Diet"
 	perk_desc = "[color=green]Increases your stamina by 20 units[/color]"
 	perk_icon = preload("res://Textures/Perks/student_diet.png")
-	
+	perk_name = tr(untranslated_perk_name)
+	perk_desc = tr(perk_desc)
+
 @onready var stamina_component: StaminaComponent = parent.get_node_or_null("StaminaComponent")
 
 func apply_modifiers() -> void:

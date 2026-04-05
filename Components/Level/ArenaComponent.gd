@@ -3,10 +3,12 @@ class_name ArenaComponent extends Component
 @export_category("Settings")
 @export var enabled: bool = true
 @export_file_path() var perks: Array[String]
+@export var boss_battles_per: int = 10
 @export var area_info: RichTextLabel
 @export var start_budget: float = 5
 @export var choosable_perk_count_per_wave: int = 4
 @export var available_enemies: Array[Enemy]
+@export var available_bosses: Array[Enemy]
 @export var budget_per_wave: float = 1
 @export var spawn_positions: Array[Vector2]
 @export var difficulty: int = 2
@@ -23,7 +25,6 @@ var melee_enemies: Array[Enemy]
 var range_enemies: Array[Enemy]
 var assist_enemies: Array[Enemy]
 var universal_enemies: Array[Enemy]
-var boss_enemies: Array[Enemy]
 var time: float
 var loose: bool = false
 
@@ -58,8 +59,6 @@ func _ready() -> void:
 			assist_enemies.append(enemy)
 		elif enemy.enemy_type == enemy.enemy_types.UNIVERSAL:
 			universal_enemies.append(enemy)
-		elif enemy.enemy_type == enemy.enemy_types.BOSS:
-			boss_enemies.append(enemy)
 	
 	start_game()
 
@@ -83,6 +82,15 @@ func start_new_wave(new_game: bool = false) -> void:
 	wave += 1
 	budget = start_budget + budget_per_wave * wave
 	
+	var bosses: Array[PhysicsBody2D]
+	if wave % boss_battles_per == 0:
+		var boss_enemy: Enemy = _random_enemy(available_bosses)
+		var boss_array: Array[PackedScene]
+		boss_array.append(boss_enemy.scene)
+		bosses = _spawn_enemies(boss_array)
+		budget -= boss_enemy.cost
+		current_enemies.append(bosses[0])
+	
 	current_enemies.append_array(_spawn_enemies(_choose_enemies(available_enemies)))
 	
 	if budget < 2:
@@ -91,7 +99,10 @@ func start_new_wave(new_game: bool = false) -> void:
 	var attempts: int = 0
 	while budget >= 2 and attempts < MAX_ATTEMPTS:
 		attempts += 1
-		_add_perks(current_enemies)
+		if !bosses:
+			_add_perks(current_enemies)
+		else:
+			_add_perks(bosses)
 
 #-----------------------ASSIST FUNCTIONS-----------------------
 func _spawn_enemies(enemies: Array[PackedScene]) -> Array[PhysicsBody2D]:
@@ -172,7 +183,7 @@ func _add_perks(enemies: Array[PhysicsBody2D]):
 		if !perk_owner_comp:
 			continue
 		
-		perk_owner_comp.add_perk(_get_random_perk(), 2)
+		perk_owner_comp.add_perk(_get_random_perk(), 10)
 		budget -= 2
 
 func _get_random_perk():
@@ -239,7 +250,8 @@ func _open_perk_choose() -> void:
 		var perk_tween: Tween = create_tween()
 		perk_tween.set_trans(Tween.TRANS_SINE)
 		perk_tween.set_ease(Tween.EASE_IN_OUT)
-		perk_tween.tween_property(perk, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.3)
+		perk_tween.tween_property(perk, "modulate", Color(4.416, 4.416, 4.416, 1.0), 0.15)
+		perk_tween.tween_property(perk, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.15)
 		await perk_tween.finished
 	
 	for button in perk_units_buttons:
@@ -249,6 +261,9 @@ func _open_perk_choose() -> void:
 	_close_perk_choose()
 
 func _close_perk_choose() -> void:
+	if !weapon_user_component:
+		player_perk_ui.visible = false
+		return
 	perk_selected_sound.play()
 	weapon_user_component.can_attack = true
 	var tween: Tween = create_tween()

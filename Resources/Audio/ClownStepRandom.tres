@@ -1,0 +1,10 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://bh5d1i55lrqja"]
+
+[ext_resource type="AudioStream" uid="uid://daog2485l04fg" path="res://Audio/Footstep/clownstep1.ogg" id="1_pbthx"]
+[ext_resource type="AudioStream" uid="uid://b8m2qubijhkoi" path="res://Audio/Footstep/clownstep2.ogg" id="2_vpkqn"]
+
+[resource]
+random_pitch = 1.2599211
+streams_count = 2
+stream_0/stream = ExtResource("1_pbthx")
+stream_1/stream = ExtResource("2_vpkqn")

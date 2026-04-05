@@ -1,11 +1,13 @@
 class_name RegenerationPerkComponent extends BasePerkComponent
 
 func _init() -> void:
-	perk_name = "Medical Belt"
-	perk_desc = "[color=green]Increases your regeneration by 2 units per second[/color]"
+	untranslated_perk_name = "Practice Medicine"
+	perk_desc = "[color=green]Increases your passive regeneration by 2 units per second[/color]"
 	perk_icon = preload("res://Textures/Perks/med_belt.png")
 	perk_equipped_texture = preload("res://Textures/Perks/med_belt_equipped.png")
 	rarity = rarity_classes.COMMON
+	perk_name = tr(untranslated_perk_name)
+	perk_desc = tr(perk_desc)
 
 @onready var health_component: HealthComponent = parent.get_node("HealthComponent")
 @export var base_regeneration: int = 2

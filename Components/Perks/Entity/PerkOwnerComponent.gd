@@ -36,7 +36,7 @@ func add_perk(new_perk, amount = 1) -> void:
 	
 	create_perk_ui(perk_instance)
 
-func get_perk(perk_type):
+func get_perk(perk_type: Script):
 	for perk in perks:
 		var perk_type_inst = perk_type.new()
 		if perk.get_perk_name() == perk_type_inst.get_perk_name():
@@ -85,7 +85,6 @@ func setup_perk_ui(perk_ui_instance: Control, perk: BasePerkComponent) -> void:
 func update_perk_ui(perk: BasePerkComponent) -> void:
 	if !ui_perks.has(perk):
 		return
-	
 	var perk_ui_instance = ui_perks[perk] as Control
 	var label = perk_ui_instance.find_child("Label", true, false) as Label
 	

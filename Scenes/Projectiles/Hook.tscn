@@ -3,16 +3,18 @@
 [ext_resource type="PackedScene" uid="uid://c2fs5eoy7ntgu" path="res://Scenes/Projectiles/BaseProjectile.tscn" id="1_7iyqb"]
 [ext_resource type="AudioStream" uid="uid://cuj7tgh253e14" path="res://Resources/Audio/GenHitRandom.tres" id="2_7iyqb"]
 [ext_resource type="Texture2D" uid="uid://g575msxxir52" path="res://Textures/Weapons/Hook/hook.png" id="2_e7j47"]
+[ext_resource type="Script" uid="uid://ch6fjxkr8n5db" path="res://Components/Entity/ProjectileIgnoreComponent.gd" id="4_2oejk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kf5wp"]
-radius = 15.0
+radius = 32.0
+height = 64.0
 
 [node name="Projectile" unique_id=676694476 instance=ExtResource("1_7iyqb")]
 
 [node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture")]
 can_penetrate = false
 texture = NodePath("../Texture")
-speed = 2000
+speed = 3500
 max_damage = 0
 damage = 0
 stamina_damage = 40.0
@@ -30,3 +32,7 @@ stream = ExtResource("2_7iyqb")
 
 [node name="Texture" type="Sprite2D" parent="." index="4" unique_id=7943572]
 texture = ExtResource("2_e7j47")
+
+[node name="ProjectileIgnoreComponent" type="Node" parent="." index="6" unique_id=1213793882]
+script = ExtResource("4_2oejk")
+metadata/_custom_type_script = "uid://ch6fjxkr8n5db"

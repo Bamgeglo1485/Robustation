@@ -8,6 +8,7 @@ class_name RangeWeapon extends Weapon
 @export var bullets_recover_count: int = 2
 
 @export var shots: int = 3
+@export var extra_shots: int = 0
 @export var shots_angle: int = 15
 
 @export var case_scene: PackedScene
@@ -33,11 +34,15 @@ class_name RangeWeapon extends Weapon
 
 @export_category("Overheat")
 @export var overheat_enabled: bool = false
-@export var max_overheat: float = 6.0
+@export var max_overheat: float = 7.0
+@export var overheat_per_shoot_modifier: float = 1.0
 @export var overheat_per_shoot: float = 2.0
 @export var cool_delay: float = 0.1
-@export var cool_count: float = 0.1
+@export var cool_count: float = 0.15
 @export var min_overheat_damage_debuff: float = 0.3
+@export var explosion_on_max_heat: PackedScene
+@export var overheat_alert: AudioStreamPlayer2D
+@export var alert_on_heat: float = 5.0
 var cool_timer: Timer
 var overheat: float
 
@@ -106,8 +111,17 @@ func attack(raiser, _npc = true) -> void:
 	await _swing(raiser.get_attack_direction())
 	
 	if overheat_enabled:
-		overheat += overheat_per_shoot
+		overheat += overheat_per_shoot * overheat_per_shoot_modifier
 		overheat = clamp(overheat, 0, max_overheat)
+		if overheat_alert and overheat >= alert_on_heat:
+			overheat_alert.play()
+		if explosion_on_max_heat and overheat == max_overheat:
+			var expl: Node2D = explosion_on_max_heat.instantiate()
+			scene.add_child(expl)
+			expl.global_position = parent.global_position
+			overheat = 0
+			_overheat_visuals()
+			return
 		_overheat_visuals()
 	
 	var direction = raiser.get_attack_direction()
@@ -119,7 +133,7 @@ func attack(raiser, _npc = true) -> void:
 		if self_throw_speed != 0:
 			parent.get_node("MobMoverComponent").throw(-direction, self_throw_speed, null, self_throw_stop_speed, true, self_throw_rewrite)
 	
-	if shots > 1 and bullets >= shots:
+	if shots > 1 and bullets >= 1:
 		var total_spread: float = deg_to_rad(shots_angle)
 		var angle_step: float = total_spread / (shots - 1) if shots > 1 else 0.0
 		var start_angle: float = -total_spread * 0.5
@@ -133,7 +147,7 @@ func attack(raiser, _npc = true) -> void:
 		bullets -= possible_shots
 		bullets = clamp(bullets, 0, bullets_max_count)
 		
-		for i in range(possible_shots):
+		for i in range(possible_shots + extra_shots):
 			var shot_direction = direction.rotated(start_angle + angle_step * i)
 			_projectile_shoot(shot_direction)
 			
@@ -207,13 +221,13 @@ func _projectile_shoot(direction) -> Node2D:
 			rope.visible = true
 			projectile_component.rope = rope
 			if rope.material:
-				rope.material.set_shader_parameter("wave_amplitude", 0.5)
+				rope.material.set_shader_parameter("wave_amplitude", 0.15)
 				var tween: Tween = create_tween()
 				tween.set_trans(Tween.TRANS_SINE)
 				tween.set_ease(Tween.EASE_IN_OUT)
 				tween.tween_property(rope.material, "shader_parameter/wave_amplitude", 0, 0.5)
 		if scene:
-			scene.add_child.call_deferred(instance)
+			scene.add_child(instance)
 		if overheat_enabled:
 			var heat_factor: float = overheat / max_overheat
 			var damage_multiplier: float = 1.0 - pow(heat_factor, 2) * (1.0 - min_overheat_damage_debuff)
@@ -221,13 +235,12 @@ func _projectile_shoot(direction) -> Node2D:
 	elif instance.has_node("HitscanComponent"):
 		var hitscan_component: HitscanComponent = instance.get_node("HitscanComponent")
 		instance.global_position = parent.global_position
-		instance.global_rotation = angle
 		
 		hitscan_component.direction = angle
 		hitscan_component.shooter = parent
 		
 		if scene:
-			scene.add_child.call_deferred(instance)
+			scene.add_child(instance)
 	else:
 		instance.queue_free()
 	
@@ -246,7 +259,8 @@ func _on_swap(_new_weapon: Weapon) -> void:
 func _on_bullets_recover() -> void:
 	if weapon_sprite and weapon_sprite.weapon_texture.texture == equipped_texture and reload_animation:
 		weapon_sprite.reload()
-	bullets += bullets_recover_count
+	bullets += bullets_recover_count + extra_shots
+	bullets = clamp(bullets, 0, bullets_max_count)
 	if bullets_recover_sound:
 		bullets_recover_sound.play()
 

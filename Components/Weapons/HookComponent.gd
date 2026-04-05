@@ -6,18 +6,19 @@ enum hook_states {
 	HOOKED,
 	HOOKING,
 	RETURNING}
-@export var hook_speed: int = 900
-@export var returning_radius: int = 24
+@export var hook_speed: int = 1200
+@export var returning_radius: int = 48
 @export var state: hook_states = hook_states.BASE
-@export var drop_force: int = 0
+@export var drop_force: int = 1
 @export var hook_throw_force: int = 600
+@export var weapon_to_reload: RangeWeapon
 
 @export var reel_sound: AudioStreamPlayer2D
 
 var hook: Node2D
 var hook_projectile_comp: ProjectileComponent
 var hooked_body: Node2D
-var mob_mover_component
+var mob_mover_component: MobMoverComponent
 var hook_enemy: bool = false
 var target_mob_mover: MobMoverComponent
 
@@ -104,15 +105,14 @@ func _physics_process(_delta: float) -> void:
 	elif state == hook_states.HOOKING:
 		if !hook_enemy:
 			parent.velocity = -direction.normalized() * hook_speed
-		else:
+		elif hooked_body is CharacterBody2D:
 			hooked_body.velocity = direction.normalized() * hook_speed
 	
 	if direction.length_squared() < returning_radius:
 		_delete_hook()
 		if hooked_body and state == hook_states.HOOKING:
-			var hooked_mob_mover: MobMoverComponent = hooked_body.get_node_or_null("MobMoverComponent")
-			if hooked_mob_mover:
-				hooked_mob_mover.throw(parent.velocity, hook_throw_force, parent)
+			if !hook_enemy:
+				target_mob_mover.throw(parent.velocity, hook_throw_force, parent)
 
 func _projectile_shoot(direction) -> Node2D:
 	hook = super._projectile_shoot(direction)
@@ -137,6 +137,15 @@ func _on_hit(emitter: Node2D, _projectile: Node2D) -> void:
 func _delete_hook():
 	if mob_mover_component and !hook_enemy:
 		mob_mover_component.movement_blocked = false
+	elif hooked_body and target_mob_mover and hook_enemy:
+		hooked_body.velocity = Vector2.ZERO
+		target_mob_mover.movement_blocked = false
+	if weapon_to_reload:
+		weapon_to_reload.bullets_recover_timer.stop()
+		weapon_to_reload._on_bullets_recover()
+		EventBusManager.update_weapon_icon.emit(parent, weapon_to_reload)
+	
+	hook_enemy = false
 	state = hook_states.BASE
 	cooldown_timer.start()
 	hook.queue_free()

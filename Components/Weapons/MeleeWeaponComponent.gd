@@ -38,12 +38,15 @@ class_name MeleeWeapon extends Weapon
 @export var qte_max_time: float = 1.5
 @export var base_qte_perfect_time_min: float = 0.5
 @export var base_qte_perfect_time_max: float = 0.9
-@export var qte_time_mod: float = 3
-@export var qte_perfect_damage_modifier: float = 4
-@export var qte_perfect_heal_modifier_from_max: float = 0.3
+@export var qte_time_mod: float = 1.0
+@export var qte_time_speed: float = 1
+@export var qte_perfect_damage_modifier: float = 4.0
+@export var qte_perfect_heal_modifier_from_max: float = 0.15
+@export var qte_perfect_heal_modifier_from_max_modifier: float = 1.0
 @export var qte_perfect_sound: AudioStreamPlayer2D
+@export var qte_perfect_time_sound: AudioStreamPlayer2D
 @export var qte_perfect_effect: PackedScene
-@export var qte_icon_random_perfect_range_min: float = -0.2
+@export var qte_icon_random_perfect_range_min: float = 0
 @export var qte_icon_random_perfect_range_max: float = 0.4
 var qte_perfect_time_min: float = base_qte_perfect_time_min
 var qte_perfect_time_max: float = base_qte_perfect_time_max
@@ -52,19 +55,23 @@ var qte_time: float = 0.0
 var qte_move_back: bool = false
 var qte_active: bool = false
 var qte_tween: Tween
+var perfect_time_sound_played: bool = false
 
 func _physics_process(delta: float) -> void:
 	if qte_enabled and qte_active:
 		if !qte_move_back:
-			qte_time += delta * qte_time_mod / Engine.time_scale
+			qte_time += delta * qte_time_speed * qte_time_mod / Engine.time_scale
 			if qte_time >= qte_max_time:
 				qte_time = qte_max_time
 				qte_move_back = true
 		else:
-			qte_time -= delta * qte_time_mod / Engine.time_scale
+			qte_time -= delta * qte_time_speed * qte_time_mod  / Engine.time_scale
 			if qte_time <= 0:
 				qte_time = 0
 				qte_move_back = false
+		if qte_time > qte_perfect_time_min and qte_time < qte_perfect_time_max and !perfect_time_sound_played and qte_perfect_time_sound:
+			qte_perfect_time_sound.play()
+			perfect_time_sound_played = true
 		if qte_icon:
 			qte_icon.value = qte_time
 
@@ -80,7 +87,7 @@ func on_release(_raiser) -> void:
 			qte_active = false
 			if health_component:
 				@warning_ignore("narrowing_conversion")
-				health_component.take_damage(-health_component.max_health * qte_perfect_heal_modifier_from_max, null, "Heal", true)
+				health_component.take_damage(-health_component.max_health * qte_perfect_heal_modifier_from_max * qte_perfect_heal_modifier_from_max_modifier, null, "Heal", true)
 			if qte_perfect_sound:
 				qte_perfect_sound.play()
 			if qte_perfect_effect:
@@ -91,6 +98,7 @@ func on_release(_raiser) -> void:
 			qte_tween.tween_property(qte_icon, "modulate:r", 4.0, 0.1)
 		qte_tween.tween_property(qte_icon, "modulate:a", 0.0, 0.2)
 		qte_active = false
+		perfect_time_sound_played = false
 		
 		await _try_melee_attack(_raiser.get_attack_direction())
 		minor_damage_modifiers["qte_perfect"] = 1.0
@@ -248,11 +256,10 @@ multiple_attack: bool = false) -> bool:
 		parry_projectile(target, projectile, direction)
 	
 	var target_weapon_user_component = target.get_node_or_null("WeaponUserComponent")
-	if can_parry_weapon and target_weapon_user_component:
-		if target_weapon_user_component and target_weapon_user_component.selected_weapon:
-			var weapon = target_weapon_user_component.selected_weapon 
-			if weapon.swinging and weapon.parriable:
-				parry_weapon(weapon, target)
+	if can_parry_weapon and target_weapon_user_component and target_weapon_user_component.selected_weapon:
+		var weapon = target_weapon_user_component.selected_weapon 
+		if weapon.swinging and weapon.parriable:
+			parry_weapon(weapon, target)
 	
 	var target_health_component: HealthComponent = target.get_node_or_null("HealthComponent")
 	if target_health_component:
@@ -269,8 +276,9 @@ multiple_attack: bool = false) -> bool:
 			target_mover.drop(drop_enemy_delay, drop_forced, drop_resistance_force)
 		throw_speed = base_throw_speed
 	
-	if target.has_node("StaminaComponent") and stamina_damage != 0:
-		target.get_node("StaminaComponent").take_stamina_damage(stamina_damage * damage_modifier, parent)
+	var target_stamina: StaminaComponent = target.get_node("StaminaComponent")
+	if target_stamina and stamina_damage != 0:
+		target_stamina.take_stamina_damage(stamina_damage * damage_modifier, parent)
 	
 	if self_throw_speed != 0 and !multiple_attack:
 		if parent_mob_mover_component and direction:

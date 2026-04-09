@@ -5,7 +5,7 @@ class_name ArenaComponent extends Component
 @export_file_path() var perks: Array[String]
 @export var boss_battles_per: int = 10
 @export var area_info: RichTextLabel
-@export var start_budget: float = 5
+@export var start_budget: float = 3
 @export var choosable_perk_count_per_wave: int = 4
 @export var available_enemies: Array[Enemy]
 @export var available_bosses: Array[Enemy]
@@ -49,6 +49,7 @@ const MAX_ATTEMPTS: int = 100
 func _ready() -> void:
 	if !enabled:
 		return
+	_get_random_perk() #preload to avoid lags
 	EventBusManager.gibbed.connect(_on_gibbed)
 	for enemy in available_enemies:
 		if enemy.enemy_type == enemy.enemy_types.MELEE:
@@ -76,8 +77,9 @@ func start_game() -> void:
 
 func start_new_wave(new_game: bool = false) -> void:
 	if !new_game:
-		await _open_perk_choose()
+		health_component.delayed_damage_queue.clear()
 		health_component.set_health(health_component.max_health)
+		await _open_perk_choose()
 	wave_active = true
 	wave += 1
 	budget = start_budget + budget_per_wave * wave

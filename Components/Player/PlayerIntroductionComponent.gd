@@ -26,6 +26,8 @@ var prev_timescale: float = 1.0
 var config: ConfigFile = ConfigFile.new()
 
 func _ready() -> void:
+	if !scene:
+		return
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	EventBusManager.introduction_subject_on_screen.connect(_on_subject_on_screen)
 	camera = Camera2D.new()

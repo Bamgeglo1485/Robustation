@@ -3,6 +3,7 @@ class_name SetEnemyToBlackboardAction extends ActionLeaf
 
 @export var key: String = "Target"
 @export var delete_if_no_enemies: bool = false
+@export var targeted_faction: String
 
 @onready var tree: SceneTree = get_tree()
 @onready var faction_comp: FactionComponent = owner.get_node_or_null("FactionComponent")
@@ -34,9 +35,11 @@ func tick(actor: Node, blackboard: Blackboard) -> int:
 			continue
 		
 		var faction_component = enemy.get_node_or_null("FactionComponent")
-		if faction_component and faction_component.faction == faction:
-			continue
-		
+		if faction_component:
+			if targeted_faction and faction_component.faction != targeted_faction:
+				continue
+			elif faction_component.faction == faction:
+				continue
 		var distance: float = (parent_pos - enemy.global_position).length_squared()
 		
 		if distance < nearest_distance:

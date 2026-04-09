@@ -7,7 +7,7 @@ func on_trigger() -> void:
 	if !hitscan_scene:
 		return
 	
-	var inst = hitscan_scene.instantiate()
+	var inst: Node2D = hitscan_scene.instantiate()
 	inst.global_position = parent.global_position
 	var hitscan_comp: HitscanComponent = inst.get_node_or_null("HitscanComponent")
 	var projectile_comp: ProjectileComponent = parent.get_node_or_null("ProjectileComponent")

@@ -9,8 +9,8 @@ class_name BossMusicComponent extends Component
 @export var music: AudioStream
 
 var pitch_tween: Tween
-var player_pitch: float = 0.3
-var pitch: float = 0.3
+@export var player_pitch: float = 0.3
+@export var pitch: float = 0.3
 
 func change_music(new_music: AudioStream):
 	player_music.set_main(new_music, 2)

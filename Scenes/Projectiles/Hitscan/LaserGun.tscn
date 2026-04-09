@@ -19,12 +19,11 @@ shader_parameter/color = Color(6.330253, 0, 2.2960641, 1)
 material = SubResource("ShaderMaterial_c1744")
 position = Vector2(0.05896592, 0.018667966)
 scale = Vector2(1.058966, 1.0186689)
-points = PackedVector2Array()
 width = 30.0
 texture_mode = 2
 
 [node name="HitscanComponent" parent="." index="1" unique_id=993689081]
-damage = 70
+damage = 100
 disappear_speed = 0.3
 modify_by_range_base_range = 300
 

@@ -8,12 +8,13 @@ extends Node2D
 @export var radius: int = 128
 @export var source: PhysicsBody2D
 @export var explosion_duration: float = 0.3
-@export var check_interval: float = 0.05
+@export var check_interval: float = 0.1
 @export var ignore_faction: bool = false
 @export var drop_forced: bool = false
 @export var drop_resistance_force: int = 3
 @export var main_lighting: PointLight2D
 var active: bool = true
+var source_faction: FactionComponent
 
 var damaged_bodies: Array = []
 var check_timer: Timer
@@ -22,11 +23,12 @@ func _ready() -> void:
 	var collision_shape = area2d.get_node("CollisionShape2D").shape
 	if collision_shape is CircleShape2D:
 		collision_shape.radius = radius
+	if source:
+		source_faction = source.get_node_or_null("FactionComponent")
 	
 	check_timer = Timer.new()
 	add_child(check_timer)
 	check_timer.wait_time = check_interval
-	check_timer.one_shot = false
 	check_timer.timeout.connect(_check_overlapping_bodies)
 	check_timer.start()
 	
@@ -47,7 +49,7 @@ func _ready() -> void:
 		check_timer.stop()
 	area2d.queue_free()
 	
-	await get_tree().create_timer(5.0).timeout
+	await get_tree().create_timer(2.0).timeout
 	queue_free()
 
 func _set_lighting():
@@ -60,6 +62,7 @@ func _set_lighting():
 	main_tween.tween_property(main_lighting, "scale", Vector2(0, 0), 0.25)
 
 func _check_overlapping_bodies() -> void:
+	check_timer.start()
 	if !active:
 		return
 	
@@ -71,11 +74,8 @@ func _check_overlapping_bodies() -> void:
 func _apply_damage_to_body(body: Node2D) -> void:
 	if !is_instance_valid(body) or body in damaged_bodies:
 		return
-	if (!ignore_faction and source and source.has_node("FactionComponent") and 
-		body.has_node("FactionComponent")):
-		var source_faction: Node = source.get_node("FactionComponent")
-		var body_faction: Node = body.get_node("FactionComponent")
-		
+	var body_faction: Node = body.get_node_or_null("FactionComponent")
+	if source_faction and !ignore_faction and source and body_faction:
 		if source_faction.faction == body_faction.faction:
 			return
 	

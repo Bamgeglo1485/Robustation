@@ -279,6 +279,6 @@ func on_fly_impact(body: Node) -> void:
 	mob_mover.throw(parent.velocity, fly_speed/1.5)
 	mob_mover.drop(1)
 	var body_health_component: HealthComponent = body.get_node_or_null("HealthComponent")
-	if body_health_component:
+	if body_health_component and fly_source:
 		@warning_ignore("narrowing_conversion")
-		body_health_component.take_damage(fly_speed/50.0, fly_source)
+		body_health_component.take_damage(fly_speed/25.0, fly_source)

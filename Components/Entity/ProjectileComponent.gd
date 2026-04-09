@@ -49,6 +49,7 @@ var targeted_enemies: Array[CharacterBody2D]
 
 @export_category("Parry")
 @export var parriable: bool = true
+@export var parry_damage_modifier: float = 1.0
 @export var parry_speed_boost: float = 1.5
 @export var parry_projectile_to_enemy: bool = true
 var can_parry_weapon: MeleeWeapon
@@ -57,6 +58,7 @@ var can_parry_weapon: MeleeWeapon
 @export var explosion_scene: PackedScene
 @export var explode_on_delete: bool = false
 @export var explode_on_hit: bool = false
+@export var explode_on_projectile_hit: bool = false
 @export var explode_on_damage: bool = false
 
 var sploded: bool = false
@@ -161,6 +163,13 @@ func _delete() -> void:
 func on_parried():
 	if speed < 0 and return_to_sender:
 		speed *= -1
+	
+	@warning_ignore_start("narrowing_conversion")
+	speed *= parry_speed_boost
+	rotate_speed *= parry_speed_boost
+	throw_speed *= parry_speed_boost
+	damage *= parry_damage_modifier
+	@warning_ignore_restore("narrowing_conversion")
 
 func explode() -> void:
 	if explosion_scene and !sploded:
@@ -178,7 +187,7 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	var projectile_comp: ProjectileComponent = body.get_node_or_null("ProjectileComponent")
 	if projectile_comp and shooter_faction and projectile_comp.shooter_faction and projectile_comp.shooter_faction.faction == shooter_faction.faction:
-		if explode_on_hit:
+		if explode_on_projectile_hit:
 			explode_on_delete = true
 			_delete()
 			return

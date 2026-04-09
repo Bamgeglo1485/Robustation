@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://beie4mcfgy8sm"]
 
-[ext_resource type="LabelSettings" uid="uid://nbgfghoq6ado" path="res://Resources/Text/CMDHeading.tres" id="1_v3kjt"]
 [ext_resource type="Script" uid="uid://4io3bm7r86h6" path="res://Components/Interface/Menu/TextPrintingAnimationComponent.gd" id="2_3hayu"]
+[ext_resource type="FontFile" uid="uid://mhx51lyuasx4" path="res://Resources/Text/Fonts/Ac437_ApricotPortable.ttf" id="3_11wkb"]
 [ext_resource type="Script" uid="uid://dlyqiva26n7ka" path="res://Components/Interface/Menu/CMDInputComponent.gd" id="3_vlcut"]
-[ext_resource type="FontFile" uid="uid://4xw2o0e2j051" path="res://Resources/Text/Fonts/RobotoMono/static/RobotoMono-Regular.ttf" id="4_87s68"]
 [ext_resource type="Script" uid="uid://b0uuawujbqmt4" path="res://Components/Interface/Menu/PrintOnButtonPressComponent.gd" id="4_g37sx"]
 [ext_resource type="Texture2D" uid="uid://dqd7xkk5m77ck" path="res://Textures/Interface/Menu/cross.png" id="5_0oyh4"]
 [ext_resource type="Script" uid="uid://b21t14osl1vrf" path="res://Components/Interface/Menu/RoundstartOnPressedComponent.gd" id="5_j8l1p"]
@@ -17,7 +16,6 @@
 [ext_resource type="AudioStream" uid="uid://ds80ebrq0wpmg" path="res://Audio/Interface/Menu/Keyboard/mouse.mp3" id="12_0oyh4"]
 [ext_resource type="AudioStream" uid="uid://c6pjjac6n8b47" path="res://Audio/Interface/Menu/computer_off.mp3" id="12_2kl40"]
 [ext_resource type="Script" uid="uid://cxitq7uuw7y6p" path="res://Components/Interface/Menu/RoundstartComponent.gd" id="13_2kl40"]
-[ext_resource type="FontFile" uid="uid://dichq2si55q4b" path="res://Resources/Text/Fonts/RobotoMono/static/RobotoMono-ExtraLight.ttf" id="15_kkc8k"]
 [ext_resource type="Material" uid="uid://bdio1hqqwuopn" path="res://Resources/Shaders/Monitor.tres" id="17_bwdcc"]
 [ext_resource type="AudioStream" uid="uid://b3bn8ma2pwwns" path="res://Audio/Interface/Menu/computer_loop.ogg" id="18_2xdyd"]
 [ext_resource type="PackedScene" uid="uid://dpxlm72aq8ofl" path="res://Scenes/UI/Keybinds.tscn" id="20_11wkb"]
@@ -214,8 +212,8 @@ offset_top = 20.0
 offset_right = 267.5
 offset_bottom = 48.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_11wkb")
 text = "NanoTrasen RobustOS - Omega project Version"
-label_settings = ExtResource("1_v3kjt")
 
 [node name="TextPrintingAnimationComponent" type="Node" parent="Label/Label" unique_id=462373065]
 script = ExtResource("2_3hayu")
@@ -247,8 +245,8 @@ offset_left = 0.24399948
 offset_top = 0.14799976
 offset_right = -0.23602295
 offset_bottom = -0.20501709
-theme_override_fonts/normal_font = ExtResource("15_kkc8k")
-theme_override_fonts/bold_font = ExtResource("4_87s68")
+theme_override_constants/line_separation = 5
+theme_override_fonts/normal_font = ExtResource("3_11wkb")
 bbcode_enabled = true
 text = "NanoTrasen Robust OS {Version 14.85-Om-PR}
 (c) Digital Development Department (NanoTrasen Corporation).
@@ -272,8 +270,9 @@ anchor_right = 1.0
 anchor_bottom = 0.994
 offset_left = 0.20599985
 offset_top = -0.03302002
-offset_right = -348.0
+offset_right = -282.0
 offset_bottom = 3.4259644
+theme_override_fonts/normal_font = ExtResource("3_11wkb")
 theme_override_styles/normal = SubResource("StyleBoxFlat_444o2")
 text = "C:\\Omega\\Manager>"
 scroll_active = false
@@ -286,11 +285,13 @@ anchors_preset = -1
 anchor_top = 0.92300004
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 169.0
+offset_left = 215.0
 offset_top = -0.03302002
 offset_bottom = -2.0
+theme_override_fonts/font = ExtResource("3_11wkb")
 theme_override_styles/normal = SubResource("StyleBoxFlat_2uogn")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2uogn")
+max_length = 40
 context_menu_enabled = false
 emoji_menu_enabled = false
 
@@ -397,7 +398,7 @@ custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.07450981, 0.4745098, 1)
 theme_override_colors/font_hover_color = Color(1, 0.4100209, 0.5802685, 0.855)
-theme_override_fonts/font = ExtResource("15_kkc8k")
+theme_override_fonts/font = ExtResource("3_11wkb")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_nu65f")
 theme_override_styles/hover = SubResource("StyleBoxFlat_y67r4")
@@ -440,7 +441,7 @@ custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.07450981, 0.4745098, 1)
 theme_override_colors/font_hover_color = Color(1, 0.4100209, 0.5802685, 0.855)
-theme_override_fonts/font = ExtResource("15_kkc8k")
+theme_override_fonts/font = ExtResource("3_11wkb")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_nu65f")
 theme_override_styles/hover = SubResource("StyleBoxFlat_y67r4")
@@ -494,7 +495,7 @@ custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.07450981, 0.4745098, 1)
 theme_override_colors/font_hover_color = Color(1, 0.4100209, 0.5802685, 0.855)
-theme_override_fonts/font = ExtResource("15_kkc8k")
+theme_override_fonts/font = ExtResource("3_11wkb")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_nu65f")
 theme_override_styles/hover = SubResource("StyleBoxFlat_y67r4")
@@ -542,7 +543,7 @@ custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.07450981, 0.4745098, 1)
 theme_override_colors/font_hover_color = Color(1, 0.4100209, 0.5802685, 0.855)
-theme_override_fonts/font = ExtResource("15_kkc8k")
+theme_override_fonts/font = ExtResource("3_11wkb")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_nu65f")
 theme_override_styles/hover = SubResource("StyleBoxFlat_y67r4")
@@ -590,7 +591,7 @@ custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.07450981, 0.4745098, 1)
 theme_override_colors/font_hover_color = Color(1, 0.4100209, 0.5802685, 0.855)
-theme_override_fonts/font = ExtResource("15_kkc8k")
+theme_override_fonts/font = ExtResource("3_11wkb")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxFlat_nu65f")
 theme_override_styles/hover = SubResource("StyleBoxFlat_y67r4")
@@ -610,8 +611,9 @@ text = "[color=crimson]Geglo1485 — Head developer / Maintainer[/color]
 [color=violet]_pixar4ik_ — Contributor / Programmer[/color]
 [color=orange]MrJajkes — Composer[/color]
 ------------
-Most sprites taken from Space Station 14
+Most sprites taken from Space Station 13[tg station]
 Space asshole menu remix by Slend32
+Some enemy themes by A-Guy
 "
 delay = 0.5
 metadata/_custom_type_script = "uid://b0uuawujbqmt4"

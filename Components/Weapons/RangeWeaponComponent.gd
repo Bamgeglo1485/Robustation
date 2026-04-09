@@ -2,6 +2,7 @@ class_name RangeWeapon extends Weapon
 
 @export var projectile: PackedScene
 @export var spread_angle: int = 10
+@export var spread_modifier: float = 1.0
 
 @export var bullets_max_count: int = 2
 @export var bullets: int = bullets_max_count : set = set_bullets, get = get_bullets
@@ -194,7 +195,7 @@ func _projectile_shoot(direction) -> Node2D:
 	if direction > Vector2(1, 1):
 		direction = direction.normalized()
 	
-	var weapon_spread: int = spread_angle
+	var weapon_spread: float = spread_angle * spread_modifier
 	var spread: float = 0.0
 	
 	if weapon_spread != 0:

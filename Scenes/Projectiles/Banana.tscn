@@ -25,6 +25,7 @@ parriable = false
 parry_projectile_to_enemy = false
 
 [node name="CollisionShape2D" parent="ProjectileComponent" index="0" unique_id=1391622764]
+visible = false
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_i6uow")
 
@@ -32,7 +33,11 @@ shape = SubResource("CapsuleShape2D_i6uow")
 stream = ExtResource("2_bwogs")
 
 [node name="CollisionShape2D" parent="Parry" parent_id_path=PackedInt32Array(757156969) index="0" unique_id=2139953676]
+visible = false
 disabled = true
 
 [node name="Texture" type="Sprite2D" parent="." index="4" unique_id=1806190901]
 texture = ExtResource("3_bwogs")
+
+[node name="VisibleOnScreenEnabler" parent="." index="5" unique_id=776942242]
+visible = false

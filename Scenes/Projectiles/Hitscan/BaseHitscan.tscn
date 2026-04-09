@@ -2,16 +2,14 @@
 
 [ext_resource type="Script" uid="uid://c7ls6pxubfe4d" path="res://Components/Entity/HitscanComponent.gd" id="1_c2a5l"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_apuoa"]
-
 [node name="BaseHitscan" type="RayCast2D" unique_id=1219814461]
 exclude_parent = false
 target_position = Vector2(1000, 0)
 collision_mask = 2
 
 [node name="RayLine" type="Line2D" parent="." unique_id=1153845673]
-material = SubResource("ShaderMaterial_apuoa")
-points = PackedVector2Array(48, 2.0981465e-06, 0, 0)
+top_level = true
+points = PackedVector2Array(0, 0)
 width = 1.0
 default_color = Color(5.033489, 0, 1.7397217, 1)
 

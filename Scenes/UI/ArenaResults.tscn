@@ -93,14 +93,14 @@ metadata/_custom_type_script = "uid://c4cwhtwctw4yr"
 [node name="OffButton" type="TextureButton" parent="." unique_id=294038660]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.89800006
-anchor_top = 0.0050000004
-anchor_right = 0.99200004
-anchor_bottom = 0.20400001
-offset_left = -0.07601929
-offset_top = -0.86000276
-offset_right = -0.044006348
-offset_bottom = -0.028007507
+anchor_left = 0.9250001
+anchor_top = 0.058000002
+anchor_right = 0.97
+anchor_bottom = 0.15100001
+offset_left = 0.14996338
+offset_top = 0.023996353
+offset_right = -0.14001465
+offset_bottom = 0.027994156
 grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("3_225bj")
@@ -131,3 +131,31 @@ bbcode_enabled = true
 text = "[color=crimson]SAVED DATA:"
 scroll_active = false
 metadata/_edit_use_anchors_ = true
+
+[node name="ReferenceRect" type="ReferenceRect" parent="." unique_id=2036763085]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 1.0
+offset_bottom = 2.0
+mouse_behavior_recursive = 1
+border_color = Color(0.033853278, 0.033853278, 0.033853274, 1)
+border_width = 5.0
+editor_only = false
+
+[node name="ReferenceRect2" type="ReferenceRect" parent="." unique_id=1227617288]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 12.0
+mouse_behavior_recursive = 1
+border_color = Color(0.033853278, 0.033853278, 0.033853274, 1)
+border_width = 5.0
+editor_only = false

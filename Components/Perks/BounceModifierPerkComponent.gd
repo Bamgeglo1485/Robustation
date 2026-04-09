@@ -19,9 +19,15 @@ func _on_projectile_shoot(emitter, _weapon, _direction, projectile):
 		return
 	
 	var projectile_component: ProjectileComponent = projectile.get_node_or_null("ProjectileComponent")
-	if !projectile_component:
+	if projectile_component:
+		projectile_component.max_bounces += amount
+		if projectile_component.max_penetrations != 0:
+			projectile_component.max_penetrations -= amount
 		return
-	
-	projectile_component.max_bounces += amount
-	if projectile_component.max_penetrations != 0:
-		projectile_component.max_penetrations -= amount
+		
+	var hitscan_component: HitscanComponent = projectile.get_node_or_null("HitscanComponent")
+	if hitscan_component:
+		hitscan_component.max_bounces += amount
+		if hitscan_component.max_penetrations != 0:
+			hitscan_component.max_penetrations -= amount
+		return

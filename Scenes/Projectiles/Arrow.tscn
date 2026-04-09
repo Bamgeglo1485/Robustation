@@ -4,6 +4,8 @@
 [ext_resource type="AudioStream" uid="uid://cg0leh0na5lvv" path="res://Resources/Audio/BulletHitRandom.tres" id="2_doom2"]
 [ext_resource type="Texture2D" uid="uid://c0w1acal2twly" path="res://Textures/Weapons/Bow/arrow.png" id="3_doom2"]
 [ext_resource type="Script" uid="uid://dfahm1hamvt58" path="res://Components/Entity/TrailEffectComponent.gd" id="4_1lymg"]
+[ext_resource type="Script" uid="uid://0qaedvb6js57" path="res://Components/Triggers/SetProjectileExplosionOnTriggerComponent.gd" id="5_fvop5"]
+[ext_resource type="PackedScene" uid="uid://c03qvua0tf8st" path="res://Scenes/Explosion/MiniExplosion.tscn" id="6_blmrq"]
 
 [sub_resource type="Shader" id="Shader_ut4xv"]
 code = "shader_type canvas_item;
@@ -29,10 +31,12 @@ material = SubResource("ShaderMaterial_doom2")
 
 [node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture")]
 texture = NodePath("../Texture")
-speed = 1000
+speed = 700
 damage = 6
 delayed_damage = 3
 delayed_damage_delay = 5
+parry_damage_modifier = 3.0
+parry_speed_boost = 3.0
 
 [node name="CollisionShape2D" parent="ProjectileComponent" index="0" unique_id=1391622764]
 rotation = 1.5707964
@@ -54,3 +58,9 @@ colors = Array[Color]([Color(0.8164007, 0, 0, 1), Color(0.7808727, 0.00017808378
 clean_delay = 1.0
 trail_lifetime = 0.2
 metadata/_custom_type_script = "uid://dfahm1hamvt58"
+
+[node name="SetProjectileExplosionOnTriggerComponent" type="Node" parent="." index="7" unique_id=1857456193]
+script = ExtResource("5_fvop5")
+explosion_scene = ExtResource("6_blmrq")
+explode_on_delete = true
+metadata/_custom_type_script = "uid://0qaedvb6js57"

@@ -25,8 +25,10 @@ func _on_projectile_shoot(emitter, _weapon, _direction, projectile):
 	if emitter != parent:
 		return
 	
-	var projectile_component = projectile.get_node_or_null("ProjectileComponent")
-	if !projectile_component:
+	var projectile_component: ProjectileComponent = projectile.get_node_or_null("ProjectileComponent")
+	if projectile_component:
+		projectile_component.max_penetrations += amount
 		return
-	
-	projectile_component.max_penetrations += amount
+	var hitscan_component: HitscanComponent = projectile.get_node_or_null("HitscanComponent")
+	if hitscan_component:
+		hitscan_component.max_penetrations += amount

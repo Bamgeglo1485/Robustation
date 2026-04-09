@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Enemy" format=3 uid="uid://tcq0h43ui04w"]
+
+[ext_resource type="PackedScene" uid="uid://cxi2gla87no36" path="res://Scenes/Mobs/Enemies/RobustBotanist.tscn" id="1_2yjyp"]
+[ext_resource type="Script" uid="uid://di5u0whaqiyjp" path="res://Resources/Custom/Enemy/Base/Enemy.gd" id="2_epuj4"]
+
+[resource]
+script = ExtResource("2_epuj4")
+scene = ExtResource("1_2yjyp")
+cost = 6.0
+weight = 0.5
+enemy_type = 4
+metadata/_custom_type_script = "uid://di5u0whaqiyjp"

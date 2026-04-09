@@ -4,7 +4,7 @@ extends Node2D
 @export var delayed_damage: int = 3
 @export var delayed_time: int = 5
 @export var heal_teammates: bool = true
-@export var heal_amount: int = 70
+@export var heal_amount: int = 100
 @export var radius: int = 128
 @export var source: PhysicsBody2D
 @export var lifetime: float = 4.0
@@ -27,7 +27,7 @@ func _ready() -> void:
 	check_timer = Timer.new()
 	add_child(check_timer)
 	check_timer.wait_time = update_rate
-	check_timer.one_shot = false
+	check_timer.one_shot = true
 	check_timer.timeout.connect(_update)
 	check_timer.start()
 	

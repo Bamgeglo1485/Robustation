@@ -19,17 +19,15 @@ shader_parameter/color = Color(0, 3.7081256, 5.75759, 1)
 material = SubResource("ShaderMaterial_c1744")
 position = Vector2(0.05896592, 0.018667966)
 scale = Vector2(1.058966, 1.0186689)
-points = PackedVector2Array()
 width = 30.0
 default_color = Color(0, 1.1108615, 1.950255, 1)
 texture_mode = 2
 
-[node name="HitscanComponent" parent="." index="1" unique_id=993689081 node_paths=PackedStringArray("hit_sound")]
-hit_sound = NodePath("../HitSound")
+[node name="HitscanComponent" parent="." index="1" unique_id=993689081]
 damage = 0
 disappear_speed = 0.3
 drop_enemy_delay = 0.5
-throw_speed = 700.0
+throw_speed = 400.0
 modify_by_range_base_range = 300
 
 [node name="HitSound" type="AudioStreamPlayer2D" parent="." index="2" unique_id=1641163860]

@@ -141,6 +141,7 @@ func _delete_hook():
 		hooked_body.velocity = Vector2.ZERO
 		target_mob_mover.movement_blocked = false
 	if weapon_to_reload:
+		weapon_to_reload.bullets = 0
 		weapon_to_reload.bullets_recover_timer.stop()
 		weapon_to_reload._on_bullets_recover()
 		EventBusManager.update_weapon_icon.emit(parent, weapon_to_reload)

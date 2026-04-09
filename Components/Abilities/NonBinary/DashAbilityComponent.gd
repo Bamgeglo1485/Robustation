@@ -97,6 +97,7 @@ func dash(direction) -> void:
 	
 	_cooldown()
 	
+	var trail_effect_component: TrailEffectComponent = parent.get_node_or_null("TrailEffectComponent")
 	if overdose_component and overdose_component.active:
 		overdose_component.ability_timer += overdose_refuel_count
 		if overdose_refuel_sound:
@@ -104,16 +105,16 @@ func dash(direction) -> void:
 
 		if health_component:
 			health_component.set_delayed_damage(overdose_refuel_damage, overdose_refuel_damage_time)
-
-		if parent.has_node("TrailEffectComponent"):
-			parent.get_node("TrailEffectComponent").lifetime_timer += overdose_refuel_count
+		
+		if trail_effect_component:
+			trail_effect_component.lifetime_timer += overdose_refuel_count
 		
 		_update_stamina_bar()
 		return
 	
 	_INVINCIBLE()
 	
-	if trail_effect and !parent.has_node("TrailEffectComponent"):
+	if trail_effect and !trail_effect_component:
 		var trail: TrailEffectComponent = TrailEffectComponent.new()
 		trail.lifetime = 0.3
 		trail.trail_lifetime = 0.3

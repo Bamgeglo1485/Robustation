@@ -64,5 +64,5 @@ func get_attack_direction() -> Vector2:
 	
 	return owner.global_position.direction_to(predicted_pos)
 
-func get_attack_target() -> CharacterBody2D:
+func get_attack_target() -> PhysicsBody2D:
 	return blackboard.get_value(key)

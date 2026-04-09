@@ -50,9 +50,9 @@ speed = 100
 speed_decreasing = -5
 damage = 150
 lifetime = 5.0
-parry_speed_boost = 4.0
+parry_speed_boost = 1.0
 explosion_scene = ExtResource("3_oqm3e")
-explode_on_hit = true
+explode_on_projectile_hit = true
 
 [node name="CollisionShape2D" parent="ProjectileComponent" index="0" unique_id=1391622764]
 rotation = 1.5707964
@@ -81,7 +81,7 @@ explosion_scene = ExtResource("7_lqmm4")
 explode_on_delete = true
 explode_on_hit = true
 explode_on_damage = true
-explode_lifetime = 0.5
+speed = 1000
 metadata/_custom_type_script = "uid://0qaedvb6js57"
 
 [node name="ActivateProjectileParticlesOnTriggerComponent" type="Node" parent="." index="6" unique_id=791180759]

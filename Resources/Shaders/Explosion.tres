@@ -4,8 +4,8 @@
 
 [resource]
 shader = ExtResource("1_6w07q")
-shader_parameter/strength = 0.50000002375
-shader_parameter/radius = 0.0
+shader_parameter/strength = 0.08
+shader_parameter/radius = 0.25
 shader_parameter/aberration = 1.0
-shader_parameter/width = 0.0
-shader_parameter/feather = 1.0
+shader_parameter/width = 0.09999999747
+shader_parameter/feather = 0.135

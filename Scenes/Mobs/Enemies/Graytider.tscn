@@ -149,7 +149,7 @@ parry_sound = NodePath("ParrySound")
 play_parried_sound = true
 attack_sound = NodePath("MeleeHitSound")
 miss_sound = NodePath("MeleeMissSound")
-parry_force = 1.5
+parry_force = 3.0
 throw_speed = 400
 drop_enemy_delay = 0.5
 cooldown_delay = 0.5
@@ -232,7 +232,7 @@ avoidance_enabled = false
 radius = 64.0
 
 [node name="BeehaveTree" parent="." index="16" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@18982")
+blackboard = NodePath("@Node@18977")
 
 [node name="MoveToPlayer" type="Node" parent="BeehaveTree" index="0" unique_id=478688837]
 script = ExtResource("23_fs2h0")

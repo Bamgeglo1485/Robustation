@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://boqce2oysl7a0"]
 
-[ext_resource type="LabelSettings" uid="uid://cwb2xcovj2h4n" path="res://Resources/Text/UI.tres" id="1_4er1k"]
+[ext_resource type="FontFile" uid="uid://mhx51lyuasx4" path="res://Resources/Text/Fonts/Ac437_ApricotPortable.ttf" id="1_te8x8"]
 [ext_resource type="Script" uid="uid://cja3led3n1ehp" path="res://Components/Interface/Menu/DragButtonComponent.gd" id="1_wxoyb"]
-[ext_resource type="FontFile" uid="uid://cqkiexxa05htr" path="res://Resources/Text/Fonts/RobotoMono/static/RobotoMono-SemiBold.ttf" id="2_te8x8"]
 [ext_resource type="Script" uid="uid://bkpb86i444kp8" path="res://Components/Interface/Ingame/GoToMenuOnPressedComponent.gd" id="3_wxoyb"]
 [ext_resource type="PackedScene" uid="uid://beie4mcfgy8sm" path="res://Scenes/UI/Menu.tscn" id="4_36p5r"]
 [ext_resource type="Script" uid="uid://bodxsix2kyyy6" path="res://Components/Interface/Menu/ToggleVisibleOnPressedComponent.gd" id="4_te8x8"]
@@ -53,11 +52,12 @@ anchor_right = 1.0020001
 anchor_bottom = 0.051000003
 offset_left = 1.0
 offset_top = 0.26199985
-offset_right = 61.27597
+offset_right = -34.72403
 offset_bottom = 7.566
 mouse_behavior_recursive = 1
+theme_override_fonts/font = ExtResource("1_te8x8")
+theme_override_font_sizes/font_size = 12
 text = "replay_menu.exe - ui_system.rbst"
-label_settings = ExtResource("1_4er1k")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=141232202]
 layout_mode = 1
@@ -75,7 +75,7 @@ layout_mode = 2
 [node name="Return" type="Button" parent="Panel/VBoxContainer" unique_id=217292840]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_te8x8")
+theme_override_fonts/font = ExtResource("1_te8x8")
 text = "RETURN"
 
 [node name="ToggleVisibleOnPressedComponent" type="Node" parent="Panel/VBoxContainer/Return" unique_id=40887940 node_paths=PackedStringArray("toggle_frame")]
@@ -86,7 +86,7 @@ metadata/_custom_type_script = "uid://bodxsix2kyyy6"
 [node name="Settings" type="Button" parent="Panel/VBoxContainer" unique_id=195329228]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_te8x8")
+theme_override_fonts/font = ExtResource("1_te8x8")
 text = "SETTINGS"
 
 [node name="ToggleVisibleOnPressedComponent" type="Node" parent="Panel/VBoxContainer/Settings" unique_id=1532459941 node_paths=PackedStringArray("toggle_frame")]
@@ -97,7 +97,7 @@ metadata/_custom_type_script = "uid://bodxsix2kyyy6"
 [node name="Keybind" type="Button" parent="Panel/VBoxContainer" unique_id=712265820]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_te8x8")
+theme_override_fonts/font = ExtResource("1_te8x8")
 text = "KEYBINDS"
 
 [node name="ToggleVisibleOnPressedComponent" type="Node" parent="Panel/VBoxContainer/Keybind" unique_id=1123777992 node_paths=PackedStringArray("toggle_frame")]
@@ -108,7 +108,7 @@ metadata/_custom_type_script = "uid://bodxsix2kyyy6"
 [node name="Menu" type="Button" parent="Panel/VBoxContainer" unique_id=1723291705]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_te8x8")
+theme_override_fonts/font = ExtResource("1_te8x8")
 text = "MENU"
 
 [node name="ChangeSceneOnPressedComponent" type="Node" parent="Panel/VBoxContainer/Menu" unique_id=1256632907]
@@ -165,6 +165,7 @@ offset_top = 0.0060002804
 offset_right = 2.0
 offset_bottom = -0.06600189
 mouse_default_cursor_shape = 6
+theme_override_fonts/font = ExtResource("1_te8x8")
 theme_override_styles/normal = SubResource("StyleBoxFlat_36p5r")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_4er1k")
 theme_override_styles/hover = SubResource("StyleBoxFlat_te8x8")

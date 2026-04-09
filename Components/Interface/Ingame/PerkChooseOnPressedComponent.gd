@@ -2,10 +2,12 @@ class_name PerkChooseOnPressedComponent extends Component
 
 @export var perk: Script
 @export var delete: bool = true
-@onready var player: PhysicsBody2D = scene.get_node_or_null("Player")
+var player: PhysicsBody2D
 
 func _ready() -> void:
 	parent.pressed.connect(_on_button_pressed)
+	if scene:
+		player = scene.get_node_or_null("Player")
 
 func _on_button_pressed() -> void:
 	if !player:

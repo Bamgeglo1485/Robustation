@@ -11,9 +11,14 @@
 [ext_resource type="Texture2D" uid="uid://5csj6f542jrk" path="res://Textures/Weapons/Horn/pushorn_inhand_right.png" id="8_0m0ai"]
 [ext_resource type="Texture2D" uid="uid://bnx2ug4ecd0xd" path="res://Textures/Perks/pushorn.png" id="9_iqm8m"]
 [ext_resource type="AudioStream" uid="uid://btaybld712qks" path="res://Audio/Weapon/Hit/pushHornHonk.ogg" id="10_5q41g"]
+[ext_resource type="PackedScene" uid="uid://i0grnlgo0x2q" path="res://Scenes/Projectiles/Creampie.tscn" id="11_1v7dl"]
 [ext_resource type="AudioStream" uid="uid://b21hluxqt2tlt" path="res://Resources/Audio/LaughRandom.tres" id="12_ku322"]
+[ext_resource type="Texture2D" uid="uid://rbct170kdtnl" path="res://Textures/Weapons/PieCannon/pie_cannon_inhands.png" id="12_q8qhr"]
+[ext_resource type="AudioStream" uid="uid://d2heoxvpkxyp2" path="res://Audio/Weapon/thunk.ogg" id="13_vrxvs"]
+[ext_resource type="AudioStream" uid="uid://4e6wsvcw0jrt" path="res://Audio/Ambience/hiss.ogg" id="14_8uj3v"]
+[ext_resource type="AudioStream" uid="uid://byyinwd23qdiy" path="res://Audio/Weapon/trashbag2.ogg" id="15_lrk2o"]
 [ext_resource type="Script" uid="uid://dua6hp8ir5tiu" path="res://Components/Mobs/AI/Actions/AttackTargetAction.gd" id="17_0m0ai"]
-[ext_resource type="Script" uid="uid://da2q40ragr5wk" path="res://Components/Mobs/NPC/BuddyComponent.gd" id="30_djxbv"]
+[ext_resource type="AudioStream" uid="uid://bngd1vkik15ra" path="res://Audio/EnemyThemes/Clown.ogg" id="23_iqm8m"]
 [ext_resource type="Script" uid="uid://hv0g6akh0ftn" path="res://Components/Mobs/RandomizeMobMoverComponent.gd" id="31_nhx7t"]
 [ext_resource type="Script" uid="uid://8hn4kne15ac5" path="res://addons/beehave/nodes/composites/selector.gd" id="32_wbqi6"]
 [ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="33_1ursc"]
@@ -22,7 +27,6 @@
 [ext_resource type="Script" uid="uid://wlnghjnvdlyn" path="res://Components/Mobs/AI/Actions/MoveToPointAction.gd" id="36_yghj4"]
 [ext_resource type="Script" uid="uid://b2bu3qqcql0lk" path="res://Components/Mobs/AI/Conditions/PointInRangeCondition.gd" id="37_q5dki"]
 [ext_resource type="Script" uid="uid://ttwxxcce2i4p" path="res://Components/Mobs/AI/Actions/LookAtPointAction.gd" id="40_rjjt5"]
-[ext_resource type="AudioStream" uid="uid://x11c2lqv8483" path="res://Audio/EnemyThemes/GreytideFollower.ogg" id="41_o15ms"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0svj0"]
 polygon = PackedVector2Array(-13, 15, -1, 15, -1, 11, 0, 15, 12, 15, 10, 12, 4, 12, 9, 8, 8, 4, 8, -2, 4, -7, 2, -7, 8, -12, 8, -14, 6, -16, 3, -16, 1, -15, -2, -15, -4, -16, -7, -16, -9, -14, -9, -12, -3, -7, -5, -7, -9, -2, -9, 4, -10, 8, -5, 12, -11, 12)
@@ -44,6 +48,7 @@ position = Vector2(0, -1)
 texture = ExtResource("2_0svj0")
 
 [node name="HealthComponent" parent="." index="4" unique_id=1758373275]
+max_health = 150
 damage_type_modifiers = Dictionary[String, float]({
 "Projectile": 2.0
 })
@@ -55,10 +60,10 @@ selected_weapon = NodePath("Banana")
 script = ExtResource("3_d7x3a")
 projectile = ExtResource("4_0612y")
 spread_angle = 0
-bullets_max_count = 3
-bullets = 3
-bullets_recover_count = 3
-shots = 2
+bullets_max_count = 1
+bullets = 1
+bullets_recover_count = 1
+shots = 1
 shoot_sound = NodePath("ShootSound")
 bullets_recovery_delay = 3.0
 random_bullet_recover_delay_coef = 0.2
@@ -103,6 +108,40 @@ max_distance = 600.0
 stream = ExtResource("10_5q41g")
 max_distance = 600.0
 
+[node name="PieCannon" type="Node" parent="WeaponUserComponent" index="2" unique_id=578340997 node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound", "bullets_recover_sound")]
+script = ExtResource("3_d7x3a")
+projectile = ExtResource("11_1v7dl")
+bullets = 2
+shots = 1
+shoot_sound = NodePath("ShootSound")
+empty_shoot_sound = NodePath("EmptySound")
+bullets_recover_sound = NodePath("BulletRecoverSound")
+bullets_recovery_delay = 4.5
+random_bullet_recover_delay_coef = 0.2
+cooldown_delay = 0.5
+swing_delay = 0.3
+equipped_texture = ExtResource("12_q8qhr")
+equipped_scale = Vector2(0.75, 0.75)
+swing_rotation_multiplier = 0.0
+attack_rotation_multiplier = -0.6
+attack_shift_multiplier = -0.7
+random_cooldown_delay_coef = 0.4
+metadata/_custom_type_script = "uid://bi1gje1pfokqc"
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/PieCannon" index="0" unique_id=777201778]
+stream = ExtResource("13_vrxvs")
+max_distance = 600.0
+max_polyphony = 3
+
+[node name="EmptySound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/PieCannon" index="1" unique_id=1767317435]
+stream = ExtResource("14_8uj3v")
+max_distance = 600.0
+
+[node name="BulletRecoverSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/PieCannon" index="2" unique_id=1386158238]
+stream = ExtResource("15_lrk2o")
+volume_db = 5.0
+max_distance = 600.0
+
 [node name="FootstepComponent" parent="." index="9" unique_id=86781683]
 footstep_range = 16
 
@@ -120,20 +159,14 @@ sdf_collision = true
 [node name="NavigationAgent" parent="." index="13" unique_id=1358139639]
 target_desired_distance = 0.1
 
-[node name="BuddyComponent" type="Node" parent="." index="15" unique_id=2046809544]
-script = ExtResource("30_djxbv")
-buddy_group = "Assistant"
-rage_when_buddy_dead = false
-metadata/_custom_type_script = "uid://da2q40ragr5wk"
-
-[node name="RandomizeMobMoverComponent" type="Node" parent="." index="16" unique_id=831758902]
+[node name="RandomizeMobMoverComponent" type="Node" parent="." index="15" unique_id=831758902]
 script = ExtResource("31_nhx7t")
 randomize_multiplier_min = 0.85
 randomize_multiplier_max = 1.2
 metadata/_custom_type_script = "uid://hv0g6akh0ftn"
 
-[node name="BeehaveTree" parent="." index="18" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@18987")
+[node name="BeehaveTree" parent="." index="17" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
+blackboard = NodePath("@Node@18971")
 
 [node name="SequenceComposite" type="Node" parent="BeehaveTree" index="0" unique_id=772322784]
 script = ExtResource("33_1ursc")
@@ -166,7 +199,22 @@ metadata/_custom_type_script = "uid://ttwxxcce2i4p"
 script = ExtResource("32_wbqi6")
 metadata/_custom_type_script = "uid://8hn4kne15ac5"
 
-[node name="Banana" type="Node" parent="BeehaveTree/SequenceComposite/Attack" index="0" unique_id=1371964999]
+[node name="Cannon" type="Node" parent="BeehaveTree/SequenceComposite/Attack" index="0" unique_id=788974519]
+script = ExtResource("33_1ursc")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="PointInRangeCondition" type="Node" parent="BeehaveTree/SequenceComposite/Attack/Cannon" index="0" unique_id=380931210]
+script = ExtResource("37_q5dki")
+negative = true
+max_distance = 120
+metadata/_custom_type_script = "uid://b2bu3qqcql0lk"
+
+[node name="AttackTargetAction" type="Node" parent="BeehaveTree/SequenceComposite/Attack/Cannon" index="1" unique_id=1984940510 node_paths=PackedStringArray("weapon")]
+script = ExtResource("17_0m0ai")
+weapon = NodePath("../../../../../WeaponUserComponent/PieCannon")
+metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
+
+[node name="Banana" type="Node" parent="BeehaveTree/SequenceComposite/Attack" index="1" unique_id=1371964999]
 script = ExtResource("33_1ursc")
 metadata/_custom_type_script = "uid://cg016dbe7gs1x"
 
@@ -181,7 +229,7 @@ script = ExtResource("17_0m0ai")
 weapon = NodePath("../../../../../WeaponUserComponent/Banana")
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 
-[node name="Horn" type="Node" parent="BeehaveTree/SequenceComposite/Attack" index="1" unique_id=1839476681]
+[node name="Horn" type="Node" parent="BeehaveTree/SequenceComposite/Attack" index="2" unique_id=1839476681]
 script = ExtResource("33_1ursc")
 metadata/_custom_type_script = "uid://cg016dbe7gs1x"
 
@@ -190,16 +238,16 @@ script = ExtResource("17_0m0ai")
 weapon = NodePath("../../../../../WeaponUserComponent/Horn")
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 
-[node name="Rush" type="Area2D" parent="." index="20" unique_id=429380638]
+[node name="Rush" type="Area2D" parent="." index="19" unique_id=429380638]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rush" index="0" unique_id=1679646748]
 visible = false
 shape = SubResource("CircleShape2D_fb4jx")
 
-[node name="IntroductionSubjectComponent" parent="." index="23" unique_id=776935428]
-group = "Gray"
-subject_name = "GRAY"
-subject_desc = "A GRAYTIDE SPEARMAN WHO ATTACKS WITH A DASH.
-[color=purple]WEAK TO THE BULLETS AND GETS STUN WHEN HITTING A WALL[/color]"
-subject_prefix = "GREYTIDE'S FOLLOWER"
-theme = ExtResource("41_o15ms")
+[node name="IntroductionSubjectComponent" parent="." index="22" unique_id=776935428]
+group = "Clown"
+subject_name = "CLOWN"
+subject_desc = "FUCKIN' BITCH
+[color=purple]KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT[/color]"
+subject_prefix = "ANNOYING MOTHERFUCKER"
+theme = ExtResource("23_iqm8m")

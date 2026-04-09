@@ -77,8 +77,39 @@ MASTER OF SPEAR, MELEE AND RANGE WEAPONS.
 "Bang","Бам"
 "Take this, Brother!","Получай, Братец!"
 
+"CLOWN","КЛОУН"
+"ANNOYING MOTHERFUCKER","РАЗДРАЖАЮЩИЙ ПИДОР"
+"FUCKIN' BITCH
+[color=purple]KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT[/color]",
+"ЕБУЧАЯ СУЧКА
+[color=purple]УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО[/color]"
+
+"TOMATO KILLER","ТОМАТ УБИЙЦА"
+"WEAKEST BOTANISTS PAWN.
+[color=purple]WEAK TO EVERYTHING[/color]",
+"СЛАБЕЙШАЯ ПЕШКА БОТАНИКА.
+[color=purple]УЯЗВИМ КО ВСЕМУ[/color]"
+
+"ROBUST BOTANIST","РОБАСТНЫЙ БОТАНИК"
+"STONED ROBUSTER","ОБКУРЕННЫЙ РОБАСТЕР"
+"A BOTANIST WHO HAS MASTERED THE USE OF MUTAGEN. DUE TO THE HEALING GAS, HE IS PRACTICALLY IMMORTAL AS LONG AS HYDROPONIC TRAYS WITH TOMATO KILLERS ARE ACTIVE. HE USES POISON GAS AND DEATHNETTLE.
+[COLOR=PURPLE]IMMORTAL UNTIL THE TRAYS ARE BROKEN[/COLOR]","БОТАНИК, КОТОРЫЙ ДОСТИГ МАСТЕРСТВА В ИСПОЛЬЗОВАНИИ МУТАГЕНА. ИЗ-ЗА ЛЕЧЕБНОГО ГАЗА ОН ПРАКТИЧЕСКИ БЕССМЕРТЕН, ПОКА АКТИВНЫ ГИДРОПОНЫЕ ЛОТКИ С ТОМАТАМИ УБИЙЦАМИ. ОН ИСПОЛЬЗУЕТ ЯДОВИТЫЙ ГАЗ И СМЕРТОКРАПИВУ.
+[COLOR=PURPLE]БЕССМЕРТЕН ПОКА ЛОТКИ НЕ УНИЧТОЖЕНЫ[/COLOR]"
+"Bruuh... try my gas, it's fucking better than frezon","Броо... попробуй мой газ, он дохуя лучше фрезона"
+"Brooo...","Братааан..."
+"Weeds!..","Травка!.."
+"I hate tomatoes... unless they're killers","Я ненавижу томаты... если они не убийцы"
+"I see a rainbow. Catch the rainbow, bro!","Я вижу радугу. Catch the rainbow, братан!"
+"Bruuh...","Броо..."
+
+"BOTANIST","БОТАНИК"
+"SUPERIOR CREW MEMBER","ВЫСШИЙ ЧЛЕН ЭКИПАЖА"
+"AFTER THE DEATH OF STONED ROBUSTER, THE MUTAGEN BECAME AVAILABLE TO ALL BOTANISTS
+[COLOR=PURPLE]IMMORTAL UNTIL THE TRAYS ARE BROKEN[/COLOR]","ПОСЛЕ СМЕРТИ ОБКУРЕННОГО РОБАСТЕРА, МУТАГЕН СТАЛ ДОСТУПЕН ДЛЯ ВСЕХ БОТАНИКОВ
+[COLOR=PURPLE]БЕССМЕРТЕН ПОКА ЛОТКИ НЕ УНИЧТОЖЕНЫ[/COLOR]"
+
 "Bandage and (Toxic) Marker","Бинт и (Токсичный) Маркер"
-"[color=green]Increases your maximum health by 5 unit[/color], but [color=crimson]decreases passive regeneration by 4 unit[/color]","[color=green]Повышает твоё максимальное здоровье на 5 единиц[/color], но [color=crimson]снижает пассивную регенерацию на 4 единицы[/color]"
+"[color=green]Increases your maximum health by 10 unit[/color], but [color=crimson]decreases passive regeneration by 4 unit[/color]","[color=green]Повышает твоё максимальное здоровье на 10 единиц[/color], но [color=crimson]снижает пассивную регенерацию на 4 единицы[/color]"
 
 "[color=green]Increases your attack knockback power[/color]","[color=green]Повышает силу толкания при атаках[/color]"
 
@@ -89,7 +120,7 @@ MASTER OF SPEAR, MELEE AND RANGE WEAPONS.
 "[color=green]Increases your armor by 5%[/color], but [color=crimson]decreases heal for damage by 5%[/color]","[color=green]Усиливает вашу броню на 5%[/color], но [color=crimson]уменьшает лечение от урона на 5%[/color]"
 
 "Combat Glove","Боевые Перчатки"
-"[color=green]Reduces weapon cooldown by 5%[/color]","[color=green]Понижает кулдаун оружия на 5%[/color]"
+"[color=green]Reduces weapon cooldown by 10%[/color]","[color=green]Понижает кулдаун оружия на 10%[/color]"
 
 "Galaxythistle","Галакточертополох"
 "[color=green]Reduces delayed damage by 10%[/color]","[color=green]Уменьшает отложенный урон на 10%[/color]"
@@ -98,10 +129,10 @@ MASTER OF SPEAR, MELEE AND RANGE WEAPONS.
 "[color=green]Increases projectile penetration[/color], but [color=crimson]decreases damage by 4%[/color]","[color=green]Повышает количество прострелов проджектайлов[/color], но [color=crimson]понижает урон на 4%[/color]"
 
 "Bitch Ball","Бляжный Мяч"
-"[color=green]Increases your melee attack reflect chance by 3%[/color]","[color=green]Повышает шанс отражения ближних атак на 3%[/color]"
+"[color=green]Increases your melee attack reflect chance by 5%[/color], but [color=crimson]decreases your bullet reflect chance by 5%[/color]","[color=green]Повышает шанс отражения ближних атак на 5%[/color], но [color=crimson]уменьшает шанс отражения пуль на 5%[/color]"
 
 "Mirror Shard or (Shard of Mirror)","Стеклянный Осколок или же (Осколок Стекла)"
-"[color=green]Increases your bullet reflect chance by 3%[/color]","[color=green]Повышает шанс отражения пуль на 3%[/color]"
+"[color=green]Increases your bullet reflect chance by 5%[/color], but [color=crimson]decreases your melee reflect chance by 5%[/color]","[color=green]Повышает шанс отражения пуль на 5%[/color], но [color=crimson]уменьшает шанс отражения ближних атак на 5%[/color]"
 
 "Practice Medicine","Практическая Медицина"
 "[color=green]Increases your passive regeneration by 2 units per second[/color]","[color=green]Повышает пассивную регенерацию на 2 единицы[/color]"
@@ -122,3 +153,6 @@ MASTER OF SPEAR, MELEE AND RANGE WEAPONS.
 
 "Rubber Bullets(Without jokes about dildos pls)","Резиновые Пули(Пж без шуток о дилдаках)"
 "[color=green]Increases projectile bounce[/color], but [color=crimson]decreases projectile penetration[/color]","[color=green]Повышает отскакиваемость проджектайлов[/color], но [color=crimson]уменьшает пробиваемость проджектайлов[/color]"
+
+"Inspector's Flask","Фляга инспектора"
+"[color=green]Decreases your Battle Tendency reduction by 15%[/color], but [color=crimson]increases weapon spread by 15%[/color]","[color=green]Уменьшает уменьшение боевого духа на 15%[/color], но [color=crimson]повышает разброс на 15%[/color]"

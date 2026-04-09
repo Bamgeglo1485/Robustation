@@ -1,0 +1,194 @@
+[gd_scene format=3 uid="uid://b5bwpclrlb8k1"]
+
+[ext_resource type="PackedScene" uid="uid://c0eulucj1dtco" path="res://Scenes/Mobs/Base/BaseEnemy.tscn" id="1_ypxbh"]
+[ext_resource type="Texture2D" uid="uid://52mbog6ej55u" path="res://Textures/Mobs/Mobs/botanist.png" id="2_8bjdt"]
+[ext_resource type="Script" uid="uid://6b7bcparwq17" path="res://Components/Weapons/MeleeWeaponComponent.gd" id="3_r3gap"]
+[ext_resource type="Texture2D" uid="uid://vrqr4j3chq75" path="res://Textures/Weapons/DeathNettle/death-nettle-inhand.png" id="4_x7fu3"]
+[ext_resource type="AudioStream" uid="uid://eogckfs15aph" path="res://Audio/Weapon/miss.ogg" id="5_gume5"]
+[ext_resource type="AudioStream" uid="uid://cuj7tgh253e14" path="res://Resources/Audio/GenHitRandom.tres" id="6_yt3j5"]
+[ext_resource type="Script" uid="uid://bi1gje1pfokqc" path="res://Components/Weapons/RangeWeaponComponent.gd" id="7_gume5"]
+[ext_resource type="PackedScene" uid="uid://dpbow47giqahy" path="res://Scenes/Projectiles/Bloonion.tscn" id="8_ie53o"]
+[ext_resource type="Texture2D" uid="uid://cl55cjfskguko" path="res://Textures/Weapons/Bloonion/bloonion-inhands.png" id="9_ktnof"]
+[ext_resource type="PackedScene" uid="uid://c8ttebjsf0pmx" path="res://Scenes/Entities/Functioning/TrayDebuffed.tscn" id="13_nd1cv"]
+[ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="14_gt7if"]
+[ext_resource type="Script" uid="uid://6xpj3gw1krkd" path="res://Components/Mobs/AI/Actions/SayAction.gd" id="15_ernne"]
+[ext_resource type="Script" uid="uid://c6fapai3prk4g" path="res://Components/Mobs/AI/Actions/SetPlayerToBlackboardAction.gd" id="15_ktnof"]
+[ext_resource type="Script" uid="uid://dl1x4qw4skabi" path="res://Components/Mobs/AI/Actions/SetMoveToKeyAction.gd" id="16_ie53o"]
+[ext_resource type="Script" uid="uid://dua6hp8ir5tiu" path="res://Components/Mobs/AI/Actions/AttackTargetAction.gd" id="17_ie53o"]
+[ext_resource type="Script" uid="uid://wlnghjnvdlyn" path="res://Components/Mobs/AI/Actions/MoveToPointAction.gd" id="17_oktwv"]
+[ext_resource type="Script" uid="uid://c6dnhtk86vqwr" path="res://Components/Mobs/AI/Actions/ReturnSuccessAction.gd" id="19_3vfl7"]
+[ext_resource type="Script" uid="uid://bankaictwkjye" path="res://Components/Mobs/AI/Actions/SetEnemyToBlackboardAction.gd" id="19_gt7if"]
+[ext_resource type="Script" uid="uid://ttwxxcce2i4p" path="res://Components/Mobs/AI/Actions/LookAtPointAction.gd" id="19_m4aq3"]
+[ext_resource type="Script" uid="uid://8hn4kne15ac5" path="res://addons/beehave/nodes/composites/selector.gd" id="20_m811i"]
+[ext_resource type="Script" uid="uid://cxcq0m0o1gno7" path="res://Components/Mobs/AI/Actions/AddSceneAction.gd" id="21_qla6x"]
+[ext_resource type="Script" uid="uid://bpstodpkpmrij" path="res://Components/Mobs/AI/Actions/SetInvincibleAction.gd" id="22_h3x2p"]
+[ext_resource type="AudioStream" uid="uid://b1ws82m41ftc4" path="res://Audio/EnemyThemes/Botanist.ogg" id="23_nd1cv"]
+[ext_resource type="Texture2D" uid="uid://cryexxr4x761f" path="res://Textures/Mobs/Mobs/Hair/undercutright.png" id="24_nd1cv"]
+[ext_resource type="Script" uid="uid://bqvdlb3r03cs0" path="res://Components/Visual/DirectionalSpriteComponent.gd" id="25_3bpxu"]
+[ext_resource type="Texture2D" uid="uid://t8go84dailgi" path="res://Textures/Mobs/Mobs/Hair/shorthairg.png" id="26_3u4av"]
+[ext_resource type="Texture2D" uid="uid://fx8bg7p2wfff" path="res://Textures/Mobs/Mobs/Hair/80s.png" id="27_27mmv"]
+[ext_resource type="Texture2D" uid="uid://exreeul6rla6" path="res://Textures/Mobs/Mobs/Hair/bald.png" id="28_tcd2f"]
+[ext_resource type="Texture2D" uid="uid://b46je4cwbysn6" path="res://Textures/Mobs/Mobs/Hair/bun3.png" id="29_ex5hw"]
+[ext_resource type="Texture2D" uid="uid://boij24x83l0lv" path="res://Textures/Mobs/Mobs/Hair/afro2.png" id="30_1fi8b"]
+[ext_resource type="Texture2D" uid="uid://b44oghif1lc4g" path="res://Textures/Mobs/Mobs/Hair/curls.png" id="31_fl2im"]
+[ext_resource type="Texture2D" uid="uid://yqtajeusof8p" path="res://Textures/Mobs/Mobs/Hair/flair.png" id="32_4rnjf"]
+[ext_resource type="Texture2D" uid="uid://lcbe8war4xp7" path="res://Textures/Mobs/Mobs/Hair/spiky.png" id="33_i5b83"]
+[ext_resource type="Texture2D" uid="uid://ci84jx3iuyn21" path="res://Textures/Mobs/Mobs/Hair/bobcut.png" id="34_hk7io"]
+[ext_resource type="Texture2D" uid="uid://drxdjuw45awor" path="res://Textures/Mobs/Mobs/Hair/gentle.png" id="35_t2vwi"]
+[ext_resource type="Texture2D" uid="uid://dpr87culdu5mg" path="res://Textures/Mobs/Mobs/Hair/swept2.png" id="36_br5qh"]
+[ext_resource type="Texture2D" uid="uid://b1r30o42v7kyr" path="res://Textures/Mobs/Mobs/Hair/bobcurl.png" id="37_lko1v"]
+[ext_resource type="Texture2D" uid="uid://dlu5n8uy6npxo" path="res://Textures/Mobs/Mobs/Hair/joestar.png" id="38_dm2cf"]
+[ext_resource type="Texture2D" uid="uid://k32gxv505ucy" path="res://Textures/Mobs/Mobs/Hair/sidecut.png" id="39_7wmxi"]
+[ext_resource type="Texture2D" uid="uid://dab0prsqfymf6" path="res://Textures/Mobs/Mobs/Hair/halfbang.png" id="40_c7pau"]
+[ext_resource type="Texture2D" uid="uid://c2j84lfhydlo7" path="res://Textures/Mobs/Mobs/Hair/bedheadv2.png" id="41_6cwrr"]
+[ext_resource type="Texture2D" uid="uid://4rew8bctbhwt" path="res://Textures/Mobs/Mobs/Hair/undercutleft.png" id="42_oeaax"]
+[ext_resource type="Texture2D" uid="uid://cvtrwkf34me6c" path="res://Textures/Mobs/Mobs/Hair/classicmulder.png" id="43_sprdq"]
+
+[node name="RobustBotanist" unique_id=600669417 instance=ExtResource("1_ypxbh")]
+
+[node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
+base_max_speed = 200.0
+drop_resistance = 2
+
+[node name="Texture" parent="." index="2" unique_id=382857461]
+position = Vector2(0, 1)
+texture = ExtResource("2_8bjdt")
+
+[node name="HealthComponent" parent="." index="4" unique_id=1758373275]
+hitstop_on_death = true
+max_health = 150
+INVINCIBLE = true
+
+[node name="WeaponUserComponent" parent="." index="6" unique_id=2123544057 node_paths=PackedStringArray("selected_weapon")]
+selected_weapon = NodePath("Deathnettle")
+
+[node name="Deathnettle" type="Node" parent="WeaponUserComponent" index="0" unique_id=1593566200 node_paths=PackedStringArray("attack_sound", "miss_sound")]
+script = ExtResource("3_r3gap")
+delayed_damage = 3
+delayed_damage_delay = 5
+attack_sound = NodePath("HitSound")
+miss_sound = NodePath("MissSound")
+can_parry_weapon = false
+swing_delay = 0.0
+equipped_texture = ExtResource("4_x7fu3")
+metadata/_custom_type_script = "uid://6b7bcparwq17"
+
+[node name="MissSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Deathnettle" index="0" unique_id=1778817825]
+stream = ExtResource("5_gume5")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Deathnettle" index="1" unique_id=1235228624]
+stream = ExtResource("6_yt3j5")
+
+[node name="Bloonion" type="Node" parent="WeaponUserComponent" index="1" unique_id=616156701 node_paths=PackedStringArray("shoot_sound")]
+script = ExtResource("7_gume5")
+projectile = ExtResource("8_ie53o")
+spread_angle = 3
+bullets_max_count = 1
+bullets = 1
+bullets_recover_count = 1
+shots = 1
+shots_angle = 0
+shoot_sound = NodePath("ShootSound")
+bullets_recovery_delay = 6.0
+cooldown_delay = 0.3
+swing_delay = 0.2
+equipped_texture = ExtResource("9_ktnof")
+metadata/_custom_type_script = "uid://bi1gje1pfokqc"
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Bloonion" index="0" unique_id=207258997]
+stream = ExtResource("5_gume5")
+
+[node name="NavigationAgent" parent="." index="13" unique_id=1358139639]
+target_desired_distance = 0.1
+
+[node name="BeehaveTree" parent="." index="16" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
+blackboard = NodePath("@Node@30019")
+
+[node name="SequenceComposite" type="Node" parent="BeehaveTree" index="0" unique_id=815350071]
+script = ExtResource("14_gt7if")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="SelectorComposite" type="Node" parent="BeehaveTree/SequenceComposite" index="0" unique_id=90073425]
+script = ExtResource("20_m811i")
+metadata/_custom_type_script = "uid://8hn4kne15ac5"
+
+[node name="AddSceneAction" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite" index="0" unique_id=1402285602 node_paths=PackedStringArray("position_target")]
+script = ExtResource("21_qla6x")
+position_target = NodePath("../../../..")
+scene = ExtResource("13_nd1cv")
+metadata/_custom_type_script = "uid://cxcq0m0o1gno7"
+
+[node name="AttackTargetAction" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite" index="1" unique_id=1168815313 node_paths=PackedStringArray("weapon")]
+script = ExtResource("17_ie53o")
+weapon = NodePath("../../../../WeaponUserComponent/Deathnettle")
+metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
+
+[node name="AttackTargetAction2" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite" index="2" unique_id=2111187169 node_paths=PackedStringArray("weapon")]
+script = ExtResource("17_ie53o")
+weapon = NodePath("../../../../WeaponUserComponent/Bloonion")
+metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
+
+[node name="SayAction" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite" index="3" unique_id=1020312439]
+script = ExtResource("15_ernne")
+lines = Array[String](["Brooo...", "Weeds!..", "I hate tomatoes... unless they're killers", "I see a rainbow. Catch the rainbow, bro!", "Bruuh..."])
+chance = 0.05
+metadata/_custom_type_script = "uid://6xpj3gw1krkd"
+
+[node name="ReturnSuccessAction" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite" index="4" unique_id=1716648034]
+script = ExtResource("19_3vfl7")
+metadata/_custom_type_script = "uid://c6dnhtk86vqwr"
+
+[node name="MoveToPlayer" type="Node" parent="BeehaveTree/SequenceComposite" index="1" unique_id=765773787]
+script = ExtResource("14_gt7if")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="SetPlayerToBlackboardAction" type="Node" parent="BeehaveTree/SequenceComposite/MoveToPlayer" index="0" unique_id=430356606]
+script = ExtResource("15_ktnof")
+ignore_player_change = true
+metadata/_custom_type_script = "uid://c6fapai3prk4g"
+
+[node name="SetMoveToKeyAction" type="Node" parent="BeehaveTree/SequenceComposite/MoveToPlayer" index="1" unique_id=1217404051]
+script = ExtResource("16_ie53o")
+key = "Target"
+metadata/_custom_type_script = "uid://dl1x4qw4skabi"
+
+[node name="MoveToPointAction" type="Node" parent="BeehaveTree/SequenceComposite/MoveToPlayer" index="2" unique_id=1485844567]
+script = ExtResource("17_oktwv")
+pathfind_update_rate = 0.1
+metadata/_custom_type_script = "uid://wlnghjnvdlyn"
+
+[node name="LookAtDirectionAction" type="Node" parent="BeehaveTree/SequenceComposite/MoveToPlayer" index="3" unique_id=750480377]
+script = ExtResource("19_m4aq3")
+key = "MovePoint"
+metadata/_custom_type_script = "uid://ttwxxcce2i4p"
+
+[node name="SelectorComposite2" type="Node" parent="BeehaveTree/SequenceComposite" index="2" unique_id=800538724]
+script = ExtResource("20_m811i")
+metadata/_custom_type_script = "uid://8hn4kne15ac5"
+
+[node name="SetEnemyToBlackboardAction" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite2" index="0" unique_id=565298509]
+script = ExtResource("19_gt7if")
+key = "Tray"
+targeted_faction = "Tray"
+metadata/_custom_type_script = "uid://bankaictwkjye"
+
+[node name="SetInvincibleAction" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite2" index="1" unique_id=441457070]
+script = ExtResource("22_h3x2p")
+metadata/_custom_type_script = "uid://bpstodpkpmrij"
+
+[node name="IntroductionSubjectComponent" parent="." index="20" unique_id=776935428]
+group = "Botanist"
+subject_name = "BOTANIST"
+subject_desc = "AFTER THE DEATH OF STONED ROBUSTER, THE MUTAGEN BECAME AVAILABLE TO ALL BOTANICS
+[COLOR=PURPLE]IMMORTAL UNTIL THE TRAYS ARE BROKEN[/COLOR]"
+subject_prefix = "SUPERIOR CREW MEMBER"
+theme = ExtResource("23_nd1cv")
+
+[node name="Hair" type="Sprite2D" parent="." index="21" unique_id=682336587]
+texture = ExtResource("24_nd1cv")
+offset = Vector2(0, -2)
+region_enabled = true
+script = ExtResource("25_3bpxu")
+random_textures = Array[Texture2D]([ExtResource("26_3u4av"), ExtResource("27_27mmv"), ExtResource("28_tcd2f"), ExtResource("29_ex5hw"), ExtResource("30_1fi8b"), ExtResource("31_fl2im"), ExtResource("32_4rnjf"), ExtResource("33_i5b83"), ExtResource("34_hk7io"), ExtResource("35_t2vwi"), ExtResource("36_br5qh"), ExtResource("37_lko1v"), ExtResource("38_dm2cf"), ExtResource("39_7wmxi"), ExtResource("40_c7pau"), ExtResource("41_6cwrr"), ExtResource("42_oeaax"), ExtResource("43_sprdq"), ExtResource("24_nd1cv")])
+random_color = true
+metadata/_custom_type_script = "uid://bqvdlb3r03cs0"

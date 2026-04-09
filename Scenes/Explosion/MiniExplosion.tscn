@@ -5,11 +5,11 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u3mfi"]
 shader = ExtResource("2_d1i1e")
-shader_parameter/strength = 0.10000000475
-shader_parameter/radius = 0.0
-shader_parameter/aberration = 1.0
-shader_parameter/width = 0.0
-shader_parameter/feather = 1.0
+shader_parameter/strength = 0.08
+shader_parameter/radius = 0.25
+shader_parameter/aberration = 0.425
+shader_parameter/width = 0.04
+shader_parameter/feather = 0.135
 
 [node name="MiniExplosion" unique_id=1040504191 instance=ExtResource("1_wupnp")]
 impact_frame = false

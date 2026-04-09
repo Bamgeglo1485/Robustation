@@ -35,7 +35,6 @@ damage = 100.0
 fly_force = 700
 fall_time = 1
 radius = 200
-check_interval = 0.1
 ignore_faction = true
 main_lighting = NodePath("Light")
 
@@ -70,7 +69,7 @@ visibility_rect = Rect2(-1000, -1000, 2000, 2000)
 [node name="Light" type="PointLight2D" parent="." unique_id=1912790245]
 position = Vector2(0, 9.536743e-07)
 color = Color(0.9963228, 0.39377716, 3.85046e-07, 1)
-energy = 27.75
+energy = 40.0
 texture = ExtResource("5_jqe0j")
 texture_scale = 2.1
 

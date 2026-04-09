@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://bfiiciqf8e8w1"]
 
+[ext_resource type="FontFile" uid="uid://mhx51lyuasx4" path="res://Resources/Text/Fonts/Ac437_ApricotPortable.ttf" id="1_745y4"]
 [ext_resource type="FontFile" uid="uid://4xw2o0e2j051" path="res://Resources/Text/Fonts/RobotoMono/static/RobotoMono-Regular.ttf" id="2_4eipc"]
 [ext_resource type="Script" uid="uid://clfjtp26jetey" path="res://Components/Player/RestartComponent.gd" id="2_ee1ry"]
 [ext_resource type="Script" uid="uid://4io3bm7r86h6" path="res://Components/Interface/Menu/TextPrintingAnimationComponent.gd" id="2_udu1i"]
 [ext_resource type="Material" uid="uid://bdio1hqqwuopn" path="res://Resources/Shaders/Monitor.tres" id="3_uu8do"]
-[ext_resource type="FontFile" uid="uid://dichq2si55q4b" path="res://Resources/Text/Fonts/RobotoMono/static/RobotoMono-ExtraLight.ttf" id="4_i5qfg"]
 [ext_resource type="AudioStream" uid="uid://b1hijj0a6bn4s" path="res://Audio/Effects/hahaha.ogg" id="6_3ffbk"]
 [ext_resource type="AudioStream" uid="uid://b3bn8ma2pwwns" path="res://Audio/Interface/Menu/computer_loop.ogg" id="7_4eipc"]
 [ext_resource type="Script" uid="uid://q6vb3j07d62t" path="res://Components/Entity/FadeInComponent.gd" id="7_u8k2u"]
@@ -44,7 +44,8 @@ offset_right = 25.0
 offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/normal_font = ExtResource("4_i5qfg")
+theme_override_constants/line_separation = 5
+theme_override_fonts/normal_font = ExtResource("1_745y4")
 theme_override_fonts/bold_font = ExtResource("2_4eipc")
 bbcode_enabled = true
 text = "A problem has been detected and RobustOS has been shut down to prevent damage
@@ -90,7 +91,8 @@ anchor_right = 0.9861111
 anchor_bottom = 0.7484568
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/normal_font = ExtResource("4_i5qfg")
+theme_override_constants/line_separation = 5
+theme_override_fonts/normal_font = ExtResource("1_745y4")
 text = "                                                         
                                                          
                                                          
@@ -123,7 +125,6 @@ text = "
                                                          
                                                          "
 scroll_active = false
-metadata/_edit_use_anchors_ = true
 
 [node name="TextPrintingAnimationComponent" type="Node" parent="ColorRect/RichTextLabel2" unique_id=107704517]
 script = ExtResource("2_udu1i")

@@ -276,7 +276,7 @@ multiple_attack: bool = false) -> bool:
 			target_mover.drop(drop_enemy_delay, drop_forced, drop_resistance_force)
 		throw_speed = base_throw_speed
 	
-	var target_stamina: StaminaComponent = target.get_node("StaminaComponent")
+	var target_stamina: StaminaComponent = target.get_node_or_null("StaminaComponent")
 	if target_stamina and stamina_damage != 0:
 		target_stamina.take_stamina_damage(stamina_damage * damage_modifier, parent)
 	
@@ -320,15 +320,12 @@ func parry_projectile(projectile: Node2D, projectile_component: ProjectileCompon
 	var angle = direction.angle()
 	projectile.modulate = parry_color
 	projectile.global_rotation = angle
-	projectile_component.speed *= projectile_component.parry_speed_boost
 	projectile_component.damage *= parry_force
-	projectile_component.rotate_speed *= projectile_component.parry_speed_boost
-	projectile_component.throw_speed *= projectile_component.parry_speed_boost
 	projectile_component.direction = angle
 	projectile_component.shooter = parent
 	projectile_component.shooter_faction = parent_faction
 	projectile_component.on_parried()
-		
+	
 	if parry_sound:
 		parry_sound.play()
 	parry_effects()

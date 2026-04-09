@@ -56,7 +56,7 @@
 [ext_resource type="PackedScene" uid="uid://cc30l120jqrpr" path="res://Scenes/Projectiles/Hitscan/LaserGun.tscn" id="40_c8gs6"]
 [ext_resource type="AudioStream" uid="uid://pdbtg3ie1ptb" path="res://Audio/Effects/ephedrine_overdose.ogg" id="40_sp3tm"]
 [ext_resource type="PackedScene" uid="uid://dwm5ay00kaqqf" path="res://Scenes/Effects/Particles/LaserFire.tscn" id="41_q84mv"]
-[ext_resource type="AudioStream" uid="uid://b5y2urbnmjr2b" path="res://Audio/Music/laser_cannon2.ogg" id="41_vcq5s"]
+[ext_resource type="AudioStream" uid="uid://b5y2urbnmjr2b" path="res://Audio/Weapon/laser_cannon2.ogg" id="41_vcq5s"]
 [ext_resource type="PackedScene" uid="uid://dmrgvirxbiawv" path="res://Scenes/Effects/Particles/Overdose.tscn" id="42_75g6c"]
 [ext_resource type="PackedScene" uid="uid://dahjv32y84ofv" path="res://Scenes/Mobs/Player/AbstractPlayer.tscn" id="42_isbls"]
 [ext_resource type="Texture2D" uid="uid://oyppmxey67oa" path="res://Textures/Weapons/LaserGun/lasergun-inhand.png" id="42_mjqyx"]
@@ -67,6 +67,7 @@
 [ext_resource type="Texture2D" uid="uid://pe7a4yj0c7rq" path="res://Textures/Weapons/LaserGun/unlethal_icon.png" id="46_xvfrh"]
 [ext_resource type="PackedScene" uid="uid://e33tm7nwmy0y" path="res://Scenes/Effects/Particles/Charge.tscn" id="48_ssq7n"]
 [ext_resource type="Script" uid="uid://d35ly1kbt1uf" path="res://Components/Interface/AnchorToCursorComponent.gd" id="56_sp3tm"]
+[ext_resource type="FontFile" uid="uid://mhx51lyuasx4" path="res://Resources/Text/Fonts/Ac437_ApricotPortable.ttf" id="59_5mfce"]
 
 [sub_resource type="DPITexture" id="DPITexture_wl2js"]
 _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"4\" height=\"8\"><path fill=\"#fff\" fill-opacity=\".25\" d=\"M1 0h2v16H1z\"/></svg>
@@ -369,7 +370,7 @@ bullets_recover_count = 1
 shots_angle = 0
 shoot_sound = NodePath("ShootSound")
 empty_shoot_sound = NodePath("EmptySound")
-bullets_recovery_delay = 0.5
+bullets_recovery_delay = 1.0
 gun_fire_effect = ExtResource("41_q84mv")
 cooldown_delay = 0.2
 swing_delay = 0.0
@@ -472,6 +473,9 @@ region_rect = Rect2(0, 0, 32, 32)
 script = ExtResource("31_m4dpc")
 metadata/_custom_type_script = "uid://bqvdlb3r03cs0"
 
+[node name="Information" parent="GUI/EnemyIntroduction" parent_id_path=PackedInt32Array(1741703015) index="0" unique_id=2104700922]
+theme_override_fonts/normal_font = ExtResource("59_5mfce")
+
 [node name="QTE" type="Control" parent="GUI/Misc" parent_id_path=PackedInt32Array(2073434627) index="4" unique_id=8522509]
 layout_mode = 1
 anchors_preset = 15
@@ -569,6 +573,15 @@ texture = ExtResource("36_u1ecu")
 
 [node name="BattleTendency" parent="GUI/Overlays/BattleTendency" parent_id_path=PackedInt32Array(1422523169) index="0" unique_id=586695650]
 z_index = 5
+
+[node name="Rainbow" parent="GUI/Overlays/Rainbow" parent_id_path=PackedInt32Array(1257070989) index="0" unique_id=400252612]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="ImpactFrame" parent="GUI/Overlays/ImpactFrame" parent_id_path=PackedInt32Array(552674945) index="0" unique_id=1727064910]
+process_mode = 3
 
 [node name="Ability" parent="GUI/Overlays" parent_id_path=PackedInt32Array(1713393531) index="6" unique_id=614013625]
 layer = 2

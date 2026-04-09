@@ -1,14 +1,17 @@
 class_name HealthBarComponent extends Component
 
 @onready var health_component: HealthComponent = owner.get_node_or_null("HealthComponent")
-@onready var player: CharacterBody2D = scene.get_node_or_null("Player")
-@onready var player_controller: BossHealthBarsControllerComponent = player.get_node_or_null("BossHealthBarsControllerComponent")
+var player: CharacterBody2D
+var player_controller: BossHealthBarsControllerComponent
 var tween: Tween
 @export var on_spawn: bool = false
 
 func _ready() -> void:
+	if scene:
+		player = scene.get_node_or_null("Player")
 	if !on_spawn:
 		return
+	player_controller = player.get_node_or_null("BossHealthBarsControllerComponent")
 	if player_controller:
 		player_controller.add_health_bar(parent)
 	parent.visible = true

@@ -40,6 +40,7 @@ selected_weapon = NodePath("Bite")
 
 [node name="Bite" type="Node" parent="WeaponUserComponent" index="0" unique_id=2029928507 node_paths=PackedStringArray("attack_sound", "miss_sound")]
 script = ExtResource("25_nmuin")
+damage = 5
 attack_range = 83
 attack_sound = NodePath("HitSound")
 miss_sound = NodePath("MissSound")
@@ -75,7 +76,7 @@ randomize_multiplier_max = 1.2
 metadata/_custom_type_script = "uid://hv0g6akh0ftn"
 
 [node name="BeehaveTree" parent="." index="17" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@31383")
+blackboard = NodePath("@Node@18987")
 
 [node name="MoveToPlayer" type="Node" parent="BeehaveTree" index="0" unique_id=1542265017]
 script = ExtResource("33_f0rbt")
@@ -110,8 +111,8 @@ resistance = 2.0
 metadata/_custom_type_script = "uid://clr7jbioge17t"
 
 [node name="IntroductionSubjectComponent" parent="." index="22" unique_id=776935428]
-group = "Assistant"
-subject_name = "ASSISTANT"
-subject_desc = "WEAK INSANE ASSISTANT USING MELEE WEAPON.
+group = "Tomato"
+subject_name = "TOMATO KILLER"
+subject_desc = "WEAKEST BOTANISTS PAWN.
 [color=purple]WEAK TO EVERYTHING[/color]"
 subject_prefix = "MELEE PAWN"

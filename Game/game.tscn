@@ -17,7 +17,9 @@
 [ext_resource type="Resource" uid="uid://dt4sscnunrdcs" path="res://Resources/Custom/Enemy/Clown.tres" id="11_4w5h0"]
 [ext_resource type="AudioStream" uid="uid://14o4e8msndow" path="res://Audio/Weapon/Projectile/mk58_shoot.ogg" id="11_33n3b"]
 [ext_resource type="Script" uid="uid://di5u0whaqiyjp" path="res://Resources/Custom/Enemy/Base/Enemy.gd" id="11_72g0p"]
+[ext_resource type="Resource" uid="uid://cy0o6q7rklt6r" path="res://Resources/Custom/Enemy/Botanist.tres" id="12_4w5h0"]
 [ext_resource type="AudioStream" uid="uid://b2utqxvujdi7f" path="res://Audio/Ambience/box_deploy.ogg" id="12_33n3b"]
+[ext_resource type="Resource" uid="uid://tcq0h43ui04w" path="res://Resources/Custom/Enemy/RobustBotanist.tres" id="13_4w5h0"]
 [ext_resource type="Environment" uid="uid://r1a7fr7x6en8" path="res://DemoTrash/Light.tres" id="15_qlwvw"]
 [ext_resource type="Script" uid="uid://dptr5blvqsgks" path="res://Components/Interface/Menu/Settings/WorldEnvComponent.gd" id="15_rpdke"]
 
@@ -115,10 +117,10 @@ texture_scale = 10.0
 [node name="ArenaComponent" type="Node" parent="." unique_id=1165337052 node_paths=PackedStringArray("area_info", "perk_choice_start_sound", "perk_choice_sound", "perk_selected_sound")]
 process_mode = 3
 script = ExtResource("10_glinl")
-perks = Array[String](["res://Components/Perks/AdditionalHealthPerkComponent.gd", "res://Components/Perks/AdditionalKnockbackPerkComponent.gd", "res://Components/Perks/AdditionalStaminaPerkComponent.gd", "res://Components/Perks/ArmorPerkComponent.gd", "res://Components/Perks/CooldownModifierPerkComponent.gd", "res://Components/Perks/DelayedDamageModifierPerkComponent.gd", "res://Components/Perks/PenetrationModifierPerkComponent.gd", "res://Components/Perks/ReflectMeleePerkComponent.gd", "res://Components/Perks/ReflectPerkComponent.gd", "res://Components/Perks/RegenerationPerkComponent.gd", "res://Components/Perks/SpeedModifierPerkComponent.gd", "res://Components/Perks/ExplosionResistancePerkComponent.gd", "res://Components/Perks/AdditionalShotsPerkComponent.gd", "res://Components/Perks/ExplosionDamageModifierPerk.gd", "res://Components/Perks/PerfectTimerPerkComponent.gd", "res://Components/Perks/BounceModifierPerkComponent.gd"])
+perks = Array[String](["res://Components/Perks/AdditionalHealthPerkComponent.gd", "res://Components/Perks/AdditionalKnockbackPerkComponent.gd", "res://Components/Perks/AdditionalStaminaPerkComponent.gd", "res://Components/Perks/ArmorPerkComponent.gd", "res://Components/Perks/CooldownModifierPerkComponent.gd", "res://Components/Perks/DelayedDamageModifierPerkComponent.gd", "res://Components/Perks/PenetrationModifierPerkComponent.gd", "res://Components/Perks/ReflectMeleePerkComponent.gd", "res://Components/Perks/ReflectPerkComponent.gd", "res://Components/Perks/RegenerationPerkComponent.gd", "res://Components/Perks/SpeedModifierPerkComponent.gd", "res://Components/Perks/ExplosionDamageModifierPerk.gd", "res://Components/Perks/ExplosionResistancePerkComponent.gd", "res://Components/Perks/AdditionalShotsPerkComponent.gd", "res://Components/Perks/PerfectTimerPerkComponent.gd", "res://Components/Perks/BounceModifierPerkComponent.gd", "res://Components/Perks/BattleTendencyDebuffModifierPerkComponent.gd"])
 area_info = NodePath("../Player/DEBUG/Control/RichTextLabel")
-available_enemies = Array[ExtResource("11_72g0p")]([ExtResource("8_33n3b"), ExtResource("9_rxmp4"), ExtResource("10_qyr8x"), ExtResource("11_2cxdh"), ExtResource("11_4w5h0")])
-available_bosses = Array[ExtResource("11_72g0p")]([ExtResource("10_ss60k")])
+available_enemies = Array[ExtResource("11_72g0p")]([ExtResource("8_33n3b"), ExtResource("9_rxmp4"), ExtResource("10_qyr8x"), ExtResource("11_2cxdh"), ExtResource("11_4w5h0"), ExtResource("12_4w5h0")])
+available_bosses = Array[ExtResource("11_72g0p")]([ExtResource("10_ss60k"), ExtResource("13_4w5h0")])
 spawn_positions = Array[Vector2]([Vector2(-576, 0), Vector2(594, 0), Vector2(0, 453), Vector2(0, -386)])
 perk_choice_start_sound = NodePath("PerkStart")
 perk_choice_sound = NodePath("PerkChoice")
@@ -136,10 +138,10 @@ pitch_scale = 2.0
 [node name="PerkSelected" type="AudioStreamPlayer" parent="ArenaComponent" unique_id=1048082223]
 stream = ExtResource("12_33n3b")
 
-[node name="Node2D" type="Node2D" parent="." unique_id=248863710]
+[node name="Parallaxes" type="Node2D" parent="." unique_id=248863710]
 position = Vector2(1213, 681)
 
-[node name="Parallax2D2" type="Parallax2D" parent="Node2D" unique_id=435382281]
+[node name="Parallax2D2" type="Parallax2D" parent="Parallaxes" unique_id=435382281]
 modulate = Color(1.8247963, 1.8247963, 1.8247963, 1)
 z_index = -4
 scale = Vector2(0.3, 0.3)
@@ -147,13 +149,13 @@ scroll_scale = Vector2(0.1, 0.1)
 repeat_size = Vector2(1340, 480)
 repeat_times = 4
 
-[node name="Sprite2D2" type="Sprite2D" parent="Node2D/Parallax2D2" unique_id=616589044]
+[node name="Sprite2D2" type="Sprite2D" parent="Parallaxes/Parallax2D2" unique_id=616589044]
 modulate = Color(4.415934, 4.415934, 4.415934, 1)
 texture_filter = 2
 position = Vector2(-623.3333, -243.33333)
 texture = ExtResource("9_33n3b")
 
-[node name="Parallax2D3" type="Parallax2D" parent="Node2D" unique_id=604617654]
+[node name="Parallax2D3" type="Parallax2D" parent="Parallaxes" unique_id=604617654]
 z_index = -3
 scroll_scale = Vector2(0.95, 0.95)
 repeat_size = Vector2(1024, 1024)
@@ -162,7 +164,7 @@ repeat_times = 2
 follow_viewport = false
 ignore_camera_scroll = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/Parallax2D3" unique_id=1650751319]
+[node name="Sprite2D" type="Sprite2D" parent="Parallaxes/Parallax2D3" unique_id=1650751319]
 texture_filter = 2
 texture = ExtResource("6_4lqr4")
 

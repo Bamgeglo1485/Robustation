@@ -4,7 +4,7 @@ class_name BattleTendencyComponent extends Component
 @export var battle_tendency_on_max_health: float = 50.0
 @export var max_battle_tendency: float = 100.0
 @export var battle_tendecy_dependency: float = 1.0
-@export var battle_tendency_debuff_multiplier: float = 0.08
+@export var battle_tendency_debuff_multiplier: float = 0.12
 @export var battle_tendency_buff_multiplier: float = 1.0
 @export var battle_tendency_bonus: float = 0
 @export var palette_section: int = 2
@@ -31,10 +31,12 @@ func _on_health_changed(_emitter, _health, _new_health) -> void:
 	change_battle_tendency(0)
 
 func _on_damaged(emitter, damage, damager) -> void:
+	if damage <= 0:
+		return
 	if damager == emitter and emitter == parent: # SELFHARM
 		change_battle_tendency(damage * -0.2)
 	elif damager == parent:
-		change_battle_tendency(damage * 0.) # DAMAGE
+		change_battle_tendency(damage * 0) # DAMAGE
 	else:
 		change_battle_tendency(damage * -0.1) # PLAYER DAMAGED
 
@@ -125,11 +127,11 @@ func set_battle_tendency_modifiers() -> void:
 		weapon_user_component.damage_modifier = 1
 		health_component.damage_modifier = 1
 	elif section == 3:
+		weapon_user_component.damage_modifier = 1.3
+		health_component.damage_modifier = 0.85
+	elif section == 4:
 		weapon_user_component.damage_modifier = 1.5
 		health_component.damage_modifier = 0.7
-	elif section == 4:
-		weapon_user_component.damage_modifier = 2
-		health_component.damage_modifier = 0.5
 	change_palette()
 
 # PLS REWORK THIS SHIT

@@ -648,6 +648,7 @@ environment = SubResource("Environment_kkc8k")
 stream = ExtResource("20_nbqb1")
 volume_db = 3.0
 autoplay = true
+bus = &"Music"
 parameters/looping = true
 
 [node name="FadeInComponent" type="Node" parent="AudioStreamPlayer" unique_id=1631964528]

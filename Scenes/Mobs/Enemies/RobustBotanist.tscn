@@ -83,7 +83,7 @@ stream = ExtResource("5_gume5")
 [node name="HitSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Deathnettle" index="1" unique_id=1235228624]
 stream = ExtResource("6_yt3j5")
 
-[node name="Bloonion" type="Node" parent="WeaponUserComponent" index="1" unique_id=616156701 node_paths=PackedStringArray("shoot_sound", "bullets_recover_sound", "parent_weapon", "alt_attack")]
+[node name="Bloonion" type="Node" parent="WeaponUserComponent" index="1" unique_id=616156701 node_paths=PackedStringArray("shoot_sound")]
 script = ExtResource("7_gume5")
 projectile = ExtResource("8_ie53o")
 spread_angle = 3
@@ -93,12 +93,9 @@ bullets_recover_count = 1
 shots = 1
 shots_angle = 0
 shoot_sound = NodePath("ShootSound")
-bullets_recover_sound = NodePath("")
 cooldown_delay = 0.3
 swing_delay = 0.2
 equipped_texture = ExtResource("9_ktnof")
-parent_weapon = NodePath("")
-alt_attack = NodePath("")
 metadata/_custom_type_script = "uid://bi1gje1pfokqc"
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Bloonion" index="0" unique_id=207258997]
@@ -108,7 +105,7 @@ stream = ExtResource("5_gume5")
 target_desired_distance = 0.1
 
 [node name="BeehaveTree" parent="." index="16" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@154705")
+blackboard = NodePath("@Node@27445")
 
 [node name="SequenceComposite" type="Node" parent="BeehaveTree" index="0" unique_id=815350071]
 script = ExtResource("14_gt7if")
@@ -216,7 +213,6 @@ grow_vertical = 2
 alignment = 2
 
 [node name="ProgressBar" type="ProgressBar" parent="CanvasLayer" index="1" unique_id=1568004556]
-visible = false
 custom_minimum_size = Vector2(0, 48)
 theme_override_styles/background = SubResource("StyleBoxFlat_ak16y")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ppp0o")
@@ -240,7 +236,7 @@ grow_vertical = 2
 theme_override_fonts/normal_font = ExtResource("24_4b3v0")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "[color=grey]Robust Botanist[/color] [color=yellow]「STONED ROBUSTER」"
+text = "[color=grey]Robust Botanist[/color] [color=#19854d]「STONED ROBUSTER」"
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1

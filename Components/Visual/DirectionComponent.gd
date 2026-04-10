@@ -11,29 +11,37 @@ enum Direction {
 signal direction_changed(new_rect: Rect2)
 
 func look_at_direction(look_direction: Vector2) -> Direction:
-	var angle: float = look_direction.angle()
-	var angle_deg: float = rad_to_deg(angle)
-	angle_deg = fmod(angle_deg + 360, 360)
+	var new_direction: Direction = Direction.UP
 	
-	var rect: Rect2
-	var prev_dir: Direction = direction
+	if abs(look_direction.x) > abs(look_direction.y):
+		if look_direction.x > 0:
+			new_direction = Direction.RIGHT
+		else:
+			new_direction = Direction.LEFT
+	else:
+		if look_direction.y > 0:
+			new_direction = Direction.DOWN
+		else:
+			new_direction = Direction.UP
 	
-	if angle_deg >= 315 or angle_deg < 45:
-		rect = Rect2(0, 32, 32, 32)
-		direction = Direction.RIGHT
-	elif angle_deg >= 45 and angle_deg < 135:
-		rect = Rect2(0, 0, 32, 32)
-		direction = Direction.DOWN
-	elif angle_deg >= 135 and angle_deg < 225:
-		rect = Rect2(32, 32, 32, 32)
-		direction = Direction.LEFT
-	elif angle_deg >= 225 and angle_deg < 315:
-		rect = Rect2(32, 0, 32, 32)
-		direction = Direction.UP
+	if new_direction != direction:
+		direction = new_direction
+		change_rect(_get_rect_for_direction(direction))
 	
-	if direction != prev_dir:
-		change_rect(rect)
 	return direction
+
+func _get_rect_for_direction(dir: Direction) -> Rect2:
+	match dir:
+		Direction.RIGHT:
+			return Rect2(0, 32, 32, 32)
+		Direction.DOWN:
+			return Rect2(0, 0, 32, 32)
+		Direction.LEFT:
+			return Rect2(32, 32, 32, 32)
+		Direction.UP:
+			return Rect2(32, 0, 32, 32)
+		_:
+			return Rect2(0, 0, 32, 32)
 
 func change_rect(rect) -> void:
 	direction_changed.emit(rect)

@@ -67,7 +67,6 @@ var speed: float
 func _ready() -> void:
 	if fly_impact_area:
 		fly_impact_area.body_entered.connect(on_fly_impact)
-	
 	set_minor_speed_modifier("fallen", 1.0)
 
 func _physics_process(delta: float) -> void:

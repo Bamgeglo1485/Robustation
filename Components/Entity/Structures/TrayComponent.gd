@@ -17,7 +17,7 @@ var plants: Array[Node2D]
 func _ready() -> void:
 	EventBusManager.gibbed.connect(_on_gibbed)
 	stage_timer = Timer.new()
-	stage_timer.one_shot = false
+	stage_timer.one_shot = true
 	stage_timer.wait_time = progress_stage_delay
 	stage_timer.timeout.connect(_stage_progress)
 	stage_timer.autostart = true

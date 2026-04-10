@@ -12,17 +12,20 @@ func _ready() -> void:
 func _unhandled_input(_event: InputEvent) -> void:
 	if !menu:
 		return
-	
 	var toggle_action = Input.is_action_just_pressed(action_event)
 	if toggle_action:
 		_toggle()
 
 func _toggle():
 	menu.visible = !menu.visible
+	SettingsConfigSystem.paused = menu.visible
 
 func _visibility_changed():
 	if menu.visible:
-		prev_pause_state = get_tree().paused
+		if SettingsConfigSystem.impact_frame:
+			prev_pause_state = false
+		else:
+			prev_pause_state = get_tree().paused
 		get_tree().paused = true
 	else:
 		get_tree().paused = prev_pause_state

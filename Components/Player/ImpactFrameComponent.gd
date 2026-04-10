@@ -24,7 +24,11 @@ func impact_frame(
 
 func frame_freeze(impact_time = 0.3) -> void:
 	get_tree().paused = true
+	SettingsConfigSystem.impact_frame = true
 	await(get_tree().create_timer(impact_time, true, false, true).timeout)
+	SettingsConfigSystem.impact_frame = false
+	if SettingsConfigSystem.paused:
+		return
 	get_tree().paused = false
 
 func set_color_modify(distort_audio = false) -> void:

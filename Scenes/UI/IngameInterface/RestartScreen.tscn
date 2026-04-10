@@ -75,7 +75,7 @@ Technical Information:
 0xfffff880009a9230)
 
 *** 
-[color=green][b]PRESS \"W/A/S/D\" TO RETURN TO THE BOOTLOADER, OR \"R\" TO TRY RESTART THE SESSION."
+[color=green]PRESS \"W/A/S/D\" TO RETURN TO THE BOOTLOADER, OR \"R\" TO TRY RESTART THE SESSION."
 
 [node name="TextPrintingAnimationComponent" type="Node" parent="ColorRect/RichTextLabel" unique_id=1497740228]
 script = ExtResource("2_udu1i")

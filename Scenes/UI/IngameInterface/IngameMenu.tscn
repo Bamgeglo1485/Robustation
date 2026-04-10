@@ -175,13 +175,6 @@ script = ExtResource("1_wxoyb")
 frame_to_drag = NodePath("../..")
 metadata/_custom_type_script = "uid://cja3led3n1ehp"
 
-[node name="Settings" parent="." unique_id=1190863104 instance=ExtResource("5_36p5r")]
-visible = false
-layout_mode = 1
-offset_left = 449.0
-offset_right = 616.364
-offset_bottom = 0.0
-
 [node name="Keybinds" parent="." unique_id=727110380 instance=ExtResource("8_wdhnk")]
 visible = false
 layout_mode = 1
@@ -193,3 +186,15 @@ offset_left = -246.92801
 offset_top = 0.15200043
 offset_right = 247.07199
 offset_bottom = 211.63995
+
+[node name="Settings" parent="." unique_id=1474746943 instance=ExtResource("5_36p5r")]
+visible = false
+layout_mode = 1
+anchor_left = 0.48800004
+anchor_top = 0.066
+anchor_right = 0.48800004
+anchor_bottom = 0.46600002
+offset_left = -246.70404
+offset_top = 0.23199844
+offset_right = 247.29596
+offset_bottom = 259.03198

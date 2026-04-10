@@ -4,6 +4,8 @@ var config: ConfigFile = ConfigFile.new()
 
 var blood_clean_delay: float = 20.0
 var glow: bool = true
+var parallax: bool = true
+var explosion_effect: bool = true
 
 var introductiones_enemies: Array[String]
 

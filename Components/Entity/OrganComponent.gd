@@ -7,7 +7,6 @@ class_name OrganComponent extends PhysicalParticleComponent
 
 func _ready() -> void:
 	parent.reparent.call_deferred(scene)
-	
 	if area2d:
 		area2d.body_entered.connect(_on_step)
 	super._ready()
@@ -20,17 +19,16 @@ func _on_step(_body) -> void:
 		var _effect: Node = blood_scene.instantiate()
 		_effect.global_position = parent.global_position
 		scene.add_child.call_deferred(_effect)
-		if _body.has_node("HealthComponent"):
-			var health_component: HealthComponent = _body.get_node("HealthComponent")
+		var health_component: HealthComponent = _body.get_node("HealthComponent")
+		if health_component:
 			_effect.rotation = _body.velocity.angle()
 			health_component.set_health(health_component.health + health_bonus)
 	
 	if step_sound:
-		step_sound.reparent(scene)
-		step_sound.global_position = parent.global_position
 		step_sound.play()
-		
-		var auto_delete: AutoDeleteComponent = AutoDeleteComponent.new()
-		step_sound.add_child(auto_delete)
+		area2d.set_deferred("monitoring", false)
+		area2d.set_deferred("monitorable", false)
+		parent.visible = false
+		await step_sound.finished
 	
 	parent.queue_free()

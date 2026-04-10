@@ -5,7 +5,7 @@ class_name TrayComponent extends Component
 @export var max_plant_progress: int = 4
 var plant_progress: int = 0
 @export var plant_textures: Array[Texture2D]
-@export var progress_stage_delay: float = 1
+@export var progress_stage_delay: float = 0.5
 @export var plant_scene: PackedScene
 
 var stage_timer: Timer

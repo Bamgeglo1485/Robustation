@@ -641,15 +641,6 @@ stream = ExtResource("18_2xdyd")
 autoplay = true
 parameters/looping = true
 
-[node name="Settings" parent="." unique_id=727110380 instance=ExtResource("6_ahnea")]
-visible = false
-z_index = 12
-layout_mode = 1
-offset_left = 251.0
-offset_top = 29.0
-offset_right = 251.0
-offset_bottom = 29.0
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2110844953]
 environment = SubResource("Environment_kkc8k")
 
@@ -698,3 +689,15 @@ offset_left = -246.59204
 offset_top = 0.26399994
 offset_right = 247.40796
 offset_bottom = 0.23995972
+
+[node name="Settings" parent="." unique_id=727110380 instance=ExtResource("6_ahnea")]
+visible = false
+layout_mode = 1
+anchor_left = 0.48400003
+anchor_top = 0.062000003
+anchor_right = 0.48400003
+anchor_bottom = 0.39600003
+offset_left = -246.56805
+offset_top = -0.1760025
+offset_right = 247.43195
+offset_bottom = 269.39197

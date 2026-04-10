@@ -22,6 +22,7 @@
 [ext_resource type="Resource" uid="uid://tcq0h43ui04w" path="res://Resources/Custom/Enemy/RobustBotanist.tres" id="13_4w5h0"]
 [ext_resource type="Environment" uid="uid://r1a7fr7x6en8" path="res://DemoTrash/Light.tres" id="15_qlwvw"]
 [ext_resource type="Script" uid="uid://dptr5blvqsgks" path="res://Components/Interface/Menu/Settings/WorldEnvComponent.gd" id="15_rpdke"]
+[ext_resource type="Script" uid="uid://08qu36la5uv4" path="res://Components/Interface/Menu/Settings/ParallaxComponent.gd" id="20_vtcgr"]
 
 [node name="Game" type="Node2D" unique_id=1459948473]
 physics_interpolation_mode = 2
@@ -167,6 +168,10 @@ ignore_camera_scroll = true
 [node name="Sprite2D" type="Sprite2D" parent="Parallaxes/Parallax2D3" unique_id=1650751319]
 texture_filter = 2
 texture = ExtResource("6_4lqr4")
+
+[node name="ParallaxComponent" type="Node" parent="Parallaxes" unique_id=503207262]
+script = ExtResource("20_vtcgr")
+metadata/_custom_type_script = "uid://08qu36la5uv4"
 
 [node name="Tiles" type="TileMapLayer" parent="." unique_id=336196802]
 z_index = -2

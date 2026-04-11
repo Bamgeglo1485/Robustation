@@ -166,7 +166,7 @@ randomize_multiplier_max = 1.2
 metadata/_custom_type_script = "uid://hv0g6akh0ftn"
 
 [node name="BeehaveTree" parent="." index="17" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@18971")
+blackboard = NodePath("@Node@18975")
 
 [node name="SequenceComposite" type="Node" parent="BeehaveTree" index="0" unique_id=772322784]
 script = ExtResource("33_1ursc")

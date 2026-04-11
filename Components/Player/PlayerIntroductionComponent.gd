@@ -164,7 +164,8 @@ func _resume() -> void:
 	information.text = ""
 	
 	_setup_camera(false)
-	get_tree().paused = false
+	if !SettingsConfigSystem.paused:
+		get_tree().paused = false
 	introductioning = false
 	
 	for child in control.get_children():

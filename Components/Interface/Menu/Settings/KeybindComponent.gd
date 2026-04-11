@@ -6,73 +6,69 @@ var default_event
 @onready var label: Label = parent.get_node_or_null("Label")
 @onready var reset: Button = parent.get_node_or_null("Reset")
 var config: ConfigFile = ConfigFile.new()
-var input: InputEvent
 
 func _ready() -> void:
 	config.load("user://keybinds.cfg")
 	
-	var config_key = null
-	if config and config.has_section("KEYBINDS"):
-		if config.has_section_key("KEYBINDS", action):
-			config_key = config.get_value("KEYBINDS", action)
+	var config_event = null
+	if config.has_section("KEYBINDS") and config.has_section_key("KEYBINDS", action):
+		config_event = config.get_value("KEYBINDS", action)
 	
-	input = InputMap.action_get_events(action)[0]
-	if input is InputEventKey:
-		default_event = input
-		default_key = default_event.physical_keycode
-		if config_key == null:
-			parent.text = OS.get_keycode_string(default_key)
-		else:
-			if config_key is InputEventKey:
-				parent.text = OS.get_keycode_string(config_key.physical_keycode)
-			elif config_key is InputEventMouseButton:
-				_mouse_text(config_key)
-	elif input is InputEventMouseButton:
-		if config_key == null:
-			_mouse_text(input)
-		else:
-			_mouse_text(config_key)
-		default_key = input.button_index
+	default_event = InputMap.action_get_events(action)[0]
+	default_key = _get_event_key(default_event)
+	
+	# Устанавливаем текст кнопки
+	if config_event == null:
+		_set_button_text(default_event)
+	else:
+		_set_button_text(config_event)
+		_remap(config_event, false)
+	
 	reset.pressed.connect(_reset)
-	
-	if config_key != null:
-		_remap(config_key, false)
 
 func _input(event: InputEvent) -> void:
-	if !parent.button_pressed or !event.is_pressed():
+	if not parent.button_pressed or not event.is_pressed():
 		return
 	
-	if event is InputEventMouseButton:
-		_mouse_text(event)
-		_remap(event)
-	elif event is InputEventKey:
-		parent.text = OS.get_keycode_string(event.physical_keycode)
-		_remap(event)
+	_set_button_text(event)
+	_remap(event)
 
-func _mouse_text(event: InputEventMouseButton) -> void:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			parent.text = "LMB"
-		elif event.button_index == MOUSE_BUTTON_RIGHT:
-			parent.text = "RMB"
-		elif event.button_index == MOUSE_BUTTON_XBUTTON1:
-			parent.text = "MB4"
-		elif event.button_index == MOUSE_BUTTON_XBUTTON2:
-			parent.text = "MB5"
+func _get_event_key(event: InputEvent):
+	if event is InputEventKey:
+		return event.physical_keycode
+	elif event is InputEventMouseButton:
+		return event.button_index
+	return null
+
+func _get_event_text(event: InputEvent) -> String:
+	if event is InputEventKey:
+		return OS.get_keycode_string(event.physical_keycode)
+	elif event is InputEventMouseButton:
+		match event.button_index:
+			MOUSE_BUTTON_LEFT:
+				return "LMB"
+			MOUSE_BUTTON_RIGHT:
+				return "RMB"
+			MOUSE_BUTTON_XBUTTON1:
+				return "MB4"
+			MOUSE_BUTTON_XBUTTON2:
+				return "MB5"
+			_:
+				return "MB" + str(event.button_index)
+	return "Unknown"
+
+func _set_button_text(event: InputEvent) -> void:
+	parent.text = _get_event_text(event)
 
 func _remap(event: InputEvent, save_config: bool = true) -> void:
 	parent.button_pressed = false
+	
 	InputMap.action_erase_events(action)
 	InputMap.action_add_event(action, event)
-	if event is InputEventMouseButton:
-		if event.button_index != default_key:
-			reset.disabled = false
-		else:
-			reset.disabled = true
-	elif event is InputEventKey:
-		if event.physical_keycode != default_key:
-			reset.disabled = false
-		else:
-			reset.disabled = true
+	
+	var event_key = _get_event_key(event)
+	reset.disabled = (event_key == default_key)
+	
 	if save_config:
 		config.load("user://keybinds.cfg")
 		config.set_value("KEYBINDS", action, event)
@@ -80,8 +76,5 @@ func _remap(event: InputEvent, save_config: bool = true) -> void:
 
 func _reset() -> void:
 	reset.disabled = true
-	_remap(default_event)
-	if input is InputEventKey:
-		parent.text = OS.get_keycode_string(default_key)
-	elif default_key is InputEventMouseButton:
-		_mouse_text(default_event)
+	_set_button_text(default_event)
+	_remap(default_event, true)

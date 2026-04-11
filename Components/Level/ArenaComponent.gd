@@ -28,6 +28,7 @@ var universal_enemies: Array[Enemy]
 var time: float
 var loose: bool = false
 
+@onready var tree: SceneTree = get_tree()
 @onready var player: Node2D = scene.get_node_or_null("Player")
 @onready var weapon_user_component: WeaponUserComponent = player.get_node_or_null("WeaponUserComponent")
 @onready var health_component: HealthComponent = player.get_node_or_null("HealthComponent")
@@ -65,7 +66,7 @@ func _ready() -> void:
 
 #-----------------------PROCESS-----------------------
 func _physics_process(delta: float) -> void:
-	if !wave_active:
+	if !wave_active or tree.paused:
 		return
 	time += delta
 	if area_info:

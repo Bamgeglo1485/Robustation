@@ -93,8 +93,8 @@ MASTER OF SPEAR, MELEE AND RANGE WEAPONS.
 "ROBUST BOTANIST","РОБАСТНЫЙ БОТАНИК"
 "STONED ROBUSTER","ОБКУРЕННЫЙ РОБАСТЕР"
 "A BOTANIST WHO HAS MASTERED THE USE OF MUTAGEN. DUE TO THE HEALING GAS, HE IS PRACTICALLY IMMORTAL AS LONG AS HYDROPONIC TRAYS WITH TOMATO KILLERS ARE ACTIVE. HE USES POISON GAS AND DEATHNETTLE.
-[COLOR=PURPLE]IMMORTAL UNTIL THE TRAYS ARE BROKEN[/COLOR]","БОТАНИК, КОТОРЫЙ ДОСТИГ МАСТЕРСТВА В ИСПОЛЬЗОВАНИИ МУТАГЕНА. ИЗ-ЗА ЛЕЧЕБНОГО ГАЗА ОН ПРАКТИЧЕСКИ БЕССМЕРТЕН, ПОКА АКТИВНЫ ГИДРОПОНЫЕ ЛОТКИ С ТОМАТАМИ УБИЙЦАМИ. ОН ИСПОЛЬЗУЕТ ЯДОВИТЫЙ ГАЗ И СМЕРТОКРАПИВУ.
-[COLOR=PURPLE]БЕССМЕРТЕН ПОКА ЛОТКИ НЕ УНИЧТОЖЕНЫ[/COLOR]"
+[color=PURPLE]IMMORTAL UNTIL THE TRAYS ARE BROKEN[/color]","БОТАНИК, КОТОРЫЙ ДОСТИГ МАСТЕРСТВА В ИСПОЛЬЗОВАНИИ МУТАГЕНА. ИЗ-ЗА ЛЕЧЕБНОГО ГАЗА ОН ПРАКТИЧЕСКИ БЕССМЕРТЕН, ПОКА АКТИВНЫ ГИДРОПОНЫЕ ЛОТКИ С ТОМАТАМИ УБИЙЦАМИ. ОН ИСПОЛЬЗУЕТ ЯДОВИТЫЙ ГАЗ И СМЕРТОКРАПИВУ.
+[color=PURPLE]БЕССМЕРТЕН ПОКА ЛОТКИ НЕ УНИЧТОЖЕНЫ[/color]"
 "Bruuh... try my gas, it's fucking better than frezon","Броо... попробуй мой газ, он дохуя лучше фрезона"
 "Brooo...","Братааан..."
 "Weeds!..","Травка!.."
@@ -105,8 +105,8 @@ MASTER OF SPEAR, MELEE AND RANGE WEAPONS.
 "BOTANIST","БОТАНИК"
 "SUPERIOR CREW MEMBER","ВЫСШИЙ ЧЛЕН ЭКИПАЖА"
 "AFTER THE DEATH OF STONED ROBUSTER, THE MUTAGEN BECAME AVAILABLE TO ALL BOTANISTS
-[COLOR=PURPLE]IMMORTAL UNTIL THE TRAYS ARE BROKEN[/COLOR]","ПОСЛЕ СМЕРТИ ОБКУРЕННОГО РОБАСТЕРА, МУТАГЕН СТАЛ ДОСТУПЕН ДЛЯ ВСЕХ БОТАНИКОВ
-[COLOR=PURPLE]БЕССМЕРТЕН ПОКА ЛОТКИ НЕ УНИЧТОЖЕНЫ[/COLOR]"
+[color=PURPLE]IMMORTAL UNTIL THE TRAYS ARE BROKEN[/color]","ПОСЛЕ СМЕРТИ ОБКУРЕННОГО РОБАСТЕРА, МУТАГЕН СТАЛ ДОСТУПЕН ДЛЯ ВСЕХ БОТАНИКОВ
+[color=PURPLE]БЕССМЕРТЕН ПОКА ЛОТКИ НЕ УНИЧТОЖЕНЫ[/color]"
 
 "Bandage and (Toxic) Marker","Бинт и (Токсичный) Маркер"
 "[color=green]Increases your maximum health by 10 unit[/color], but [color=crimson]decreases passive regeneration by 4 unit[/color]","[color=green]Повышает твоё максимальное здоровье на 10 единиц[/color], но [color=crimson]снижает пассивную регенерацию на 4 единицы[/color]"

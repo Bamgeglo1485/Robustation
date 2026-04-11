@@ -32,6 +32,7 @@ signal field_of_view_changed(value: int)
 signal fullscreen_changed(fullscreen: bool)
 signal glow_changed(glow: bool)
 signal parallax_changed(parallax: bool)
+signal unpaused()
 
 signal update_weapon_icon(emitter: Node2D, weapon: Weapon)
 signal change_player(new_player: Node2D, wait_time: float)

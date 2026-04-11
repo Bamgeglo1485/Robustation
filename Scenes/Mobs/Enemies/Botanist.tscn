@@ -44,7 +44,7 @@
 [ext_resource type="Texture2D" uid="uid://4rew8bctbhwt" path="res://Textures/Mobs/Mobs/Hair/undercutleft.png" id="42_oeaax"]
 [ext_resource type="Texture2D" uid="uid://cvtrwkf34me6c" path="res://Textures/Mobs/Mobs/Hair/classicmulder.png" id="43_sprdq"]
 
-[node name="RobustBotanist" unique_id=600669417 instance=ExtResource("1_ypxbh")]
+[node name="Botanist" unique_id=600669417 instance=ExtResource("1_ypxbh")]
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
 base_max_speed = 200.0
@@ -102,7 +102,7 @@ stream = ExtResource("5_gume5")
 target_desired_distance = 0.1
 
 [node name="BeehaveTree" parent="." index="16" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@30019")
+blackboard = NodePath("@Node@18993")
 
 [node name="SequenceComposite" type="Node" parent="BeehaveTree" index="0" unique_id=815350071]
 script = ExtResource("14_gt7if")

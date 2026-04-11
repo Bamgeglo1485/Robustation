@@ -22,13 +22,15 @@ func _toggle():
 
 func _visibility_changed():
 	if menu.visible:
-		if SettingsConfigSystem.impact_frame:
-			prev_pause_state = false
-		else:
+		if !SettingsConfigSystem.impact_frame:
 			prev_pause_state = get_tree().paused
+		else:
+			prev_pause_state = false
 		get_tree().paused = true
+		SettingsConfigSystem.paused = true
 	else:
 		get_tree().paused = prev_pause_state
+		SettingsConfigSystem.paused = false
 	if paused_effect:
 		paused_effect.visible = menu.visible
 	if menu.visible and ambience:

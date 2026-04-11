@@ -2,8 +2,8 @@ extends Node
 
 var config: ConfigFile = ConfigFile.new()
 
-var impact_frame: bool = false
 var paused: bool = false
+var impact_frame: bool = false
 var blood_clean_delay: float = 20.0
 var glow: bool = true
 var parallax: bool = true

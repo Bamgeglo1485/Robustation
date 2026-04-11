@@ -105,7 +105,7 @@ stream = ExtResource("5_gume5")
 target_desired_distance = 0.1
 
 [node name="BeehaveTree" parent="." index="16" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@27445")
+blackboard = NodePath("@Node@19001")
 
 [node name="SequenceComposite" type="Node" parent="BeehaveTree" index="0" unique_id=815350071]
 script = ExtResource("14_gt7if")
@@ -183,8 +183,8 @@ metadata/_custom_type_script = "uid://bpstodpkpmrij"
 [node name="IntroductionSubjectComponent" parent="." index="20" unique_id=776935428]
 group = "RobustBotanist"
 subject_name = "ROBUST BOTANIST"
-subject_desc = "A botanist who has mastered the use of mutagen. Due to the healing gas, he is practically immortal as long as hydroponic trays with tomato killers are active. He uses poison gas and deathnettle.
-[color=purple]IMMORTAL UNTIL THE TRAYS ARE BROKEN[/color]"
+subject_desc = "A BOTANIST WHO HAS MASTERED THE USE OF MUTAGEN. DUE TO THE HEALING GAS, HE IS PRACTICALLY IMMORTAL AS LONG AS HYDROPONIC TRAYS WITH TOMATO KILLERS ARE ACTIVE. HE USES POISON GAS AND DEATHNETTLE.
+[COLOR=PURPLE]IMMORTAL UNTIL THE TRAYS ARE BROKEN[/COLOR]"
 subject_prefix = "STONED ROBUSTER"
 theme = ExtResource("23_hejhp")
 

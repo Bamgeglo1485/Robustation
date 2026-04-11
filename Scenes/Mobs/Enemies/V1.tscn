@@ -1,0 +1,526 @@
+[gd_scene format=3 uid="uid://dqsk54k7gumta"]
+
+[ext_resource type="PackedScene" uid="uid://c0eulucj1dtco" path="res://Scenes/Mobs/Base/BaseEnemy.tscn" id="1_oxh77"]
+[ext_resource type="Texture2D" uid="uid://c6t0r08dwt8j4" path="res://Textures/Mobs/Mobs/Secret/V-1.png" id="2_ctsrs"]
+[ext_resource type="Shader" uid="uid://3piuftd8ukss" path="res://Resources/Shaders/CollectableShining.gdshader" id="3_jtqfy"]
+[ext_resource type="Shader" uid="uid://bl4ojx3gaol8" path="res://Resources/Shaders/Wave.gdshader" id="4_h7ie0"]
+[ext_resource type="PackedScene" uid="uid://deq4t84d81wnb" path="res://Scenes/Effects/Particles/Dodge.tscn" id="5_qvte6"]
+[ext_resource type="PackedScene" uid="uid://bkmo55qvqkckx" path="res://Scenes/Effects/Particles/V1Gib.tscn" id="6_oq3ep"]
+[ext_resource type="Script" uid="uid://6b7bcparwq17" path="res://Components/Weapons/MeleeWeaponComponent.gd" id="7_sr46d"]
+[ext_resource type="Texture2D" uid="uid://b7k6hgaralomn" path="res://Textures/Mobs/Mobs/Secret/V-1_knucklebluster.png" id="8_snpde"]
+[ext_resource type="AudioStream" uid="uid://ox2p1vpue3ek" path="res://Audio/Effects/V-1/v-1_knuckleblaster.ogg" id="9_sam4b"]
+[ext_resource type="Script" uid="uid://bi1gje1pfokqc" path="res://Components/Weapons/RangeWeaponComponent.gd" id="10_liwoq"]
+[ext_resource type="PackedScene" uid="uid://bc7it233sooyn" path="res://Scenes/Projectiles/Shotgun_bullet_debuffed.tscn" id="11_66xee"]
+[ext_resource type="PackedScene" uid="uid://vj6mn42tufxs" path="res://Scenes/Effects/Particles/Case/ShotgunCase.tscn" id="12_0hn43"]
+[ext_resource type="PackedScene" uid="uid://cowxlra6ogbp0" path="res://Scenes/Effects/Particles/ShotgunFire.tscn" id="13_a84a5"]
+[ext_resource type="PackedScene" uid="uid://bbqpmpj4ntyg" path="res://Scenes/Explosion/BaseExplosion.tscn" id="14_b4ylk"]
+[ext_resource type="AudioStream" uid="uid://bo7osxbu4wekc" path="res://Audio/Effects/V-1/v-1_shotgun.ogg" id="15_dbjsc"]
+[ext_resource type="AudioStream" uid="uid://2r0y32cx4e8s" path="res://Audio/Weapon/empty.ogg" id="16_r18vm"]
+[ext_resource type="AudioStream" uid="uid://dhwn1xi06keaf" path="res://Audio/Weapon/shotgun_insert.ogg" id="17_wjqdu"]
+[ext_resource type="AudioStream" uid="uid://bxwx57y8k3fqt" path="res://Audio/Effects/lightburn.ogg" id="18_m8h2w"]
+[ext_resource type="PackedScene" uid="uid://ck5b8568mim1c" path="res://Scenes/Projectiles/Hitscan/Piercer.tscn" id="19_dug6g"]
+[ext_resource type="PackedScene" uid="uid://dwm5ay00kaqqf" path="res://Scenes/Effects/Particles/LaserFire.tscn" id="20_7hpha"]
+[ext_resource type="AudioStream" uid="uid://b8h7h6xbsbd4o" path="res://Audio/Effects/V-1/v-1_piercer.ogg" id="21_xt53t"]
+[ext_resource type="Script" uid="uid://ci5vgg14lkrku" path="res://Components/Weapons/HookComponent.gd" id="22_50mrc"]
+[ext_resource type="PackedScene" uid="uid://daw32xlhr5kkp" path="res://Scenes/Projectiles/HookEnemy.tscn" id="23_0sbf5"]
+[ext_resource type="AudioStream" uid="uid://dvixjlsidryp0" path="res://Audio/Weapon/Hit/reel.ogg" id="24_7sjns"]
+[ext_resource type="AudioStream" uid="uid://c7yhulhuc27f4" path="res://Audio/Weapon/Projectile/harpoon.ogg" id="25_70c7m"]
+[ext_resource type="PackedScene" uid="uid://blirqttcya5dh" path="res://Scenes/Projectiles/V1_shotgun_explosive.tscn" id="26_4hbdl"]
+[ext_resource type="AudioStream" uid="uid://c14ckhtbrb550" path="res://Audio/Weapon/parry.ogg" id="27_uvbx8"]
+[ext_resource type="AudioStream" uid="uid://eogckfs15aph" path="res://Audio/Weapon/miss.ogg" id="28_d0lfa"]
+[ext_resource type="AudioStream" uid="uid://blc0o0577akc7" path="res://Audio/Weapon/Hit/smash.ogg" id="29_6sdl1"]
+[ext_resource type="AudioStream" uid="uid://c86nvnjcdaiue" path="res://Audio/Weapon/swing.mp3" id="30_cmwl2"]
+[ext_resource type="AudioStream" uid="uid://bg31mrd4v67tg" path="res://Audio/Effects/V-1/v-1_dash.ogg" id="31_7xj8x"]
+[ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="32_28lqn"]
+[ext_resource type="Script" uid="uid://c6fapai3prk4g" path="res://Components/Mobs/AI/Actions/SetPlayerToBlackboardAction.gd" id="33_akgir"]
+[ext_resource type="Script" uid="uid://dl1x4qw4skabi" path="res://Components/Mobs/AI/Actions/SetMoveToKeyAction.gd" id="34_5gq7y"]
+[ext_resource type="Script" uid="uid://wlnghjnvdlyn" path="res://Components/Mobs/AI/Actions/MoveToPointAction.gd" id="35_dxclx"]
+[ext_resource type="Script" uid="uid://ttwxxcce2i4p" path="res://Components/Mobs/AI/Actions/LookAtPointAction.gd" id="36_878v7"]
+[ext_resource type="Script" uid="uid://8hn4kne15ac5" path="res://addons/beehave/nodes/composites/selector.gd" id="37_q11sf"]
+[ext_resource type="Script" uid="uid://b2bu3qqcql0lk" path="res://Components/Mobs/AI/Conditions/PointInRangeCondition.gd" id="38_jvp7k"]
+[ext_resource type="Script" uid="uid://dua6hp8ir5tiu" path="res://Components/Mobs/AI/Actions/AttackTargetAction.gd" id="39_nuwcy"]
+[ext_resource type="Script" uid="uid://bdcq7y2ek222e" path="res://Components/Mobs/NPC/DodgerComponent.gd" id="40_et5ma"]
+[ext_resource type="Material" uid="uid://cyp3pqnhbfrj3" path="res://Resources/Shaders/Jiggle.tres" id="41_esloc"]
+[ext_resource type="FontFile" uid="uid://4xw2o0e2j051" path="res://Resources/Text/Fonts/RobotoMono/static/RobotoMono-Regular.ttf" id="42_85tct"]
+[ext_resource type="Script" uid="uid://4io3bm7r86h6" path="res://Components/Interface/Menu/TextPrintingAnimationComponent.gd" id="43_ohjjk"]
+[ext_resource type="Script" uid="uid://b1stcr2j1euvf" path="res://Components/Mobs/HealthBarComponent.gd" id="44_87mtt"]
+[ext_resource type="Script" uid="uid://dfahm1hamvt58" path="res://Components/Entity/TrailEffectComponent.gd" id="45_7afsw"]
+[ext_resource type="AudioStream" uid="uid://by12xhmk6tkrs" path="res://Audio/Effects/V-1/v-1_introduction.ogg" id="46_msqm6"]
+[ext_resource type="Script" uid="uid://c3hn1oustp3t1" path="res://Components/Mobs/BossMusicComponent.gd" id="47_j2xi4"]
+[ext_resource type="AudioStream" uid="uid://ren60q8kwtf1" path="res://Audio/Effects/V-1/v-1_theme.ogg" id="48_3ayfq"]
+[ext_resource type="Texture2D" uid="uid://bt3u4868xurik" path="res://Textures/Mobs/Mobs/Secret/V-1_unlit.png" id="49_gsnmg"]
+[ext_resource type="Script" uid="uid://bqvdlb3r03cs0" path="res://Components/Visual/DirectionalSpriteComponent.gd" id="50_2t588"]
+[ext_resource type="Script" uid="uid://cth8csvhil3ut" path="res://Components/Perks/ReflectMeleePerkComponent.gd" id="51_e2u2o"]
+[ext_resource type="AudioStream" uid="uid://rfervefrhp8d" path="res://Audio/Effects/V-1/v-1_parry.ogg" id="52_mp0n8"]
+[ext_resource type="Script" uid="uid://nnac0ng77wfq" path="res://Components/Perks/ReflectPerkComponent.gd" id="53_4jgah"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jkj8r"]
+shader = ExtResource("3_jtqfy")
+shader_parameter/Angle_deg = 30.0
+shader_parameter/Brightness = 0.0
+shader_parameter/Band_Soft = 0.06
+shader_parameter/Stage_Count = 2
+shader_parameter/Stage1_Duration = 0.50000002305148
+shader_parameter/Stage2_Duration = 0.00999999977648
+shader_parameter/Stage3_Duration = 0.00999999977648
+shader_parameter/Stage1_Width = 0.010000000475
+shader_parameter/Stage2_Width = 0.010000000475
+shader_parameter/Stage3_Width = 0.010000000475
+shader_parameter/Stage1_LeftToRight = true
+shader_parameter/Stage2_LeftToRight = false
+shader_parameter/Stage3_LeftToRight = true
+shader_parameter/One_Shot = false
+shader_parameter/OneShot_Delay = 0.0
+shader_parameter/Phase_Offset = 0.0
+shader_parameter/Wiggle_Angle = false
+shader_parameter/Wiggle_Amount_deg = 15.0
+shader_parameter/Shine_Pause = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dssqi"]
+shader = ExtResource("4_h7ie0")
+shader_parameter/wave_amplitude = 0.25
+shader_parameter/wave_frequency = 40.0
+shader_parameter/wave_speed = 40.0
+shader_parameter/left_falloff = -0.1
+shader_parameter/right_falloff = 1.0
+shader_parameter/color = Color(0.22342172, 0.2154262, 0.22729489, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fb4jx"]
+radius = 40.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fe6br"]
+bg_color = Color(0.2772051, 0, 0.0625755, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjvbd"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.6416675, 0, 0.20431465, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[node name="V1" unique_id=1270222458 instance=ExtResource("1_oxh77")]
+visibility_layer = 3
+
+[node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
+base_max_speed = 400.0
+acceleration = 400.0
+friction = 700.0
+can_fall_from_body = false
+set_navigation_velocity = false
+drop_resistance = 5
+
+[node name="Texture" parent="." index="2" unique_id=382857461]
+process_mode = 0
+texture = ExtResource("2_ctsrs")
+
+[node name="WeaponSprite" parent="Texture/WeaponSpriteComponent" parent_id_path=PackedInt32Array(567988851) index="0" unique_id=2109145355]
+material = SubResource("ShaderMaterial_jkj8r")
+
+[node name="Rope" type="Line2D" parent="Texture/WeaponSpriteComponent" parent_id_path=PackedInt32Array(567988851) index="2" unique_id=2108582631]
+material = SubResource("ShaderMaterial_dssqi")
+points = PackedVector2Array(0, 0, 0, 0)
+width = 50.0
+texture_mode = 2
+
+[node name="HealthComponent" parent="." index="4" unique_id=1758373275]
+hitstop_on_death = true
+max_health = 300
+invinciblitiy_attack_effect = ExtResource("5_qvte6")
+gib_effect_scene = ExtResource("6_oq3ep")
+heal_for_damage_multiplier = 10.0
+heal_for_damage_range = 96
+max_heal_for_damage_health_percent = 1.0
+
+[node name="Knuckleblaster" type="Node" parent="WeaponUserComponent" parent_id_path=PackedInt32Array(2123544057) index="0" unique_id=1309996882 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound", "swinging_sound")]
+script = ExtResource("7_sr46d")
+damage = 15
+attack_range = 96
+parry_sound = NodePath("../../Sounds/ParrySound")
+play_parried_sound = true
+attack_sound = NodePath("HitSound")
+miss_sound = NodePath("../../Sounds/MeleeMissSound")
+can_parry_weapon = false
+parry_force = 1.0
+throw_speed = 800
+drop_enemy_delay = 0.5
+cooldown_delay = 4.0
+swing_delay = 0.2
+equipped_scale = Vector2(0.6, 0.6)
+icon_texture = ExtResource("8_snpde")
+self_throw_speed = 200
+attack_rotation_multiplier = 0.5
+swinging_sound = NodePath("../../Sounds/SwingSound")
+metadata/_custom_type_script = "uid://6b7bcparwq17"
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Knuckleblaster" index="0" unique_id=988943625]
+stream = ExtResource("9_sam4b")
+max_distance = 600.0
+
+[node name="Shotgun" type="Node" parent="WeaponUserComponent" parent_id_path=PackedInt32Array(2123544057) index="1" unique_id=296336864 node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound", "bullets_recover_sound", "overheat_alert")]
+script = ExtResource("10_liwoq")
+projectile = ExtResource("11_66xee")
+spread_angle = 2
+bullets_max_count = 3
+bullets = 3
+bullets_recover_count = 3
+shots_angle = 20
+case_scene = ExtResource("12_0hn43")
+shoot_sound = NodePath("ShootSound")
+empty_shoot_sound = NodePath("EmptySound")
+bullets_recover_sound = NodePath("BulletRecoverSound")
+bullets_recovery_delay = 2.0
+gun_fire_effect = ExtResource("13_a84a5")
+overheat_enabled = true
+explosion_on_max_heat = ExtResource("14_b4ylk")
+overheat_alert = NodePath("Overheat")
+cooldown_delay = 0.2
+swing_delay = 0.0
+equipped_scale = Vector2(0.75, 0.75)
+swing_rotation_multiplier = 0.0
+attack_rotation_multiplier = -0.6
+attack_shift_multiplier = -0.7
+metadata/_custom_type_script = "uid://bi1gje1pfokqc"
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Shotgun" index="0" unique_id=472308884]
+stream = ExtResource("15_dbjsc")
+max_distance = 600.0
+
+[node name="EmptySound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Shotgun" index="1" unique_id=896737076]
+stream = ExtResource("16_r18vm")
+max_distance = 600.0
+
+[node name="BulletRecoverSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Shotgun" index="2" unique_id=2047925807]
+stream = ExtResource("17_wjqdu")
+max_distance = 600.0
+
+[node name="Overheat" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Shotgun" index="3" unique_id=1550381983]
+stream = ExtResource("18_m8h2w")
+volume_db = 20.0
+max_distance = 600.0
+
+[node name="Piercer" type="Node" parent="WeaponUserComponent" parent_id_path=PackedInt32Array(2123544057) index="2" unique_id=996243159 node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound")]
+script = ExtResource("10_liwoq")
+projectile = ExtResource("19_dug6g")
+spread_angle = 1
+bullets_max_count = 1
+bullets_recover_count = 1
+shots_angle = 0
+shoot_sound = NodePath("ShootSound")
+empty_shoot_sound = NodePath("EmptySound")
+bullets_recovery_delay = 1.0
+gun_fire_effect = ExtResource("20_7hpha")
+flip_after_shoot = false
+reload_animation = false
+cooldown_delay = 0.2
+swing_delay = 0.0
+swing_rotation_multiplier = 0.0
+attack_rotation_multiplier = -0.6
+attack_shift_multiplier = -0.7
+metadata/_custom_type_script = "uid://bi1gje1pfokqc"
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Piercer" index="0" unique_id=2037087783]
+stream = ExtResource("21_xt53t")
+max_distance = 600.0
+
+[node name="EmptySound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Piercer" index="1" unique_id=88661710]
+stream = ExtResource("16_r18vm")
+max_distance = 600.0
+
+[node name="ShotgunHook" type="Node" parent="WeaponUserComponent" parent_id_path=PackedInt32Array(2123544057) index="3" unique_id=598185087 node_paths=PackedStringArray("reel_sound", "shoot_sound", "rope")]
+script = ExtResource("22_50mrc")
+reel_sound = NodePath("ReelSound")
+projectile = ExtResource("23_0sbf5")
+spread_angle = 0
+bullets_max_count = 1
+bullets = 1
+bullets_recover_count = 1
+shots = 1
+shots_angle = 0
+shoot_sound = NodePath("ShootSound")
+rope = NodePath("../../Texture/WeaponSpriteComponent/Rope")
+cooldown_delay = 10.0
+swing_delay = 0.0
+metadata/_custom_type_script = "uid://ci5vgg14lkrku"
+
+[node name="ReelSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/ShotgunHook" index="0" unique_id=24376967]
+stream = ExtResource("24_7sjns")
+volume_db = 10.0
+parameters/looping = false
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/ShotgunHook" index="1" unique_id=745930681]
+stream = ExtResource("25_70c7m")
+
+[node name="ShotgunExplosive" type="Node" parent="WeaponUserComponent" parent_id_path=PackedInt32Array(2123544057) index="4" unique_id=699373804 node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound", "bullets_recover_sound", "overheat_alert")]
+script = ExtResource("10_liwoq")
+projectile = ExtResource("26_4hbdl")
+spread_angle = 0
+bullets_max_count = 1
+bullets = 1
+bullets_recover_count = 1
+case_scene = ExtResource("12_0hn43")
+shoot_sound = NodePath("ShootSound")
+empty_shoot_sound = NodePath("EmptySound")
+bullets_recover_sound = NodePath("BulletRecoverSound")
+bullets_recovery_delay = 8.0
+gun_fire_effect = ExtResource("13_a84a5")
+overheat_enabled = true
+explosion_on_max_heat = ExtResource("14_b4ylk")
+overheat_alert = NodePath("Overheat")
+cooldown_delay = 0.2
+swing_delay = 0.0
+equipped_scale = Vector2(0.75, 0.75)
+swing_rotation_multiplier = 0.0
+attack_rotation_multiplier = -0.6
+attack_shift_multiplier = -0.7
+metadata/_custom_type_script = "uid://bi1gje1pfokqc"
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/ShotgunExplosive" index="0" unique_id=2084399047]
+stream = ExtResource("15_dbjsc")
+max_distance = 600.0
+
+[node name="EmptySound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/ShotgunExplosive" index="1" unique_id=1800422192]
+stream = ExtResource("16_r18vm")
+max_distance = 600.0
+
+[node name="BulletRecoverSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/ShotgunExplosive" index="2" unique_id=614859997]
+stream = ExtResource("17_wjqdu")
+max_distance = 600.0
+
+[node name="Overheat" type="AudioStreamPlayer2D" parent="WeaponUserComponent/ShotgunExplosive" index="3" unique_id=1544889920]
+stream = ExtResource("18_m8h2w")
+volume_db = 20.0
+max_distance = 600.0
+
+[node name="ParrySound" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="2" unique_id=1896571880]
+stream = ExtResource("27_uvbx8")
+max_distance = 600.0
+
+[node name="MeleeMissSound" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="3" unique_id=1864746046]
+stream = ExtResource("28_d0lfa")
+max_distance = 600.0
+
+[node name="MeleeHitSound" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="4" unique_id=974708639]
+stream = ExtResource("29_6sdl1")
+max_distance = 900.0
+
+[node name="SwingSound" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="5" unique_id=845327928]
+stream = ExtResource("30_cmwl2")
+volume_db = 9.0
+max_distance = 600.0
+
+[node name="Dodge" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="6" unique_id=1314199503]
+stream = ExtResource("31_7xj8x")
+volume_db = 5.0
+max_distance = 600.0
+max_polyphony = 20
+
+[node name="NavigationAgent" parent="." index="13" unique_id=1358139639]
+target_desired_distance = 0.1
+avoidance_enabled = false
+radius = 64.0
+
+[node name="BeehaveTree" parent="." index="16" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
+blackboard = NodePath("@Node@18991")
+
+[node name="MoveToPlayer" type="Node" parent="BeehaveTree" index="0" unique_id=478688837]
+script = ExtResource("32_28lqn")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="SetPlayerToBlackboardAction" type="Node" parent="BeehaveTree/MoveToPlayer" index="0" unique_id=1570595781]
+script = ExtResource("33_akgir")
+metadata/_custom_type_script = "uid://c6fapai3prk4g"
+
+[node name="SetMoveToKeyAction" type="Node" parent="BeehaveTree/MoveToPlayer" index="1" unique_id=1930580778]
+script = ExtResource("34_5gq7y")
+key = "Target"
+metadata/_custom_type_script = "uid://dl1x4qw4skabi"
+
+[node name="MoveToPointAction" type="Node" parent="BeehaveTree/MoveToPlayer" index="2" unique_id=1364976193]
+script = ExtResource("35_dxclx")
+pathfind_update_rate = 0.1
+metadata/_custom_type_script = "uid://wlnghjnvdlyn"
+
+[node name="LookAtDirectionAction" type="Node" parent="BeehaveTree/MoveToPlayer" index="3" unique_id=1358597805]
+script = ExtResource("36_878v7")
+key = "MovePoint"
+metadata/_custom_type_script = "uid://ttwxxcce2i4p"
+
+[node name="SelectorComposite" type="Node" parent="BeehaveTree/MoveToPlayer" index="4" unique_id=1905608993]
+script = ExtResource("37_q11sf")
+metadata/_custom_type_script = "uid://8hn4kne15ac5"
+
+[node name="Hook" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite" index="0" unique_id=163656528]
+script = ExtResource("32_28lqn")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="PointInRangeCondition" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/Hook" index="0" unique_id=631879571]
+script = ExtResource("38_jvp7k")
+negative = true
+max_distance = 130
+metadata/_custom_type_script = "uid://b2bu3qqcql0lk"
+
+[node name="AttackTargetAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/Hook" index="1" unique_id=1314616936 node_paths=PackedStringArray("weapon")]
+script = ExtResource("39_nuwcy")
+weapon = NodePath("../../../../../WeaponUserComponent/ShotgunHook")
+prediction_coef = 1.0
+metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
+
+[node name="Shotgun" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite" index="1" unique_id=508461700]
+script = ExtResource("32_28lqn")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="AttackTargetAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/Shotgun" index="0" unique_id=1997944300 node_paths=PackedStringArray("weapon")]
+script = ExtResource("39_nuwcy")
+weapon = NodePath("../../../../../WeaponUserComponent/Shotgun")
+prediction_coef = 1.0
+metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
+
+[node name="ShotgunExplosive" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite" index="2" unique_id=1530240686]
+script = ExtResource("32_28lqn")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="PointInRangeCondition" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/ShotgunExplosive" index="0" unique_id=2064646399]
+script = ExtResource("38_jvp7k")
+negative = true
+max_distance = 160
+metadata/_custom_type_script = "uid://b2bu3qqcql0lk"
+
+[node name="AttackTargetAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/ShotgunExplosive" index="1" unique_id=93806772 node_paths=PackedStringArray("weapon")]
+script = ExtResource("39_nuwcy")
+weapon = NodePath("../../../../../WeaponUserComponent/ShotgunExplosive")
+prediction_coef = 1.0
+metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
+
+[node name="KnuckleBlaster" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite" index="3" unique_id=1218643424]
+script = ExtResource("32_28lqn")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="AttackTargetAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/KnuckleBlaster" index="0" unique_id=414740139 node_paths=PackedStringArray("weapon")]
+script = ExtResource("39_nuwcy")
+weapon = NodePath("../../../../../WeaponUserComponent/Knuckleblaster")
+metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
+
+[node name="Piercer" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite" index="4" unique_id=590651813]
+script = ExtResource("32_28lqn")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="PointInRangeCondition" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/Piercer" index="0" unique_id=1958700077]
+script = ExtResource("38_jvp7k")
+negative = true
+max_distance = 130
+metadata/_custom_type_script = "uid://b2bu3qqcql0lk"
+
+[node name="AttackTargetAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/Piercer" index="1" unique_id=1467481585 node_paths=PackedStringArray("weapon")]
+script = ExtResource("39_nuwcy")
+weapon = NodePath("../../../../../WeaponUserComponent/Piercer")
+prediction_coef = 0.0
+metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
+
+[node name="DodgerComponent" type="Node" parent="." index="17" unique_id=1942897066 node_paths=PackedStringArray("dodge_sound")]
+script = ExtResource("40_et5ma")
+dodge_melee = true
+dash_force = 800.0
+dash_stop_speed = 650.0
+dodge_sound = NodePath("../Sounds/Dodge")
+max_stamina = 0
+metadata/_custom_type_script = "uid://bdcq7y2ek222e"
+
+[node name="Rush" type="Area2D" parent="." index="19" unique_id=429380638]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rush" index="0" unique_id=1679646748]
+visible = false
+shape = SubResource("CircleShape2D_fb4jx")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="21" unique_id=1889970264]
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer" index="0" unique_id=1863333061]
+visible = false
+custom_minimum_size = Vector2(0, 48)
+theme_override_styles/background = SubResource("StyleBoxFlat_fe6br")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mjvbd")
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/ProgressBar" index="0" unique_id=912270087]
+material = ExtResource("41_esloc")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33680555
+anchor_top = 0.010802467
+anchor_right = 0.6701389
+anchor_bottom = 0.82561725
+offset_left = -48.944427
+offset_top = 1.7083334
+offset_right = -48.944397
+offset_bottom = 1.7083335
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("42_85tct")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[color=grey]V1[/color] [color=yellow]「UNSTOPPABLE FORCE」"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="TextPrintingAnimationComponent" type="Node" parent="CanvasLayer/ProgressBar/RichTextLabel" index="2" unique_id=1187470841]
+script = ExtResource("43_ohjjk")
+animate_on_ready_delay = 5.0
+play_sound = false
+metadata/_custom_type_script = "uid://4io3bm7r86h6"
+
+[node name="HealthBarComponent" type="Node" parent="CanvasLayer/ProgressBar" index="1" unique_id=1176883866]
+script = ExtResource("44_87mtt")
+on_spawn = true
+metadata/_custom_type_script = "uid://b1stcr2j1euvf"
+
+[node name="TrailEffectComponent" type="Node" parent="." index="22" unique_id=1673440786]
+script = ExtResource("45_7afsw")
+colors = Array[Color]([Color(1, 1, 1, 0.259)])
+trail_lifetime = 0.3
+active_delete = true
+metadata/_custom_type_script = "uid://dfahm1hamvt58"
+
+[node name="IntroductionSubjectComponent" parent="." index="24" unique_id=776935428]
+group = "V1"
+subject_name = "V1"
+subject_desc = "[color=crimson]ERR: 404 DATA NOT FOUND[/color]"
+subject_prefix = "UNSTOPPABLE FORCE"
+theme = ExtResource("46_msqm6")
+
+[node name="BossMusicComponent" type="Node" parent="." index="25" unique_id=1014498355]
+script = ExtResource("47_j2xi4")
+music = ExtResource("48_3ayfq")
+modify_pitch = false
+player_pitch = -1.0
+metadata/_custom_type_script = "uid://c3hn1oustp3t1"
+
+[node name="Unlit" type="Sprite2D" parent="." index="26" unique_id=626425956]
+modulate = Color(2.454227, 2.454227, 2.454227, 1)
+texture = ExtResource("49_gsnmg")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+script = ExtResource("50_2t588")
+metadata/_custom_type_script = "uid://bqvdlb3r03cs0"
+
+[node name="ReflectMeleePerkComponent" type="Node" parent="." index="27" unique_id=672273571]
+script = ExtResource("51_e2u2o")
+reflect_sound = ExtResource("52_mp0n8")
+base_chance = 0.2
+base_chance_decrease = 0.0
+metadata/_custom_type_script = "uid://cth8csvhil3ut"
+
+[node name="ReflectPerkComponent" type="Node" parent="." index="28" unique_id=1622348733]
+script = ExtResource("53_4jgah")
+reflect_sound = ExtResource("52_mp0n8")
+base_chance = 0.3
+base_chance_decrease = 0.0
+metadata/_custom_type_script = "uid://nnac0ng77wfq"

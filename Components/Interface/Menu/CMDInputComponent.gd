@@ -39,6 +39,7 @@ func _on_text_submitted(new_text: String):
 	var check_text: String = new_text.to_lower()
 	var input_text: String = "C:/Omega/Manager>"
 	var text: String
+	var start_game: String
 	if check_text == "geglo":
 		text = "!best motherfucker in universe!"
 	elif check_text == "hello":
@@ -65,9 +66,11 @@ func _on_text_submitted(new_text: String):
 			off_screen._off()
 	
 	# COMMANDS
-	
 	elif check_text == "test_system init arena" and roundstart_component:
-		roundstart_component.start_game("arena")
+		start_game = "arena"
+		text = "[color=yellow]WARN: Purger subject testing procedure initialized...[/color]\n[color=green]Subject loaded\nArea injection: Successful!\nSubject injection: Successful!\nData verification: Successful![/color]\n\n[color=red]Have fun![/color]"
+	elif check_text == "ultrakill is shit" and roundstart_component:
+		start_game = "v1"
 		text = "[color=yellow]WARN: Purger subject testing procedure initialized...[/color]\n[color=green]Subject loaded\nArea injection: Successful!\nSubject injection: Successful!\nData verification: Successful![/color]\n\n[color=red]Have fun![/color]"
 	elif check_text == "test_system init arena" and !roundstart_component:
 		text = "[color=red]ERROR 404: test_system NOT FOUND[/color]"
@@ -76,3 +79,5 @@ func _on_text_submitted(new_text: String):
 	
 	cmd_output.text += "\n\n" + input_text + new_text
 	text_printing.animate(text, delay, false, false)
+	if roundstart_component and start_game:
+		roundstart_component.start_game(start_game)

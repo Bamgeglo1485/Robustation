@@ -3,13 +3,13 @@ class_name DeathScreenComponent extends Component
 @export var error_panel: Panel
 @export var clone_count: int = 20
 @export var spawn_time: float = 2.75
-@export var start_delay: float = 0.0
 
 @export var min_rotation: float = -8.0
 @export var max_rotation: float = 8.0
 @export var min_scale: float = 0.7
 @export var max_scale: float = 1.3
 @export var margin: int = 50
+@export var can_restart_delay: float = 0.5
 
 var clone_timer: Timer
 var current_clones: int = 0
@@ -30,11 +30,11 @@ func _ready() -> void:
 	clone_timer.one_shot = false
 	clone_timer.timeout.connect(_clone_error_panel)
 	add_child(clone_timer)
-	
-	if start_delay > 0:
-		await get_tree().create_timer(start_delay).timeout
-	
 	_reset_timer()
+	
+	await get_tree().create_timer(can_restart_delay).timeout
+	var restart: RestartComponent = RestartComponent.new()
+	add_child(restart)
 
 func _calculate_spawn_area() -> void:
 	if get_parent() is Control:

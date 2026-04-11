@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://ck5b8568mim1c"]
+
+[ext_resource type="PackedScene" uid="uid://ckfxwjnv84i2l" path="res://Scenes/Projectiles/Hitscan/BaseHitscan.tscn" id="1_1cwyt"]
+[ext_resource type="AudioStream" uid="uid://bxwx57y8k3fqt" path="res://Audio/Effects/lightburn.ogg" id="3_mxpef"]
+
+[node name="BaseHitscan" unique_id=1219814461 instance=ExtResource("1_1cwyt")]
+collision_mask = 1
+
+[node name="RayLine" parent="." index="0" unique_id=1153845673]
+position = Vector2(0.05896592, 0.018667966)
+scale = Vector2(1.058966, 1.0186689)
+width = 2.0
+default_color = Color(0, 2.9140422, 4.665402, 1)
+texture_mode = 2
+
+[node name="HitscanComponent" parent="." index="1" unique_id=993689081]
+damage = 5
+disappear_speed = 0.3
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="." index="2" unique_id=1641163860]
+stream = ExtResource("3_mxpef")

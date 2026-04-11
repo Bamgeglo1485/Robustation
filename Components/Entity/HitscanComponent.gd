@@ -21,7 +21,7 @@ var penetrations: int = 0
 var last_target: Node2D
 
 var shooter: CharacterBody2D
-var direction: float
+var direction: Vector2
 var damage_modifier: float = 1
 var deleted: bool = false
 
@@ -57,7 +57,7 @@ func fire() -> void:
 		if last_target:
 			parent.add_exception(last_target)
 	
-	parent.target_position = Vector2.from_angle(direction) * 1000
+	parent.target_position = direction * 1000
 	await get_tree().physics_frame
 	parent.force_raycast_update()
 	
@@ -110,10 +110,8 @@ func damage_collider() -> void:
 			inst.global_position = collision_point
 			scene.add_child(inst)
 		
-		var incoming_dir = Vector2.from_angle(direction)
-		var bounce_dir = incoming_dir.bounce(collision_normal)
-		
-		direction = bounce_dir.angle()
+		var incoming_dir = direction
+		direction = incoming_dir.bounce(collision_normal)
 		parent.global_position = collision_point
 		
 		fire()

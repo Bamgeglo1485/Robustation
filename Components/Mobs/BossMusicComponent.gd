@@ -9,6 +9,7 @@ class_name BossMusicComponent extends Component
 @export var music: AudioStream
 
 var pitch_tween: Tween
+@export var modify_pitch: bool = true
 @export var player_pitch: float = 0.3
 @export var pitch: float = 0.3
 
@@ -38,7 +39,7 @@ func _player_health_changed(_new_health: float) -> void:
 	_update_boss_pitch()
 
 func _update_boss_pitch() -> void:
-	if !player_music:
+	if !player_music or !modify_pitch:
 		return
 	if health:
 		pitch = 1.0 - (float(health.health) / health.max_health)

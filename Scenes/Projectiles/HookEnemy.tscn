@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://daw32xlhr5kkp"]
+
+[ext_resource type="PackedScene" uid="uid://c2fs5eoy7ntgu" path="res://Scenes/Projectiles/BaseProjectile.tscn" id="1_ydptf"]
+[ext_resource type="AudioStream" uid="uid://cuj7tgh253e14" path="res://Resources/Audio/GenHitRandom.tres" id="2_blx5f"]
+[ext_resource type="Texture2D" uid="uid://g575msxxir52" path="res://Textures/Weapons/Hook/hook.png" id="3_23j01"]
+[ext_resource type="Script" uid="uid://ch6fjxkr8n5db" path="res://Components/Entity/ProjectileIgnoreComponent.gd" id="4_15274"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kf5wp"]
+radius = 32.0
+height = 64.0
+
+[node name="Projectile" unique_id=676694476 instance=ExtResource("1_ydptf")]
+
+[node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture")]
+can_penetrate = false
+texture = NodePath("../Texture")
+speed = 1200
+max_damage = 0
+damage = 0
+lifetime = 0.0
+delete_on_hit = false
+embed_on_hit = true
+parriable = false
+
+[node name="CollisionShape2D" parent="ProjectileComponent" index="0" unique_id=1391622764]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_kf5wp")
+
+[node name="HitSound" parent="ProjectileComponent" index="1" unique_id=1752295456]
+stream = ExtResource("2_blx5f")
+
+[node name="Texture" type="Sprite2D" parent="." index="4" unique_id=7943572]
+texture = ExtResource("3_23j01")
+
+[node name="ProjectileIgnoreComponent" type="Node" parent="." index="6" unique_id=1213793882]
+script = ExtResource("4_15274")
+metadata/_custom_type_script = "uid://ch6fjxkr8n5db"

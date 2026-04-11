@@ -12,7 +12,7 @@ func on_trigger() -> void:
 	var hitscan_comp: HitscanComponent = inst.get_node_or_null("HitscanComponent")
 	var projectile_comp: ProjectileComponent = parent.get_node_or_null("ProjectileComponent")
 	if hitscan_comp and projectile_comp:
-		hitscan_comp.direction = projectile_comp.direction
+		hitscan_comp.direction = Vector2.from_angle(projectile_comp.direction)
 	scene.add_child(inst)
 	if delete_parent:
 		parent.queue_free()

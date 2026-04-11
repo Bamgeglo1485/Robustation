@@ -12,5 +12,4 @@ func _ready() -> void:
 func _on_button_pressed() -> void:
 	if !roundstart_component:
 		return
-	
 	roundstart_component.start_game(type)

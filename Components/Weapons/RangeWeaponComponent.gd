@@ -102,7 +102,7 @@ func _ready() -> void:
 	swapped.connect(_on_swap)
 
 func attack(raiser, _npc = true) -> void:
-	if cooldown or !can_attack or swinging or !projectile or not raiser.has_method("get_attack_direction"):
+	if cooldown or !can_attack or swinging or !projectile or !raiser.has_method("get_attack_direction"):
 		return
 	if bullets == 0 or parent_weapon and parent_weapon.bullets == 0:
 		if empty_shoot_sound:
@@ -237,7 +237,7 @@ func _projectile_shoot(direction) -> Node2D:
 		var hitscan_component: HitscanComponent = instance.get_node("HitscanComponent")
 		instance.global_position = parent.global_position
 		
-		hitscan_component.direction = angle
+		hitscan_component.direction = direction.normalized()
 		hitscan_component.shooter = parent
 		
 		if scene:

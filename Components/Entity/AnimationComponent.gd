@@ -72,14 +72,15 @@ func lean_to_direction(
 	
 	var rotation: Dictionary = get_rotation_from_angle(angle_deg)
 	
-	var _tween: Tween = create_tween()
-	_tween.set_trans(Tween.TRANS_SINE)
-	_tween.set_ease(Tween.EASE_IN_OUT)
-	
 	var loops: bool = false
 	if time == 0:
 		time = 0.1
 		loops = true
+	if !rotation.value:
+		return
+	var _tween: Tween = create_tween()
+	_tween.set_trans(Tween.TRANS_SINE)
+	_tween.set_ease(Tween.EASE_IN_OUT)
 	_tween.tween_property(parent, rotation.type, rotation.value * rotation_multiplier, time)
 	if return_to_prev_pos:
 		_tween.tween_property(parent, rotation.type, 0 , time)

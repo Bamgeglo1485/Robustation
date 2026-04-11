@@ -8,6 +8,7 @@ class_name DodgerComponent extends Component
 @export var move_priority: int = 5
 @export var dash_force: float = 2000.0
 @export var dash_stop_speed: float = 1930.0
+@export var dodge_sound: AudioStreamPlayer2D
 
 @export var max_stamina: int = 2
 @onready var stamina: int = max_stamina
@@ -94,6 +95,8 @@ func _dodge() -> void:
 	
 	mob_mover.throw(dodge_direction, dash_force, parent, dash_stop_speed, false, true, false, 1000)
 	
+	if dodge_sound:
+		dodge_sound.play()
 	if max_stamina > 0:
 		stamina -= 1
 		recovery_timer.start()

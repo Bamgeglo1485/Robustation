@@ -9,4 +9,4 @@ shader_parameter/wave_frequency = 40.0
 shader_parameter/wave_speed = 40.0
 shader_parameter/left_falloff = -0.1
 shader_parameter/right_falloff = 1.0
-shader_parameter/color = Color(0.42898262, 0, 0.122340836, 1)
+shader_parameter/color = Color(0.15686275, 0.003921569, 0.039215688, 1)

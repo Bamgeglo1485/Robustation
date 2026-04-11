@@ -179,8 +179,8 @@ metadata/_custom_type_script = "uid://bpstodpkpmrij"
 [node name="IntroductionSubjectComponent" parent="." index="20" unique_id=776935428]
 group = "Botanist"
 subject_name = "BOTANIST"
-subject_desc = "AFTER THE DEATH OF STONED ROBUSTER, THE MUTAGEN BECAME AVAILABLE TO ALL BOTANICS
-[COLOR=PURPLE]IMMORTAL UNTIL THE TRAYS ARE BROKEN[/COLOR]"
+subject_desc = "AFTER THE DEATH OF STONED ROBUSTER, THE MUTAGEN BECAME AVAILABLE TO ALL BOTANISTS
+[color=PURPLE]IMMORTAL UNTIL THE TRAYS ARE BROKEN[/color]"
 subject_prefix = "SUPERIOR CREW MEMBER"
 theme = ExtResource("23_nd1cv")
 

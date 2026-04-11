@@ -9,7 +9,7 @@ var tween: Tween
 func _ready() -> void:
 	if scene:
 		player = scene.get_node_or_null("Player")
-	if !on_spawn:
+	if !on_spawn or !player:
 		return
 	player_controller = player.get_node_or_null("BossHealthBarsControllerComponent")
 	if player_controller:

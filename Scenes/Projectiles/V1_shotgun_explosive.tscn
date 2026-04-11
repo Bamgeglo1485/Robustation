@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://blirqttcya5dh"]
+
+[ext_resource type="PackedScene" uid="uid://c2fs5eoy7ntgu" path="res://Scenes/Projectiles/BaseProjectile.tscn" id="1_qruos"]
+[ext_resource type="Shader" uid="uid://dskgkby1vn5hf" path="res://Resources/Shaders/Jiggle.gdshader" id="2_ckm2m"]
+[ext_resource type="PackedScene" uid="uid://bbqpmpj4ntyg" path="res://Scenes/Explosion/BaseExplosion.tscn" id="3_qn4o5"]
+[ext_resource type="AudioStream" uid="uid://cg0leh0na5lvv" path="res://Resources/Audio/BulletHitRandom.tres" id="4_xqkg8"]
+[ext_resource type="Texture2D" uid="uid://yphdodjnre6d" path="res://Textures/Perks/shiny_green_bullets.png" id="5_p2x0f"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oqm3e"]
+shader = ExtResource("2_ckm2m")
+shader_parameter/jiggle = 2.0
+shader_parameter/speed = 50.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vpryf"]
+radius = 9.0
+height = 56.0
+
+[sub_resource type="Curve" id="Curve_0hneg"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 1.011236), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_c1ng1"]
+curve = SubResource("Curve_0hneg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oqm3e"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 1.0
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.099999994
+scale_over_velocity_max = 1000.0
+scale_over_velocity_curve = SubResource("CurveTexture_c1ng1")
+hue_variation_min = -1.0
+hue_variation_max = -0.54
+
+[node name="Projectile" unique_id=1574842334 instance=ExtResource("1_qruos")]
+material = SubResource("ShaderMaterial_oqm3e")
+
+[node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture", "particle_emitter")]
+max_penetrations = 2
+texture = NodePath("../Texture")
+particle_emitter = NodePath("GPUParticles2D")
+speed = 700
+rotate_speed = 10
+lifetime = 1.0
+parry_speed_boost = 1.0
+explosion_scene = ExtResource("3_qn4o5")
+explode_on_delete = true
+
+[node name="CollisionShape2D" parent="ProjectileComponent" index="0" unique_id=1391622764]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_vpryf")
+
+[node name="HitSound" parent="ProjectileComponent" index="1" unique_id=1752295456]
+stream = ExtResource("4_xqkg8")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ProjectileComponent" index="2" unique_id=1206047265]
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
+amount = 40
+preprocess = 0.5
+speed_scale = 4.0
+randomness = 1.0
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_oqm3e")
+
+[node name="Texture" type="Sprite2D" parent="." index="1" unique_id=1723735001]
+modulate = Color(5.1944203, 4.0839553, 0, 1)
+use_parent_material = true
+texture = ExtResource("5_p2x0f")
+
+[connection signal="area_shape_entered" from="ProjectileComponent" to="ProjectileComponent" method="_on_area_shape_entered"]

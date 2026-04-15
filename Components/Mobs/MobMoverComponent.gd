@@ -196,7 +196,7 @@ func throw(
 		fly_animation_tween = create_tween()
 		fly_animation_tween.set_trans(Tween.TRANS_SINE)
 		fly_animation_tween.set_ease(Tween.EASE_IN_OUT)
-		fly_animation_tween.tween_property(parent, "scale", Vector2(1.35, 1.35), 0.2)
+		fly_animation_tween.tween_property(parent, "scale", Vector2(1.5, 1.5), 0.2)
 
 func _fall_process(delta: float) -> void:
 	if !flying:

@@ -41,7 +41,7 @@ func attack(raiser, _npc = true) -> void:
 	
 	await _swing(raiser.get_attack_direction())
 	bullets = 0
-	var direction = raiser.get_attack_direction()
+	var direction: Vector2 = raiser.get_attack_direction()
 	
 	if mob_mover_component:
 		if self_throw_speed != 0:
@@ -141,9 +141,7 @@ func _delete_hook():
 		hooked_body.velocity = Vector2.ZERO
 		target_mob_mover.movement_blocked = false
 	if weapon_to_reload:
-		weapon_to_reload.bullets = 0
-		weapon_to_reload.bullets_recover_timer.stop()
-		weapon_to_reload._on_bullets_recover()
+		weapon_to_reload.bullets = weapon_to_reload.bullets_max_count
 		EventBusManager.update_weapon_icon.emit(parent, weapon_to_reload)
 	
 	hook_enemy = false

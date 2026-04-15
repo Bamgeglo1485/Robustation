@@ -236,8 +236,11 @@ func _projectile_shoot(direction) -> Node2D:
 	elif instance.has_node("HitscanComponent"):
 		var hitscan_component: HitscanComponent = instance.get_node("HitscanComponent")
 		instance.global_position = parent.global_position
+		var shoot_direction = direction.normalized()
+		if shoot_direction == Vector2.ZERO:
+			shoot_direction = Vector2.RIGHT
 		
-		hitscan_component.direction = direction.normalized()
+		hitscan_component.direction = shoot_direction
 		hitscan_component.shooter = parent
 		
 		if scene:

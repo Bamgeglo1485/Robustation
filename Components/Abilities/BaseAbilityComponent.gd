@@ -18,8 +18,8 @@ var active: bool = false
 var ability_timer: float = 0.0
 
 func _ready() -> void:
-	if parent.has_node("Sounds"):
-		var sounds: Node = parent.get_node("Sounds")
+	var sounds: Node = parent.get_node("Sounds")
+	if sounds:
 		if start_sound:
 			start_sound.reparent(sounds)
 		if stop_sound:
@@ -49,13 +49,15 @@ func input() -> void:
 		on_activate_ability()
 
 func on_activate_ability() -> void:
-	cooldown = true
+	
+	var activate: bool = activate_ability()
+	if !activate:
+		return
+	
 	active = true
 	
 	if cooldown_on_activate:
 		_start_cooldown()
-	
-	activate_ability()
 	
 	if ability_delay > 0:
 		ability_timer = ability_delay
@@ -84,8 +86,8 @@ func on_disable_ability() -> void:
 		inst.global_position = parent.global_position
 		scene.add_child(inst)
 
-func activate_ability() -> void:
-	pass
+func activate_ability() -> bool:
+	return true
 
 func disable_ability() -> void:
 	pass

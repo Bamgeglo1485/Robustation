@@ -198,6 +198,7 @@ func _on_body_entered(body: Node2D) -> void:
 				var nearest_enemy = _get_nearest_enemy()
 				if nearest_enemy:
 					_direction = nearest_enemy.global_position - parent.global_position
+			body.global_position = parent.global_position
 			can_parry_weapon.parry_projectile(body, projectile_comp, _direction)
 	if max_penetrations != 0 and penetration_damaged_bodies.has(body):
 		return

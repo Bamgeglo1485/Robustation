@@ -32,6 +32,7 @@ var loose: bool = false
 @onready var player: Node2D = scene.get_node_or_null("Player")
 @onready var weapon_user_component: WeaponUserComponent = player.get_node_or_null("WeaponUserComponent")
 @onready var health_component: HealthComponent = player.get_node_or_null("HealthComponent")
+@onready var stamina_component: StaminaComponent = player.get_node_or_null("StaminaComponent")
 @onready var player_perk_ui: Control = player.get_node("GUI").get_node("PerkChoose").get_node("PerkChoose")
 @onready var player_perk_ui_list: VBoxContainer = player_perk_ui.get_node("Panel").get_node("VBoxContainer")
 var perk_list_unit: PackedScene = preload("res://Scenes/UI/IngameInterface/Perks/PerkChooseUnit.tscn")
@@ -80,6 +81,7 @@ func start_new_wave(new_game: bool = false) -> void:
 	if !new_game:
 		health_component.delayed_damage_queue.clear()
 		health_component.set_health(health_component.max_health)
+		stamina_component.set_stamina(stamina_component.max_stamina)
 		await _open_perk_choose()
 	wave_active = true
 	wave += 1

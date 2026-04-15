@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://ci2jd2wcm5sd8" path="res://Components/Interface/Menu/Settings/FOVSettingsComponent.gd" id="8_uo7xn"]
 [ext_resource type="Script" uid="uid://eueqbg2py0bc" path="res://Components/Interface/Menu/Settings/VerticalSyncSettingsComponent.gd" id="9_uujv2"]
 [ext_resource type="Script" uid="uid://b5miclua4wknq" path="res://Components/Interface/Menu/Settings/FullcreenSettingsComponent.gd" id="10_6wdx2"]
+[ext_resource type="Script" uid="uid://48fp7f874ukh" path="res://Components/Interface/Menu/Settings/FastRenderSettingsComponent.gd" id="10_acibd"]
 [ext_resource type="Script" uid="uid://dphs1pxcujmhq" path="res://Components/Interface/Menu/Settings/BloodCleaningSettingsComponent.gd" id="10_r3am3"]
 [ext_resource type="Script" uid="uid://cnotog8ol8m7h" path="res://Components/Interface/Menu/Settings/GlowSettingsComponent.gd" id="13_7aci1"]
 [ext_resource type="Script" uid="uid://cut2kh1l3dj88" path="res://Components/Interface/Menu/Settings/ParallaxSettingsComponent.gd" id="13_m7hwe"]
@@ -391,6 +392,37 @@ offset_top = -0.008000135
 offset_right = 0.21199799
 theme_override_fonts/font = ExtResource("1_4crku")
 text = "Blood cleaning delay (0 - do not clean)"
+
+[node name="FAST_RENDER" type="Panel" parent="ScrollContainer/VBoxContainer" unique_id=87109507]
+custom_minimum_size = Vector2(480, 48)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="ScrollContainer/VBoxContainer/FAST_RENDER" unique_id=742958635]
+modulate = Color(0.92048395, 0, 0.3560112, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.002
+anchor_top = 0.021000002
+anchor_right = 0.202
+anchor_bottom = 0.5
+offset_left = 0.011999965
+offset_top = -0.008000135
+offset_right = 0.21199799
+theme_override_fonts/font = ExtResource("1_4crku")
+text = "Fast Rendering (requires reboot)"
+
+[node name="CheckButton" type="CheckButton" parent="ScrollContainer/VBoxContainer/FAST_RENDER" unique_id=1661057991]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 0.089
+anchor_bottom = 1.0
+offset_right = 0.034000397
+grow_vertical = 2
+
+[node name="FastRenderSettingsComponent" type="Node" parent="ScrollContainer/VBoxContainer/FAST_RENDER/CheckButton" unique_id=1225428295]
+script = ExtResource("10_acibd")
+metadata/_custom_type_script = "uid://48fp7f874ukh"
 
 [node name="V-SYNC" type="Panel" parent="ScrollContainer/VBoxContainer" unique_id=1771719771]
 custom_minimum_size = Vector2(480, 48)

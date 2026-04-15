@@ -49,7 +49,6 @@ func _input(_event: InputEvent) -> void:
 		var direction: Vector2 = mob_mover_component.direction
 		if direction == Vector2.ZERO:
 			direction = (parent.get_global_mouse_position() - parent.global_position)
-		
 		dash(direction)
 
 func _update_stamina_bar():

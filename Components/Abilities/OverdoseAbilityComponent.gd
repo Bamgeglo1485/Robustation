@@ -1,6 +1,7 @@
 class_name OverdoseAbilityComponent extends BaseAbilityComponent
 
 @onready var mob_mover_component: MobMoverComponent = parent.get_node_or_null("MobMoverComponent")
+@onready var dash_component: DashAbilityComponent = parent.get_node_or_null("DashAbilityComponent")
 
 @export var trail_colors: Array[Color]
 @export var overdose_effect: ColorRect
@@ -22,9 +23,16 @@ func _ready() -> void:
 		distraction = distraction_scene.instantiate()
 		scene.add_child.call_deferred(distraction)
 
-func activate_ability() -> void:
+func activate_ability() -> bool:
 	if !mob_mover_component:
-		return
+		return false
+	
+	if dash_component:
+		if dash_component.dash_stamina < dash_component.max_dash_stamina:
+			return false
+		dash_component.dash_stamina = 0
+		dash_component._update_stamina_bar()
+		dash_component._cooldown()
 	
 	overdose_effects()
 	mob_mover_component.set_minor_speed_modifier("overdose", 2.0)
@@ -52,6 +60,7 @@ func activate_ability() -> void:
 	if distraction:
 		distraction.global_position = parent.global_position
 		EventBusManager.change_player.emit(distraction, 0)
+	return true
 
 func overdose_effects() -> void:
 	var trail = TrailEffectComponent.new()

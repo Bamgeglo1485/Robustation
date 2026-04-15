@@ -171,6 +171,7 @@ func _try_melee_attack(direction) -> Dictionary:
 		var query: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.create(ray_start, ray_end)
 		query.collision_mask = 1 | 2 | 3 | 4
 		query.collide_with_areas = true
+		query.hit_from_inside = true
 		
 		var excluded_nodes: Array
 		excluded_nodes.append(parent)
@@ -185,7 +186,7 @@ func _try_melee_attack(direction) -> Dictionary:
 		if result.is_empty():
 			continue
 		
-		var enemy = result.collider
+		var enemy: Node2D = result.collider
 		if enemy is Area2D:
 			enemy = enemy.get_parent()
 		
@@ -316,6 +317,7 @@ func _attack_animation(direction):
 func parry_projectile(projectile: Node2D, projectile_component: ProjectileComponent, direction: Vector2) -> void:
 	if !projectile_component.parriable:
 		return
+	projectile.global_position = parent.global_position
 	EventBusManager.parry.emit(parent, "Projectile")
 	var angle = direction.angle()
 	projectile.modulate = parry_color

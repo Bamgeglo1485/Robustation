@@ -5,6 +5,7 @@
 [ext_resource type="Shader" uid="uid://b53pser2tah5a" path="res://Resources/Shaders/Monitor.gdshader" id="2_2uogn"]
 [ext_resource type="Script" uid="uid://4io3bm7r86h6" path="res://Components/Interface/Menu/TextPrintingAnimationComponent.gd" id="2_qefsa"]
 [ext_resource type="Script" uid="uid://ccj77qbogyatv" path="res://Components/Entity/TimedSceneAdderComponent.gd" id="4_qefsa"]
+[ext_resource type="Script" uid="uid://b5miclua4wknq" path="res://Components/Interface/Menu/Settings/FullcreenSettingsComponent.gd" id="8_ceu5l"]
 [ext_resource type="AudioStream" uid="uid://cla3xv7l2yqii" path="res://Audio/Interface/Menu/startup.ogg" id="9_bjiq0"]
 [ext_resource type="Script" uid="uid://gms322u0heem" path="res://Components/Entity/TimedEnablerComponent.gd" id="10_kig3x"]
 
@@ -159,10 +160,10 @@ anchor_left = 0.59900004
 anchor_top = 0.035
 anchor_right = 0.59900004
 anchor_bottom = 0.035
-offset_left = -0.048034668
+offset_left = -2.0480347
 offset_top = 0.3199997
 offset_right = 399.95197
-offset_bottom = 443.32
+offset_bottom = 416.32
 grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
@@ -192,3 +193,7 @@ script = ExtResource("2_qefsa")
 animate_on_ready_delay = 1.5
 play_sound = false
 metadata/_custom_type_script = "uid://4io3bm7r86h6"
+
+[node name="FullcreenSettingsComponent" type="Node" parent="." unique_id=1873051602]
+script = ExtResource("8_ceu5l")
+metadata/_custom_type_script = "uid://b5miclua4wknq"

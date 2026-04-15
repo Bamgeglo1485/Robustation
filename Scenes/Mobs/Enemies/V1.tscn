@@ -159,6 +159,7 @@ metadata/_custom_type_script = "uid://6b7bcparwq17"
 
 [node name="HitSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Knuckleblaster" index="0" unique_id=988943625]
 stream = ExtResource("9_sam4b")
+volume_db = 5.0
 max_distance = 600.0
 
 [node name="Shotgun" type="Node" parent="WeaponUserComponent" parent_id_path=PackedInt32Array(2123544057) index="1" unique_id=296336864 node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound", "bullets_recover_sound", "overheat_alert")]
@@ -209,6 +210,7 @@ projectile = ExtResource("19_dug6g")
 spread_angle = 1
 bullets_max_count = 1
 bullets_recover_count = 1
+shots = 1
 shots_angle = 0
 shoot_sound = NodePath("ShootSound")
 empty_shoot_sound = NodePath("EmptySound")
@@ -325,7 +327,7 @@ avoidance_enabled = false
 radius = 64.0
 
 [node name="BeehaveTree" parent="." index="16" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@18991")
+blackboard = NodePath("@Node@66097")
 
 [node name="MoveToPlayer" type="Node" parent="BeehaveTree" index="0" unique_id=478688837]
 script = ExtResource("32_28lqn")

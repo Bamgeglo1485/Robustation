@@ -21,7 +21,7 @@ var penetrations: int = 0
 var last_target: Node2D
 
 var shooter: CharacterBody2D
-var direction: Vector2
+var direction: Vector2 = Vector2.RIGHT
 var damage_modifier: float = 1
 var deleted: bool = false
 
@@ -33,6 +33,9 @@ var deleted: bool = false
 @export var modify_by_range_max_value: float = 2.5
 
 func _ready() -> void:
+	if direction == Vector2.ZERO:
+		direction = Vector2.RIGHT
+	
 	ray_line.clear_points()
 	ray_line.add_point(Vector2(0,0))
 	ray_line.global_position = parent.global_position
@@ -51,28 +54,58 @@ func fire() -> void:
 	if parent is not RayCast2D:
 		return
 	
+	if direction == Vector2.ZERO:
+		direction = Vector2.RIGHT
+	
 	if shooter:
 		parent.clear_exceptions()
 		parent.add_exception(shooter)
 		if last_target:
 			parent.add_exception(last_target)
 	
-	parent.target_position = direction * 1000
+	parent.target_position = direction * 2000
 	await get_tree().physics_frame
 	parent.force_raycast_update()
 	
-	var target_position: Vector2 = ray_line.to_local(parent.get_collision_point())
+	var collision_point: Vector2 = parent.get_collision_point()
+	
+	if collision_point == Vector2.ZERO:
+		collision_point = parent.global_position + direction * 2000
+	
+	var target_position: Vector2 = ray_line.to_local(collision_point)
 	ray_line.add_point(target_position)
 	
-	damage_collider()
+	var collider = parent.get_collider()
+	if collider:
+		damage_collider()
 
 func damage_collider() -> void:
 	var collider: Node2D = parent.get_collider()
 	var collision_point: Vector2 = parent.get_collision_point()
 	var collision_normal: Vector2 = parent.get_collision_normal()
+	
+	if collision_point == Vector2.ZERO:
+		return
+	
 	if collider and collider is Area2D:
 		collider = collider.get_parent()
 	if !collider:
+		return
+	
+	var projectile_comp: ProjectileComponent = collider.get_node_or_null("ProjectileComponent")
+	if projectile_comp:
+		if projectile_comp.can_parry_weapon:
+			var nearest_enemy = projectile_comp._get_nearest_enemy()
+			if !nearest_enemy:
+				direction = -direction
+			else:
+				direction = nearest_enemy.global_position - parent.global_position
+			@warning_ignore("narrowing_conversion")
+			damage *= projectile_comp.can_parry_weapon.parry_force
+			fire()
+		elif projectile_comp.explode_on_projectile_hit:
+			projectile_comp.explode_on_delete = true
+			projectile_comp._delete()
 		return
 	
 	if collider is not TileMapLayer:
@@ -80,28 +113,30 @@ func damage_collider() -> void:
 	
 	var target_health: HealthComponent = collider.get_node_or_null("HealthComponent")
 	if target_health and shooter:
-		@warning_ignore("narrowing_conversion")
-		var total_damage: int = damage
+		var total_damage: float = damage
 		if modify_by_range_base_range != 0:
 			var distance: float = (shooter.global_position - collider.global_position).length()
-			total_damage *= clamp(distance/modify_by_range_base_range, modify_by_range_min_value, modify_by_range_max_value) 
-		@warning_ignore("narrowing_conversion")
-		target_health.take_damage(total_damage * damage_modifier, shooter, "Hitscan")
+			total_damage *= clamp(distance / modify_by_range_base_range, modify_by_range_min_value, modify_by_range_max_value) 
+		target_health.take_damage(int(total_damage * damage_modifier), shooter, "Hitscan")
+	
 	var target_mover: MobMoverComponent = collider.get_node_or_null("MobMoverComponent")
 	if target_mover:
 		if drop_enemy_delay != 0:
 			target_mover.drop(drop_enemy_delay)
 		if throw_speed != 0:
 			target_mover.throw(collider.global_position - shooter.global_position, throw_speed, shooter, 10, true, true)
+	
 	if explosion_scene and collider:
 		var inst: Node2D = explosion_scene.instantiate()
 		inst.global_position = collision_point
 		inst.source = shooter
 		scene.add_child(inst)
+	
 	if hit_effect and collider:
 		var inst: Node2D = hit_effect.instantiate()
 		inst.global_position = collision_point
 		scene.add_child(inst)
+	
 	if bounces < max_bounces and (collider is TileMapLayer or collider is TileMap):
 		bounces += 1
 		
@@ -110,14 +145,18 @@ func damage_collider() -> void:
 			inst.global_position = collision_point
 			scene.add_child(inst)
 		
-		var incoming_dir = direction
-		direction = incoming_dir.bounce(collision_normal)
-		parent.global_position = collision_point
+		if collision_normal != Vector2.ZERO:
+			direction = direction.bounce(collision_normal)
+		else:
+			direction = -direction
+		
+		parent.global_position = collision_point + direction * 5
 		
 		fire()
 		return
 	elif penetrations < max_penetrations:
 		penetrations += 1
+		parent.global_position = collision_point + direction * 5
 		fire()
 
 func _ray_appear_effects() -> void:

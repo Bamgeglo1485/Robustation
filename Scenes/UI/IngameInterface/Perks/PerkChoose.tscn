@@ -30,10 +30,10 @@ grow_vertical = 2
 use_parent_material = true
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.24479167
-anchor_top = 0.15277778
-anchor_right = 0.7378472
-anchor_bottom = 0.8132716
+anchor_left = 0.30208334
+anchor_top = 0.17283951
+anchor_right = 0.7951389
+anchor_bottom = 0.8333333
 theme_override_styles/panel = SubResource("StyleBoxFlat_wm5bs")
 metadata/_edit_use_anchors_ = true
 

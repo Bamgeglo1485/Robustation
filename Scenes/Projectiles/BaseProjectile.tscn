@@ -25,17 +25,18 @@ metadata/_custom_type_script = "uid://dn05jeqqq5844"
 [node name="HitSound" type="AudioStreamPlayer2D" parent="ProjectileComponent" unique_id=1752295456]
 max_distance = 600.0
 
+[node name="Parry" type="Area2D" parent="." unique_id=757156969]
+collision_layer = 2055
+collision_mask = 2055
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Parry" unique_id=2139953676]
+shape = ExtResource("3_geesq")
+
 [node name="HealthComponent" type="Node" parent="." unique_id=90404297]
 script = ExtResource("3_88g3b")
 max_health = 1
 damage_modifier = 0.0
 metadata/_custom_type_script = "uid://df356su15y7ow"
-
-[node name="Parry" type="Area2D" parent="." unique_id=757156969]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Parry" unique_id=2139953676]
-rotation = 1.5707964
-shape = ExtResource("3_geesq")
 
 [node name="TriggerOnParryComponent" type="Node" parent="." unique_id=1141083762]
 script = ExtResource("3_t4af8")

@@ -61,6 +61,9 @@ var walking_tween: Tween
 var drop_tween: Tween
 
 # Cache
+
+var max_speed_current: float
+var friction_amount: float
 var velocity: Vector2
 var speed: float
 
@@ -94,7 +97,7 @@ func _move(delta: float) -> void:
 	if direction.is_zero_approx():
 		# If the body does not go somewhere, we apply friction
 		if !velocity.is_zero_approx():
-			var friction_amount: float = friction * delta
+			friction_amount = friction * delta
 			if speed > friction_amount:
 				velocity -= (velocity / speed) * friction_amount
 			else:
@@ -107,7 +110,7 @@ func _move(delta: float) -> void:
 			var nav_vel: Vector2 = direction * acceleration * speed_modifier * minor_speed_modifier
 			navigation_agent.set_velocity(nav_vel)
 		
-		var max_speed_current: float = max_speed * speed_modifier * minor_speed_modifier
+		max_speed_current = max_speed * speed_modifier * minor_speed_modifier
 		if speed > max_speed_current:
 			velocity = (velocity / speed) * max_speed_current
 	

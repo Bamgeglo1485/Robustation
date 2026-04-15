@@ -4,6 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://cg0leh0na5lvv" path="res://Resources/Audio/BulletHitRandom.tres" id="2_doom2"]
 [ext_resource type="Texture2D" uid="uid://c0w1acal2twly" path="res://Textures/Weapons/Bow/arrow.png" id="3_doom2"]
 [ext_resource type="Script" uid="uid://dfahm1hamvt58" path="res://Components/Entity/TrailEffectComponent.gd" id="4_1lymg"]
+[ext_resource type="Shape2D" uid="uid://b6xj0wmic3mm5" path="res://Resources/Colliders/ProjectileParryRange.tres" id="4_blmrq"]
 [ext_resource type="Script" uid="uid://0qaedvb6js57" path="res://Components/Triggers/SetProjectileExplosionOnTriggerComponent.gd" id="5_fvop5"]
 [ext_resource type="PackedScene" uid="uid://c03qvua0tf8st" path="res://Scenes/Explosion/MiniExplosion.tscn" id="6_blmrq"]
 
@@ -23,8 +24,8 @@ shader_parameter/jiggle = 2.5
 shader_parameter/speed = 20.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i6uow"]
-radius = 5.0
-height = 26.0
+radius = 11.0
+height = 46.0
 
 [node name="Projectile" unique_id=1269485508 instance=ExtResource("1_5axxq")]
 material = SubResource("ShaderMaterial_doom2")
@@ -45,12 +46,14 @@ shape = SubResource("CapsuleShape2D_i6uow")
 [node name="HitSound" parent="ProjectileComponent" index="1" unique_id=1752295456]
 stream = ExtResource("2_doom2")
 
-[node name="CollisionShape2D" parent="Parry" parent_id_path=PackedInt32Array(757156969) index="0" unique_id=2139953676]
-disabled = true
-
 [node name="Texture" type="Sprite2D" parent="." index="4" unique_id=1806190901]
 use_parent_material = true
 texture = ExtResource("3_doom2")
+
+[node name="Parry#CollisionShape2D" type="CollisionShape2D" parent="." index="5" unique_id=2139953676]
+rotation = 1.5707964
+shape = ExtResource("4_blmrq")
+disabled = true
 
 [node name="TrailEffectComponent" type="Node" parent="." index="6" unique_id=15597664]
 script = ExtResource("4_1lymg")

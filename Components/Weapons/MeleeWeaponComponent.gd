@@ -57,6 +57,8 @@ var qte_active: bool = false
 var qte_tween: Tween
 var perfect_time_sound_played: bool = false
 
+var excluded_nodes: Array
+	
 func _physics_process(delta: float) -> void:
 	if qte_enabled and qte_active:
 		if !qte_move_back:
@@ -109,6 +111,11 @@ func _ready() -> void:
 	parent_faction = parent.get_node_or_null("FactionComponent")
 	if qte_enabled:
 		health_component = parent.get_node_or_null("HealthComponent")
+	
+	excluded_nodes.append(parent)
+	for child in parent.get_children():
+		if child is Area2D:
+			excluded_nodes.append(child)
 
 func attack(raiser, npc = true) -> Dictionary:
 	if !raiser.has_method("get_attack_direction"):
@@ -138,12 +145,12 @@ func attack(raiser, npc = true) -> Dictionary:
 		return {}
 	
 	if npc:
-		var succefull_swing = await attack_logic(raiser)
+		var succefull_swing: bool = await attack_logic(raiser)
 		if !succefull_swing:
 			return {}
 		_melee_attack_target(raiser.get_attack_target(), raiser.get_attack_direction())
 	else:
-		var succefull_swing = await attack_logic(raiser)
+		var succefull_swing: bool = await attack_logic(raiser)
 		if !succefull_swing:
 			return {}
 		return await _try_melee_attack(raiser.get_attack_direction())
@@ -169,15 +176,9 @@ func _try_melee_attack(direction) -> Dictionary:
 		var ray_end: Vector2 = parent.global_position + ray_direction * attack_range
 		
 		var query: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.create(ray_start, ray_end)
-		query.collision_mask = 1 | 2 | 3 | 4
+		query.collision_mask = 1 | 2 | 4 | 7 | 12
 		query.collide_with_areas = true
 		query.hit_from_inside = true
-		
-		var excluded_nodes: Array
-		excluded_nodes.append(parent)
-		for child in parent.get_children():
-			if child is Area2D:
-				excluded_nodes.append(child)
 		
 		query.exclude = excluded_nodes
 		

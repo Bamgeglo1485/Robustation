@@ -25,7 +25,6 @@ texture_mode = 2
 [node name="HitscanComponent" parent="." index="1" unique_id=993689081]
 damage = 80
 disappear_speed = 0.3
-max_penetrations = 1
 modify_by_range_base_range = 300
 
 [node name="HitSound" type="AudioStreamPlayer2D" parent="." index="2" unique_id=1641163860]

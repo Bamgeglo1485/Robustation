@@ -457,7 +457,7 @@ metadata/_custom_type_script = "uid://cmonoqon5s4vx"
 
 [node name="OverdoseAbilityComponent" type="Node" parent="." index="18" unique_id=142273018 node_paths=PackedStringArray("overdose_effect", "start_sound", "ability_icon")]
 script = ExtResource("27_l8jtb")
-trail_colors = Array[Color]([Color(0.8736105, 0, 0.34971508, 1), Color(0, 0.49991995, 0.47274232, 1), Color(0.5611145, 0.44604957, 0, 1)])
+trail_colors = Array[Color]([Color(0.8736105, 0, 0.34971508, 1), Color(9.62615e-07, 0.6505986, 0.6205783, 1), Color(0.7722405, 0.6194622, 1.1551381e-06, 1)])
 overdose_effect = NodePath("../GUI/Overlays/Ability/Overdose")
 distraction_scene = ExtResource("42_isbls")
 cooldown_delay = 3.0

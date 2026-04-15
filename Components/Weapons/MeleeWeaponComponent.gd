@@ -317,7 +317,6 @@ func _attack_animation(direction):
 func parry_projectile(projectile: Node2D, projectile_component: ProjectileComponent, direction: Vector2) -> void:
 	if !projectile_component.parriable:
 		return
-	projectile.global_position = parent.global_position
 	EventBusManager.parry.emit(parent, "Projectile")
 	var angle = direction.angle()
 	projectile.modulate = parry_color
@@ -344,6 +343,7 @@ func parry_projectile(projectile: Node2D, projectile_component: ProjectileCompon
 	var trigger_on_parry: TriggerOnParryComponent = projectile.get_node("TriggerOnParryComponent")
 	if trigger_on_parry:
 		trigger_on_parry.trigger()
+	projectile.global_position = parent.global_position
 
 func parry_effects():
 	if parry_effect:

@@ -66,7 +66,7 @@ func overdose_effects() -> void:
 	var trail = TrailEffectComponent.new()
 	trail.lifetime = ability_delay
 	trail.colors = trail_colors
-	trail.color_change_delay = ability_delay / trail_colors.size()
+	trail.color_change_delay = ability_delay / trail_colors.size() / 10
 	trail.name = "TrailEffectComponent"
 	trail.ignore_time_scale = true
 	parent.add_child(trail)

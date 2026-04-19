@@ -1,14 +1,15 @@
 class_name ChargingMeleeWeaponComponent extends MeleeWeapon
 
-@export var max_charge_time: float = 3
-@export var base_charge_time: float = 1
-@export var min_charge: float = 0.3
+@export var max_charge_time: float = 1
+@export var base_charge_time: float = 0.5
+@export var min_charge: float = 0.2
 @export var exponential: bool = true
 @export var exponent_divider: float = 1.2
 @export var charging_effect: Node2D
-@export var hitstop_charge: float = 1.5
+@export var hitstop_charge: float = 0.7
 @export var charging_sound: AudioStreamPlayer2D
 @export var full_charge_sound: AudioStreamPlayer2D
+@export var remove_overheat_weapon: RangeWeapon
 var charging: bool = false
 var charge: float = 0
 var npc: bool = true
@@ -57,6 +58,7 @@ func on_release(raiser) -> void:
 		var charge_ratio = charge / base_charge_time
 		var exp_multiplier = exp(charge_ratio) - 0.5
 		minor_damage_modifiers["Charge"] = exp_multiplier / exponent_divider
+		print(exp_multiplier / exponent_divider)
 	else:
 		minor_damage_modifiers["Charge"] = charge / base_charge_time
 	var mod: float = charge / base_charge_time
@@ -64,6 +66,8 @@ func on_release(raiser) -> void:
 	throw_speed = base_throw_speed * mod
 	self_throw_speed = base_self_throw_speed * mod
 	var targets = await _attack(raiser, npc)
+	if remove_overheat_weapon:
+		remove_overheat_weapon.overheat = 0
 	if targets.is_empty():
 		return
 	if hitstop_charge != 0 and hitstop_charge < charge:

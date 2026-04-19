@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://qc88d2rnpoo6"]
+
+[ext_resource type="PackedScene" uid="uid://3kpwp1isvu1g" path="res://Scenes/UI/Folders/BaseInfo.tscn" id="1_4tget"]
+[ext_resource type="Texture2D" uid="uid://dverpu5mv40au" path="res://Textures/Weapons/Toolbox/toolbox.png" id="2_nnkqi"]
+[ext_resource type="FontFile" uid="uid://mhx51lyuasx4" path="res://Resources/Text/Fonts/Ac437_ApricotPortable.ttf" id="3_qq08u"]
+[ext_resource type="FontFile" uid="uid://dskv5n6tofrla" path="res://Resources/Text/Fonts/LCD 40x2 Display/LCD40x2Display-Regular.otf" id="4_u4g4g"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t13ep"]
+bg_color = Color(0.06469653, 0.064696535, 0.0646965, 1)
+
+[node name="ToolboxInfo" unique_id=727110380 instance=ExtResource("1_4tget")]
+
+[node name="Label" parent="Panel" parent_id_path=PackedInt32Array(1765621037) index="1" unique_id=889542511]
+text = "Robust-os - toolbox_info.rbstxt - ui_system.rbst"
+
+[node name="Image" parent="Info" parent_id_path=PackedInt32Array(157422737) index="0" unique_id=1356612208]
+texture = ExtResource("2_nnkqi")
+
+[node name="Name" parent="Info" parent_id_path=PackedInt32Array(157422737) index="1" unique_id=665103481]
+text = "[color=crimson]Toolbox[/color]
+Melee weapon"
+
+[node name="OBJECTSSCROLL" parent="." index="5" unique_id=1868664687]
+anchor_top = 0.2614035
+
+[node name="DescriptionHeading" type="Panel" parent="OBJECTSSCROLL/OBJECTS" parent_id_path=PackedInt32Array(987928520) index="0" unique_id=1826602918]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t13ep")
+
+[node name="Label" type="Label" parent="OBJECTSSCROLL/OBJECTS/DescriptionHeading" index="0" unique_id=224955931]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.30188018
+anchor_top = 0.24951553
+anchor_right = 0.67584705
+anchor_bottom = 0.83284897
+theme_override_fonts/font = ExtResource("3_qq08u")
+theme_override_font_sizes/font_size = 20
+text = "DESCRIPTION"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Description" type="RichTextLabel" parent="OBJECTSSCROLL/OBJECTS" parent_id_path=PackedInt32Array(987928520) index="1" unique_id=1306394144]
+custom_minimum_size = Vector2(0, 1000)
+layout_mode = 2
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("4_u4g4g")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "Toolbox is a heavy melee weapon capable of staggering subjects, as well as equipped with a special ████ coating that parries projectiles upon striking them.
+
+Due to its heavy weight and constantly moving internal mechanisms, finding the right moment is required for a perfect hit. For this purpose, a perfect hit indicator was built into the outer casing. When the hit lands as the red mark is reached (a shining sound is also heard), the hit is typically 4 times stronger and the ████ coating is energized, healing up to 15% of the user's external wounds.
+
+There is a button on the handle. Holding it down begins charging toolbox. Air is drawn in and immediately burned by plasma, creating pressure that upon release imparts additional momentum to the toolbox. At maximum charge, the strike is approximately 10 times stronger than normal. Additionally, a charged strike's airflow cools down the shotgun if it is overheated.
+
+Toolbox should be used for parrying attacks from hostile subjects, staggering them, and cooling down the shotgun."

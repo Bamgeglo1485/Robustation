@@ -9,10 +9,10 @@ func start_game(type: String):
 	if type == "arena":
 		if output_animation and output_animation.tween:
 			await output_animation.tween.finished
-		get_tree().change_scene_to_file(arena)
+		tree.change_scene_to_file(arena)
 		return
 	elif type == "v1":
 		if output_animation and output_animation.tween:
 			await output_animation.tween.finished
-		get_tree().change_scene_to_file(v1)
+		tree.change_scene_to_file(v1)
 		return

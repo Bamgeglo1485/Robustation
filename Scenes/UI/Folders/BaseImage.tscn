@@ -1,0 +1,137 @@
+[gd_scene format=3 uid="uid://h5e7np6pkbkw"]
+
+[ext_resource type="FontFile" uid="uid://mhx51lyuasx4" path="res://Resources/Text/Fonts/Ac437_ApricotPortable.ttf" id="1_4phlu"]
+[ext_resource type="Script" uid="uid://cja3led3n1ehp" path="res://Components/Interface/Menu/DragButtonComponent.gd" id="2_2yymu"]
+[ext_resource type="Texture2D" uid="uid://dqd7xkk5m77ck" path="res://Textures/Interface/Menu/cross.png" id="3_fhd68"]
+[ext_resource type="Texture2D" uid="uid://ftxxh2qcsb0s" path="res://Textures/Interface/Menu/cross_hovered.png" id="4_h5pa5"]
+[ext_resource type="Script" uid="uid://bodxsix2kyyy6" path="res://Components/Interface/Menu/ToggleVisibleOnPressedComponent.gd" id="5_hcqsb"]
+[ext_resource type="Texture2D" uid="uid://8d2n77fftdbi" path="res://icon.png" id="6_wpawa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ex7t"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mj2lg"]
+bg_color = Color(0.060530342, 0.06053035, 0.060530327, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v5qja"]
+bg_color = Color(0.11286896, 1.469492e-06, 0.08068577, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y60rh"]
+bg_color = Color(0.14165193, 0.075261734, 0.0927326, 1)
+
+[node name="BaseImage" type="Control" unique_id=727110380]
+z_index = 5
+layout_mode = 3
+anchor_left = 0.46500003
+anchor_top = 0.076000005
+anchor_right = 0.46500003
+anchor_bottom = 0.45700002
+offset_left = -242.68005
+offset_top = -0.24800491
+offset_right = 243.31995
+offset_bottom = 245.86398
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=1765621037]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_7ex7t")
+
+[node name="Button" type="Button" parent="Panel" unique_id=1408473027]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.048
+offset_bottom = 14.896
+mouse_default_cursor_shape = 6
+theme_override_fonts/font = ExtResource("1_4phlu")
+theme_override_styles/normal = SubResource("StyleBoxFlat_mj2lg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_v5qja")
+theme_override_styles/hover = SubResource("StyleBoxFlat_y60rh")
+
+[node name="DragButtonComponent" type="Node" parent="Panel/Button" unique_id=1204231945 node_paths=PackedStringArray("frame_to_drag")]
+script = ExtResource("2_2yymu")
+frame_to_drag = NodePath("../../..")
+metadata/_custom_type_script = "uid://cja3led3n1ehp"
+
+[node name="Label" type="Label" parent="Panel" unique_id=889542511]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.9620001
+offset_left = 1.0
+offset_top = 4.0
+offset_right = 1.0
+offset_bottom = -534.80804
+mouse_behavior_recursive = 1
+theme_override_fonts/font = ExtResource("1_4phlu")
+theme_override_font_sizes/font_size = 12
+text = "Robust-os - IMAGE NAME - ui_system.rbst"
+
+[node name="OffButton" type="TextureButton" parent="." unique_id=68944335]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.92300004
+anchor_top = 0.0050000004
+anchor_right = 0.99200004
+anchor_bottom = 0.069000006
+offset_left = 0.037994385
+offset_top = 0.079999685
+offset_right = -0.048034668
+offset_bottom = 0.2579956
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("3_fhd68")
+texture_hover = ExtResource("4_h5pa5")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="ToggleVisibleOnPressedComponent" type="Node" parent="OffButton" unique_id=348004630 node_paths=PackedStringArray("toggle_frame")]
+script = ExtResource("5_hcqsb")
+toggle_frame = NodePath("../..")
+metadata/_custom_type_script = "uid://bodxsix2kyyy6"
+
+[node name="ReferenceRect" type="ReferenceRect" parent="." unique_id=1098635970]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 1.0
+offset_bottom = 2.0
+mouse_behavior_recursive = 1
+border_color = Color(0.033853278, 0.033853278, 0.033853274, 1)
+border_width = 5.0
+editor_only = false
+
+[node name="ReferenceRect2" type="ReferenceRect" parent="." unique_id=316285321]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 12.0
+mouse_behavior_recursive = 1
+border_color = Color(0.033853278, 0.033853278, 0.033853274, 1)
+border_width = 5.0
+editor_only = false
+
+[node name="Image" type="TextureRect" parent="." unique_id=1356612208]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.089
+anchor_right = 1.006
+anchor_bottom = 1.0
+offset_top = -0.030838013
+offset_right = 0.083984375
+offset_bottom = 4.0
+texture = ExtResource("6_wpawa")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true

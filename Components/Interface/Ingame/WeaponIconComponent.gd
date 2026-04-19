@@ -81,7 +81,7 @@ func _progress_bar() -> void:
 				_start_progress_tween(1.0, cooldown_time)
 				modifier = cooldown_time
 				await progress_tween.finished
-			if !is_instance_valid(weapon):
+			if !is_instance_valid(weapon) or !weapon.bullets_recover_timer:
 				return
 			var progress_value = weapon.bullets_recover_timer.time_left / weapon.bullets_recover_timer.wait_time + modifier
 			parent.material.set_shader_parameter("progress", progress_value)

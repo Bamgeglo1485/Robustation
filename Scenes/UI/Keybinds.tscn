@@ -20,7 +20,7 @@ bg_color = Color(0.11286896, 1.469492e-06, 0.08068577, 1)
 bg_color = Color(0.14165193, 0.075261734, 0.0927326, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aeqpk"]
-bg_color = Color(0.06469653, 0.064696535, 0.0646965, 1)
+bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5us0c"]
 content_margin_left = 4.0
@@ -35,7 +35,7 @@ corner_radius_bottom_left = 3
 corner_detail = 5
 
 [node name="Keybinds" type="Control" unique_id=727110380]
-z_index = 5
+z_index = 10
 layout_mode = 3
 anchor_left = 0.21400002
 anchor_right = 0.21400002
@@ -73,12 +73,12 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.008
 anchor_top = -0.009000001
-anchor_right = 1.0
-anchor_bottom = 0.09900001
+anchor_right = 1.0040001
+anchor_bottom = 0.07700001
 offset_left = -0.103999615
 offset_top = 0.006000519
-offset_right = 2.0
-offset_bottom = -9.855003
+offset_right = 0.023956299
+offset_bottom = 0.042995453
 mouse_default_cursor_shape = 6
 theme_override_styles/normal = SubResource("StyleBoxFlat_2ejn7")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_dxep6")
@@ -92,14 +92,14 @@ metadata/_custom_type_script = "uid://cja3led3n1ehp"
 [node name="OffButton" type="TextureButton" parent="." unique_id=68944335]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.94500005
+anchor_left = 0.92700005
 anchor_top = 0.0050000004
 anchor_right = 0.99200004
-anchor_bottom = 0.057000004
-offset_left = 0.16998291
+anchor_bottom = 0.07700001
+offset_left = 0.0619812
 offset_top = 0.079999685
 offset_right = -0.048034668
-offset_bottom = -0.13700104
+offset_bottom = 0.042995453
 texture_normal = ExtResource("2_3amt8")
 texture_hover = ExtResource("3_t1u3q")
 ignore_texture_size = true

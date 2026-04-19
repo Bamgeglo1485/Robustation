@@ -51,6 +51,7 @@ enabled=PackedStringArray("res://addons/beehave/plugin.cfg")
 Enemies=""
 Blood=""
 PhysicalParticle=""
+Mob=""
 
 [input]
 

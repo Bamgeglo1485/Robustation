@@ -30,6 +30,7 @@ hue_variation_min = -1.0
 hue_variation_max = -0.54
 
 [node name="Projectile" unique_id=1574842334 instance=ExtResource("1_76f4r")]
+collision_layer = 8192
 
 [node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture", "particle_emitter")]
 collision_layer = 527
@@ -38,9 +39,9 @@ can_penetrate = false
 texture = NodePath("../Texture")
 particle_emitter = NodePath("GPUParticles2D")
 speed = 700
-speed_decreasing = 12
-max_damage = 40
-damage = 20
+speed_decreasing = 8
+max_damage = 80.0
+damage = 40.0
 lifetime = 0.0
 delete_on_hit = false
 return_to_sender = true

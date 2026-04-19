@@ -15,10 +15,10 @@ var bounces: int = 0
 @export var speed: int = 500
 @export var speed_decreasing: int = 0
 @export var stop_when_null_speed: bool = false
-@export var max_damage: int = 200
-@export var damage: int = 10 : set = _set_damage
-@export var delayed_damage: int = 0
-@export var delayed_damage_delay: int = 0
+@export var max_damage: float = 200
+@export var damage: float = 10 : set = _set_damage
+@export var delayed_damage: float = 0
+@export var delayed_damage_delay: float = 0
 @export var stamina_damage: float = 0
 @export var rotate_speed: int = 0
 @export var lifetime: float = 3.0
@@ -40,7 +40,7 @@ var penetrations: int = 0
 var can_hit: bool = true
 var weapon: RangeWeapon
 var shooter_faction: FactionComponent
-var targeted_enemies: Array[CharacterBody2D]
+var targeted_enemies: Array[PhysicsBody2D]
 
 @export_category("Sender")
 @export var return_to_sender: bool = false

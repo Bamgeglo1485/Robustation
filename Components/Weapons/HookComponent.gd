@@ -75,7 +75,14 @@ func _hook():
 	
 	if reel_sound:
 		reel_sound.play()
-	if target_mob_mover and target_mob_mover.drop_resistance < drop_force:
+	var projectile_component: ProjectileComponent = hooked_body.get_node_or_null("ProjectileComponent")
+	if projectile_component:
+		var angle: float = (parent.global_position - hooked_body.global_position).angle()
+		projectile_component.direction = angle
+		projectile_component.max_penetrations = 100
+		projectile_component.max_bounces += 12
+		hooked_body.global_rotation = angle
+	elif target_mob_mover and target_mob_mover.drop_resistance < drop_force:
 		hook_enemy = true
 		target_mob_mover.movement_blocked = true
 	else:

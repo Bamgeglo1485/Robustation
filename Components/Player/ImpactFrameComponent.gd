@@ -40,6 +40,7 @@ func set_color_modify(distort_audio = false) -> void:
 		color_tween.kill()
 	if pitch_tween:
 		pitch_tween.kill()
+		pitch.pitch_scale = 1.0
 	
 	if distort_audio and pitch:
 		pitch.pitch_scale = 0.1

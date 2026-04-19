@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://4jqylg4d0iwc"]
+
+[ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts/Effects/TimedDelete.gd" id="2_edplf"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_13s4m"]
+particle_flag_disable_z = true
+gravity = Vector3(0, -0.8, 0)
+linear_accel_min = -34.440002
+linear_accel_max = 25.559998
+radial_accel_min = -38.890003
+radial_accel_max = 22.229998
+tangential_accel_min = -93.34
+tangential_accel_max = 99.99999
+
+[node name="LightningHit" type="Node2D" unique_id=384143004]
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="." unique_id=1345377353]
+modulate = Color(18.892002, 9.461478, 9.39658, 1)
+amount = 32
+lifetime = 1.37
+speed_scale = 10.49
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_13s4m")
+script = ExtResource("2_edplf")
+_lifetime = 0.2

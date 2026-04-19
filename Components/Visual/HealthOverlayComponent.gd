@@ -42,7 +42,7 @@ func _on_health_changed(health) -> void:
 	_tween.set_trans(Tween.TRANS_SINE)
 	_tween.set_ease(Tween.EASE_IN_OUT)
 	
-	var max_health: int = health_component.max_health
+	var max_health: float = health_component.max_health
 	
 	var health_percent: float = float(health) / float(max_health)
 	var intensity: float

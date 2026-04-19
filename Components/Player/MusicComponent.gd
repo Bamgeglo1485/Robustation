@@ -10,12 +10,6 @@ var minor_priority: int = -1
 func _ready() -> void:
 	main_music_player.finished.connect(_on_main_music_end)
 
-func _process(_delta: float) -> void:
-	if get_tree().paused:
-		main_music_player_staged.volume_db = -40
-	else:
-		main_music_player_staged.volume_db = 0
-
 func set_main(new_stream: AudioStream, priority: int) -> void:
 	if priority < main_priority:
 		return

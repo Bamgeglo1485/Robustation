@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://cip5llwndf60d"]
+
+[ext_resource type="Shader" uid="uid://bl4ojx3gaol8" path="res://Resources/Shaders/Wave.gdshader" id="2_nd5rx"]
+[ext_resource type="Script" uid="uid://b2th1tfi8wun8" path="res://Components/Entity/ChainAttacksComponent.gd" id="2_o48jm"]
+[ext_resource type="AudioStream" uid="uid://bnv470inlbp14" path="res://Audio/Effects/lightningshock.ogg" id="3_eyryp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eyryp"]
+shader = ExtResource("2_nd5rx")
+shader_parameter/wave_amplitude = 0.3
+shader_parameter/wave_frequency = 40.0
+shader_parameter/wave_speed = 100.0
+shader_parameter/left_falloff = 0.0
+shader_parameter/right_falloff = 0.0
+shader_parameter/color = Color(0, 3.707468, 5.7581744, 1)
+
+[node name="Chain" type="Node2D" unique_id=1102148119]
+
+[node name="ChainAttacksComponent" type="Node" parent="." unique_id=1961802105 node_paths=PackedStringArray("ray_line")]
+script = ExtResource("2_o48jm")
+ray_line = NodePath("../RayLine")
+damage = 0
+stamina_damage = 50
+drop_enemy_delay = 0.5
+metadata/_custom_type_script = "uid://b2th1tfi8wun8"
+
+[node name="RayLine" type="Line2D" parent="." unique_id=1410123411]
+material = SubResource("ShaderMaterial_eyryp")
+position = Vector2(0, -1)
+scale = Vector2(1.058966, 1.0186689)
+points = PackedVector2Array(3.7772696, 0.9816733, 0, 0.9816733)
+width = 30.0
+default_color = Color(0, 1.1108615, 1.950255, 1)
+texture_mode = 2
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=104727405]
+stream = ExtResource("3_eyryp")
+autoplay = true
+max_distance = 1000.0

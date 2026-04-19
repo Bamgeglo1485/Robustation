@@ -27,6 +27,9 @@ scale_min = 0.099999994
 scale_over_velocity_max = 1000.0
 scale_over_velocity_curve = SubResource("CurveTexture_c1ng1")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_1uto6"]
+radius = 11.0
+
 [node name="Projectile" unique_id=1536955502 instance=ExtResource("1_uq5et")]
 
 [node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture", "particle_emitter")]
@@ -65,3 +68,6 @@ texture = ExtResource("3_1uto6")
 script = ExtResource("4_1uto6")
 hitscan_scene = ExtResource("5_mjd5c")
 metadata/_custom_type_script = "uid://cg2q0h3wyjldl"
+
+[node name="CollisionShape2D" parent="." index="7" unique_id=32254729]
+shape = SubResource("CircleShape2D_1uto6")

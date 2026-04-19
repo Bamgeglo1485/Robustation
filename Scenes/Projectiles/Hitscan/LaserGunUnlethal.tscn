@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ckfxwjnv84i2l" path="res://Scenes/Projectiles/Hitscan/BaseHitscan.tscn" id="1_4g45x"]
 [ext_resource type="Shader" uid="uid://bl4ojx3gaol8" path="res://Resources/Shaders/Wave.gdshader" id="2_oecld"]
+[ext_resource type="PackedScene" uid="uid://cip5llwndf60d" path="res://Scenes/Projectiles/Hitscan/LaserGunUnlethalChain.tscn" id="3_lkj3e"]
 [ext_resource type="AudioStream" uid="uid://bxwx57y8k3fqt" path="res://Audio/Effects/lightburn.ogg" id="3_oecld"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c1744"]
@@ -25,9 +26,10 @@ texture_mode = 2
 
 [node name="HitscanComponent" parent="." index="1" unique_id=993689081]
 damage = 0
+stamina_damage = 30
 disappear_speed = 0.3
-drop_enemy_delay = 0.5
-throw_speed = 400.0
+drop_enemy_delay = 1.0
+chain_scene = ExtResource("3_lkj3e")
 modify_by_range_base_range = 300
 
 [node name="HitSound" type="AudioStreamPlayer2D" parent="." index="2" unique_id=1641163860]

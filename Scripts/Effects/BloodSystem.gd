@@ -3,6 +3,7 @@ extends GPUParticles2D
 @export var max_clean_health = 3
 @export var clean_health = max_clean_health
 @export var do_not_delete: bool = false
+@onready var tree: SceneTree = get_tree()
 var cleaning: bool = false
 
 func _ready() -> void:
@@ -18,7 +19,7 @@ func _ready() -> void:
 	
 	if do_not_delete:
 		return
-	await get_tree().create_timer(clean_delay - 3).timeout
+	await tree.create_timer(clean_delay - 3).timeout
 	clean()
 
 func clean():
@@ -26,10 +27,8 @@ func clean():
 		return
 	cleaning = true
 	var tween: Tween = create_tween()
-	tween.set_trans(Tween.TRANS_SINE)
-	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(self, "modulate", Color(0.0, 0.0, 1.0, 0.0), 3)
-	await get_tree().create_timer(3).timeout
+	await tree.create_timer(3).timeout
 	queue_free()
 
 func is_blood():

@@ -1,0 +1,213 @@
+[gd_scene format=3 uid="uid://coat4jbvf6jfe"]
+
+[ext_resource type="PackedScene" uid="uid://bnh11kj2wojn6" path="res://Scenes/UI/Folders/BaseFolder.tscn" id="1_d8n1o"]
+[ext_resource type="FontFile" uid="uid://mhx51lyuasx4" path="res://Resources/Text/Fonts/Ac437_ApricotPortable.ttf" id="2_syb5t"]
+[ext_resource type="Texture2D" uid="uid://bh54c6txfmv25" path="res://Textures/Interface/Menu/rbstxt_icon.png" id="3_iblfu"]
+[ext_resource type="Script" uid="uid://bodxsix2kyyy6" path="res://Components/Interface/Menu/ToggleVisibleOnPressedComponent.gd" id="4_iblfu"]
+[ext_resource type="PackedScene" uid="uid://qc88d2rnpoo6" path="res://Scenes/UI/Folders/WeaponsDataFolder/Data/ToolboxInfo.tscn" id="5_rtqse"]
+[ext_resource type="PackedScene" uid="uid://ciwkibcow0nod" path="res://Scenes/UI/Folders/WeaponsDataFolder/Data/ShotgunInfo.tscn" id="6_byp38"]
+[ext_resource type="PackedScene" uid="uid://q6mchwooyuaq" path="res://Scenes/UI/Folders/WeaponsDataFolder/Data/LasergunInfo.tscn" id="7_s1gpm"]
+[ext_resource type="PackedScene" uid="uid://r2tkwwp5v3vr" path="res://Scenes/UI/Folders/WeaponsDataFolder/Data/SpearInfo.tscn" id="8_0kaxa"]
+
+[node name="WeaponsDataFolder" unique_id=727110380 instance=ExtResource("1_d8n1o")]
+offset_right = 264.81598
+
+[node name="Label" parent="Panel" parent_id_path=PackedInt32Array(1765621037) index="1" unique_id=889542511]
+text = "Robust-os - Desktop\\weapons_data"
+
+[node name="Lasergun" type="Button" parent="ScrollContainer/Objects" parent_id_path=PackedInt32Array(1585434421) index="0" unique_id=1026114932]
+custom_minimum_size = Vector2(480, 48)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/Objects/Lasergun" index="0" unique_id=496315401]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48900002
+anchor_top = 0.16700001
+anchor_right = 0.48900002
+anchor_bottom = 0.75000006
+offset_left = -188.72002
+offset_top = 1.030508
+offset_right = 93.27998
+offset_bottom = 1.0465088
+theme_override_fonts/font = ExtResource("2_syb5t")
+text = "lasergun_info.rbstxt"
+vertical_alignment = 1
+
+[node name="icon" type="TextureRect" parent="ScrollContainer/Objects/Lasergun" index="1" unique_id=1656849549]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.1
+anchor_bottom = 0.98
+offset_left = 1.0
+offset_top = 0.04650879
+offset_bottom = 0.0065078735
+texture = ExtResource("3_iblfu")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ToggleVisibleOnPressedComponent" type="Node" parent="ScrollContainer/Objects/Lasergun" index="2" unique_id=1626320678 node_paths=PackedStringArray("toggle_frame")]
+script = ExtResource("4_iblfu")
+toggle_frame = NodePath("../../../../LasergunInfo")
+require_double_click = true
+metadata/_custom_type_script = "uid://bodxsix2kyyy6"
+
+[node name="Shotgun" type="Button" parent="ScrollContainer/Objects" parent_id_path=PackedInt32Array(1585434421) index="1" unique_id=1888270356]
+custom_minimum_size = Vector2(480, 48)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/Objects/Shotgun" index="0" unique_id=1573512540]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48900002
+anchor_top = 0.16700001
+anchor_right = 0.48900002
+anchor_bottom = 0.75000006
+offset_left = -188.72002
+offset_top = 1.030508
+offset_right = 93.27998
+offset_bottom = 1.0465088
+theme_override_fonts/font = ExtResource("2_syb5t")
+text = "shotgun_info.rbstxt"
+vertical_alignment = 1
+
+[node name="icon" type="TextureRect" parent="ScrollContainer/Objects/Shotgun" index="1" unique_id=1727299025]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.1
+anchor_bottom = 0.98
+offset_left = 1.0
+offset_top = 0.04650879
+offset_bottom = 0.0065078735
+texture = ExtResource("3_iblfu")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ToggleVisibleOnPressedComponent" type="Node" parent="ScrollContainer/Objects/Shotgun" index="2" unique_id=1888665264 node_paths=PackedStringArray("toggle_frame")]
+script = ExtResource("4_iblfu")
+toggle_frame = NodePath("../../../../ShotgunInfo")
+require_double_click = true
+metadata/_custom_type_script = "uid://bodxsix2kyyy6"
+
+[node name="Spear" type="Button" parent="ScrollContainer/Objects" parent_id_path=PackedInt32Array(1585434421) index="2" unique_id=259485469]
+custom_minimum_size = Vector2(480, 48)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/Objects/Spear" index="0" unique_id=1356072567]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48900002
+anchor_top = 0.16700001
+anchor_right = 0.48900002
+anchor_bottom = 0.75000006
+offset_left = -188.72002
+offset_top = 1.030508
+offset_right = 93.27998
+offset_bottom = 1.0465088
+theme_override_fonts/font = ExtResource("2_syb5t")
+text = "spear_info.rbstxt"
+vertical_alignment = 1
+
+[node name="icon" type="TextureRect" parent="ScrollContainer/Objects/Spear" index="1" unique_id=323509471]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.1
+anchor_bottom = 0.98
+offset_left = 1.0
+offset_top = 0.04650879
+offset_bottom = 0.0065078735
+texture = ExtResource("3_iblfu")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ToggleVisibleOnPressedComponent" type="Node" parent="ScrollContainer/Objects/Spear" index="2" unique_id=1803936987 node_paths=PackedStringArray("toggle_frame")]
+script = ExtResource("4_iblfu")
+toggle_frame = NodePath("../../../../SpearInfo")
+require_double_click = true
+metadata/_custom_type_script = "uid://bodxsix2kyyy6"
+
+[node name="Toolbox" type="Button" parent="ScrollContainer/Objects" parent_id_path=PackedInt32Array(1585434421) index="3" unique_id=2128183710]
+custom_minimum_size = Vector2(480, 48)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/Objects/Toolbox" index="0" unique_id=996571]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48900002
+anchor_top = 0.16700001
+anchor_right = 0.48900002
+anchor_bottom = 0.75000006
+offset_left = -188.72002
+offset_top = 1.030508
+offset_right = 93.27998
+offset_bottom = 1.0465088
+theme_override_fonts/font = ExtResource("2_syb5t")
+text = "toolbox_info.rbstxt"
+vertical_alignment = 1
+
+[node name="icon" type="TextureRect" parent="ScrollContainer/Objects/Toolbox" index="1" unique_id=942494914]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.1
+anchor_bottom = 0.98
+offset_left = 1.0
+offset_top = 0.04650879
+offset_bottom = 0.0065078735
+texture = ExtResource("3_iblfu")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ToggleVisibleOnPressedComponent" type="Node" parent="ScrollContainer/Objects/Toolbox" index="2" unique_id=1695313654 node_paths=PackedStringArray("toggle_frame")]
+script = ExtResource("4_iblfu")
+toggle_frame = NodePath("../../../../Toolbox")
+require_double_click = true
+metadata/_custom_type_script = "uid://bodxsix2kyyy6"
+
+[node name="Toolbox" parent="." index="5" unique_id=944069492 instance=ExtResource("5_rtqse")]
+visible = false
+layout_mode = 1
+anchor_left = 1.11
+anchor_top = -0.026
+anchor_right = 1.11
+anchor_bottom = 0.5
+offset_left = -242.91003
+offset_top = -0.15600014
+offset_right = 243.08997
+offset_bottom = 251.32599
+
+[node name="ShotgunInfo" parent="." index="6" unique_id=1908213079 instance=ExtResource("6_byp38")]
+visible = false
+z_index = 6
+layout_mode = 1
+anchor_left = 1.146
+anchor_top = -0.053000003
+anchor_right = 1.146
+anchor_bottom = 0.46400002
+offset_left = -242.90607
+offset_top = -0.0660038
+offset_right = 243.09393
+offset_bottom = 255.862
+
+[node name="LasergunInfo" parent="." index="7" unique_id=1527780523 instance=ExtResource("7_s1gpm")]
+visible = false
+layout_mode = 1
+anchor_left = 1.2340001
+anchor_top = -0.035
+anchor_right = 1.2340001
+anchor_bottom = 0.483
+offset_left = -243.23407
+offset_top = 0.041996002
+offset_right = 242.76593
+offset_bottom = 255.476
+
+[node name="SpearInfo" parent="." index="8" unique_id=12886526 instance=ExtResource("8_0kaxa")]
+visible = false
+layout_mode = 1
+anchor_left = 1.2110001
+anchor_top = -0.057000004
+anchor_right = 1.2110001
+anchor_bottom = 0.46
+offset_left = -243.17108
+offset_top = -0.09000397
+offset_right = 242.82892
+offset_bottom = 255.838

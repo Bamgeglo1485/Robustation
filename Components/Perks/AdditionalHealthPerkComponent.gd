@@ -2,7 +2,7 @@ class_name AdditionalHealthPerkComponent extends BasePerkComponent
 
 func _init() -> void:
 	untranslated_perk_name = "Bandage and (Toxic) Marker"
-	perk_desc = "[color=green]Increases your maximum health by 10 unit[/color], but [color=crimson]decreases passive regeneration by 4 unit[/color]"
+	perk_desc = "[color=green]Increases your maximum health by 10 unit[/color], but [color=crimson]decreases passive regeneration by 2 unit[/color]"
 	perk_icon = preload("res://Textures/Perks/bandage_and_marker.png")
 	perk_equipped_texture = preload("res://Textures/Perks/bandage_equipped.png")
 	perk_name = tr(untranslated_perk_name)
@@ -11,8 +11,8 @@ func _init() -> void:
 @onready var health_component: HealthComponent = parent.get_node_or_null("HealthComponent")
 @onready var regeneration_perk: RegenerationPerkComponent = parent.get_node_or_null("RegenerationPerkComponent")
 
-@export var base_health_increase: int = 5
-@export var base_regeneration_decrease: int = 4
+@export var base_health_increase: float = 10
+@export var base_regeneration_decrease: float = 2
 
 func apply_modifiers() -> void:
 	if !health_component:

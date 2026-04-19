@@ -333,7 +333,6 @@ texture_scale = 0.5
 do_not_delete_after_gib = true
 invinciblitiy_attack_effect = ExtResource("5_oayod")
 gib_effect_scene = ExtResource("7_nnp87")
-heal_for_damage_multiplier = 0.1
 
 [node name="FactionComponent" parent="." index="7" unique_id=1651473390]
 faction = "Player"
@@ -444,12 +443,15 @@ minor_music_player = NodePath("Minor")
 metadata/_custom_type_script = "uid://b4e4ba2xr3ea7"
 
 [node name="Main" type="AudioStreamPlayer" parent="MusicComponent" index="0" unique_id=2053893957]
+process_mode = 3
 bus = &"Music"
 
 [node name="Minor" type="AudioStreamPlayer" parent="MusicComponent" index="1" unique_id=19790165]
+process_mode = 3
 bus = &"Music"
 
 [node name="Main_stage" type="AudioStreamPlayer" parent="MusicComponent" index="2" unique_id=1660062971]
+process_mode = 3
 bus = &"Music"
 
 [node name="HealthIndicatorComponent" type="Node" parent="." index="27" unique_id=1026848912 node_paths=PackedStringArray("texture_rect")]

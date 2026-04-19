@@ -9,6 +9,8 @@ var last_time_scale: float
 @export var ignore_time_scale: bool = false
 @onready var shader: ShaderMaterial
 
+
+
 func set_animation(tween, priority, rewrite = false) -> void:
 	if (priority > animation_priority) or (priority == animation_priority and rewrite):
 		if animation_tween:
@@ -29,7 +31,6 @@ func clear_animation(kill_tween = true) -> void:
 
 func _clear_tween() -> void:
 	var _tween: Tween = create_tween()
-	
 	_tween.tween_property(parent, "global_rotation", 0.0, 0.3)
 	_tween.tween_property(parent, "rotation", 0.0, 0.3)
 	_tween.tween_property(parent, "scale", Vector2(1, 1), 0.3)
@@ -49,8 +50,6 @@ func shift_to_direction(
 			continue
 		
 		var _tween: Tween = create_tween()
-		_tween.set_trans(Tween.TRANS_SINE)
-		_tween.set_ease(Tween.EASE_IN_OUT)
 		
 		_tween.tween_property(child, "position", child.position + direction.normalized() * multiplier * 10, time)
 		if child is not WeaponSpriteComponent:
@@ -79,8 +78,6 @@ func lean_to_direction(
 	if !rotation.value:
 		return
 	var _tween: Tween = create_tween()
-	_tween.set_trans(Tween.TRANS_SINE)
-	_tween.set_ease(Tween.EASE_IN_OUT)
 	_tween.tween_property(parent, rotation.type, rotation.value * rotation_multiplier, time)
 	if return_to_prev_pos:
 		_tween.tween_property(parent, rotation.type, 0 , time)

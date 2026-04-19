@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cep4d05xyuapq"]
+
+[ext_resource type="PackedScene" uid="uid://h5e7np6pkbkw" path="res://Scenes/UI/Folders/BaseImage.tscn" id="1_212vt"]
+[ext_resource type="Texture2D" uid="uid://y4dmhhlmpsvi" path="res://Textures/Interface/Menu/Images/photo2.png" id="2_212vt"]
+
+[node name="Image2" unique_id=727110380 instance=ExtResource("1_212vt")]
+
+[node name="Image" parent="." index="4" unique_id=1356612208]
+texture = ExtResource("2_212vt")

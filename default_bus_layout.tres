@@ -9,6 +9,13 @@ resource_name = "PitchShift"
 [sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_g28q7"]
 resource_name = "PitchShift"
 
+[sub_resource type="AudioEffectHighPassFilter" id="AudioEffectHighPassFilter_j3pel"]
+resource_name = "HighPassFilter"
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_j3pel"]
+resource_name = "Reverb"
+room_size = 0.3
+
 [sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_n8wo2"]
 resource_name = "PitchShift"
 pitch_scale = 4.0
@@ -26,6 +33,10 @@ bus/1/mute = false
 bus/1/bypass_fx = false
 bus/1/volume_db = 0.0
 bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectHighPassFilter_j3pel")
+bus/1/effect/0/enabled = false
+bus/1/effect/1/effect = SubResource("AudioEffectReverb_j3pel")
+bus/1/effect/1/enabled = false
 bus/2/name = &"OverdoseIgnore"
 bus/2/solo = false
 bus/2/mute = false

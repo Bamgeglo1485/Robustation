@@ -25,7 +25,7 @@ func _on_section_changed(_emitter, timer: bool = true):
 
 func force_change(timer: bool = true):
 	if timer:
-		await get_tree().create_timer(3).timeout
+		await tree.create_timer(3).timeout
 	
 	last_section = battle_tendency_component.section
 	

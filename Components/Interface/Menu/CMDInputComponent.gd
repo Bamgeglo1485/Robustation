@@ -64,6 +64,8 @@ func _on_text_submitted(new_text: String):
 		text = "[color=red]Shutdowning...[/color]"
 		if off_screen:
 			off_screen._off()
+	elif check_text == "nanotrasen":
+		text = "[color=#204c6d]GLORY TO NANOTRASEN![/color]"
 	
 	# COMMANDS
 	elif check_text == "test_system init arena" and roundstart_component:

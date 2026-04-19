@@ -1,0 +1,164 @@
+[gd_scene format=3 uid="uid://df8siups3u0kj"]
+
+[ext_resource type="PackedScene" uid="uid://bnh11kj2wojn6" path="res://Scenes/UI/Folders/BaseFolder.tscn" id="1_50gtk"]
+[ext_resource type="FontFile" uid="uid://mhx51lyuasx4" path="res://Resources/Text/Fonts/Ac437_ApricotPortable.ttf" id="2_8cc8f"]
+[ext_resource type="Texture2D" uid="uid://btp8mhgemdxtc" path="res://Textures/Interface/Menu/rbg_icon.png" id="3_3sdla"]
+[ext_resource type="Texture2D" uid="uid://bh54c6txfmv25" path="res://Textures/Interface/Menu/rbstxt_icon.png" id="3_ksar2"]
+[ext_resource type="Script" uid="uid://bodxsix2kyyy6" path="res://Components/Interface/Menu/ToggleVisibleOnPressedComponent.gd" id="4_xijjy"]
+[ext_resource type="PackedScene" uid="uid://dsl2qfjltwuq0" path="res://Scenes/UI/Folders/asdasFolder/image_1.tscn" id="5_j6mkx"]
+[ext_resource type="PackedScene" uid="uid://cep4d05xyuapq" path="res://Scenes/UI/Folders/asdasFolder/image_2.tscn" id="6_8t7v6"]
+[ext_resource type="PackedScene" uid="uid://hw065kbq0vwi" path="res://Scenes/UI/Folders/asdasFolder/qweqwe.tscn" id="8_3sdla"]
+
+[node name="asdasFolder" unique_id=727110380 instance=ExtResource("1_50gtk")]
+offset_right = 264.81598
+
+[node name="Label" parent="Panel" parent_id_path=PackedInt32Array(1765621037) index="1" unique_id=889542511]
+text = "Robust-os - Desktop\\weapons_data"
+
+[node name="Image1" type="Button" parent="ScrollContainer/Objects" parent_id_path=PackedInt32Array(1585434421) index="0" unique_id=1026114932]
+custom_minimum_size = Vector2(480, 48)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/Objects/Image1" index="0" unique_id=496315401]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48900002
+anchor_top = 0.16700001
+anchor_right = 0.48900002
+anchor_bottom = 0.75000006
+offset_left = -188.72002
+offset_top = 1.030508
+offset_right = 93.27998
+offset_bottom = 1.0465088
+theme_override_fonts/font = ExtResource("2_8cc8f")
+text = "image.rbg"
+vertical_alignment = 1
+
+[node name="icon" type="TextureRect" parent="ScrollContainer/Objects/Image1" index="1" unique_id=1656849549]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.1
+anchor_bottom = 0.98
+offset_left = 1.0
+offset_top = 0.04650879
+offset_bottom = 0.0065078735
+texture = ExtResource("3_3sdla")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ToggleVisibleOnPressedComponent" type="Node" parent="ScrollContainer/Objects/Image1" index="2" unique_id=1626320678 node_paths=PackedStringArray("toggle_frame")]
+script = ExtResource("4_xijjy")
+toggle_frame = NodePath("../../../../Image1")
+require_double_click = true
+metadata/_custom_type_script = "uid://bodxsix2kyyy6"
+
+[node name="Image2" type="Button" parent="ScrollContainer/Objects" parent_id_path=PackedInt32Array(1585434421) index="1" unique_id=196927954]
+custom_minimum_size = Vector2(480, 48)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/Objects/Image2" index="0" unique_id=2125758384]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48900002
+anchor_top = 0.16700001
+anchor_right = 0.48900002
+anchor_bottom = 0.75000006
+offset_left = -188.72002
+offset_top = 1.030508
+offset_right = 93.27998
+offset_bottom = 1.0465088
+theme_override_fonts/font = ExtResource("2_8cc8f")
+text = "image (2).rbg"
+vertical_alignment = 1
+
+[node name="icon" type="TextureRect" parent="ScrollContainer/Objects/Image2" index="1" unique_id=1772890110]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.1
+anchor_bottom = 0.98
+offset_left = 1.0
+offset_top = 0.04650879
+offset_bottom = 0.0065078735
+texture = ExtResource("3_3sdla")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ToggleVisibleOnPressedComponent" type="Node" parent="ScrollContainer/Objects/Image2" index="2" unique_id=1019113884 node_paths=PackedStringArray("toggle_frame")]
+script = ExtResource("4_xijjy")
+toggle_frame = NodePath("../../../../Image2")
+require_double_click = true
+metadata/_custom_type_script = "uid://bodxsix2kyyy6"
+
+[node name="qweqwe" type="Button" parent="ScrollContainer/Objects" parent_id_path=PackedInt32Array(1585434421) index="2" unique_id=125211598]
+custom_minimum_size = Vector2(480, 48)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/Objects/qweqwe" index="0" unique_id=53601617]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48900002
+anchor_top = 0.16700001
+anchor_right = 0.48900002
+anchor_bottom = 0.75000006
+offset_left = -188.72002
+offset_top = 1.030508
+offset_right = 93.27998
+offset_bottom = 1.0465088
+theme_override_fonts/font = ExtResource("2_8cc8f")
+text = "qweqwe.rbstxt"
+vertical_alignment = 1
+
+[node name="icon" type="TextureRect" parent="ScrollContainer/Objects/qweqwe" index="1" unique_id=1188727973]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.1
+anchor_bottom = 0.98
+offset_left = 1.0
+offset_top = 0.04650879
+offset_bottom = 0.0065078735
+texture = ExtResource("3_ksar2")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ToggleVisibleOnPressedComponent" type="Node" parent="ScrollContainer/Objects/qweqwe" index="2" unique_id=621967999 node_paths=PackedStringArray("toggle_frame")]
+script = ExtResource("4_xijjy")
+toggle_frame = NodePath("../../../../qweqwe")
+require_double_click = true
+metadata/_custom_type_script = "uid://bodxsix2kyyy6"
+
+[node name="Image1" parent="." index="5" unique_id=666395348 instance=ExtResource("5_j6mkx")]
+visible = false
+layout_mode = 1
+anchor_left = 0.587
+anchor_top = 0.072000004
+anchor_right = 1.5970001
+anchor_bottom = 0.952
+offset_left = -0.027069092
+offset_top = 0.18399811
+offset_right = 0.16290283
+offset_bottom = -0.21002197
+
+[node name="Image2" parent="." index="6" unique_id=2061678330 instance=ExtResource("6_8t7v6")]
+visible = false
+layout_mode = 1
+anchor_left = 0.65762985
+anchor_top = -0.016696366
+anchor_right = 1.6680248
+anchor_bottom = 0.8625061
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+metadata/_edit_use_anchors_ = true
+
+[node name="qweqwe" parent="." index="7" unique_id=1206473810 instance=ExtResource("8_3sdla")]
+visible = false
+layout_mode = 1
+anchor_left = 1.08
+anchor_top = -0.039
+anchor_right = 1.08
+anchor_bottom = 0.40100002
+offset_left = -243.1601
+offset_top = 0.017995834
+offset_right = 242.8399
+offset_bottom = 216.984

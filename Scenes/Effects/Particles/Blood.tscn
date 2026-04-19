@@ -5,8 +5,8 @@
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ttwd7"]
 particle_flag_disable_z = true
-initial_velocity_min = 110.29
-initial_velocity_max = 289.78
+initial_velocity_min = 110.0
+initial_velocity_max = 245.0
 gravity = Vector3(0, 0, 0)
 color = Color(0.5568628, 0, 0.18431373, 1)
 

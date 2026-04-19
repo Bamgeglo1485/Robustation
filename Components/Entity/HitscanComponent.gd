@@ -6,8 +6,12 @@ class_name HitscanComponent extends Component
 
 @export var tween_speed: float = 0.2
 @export var damage: int = 10
+@export var stamina_damage: int = 0
 @export var disappear_speed: float = 0.1
 @export var after_delete_lifetime: float = 2
+
+@export var delayed_damage: float = 2
+@export var delayed_damage_delay: float = 0
 
 @export var drop_enemy_delay: float = 0.0
 @export var throw_speed: float = 0
@@ -20,12 +24,13 @@ var penetrations: int = 0
 
 var last_target: Node2D
 
-var shooter: CharacterBody2D
+var shooter: PhysicsBody2D
 var direction: Vector2 = Vector2.RIGHT
 var damage_modifier: float = 1
 var deleted: bool = false
 
 @export var explosion_scene: PackedScene
+@export var chain_scene: PackedScene
 
 @export_category("ModifyByRange")
 @export var modify_by_range_base_range: int = 0
@@ -41,9 +46,9 @@ func _ready() -> void:
 	ray_line.global_position = parent.global_position
 	fire()
 	_ray_appear_effects()
-	await get_tree().create_timer(disappear_speed).timeout
+	await tree.create_timer(disappear_speed).timeout
 	_ray_disappear_effects()
-	await get_tree().create_timer(after_delete_lifetime + tween_speed).timeout
+	await tree.create_timer(after_delete_lifetime + tween_speed).timeout
 	parent.queue_free()
 
 func _physics_process(_delta: float) -> void:
@@ -77,10 +82,9 @@ func fire() -> void:
 	
 	var collider = parent.get_collider()
 	if collider:
-		damage_collider()
+		damage_collider(collider)
 
-func damage_collider() -> void:
-	var collider: Node2D = parent.get_collider()
+func damage_collider(collider: Node2D) -> void:
 	var collision_point: Vector2 = parent.get_collision_point()
 	var collision_normal: Vector2 = parent.get_collision_normal()
 	
@@ -91,7 +95,6 @@ func damage_collider() -> void:
 		collider = collider.get_parent()
 	if !collider:
 		return
-	
 	var projectile_comp: ProjectileComponent = collider.get_node_or_null("ProjectileComponent")
 	if projectile_comp:
 		if projectile_comp.can_parry_weapon:
@@ -106,30 +109,50 @@ func damage_collider() -> void:
 		elif projectile_comp.explode_on_projectile_hit:
 			projectile_comp.explode_on_delete = true
 			projectile_comp._delete()
+		else:
+			last_target = collider
+			fire()
 		return
 	
 	if collider is not TileMapLayer:
 		last_target = collider
 	
-	var target_health: HealthComponent = collider.get_node_or_null("HealthComponent")
-	if target_health and shooter:
-		var total_damage: float = damage
-		if modify_by_range_base_range != 0:
-			var distance: float = (shooter.global_position - collider.global_position).length()
-			total_damage *= clamp(distance / modify_by_range_base_range, modify_by_range_min_value, modify_by_range_max_value) 
-		target_health.take_damage(int(total_damage * damage_modifier), shooter, "Hitscan")
+	if damage != 0:
+		var target_health: HealthComponent = collider.get_node_or_null("HealthComponent")
+		if target_health and shooter:
+			var total_damage: float = damage
+			if modify_by_range_base_range != 0:
+				var distance: float = (shooter.global_position - collider.global_position).length()
+				total_damage *= clamp(distance / modify_by_range_base_range, modify_by_range_min_value, modify_by_range_max_value) 
+			target_health.take_damage(int(total_damage * damage_modifier), shooter, "Hitscan")
+			if delayed_damage != 0 and delayed_damage_delay != 0:
+				target_health.set_delayed_damage(delayed_damage * damage_modifier, delayed_damage_delay)
 	
-	var target_mover: MobMoverComponent = collider.get_node_or_null("MobMoverComponent")
-	if target_mover:
-		if drop_enemy_delay != 0:
-			target_mover.drop(drop_enemy_delay)
-		if throw_speed != 0:
-			target_mover.throw(collider.global_position - shooter.global_position, throw_speed, shooter, 10, true, true)
+	if stamina_damage != 0:
+		var target_stamina: StaminaComponent = collider.get_node_or_null("StaminaComponent")
+		if target_stamina:
+			target_stamina.take_stamina_damage(stamina_damage, shooter)
+	
+	if drop_enemy_delay != 0 or throw_speed != 0:
+		var target_mover: MobMoverComponent = collider.get_node_or_null("MobMoverComponent")
+		if target_mover:
+			if drop_enemy_delay != 0:
+				target_mover.drop(drop_enemy_delay)
+			if throw_speed != 0:
+				target_mover.throw(collider.global_position - shooter.global_position, throw_speed, shooter, 10, true, true)
 	
 	if explosion_scene and collider:
 		var inst: Node2D = explosion_scene.instantiate()
 		inst.global_position = collision_point
 		inst.source = shooter
+		scene.add_child(inst)
+	
+	if chain_scene and collider:
+		var inst: Node2D = chain_scene.instantiate()
+		inst.global_position = collision_point
+		var chain_comp: ChainAttacksComponent = inst.get_node_or_null("ChainAttacksComponent")
+		if chain_comp:
+			chain_comp.shooter = shooter
 		scene.add_child(inst)
 	
 	if hit_effect and collider:

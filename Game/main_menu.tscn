@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://8useii0cqwer"]
 
 [ext_resource type="FontFile" uid="uid://mhx51lyuasx4" path="res://Resources/Text/Fonts/Ac437_ApricotPortable.ttf" id="1_444o2"]
-[ext_resource type="PackedScene" uid="uid://beie4mcfgy8sm" path="res://Scenes/UI/Menu.tscn" id="1_y67r4"]
+[ext_resource type="PackedScene" uid="uid://c1d27yux3ba4q" path="res://Scenes/UI/Menu.tscn" id="1_y67r4"]
 [ext_resource type="Shader" uid="uid://b53pser2tah5a" path="res://Resources/Shaders/Monitor.gdshader" id="2_2uogn"]
 [ext_resource type="Script" uid="uid://4io3bm7r86h6" path="res://Components/Interface/Menu/TextPrintingAnimationComponent.gd" id="2_qefsa"]
 [ext_resource type="Script" uid="uid://ccj77qbogyatv" path="res://Components/Entity/TimedSceneAdderComponent.gd" id="4_qefsa"]

@@ -1,26 +1,13 @@
 @abstract
 class_name Component extends Node
 
-var parent: Node = _get_valid_parent()
-@onready var scene: Node2D = get_tree().get_root().get_node_or_null("Game")
+var parent: Node = get_parent()
+@onready var tree: SceneTree = get_tree()
+@onready var scene: Node2D = tree.get_root().get_node_or_null("Game")
 
 func _init() -> void:
 	name = get_script().get_global_name()
 
-func _get_valid_parent() -> Node:
-	var current_parent: Node = get_parent()
-	
-	if !current_parent:
-		return null
-	
-	while current_parent is ComponentFolder:
-		var next_parent: Node = current_parent.get_parent()
-		if !next_parent:
-			break
-		current_parent = next_parent
-	
-	return current_parent
-
 func _notification(notif) -> void:
 	if notif == NOTIFICATION_PARENTED:
-		parent = _get_valid_parent()
+		parent = get_parent()

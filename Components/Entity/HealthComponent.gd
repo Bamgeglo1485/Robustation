@@ -2,15 +2,16 @@ class_name HealthComponent extends Component
 
 @export var hitstop_on_death: bool = false
 @export var do_not_delete_after_gib: bool = false
-@export var max_health: int = 100
+@export var max_health: float = 100
 @export var INVINCIBLE: bool = false
-var base_max_health: int = max_health
-@export var health: int = max_health: set = set_health, get = get_health
+var base_max_health: float = max_health
+@export var health: float = max_health: set = set_health, get = get_health
 @export var damage_type_modifiers: Dictionary[String, float]
 @export var damage_modifier: float = 1
 @export var armor: float = 1 # I'm too lazy to integrate armor perk with other systems.
 @export var gibbed: bool = false
 @export var invinciblitiy_attack_effect: PackedScene
+@export var healing_from_organs_modifier: float = 1.0
 
 @export var blood_effect_scene: PackedScene
 @export var blood_spurt_effect_scene: PackedScene
@@ -22,18 +23,11 @@ var base_max_health: int = max_health
 @onready var animation_component: AnimationComponent = parent.get_node_or_null("AnimationComponent")
 @onready var trigger_on_damage_component: TriggerOnDamageComponent = parent.get_node_or_null("TriggerOnDamageComponent")
 
-@export_category("Heal For Damage")
-@export var heal_for_damage_multiplier: float = 0.0
-@export var heal_for_damage_range: int = 64
-@export var max_heal_for_damage_health_percent: float = 0.7
-@warning_ignore("narrowing_conversion")
-@onready var max_heal_for_damage_health: int = max_health * max_heal_for_damage_health_percent
-
 @export_category("Delayed damage")
 @export var delayed_damage_modifier: float = 1.0
 var delayed_damage_timer: Timer
 var delayed_damage_queue: Array = []
-var current_delayed_damage: int = 0
+var current_delayed_damage: float = 0
 
 signal health_changed(new_health)
 
@@ -51,14 +45,14 @@ func _ready():
 		await parent.get_node("UniqueShaderComponent").ready
 	shader = parent.material
 
-func set_health(new_health: int) -> void:
+func set_health(new_health: float) -> void:
 	EventBusManager.health_changed.emit(parent, health, new_health)
 	
 	if new_health < health:
 		if new_health <= 0:
 			_death()
 	health = clamp(new_health, 0, max_health)
-	health_changed.emit(health)
+	health_changed.emit(new_health)
 	
 	health_effect()
 
@@ -66,11 +60,11 @@ func health_effect() -> void:
 	if shader:
 		shader.set_shader_parameter("blood_intensity", (float(health) / float(max_health)))
 
-func get_health() -> int:
+func get_health() -> float:
 	return health
 
 # Наносит урон и создаёт эффекты
-func take_damage(damage: int, damager: Node2D, damage_type: String = "Generic", ignore_damage_modifier: bool = false) -> void:
+func take_damage(damage: float, damager: Node2D, damage_type: String = "Generic", ignore_damage_modifier: bool = false) -> void:
 	if INVINCIBLE:
 		if invinciblitiy_attack_effect:
 			var inst: Node2D = invinciblitiy_attack_effect.instantiate()
@@ -100,11 +94,6 @@ func take_damage(damage: int, damager: Node2D, damage_type: String = "Generic", 
 		animation_component.lean_to_direction(-direction, 4)
 	if trigger_on_damage_component:
 		trigger_on_damage_component.trigger()
-	var damager_health_component: HealthComponent = damager.get_node_or_null("HealthComponent")
-	if damager_health_component and damager_health_component.heal_for_damage_multiplier != 0 and damager != parent and damage > 0 and damager_health_component.health < damager_health_component.max_heal_for_damage_health:
-		if direction.length() <= damager_health_component.heal_for_damage_range:
-			@warning_ignore("narrowing_conversion")
-			damager_health_component.set_health(damager_health_component.health + damage * damager_health_component.heal_for_damage_multiplier)
 
 func damage_effects(damager) -> void:
 	if !parent or !damager:
@@ -161,7 +150,7 @@ func _death() -> void:
 	if hitstop_on_death:
 		EventBusManager.request_impact_frame.emit(0.5, 0, true, true)
 
-func set_delayed_damage(damage: int, time: int) -> void:
+func set_delayed_damage(damage: float, time: float) -> void:
 	delayed_damage_queue.append({"damage": damage, "time": time})
 	
 	if !delayed_damage_timer.is_stopped():
@@ -172,7 +161,7 @@ func _delayed_damage_process() -> void:
 		delayed_damage_timer.start()
 		return
 	
-	var total_damage: int = 0
+	var total_damage: float = 0
 	var new_queue: Array = []
 	
 	for task in delayed_damage_queue:
@@ -192,6 +181,4 @@ func _delayed_damage_process() -> void:
 	delayed_damage_timer.start()
 
 func set_max_health(new_value) -> void:
-	if heal_for_damage_multiplier != 0:
-		max_heal_for_damage_health = new_value * max_heal_for_damage_health_percent
 	max_health = new_value

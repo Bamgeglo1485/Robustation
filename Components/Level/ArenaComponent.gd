@@ -28,7 +28,6 @@ var universal_enemies: Array[Enemy]
 var time: float
 var loose: bool = false
 
-@onready var tree: SceneTree = get_tree()
 @onready var player: Node2D = scene.get_node_or_null("Player")
 @onready var weapon_user_component: WeaponUserComponent = player.get_node_or_null("WeaponUserComponent")
 @onready var health_component: HealthComponent = player.get_node_or_null("HealthComponent")

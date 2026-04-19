@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://r2tkwwp5v3vr"]
+
+[ext_resource type="PackedScene" uid="uid://3kpwp1isvu1g" path="res://Scenes/UI/Folders/BaseInfo.tscn" id="1_4u5r2"]
+[ext_resource type="Texture2D" uid="uid://c2wadc7c7e3v3" path="res://Textures/Weapons/Spear/spear.png" id="2_4u5r2"]
+[ext_resource type="FontFile" uid="uid://mhx51lyuasx4" path="res://Resources/Text/Fonts/Ac437_ApricotPortable.ttf" id="3_gmvp1"]
+[ext_resource type="FontFile" uid="uid://dskv5n6tofrla" path="res://Resources/Text/Fonts/LCD 40x2 Display/LCD40x2Display-Regular.otf" id="4_s2y8h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t13ep"]
+bg_color = Color(0.06469653, 0.064696535, 0.0646965, 1)
+
+[node name="SpearInfo" unique_id=727110380 instance=ExtResource("1_4u5r2")]
+
+[node name="Label" parent="Panel" parent_id_path=PackedInt32Array(1765621037) index="1" unique_id=889542511]
+text = "Robust-os - spear_info.rbstxt - ui_system.rbst"
+
+[node name="Image" parent="Info" parent_id_path=PackedInt32Array(157422737) index="0" unique_id=1356612208]
+texture = ExtResource("2_4u5r2")
+
+[node name="Name" parent="Info" parent_id_path=PackedInt32Array(157422737) index="1" unique_id=665103481]
+text = "[color=lightblue]Spear[/color]
+Area damage spear"
+
+[node name="OBJECTSSCROLL" parent="." index="5" unique_id=1868664687]
+anchor_top = 0.2614035
+
+[node name="DescriptionHeading" type="Panel" parent="OBJECTSSCROLL/OBJECTS" parent_id_path=PackedInt32Array(987928520) index="0" unique_id=1826602918]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t13ep")
+
+[node name="Label" type="Label" parent="OBJECTSSCROLL/OBJECTS/DescriptionHeading" index="0" unique_id=224955931]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.30188018
+anchor_top = 0.24951553
+anchor_right = 0.67584705
+anchor_bottom = 0.83284897
+theme_override_fonts/font = ExtResource("3_gmvp1")
+theme_override_font_sizes/font_size = 20
+text = "DESCRIPTION"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Description" type="RichTextLabel" parent="OBJECTSSCROLL/OBJECTS" parent_id_path=PackedInt32Array(987928520) index="1" unique_id=1306394144]
+custom_minimum_size = Vector2(0, 1000)
+layout_mode = 2
+theme_override_constants/line_separation = 4
+theme_override_fonts/normal_font = ExtResource("4_s2y8h")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "Spear is a weapon of mass destruction, effective for eliminating groups of enemies. However, it requires caution due to its large blast radius and damage output.
+
+By itself, it can pierce through several enemies, dealing high damage to single targets, but to eliminate a large group of enemies, the explosive charge must be activated. Activation is possible in two ways:
+1. When parried, an explosive release timer is initiated, causing an explosion after 0.3 seconds.
+2. The explosive can be detonated by shooting it with any weapon, though the explosion will be of lesser power.
+
+Spear accelerates via jet propulsion using an burning canister (which also serves as the explosive), and when struck by the hook, all the gas is instantly and evenly released, causing spear to ricochet uncontrollably off walls and pierce through everything in its path.
+
+Spear can be launched with the hook, which deactivates the explosive and allows one to juggle it by parrying it as it flies back. In this way, it's possible to destroy enemies by piercing through them. In this state, it will also parry all projectiles and lasers that hit it, redirecting them at enemies."

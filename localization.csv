@@ -109,15 +109,15 @@ MASTER OF SPEAR, MELEE AND RANGE WEAPONS.
 [color=PURPLE]БЕССМЕРТЕН ПОКА ЛОТКИ НЕ УНИЧТОЖЕНЫ[/color]"
 
 "Bandage and (Toxic) Marker","Бинт и (Токсичный) Маркер"
-"[color=green]Increases your maximum health by 10 unit[/color], but [color=crimson]decreases passive regeneration by 4 unit[/color]","[color=green]Повышает твоё максимальное здоровье на 10 единиц[/color], но [color=crimson]снижает пассивную регенерацию на 4 единицы[/color]"
+"[color=green]Increases your maximum health by 10 unit[/color], but [color=crimson]decreases passive regeneration by 2 unit[/color]","[color=green]Повышает твоё максимальное здоровье на 10 единиц[/color], но [color=crimson]снижает пассивную регенерацию на 2 единицы[/color]"
 
-"[color=green]Increases your attack knockback power[/color]","[color=green]Повышает силу толкания при атаках[/color]"
+"[color=green]Increases your attack knockback power and the damage of enemy-to-enemy collisions by 40%[/color]","[color=green]Повышает силу толкания при атаках и урон от столкновения врага об врага на 40%[/color]"
 
 "Student Diet","Студенческая Диета"
 "[color=green]Increases your stamina by 20 units[/color]","[color=green]Повышает вашу стамину на 20 единиц[/color]"
 
 "Goliath Plate","Пластина Голиафа"
-"[color=green]Increases your armor by 5%[/color], but [color=crimson]decreases heal for damage by 5%[/color]","[color=green]Усиливает вашу броню на 5%[/color], но [color=crimson]уменьшает лечение от урона на 5%[/color]"
+"[color=green]Increases your armor by 5%[/color], but [color=crimson]decreases healing from organs crushing by 10%[/color]","[color=green]Усиливает вашу броню на 5%[/color], но [color=crimson]уменьшает лечение от давления органов на 10%[/color]"
 
 "Combat Glove","Боевые Перчатки"
 "[color=green]Reduces weapon cooldown by 10%[/color]","[color=green]Понижает кулдаун оружия на 10%[/color]"
@@ -126,7 +126,7 @@ MASTER OF SPEAR, MELEE AND RANGE WEAPONS.
 "[color=green]Reduces delayed damage by 10%[/color]","[color=green]Уменьшает отложенный урон на 10%[/color]"
 
 "Double Penetration Bullets","Пули Двойного Проникновения"
-"[color=green]Increases projectile penetration[/color], but [color=crimson]decreases damage by 4%[/color]","[color=green]Повышает количество прострелов проджектайлов[/color], но [color=crimson]понижает урон на 4%[/color]"
+"[color=green]Increases projectile penetration[/color], but [color=crimson]decreases damage by 10%[/color]","[color=green]Повышает количество прострелов проджектайлов[/color], но [color=crimson]понижает урон на 10%[/color]"
 
 "Bitch Ball","Бляжный Мяч"
 "[color=green]Increases your melee attack reflect chance by 5%[/color], but [color=crimson]decreases your bullet reflect chance by 5%[/color]","[color=green]Повышает шанс отражения ближних атак на 5%[/color], но [color=crimson]уменьшает шанс отражения пуль на 5%[/color]"
@@ -156,3 +156,72 @@ MASTER OF SPEAR, MELEE AND RANGE WEAPONS.
 
 "Inspector's Flask","Фляга инспектора"
 "[color=green]Decreases your Battle Tendency reduction by 15%[/color], but [color=crimson]increases weapon spread by 15%[/color]","[color=green]Уменьшает уменьшение боевого духа на 15%[/color], но [color=crimson]повышает разброс на 15%[/color]"
+
+"Crusher Module","Модуль Крушителя"
+"[color=green]Adds and increases healing from damage by 4%[/color], but [color=crimson]healing only works within 3 tiles[/color]","[color=green]Добавляет и повышает лечение от урона на 4%[/color], но [color=crimson]лечение работает только в пределах 3 клеток[/color]"
+
+
+
+
+
+
+
+
+
+
+
+
+"Toolbox is a heavy melee weapon capable of staggering subjects, as well as equipped with a special ████ coating that parries projectiles upon striking them.
+
+Due to its heavy weight and constantly moving internal mechanisms, finding the right moment is required for a perfect hit. For this purpose, a perfect hit indicator was built into the outer casing. When the hit lands as the red mark is reached (a shining sound is also heard), the hit is typically 4 times stronger and the ████ coating is energized, healing up to 15% of the user's external wounds.
+
+There is a button on the handle. Holding it down begins charging toolbox. Air is drawn in and immediately burned by plasma, creating pressure that upon release imparts additional momentum to the toolbox. At maximum charge, the strike is approximately 10 times stronger than normal. Additionally, a charged strike's airflow cools down the shotgun if it is overheated.
+
+Toolbox should be used for parrying attacks from hostile subjects, staggering them, and cooling down the shotgun.","Тулбокс - это тяжёлое ближнее оружие, способное вывести субъектов из равновесия, а также оснащённое специальным ████ покрытием, парирующее снаряды при ударе по ним.
+
+Из-за большого веса и постоянно движущихся механизмов внутри, для идеального удара требуется подобрать нужный момент, для этого во внешней обшивке был встроен индикатор идеального удара. При ударе когда достигает красная отметка(также слышен характерный звук блеска), то удар, как правило, 4 раза сильнее, а также возбуждается ████ покрытие, исцеляя до 15% внешних ран пользователя.
+На рукоятке есть кнопка, при зажатии которой начинается заряд тулбокса. Собирается воздух и сразу же сжигается плазмой, создавая давление, которое при высвобождении придаёт дополнительный импульс тулбоксу. При максимальном заряде удар около в 10 раз сильнее обычного. Также при заряженном ударе поток воздуха охлаждает дробовик, если тот перегрет.
+
+Тулбокс необходимо применять для парирования атак враждебных субъектов, выведения их из равновесия и охлаждения дробовика."
+
+"Shotgun is a close-range firearm, essentially a double-barreled gun with a sawed-off barrel. It's useful in any situation and can even be effective at long distances.
+
+It's projectiles are fairly lightweight and also possess a ████ coating, which allows them to be parried, inducing resonance. In such a case, the bullets reach tremendous velocity and rupture due to pressure, exploding. Projectiles can be parried with the toolbox or by dash acceleration (the dash possesses a resonant frequency).
+
+Bullets are synthesized from ████████, and due to the high rate of fire, shotgun can heat up to ██ degrees Kelvin, leading to reduced efficiency and melting of the bullets, which reduces their damage to zero. It's forbidden to parry bullets if the barrel is too hot, as this has a negative effect.
+
+The Shotgun can be used to launch a hook, which will either pull the subject in or pull the owner towards it. When being pulled toward the hook, shotgun reloads, allowing several shots to be fired without delay until the barrel overheats.","Дробовик - это ближнее огнестрельное оружие, представляющее из себя двуствольное ружьё с обрезанным дулом. Он полезен в любых ситуациях и даже может быть эффективен в дальних расстояниях. 
+
+Его снаряды достаточно лёгкие и также обладают ████ покрытием, что позволять парировать их, вызывая резонанс. В таком случае пули достигают огромной скорости и разрываются из-за давления, взрываясь. Парировать снаряды возможно либо тулбоксом, либо ускорением рывком(рывок обладает резонансной частотой).
+
+Пули синтезируются из ████████ и из-за высокой скорострельности дробовик может нагреваться до ███ градусов кельвин, что приводит к снижению эффективности и плавлению пуль, уменьшая их урон до нуля. Запрещено парировать пули, если дуло слишком нагрето, так как это имеет отрицательный эффект.
+
+Дробовик можно использовать для запускания крюка, который либо притянет субъект, либо притянет самого владельца. При притягивании к крюку дробовик перезаряжается, позволяя несколько раз стрелять без задержек, пока дуло не перегреется."
+
+"Lasergun is a long-range firearm, completely ineffective up close, but deadly when used on distant targets.
+
+Since it fires concentrated photons (gamma radiation), it only deals long-term cellular damage, meaning it causes no harm for the next several hours. However, the photons defocus due to air, and the laser strikes a larger area at a lower velocity, causing instant burns. The greater distance, the higher damage dealt to the subject. Laser also deals delayed damage due to ignition caused by the temperature.
+
+Attached to it is a laser stunner, which creates a chain of lightning between targets, disabling them and dealing stamina damage. Lightning may also strike the owner if they are close enough to it. It's most effective to stun a group of enemies, create distance, and fire using the primary mode.","Лазерная пушка - это дальнее огнестрельное оружие, полностью неэффективное вблизи, но смертельно опасное при применении на дальних целях.
+
+Так как он стреляет концентрированными фотонами(гамма излучением), он наносит только долговременный клеточный урон, то есть не наносит никакого вреда в ближайшие несколько часов. Но фотоны расфокусируются из-за воздуха и лазер бьёт по большей площади и с меньшей скоростью, нанося мгновенные ожоги. Поэтому, чем выше расстояние - тем больше урон по субъекту. Лазер также наносит отложенный урон из-за возгорания, вызываемый температурой. 
+
+К нему прикручен лазерный станнер, создающий цепочку молний по целям, которые выводят из строя и наносят урон по выносливости. Но при неосторожности молнии также могут задеть владельца, если он находится достаточно близко к месту попадания. Наиболее эффективно оглушать группу врагов, создавать дистанцию и стрелять основным режимом."
+
+"Spear is a weapon of mass destruction, effective for eliminating groups of enemies. However, it requires caution due to its large blast radius and damage output.
+
+By itself, it can pierce through several enemies, dealing high damage to single targets, but to eliminate a large group of enemies, the explosive charge must be activated. Activation is possible in two ways:
+1. When parried, an explosive release timer is initiated, causing an explosion after 0.3 seconds.
+2. The explosive can be detonated by shooting it with any weapon, though the explosion will be of lesser power.
+
+Spear accelerates via jet propulsion using an burning canister (which also serves as the explosive), and when struck by the hook, all the gas is instantly and evenly released, causing spear to ricochet uncontrollably off walls and pierce through everything in its path.
+
+Spear can be launched with the hook, which deactivates the explosive and allows one to juggle it by parrying it as it flies back. In this way, it's possible to destroy enemies by piercing through them. In this state, it will also parry all projectiles and lasers that hit it, redirecting them at enemies.","Копьё - это оружие массового поражения, эффективное для устранения групп врагов. Но он требует осторожности из-за его большого радиуса поражения и урона.
+
+Сам по себе он может пробить насквозь несколько врагов, нанося большой урон по единичным целям, но для устранения большой группы врагов необходимо активировать взрывчатку. Активация возможна двумя способами:
+1. При парировании инициируется таймер высвобождения взрывчатки, вызывая взрыв через 0.3 секунды.
+2. Взрывчатку можно взорвать при выстреле по нему любым оружием, но взрыв будет меньшей мощности.
+
+Копьё ускоряется благодаря реактивному ускорению через воспламеняющийся баллон(который также является взрывчаткой) и при повреждении его крюком весь газ мгновенно и равномерно высвобождается, из-за чего копьё начинает бесконтрольно отскакивать от стен и пробивать всё насквозь.
+
+Копьё можно выпустить с крюком, что деактивирует взрывчатку и даёт возможность жонглировать им, парируя его, когда он летит обратно. Таким образом возможно уничтожать врагов, пробивая их насквозь. В таком состоянии он также будет парировать все снаряды и лазеры, попадающие в него во врагов."

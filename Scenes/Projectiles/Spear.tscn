@@ -41,6 +41,7 @@ hue_variation_max = -0.54
 
 [node name="Projectile" unique_id=1574842334 instance=ExtResource("1_vpryf")]
 material = SubResource("ShaderMaterial_oqm3e")
+collision_layer = 34818
 
 [node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture", "particle_emitter")]
 max_penetrations = 2

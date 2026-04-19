@@ -1,6 +1,6 @@
 class_name MeleeWeapon extends Weapon
 
-@export var damage: int = 10
+@export var damage: float = 10
 @export var stamina_damage: int = 0
 @export var attack_range: int = 64
 @export var ignore_armor: bool = false
@@ -318,6 +318,11 @@ func _attack_animation(direction):
 func parry_projectile(projectile: Node2D, projectile_component: ProjectileComponent, direction: Vector2) -> void:
 	if !projectile_component.parriable:
 		return
+	# To prevent shotgun projectile boost spamming
+	if is_instance_valid(projectile_component.weapon) and projectile_component.weapon.overheat > projectile_component.weapon.alert_on_heat and projectile_component.shooter == parent:
+		projectile_component.shooter_faction = null
+		projectile_component.shooter = null
+		projectile_component.direction = (parent.global_position - projectile.global_position).angle()
 	EventBusManager.parry.emit(parent, "Projectile")
 	var angle = direction.angle()
 	projectile.modulate = parry_color

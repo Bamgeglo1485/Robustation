@@ -8,7 +8,7 @@
 [node name="Projectile" type="CharacterBody2D" unique_id=1001723315]
 physics_interpolation_mode = 1
 texture_filter = 1
-collision_layer = 2048
+collision_layer = 18432
 collision_mask = 0
 motion_mode = 1
 
@@ -45,5 +45,8 @@ metadata/_custom_type_script = "uid://bqtip02i73xyq"
 [node name="VisibleOnScreenEnabler" type="VisibleOnScreenEnabler2D" parent="." unique_id=776942242]
 rect = Rect2(-20, -20, 40, 40)
 enable_node_path = NodePath("../Texture")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=32254729]
+shape = ExtResource("3_geesq")
 
 [connection signal="body_entered" from="ProjectileComponent" to="ProjectileComponent" method="_on_body_entered"]

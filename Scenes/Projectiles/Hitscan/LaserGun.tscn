@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ckfxwjnv84i2l" path="res://Scenes/Projectiles/Hitscan/BaseHitscan.tscn" id="1_6wk5s"]
 [ext_resource type="Shader" uid="uid://bl4ojx3gaol8" path="res://Resources/Shaders/Wave.gdshader" id="2_0oitm"]
+[ext_resource type="PackedScene" uid="uid://4jqylg4d0iwc" path="res://Scenes/Effects/Particles/LaserHit.tscn" id="3_6wk5s"]
 [ext_resource type="AudioStream" uid="uid://bxwx57y8k3fqt" path="res://Audio/Effects/lightburn.ogg" id="3_c1744"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c1744"]
@@ -23,8 +24,11 @@ width = 30.0
 texture_mode = 2
 
 [node name="HitscanComponent" parent="." index="1" unique_id=993689081]
+hit_effect = ExtResource("3_6wk5s")
 damage = 80
 disappear_speed = 0.3
+delayed_damage = 30.0
+delayed_damage_delay = 2.0
 modify_by_range_base_range = 300
 
 [node name="HitSound" type="AudioStreamPlayer2D" parent="." index="2" unique_id=1641163860]

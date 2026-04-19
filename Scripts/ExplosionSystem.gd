@@ -1,5 +1,6 @@
 extends Node2D
 
+@onready var tree: SceneTree = get_tree()
 @onready var area2d: Area2D = $Area2D
 @export var impact_frame: bool = true
 @export var damage: float = 80
@@ -40,16 +41,16 @@ func _ready() -> void:
 	
 	EventBusManager.explosion.emit(self)
 	
-	await get_tree().create_timer(0.15).timeout
+	await tree.create_timer(0.15).timeout
 	_check_overlapping_bodies()
 	
-	await get_tree().create_timer(explosion_duration).timeout
+	await tree.create_timer(explosion_duration).timeout
 	active = false
 	if check_timer:
 		check_timer.stop()
 	area2d.queue_free()
 	
-	await get_tree().create_timer(2.0).timeout
+	await tree.create_timer(2.0).timeout
 	queue_free()
 
 func _set_lighting():

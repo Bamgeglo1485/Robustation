@@ -16,6 +16,7 @@ signal weapon_cooldown(emitter: Node2D, weapon: Weapon)
 signal bullets_end(emitter: Node2D, weapon: Weapon)
 signal swinging_start(emitter: Node2D, weapon: Weapon)
 signal weapon_cooldown_reset(emitter: Node2D, weapon: Weapon)
+signal body_to_body_collision(emitter: Node2D, body: Node2D, damage: float, body_health: HealthComponent)
 
 signal projectile_shoot(emitter: Node2D, weapon: Weapon, direction: Vector2, projectile: Node2D)
 

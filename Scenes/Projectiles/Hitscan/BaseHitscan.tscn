@@ -5,8 +5,7 @@
 [node name="BaseHitscan" type="RayCast2D" unique_id=1219814461]
 exclude_parent = false
 target_position = Vector2(1000, 0)
-collision_mask = 2
-collide_with_areas = true
+collision_mask = 24578
 
 [node name="RayLine" type="Line2D" parent="." unique_id=1153845673]
 top_level = true

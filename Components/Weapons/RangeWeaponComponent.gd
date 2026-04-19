@@ -23,7 +23,8 @@ class_name RangeWeapon extends Weapon
 @export var gun_fire_effect: PackedScene
 @export var projectile_can_parry_weapon: Weapon
 
-@export var parent_shared_bullets: bool = true
+@export var shared_bullets_weapon: RangeWeapon
+var children_shared_bullets_weapon: RangeWeapon
 
 @export var show_cooldown_on_icon: bool = false
 @export var rope: Line2D
@@ -35,15 +36,15 @@ class_name RangeWeapon extends Weapon
 
 @export_category("Overheat")
 @export var overheat_enabled: bool = false
-@export var max_overheat: float = 7.0
+@export var max_overheat: float = 8.0
 @export var overheat_per_shoot_modifier: float = 1.0
 @export var overheat_per_shoot: float = 2.0
 @export var cool_delay: float = 0.1
-@export var cool_count: float = 0.15
-@export var min_overheat_damage_debuff: float = 0.3
-@export var explosion_on_max_heat: PackedScene
+@export var cool_count: float = 0.1
+@export var min_overheat_damage_debuff: float = 0.2
 @export var overheat_alert: AudioStreamPlayer2D
-@export var alert_on_heat: float = 5.0
+@export var alert_on_heat: float = 6.0
+var cool_start_timer: Timer
 var cool_timer: Timer
 var overheat: float
 
@@ -53,42 +54,45 @@ var projectile_speed: float
 func set_bullets(new_value) -> void:
 	bullets = new_value
 	clamp(bullets, 0, new_value)
-	if parent_weapon:
-		parent_weapon.bullets += new_value - bullets
+	if shared_bullets_weapon:
+		shared_bullets_weapon.bullets += new_value - bullets
 
 func get_bullets() -> int:
-	if !parent_weapon:
+	if !shared_bullets_weapon:
 		return bullets
 	
-	return parent_weapon.bullets
+	return shared_bullets_weapon.bullets
 
 func _ready() -> void:
 	super._ready()
 	
-	if !parent_weapon:
-		if overheat_enabled:
-			cool_timer = Timer.new()
-			cool_timer.ignore_time_scale = !timers_timescaled
-			cool_timer.timeout.connect(_on_cool)
-			cool_timer.one_shot = true
-			cool_timer.wait_time = cool_delay
-			cool_timer.autostart = true
-			add_child(cool_timer)
+	if overheat_enabled:
+		cool_timer = Timer.new()
+		cool_timer.ignore_time_scale = !timers_timescaled
+		cool_timer.timeout.connect(_on_cool)
+		cool_timer.one_shot = true
+		cool_timer.wait_time = cool_delay
+		cool_timer.autostart = true
+		add_child(cool_timer)
 		
+		cool_start_timer = Timer.new()
+		cool_start_timer.ignore_time_scale = !timers_timescaled
+		cool_start_timer.timeout.connect(_start_cool)
+		cool_start_timer.one_shot = true
+		cool_start_timer.wait_time = 0.5
+		add_child(cool_start_timer)
+	
+	if !shared_bullets_weapon:
 		bullets_recover_timer = Timer.new()
 		bullets_recover_timer.ignore_time_scale = !timers_timescaled
 		bullets_recover_timer.timeout.connect(_on_bullets_recover)
 		bullets_recover_timer.one_shot = true
 		add_child(bullets_recover_timer)
 	else:
-		await parent_weapon.ready
-		if parent_weapon is not RangeWeapon:
-			return
-		bullets_recover_timer = parent_weapon.bullets_recover_timer
-		if overheat_enabled:
-			cool_timer = parent_weapon.cool_timer
-			cool_timer.timeout.connect(_on_cool)
-			_overheat_visuals()
+		if !shared_bullets_weapon.is_node_ready():
+			await shared_bullets_weapon.ready
+		shared_bullets_weapon.children_shared_bullets_weapon = self
+		bullets_recover_timer = shared_bullets_weapon.bullets_recover_timer
 	
 	if projectile:
 		var inst: Node2D = projectile.instantiate()
@@ -104,6 +108,8 @@ func _ready() -> void:
 func attack(raiser, _npc = true) -> void:
 	if cooldown or !can_attack or swinging or !projectile or !raiser.has_method("get_attack_direction"):
 		return
+	if (shared_bullets_weapon and shared_bullets_weapon.swinging) or (children_shared_bullets_weapon and children_shared_bullets_weapon.swinging):
+		return
 	if bullets == 0 or parent_weapon and parent_weapon.bullets == 0:
 		if empty_shoot_sound:
 			empty_shoot_sound.play()
@@ -116,14 +122,9 @@ func attack(raiser, _npc = true) -> void:
 		overheat = clamp(overheat, 0, max_overheat)
 		if overheat_alert and overheat >= alert_on_heat:
 			overheat_alert.play()
-		if explosion_on_max_heat and overheat == max_overheat:
-			var expl: Node2D = explosion_on_max_heat.instantiate()
-			scene.add_child(expl)
-			expl.global_position = parent.global_position
-			overheat = 0
-			_overheat_visuals()
-			return
 		_overheat_visuals()
+		cool_timer.stop()
+		cool_start_timer.start()
 	
 	var direction = raiser.get_attack_direction()
 	
@@ -268,6 +269,9 @@ func _on_bullets_recover() -> void:
 	if bullets_recover_sound:
 		bullets_recover_sound.play()
 
+func _start_cool():
+	cool_timer.start()
+
 func _on_cool() -> void:
 	cool_timer.start()
 	overheat -= cool_count
@@ -286,7 +290,7 @@ func _overheat_visuals() -> void:
 	
 	overheat_factor = clamp(overheat_factor, 1.0, 3.0)
 	
-	var red: float = overheat_factor
+	var red: float = overheat_factor * 2
 	var green: float = 1.0 / overheat_factor
 	var blue: float = 1.0 / overheat_factor
 	

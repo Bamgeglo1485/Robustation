@@ -243,7 +243,7 @@ func drop(delay: float, force: bool = false, resistance_force: int = 0) -> void:
 			return
 		var inst: Node = fall_effect.instantiate()
 		inst.global_position = parent.global_position
-		scene.add_child(inst)
+		scene.add_child.call_deferred(inst)
 	if body_fall_sound:
 		body_fall_sound.play()
 
@@ -268,7 +268,7 @@ func stand_up() -> void:
 	set_minor_speed_modifier("fallen", 1.0)
  
 # When flying body hits another body
-func on_fly_impact(body: Node) -> void:
+func on_fly_impact(body: Node2D) -> void:
 	if !fly_throw_off or !is_instance_valid(body):
 		return
 	if body == fly_source:
@@ -281,6 +281,7 @@ func on_fly_impact(body: Node) -> void:
 	mob_mover.throw(parent.velocity, fly_speed/1.5)
 	mob_mover.drop(1)
 	var body_health_component: HealthComponent = body.get_node_or_null("HealthComponent")
+	var damage: float = fly_speed/25.0
 	if body_health_component and fly_source:
-		@warning_ignore("narrowing_conversion")
-		body_health_component.take_damage(fly_speed/25.0, fly_source)
+		body_health_component.take_damage(damage, fly_source, "Collision")
+	EventBusManager.body_to_body_collision.emit(parent, body, damage, body_health_component)

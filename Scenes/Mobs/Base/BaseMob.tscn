@@ -22,7 +22,7 @@
 [ext_resource type="Script" uid="uid://kxk8t3aa4hjf" path="res://Components/Mobs/WeaponSpriteComponent.gd" id="20_vr1aj"]
 [ext_resource type="Script" uid="uid://bl4o52tmouk6e" path="res://Components/Perks/Entity/PerkOwnerComponent.gd" id="21_1lf4d"]
 
-[node name="Mob" type="CharacterBody2D" unique_id=660687485]
+[node name="Mob" type="CharacterBody2D" unique_id=660687485 groups=["Mob"]]
 physics_interpolation_mode = 1
 z_index = 3
 texture_filter = 1

@@ -41,7 +41,7 @@ func _on_gibbed(emitter: Node2D) -> void:
 		return
 	plants.erase(emitter)
 
-func free() -> void:
+func _exit_tree() -> void:
 	for plant in plants:
 		var health: HealthComponent = plant.get_node_or_null("HealthComponent")
 		if health:

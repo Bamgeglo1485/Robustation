@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0u0pfvuv47uf"
-path="res://.godot/imported/equipped-HELMET.png-74f752004976b8f366eb729ff5143a58.ctex"
+uid="uid://bifsqh652y1i1"
+path="res://.godot/imported/keybinds_covered.png-f0a8000cc1bbdbfc80faaccf2b84a6c2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/UI/equipped-HELMET.png"
-dest_files=["res://.godot/imported/equipped-HELMET.png-74f752004976b8f366eb729ff5143a58.ctex"]
+source_file="res://Textures/Interface/Menu/keybinds_covered.png"
+dest_files=["res://.godot/imported/keybinds_covered.png-f0a8000cc1bbdbfc80faaccf2b84a6c2.ctex"]
 
 [params]
 

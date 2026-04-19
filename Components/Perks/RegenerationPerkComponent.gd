@@ -10,15 +10,15 @@ func _init() -> void:
 	perk_desc = tr(perk_desc)
 
 @onready var health_component: HealthComponent = parent.get_node("HealthComponent")
-@export var base_regeneration: int = 2
+@export var base_regeneration: float = 2
 
 # Cooldown after damage
 @export var cooldown_delay: float = 4.0
 var cooldown: bool = false
 var regeneration_timer: Timer
 
-var regeneration: int = 2
-var additive_regeneration: int = 0
+var regeneration: float = 2
+var additive_regeneration: float = 0
 
 func apply_modifiers() -> void:
 	regeneration = base_regeneration * amount + additive_regeneration

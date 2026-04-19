@@ -10,11 +10,12 @@ radius = 32.0
 height = 64.0
 
 [node name="Projectile" unique_id=676694476 instance=ExtResource("1_7iyqb")]
+collision_layer = 34816
 
 [node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture")]
 can_penetrate = false
 texture = NodePath("../Texture")
-speed = 3500
+speed = 4500
 max_damage = 0
 damage = 0
 stamina_damage = 40.0

@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://dmokrqrpfaex0" path="res://Scenes/Projectiles/Spear.tscn" id="5_6fu7j"]
 [ext_resource type="AudioStream" uid="uid://c064ooavx7oy1" path="res://Audio/Abilities/Teleport.ogg" id="5_42pyi"]
 [ext_resource type="Texture2D" uid="uid://1yvrhqvfqqus" path="res://Textures/Weapons/Toolbox/toolbox_inhand.png" id="8_42pyi"]
-[ext_resource type="AudioStream" uid="uid://baxotaiac5j8p" path="res://Audio/Effects/spear_eject.ogg" id="8_ba6hk"]
 [ext_resource type="AudioStream" uid="uid://blc0o0577akc7" path="res://Audio/Weapon/Hit/smash.ogg" id="8_pgypf"]
+[ext_resource type="AudioStream" uid="uid://baxotaiac5j8p" path="res://Audio/Effects/spear_eject.ogg" id="10_ia5h3"]
 [ext_resource type="AudioStream" uid="uid://c14ckhtbrb550" path="res://Audio/Weapon/parry.ogg" id="11_si836"]
 [ext_resource type="PackedScene" uid="uid://co34sclxdwctu" path="res://Scenes/Effects/Particles/Perfect.tscn" id="11_u615k"]
 [ext_resource type="Script" uid="uid://6b7bcparwq17" path="res://Components/Weapons/MeleeWeaponComponent.gd" id="12_tn3ht"]
@@ -25,7 +25,6 @@
 [ext_resource type="AudioStream" uid="uid://cln64q1fo5f86" path="res://Audio/Weapon/Projectile/spear_throw.ogg" id="18_w1un4"]
 [ext_resource type="AudioStream" uid="uid://2r0y32cx4e8s" path="res://Audio/Weapon/empty.ogg" id="19_kyb4y"]
 [ext_resource type="AudioStream" uid="uid://dhwn1xi06keaf" path="res://Audio/Weapon/shotgun_insert.ogg" id="20_si836"]
-[ext_resource type="PackedScene" uid="uid://bbqpmpj4ntyg" path="res://Scenes/Explosion/BaseExplosion.tscn" id="20_wl2js"]
 [ext_resource type="PackedScene" uid="uid://ebbkkdo5toyh" path="res://Scenes/Projectiles/Hook.tscn" id="22_pfa82"]
 [ext_resource type="Script" uid="uid://ci5vgg14lkrku" path="res://Components/Weapons/HookComponent.gd" id="22_vx866"]
 [ext_resource type="Script" uid="uid://bi1gje1pfokqc" path="res://Components/Weapons/RangeWeaponComponent.gd" id="23_si836"]
@@ -118,6 +117,9 @@ shader_parameter/vignette_strength = 0.0
 
 [node name="Player" unique_id=914217487 instance=ExtResource("1_mq7la")]
 
+[node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
+friction = 800.0
+
 [node name="Texture" parent="." index="2" unique_id=382857461]
 process_mode = 0
 texture = ExtResource("4_bvl14")
@@ -152,7 +154,7 @@ ignore_time_scale = true
 selected_weapon = NodePath("Toolbox")
 timers_timescaled = false
 
-[node name="Spear" type="Node" parent="WeaponUserComponent" index="0" unique_id=1787565286 node_paths=PackedStringArray("shoot_sound", "bullets_recover_sound", "parent_weapon", "alt_attack")]
+[node name="Spear" type="Node" parent="WeaponUserComponent" index="0" unique_id=1787565286 node_paths=PackedStringArray("shoot_sound", "bullets_recover_sound", "alt_attack")]
 script = ExtResource("23_si836")
 projectile = ExtResource("5_6fu7j")
 spread_angle = 3
@@ -162,22 +164,23 @@ bullets_recover_count = 1
 shots = 1
 shots_angle = 0
 shoot_sound = NodePath("ShootSound")
-bullets_recover_sound = NodePath("../SpearShared/BulletRecoverSound")
+bullets_recover_sound = NodePath("BulletRecoverSound")
 bullets_recovery_delay = 8.0
 cooldown_delay = 0.3
 swing_delay = 0.2
 equipped_texture = ExtResource("13_aa22f")
 icon_texture = ExtResource("24_46s63")
-parent_weapon = NodePath("../SpearShared")
 alt_attack = NodePath("../SpearBoomerang")
 metadata/_custom_type_script = "uid://bi1gje1pfokqc"
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Spear" index="0" unique_id=23333780]
 stream = ExtResource("18_w1un4")
 
+[node name="BulletRecoverSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Spear" index="1" unique_id=786948453]
+stream = ExtResource("10_ia5h3")
+
 [node name="Toolbox" type="Node" parent="WeaponUserComponent" index="1" unique_id=140255965 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound", "qte_icon", "qte_icon_perfect_frame", "qte_perfect_sound", "qte_perfect_time_sound", "alt_attack")]
 script = ExtResource("12_tn3ht")
-damage = 20
 attack_range = 80
 ignore_armor = true
 parry_sound = NodePath("ParrySound")
@@ -233,7 +236,6 @@ bullets_recover_sound = NodePath("BulletRecoverSound")
 bullets_recovery_delay = 1.5
 gun_fire_effect = ExtResource("16_w1un4")
 overheat_enabled = true
-explosion_on_max_heat = ExtResource("20_wl2js")
 overheat_alert = NodePath("Overheat")
 cooldown_delay = 0.2
 swing_delay = 0.0
@@ -286,7 +288,7 @@ parameters/looping = false
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/ShotgunHook" index="1" unique_id=353929796]
 stream = ExtResource("24_e06si")
 
-[node name="SpearBoomerang" type="Node" parent="WeaponUserComponent" index="4" unique_id=1434839515 node_paths=PackedStringArray("shoot_sound", "projectile_can_parry_weapon", "rope", "parent_weapon")]
+[node name="SpearBoomerang" type="Node" parent="WeaponUserComponent" index="4" unique_id=1434839515 node_paths=PackedStringArray("shoot_sound", "projectile_can_parry_weapon", "shared_bullets_weapon", "rope")]
 script = ExtResource("23_si836")
 projectile = ExtResource("4_pcu7p")
 spread_angle = 0
@@ -298,42 +300,22 @@ shots_angle = 0
 shoot_sound = NodePath("../Spear/ShootSound")
 bullets_recovery_delay = 0.0
 projectile_can_parry_weapon = NodePath("../Toolbox")
+shared_bullets_weapon = NodePath("../Spear")
 show_cooldown_on_icon = true
 rope = NodePath("../../Texture/WeaponSpriteComponent/SpearRope")
 cooldown_delay = 5.0
 swing_delay = 0.2
 icon_texture = ExtResource("24_483ma")
-parent_weapon = NodePath("../SpearShared")
 metadata/_custom_type_script = "uid://bi1gje1pfokqc"
 
-[node name="SpearShared" type="Node" parent="WeaponUserComponent" index="5" unique_id=2042478328 node_paths=PackedStringArray("bullets_recover_sound", "projectile_can_parry_weapon")]
-script = ExtResource("23_si836")
-spread_angle = 3
-bullets_max_count = 1
-bullets = 1
-bullets_recover_count = 1
-shots = 1
-shots_angle = 0
-bullets_recover_sound = NodePath("BulletRecoverSound")
-bullets_recovery_delay = 8.0
-projectile_can_parry_weapon = NodePath("../Toolbox")
-cooldown_delay = 0.3
-swing_delay = 0.2
-metadata/_custom_type_script = "uid://bi1gje1pfokqc"
-
-[node name="BulletRecoverSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/SpearShared" index="0" unique_id=463305822]
-stream = ExtResource("8_ba6hk")
-
-[node name="ChargingToolbox" type="Node" parent="WeaponUserComponent" index="6" unique_id=1424202148 node_paths=PackedStringArray("charging_effect", "charging_sound", "full_charge_sound", "parry_sound", "attack_sound", "miss_sound")]
+[node name="ChargingToolbox" type="Node" parent="WeaponUserComponent" index="5" unique_id=1424202148 node_paths=PackedStringArray("charging_effect", "charging_sound", "full_charge_sound", "remove_overheat_weapon", "parry_sound", "attack_sound", "miss_sound")]
 script = ExtResource("27_hev03")
-max_charge_time = 1.5
-base_charge_time = 0.5
 exponent_divider = 0.7
 charging_effect = NodePath("../../ChargingEffect")
 hitstop_charge = 0.75
 charging_sound = NodePath("ChargingSound")
 full_charge_sound = NodePath("FullChargeSound")
-damage = 7
+remove_overheat_weapon = NodePath("../Shotgun")
 attack_range = 80
 parry_sound = NodePath("ParrySound")
 attack_sound = NodePath("MeleeHitSound")
@@ -361,7 +343,7 @@ parameters/looping = true
 stream = ExtResource("31_c8oai")
 volume_db = -8.0
 
-[node name="Lasergun" type="Node" parent="WeaponUserComponent" index="7" unique_id=705566024 node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound", "alt_attack")]
+[node name="Lasergun" type="Node" parent="WeaponUserComponent" index="6" unique_id=705566024 node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound", "alt_attack")]
 script = ExtResource("23_si836")
 projectile = ExtResource("40_c8gs6")
 spread_angle = 1
@@ -390,7 +372,7 @@ stream = ExtResource("41_vcq5s")
 [node name="EmptySound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Lasergun" index="1" unique_id=754160362]
 stream = ExtResource("19_kyb4y")
 
-[node name="LasergunUnlethal" type="Node" parent="WeaponUserComponent" index="8" unique_id=679740801 node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound")]
+[node name="LasergunUnlethal" type="Node" parent="WeaponUserComponent" index="7" unique_id=679740801 node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound")]
 script = ExtResource("23_si836")
 projectile = ExtResource("45_rhd25")
 spread_angle = 1

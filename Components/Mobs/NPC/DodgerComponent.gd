@@ -4,6 +4,8 @@ class_name DodgerComponent extends Component
 @onready var mob_mover: MobMoverComponent = parent.get_node_or_null("MobMoverComponent")
 @onready var faction: FactionComponent = parent.get_node_or_null("FactionComponent")
 
+@export var modify_dodge_force_by_difficulty: bool = true
+
 @export var dodge_melee: bool = false
 @export var move_priority: int = 5
 @export var dash_force: float = 2000.0
@@ -26,6 +28,19 @@ func _ready() -> void:
 		recovery_timer.wait_time = stamina_recovery_delay
 		recovery_timer.one_shot = true
 		recovery_timer.timeout.connect(_stamina_recovery)
+	
+	if modify_dodge_force_by_difficulty:
+		match SettingsConfigSystem.difficulty:
+			SettingsConfigSystem.difficulties.RPER:
+				dash_force *= 0.8
+			SettingsConfigSystem.difficulties.AGENT:
+				dash_force *= 1.0
+			SettingsConfigSystem.difficulties.GREYTIDE:
+				max_stamina *= 2
+				stamina *= 2
+				dash_force *= 1.6
+				dash_stop_speed *= 1.7
+				dodge_melee = true
 
 func _on_melee(emitter: Node2D, weapon: Weapon) -> void:
 	if !_check(emitter):

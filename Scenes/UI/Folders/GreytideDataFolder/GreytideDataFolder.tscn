@@ -1,0 +1,165 @@
+[gd_scene format=3 uid="uid://q26tbtj4imqa"]
+
+[ext_resource type="PackedScene" uid="uid://bnh11kj2wojn6" path="res://Scenes/UI/Folders/BaseFolder.tscn" id="1_x7v6p"]
+[ext_resource type="FontFile" uid="uid://mhx51lyuasx4" path="res://Resources/Text/Fonts/Ac437_ApricotPortable.ttf" id="2_qqg65"]
+[ext_resource type="Texture2D" uid="uid://bh54c6txfmv25" path="res://Textures/Interface/Menu/rbstxt_icon.png" id="3_5cjv8"]
+[ext_resource type="Script" uid="uid://bodxsix2kyyy6" path="res://Components/Interface/Menu/ToggleVisibleOnPressedComponent.gd" id="4_ymya5"]
+[ext_resource type="PackedScene" uid="uid://ulwxpdarr2ri" path="res://Scenes/UI/Folders/GreytideDataFolder/Data/DashData.tscn" id="5_mx1ho"]
+[ext_resource type="PackedScene" uid="uid://d28asln2i1kbw" path="res://Scenes/UI/Folders/GreytideDataFolder/Data/HealingData.tscn" id="6_5qdgr"]
+[ext_resource type="PackedScene" uid="uid://dfsojujsxjsud" path="res://Scenes/UI/Folders/GreytideDataFolder/Data/EphedrineOverdoseData.tscn" id="7_iu3yf"]
+
+[node name="GreytidesDataFolder" unique_id=727110380 instance=ExtResource("1_x7v6p")]
+offset_right = 264.81598
+
+[node name="Label" parent="Panel" parent_id_path=PackedInt32Array(1765621037) index="1" unique_id=889542511]
+text = "Robust-os - Desktop\\greytide_data"
+
+[node name="Dash" type="Button" parent="ScrollContainer/Objects" parent_id_path=PackedInt32Array(1585434421) index="0" unique_id=1026114932]
+custom_minimum_size = Vector2(480, 48)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/Objects/Dash" index="0" unique_id=496315401]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48900002
+anchor_top = 0.16700001
+anchor_right = 0.48900002
+anchor_bottom = 0.75000006
+offset_left = -188.72002
+offset_top = 1.030508
+offset_right = 93.27998
+offset_bottom = 1.0465088
+theme_override_fonts/font = ExtResource("2_qqg65")
+text = "dash_info.rbstxt"
+vertical_alignment = 1
+
+[node name="icon" type="TextureRect" parent="ScrollContainer/Objects/Dash" index="1" unique_id=1656849549]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.1
+anchor_bottom = 0.98
+offset_left = 1.0
+offset_top = 0.04650879
+offset_bottom = 0.0065078735
+texture = ExtResource("3_5cjv8")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ToggleVisibleOnPressedComponent" type="Node" parent="ScrollContainer/Objects/Dash" index="2" unique_id=1626320678 node_paths=PackedStringArray("toggle_frame")]
+script = ExtResource("4_ymya5")
+toggle_frame = NodePath("../../../../DashInfo")
+require_double_click = true
+metadata/_custom_type_script = "uid://bodxsix2kyyy6"
+
+[node name="Healing" type="Button" parent="ScrollContainer/Objects" parent_id_path=PackedInt32Array(1585434421) index="1" unique_id=1649415114]
+custom_minimum_size = Vector2(480, 48)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/Objects/Healing" index="0" unique_id=689649346]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48900002
+anchor_top = 0.16700001
+anchor_right = 0.48900002
+anchor_bottom = 0.75000006
+offset_left = -188.72002
+offset_top = 1.030508
+offset_right = 93.27998
+offset_bottom = 1.0465088
+theme_override_fonts/font = ExtResource("2_qqg65")
+text = "healing_info.rbstxt"
+vertical_alignment = 1
+
+[node name="icon" type="TextureRect" parent="ScrollContainer/Objects/Healing" index="1" unique_id=1803090434]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.1
+anchor_bottom = 0.98
+offset_left = 1.0
+offset_top = 0.04650879
+offset_bottom = 0.0065078735
+texture = ExtResource("3_5cjv8")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ToggleVisibleOnPressedComponent" type="Node" parent="ScrollContainer/Objects/Healing" index="2" unique_id=1164044664 node_paths=PackedStringArray("toggle_frame")]
+script = ExtResource("4_ymya5")
+toggle_frame = NodePath("../../../../HealingInfo")
+require_double_click = true
+metadata/_custom_type_script = "uid://bodxsix2kyyy6"
+
+[node name="Overdose" type="Button" parent="ScrollContainer/Objects" parent_id_path=PackedInt32Array(1585434421) index="2" unique_id=96804036]
+custom_minimum_size = Vector2(480, 48)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/Objects/Overdose" index="0" unique_id=1640883857]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48900002
+anchor_top = 0.16700001
+anchor_right = 0.48900002
+anchor_bottom = 0.75000006
+offset_left = -188.72002
+offset_top = 1.030508
+offset_right = 93.27998
+offset_bottom = 1.0465088
+theme_override_fonts/font = ExtResource("2_qqg65")
+text = "overdose_info.rbstxt"
+vertical_alignment = 1
+
+[node name="icon" type="TextureRect" parent="ScrollContainer/Objects/Overdose" index="1" unique_id=313598222]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.1
+anchor_bottom = 0.98
+offset_left = 1.0
+offset_top = 0.04650879
+offset_bottom = 0.0065078735
+texture = ExtResource("3_5cjv8")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ToggleVisibleOnPressedComponent" type="Node" parent="ScrollContainer/Objects/Overdose" index="2" unique_id=1924612351 node_paths=PackedStringArray("toggle_frame")]
+script = ExtResource("4_ymya5")
+toggle_frame = NodePath("../../../../OverdoseInfo")
+require_double_click = true
+metadata/_custom_type_script = "uid://bodxsix2kyyy6"
+
+[node name="DashInfo" parent="." index="5" unique_id=1595647301 instance=ExtResource("5_mx1ho")]
+visible = false
+layout_mode = 1
+anchor_left = 1.317
+anchor_top = -0.059000004
+anchor_right = 1.317
+anchor_bottom = 0.381
+offset_left = -243.15704
+offset_top = -0.1020031
+offset_right = 242.84296
+offset_bottom = 217.01799
+
+[node name="HealingInfo" parent="." index="6" unique_id=1050545139 instance=ExtResource("6_5qdgr")]
+visible = false
+layout_mode = 1
+anchor_left = 1.194
+anchor_top = -0.057000004
+anchor_right = 1.194
+anchor_bottom = 0.38300002
+offset_left = -242.99408
+offset_top = -0.09000397
+offset_right = 243.00592
+offset_bottom = 217.02998
+
+[node name="OverdoseInfo" parent="." index="7" unique_id=556997861 instance=ExtResource("7_iu3yf")]
+visible = false
+layout_mode = 1
+anchor_left = 1.24
+anchor_top = -0.049000002
+anchor_right = 1.24
+anchor_bottom = 0.39100003
+offset_left = -243.12006
+offset_top = -0.04200363
+offset_right = 242.87994
+offset_bottom = 217.07797

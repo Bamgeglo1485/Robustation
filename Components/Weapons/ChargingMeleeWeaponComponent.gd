@@ -58,7 +58,6 @@ func on_release(raiser) -> void:
 		var charge_ratio = charge / base_charge_time
 		var exp_multiplier = exp(charge_ratio) - 0.5
 		minor_damage_modifiers["Charge"] = exp_multiplier / exponent_divider
-		print(exp_multiplier / exponent_divider)
 	else:
 		minor_damage_modifiers["Charge"] = charge / base_charge_time
 	var mod: float = charge / base_charge_time
@@ -73,7 +72,7 @@ func on_release(raiser) -> void:
 	if hitstop_charge != 0 and hitstop_charge < charge:
 		var hitstop_cof = charge / hitstop_charge * 0.2
 		attack_sound.volume_db = hitstop_cof
-		EventBusManager.request_impact_frame.emit(hitstop_cof, 0.0, true, false)
+		EventBusManager.request_impact_frame.emit(hitstop_cof, 0.0, false, false)
 
 func attack(_raiser, _npc = true) -> Dictionary:
 	if charging:

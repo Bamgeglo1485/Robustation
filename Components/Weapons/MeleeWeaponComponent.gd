@@ -290,14 +290,15 @@ multiple_attack: bool = false) -> bool:
 	return true
 
 func parry_weapon(weapon, target) -> void:
-	EventBusManager.parry.emit(parent, "Weapon")
+	EventBusManager.parry.emit(parent, "Weapon", true)
 	weapon.swinging_cancelled = true
 	parry_effects()
 	if parry_sound and weapon is MeleeWeapon and weapon.play_parried_sound:
 		parry_sound.play()
 	
-	if target.has_node("HealthComponent"):
-		target.get_node("HealthComponent").take_damage(damage * 0.5, parent)
+	var health: HealthComponent = target.get_node("HealthComponent")
+	if health:
+		health.take_damage(damage * 0.5, parent)
 	
 	var direction = (target.global_position - parent.global_position)
 	
@@ -323,11 +324,14 @@ func parry_projectile(projectile: Node2D, projectile_component: ProjectileCompon
 		projectile_component.shooter_faction = null
 		projectile_component.shooter = null
 		projectile_component.direction = (parent.global_position - projectile.global_position).angle()
-	EventBusManager.parry.emit(parent, "Projectile")
+	var enemy: bool = false
+	if projectile_component.shooter != parent:
+		enemy = true
+	EventBusManager.parry.emit(parent, "Projectile", enemy)
 	var angle = direction.angle()
 	projectile.modulate = parry_color
 	projectile.global_rotation = angle
-	projectile_component.damage *= parry_force
+	projectile_component.damage *= parry_force * _get_minor_modifiers() * damage_modifier
 	projectile_component.direction = angle
 	projectile_component.shooter = parent
 	projectile_component.shooter_faction = parent_faction

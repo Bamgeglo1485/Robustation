@@ -35,5 +35,6 @@ func _on_changed(new_value: float) -> void:
 	var volume_db = linear_to_db(new_value / 100.0)
 	AudioServer.set_bus_volume_db(audio_bus_id, volume_db)
 	
+	config.load("user://settings.cfg")
 	config.set_value("VOLUME", audio_bus_name + "_volume", new_value)
 	config.save("user://settings.cfg")

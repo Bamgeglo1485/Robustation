@@ -7,6 +7,6 @@
 script = ExtResource("2_weqma")
 scene = ExtResource("1_j6gg6")
 cost = 1.0
-weight = 0.2
+weight = 0.1
 enemy_type = 2
 metadata/_custom_type_script = "uid://di5u0whaqiyjp"

@@ -11,6 +11,7 @@ var base_max_health: float = max_health
 @export var armor: float = 1 # I'm too lazy to integrate armor perk with other systems.
 @export var gibbed: bool = false
 @export var invinciblitiy_attack_effect: PackedScene
+@export var invinciblitiy_attack_sound: AudioStreamPlayer2D
 @export var healing_from_organs_modifier: float = 1.0
 
 @export var blood_effect_scene: PackedScene
@@ -66,10 +67,8 @@ func get_health() -> float:
 # Наносит урон и создаёт эффекты
 func take_damage(damage: float, damager: Node2D, damage_type: String = "Generic", ignore_damage_modifier: bool = false) -> void:
 	if INVINCIBLE:
-		if invinciblitiy_attack_effect:
-			var inst: Node2D = invinciblitiy_attack_effect.instantiate()
-			inst.global_position = parent.global_position
-			scene.add_child(inst)
+		if damage > 5:
+			invincibility_effects()
 		return
 	var modifier = armor * damage_modifier
 	if !damage_type_modifiers.is_empty() and damage_type_modifiers.has(damage_type):
@@ -94,6 +93,16 @@ func take_damage(damage: float, damager: Node2D, damage_type: String = "Generic"
 		animation_component.lean_to_direction(-direction, 4)
 	if trigger_on_damage_component:
 		trigger_on_damage_component.trigger()
+
+func invincibility_effects() -> void:
+		if invinciblitiy_attack_effect:
+			var inst: Node2D = invinciblitiy_attack_effect.instantiate()
+			inst.global_position = parent.global_position
+			scene.add_child(inst)
+			EventBusManager.request_impact_frame.emit(0, 0, true, false)
+			if invinciblitiy_attack_sound:
+				invinciblitiy_attack_sound.play()
+		return
 
 func damage_effects(damager) -> void:
 	if !parent or !damager:

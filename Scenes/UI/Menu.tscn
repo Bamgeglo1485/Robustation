@@ -37,9 +37,14 @@
 [ext_resource type="Texture2D" uid="uid://bp1lnd3helcg3" path="res://Textures/Interface/Menu/credits.png" id="28_6s73t"]
 [ext_resource type="Texture2D" uid="uid://cfs0ufuqjnuan" path="res://Textures/Interface/Menu/folder_icon_hovered.png" id="28_7aweg"]
 [ext_resource type="Texture2D" uid="uid://ruft3lm6asc2" path="res://Textures/Interface/Menu/credits_covered.png" id="29_heu7w"]
+[ext_resource type="Texture2D" uid="uid://clpdrfhsiwm6e" path="res://Textures/Interface/Menu/difficulty.png" id="36_ad20w"]
 [ext_resource type="Texture2D" uid="uid://bmf0mdjgl2efj" path="res://Textures/Interface/Menu/NT_logo.png" id="36_prvga"]
+[ext_resource type="Texture2D" uid="uid://cnn46f7pl7ll0" path="res://Textures/Interface/Menu/difficulty_hovered.png" id="37_u0gst"]
+[ext_resource type="Script" uid="uid://bqqtllkj6p2n0" path="res://Components/Interface/Menu/ToggleVisibleIfConfigComponent.gd" id="38_f00cl"]
 [ext_resource type="PackedScene" uid="uid://coat4jbvf6jfe" path="res://Scenes/UI/Folders/WeaponsDataFolder/WeaponsDataFolder.tscn" id="39_7aweg"]
 [ext_resource type="PackedScene" uid="uid://df8siups3u0kj" path="res://Scenes/UI/Folders/asdasFolder/asdasFolder.tscn" id="40_jfwmj"]
+[ext_resource type="PackedScene" uid="uid://q26tbtj4imqa" path="res://Scenes/UI/Folders/GreytideDataFolder/GreytideDataFolder.tscn" id="40_xn7hy"]
+[ext_resource type="PackedScene" uid="uid://dq8gvtmjild2a" path="res://Scenes/UI/Difficulty_setup.tscn" id="41_u0gst"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_444o2"]
 bg_color = Color(0.10980392, 0, 0.05490196, 1)
@@ -457,6 +462,7 @@ offset_top = 122.0
 offset_right = 239.0
 offset_bottom = 218.0
 mouse_behavior_recursive = 2
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("21_6s73t")
 texture_hover = ExtResource("22_heu7w")
 
@@ -514,6 +520,7 @@ offset_top = 192.0
 offset_right = 484.0
 offset_bottom = 288.0
 mouse_behavior_recursive = 2
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("25_prvga")
 texture_hover = ExtResource("26_a88kj")
 
@@ -559,6 +566,7 @@ offset_top = 452.0
 offset_right = 185.0
 offset_bottom = 548.0
 mouse_behavior_recursive = 2
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("27_rnwc8")
 texture_hover = ExtResource("28_7aweg")
 
@@ -593,6 +601,49 @@ toggle_frame = NodePath("../../../WeaponsDataFolder")
 require_double_click = true
 metadata/_custom_type_script = "uid://bodxsix2kyyy6"
 
+[node name="GreytideData" type="TextureButton" parent="Desktop" unique_id=508477452]
+z_index = 1
+layout_mode = 0
+offset_left = 281.0
+offset_top = 410.0
+offset_right = 377.0
+offset_bottom = 506.0
+mouse_behavior_recursive = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("27_rnwc8")
+texture_hover = ExtResource("28_7aweg")
+
+[node name="Input_text" type="RichTextLabel" parent="Desktop/GreytideData" unique_id=11114731]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.30208334
+anchor_top = 0.9895833
+anchor_right = 1.3541666
+anchor_bottom = 1.1606773
+theme_override_fonts/normal_font = ExtResource("1_wxq71")
+text = "greytide_data"
+scroll_active = false
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="DragButtonComponent" type="Node" parent="Desktop/GreytideData" unique_id=1683487649 node_paths=PackedStringArray("frame_to_drag", "parent_bounds_control")]
+script = ExtResource("23_heu7w")
+frame_to_drag = NodePath("..")
+use_parent_corners = true
+parent_bounds_control = NodePath("../../Wallpaper")
+metadata/_custom_type_script = "uid://cja3led3n1ehp"
+
+[node name="SavePositionComponent" type="Node" parent="Desktop/GreytideData" unique_id=1165744553]
+script = ExtResource("24_xefsv")
+metadata/_custom_type_script = "uid://bhmllu85kiqcc"
+
+[node name="ToggleVisibleOnPressedComponent" type="Node" parent="Desktop/GreytideData" unique_id=1119806045 node_paths=PackedStringArray("toggle_frame")]
+script = ExtResource("25_1r0lg")
+toggle_frame = NodePath("../../../GreytidesDataFolder")
+require_double_click = true
+metadata/_custom_type_script = "uid://bodxsix2kyyy6"
+
 [node name="asdas" type="TextureButton" parent="Desktop" unique_id=1062030481]
 z_index = 1
 layout_mode = 0
@@ -601,6 +652,7 @@ offset_top = 451.0
 offset_right = 615.0
 offset_bottom = 547.0
 mouse_behavior_recursive = 2
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("27_rnwc8")
 texture_hover = ExtResource("28_7aweg")
 
@@ -675,11 +727,11 @@ anchor_bottom = 0.98600006
 offset_left = 0.447937
 offset_bottom = 0.07196045
 mouse_behavior_recursive = 2
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("24_4hbib")
 texture_hover = ExtResource("25_bxie6")
 ignore_texture_size = true
 stretch_mode = 4
-metadata/_edit_use_anchors_ = true
 
 [node name="PrintOnButtonPressComponent" type="Node" parent="Desktop/Settings" unique_id=975076631 node_paths=PackedStringArray("print_frame")]
 script = ExtResource("24_qk6ej")
@@ -717,11 +769,11 @@ anchor_top = 0.91512346
 anchor_right = 0.47916666
 anchor_bottom = 0.9861111
 mouse_behavior_recursive = 2
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("26_xmh07")
 texture_hover = ExtResource("27_r1s3j")
 ignore_texture_size = true
 stretch_mode = 4
-metadata/_edit_use_anchors_ = true
 
 [node name="PrintOnButtonPressComponent" type="Node" parent="Desktop/Keybinds" unique_id=1792261431 node_paths=PackedStringArray("print_frame")]
 script = ExtResource("24_qk6ej")
@@ -736,7 +788,7 @@ script = ExtResource("25_1r0lg")
 toggle_frame = NodePath("../../../Keybinds")
 metadata/_custom_type_script = "uid://bodxsix2kyyy6"
 
-[node name="Credits" type="TextureButton" parent="Desktop" unique_id=735270365]
+[node name="Difficulty" type="TextureButton" parent="Desktop" unique_id=368572931]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.39322916
@@ -744,6 +796,42 @@ anchor_top = 0.91512346
 anchor_right = 0.4331597
 anchor_bottom = 0.9861111
 mouse_behavior_recursive = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("36_ad20w")
+texture_hover = ExtResource("37_u0gst")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="PrintOnButtonPressComponent" type="Node" parent="Desktop/Difficulty" unique_id=178657834 node_paths=PackedStringArray("print_frame")]
+script = ExtResource("24_qk6ej")
+print_frame = NodePath("../../../CMD/CMD_OUTPUT")
+instant_text = "\\Omega\\Manager>ui_system launch diff_setup_panel.exe"
+text = "
+[color=green]diff_setup_panel.exe successfully switched![/color]"
+delay = 0.5
+metadata/_custom_type_script = "uid://b0uuawujbqmt4"
+
+[node name="ToggleVisibleOnPressedComponent" type="Node" parent="Desktop/Difficulty" unique_id=1260505609 node_paths=PackedStringArray("toggle_frame")]
+script = ExtResource("25_1r0lg")
+toggle_frame = NodePath("../../../DifficultySettings")
+metadata/_custom_type_script = "uid://bodxsix2kyyy6"
+
+[node name="ToggleVisibleIfConfigComponent" type="Node" parent="Desktop/Difficulty" unique_id=31483033 node_paths=PackedStringArray("toggle_visible_comp")]
+script = ExtResource("38_f00cl")
+config_section = "GAMEPLAY"
+config_key = "difficulty"
+toggle_visible_comp = NodePath("../ToggleVisibleOnPressedComponent")
+metadata/_custom_type_script = "uid://bqqtllkj6p2n0"
+
+[node name="Credits" type="TextureButton" parent="Desktop" unique_id=735270365]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3472222
+anchor_top = 0.91512346
+anchor_right = 0.3871528
+anchor_bottom = 0.9861111
+mouse_behavior_recursive = 2
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("28_6s73t")
 texture_hover = ExtResource("29_heu7w")
 ignore_texture_size = true
@@ -756,11 +844,11 @@ print_frame = NodePath("../../../CMD/CMD_OUTPUT")
 instant_text = "\\Omega\\Manager>credits"
 text = "[color=crimson]Geglo1485 — Head developer / Maintainer[/color]
 [color=violet]_pixar4ik_ — Contributor / Programmer[/color]
-[color=orange]MrJajkes — Composer[/color]
 ------------
 Most sprites taken from Space Station 13[tg station]
 Space asshole menu remix by Slend32
-Some enemy themes by A-Guy
+Some enemy themes and arena mode soundtracks by A-Guy
+Overdose theme by MrJajkes
 "
 delay = 0.5
 metadata/_custom_type_script = "uid://b0uuawujbqmt4"
@@ -788,6 +876,24 @@ text = "[color=#204c6d]GLORY TO NANOTRASEN![/color]"
 delay = 0.1
 metadata/_custom_type_script = "uid://b0uuawujbqmt4"
 
+[node name="ToggleVisibleOnPressedComponent" type="Node" parent="Desktop/GloryToNanoTrasen" unique_id=2014591422 node_paths=PackedStringArray("toggle_frame")]
+script = ExtResource("25_1r0lg")
+toggle_frame = NodePath("../../../MONITOR/MonitorOverlay")
+animation_time = 0.0
+metadata/_custom_type_script = "uid://bodxsix2kyyy6"
+
+[node name="DifficultySettings" parent="." unique_id=700610332 instance=ExtResource("41_u0gst")]
+visible = false
+layout_mode = 1
+anchor_left = 0.48400003
+anchor_top = 0.142
+anchor_right = 0.48400003
+anchor_bottom = 0.142
+offset_left = -247.09607
+offset_top = -0.01600647
+offset_right = 246.90393
+offset_bottom = 377.984
+
 [node name="WeaponsDataFolder" parent="." unique_id=1676258678 instance=ExtResource("39_7aweg")]
 visible = false
 layout_mode = 1
@@ -795,6 +901,14 @@ offset_left = -141.18402
 offset_top = 13.751995
 offset_right = 339.81598
 offset_bottom = 260.86398
+
+[node name="GreytidesDataFolder" parent="." unique_id=899442614 instance=ExtResource("40_xn7hy")]
+visible = false
+layout_mode = 1
+offset_left = -109.36804
+offset_top = 6.50399
+offset_right = 371.63196
+offset_bottom = 253.616
 
 [node name="asdasFolder" parent="." unique_id=1251840759 instance=ExtResource("40_jfwmj")]
 visible = false

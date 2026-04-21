@@ -1,0 +1,221 @@
+[gd_scene format=3 uid="uid://dq8gvtmjild2a"]
+
+[ext_resource type="FontFile" uid="uid://mhx51lyuasx4" path="res://Resources/Text/Fonts/Ac437_ApricotPortable.ttf" id="1_3js8x"]
+[ext_resource type="Script" uid="uid://cja3led3n1ehp" path="res://Components/Interface/Menu/DragButtonComponent.gd" id="2_6otx5"]
+[ext_resource type="Texture2D" uid="uid://dqd7xkk5m77ck" path="res://Textures/Interface/Menu/cross.png" id="3_axril"]
+[ext_resource type="Texture2D" uid="uid://ftxxh2qcsb0s" path="res://Textures/Interface/Menu/cross_hovered.png" id="4_dtwki"]
+[ext_resource type="Script" uid="uid://bodxsix2kyyy6" path="res://Components/Interface/Menu/ToggleVisibleOnPressedComponent.gd" id="5_xvu7m"]
+[ext_resource type="FontFile" uid="uid://dskv5n6tofrla" path="res://Resources/Text/Fonts/LCD 40x2 Display/LCD40x2Display-Regular.otf" id="6_k1emh"]
+[ext_resource type="Script" uid="uid://cj61d17fskpc2" path="res://Components/Interface/Menu/Settings/DifficultySettingsComponent.gd" id="7_68e15"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ex7t"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mj2lg"]
+bg_color = Color(0.060530342, 0.06053035, 0.060530327, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v5qja"]
+bg_color = Color(0.11286896, 1.469492e-06, 0.08068577, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y60rh"]
+bg_color = Color(0.14165193, 0.075261734, 0.0927326, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k1emh"]
+
+[node name="DifficultySettings" type="Control" unique_id=727110380]
+z_index = 5
+layout_mode = 3
+anchor_left = 0.21400002
+anchor_right = 0.21400002
+offset_left = -246.52802
+offset_right = 247.47198
+offset_bottom = 378.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=1765621037]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_7ex7t")
+
+[node name="Button" type="Button" parent="Panel" unique_id=1408473027]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.048
+offset_bottom = 14.896
+mouse_default_cursor_shape = 6
+theme_override_fonts/font = ExtResource("1_3js8x")
+theme_override_styles/normal = SubResource("StyleBoxFlat_mj2lg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_v5qja")
+theme_override_styles/hover = SubResource("StyleBoxFlat_y60rh")
+
+[node name="DragButtonComponent" type="Node" parent="Panel/Button" unique_id=1204231945 node_paths=PackedStringArray("frame_to_drag")]
+script = ExtResource("2_6otx5")
+frame_to_drag = NodePath("../../..")
+metadata/_custom_type_script = "uid://cja3led3n1ehp"
+
+[node name="Label" type="Label" parent="Panel" unique_id=889542511]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.9620001
+offset_left = 1.0
+offset_top = 4.0
+offset_right = 1.0
+offset_bottom = -534.80804
+mouse_behavior_recursive = 1
+theme_override_fonts/font = ExtResource("1_3js8x")
+theme_override_font_sizes/font_size = 12
+text = "Robust-os - diff_setup_panel.exe - ui_system.rbst"
+
+[node name="OffButton" type="TextureButton" parent="." unique_id=68944335]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.92300004
+anchor_top = 0.0050000004
+anchor_right = 0.99200004
+anchor_bottom = 0.069000006
+offset_left = 0.037994385
+offset_top = 0.079999685
+offset_right = -0.048034668
+offset_bottom = 0.2579956
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("3_axril")
+texture_hover = ExtResource("4_dtwki")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="ToggleVisibleOnPressedComponent" type="Node" parent="OffButton" unique_id=348004630 node_paths=PackedStringArray("toggle_frame")]
+script = ExtResource("5_xvu7m")
+toggle_frame = NodePath("../..")
+metadata/_custom_type_script = "uid://bodxsix2kyyy6"
+
+[node name="ReferenceRect" type="ReferenceRect" parent="." unique_id=1098635970]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 1.0
+offset_bottom = 2.0
+mouse_behavior_recursive = 1
+border_color = Color(0.033853278, 0.033853278, 0.033853274, 1)
+border_width = 5.0
+editor_only = false
+
+[node name="ReferenceRect2" type="ReferenceRect" parent="." unique_id=316285321]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 11.0
+offset_bottom = 12.0
+mouse_behavior_recursive = 1
+border_color = Color(0.033853278, 0.033853278, 0.033853274, 1)
+border_width = 5.0
+editor_only = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1585434421]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.12351146
+anchor_right = 1.0040486
+anchor_bottom = 1.007722
+theme_override_constants/separation = 20
+metadata/_edit_use_anchors_ = true
+
+[node name="VolumeHeading" type="Panel" parent="VBoxContainer" unique_id=459129702]
+custom_minimum_size = Vector2(480, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_k1emh")
+
+[node name="Label" type="Label" parent="VBoxContainer/VolumeHeading" unique_id=1135538613]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48900002
+anchor_top = 0.16700001
+anchor_right = 0.48900002
+anchor_bottom = 0.75000006
+offset_left = -175.544
+offset_top = -3.0160007
+offset_right = 184.456
+offset_bottom = 8.999996
+theme_override_fonts/font = ExtResource("1_3js8x")
+theme_override_font_sizes/font_size = 40
+text = "DIFFICULTIES"
+horizontal_alignment = 1
+
+[node name="Roleplayer" type="Button" parent="VBoxContainer" unique_id=1441912447]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/Roleplayer" unique_id=1716408275]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_behavior_recursive = 1
+theme_override_fonts/normal_font = ExtResource("6_k1emh")
+bbcode_enabled = true
+text = "[color=lightgreen]Roleplayer [1]"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="DifficultySettingsComponent" type="Node" parent="VBoxContainer/Roleplayer" unique_id=1753861964 node_paths=PackedStringArray("difficulty_title", "toggle_visible_comp")]
+script = ExtResource("7_68e15")
+button_difficulty = 0
+difficulty_title = NodePath("../../VolumeHeading/Label")
+toggle_visible_comp = NodePath("../../../OffButton/ToggleVisibleOnPressedComponent")
+metadata/_custom_type_script = "uid://cj61d17fskpc2"
+
+[node name="Agent" type="Button" parent="VBoxContainer" unique_id=1886044467]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/Agent" unique_id=1635699934]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_behavior_recursive = 1
+theme_override_fonts/normal_font = ExtResource("6_k1emh")
+bbcode_enabled = true
+text = "[color=orange]Agent [2]"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="DifficultySettingsComponent" type="Node" parent="VBoxContainer/Agent" unique_id=548756596 node_paths=PackedStringArray("difficulty_title", "toggle_visible_comp")]
+script = ExtResource("7_68e15")
+difficulty_title = NodePath("../../VolumeHeading/Label")
+toggle_visible_comp = NodePath("../../../OffButton/ToggleVisibleOnPressedComponent")
+metadata/_custom_type_script = "uid://cj61d17fskpc2"
+
+[node name="Greytide" type="Button" parent="VBoxContainer" unique_id=195755205]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/Greytide" unique_id=534751504]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_behavior_recursive = 1
+theme_override_fonts/normal_font = ExtResource("6_k1emh")
+bbcode_enabled = true
+text = "[color=crimson]Greytide [3]"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="DifficultySettingsComponent" type="Node" parent="VBoxContainer/Greytide" unique_id=216324397 node_paths=PackedStringArray("difficulty_title", "toggle_visible_comp")]
+script = ExtResource("7_68e15")
+button_difficulty = 2
+difficulty_title = NodePath("../../VolumeHeading/Label")
+toggle_visible_comp = NodePath("../../../OffButton/ToggleVisibleOnPressedComponent")
+metadata/_custom_type_script = "uid://cj61d17fskpc2"

@@ -6,4 +6,5 @@
 [node name="Image1" unique_id=727110380 instance=ExtResource("1_ggcbp")]
 
 [node name="Image" parent="." index="4" unique_id=1356612208]
+modulate = Color(0.735357, 0.735357, 0.735357, 1)
 texture = ExtResource("2_kjt53")

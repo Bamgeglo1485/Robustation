@@ -1,214 +1,113 @@
+/*
+Shader from Godot Shaders - the free shader library.
+godotshaders.com/shader/energy-beams
+
+This shader is under CC0 license. Feel free to use, improve and 
+change this shader according to your needs and consider sharing 
+the modified result to godotshaders.com.
+*/
+
 shader_type canvas_item;
+render_mode blend_add; // Remove this if you want to use HDR glow instead (use "Glow" and "Outline Glow" sliders)
 
-// Jittery motion parameters
-uniform float jitter_strength : hint_range(0.0, 20.0) = 2.0;
-uniform float jitter_speed : hint_range(0.1, 20.0) = 8.0;
-uniform float jitter_frequency : hint_range(0.1, 50.0) = 12.0;
-uniform bool separate_xy = true;
-uniform float time_offset : hint_range(0.0, 100.0) = 0.0;
+uniform int beams = 2; // How many beams the energy field should have
 
-// Dynamic rotation parameters
-uniform bool enable_rotation = true;
-uniform float rotation_strength : hint_range(0.0, 45.0) = 5.0;
-uniform float rotation_speed : hint_range(0.1, 10.0) = 3.0;
-uniform float rotation_frequency : hint_range(0.1, 20.0) = 4.0;
+uniform float energy = 3.0; // How much the beams will travel up and down
+uniform int roughness : hint_range(1, 10) = 3; // How compact the noise texture will be
+uniform int frequency = 10; // Amount of "ripples" in the beams
 
-// Dynamic scale parameters
-uniform bool enable_scaling = true;
-uniform float scale_strength : hint_range(0.0, 0.5) = 0.1;
-uniform float scale_speed : hint_range(0.1, 10.0) = 2.5;
-uniform float scale_frequency : hint_range(0.1, 20.0) = 6.0;
-uniform float base_scale : hint_range(0.5, 2.0) = 1.0;
+uniform float speed = 1.0; // Animation speed
+uniform float thickness : hint_range(0.0, 0.1) = 0.006; // Thickness of the main beam
+uniform float outline_thickness : hint_range(0.0, 0.1) = 0.03; //Thickness of the outline color
+uniform float beam_difference : hint_range(0.0, 1.0) = 0.0; // The thickness difference between the main beam and the other, if there are more than one beam. The closer to 1 the smaller the thickness difference.
 
-// Text effect parameters
-uniform vec4 text_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
-uniform bool use_custom_color = false;
-uniform float shake_intensity : hint_range(0.0, 1.0) = 0.5;
+uniform float glow : hint_range(0.0, 3.0) = 0.0; // Use together with WorldEnvironment's Glow feature
+uniform float outline_glow : hint_range(0.0, 3.0) = 0.0;
 
-// Adaptive pixel art effect parameters
-uniform bool enable_pixelation = true;
-uniform float pixel_size : hint_range(1.0, 32.0) = 4.0;
-uniform bool adaptive_pixels = true; // New parameter for adaptive pixel sizing
-uniform bool enable_outline = true;
-uniform vec4 outline_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
-uniform float outline_thickness : hint_range(0.5, 3.0) = 1.0;
+uniform vec4 color : source_color = vec4(0.91, 1.0, 1.0, 1.0);
+uniform vec4 outline_color : source_color = vec4(0.5, 1.0, 0.96, 1.0);
 
-// Optional chromatic aberration for extra effect
-uniform bool chromatic_aberration = false;
-uniform float aberration_strength : hint_range(0.0, 5.0) = 1.0;
+uniform float progress : hint_range(0.0, 1.0) = 1.0;
 
-// Random function for generating noise
-float random(vec2 st) {
-    return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123);
+uniform float y_offset : hint_range (-0.5, 0.5) = 0.0; // Position of the beam
+uniform float fixed_edge_size : hint_range(0.0, 0.5) = 0.05; // How close to the edge should the beam be still before the animatino starts
+uniform vec2 noise_scale = vec2(1.0); // If the object (for example the ColorRect or Sprite node) is compressed use this to compensate for the noise texture being compressed.
+
+float random(vec2 uv) {
+    return fract(sin(dot(uv.xy,
+        vec2(12.9898,78.233))) *
+            43758.5453123);
 }
 
-// Smooth noise function
-float noise(vec2 st) {
-    vec2 i = floor(st);
-    vec2 f = fract(st);
-    
-    float a = random(i);
-    float b = random(i + vec2(1.0, 0.0));
-    float c = random(i + vec2(0.0, 1.0));
-    float d = random(i + vec2(1.0, 1.0));
-    
-    vec2 u = f * f * (3.0 - 2.0 * f);
-    
-    return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+float noise(vec2 uv) {
+    vec2 uv_index = floor(uv);
+    vec2 uv_fract = fract(uv);
+
+    // Four corners in 2D of a tile
+    float a = random(uv_index);
+    float b = random(uv_index + vec2(1.0, 0.0));
+    float c = random(uv_index + vec2(0.0, 1.0));
+    float d = random(uv_index + vec2(1.0, 1.0));
+
+    vec2 blur = smoothstep(0.0, 1.0, uv_fract);
+
+    return mix(a, b, blur.x) +
+            (c - a) * blur.y * (1.0 - blur.x) +
+            (d - b) * blur.x * blur.y;
 }
 
-// 2D rotation matrix
-mat2 rotate2D(float angle) {
-    float c = cos(angle);
-    float s = sin(angle);
-    return mat2(vec2(c, -s), vec2(s, c));
+float fbm(vec2 uv, float time) {
+    int octaves = roughness;
+    float amp = 0.01 * energy * progress;
+    float freq = float(frequency);
+	float value = 0.0;
+	
+    for(int i = 0; i < octaves; i++) {
+        value += amp * noise(freq * vec2(uv.x, uv.y + time));
+        amp *= 0.5;
+        freq *= 2.0;
+    }
+    return value;
 }
 
-void vertex() {
-    float time_adjusted = TIME * jitter_speed + time_offset;
-    
-    // Calculate center of the vertex for rotation and scaling
-    vec2 center = vec2(0.5, 0.5);
-    vec2 vertex_pos = VERTEX;
-    
-    // Apply dynamic scaling
-    if (enable_scaling) {
-        float scale_time = TIME * scale_speed + time_offset;
-        float scale_noise = noise(vec2(scale_time * scale_frequency, vertex_pos.x * 0.1));
-        float scale_factor = base_scale + (scale_noise - 0.5) * scale_strength;
-        vertex_pos = (vertex_pos - center) * scale_factor + center;
-    }
-    
-    // Apply dynamic rotation
-    if (enable_rotation) {
-        float rotation_time = TIME * rotation_speed + time_offset;
-        float rotation_noise = noise(vec2(rotation_time * rotation_frequency, vertex_pos.y * 0.1));
-        float rotation_factor = (rotation_noise - 0.5) * rotation_strength;
-        float rotation_angle = rotation_factor * 0.017453; // Convert to radians
-        
-        vec2 rotated_pos = vertex_pos - center;
-        rotated_pos = rotate2D(rotation_angle) * rotated_pos;
-        vertex_pos = rotated_pos + center;
-    }
-    
-    // Apply jitter effect
-    vec2 jitter_offset;
-    if (separate_xy) {
-        // Separate jitter for X and Y axes
-        float jitter_x = noise(vec2(time_adjusted * jitter_frequency, vertex_pos.x * 0.05)) - 0.5;
-        float jitter_y = noise(vec2(vertex_pos.y * 0.05, time_adjusted * jitter_frequency + 17.3)) - 0.5;
-        jitter_offset = vec2(jitter_x, jitter_y) * jitter_strength;
-    } else {
-        // Combined jitter
-        float jitter_value = noise(vec2(time_adjusted * jitter_frequency, length(vertex_pos) * 0.1)) - 0.5;
-        jitter_offset = vec2(jitter_value) * jitter_strength;
-    }
-    
-    // Apply all transformations
-    VERTEX = vertex_pos + jitter_offset * shake_intensity;
+vec4 difference(vec4 base, vec4 blend){
+	return abs(base - blend);
 }
 
-varying float v_scale_factor;
-varying float v_rotation_factor;
+vec4 bolt(vec2 uv, float time, float i)
+{
+	// Setup the beam locking to the edges.
+	float falloff = smoothstep(0.0, fixed_edge_size, uv.x) * smoothstep(0.0, fixed_edge_size, 1.0 - uv.x);
+	
+	// Use Fractal Brownian Motion to create a "cloud texture" and use Difference blend mode to make the beam
+	vec4 clouds = vec4(fbm((uv + vec2(i) ) * noise_scale, time * speed)) * falloff;
+	vec4 diff_clouds = difference(clouds, vec4(uv.y - 0.5 + y_offset + (uv.y * falloff * 0.02 * energy * progress)));
+	
+	// Create a new noise to mask the beams on low "progress" values. To make a "turn-off" effect more visually interesting.
+	vec4 clouds2 = vec4(fbm((uv * 2.0) * noise_scale, time * 1.)) * 5.0;
+	diff_clouds += smoothstep(0.0, 0.8, clouds2) * 0.1 * (1.-progress);
+	
+	// Set thickness of the beams. First beam is the Thickness size and all following beams are sized with beam_difference
+	float thickness2 =  1. - ( thickness / (min(i + beam_difference, 1.0) + (1.0-beam_difference))) * progress ;
+	vec4 beam = clamp(smoothstep(thickness2, thickness2 + 0.005 * progress, 1.0 - diff_clouds), vec4(0.0), vec4(1.0));
+	
+	//Set the beam outlines
+	vec4 beam_outline;
+	float outline = thickness2 - (outline_thickness * progress);
+	beam_outline = clamp(smoothstep(outline, outline + 0.04, 1.0 - diff_clouds), 0.0, 1.0);
+	beam_outline = clamp(beam_outline - beam, 0.0, 1.0);
+	
+	// Merge the beam and the outline and return to the fragment function
+	return (beam * (color + vec4(glow, glow, glow, 0.))) + (beam_outline * (outline_color + vec4(outline_glow, outline_glow, outline_glow, 0.)));
+}
 
-void fragment() {
-    vec2 uv = UV;
-    
-    // Apply adaptive pixelation effect if enabled
-    if (enable_pixelation) {
-        vec2 texture_size = 1.0 / TEXTURE_PIXEL_SIZE;
-        
-        // Calculate adaptive pixel size based on transformations
-        float adaptive_pixel_size = pixel_size;
-        
-        if (adaptive_pixels) {
-            // Calculate current transformation factors for this fragment
-            float current_scale_factor = base_scale;
-            float current_rotation_factor = 0.0;
-            
-            if (enable_scaling) {
-                float scale_time = TIME * scale_speed + time_offset;
-                float scale_noise = noise(vec2(scale_time * scale_frequency, uv.x * 10.0));
-                current_scale_factor = base_scale + (scale_noise - 0.5) * scale_strength;
-                adaptive_pixel_size *= current_scale_factor;
-            }
-            
-            if (enable_rotation) {
-                float rotation_time = TIME * rotation_speed + time_offset;
-                float rotation_noise = noise(vec2(rotation_time * rotation_frequency, uv.y * 10.0));
-                current_rotation_factor = abs((rotation_noise - 0.5) * rotation_strength);
-                adaptive_pixel_size *= (1.0 + current_rotation_factor * 0.02);
-            }
-        }
-        
-        // Ensure minimum pixel size to avoid artifacts
-        adaptive_pixel_size = max(adaptive_pixel_size, 1.0);
-        
-        vec2 pixel_uv = floor(uv * texture_size / adaptive_pixel_size) * adaptive_pixel_size / texture_size;
-        pixel_uv += (adaptive_pixel_size / texture_size) * 0.5; // Center the pixel
-        uv = pixel_uv;
-    }
-    
-    vec4 base_color = texture(TEXTURE, uv);
-    
-    // Create pixel art outline effect
-    if (enable_outline && base_color.a > 0.1) {
-        vec2 texture_size = 1.0 / TEXTURE_PIXEL_SIZE;
-        float outline_step = outline_thickness / max(texture_size.x, texture_size.y);
-        
-        // Sample surrounding pixels for outline
-        float outline_alpha = 0.0;
-        for (float x = -outline_step; x <= outline_step; x += outline_step) {
-            for (float y = -outline_step; y <= outline_step; y += outline_step) {
-                if (x == 0.0 && y == 0.0) continue;
-                vec2 offset_uv = uv + vec2(x, y);
-                if (enable_pixelation) {
-                    offset_uv = floor(offset_uv * texture_size / pixel_size) * pixel_size / texture_size;
-                    offset_uv += (pixel_size / texture_size) * 0.5;
-                }
-                float sample_alpha = texture(TEXTURE, offset_uv).a;
-                outline_alpha = max(outline_alpha, sample_alpha);
-            }
-        }
-        
-        // Apply outline where there's no text but outline should be
-        if (base_color.a < 0.1 && outline_alpha > 0.1) {
-            base_color = outline_color;
-        }
-    }
-    
-    // Enhanced chromatic aberration effect with dynamic intensity
-    if (chromatic_aberration && base_color.a > 0.1) {
-        float time_adjusted = TIME * jitter_speed + time_offset;
-        float aberration_intensity = noise(vec2(time_adjusted * 0.5)) * aberration_strength;
-        
-        vec2 aberration_offset = vec2(
-            noise(vec2(time_adjusted * jitter_frequency * 2.0, uv.x * 10.0)) - 0.5,
-            noise(vec2(uv.y * 10.0, time_adjusted * jitter_frequency * 2.0 + 23.7)) - 0.5
-        ) * aberration_intensity * 0.01;
-        
-        vec2 r_uv = uv + aberration_offset;
-        vec2 b_uv = uv - aberration_offset;
-        
-        if (enable_pixelation) {
-            vec2 texture_size = 1.0 / TEXTURE_PIXEL_SIZE;
-            r_uv = floor(r_uv * texture_size / pixel_size) * pixel_size / texture_size;
-            r_uv += (pixel_size / texture_size) * 0.5;
-            b_uv = floor(b_uv * texture_size / pixel_size) * pixel_size / texture_size;
-            b_uv += (pixel_size / texture_size) * 0.5;
-        }
-        
-        float r = texture(TEXTURE, r_uv).r;
-        float g = base_color.g;
-        float b = texture(TEXTURE, b_uv).b;
-        
-        base_color.rgb = vec3(r, g, b);
-    }
-    
-    // Apply custom color if enabled
-    if (use_custom_color) {
-        COLOR = vec4(text_color.rgb, base_color.a * text_color.a);
-    } else {
-        COLOR = base_color;
-    }
+void fragment()
+{	
+	vec4 beam = vec4(0.0);
+	
+	for (int i = 0; i < beams; i++){
+		beam = max(beam, bolt(UV, TIME, float(i)));
+	}
+	
+	COLOR = beam;
 }

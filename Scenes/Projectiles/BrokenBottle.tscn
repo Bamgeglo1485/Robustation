@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c2fs5eoy7ntgu" path="res://Scenes/Projectiles/BaseProjectile.tscn" id="1_wr6qi"]
 [ext_resource type="AudioStream" uid="uid://cwegkx2i1iohu" path="res://Resources/Audio/GlassBreakRandom.tres" id="2_wr6qi"]
 [ext_resource type="Texture2D" uid="uid://b6phl7ind2mhy" path="res://Textures/Weapons/Pneumatic/bottle.png" id="3_bnkh0"]
+[ext_resource type="Script" uid="uid://wy7p8eumw3ik" path="res://Components/Entity/DifficultyDependentProjectileSpeedComponent.gd" id="4_bnkh0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wr6qi"]
 radius = 18.027756
@@ -28,3 +29,10 @@ disabled = true
 
 [node name="Texture" type="Sprite2D" parent="." index="4" unique_id=1806190901]
 texture = ExtResource("3_bnkh0")
+
+[node name="DifficultyDependentProjectileSpeedComponent" type="Node" parent="." index="7" unique_id=2142644239]
+script = ExtResource("4_bnkh0")
+speed_on_roleplayer = 400
+speed_on_agent = 500
+speed_on_greytide = 600
+metadata/_custom_type_script = "uid://wy7p8eumw3ik"

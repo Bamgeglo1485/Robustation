@@ -3,18 +3,21 @@ class_name ArenaComponent extends Component
 @export_category("Settings")
 @export var enabled: bool = true
 @export_file_path() var perks: Array[String]
+@export_file_path() var enemy_perks: Array[String]
 @export var boss_battles_per: int = 10
 @export var area_info: RichTextLabel
-@export var start_budget: float = 3
+@export var start_budget: float = 5
 @export var choosable_perk_count_per_wave: int = 4
 @export var available_enemies: Array[Enemy]
 @export var available_bosses: Array[Enemy]
-@export var budget_per_wave: float = 1
+@export var budget_per_wave: float = 1.5
 @export var spawn_positions: Array[Vector2]
 @export var difficulty: int = 2
 
-@export var max_melee_enemies: int = 8
-@export var max_range_enemies: int = 8
+@export var max_melee_enemies: int = 6
+@export var max_range_enemies: int = 6
+@export var max_assist_enemies: int = 4
+@export var max_universal_enemies: int = 6
 
 @export_category("Variables")
 @export var wave: int = 0
@@ -50,7 +53,8 @@ const MAX_ATTEMPTS: int = 100
 func _ready() -> void:
 	if !enabled:
 		return
-	_get_random_perk() #preload to avoid lags
+	_get_random_perk(perks) #preload to avoid lags
+	_get_random_perk(enemy_perks) #preload to avoid lags
 	EventBusManager.gibbed.connect(_on_gibbed)
 	for enemy in available_enemies:
 		if enemy.enemy_type == enemy.enemy_types.MELEE:
@@ -128,6 +132,8 @@ func _choose_enemies(enemies: Array[Enemy]) -> Array[PackedScene]:
 	var _available_enemies: Array[Enemy] = enemies.duplicate()
 	var melee_enemies_count: int = 0
 	var range_enemies_count: int = 0
+	var assist_enemies_count: int = 0
+	var universal_enemies_count: int = 0
 	
 	while remaining_budget > 0.1 and attempts < MAX_ATTEMPTS and _available_enemies.size() > 0:
 		attempts += 1
@@ -144,6 +150,16 @@ func _choose_enemies(enemies: Array[Enemy]) -> Array[PackedScene]:
 				continue
 			else:
 				range_enemies_count += 1
+		elif enemy.enemy_type == enemy.enemy_types.ASSIST :
+			if assist_enemies_count + 1 >= max_assist_enemies:
+				continue
+			else:
+				assist_enemies_count += 1
+		elif enemy.enemy_type == enemy.enemy_types.UNIVERSAL :
+			if universal_enemies_count + 1 >= max_universal_enemies:
+				continue
+			else:
+				universal_enemies_count += 1
 		
 		var max_count: int = floor(remaining_budget / enemy.cost)
 		if max_count <= 0:
@@ -187,12 +203,13 @@ func _add_perks(enemies: Array[PhysicsBody2D]):
 		if !perk_owner_comp:
 			continue
 		
-		perk_owner_comp.add_perk(_get_random_perk(), 10)
+		perk_owner_comp.add_perk(_get_random_perk(enemy_perks), 5)
+		perk_owner_comp.add_perk(_get_random_perk(enemy_perks), 5)
 		budget -= 2
 
-func _get_random_perk():
+func _get_random_perk(list: Array[String]):
 		var valid_perks: Array[Script] = []
-		for potential_perk in perks:
+		for potential_perk in list:
 			var loaded_perk = load(potential_perk)
 			if loaded_perk is Script:
 				valid_perks.append(loaded_perk)
@@ -224,7 +241,7 @@ func _open_perk_choose() -> void:
 	var perk_units: Array[Panel]
 	var perk_units_buttons: Array[Button]
 	for i in choosable_perk_count_per_wave:
-		var perk = _get_random_perk()
+		var perk = _get_random_perk(perks)
 		var inst_perk: BasePerkComponent = perk.new()
 		
 		var perk_unit: Panel = perk_list_unit.instantiate()

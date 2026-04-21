@@ -38,7 +38,7 @@ var children_shared_bullets_weapon: RangeWeapon
 @export var overheat_enabled: bool = false
 @export var max_overheat: float = 8.0
 @export var overheat_per_shoot_modifier: float = 1.0
-@export var overheat_per_shoot: float = 2.0
+@export var overheat_per_shoot: float = 1.5
 @export var cool_delay: float = 0.1
 @export var cool_count: float = 0.1
 @export var min_overheat_damage_debuff: float = 0.2

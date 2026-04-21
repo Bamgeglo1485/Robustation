@@ -4,9 +4,9 @@
 [ext_resource type="AudioStream" uid="uid://cg0leh0na5lvv" path="res://Resources/Audio/BulletHitRandom.tres" id="2_doom2"]
 [ext_resource type="Texture2D" uid="uid://c0w1acal2twly" path="res://Textures/Weapons/Bow/arrow.png" id="3_doom2"]
 [ext_resource type="Script" uid="uid://dfahm1hamvt58" path="res://Components/Entity/TrailEffectComponent.gd" id="4_1lymg"]
-[ext_resource type="Shape2D" uid="uid://b6xj0wmic3mm5" path="res://Resources/Colliders/ProjectileParryRange.tres" id="4_blmrq"]
 [ext_resource type="Script" uid="uid://0qaedvb6js57" path="res://Components/Triggers/SetProjectileExplosionOnTriggerComponent.gd" id="5_fvop5"]
 [ext_resource type="PackedScene" uid="uid://c03qvua0tf8st" path="res://Scenes/Explosion/MiniExplosion.tscn" id="6_blmrq"]
+[ext_resource type="Script" uid="uid://wy7p8eumw3ik" path="res://Components/Entity/DifficultyDependentProjectileSpeedComponent.gd" id="7_blmrq"]
 
 [sub_resource type="Shader" id="Shader_ut4xv"]
 code = "shader_type canvas_item;
@@ -50,20 +50,22 @@ stream = ExtResource("2_doom2")
 use_parent_material = true
 texture = ExtResource("3_doom2")
 
-[node name="Parry#CollisionShape2D" type="CollisionShape2D" parent="." index="5" unique_id=2139953676]
-rotation = 1.5707964
-shape = ExtResource("4_blmrq")
-disabled = true
-
-[node name="TrailEffectComponent" type="Node" parent="." index="6" unique_id=15597664]
+[node name="TrailEffectComponent" type="Node" parent="." index="5" unique_id=15597664]
 script = ExtResource("4_1lymg")
 colors = Array[Color]([Color(0.8164007, 0, 0, 1), Color(0.7808727, 0.00017808378, 0.689379, 1)])
 clean_delay = 1.0
 trail_lifetime = 0.2
 metadata/_custom_type_script = "uid://dfahm1hamvt58"
 
-[node name="SetProjectileExplosionOnTriggerComponent" type="Node" parent="." index="7" unique_id=1857456193]
+[node name="SetProjectileExplosionOnTriggerComponent" type="Node" parent="." index="6" unique_id=1857456193]
 script = ExtResource("5_fvop5")
 explosion_scene = ExtResource("6_blmrq")
 explode_on_delete = true
 metadata/_custom_type_script = "uid://0qaedvb6js57"
+
+[node name="DifficultyDependentProjectileSpeedComponent" type="Node" parent="." index="9" unique_id=563008404]
+script = ExtResource("7_blmrq")
+speed_on_roleplayer = 600
+speed_on_agent = 700
+speed_on_greytide = 800
+metadata/_custom_type_script = "uid://wy7p8eumw3ik"

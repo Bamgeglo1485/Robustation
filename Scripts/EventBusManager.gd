@@ -4,7 +4,7 @@ extends Node
 signal health_changed(emitter: Node2D, health: int, new_health: int)
 signal damaged(emitter: Node2D, taked_damage: int, damager: Node2D)
 signal gibbed(emitter: Node2D)
-signal parry(emitter: Node2D, type: String)
+signal parry(emitter: Node2D, type: String, enemy: bool)
 signal projectile_miss(emitter: Node2D, projectile: Node2D)
 signal projectile_hit(emitter: Node2D, projectile: Node2D)
 signal try_melee_attack(emitter: Node2D, weapon: Weapon)

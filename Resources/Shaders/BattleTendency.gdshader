@@ -15,6 +15,8 @@ uniform float gamma : hint_range(0.1, 3.0) = 1.0;
 uniform float alpha : hint_range(0.0, 1.0) = 1.0;
 uniform float vignette_strength : hint_range(0.0, 1.0) = 0.0;
 
+uniform float chromatic_aberration_strength : hint_range(0.0, 0.05) = 0.0;
+
 vec3 rgb2hsl(vec3 color) {
     float max_color = max(max(color.r, color.g), color.b);
     float min_color = min(min(color.r, color.g), color.b);
@@ -71,34 +73,62 @@ vec3 hsl2rgb(vec3 hsl) {
 }
 
 void fragment() {
-    vec4 tex_color = texture(SCREEN_TEXTURE, SCREEN_UV);
+    vec2 uv = SCREEN_UV;
+    vec4 final_color;
     
-    vec3 color = tex_color.rgb;
-    color.r *= red_factor;
-    color.g *= green_factor;
-    color.b *= blue_factor;
-
-    vec3 hsl = rgb2hsl(color);
-    
-    hsl.x = mod(hsl.x + hue_shift, 1.0);
-    
-    hsl.y *= saturation;
-    
-    hsl.y = clamp(hsl.y, 0.0, 1.0);
-
-    color = hsl2rgb(hsl);
-
-    color = color * contrast + vec3(brightness);
-    
-    color = pow(color, vec3(gamma));
-    
-    if (vignette_strength > 0.0) {
-        vec2 uv = SCREEN_UV * 2.0 - 1.0;
-        float vignette = 1.0 - dot(uv, uv) * vignette_strength;
-        vignette = clamp(vignette, 0.0, 1.0);
-        color *= vignette;
+    if (chromatic_aberration_strength > 0.0) {
+        vec2 offset = (uv - 0.5) * chromatic_aberration_strength;
+        
+        float r = texture(SCREEN_TEXTURE, uv + offset).r;
+        float g = texture(SCREEN_TEXTURE, uv).g;
+        float b = texture(SCREEN_TEXTURE, uv - offset).b;
+        float a = texture(SCREEN_TEXTURE, uv).a;
+        
+        vec3 color = vec3(r, g, b);
+        
+        color.r *= red_factor;
+        color.g *= green_factor;
+        color.b *= blue_factor;
+        
+        vec3 hsl = rgb2hsl(color);
+        hsl.x = mod(hsl.x + hue_shift, 1.0);
+        hsl.y *= saturation;
+        hsl.y = clamp(hsl.y, 0.0, 1.0);
+        
+        color = hsl2rgb(hsl);
+        color = color * contrast + vec3(brightness);
+        color = pow(color, vec3(gamma));
+        color = clamp(color, 0.0, 1.0);
+        
+        final_color = vec4(color, a);
+    } else {
+        vec4 tex_color = texture(SCREEN_TEXTURE, uv);
+        vec3 color = tex_color.rgb;
+        
+        color.r *= red_factor;
+        color.g *= green_factor;
+        color.b *= blue_factor;
+        
+        vec3 hsl = rgb2hsl(color);
+        hsl.x = mod(hsl.x + hue_shift, 1.0);
+        hsl.y *= saturation;
+        hsl.y = clamp(hsl.y, 0.0, 1.0);
+        
+        color = hsl2rgb(hsl);
+        color = color * contrast + vec3(brightness);
+        color = pow(color, vec3(gamma));
+        color = clamp(color, 0.0, 1.0);
+        
+        final_color = vec4(color, tex_color.a);
     }
     
-    color = clamp(color, 0.0, 1.0);
-    COLOR = vec4(color, tex_color.a * alpha);
+    if (vignette_strength > 0.0) {
+        vec2 vignette_uv = uv * 2.0 - 1.0;
+        float vignette = 1.0 - dot(vignette_uv, vignette_uv) * vignette_strength;
+        vignette = clamp(vignette, 0.0, 1.0);
+        final_color.rgb *= vignette;
+    }
+    
+    final_color.a *= alpha;
+    COLOR = final_color;
 }

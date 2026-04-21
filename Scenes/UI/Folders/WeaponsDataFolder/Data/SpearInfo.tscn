@@ -13,14 +13,14 @@ bg_color = Color(0.06469653, 0.064696535, 0.0646965, 1)
 [node name="Label" parent="Panel" parent_id_path=PackedInt32Array(1765621037) index="1" unique_id=889542511]
 text = "Robust-os - spear_info.rbstxt - ui_system.rbst"
 
-[node name="Image" parent="Info" parent_id_path=PackedInt32Array(157422737) index="0" unique_id=1356612208]
+[node name="Image" parent="Info" parent_id_path=PackedInt32Array(157422737) index="0" unique_id=503364341]
 texture = ExtResource("2_4u5r2")
 
-[node name="Name" parent="Info" parent_id_path=PackedInt32Array(157422737) index="1" unique_id=665103481]
+[node name="Name" parent="Info" parent_id_path=PackedInt32Array(157422737) index="1" unique_id=2133805158]
 text = "[color=lightblue]Spear[/color]
 Area damage spear"
 
-[node name="OBJECTSSCROLL" parent="." index="5" unique_id=1868664687]
+[node name="OBJECTSSCROLL" parent="." index="5" unique_id=962977550]
 anchor_top = 0.2614035
 
 [node name="DescriptionHeading" type="Panel" parent="OBJECTSSCROLL/OBJECTS" parent_id_path=PackedInt32Array(987928520) index="0" unique_id=1826602918]

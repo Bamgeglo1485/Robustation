@@ -30,7 +30,7 @@ func activate_ability() -> bool:
 	if dash_component:
 		if dash_component.dash_stamina < dash_component.max_dash_stamina:
 			return false
-		dash_component.dash_stamina = 0
+		dash_component.dash_stamina = 1
 		dash_component._update_stamina_bar()
 		dash_component._cooldown()
 	
@@ -66,7 +66,7 @@ func overdose_effects() -> void:
 	var trail = TrailEffectComponent.new()
 	trail.lifetime = ability_delay
 	trail.colors = trail_colors
-	trail.color_change_delay = ability_delay / trail_colors.size() / 10
+	trail.color_change_delay = ability_delay / trail_colors.size()
 	trail.name = "TrailEffectComponent"
 	trail.ignore_time_scale = true
 	parent.add_child(trail)

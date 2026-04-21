@@ -61,6 +61,8 @@ var can_parry_weapon: MeleeWeapon
 @export var explode_on_projectile_hit: bool = false
 @export var explode_on_damage: bool = false
 
+@onready var tree = get_tree()
+
 var sploded: bool = false
 var rope: Line2D
 var sender_mob_mover: MobMoverComponent
@@ -83,12 +85,12 @@ func _ready() -> void:
 	if lifetime == 0:
 		return
 	if fade_out_delete:
-		await get_tree().create_timer(lifetime - 1, false).timeout
+		await tree.create_timer(lifetime - 1, false).timeout
 		var _tween = create_tween()
 		_tween.tween_property(parent, "modulate:a", 0, 1)
-		await get_tree().create_timer(1, false).timeout
+		await tree.create_timer(1, false).timeout
 	else:
-		await get_tree().create_timer(lifetime, false).timeout
+		await tree.create_timer(lifetime, false).timeout
 	if deleted:
 		return
 	
@@ -157,7 +159,7 @@ func _delete() -> void:
 	if explode_on_delete:
 		explode()
 	
-	await get_tree().create_timer(5.0).timeout
+	await tree.create_timer(5.0).timeout
 	parent.queue_free()
 
 func on_parried():
@@ -186,12 +188,12 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.has_node("ProjectileIgnoreComponent"):
 		return
 	var projectile_comp: ProjectileComponent = body.get_node_or_null("ProjectileComponent")
-	if projectile_comp and shooter_faction and projectile_comp.shooter_faction and projectile_comp.shooter_faction.faction == shooter_faction.faction:
-		if explode_on_projectile_hit:
+	if projectile_comp:
+		if shooter and projectile_comp.shooter and shooter == projectile_comp.shooter and explode_on_projectile_hit:
 			explode_on_delete = true
 			_delete()
 			return
-		elif can_parry_weapon:
+		if can_parry_weapon:
 			var _direction: Vector2 = -body.velocity
 			projectile_comp.speed *= 2
 			if shooter_faction:
@@ -220,6 +222,7 @@ func _on_body_entered(body: Node2D) -> void:
 	var health_comp: HealthComponent = body.get_node_or_null("HealthComponent")
 	if health_comp:
 		if health_comp.INVINCIBLE:
+			health_comp.invincibility_effects()
 			return
 		if !shooter:
 			shooter = null
@@ -321,8 +324,8 @@ func _on_area_shape_entered(_area_rid: RID, area: Area2D, _area_shape_index: int
 		return
 	_on_body_entered(area_parent)
 
-func _get_nearest_enemy() -> CharacterBody2D:
-	var enemies: Array[CharacterBody2D] = _get_valid_enemies()
+func _get_nearest_enemy() -> PhysicsBody2D:
+	var enemies: Array[PhysicsBody2D] = _get_valid_enemies()
 	var parent_pos: Vector2 = parent.global_position
 	
 	if enemies.is_empty():
@@ -331,7 +334,7 @@ func _get_nearest_enemy() -> CharacterBody2D:
 			targeted_enemies.clear()
 			return null
 	
-	var nearest_enemy: CharacterBody2D = enemies[0]
+	var nearest_enemy: PhysicsBody2D = enemies[0]
 	var nearest_distance: float = (parent_pos - nearest_enemy.global_position).length_squared()
 	
 	for enemy in enemies:
@@ -343,9 +346,9 @@ func _get_nearest_enemy() -> CharacterBody2D:
 	targeted_enemies.append(nearest_enemy)
 	return nearest_enemy
 
-func _get_valid_enemies(check_in_targeted: bool = true) -> Array[CharacterBody2D]:
-	var enemies: Array[CharacterBody2D] = []
-	for enemy in get_tree().get_nodes_in_group("Enemies"):
+func _get_valid_enemies(check_in_targeted: bool = true) -> Array[PhysicsBody2D]:
+	var enemies: Array[PhysicsBody2D] = []
+	for enemy in tree.get_nodes_in_group("Enemies"):
 		if check_in_targeted and targeted_enemies.has(enemy):
 			continue
 		var faction_comp: FactionComponent = enemy.get_node_or_null("FactionComponent")

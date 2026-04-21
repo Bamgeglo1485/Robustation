@@ -124,7 +124,7 @@ stream = ExtResource("29_f6ny4")
 
 [node name="Toolbox" type="Node" parent="RandomWeaponSelectorComponent" index="2" unique_id=1243054908 node_paths=PackedStringArray("attack_sound", "miss_sound")]
 script = ExtResource("25_ipqlo")
-damage = 30
+damage = 20.0
 stamina_damage = 20
 attack_range = 83
 attack_sound = NodePath("HitSound")
@@ -143,7 +143,7 @@ stream = ExtResource("29_f6ny4")
 stream = ExtResource("28_mbwmj")
 
 [node name="BeehaveTree" parent="." index="19" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@112614")
+blackboard = NodePath("@Node@240836")
 
 [node name="MoveToPlayer" type="Node" parent="BeehaveTree" index="0" unique_id=1542265017]
 script = ExtResource("36_k3vsn")
@@ -156,7 +156,6 @@ metadata/_custom_type_script = "uid://c6fapai3prk4g"
 [node name="SetMoveToKeyAction" type="Node" parent="BeehaveTree/MoveToPlayer" index="1" unique_id=158999529]
 script = ExtResource("38_pe42x")
 key = "Target"
-move_key = null
 metadata/_custom_type_script = "uid://dl1x4qw4skabi"
 
 [node name="LookAtDirectionAction" type="Node" parent="BeehaveTree/MoveToPlayer" index="2" unique_id=265375964]

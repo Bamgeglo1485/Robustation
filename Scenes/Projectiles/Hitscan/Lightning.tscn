@@ -11,10 +11,9 @@
 material = ExtResource("2_rhhsc")
 position = Vector2(0.05896592, 0.018667966)
 scale = Vector2(1.058966, 1.0186689)
-points = PackedVector2Array(48, 2.0981465e-06)
+points = PackedVector2Array(48, 2.0981465e-06, 0, 0)
 
-[node name="HitscanComponent" parent="." index="1" unique_id=993689081 node_paths=PackedStringArray("hit_sound")]
-hit_sound = NodePath("../HitSound")
+[node name="HitscanComponent" parent="." index="1" unique_id=993689081]
 hit_effect = ExtResource("3_cxf87")
 tween_speed = 0.3
 damage = 0

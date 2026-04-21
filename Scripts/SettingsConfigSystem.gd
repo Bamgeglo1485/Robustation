@@ -11,6 +11,13 @@ var explosion_effect: bool = true
 
 var introductiones_enemies: Array[String]
 
+enum difficulties {
+	RPER,
+	AGENT,
+	GREYTIDE
+}
+@export var difficulty: difficulties = difficulties.AGENT
+
 func _ready() -> void:
 	var err = config.load("user://settings.cfg")
 	if err != OK:
@@ -35,6 +42,8 @@ func _ready() -> void:
 			introductiones_enemies.append(intr)
 	if config.has_section_key("VISUAL", "Blood_cleaning_delay"):
 		blood_clean_delay = config.get_value("VISUAL", "Blood_cleaning_delay")
+	if config.has_section_key("GAMEPLAY", "difficulty"):
+		difficulty = config.get_value("GAMEPLAY", "difficulty")
 
 static func linear_to_db(linear: float) -> float:
 	if linear <= 0:

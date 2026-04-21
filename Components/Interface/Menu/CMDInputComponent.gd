@@ -66,6 +66,8 @@ func _on_text_submitted(new_text: String):
 			off_screen._off()
 	elif check_text == "nanotrasen":
 		text = "[color=#204c6d]GLORY TO NANOTRASEN![/color]"
+	elif check_text == "plato":
+		text = "Knowledge which is acquired under compulsion obtains no hold on the mind. [color=crimson]U3Q[/color]"
 	
 	# COMMANDS
 	elif check_text == "test_system init arena" and roundstart_component:

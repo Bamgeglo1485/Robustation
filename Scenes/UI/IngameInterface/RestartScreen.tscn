@@ -44,6 +44,7 @@ offset_right = 25.0
 offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_behavior_recursive = 1
 theme_override_constants/line_separation = 5
 theme_override_fonts/normal_font = ExtResource("1_745y4")
 theme_override_fonts/bold_font = ExtResource("2_4eipc")
@@ -91,6 +92,7 @@ anchor_right = 0.9861111
 anchor_bottom = 0.7484568
 grow_horizontal = 2
 grow_vertical = 2
+mouse_behavior_recursive = 1
 theme_override_constants/line_separation = 5
 theme_override_fonts/normal_font = ExtResource("1_745y4")
 text = "                                                         
@@ -136,7 +138,7 @@ script = ExtResource("2_ee1ry")
 metadata/_custom_type_script = "uid://clfjtp26jetey"
 
 [node name="ColorRect2" type="ColorRect" parent="." unique_id=1875520062]
-z_index = 2
+z_index = 1
 material = ExtResource("3_uu8do")
 layout_mode = 1
 anchors_preset = 15

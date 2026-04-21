@@ -10,8 +10,18 @@ func _ready() -> void:
 	if !arena_comp:
 		return
 	
+	var difficulty: String
+	match SettingsConfigSystem.difficulty:
+		SettingsConfigSystem.difficulties.RPER:
+			difficulty = "Roleplayer [1]"
+		SettingsConfigSystem.difficulties.AGENT:
+			difficulty = "Agent [2]"
+		SettingsConfigSystem.difficulties.GREYTIDE:
+			difficulty = "Greytide [3]"
+	
 	var results: String
 	results = ("[color=crimson]Wave: [/color]" + str(arena_comp.wave) + "\n" +
-	"[color=crimson]Time: [/color]" + str(round(arena_comp.time * 10) / 10.0))
+	"[color=crimson]Time: [/color]" + str(round(arena_comp.time * 10) / 10.0) + "\n" +
+	"[color=crimson]Difficulty: [/color]" + difficulty)
 	
 	results_text_label.text = results

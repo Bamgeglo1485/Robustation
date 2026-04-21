@@ -18,6 +18,7 @@ text = "Robust-os - Desktop\\weapons_data"
 [node name="Lasergun" type="Button" parent="ScrollContainer/Objects" parent_id_path=PackedInt32Array(1585434421) index="0" unique_id=1026114932]
 custom_minimum_size = Vector2(480, 48)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 
 [node name="Label" type="Label" parent="ScrollContainer/Objects/Lasergun" index="0" unique_id=496315401]
 layout_mode = 1
@@ -55,6 +56,7 @@ metadata/_custom_type_script = "uid://bodxsix2kyyy6"
 [node name="Shotgun" type="Button" parent="ScrollContainer/Objects" parent_id_path=PackedInt32Array(1585434421) index="1" unique_id=1888270356]
 custom_minimum_size = Vector2(480, 48)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 
 [node name="Label" type="Label" parent="ScrollContainer/Objects/Shotgun" index="0" unique_id=1573512540]
 layout_mode = 1
@@ -92,6 +94,7 @@ metadata/_custom_type_script = "uid://bodxsix2kyyy6"
 [node name="Spear" type="Button" parent="ScrollContainer/Objects" parent_id_path=PackedInt32Array(1585434421) index="2" unique_id=259485469]
 custom_minimum_size = Vector2(480, 48)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 
 [node name="Label" type="Label" parent="ScrollContainer/Objects/Spear" index="0" unique_id=1356072567]
 layout_mode = 1
@@ -129,6 +132,7 @@ metadata/_custom_type_script = "uid://bodxsix2kyyy6"
 [node name="Toolbox" type="Button" parent="ScrollContainer/Objects" parent_id_path=PackedInt32Array(1585434421) index="3" unique_id=2128183710]
 custom_minimum_size = Vector2(480, 48)
 layout_mode = 2
+mouse_default_cursor_shape = 2
 
 [node name="Label" type="Label" parent="ScrollContainer/Objects/Toolbox" index="0" unique_id=996571]
 layout_mode = 1

@@ -25,6 +25,7 @@ class_name DashAbilityComponent extends Component
 @onready var health_component: HealthComponent = parent.get_node_or_null("HealthComponent")
 @onready var overdose_component: OverdoseAbilityComponent = parent.get_node_or_null("OverdoseAbilityComponent")
 @onready var mob_mover_component: MobMoverComponent = parent.get_node_or_null("MobMoverComponent")
+@onready var weapon_user_component: WeaponUserComponent = parent.get_node_or_null("WeaponUserComponent")
 
 var recovery_timer: Timer
 var active: bool = false
@@ -153,16 +154,18 @@ func _cooldown() -> void:
 	if cooldown_delay != 0:
 		cooldown = true
 		recovery_timer.stop()
-		await get_tree().create_timer(cooldown_delay, true, false, true).timeout
+		await tree.create_timer(cooldown_delay, true, false, true).timeout
 		cooldown = false
 		if dash_stamina < max_dash_stamina:
 			recovery_timer.start()
 
 func _INVINCIBLE() -> void:
 	if invincibility_delay != 0 and health_component:
+		weapon_user_component.minor_damage_modifiers["Dashboost"] = 2.0
 		health_component.INVINCIBLE = true
 		active = true
-		await get_tree().create_timer(invincibility_delay).timeout
+		await tree.create_timer(invincibility_delay).timeout
+		weapon_user_component.minor_damage_modifiers["Dashboost"] = 1.0
 		health_component.INVINCIBLE = false
 		active = false
 
@@ -173,5 +176,6 @@ func _on_shoot(emitter: Node2D, _weapon: Weapon, direction: Vector2, projectile:
 	var projectile_component: ProjectileComponent = projectile.get_node_or_null("ProjectileComponent")
 	if !projectile_component:
 		return
-	await projectile.ready
+	if !projectile.is_node_ready():
+		await projectile.ready
 	parry_weapon.parry_projectile(projectile, projectile_component, direction)

@@ -49,7 +49,7 @@ texture = NodePath("../Texture")
 particle_emitter = NodePath("GPUParticles2D")
 speed = 100
 speed_decreasing = -5
-damage = 150
+damage = 120.0
 lifetime = 30.0
 parry_speed_boost = 1.0
 explosion_scene = ExtResource("3_oqm3e")
@@ -80,8 +80,6 @@ texture = ExtResource("2_l3ous")
 script = ExtResource("5_65omb")
 explosion_scene = ExtResource("7_lqmm4")
 explode_on_delete = true
-explode_on_hit = true
-explode_on_damage = true
 speed = 1000
 metadata/_custom_type_script = "uid://0qaedvb6js57"
 

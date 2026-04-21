@@ -44,7 +44,7 @@ func _on_gibbed(damager) -> void:
 	if damager != parent:
 		change_battle_tendency(1.5)
 		
-func _on_parry(emitter, _type):
+func _on_parry(emitter, _type, _enemy):
 	if emitter == parent:
 		change_battle_tendency(1.5)
 

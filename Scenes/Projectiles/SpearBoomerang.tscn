@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c2fs5eoy7ntgu" path="res://Scenes/Projectiles/BaseProjectile.tscn" id="1_76f4r"]
 [ext_resource type="AudioStream" uid="uid://cg0leh0na5lvv" path="res://Resources/Audio/BulletHitRandom.tres" id="2_g0bgv"]
 [ext_resource type="Texture2D" uid="uid://c2wadc7c7e3v3" path="res://Textures/Weapons/Spear/spear.png" id="3_g0bgv"]
+[ext_resource type="Script" uid="uid://0qaedvb6js57" path="res://Components/Triggers/SetProjectileExplosionOnTriggerComponent.gd" id="5_vwhna"]
 [ext_resource type="Script" uid="uid://cslfowwgmffis" path="res://Components/Triggers/ActivateProjectileParticlesOnTriggerComponent.gd" id="7_it4dj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b1bul"]
@@ -71,5 +72,11 @@ texture = ExtResource("3_g0bgv")
 [node name="ActivateProjectileParticlesOnTriggerComponent" type="Node" parent="." index="5" unique_id=791180759]
 script = ExtResource("7_it4dj")
 metadata/_custom_type_script = "uid://cslfowwgmffis"
+
+[node name="SetProjectileExplosionOnTriggerComponent" type="Node" parent="." index="8" unique_id=1452082778]
+script = ExtResource("5_vwhna")
+explode_lifetime = 0.0
+speed = 700
+metadata/_custom_type_script = "uid://0qaedvb6js57"
 
 [connection signal="area_shape_entered" from="ProjectileComponent" to="ProjectileComponent" method="_on_area_shape_entered"]

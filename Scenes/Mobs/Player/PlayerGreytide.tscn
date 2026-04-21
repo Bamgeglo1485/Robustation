@@ -65,8 +65,13 @@
 [ext_resource type="AudioStream" uid="uid://brnrtg3y0uvbr" path="res://Audio/Weapon/Hit/laser3.ogg" id="46_rfjqm"]
 [ext_resource type="Texture2D" uid="uid://pe7a4yj0c7rq" path="res://Textures/Weapons/LaserGun/unlethal_icon.png" id="46_xvfrh"]
 [ext_resource type="PackedScene" uid="uid://e33tm7nwmy0y" path="res://Scenes/Effects/Particles/Charge.tscn" id="48_ssq7n"]
+[ext_resource type="AudioStream" uid="uid://cw8pdkw4hxrj1" path="res://Audio/Effects/dodge_bass.ogg" id="52_5key3"]
 [ext_resource type="Script" uid="uid://d35ly1kbt1uf" path="res://Components/Interface/AnchorToCursorComponent.gd" id="56_sp3tm"]
+[ext_resource type="AudioStream" uid="uid://c5dkys50hll0m" path="res://Audio/Music/Arena_s1.ogg" id="58_typtw"]
+[ext_resource type="AudioStream" uid="uid://buj7fii6p35gc" path="res://Audio/Music/Arena_s2.ogg" id="59_5key3"]
 [ext_resource type="FontFile" uid="uid://mhx51lyuasx4" path="res://Resources/Text/Fonts/Ac437_ApricotPortable.ttf" id="59_5mfce"]
+[ext_resource type="AudioStream" uid="uid://byemtkosqdf5f" path="res://Audio/Music/Arena_s3.ogg" id="60_jcq5h"]
+[ext_resource type="AudioStream" uid="uid://dyh6tufx6pffo" path="res://Audio/Music/Arena_s4.ogg" id="61_1j3ws"]
 
 [sub_resource type="DPITexture" id="DPITexture_wl2js"]
 _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"4\" height=\"8\"><path fill=\"#fff\" fill-opacity=\".25\" d=\"M1 0h2v16H1z\"/></svg>
@@ -147,7 +152,8 @@ texture_mode = 2
 physics_interpolation_mode = 1
 energy = 0.0
 
-[node name="HealthComponent" parent="." index="6" unique_id=1758373275]
+[node name="HealthComponent" parent="." index="6" unique_id=1758373275 node_paths=PackedStringArray("invinciblitiy_attack_sound")]
+invinciblitiy_attack_sound = NodePath("../Sounds/Dodge")
 ignore_time_scale = true
 
 [node name="WeaponUserComponent" parent="." index="8" unique_id=2123544057 node_paths=PackedStringArray("selected_weapon")]
@@ -181,6 +187,7 @@ stream = ExtResource("10_ia5h3")
 
 [node name="Toolbox" type="Node" parent="WeaponUserComponent" index="1" unique_id=140255965 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound", "qte_icon", "qte_icon_perfect_frame", "qte_perfect_sound", "qte_perfect_time_sound", "alt_attack")]
 script = ExtResource("12_tn3ht")
+damage = 25.0
 attack_range = 80
 ignore_armor = true
 parry_sound = NodePath("ParrySound")
@@ -320,6 +327,7 @@ attack_range = 80
 parry_sound = NodePath("ParrySound")
 attack_sound = NodePath("MeleeHitSound")
 miss_sound = NodePath("MeleeMissSound")
+parry_force = 1.0
 throw_speed = 200
 swing_delay = 0.0
 icon_texture = ExtResource("30_75g6c")
@@ -425,6 +433,9 @@ stream = ExtResource("40_sp3tm")
 max_polyphony = 3
 bus = &"OverdoseIgnore"
 
+[node name="Dodge" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="12" unique_id=1666659874]
+stream = ExtResource("52_5key3")
+
 [node name="LightOccluder2D" parent="." index="15" unique_id=364816313]
 sdf_collision = true
 
@@ -443,7 +454,7 @@ trail_colors = Array[Color]([Color(0.8736105, 0, 0.34971508, 1), Color(9.62615e-
 overdose_effect = NodePath("../GUI/Overlays/Ability/Overdose")
 distraction_scene = ExtResource("42_isbls")
 cooldown_delay = 3.0
-ability_delay = 3.5
+ability_delay = 3.0
 start_effect = ExtResource("42_75g6c")
 start_sound = NodePath("../Sounds/Overdose")
 ability_icon = NodePath("../GUI/Inventory/Hand_L/Hypo")
@@ -456,6 +467,12 @@ region_enabled = true
 region_rect = Rect2(0, 0, 32, 32)
 script = ExtResource("31_m4dpc")
 metadata/_custom_type_script = "uid://bqvdlb3r03cs0"
+
+[node name="BattleTendencyMusicComponent" parent="." index="28" unique_id=947169944]
+music_1 = ExtResource("58_typtw")
+music_2 = ExtResource("59_5key3")
+music_3 = ExtResource("60_jcq5h")
+music_4 = ExtResource("61_1j3ws")
 
 [node name="Information" parent="GUI/EnemyIntroduction" parent_id_path=PackedInt32Array(1741703015) index="0" unique_id=2104700922]
 theme_override_fonts/normal_font = ExtResource("59_5mfce")

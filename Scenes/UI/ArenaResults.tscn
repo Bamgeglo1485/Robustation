@@ -24,17 +24,13 @@ bg_color = Color(0.14165193, 0.075261734, 0.0927326, 1)
 
 [node name="Results" type="Panel" unique_id=390335485]
 process_mode = 3
-z_index = 1
 anchors_preset = -1
-anchor_left = 0.344
-anchor_top = 0.31500003
-anchor_right = 0.65800005
-anchor_bottom = 0.58000004
-offset_left = 368.71198
-offset_top = 239.87999
-offset_right = 368.98395
-offset_bottom = 240.15997
+anchor_left = 0.6640625
+anchor_top = 0.6851852
+anchor_right = 0.9782986
+anchor_bottom = 0.9506173
 theme_override_styles/panel = SubResource("StyleBoxFlat_3me48")
+metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="." unique_id=464566303]
 layout_mode = 1
@@ -42,6 +38,7 @@ anchors_preset = -1
 anchor_top = -0.008955223
 anchor_right = 1.0
 anchor_bottom = 0.21641788
+mouse_behavior_recursive = 2
 mouse_default_cursor_shape = 6
 theme_override_styles/normal = SubResource("StyleBoxFlat_yrqcn")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_pjvv6")

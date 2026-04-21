@@ -106,9 +106,6 @@ func damage_collider(collider: Node2D) -> void:
 			@warning_ignore("narrowing_conversion")
 			damage *= projectile_comp.can_parry_weapon.parry_force
 			fire()
-		elif projectile_comp.explode_on_projectile_hit:
-			projectile_comp.explode_on_delete = true
-			projectile_comp._delete()
 		else:
 			last_target = collider
 			fire()

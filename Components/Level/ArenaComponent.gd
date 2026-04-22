@@ -47,6 +47,9 @@ var perk_list_unit: PackedScene = preload("res://Scenes/UI/IngameInterface/Perks
 var wave_active: bool = false
 var current_enemies: Array[PhysicsBody2D]
 
+var high_pass: AudioEffectHighPassFilter = AudioServer.get_bus_effect(1, 2)
+var high_pass_tween: Tween
+
 const MAX_ATTEMPTS: int = 100
 
 #-----------------------READY-----------------------
@@ -230,14 +233,20 @@ func _clean_blood():
 func _open_perk_choose() -> void:
 	if loose:
 		return
+	
+	_high_pass_set(true)
+	
 	perk_choice_start_sound.play()
 	weapon_user_component.can_attack = false
 	player_perk_ui.visible = true
+	
 	var tween: Tween = create_tween()
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(player_perk_ui, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.5)
+	
 	await tween.finished
+	
 	var perk_units: Array[Panel]
 	var perk_units_buttons: Array[Button]
 	for i in choosable_perk_count_per_wave:
@@ -285,13 +294,19 @@ func _close_perk_choose() -> void:
 	if !weapon_user_component:
 		player_perk_ui.visible = false
 		return
+	
+	_high_pass_set(false)
+	
 	perk_selected_sound.play()
 	weapon_user_component.can_attack = true
+	
 	var tween: Tween = create_tween()
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(player_perk_ui, "modulate", Color(0.0, 0.0, 0.0, 0.0), 0.5)
+	
 	await tween.finished
+	
 	player_perk_ui.visible = false
 	for child in player_perk_ui_list.get_children():
 		child.queue_free()
@@ -299,6 +314,22 @@ func _close_perk_choose() -> void:
 func _on_player_death() -> void:
 	wave_active = false
 	loose = true
+
+func _high_pass_set(enable: bool) -> void:
+	if high_pass_tween and high_pass_tween.is_running():
+		high_pass_tween.kill()
+	
+	if enable:
+		high_pass.cutoff_hz = 1
+		high_pass_tween = create_tween()
+		high_pass_tween.tween_property(high_pass, "cutoff_hz", 700, 1)
+		AudioServer.set_bus_effect_enabled(1, 2, true)
+	else:
+		high_pass.cutoff_hz = 700
+		high_pass_tween = create_tween()
+		high_pass_tween.tween_property(high_pass, "cutoff_hz", 1, 1)
+		await high_pass_tween.finished
+		AudioServer.set_bus_effect_enabled(1, 2, false)
 
 #-----------------------SIGNALS-----------------------
 func _on_gibbed(emitter: Node2D) -> void:

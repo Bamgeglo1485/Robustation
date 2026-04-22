@@ -101,7 +101,7 @@ text = "(c) System by Geglo and contributors, more details in credits
 [color=yellow][DEBG][/color] res.mod: Loading module: '/OmegaProj/Omega.Data.Tests.dll'
 [color=yellow][DEBG][/color] res.mod: Loading module: '/OmegaProj/Omega.Interface.dll'
 [color=yellow][DEBG][/color] res.mod: Loading module: '/OmegaProj/Omega.Shared.dll'
-[color=yellow][DEBG][/color] res.mod: DONE loading modules[/color]
+[color=yellow][DEBG][/color] res.mod: DONE loading modules
 
 [color=green]STARTUP SUCCESSFUL![/color]
 Good morning, Manager!

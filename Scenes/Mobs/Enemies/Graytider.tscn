@@ -112,7 +112,6 @@ damage_type_modifiers = Dictionary[String, float]({
 "Projectile": 2.0
 })
 invinciblitiy_attack_effect = ExtResource("4_4brc5")
-heal_for_damage_multiplier = 0.1
 
 [node name="WeaponUserComponent" parent="." index="6" unique_id=2123544057 node_paths=PackedStringArray("selected_weapon")]
 selected_weapon = NodePath("Spear")
@@ -232,7 +231,7 @@ avoidance_enabled = false
 radius = 64.0
 
 [node name="BeehaveTree" parent="." index="16" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@18977")
+blackboard = NodePath("@Node@43310")
 
 [node name="MoveToPlayer" type="Node" parent="BeehaveTree" index="0" unique_id=478688837]
 script = ExtResource("23_fs2h0")

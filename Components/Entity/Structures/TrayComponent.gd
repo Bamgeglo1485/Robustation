@@ -5,13 +5,13 @@ class_name TrayComponent extends Component
 @export var max_plant_progress: int = 4
 var plant_progress: int = 0
 @export var plant_textures: Array[Texture2D]
-@export var progress_stage_delay: float = 1.0
+@export var progress_stage_delay: float = 0.7
 @export var plant_scene: PackedScene
 
 var stage_timer: Timer
 
 @export_category("Tray")
-@export var max_plants: int = 5
+@export var max_plants: int = 8
 var plants: Array[Node2D]
 
 func _ready() -> void:
@@ -33,6 +33,7 @@ func _stage_progress() -> void:
 		var plant_inst: Node2D = plant_scene.instantiate()
 		plant_inst.global_position = parent.global_position
 		scene.add_child.call_deferred(plant_inst)
+		plants.append(plant_inst)
 	
 	plant_sprite.texture = plant_textures[plant_progress]
 

@@ -208,9 +208,8 @@ func _projectile_shoot(direction) -> Node2D:
 	var instance: Node = projectile.instantiate()
 	EventBusManager.projectile_shoot.emit(parent, self, direction, instance)
 	
-	if instance.has_node("ProjectileComponent"):
-		var projectile_component: ProjectileComponent = instance.get_node("ProjectileComponent")
-		
+	var projectile_component: ProjectileComponent = instance.get_node_or_null("ProjectileComponent")
+	if projectile_component:
 		instance.global_position = parent.global_position
 		instance.global_rotation = angle
 		
@@ -225,8 +224,6 @@ func _projectile_shoot(direction) -> Node2D:
 			if rope.material:
 				rope.material.set_shader_parameter("wave_amplitude", 0.15)
 				var tween: Tween = create_tween()
-				tween.set_trans(Tween.TRANS_SINE)
-				tween.set_ease(Tween.EASE_IN_OUT)
 				tween.tween_property(rope.material, "shader_parameter/wave_amplitude", 0, 0.5)
 		if scene:
 			scene.add_child(instance)
@@ -235,7 +232,7 @@ func _projectile_shoot(direction) -> Node2D:
 			var damage_multiplier: float = 1.0 - pow(heat_factor, 2) * (1.0 - min_overheat_damage_debuff)
 			projectile_component.damage = int(projectile_component.damage * damage_multiplier)
 	elif instance.has_node("HitscanComponent"):
-		var hitscan_component: HitscanComponent = instance.get_node("HitscanComponent")
+		var hitscan_component: HitscanComponent = instance.get_node_or_null("HitscanComponent")
 		instance.global_position = parent.global_position
 		var shoot_direction = direction.normalized()
 		if shoot_direction == Vector2.ZERO:

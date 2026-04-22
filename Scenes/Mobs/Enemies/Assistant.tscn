@@ -81,7 +81,7 @@ metadata/_custom_type_script = "uid://bd0gbdhbjn7xx"
 
 [node name="Crowbar" type="Node" parent="RandomWeaponSelectorComponent" index="0" unique_id=1903842277 node_paths=PackedStringArray("attack_sound", "miss_sound")]
 script = ExtResource("25_ipqlo")
-damage = 12
+damage = 12.0
 attack_range = 83
 attack_sound = NodePath("HitSound")
 miss_sound = NodePath("MissSound")
@@ -103,7 +103,7 @@ stream = ExtResource("29_f6ny4")
 
 [node name="Fist" type="Node" parent="RandomWeaponSelectorComponent" index="1" unique_id=2029928507 node_paths=PackedStringArray("attack_sound", "miss_sound")]
 script = ExtResource("25_ipqlo")
-damage = 6
+damage = 5.0
 attack_range = 83
 attack_sound = NodePath("HitSound")
 miss_sound = NodePath("MissSound")
@@ -143,7 +143,7 @@ stream = ExtResource("29_f6ny4")
 stream = ExtResource("28_mbwmj")
 
 [node name="BeehaveTree" parent="." index="19" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@240836")
+blackboard = NodePath("@Node@35448")
 
 [node name="MoveToPlayer" type="Node" parent="BeehaveTree" index="0" unique_id=1542265017]
 script = ExtResource("36_k3vsn")

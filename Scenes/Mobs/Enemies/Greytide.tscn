@@ -130,6 +130,7 @@ selected_weapon = NodePath("Spear")
 
 [node name="Spear" type="Node" parent="WeaponUserComponent" index="0" unique_id=30503364 node_paths=PackedStringArray("attack_sound", "miss_sound")]
 script = ExtResource("3_tryy6")
+damage = 30.0
 attack_sound = NodePath("HitSound")
 miss_sound = NodePath("MissSound")
 throw_speed = 600
@@ -152,6 +153,7 @@ stream = ExtResource("7_fe6br")
 
 [node name="Toolbox" type="Node" parent="WeaponUserComponent" index="1" unique_id=1309996882 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound", "swinging_sound")]
 script = ExtResource("3_tryy6")
+damage = 30.0
 attack_range = 96
 ignore_armor = true
 parry_sound = NodePath("../../Sounds/ParrySound")
@@ -240,7 +242,7 @@ avoidance_enabled = false
 radius = 64.0
 
 [node name="BeehaveTree" parent="." index="16" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@28581")
+blackboard = NodePath("@Node@42104")
 
 [node name="MoveToPlayer" type="Node" parent="BeehaveTree" index="0" unique_id=478688837]
 script = ExtResource("33_8bpma")

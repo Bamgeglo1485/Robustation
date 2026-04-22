@@ -5,8 +5,6 @@ class_name IngameMenuComponent extends Component
 @export var paused_effect: ColorRect
 @export var ambience: AudioStreamPlayer2D
 var prev_pause_state: bool = false
-var high_pass: AudioEffectHighPassFilter = AudioServer.get_bus_effect(1, 0)
-var reverb: AudioEffectReverb = AudioServer.get_bus_effect(1, 1)
 
 func _ready() -> void:
 	menu.visibility_changed.connect(_visibility_changed)
@@ -43,3 +41,7 @@ func _visibility_changed():
 		ambience.play()
 	elif ambience:
 		ambience.stop()
+
+func _exit_tree() -> void:
+	AudioServer.set_bus_effect_enabled(1, 0, false)
+	AudioServer.set_bus_effect_enabled(1, 1, false)

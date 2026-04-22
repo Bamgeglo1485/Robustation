@@ -16,6 +16,10 @@ resource_name = "HighPassFilter"
 resource_name = "Reverb"
 room_size = 0.3
 
+[sub_resource type="AudioEffectHighPassFilter" id="AudioEffectHighPassFilter_g28q7"]
+resource_name = "HighPassFilter"
+cutoff_hz = 1.0
+
 [sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_n8wo2"]
 resource_name = "PitchShift"
 pitch_scale = 4.0
@@ -37,6 +41,8 @@ bus/1/effect/0/effect = SubResource("AudioEffectHighPassFilter_j3pel")
 bus/1/effect/0/enabled = false
 bus/1/effect/1/effect = SubResource("AudioEffectReverb_j3pel")
 bus/1/effect/1/enabled = false
+bus/1/effect/2/effect = SubResource("AudioEffectHighPassFilter_g28q7")
+bus/1/effect/2/enabled = false
 bus/2/name = &"OverdoseIgnore"
 bus/2/solo = false
 bus/2/mute = false

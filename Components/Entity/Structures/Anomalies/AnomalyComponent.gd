@@ -33,8 +33,6 @@ func _ready() -> void:
 	for child in parent.get_children():
 		if child is Sprite2D or child is PointLight2D:
 			var tween: Tween = create_tween()
-			tween.set_trans(Tween.TRANS_SINE)
-			tween.set_ease(Tween.EASE_IN_OUT)
 			tween.tween_property(child, "position", Vector2(0, 5), 1)
 			tween.tween_property(child, "position", Vector2(0, -5), 1)
 			tween.set_loops()
@@ -42,8 +40,6 @@ func _ready() -> void:
 			for node_child in child.get_children():
 				if node_child is Sprite2D or node_child is PointLight2D:
 					var tween: Tween = create_tween()
-					tween.set_trans(Tween.TRANS_SINE)
-					tween.set_ease(Tween.EASE_IN_OUT)
 					tween.tween_property(node_child, "position", Vector2(0, 5), 1)
 					tween.tween_property(node_child, "position", Vector2(0, -5), 1)
 					tween.set_loops()

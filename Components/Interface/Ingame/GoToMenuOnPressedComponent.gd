@@ -12,5 +12,6 @@ func _on_button_pressed() -> void:
 	if !new_scene:
 		return
 	
-	get_tree().paused = false
-	get_tree().change_scene_to_file(new_scene.resource_path)
+	tree.paused = false
+	tree.change_scene_to_file(new_scene.resource_path)
+	Engine.time_scale = 1.0

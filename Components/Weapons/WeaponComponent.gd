@@ -27,6 +27,7 @@ var minor_damage_modifier: float = 1.0
 # check MobMoverComponent > throw to understand
 @export var self_throw_rewrite: bool = false
 
+# animation offset modifiers
 @export var swing_rotation_multiplier: float = -1.0
 @export var attack_rotation_multiplier: float = 1.0
 @export var attack_shift_multiplier: float = 1.0
@@ -67,11 +68,16 @@ func _ready() -> void:
 	weapon_sprite = parent.get_node_or_null("Texture").get_node_or_null("WeaponSpriteComponent")
 	weapon_inhand_texture = weapon_sprite.weapon_texture
 	
+	# We move the sounds in Node2D so that they are tied to the parent's position
+	# Перемещаем звуки в Node2D, что те были привязаны к позиции родителя
 	if parent.has_node("Sounds"):
 		var sounds: Node = parent.get_node("Sounds")
 		for child in get_children():
 			if child is AudioStreamPlayer2D:
 				child.reparent(sounds)
+	
+	# эту хуйню не трогайте
+	# dont touch this shit
 	if parent_weapon:
 		parent_weapon.child_weapons.append(self)
 	if !parent_weapon:
@@ -107,6 +113,7 @@ func _swing(direction) -> void:
 		swinging_timer.wait_time = swing_delay
 		swinging_timer.start()
 		EventBusManager.swinging_start.emit(parent, self)
+		
 		await swinging_timer.timeout
 		
 		swinging = false
@@ -117,8 +124,10 @@ func _cooldown() -> void:
 		var modified_cooldown = cooldown_delay * cooldown_modifier
 		if random_cooldown_delay_coef != 0:
 			modified_cooldown *= randf_range(1.0 - random_cooldown_delay_coef, 1 + random_cooldown_delay_coef)
+		
 		cooldown_timer.wait_time = modified_cooldown
 		cooldown_timer.start()
+		
 		EventBusManager.weapon_cooldown.emit(parent, self)
 		await cooldown_timer.timeout
 		cooldown = false

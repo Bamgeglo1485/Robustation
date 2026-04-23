@@ -103,7 +103,7 @@ stream = ExtResource("5_gume5")
 target_desired_distance = 0.1
 
 [node name="BeehaveTree" parent="." index="16" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@75121")
+blackboard = NodePath("@Node@18717")
 
 [node name="SequenceComposite" type="Node" parent="BeehaveTree" index="0" unique_id=815350071]
 script = ExtResource("14_gt7if")

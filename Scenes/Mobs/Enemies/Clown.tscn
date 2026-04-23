@@ -19,6 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://byyinwd23qdiy" path="res://Audio/Weapon/trashbag2.ogg" id="15_lrk2o"]
 [ext_resource type="Script" uid="uid://dua6hp8ir5tiu" path="res://Components/Mobs/AI/Actions/AttackTargetAction.gd" id="17_0m0ai"]
 [ext_resource type="AudioStream" uid="uid://bngd1vkik15ra" path="res://Audio/EnemyThemes/Clown.ogg" id="23_iqm8m"]
+[ext_resource type="Script" uid="uid://s1yvc3m3ediv" path="res://Components/Mobs/DifficultyDependentSpeedComponent.gd" id="28_q8qhr"]
 [ext_resource type="Script" uid="uid://hv0g6akh0ftn" path="res://Components/Mobs/RandomizeMobMoverComponent.gd" id="31_nhx7t"]
 [ext_resource type="Script" uid="uid://8hn4kne15ac5" path="res://addons/beehave/nodes/composites/selector.gd" id="32_wbqi6"]
 [ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="33_1ursc"]
@@ -166,7 +167,7 @@ randomize_multiplier_max = 1.2
 metadata/_custom_type_script = "uid://hv0g6akh0ftn"
 
 [node name="BeehaveTree" parent="." index="17" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@18975")
+blackboard = NodePath("@Node@38108")
 
 [node name="SequenceComposite" type="Node" parent="BeehaveTree" index="0" unique_id=772322784]
 script = ExtResource("33_1ursc")
@@ -251,3 +252,7 @@ subject_desc = "FUCKIN' BITCH
 [color=purple]KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT[/color]"
 subject_prefix = "ANNOYING MOTHERFUCKER"
 theme = ExtResource("23_iqm8m")
+
+[node name="DifficultyDependentSpeedComponent" type="Node" parent="." index="23" unique_id=953142121]
+script = ExtResource("28_q8qhr")
+metadata/_custom_type_script = "uid://s1yvc3m3ediv"

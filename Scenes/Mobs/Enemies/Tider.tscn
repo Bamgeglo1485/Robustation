@@ -149,7 +149,7 @@ volume_db = 5.0
 max_distance = 600.0
 
 [node name="BeehaveTree" parent="." index="19" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@50703")
+blackboard = NodePath("@Node@35278")
 
 [node name="SequenceComposite" type="Node" parent="BeehaveTree" index="0" unique_id=1348709416]
 script = ExtResource("36_tw04h")

@@ -56,7 +56,7 @@ func get_attack_direction() -> Vector2:
 		return to_target
 	
 	var _weapon = weapon_user_component.selected_weapon
-	if !_weapon or prediction_coef == 0:
+	if !_weapon or prediction_coef == 0 or target is not CharacterBody2D:
 		return to_target
 	
 	var time_to_target: float = to_target.length() / _weapon.projectile_speed * prediction_coef

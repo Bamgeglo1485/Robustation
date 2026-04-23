@@ -143,7 +143,7 @@ stream = ExtResource("29_f6ny4")
 stream = ExtResource("28_mbwmj")
 
 [node name="BeehaveTree" parent="." index="19" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@35448")
+blackboard = NodePath("@Node@39381")
 
 [node name="MoveToPlayer" type="Node" parent="BeehaveTree" index="0" unique_id=1542265017]
 script = ExtResource("36_k3vsn")

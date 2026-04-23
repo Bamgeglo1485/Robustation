@@ -1,4 +1,4 @@
-class_name DifficultyDependentProjectileSpeedComponent extends BaseXOnTriggerComponent
+class_name DifficultyDependentProjectileSpeedComponent extends Component
 
 @export var speed_on_roleplayer: int = 69
 @export var speed_on_agent: int = 69

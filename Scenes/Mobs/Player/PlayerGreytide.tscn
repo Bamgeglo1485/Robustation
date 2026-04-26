@@ -179,6 +179,10 @@ swing_delay = 0.2
 equipped_texture = ExtResource("13_aa22f")
 icon_texture = ExtResource("24_46s63")
 alt_attack = NodePath("../SpearBoomerang")
+weapon_name = "Spear"
+color = Color(0, 0.5310769, 0.56252176, 1)
+weapon_class = "Mass-Range"
+weapon_rarity = 2
 metadata/_custom_type_script = "uid://bi1gje1pfokqc"
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Spear" index="0" unique_id=23333780]
@@ -212,6 +216,9 @@ icon_texture = ExtResource("13_4xc88")
 self_throw_speed = 200
 attack_rotation_multiplier = 0.5
 alt_attack = NodePath("../ChargingToolbox")
+weapon_name = "Toolbox"
+color = Color(0.8917651, 0, 0.28858507, 1)
+weapon_class = "Melee"
 metadata/_custom_type_script = "uid://6b7bcparwq17"
 
 [node name="ParrySound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Toolbox" index="0" unique_id=1806672115]
@@ -255,6 +262,10 @@ swing_rotation_multiplier = 0.0
 attack_rotation_multiplier = -0.6
 attack_shift_multiplier = -0.7
 alt_attack = NodePath("../ShotgunHook")
+weapon_name = "Shotgun"
+color = Color(0.442488, 0.22811863, 0.03323717, 1)
+weapon_class = "Melee-mid"
+weapon_rarity = 2
 metadata/_custom_type_script = "uid://bi1gje1pfokqc"
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Shotgun" index="0" unique_id=1814146600]
@@ -374,6 +385,9 @@ swing_rotation_multiplier = 0.0
 attack_rotation_multiplier = -0.6
 attack_shift_multiplier = -0.7
 alt_attack = NodePath("../LasergunUnlethal")
+weapon_name = "Lasergun"
+color = Color(0.677698, 5.4098964e-05, 0.540338, 1)
+weapon_class = "Range"
 metadata/_custom_type_script = "uid://bi1gje1pfokqc"
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Lasergun" index="0" unique_id=1326117712]
@@ -409,12 +423,13 @@ stream = ExtResource("46_rfjqm")
 [node name="EmptySound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/LasergunUnlethal" index="1" unique_id=895204182]
 stream = ExtResource("19_kyb4y")
 
-[node name="PlayerWeaponUserComponent" parent="." index="10" unique_id=283125688 node_paths=PackedStringArray("weapon_1", "weapon_2", "weapon_3", "weapon_4", "melee_weapon")]
+[node name="PlayerWeaponUserComponent" parent="." index="10" unique_id=283125688 node_paths=PackedStringArray("weapon_1", "weapon_2", "weapon_3", "weapon_4", "melee_weapon", "weapon_inventory")]
 weapon_1 = NodePath("../WeaponUserComponent/Toolbox")
 weapon_2 = NodePath("../WeaponUserComponent/Shotgun")
 weapon_3 = NodePath("../WeaponUserComponent/Lasergun")
 weapon_4 = NodePath("../WeaponUserComponent/Spear")
 melee_weapon = NodePath("../WeaponUserComponent/Toolbox")
+weapon_inventory = [NodePath("../WeaponUserComponent/Spear"), NodePath("../WeaponUserComponent/Toolbox"), NodePath("../WeaponUserComponent/Lasergun"), NodePath("../WeaponUserComponent/Shotgun")]
 
 [node name="AnimationComponent" parent="." index="11" unique_id=1054272185]
 ignore_time_scale = true

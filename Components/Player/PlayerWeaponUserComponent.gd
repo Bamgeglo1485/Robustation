@@ -9,6 +9,7 @@ class_name PlayerWeaponUserComponent extends Component
 @export var melee_weapon: Weapon
 @export var weapon_icon: TextureRect
 @export var alt_weapon_icon: TextureRect
+@export var weapon_inventory: Array[Weapon]
 var weapon_icon_component: WeaponIconComponent
 var alt_weapon_icon_component: WeaponIconComponent
 var kostil: bool = true
@@ -50,19 +51,19 @@ func _weapon_input():
 		input_weapon_1 = true
 	
 	var weapon_selected: bool = false
-	if input_weapon_1 or (position_changed and position == 1):
+	if input_weapon_1 or (position_changed and position == 1) and weapon_1:
 		weapon_user_component.select_weapon(weapon_1)
 		weapon_selected = true
-	elif input_weapon_2 or (position_changed and position == 2):
+	elif input_weapon_2 or (position_changed and position == 2) and weapon_2:
 		weapon_user_component.select_weapon(weapon_2)
 		weapon_selected = true
-	elif input_weapon_3 or (position_changed and position == 3):
+	elif input_weapon_3 or (position_changed and position == 3) and weapon_3:
 		weapon_user_component.select_weapon(weapon_3)
 		weapon_selected = true
-	elif input_weapon_4 or (position_changed and position == 4):
+	elif input_weapon_4 or (position_changed and position == 4) and weapon_4:
 		weapon_user_component.select_weapon(weapon_4)
 		weapon_selected = true
-	elif melee_attack:
+	elif melee_attack and melee_weapon:
 		weapon_user_component.attack(self, false, melee_weapon)
 		melee_weapon.on_release(self)
 		return
@@ -114,6 +115,21 @@ func _attack(weapon_selected: bool, attack_event: String = "attack", selected_we
 	var release_alt: bool = Input.is_action_just_released("alt_attack")
 	if release_alt:
 		alt_weapon.on_release(self)
+
+func add_weapon(slot: int, weapon: Weapon, set_melee: bool = false) -> void:
+	var weapon_slot = get("weapon_"+str(slot))
+	if !weapon_slot:
+		return
+	weapon_slot = weapon
+	if set_melee:
+		melee_weapon = weapon
+		
+
+func add_weapon_to_inventory(weapon: Weapon) -> void:
+	add_child.call_deferred(weapon)
+	weapon_inventory.append(weapon)
+	
+	
 
 func get_attack_direction() -> Vector2:
 	if !parent.has_method("get_global_mouse_position"):

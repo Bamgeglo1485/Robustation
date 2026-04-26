@@ -133,14 +133,15 @@ func create_notification(perk: BasePerkComponent) -> void:
 	notif_name.text = perk.perk_name
 	panel.get_node("Desc").text = perk.perk_desc
 	
-	if perk.rarity == perk.rarity_classes.COMMON:
-		notif_name.modulate = Color(0.744, 0.188, 0.0, 1.0)
-	elif perk.rarity == perk.rarity_classes.SHITTY:
-		notif_name.modulate = Color(0.348, 0.197, 0.0, 1.0)
-	elif perk.rarity == perk.rarity_classes.ROBUST:
-		notif_name.modulate = Color(0.931, 0.0, 0.323, 1.0)
-	elif perk.rarity == perk.rarity_classes.ADMINABUSE:
-		notif_name.modulate = Color(0.613, 0.003, 0.899, 1.0)
+	match perk.rarity:
+		perk.rarity_classes.COMMON:
+			notif_name.modulate = Color("be3000ff")
+		perk.rarity_classes.SHITTY:
+			notif_name.modulate = Color("593200ff")
+		perk.rarity_classes.ROBUST:
+			notif_name.modulate = Color("ed0052ff")
+		perk.rarity_classes.ADMINABUSE:
+			notif_name.modulate = Color("9c01e5ff")
 	
 	panel.modulate = Color(0.0, 0.0, 0.0, 0.0)
 

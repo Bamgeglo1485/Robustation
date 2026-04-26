@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://b5jioqm540o75"]
+
+[ext_resource type="Texture2D" uid="uid://dnsj2opn0s2h2" path="res://Textures/Abilities/telecrystal.png" id="1_sbce1"]
+[ext_resource type="FontFile" uid="uid://dskv5n6tofrla" path="res://Resources/Text/Fonts/LCD 40x2 Display/LCD40x2Display-Regular.otf" id="2_a6u8i"]
+
+[node name="WeaponUnit" type="Panel" unique_id=1206055527]
+custom_minimum_size = Vector2(320, 96)
+
+[node name="Icon" type="TextureRect" parent="." unique_id=1546589746]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.009375
+anchor_top = 0.03125
+anchor_right = 0.290625
+anchor_bottom = 0.96875
+texture = ExtResource("1_sbce1")
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="ReferenceRect2" type="ReferenceRect" parent="Icon" unique_id=924773270]
+z_index = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 1
+border_color = Color(0.033853278, 0.033853278, 0.033853274, 1)
+border_width = 2.5
+editor_only = false
+
+[node name="Name" type="RichTextLabel" parent="." unique_id=1785099235]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.34666678
+anchor_top = 0.041666668
+anchor_right = 0.9856114
+anchor_bottom = 0.9375
+theme_override_constants/line_separation = 5
+theme_override_fonts/normal_font = ExtResource("2_a6u8i")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "ASS STRATCHER 3000
+Goon Machine"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true

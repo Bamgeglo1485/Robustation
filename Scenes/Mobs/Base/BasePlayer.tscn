@@ -71,6 +71,7 @@
 [ext_resource type="Texture2D" uid="uid://c6mx7npsbi7s0" path="res://Textures/Interface/Ingame/Stamina/stamina_4.png" id="53_o3dxh"]
 [ext_resource type="Script" uid="uid://btswtn6r4uh8e" path="res://Components/Player/PlayerIntroductionComponent.gd" id="62_bvsa3"]
 [ext_resource type="PackedScene" uid="uid://qvb8sosioeoe" path="res://Scenes/UI/IngameInterface/Scan.tscn" id="64_y8oi8"]
+[ext_resource type="PackedScene" uid="uid://3bxw2jfkmu1l" path="res://Scenes/UI/IngameInterface/Inventory/WeaponsInventory.tscn" id="65_131qc"]
 [ext_resource type="AudioStream" uid="uid://4pohta766hgy" path="res://Audio/Interface/Scan/alarm.ogg" id="66_vxvnu"]
 [ext_resource type="AudioStream" uid="uid://ilhlu2455v6e" path="res://Audio/Interface/Scan/scan.ogg" id="67_wil4v"]
 [ext_resource type="AudioStream" uid="uid://b8xcri6rn3s2n" path="res://Audio/Interface/Scan/scan_loop.ogg" id="68_gq100"]
@@ -906,6 +907,17 @@ text = "STATISTICS"
 script = ExtResource("42_131qc")
 toggle_frame = NodePath("../../Characteristics")
 metadata/_custom_type_script = "uid://bodxsix2kyyy6"
+
+[node name="Inventory" parent="GUI/Touchable" index="3" unique_id=1932067856 instance=ExtResource("65_131qc")]
+visible = false
+anchor_left = 0.23700002
+anchor_top = 0.066
+anchor_right = 0.55200005
+anchor_bottom = 0.409
+offset_left = -0.72802734
+offset_top = -1.1444092e-05
+offset_right = 364.39197
+offset_bottom = 201.736
 
 [node name="Overlays" type="CanvasLayer" parent="GUI" index="6" unique_id=1713393531]
 layer = 2

@@ -2,17 +2,18 @@
 
 [ext_resource type="Texture2D" uid="uid://exsef6crft3y" path="res://Textures/Perks/bitch_ball.png" id="1_7cvpm"]
 [ext_resource type="LabelSettings" uid="uid://ckvx27ngndofk" path="res://Resources/Text/PerkHeading.tres" id="2_lrwcv"]
+[ext_resource type="FontFile" uid="uid://dskv5n6tofrla" path="res://Resources/Text/Fonts/LCD 40x2 Display/LCD40x2Display-Regular.otf" id="3_hdsew"]
 [ext_resource type="Script" uid="uid://bch3dta3tsrbs" path="res://Components/Interface/Ingame/PerkChooseOnPressedComponent.gd" id="4_hdsew"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hdsew"]
 
 [node name="PerkListUnit" type="Panel" unique_id=2073390009]
-custom_minimum_size = Vector2(0, 64)
+custom_minimum_size = Vector2(0, 96)
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=370793442]
 layout_mode = 0
-offset_right = 65.0
-offset_bottom = 64.0
+offset_right = 95.0
+offset_bottom = 95.0
 texture = ExtResource("1_7cvpm")
 stretch_mode = 4
 
@@ -41,6 +42,7 @@ offset_right = -0.24804688
 offset_bottom = -6.200001
 text = "BITCH BALL"
 label_settings = ExtResource("2_lrwcv")
+vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Desc" type="RichTextLabel" parent="." unique_id=646860177]
@@ -51,6 +53,9 @@ anchor_left = 0.11510792
 anchor_top = 0.46875
 anchor_right = 0.9856115
 anchor_bottom = 0.96875
+theme_override_constants/line_separation = 5
+theme_override_fonts/normal_font = ExtResource("3_hdsew")
+theme_override_font_sizes/normal_font_size = 10
 bbcode_enabled = true
 text = "increases goon power"
 scroll_active = false

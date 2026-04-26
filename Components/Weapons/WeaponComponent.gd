@@ -56,14 +56,39 @@ var player_weapon_user: PlayerWeaponUserComponent
 var weapon_inhand_texture: Sprite2D
 var weapon_sprite: WeaponSpriteComponent
 
+@export_category("Information")
+@export var weapon_name: String
+@export var color: Color
+@export var weapon_class: String
+@export_multiline() var weapon_desc: String
+
+enum rarity_classes {
+	SHITTY,
+	COMMON,
+	ROBUST,
+	ADMINABUSE
+}
+
+@export var weapon_rarity: rarity_classes = rarity_classes.COMMON
+
 @warning_ignore("unused_signal")
 signal swapped(new_weapon: Weapon)
 
 func _ready() -> void:
-	if parent is not Node2D:
-		parent = parent.get_parent()
-		animation_component = parent.get_node_or_null("AnimationComponent")
+	const max_attempts: int = 15
+	var attempts: int = 0
 	
+	while parent is not PhysicsBody2D:
+		var potential_parent: Node = parent.get_parent()
+		if potential_parent:
+			parent = potential_parent
+		attempts += 1
+		if parent is PhysicsBody2D:
+			break
+		if attempts > max_attempts:
+			break
+	
+	animation_component = parent.get_node_or_null("AnimationComponent")
 	player_weapon_user = parent.get_node_or_null("PlayerWeaponUserComponent")
 	weapon_sprite = parent.get_node_or_null("Texture").get_node_or_null("WeaponSpriteComponent")
 	weapon_inhand_texture = weapon_sprite.weapon_texture

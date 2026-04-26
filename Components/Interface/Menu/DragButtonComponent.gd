@@ -21,12 +21,12 @@ func _input(_event: InputEvent) -> void:
 		return
 	
 	if !last_pressed and parent.button_pressed:
-		offset = frame_to_drag.global_position - parent.get_global_mouse_position()
+		offset = frame_to_drag.position - parent.get_global_mouse_position()
 		dragging = true
 	elif dragging:
 		var new_position: Vector2 = parent.get_global_mouse_position() + offset
 		new_position = _clamp_position(new_position)
-		frame_to_drag.global_position = new_position
+		frame_to_drag.position = new_position
 	
 	if last_pressed and !parent.button_pressed:
 		dragging = false

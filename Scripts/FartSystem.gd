@@ -1,14 +1,14 @@
 extends Node2D
 
 @onready var area2d: Area2D = $Area2D
-@export var delayed_damage: int = 3
-@export var delayed_time: int = 5
+@export var delayed_damage: int = 2
+@export var delayed_time: int = 3
 @export var heal_teammates: bool = true
 @export var heal_amount: int = 100
 @export var radius: int = 128
 @export var source: PhysicsBody2D
 @export var lifetime: float = 4.0
-@export var update_rate: float = 0.5
+@export var update_rate: float = 0.2
 @export var ignore_faction: bool = false
 @export var rainbow_delay: float = 2.5
 @export var stamina_damage_amount: float = 0.0

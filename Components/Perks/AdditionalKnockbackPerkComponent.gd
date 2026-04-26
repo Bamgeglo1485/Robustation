@@ -4,7 +4,6 @@ func _init() -> void:
 	untranslated_perk_name = "Git Push"
 	perk_desc = "[color=green]Increases your attack knockback power and the damage of enemy-to-enemy collisions by 40%[/color]"
 	perk_icon = preload("res://Textures/Perks/pushorn.png")
-	rarity = rarity_classes.ROBUST
 	perk_name = tr(untranslated_perk_name)
 	perk_desc = tr(perk_desc)
 
@@ -17,6 +16,8 @@ func _ready() -> void:
 
 func apply_modifiers() -> void:
 	throw_damage_modifier = base_throw_damage_modifier ** amount
+	set_minor_stat("[color=crimson]Knockback Damage:[/color] " + str(throw_damage_modifier * 100) + "%", "throw_damage_modifier")
+	set_second_minor_stat("[color=crimson]Knockback Force:[/color] " + "x" + str(amount), "throw_modifier")
 
 func _on_damaged(source, damage, damager):
 	if damager != parent:

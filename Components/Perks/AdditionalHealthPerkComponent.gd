@@ -20,4 +20,5 @@ func apply_modifiers() -> void:
 	
 	health_component.max_health = health_component.base_max_health + amount * base_health_increase
 	if regeneration_perk:
-		regeneration_perk.additive_regeneration = -base_regeneration_decrease * amount
+		regeneration_perk.extra_regeneration = amount * -base_regeneration_decrease
+		set_minor_stat("[color=crimson]Passive Regeneration:[/color] " + str(regeneration_perk.regeneration + regeneration_perk.extra_regeneration), "additive_regeneration")

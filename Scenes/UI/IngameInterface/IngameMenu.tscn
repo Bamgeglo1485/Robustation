@@ -81,6 +81,7 @@ text = "RETURN"
 [node name="ToggleVisibleOnPressedComponent" type="Node" parent="Panel/VBoxContainer/Return" unique_id=40887940 node_paths=PackedStringArray("toggle_frame")]
 script = ExtResource("4_te8x8")
 toggle_frame = NodePath("../../../..")
+animation_time = 0.0
 metadata/_custom_type_script = "uid://bodxsix2kyyy6"
 
 [node name="Settings" type="Button" parent="Panel/VBoxContainer" unique_id=195329228]

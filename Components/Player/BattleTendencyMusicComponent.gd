@@ -8,32 +8,30 @@ class_name BattleTendencyMusicComponent extends Component
 @export var music_3: AudioStream
 @export var music_4: AudioStream
 
-var last_section: int = 69
+var last_stage: BattleTendencyComponent.battle_tendency_stages
 
 func _ready() -> void:
 	if !battle_tendency_component or !music_component:
 		return
 	
-	EventBusManager.tendency_section_changed.connect(_on_section_changed)
-	_on_section_changed(parent, false)
+	EventBusManager.tendency_stage_changed.connect(_on_stage_changed)
+	_on_stage_changed(parent)
 
-func _on_section_changed(_emitter, timer: bool = true):
-	if last_section == battle_tendency_component.section:
+func _on_stage_changed(_emitter):
+	if last_stage == battle_tendency_component.stage:
 		return
 	
-	force_change(timer)
+	force_change()
 
-func force_change(timer: bool = true):
-	if timer:
-		await tree.create_timer(3).timeout
+func force_change():
+	last_stage = battle_tendency_component.stage
 	
-	last_section = battle_tendency_component.section
-	
-	if battle_tendency_component.section == 4:
-		music_component.set_main(music_4, 1)
-	elif battle_tendency_component.section == 3:
-		music_component.set_main(music_3, 1)
-	elif battle_tendency_component.section == 2:
-		music_component.set_main(music_2, 1)
-	else:
-		music_component.set_main(music_1, 1)
+	match battle_tendency_component.stage:
+		BattleTendencyComponent.battle_tendency_stages.DESPERATE:
+			music_component.set_main(music_1, 1)
+		BattleTendencyComponent.battle_tendency_stages.STRUGGLE:
+			music_component.set_main(music_2, 1)
+		BattleTendencyComponent.battle_tendency_stages.PLEASURE:
+			music_component.set_main(music_3, 1)
+		BattleTendencyComponent.battle_tendency_stages.EUPHORIA:
+			music_component.set_main(music_4, 1)

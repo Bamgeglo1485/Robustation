@@ -18,6 +18,8 @@ func apply_modifiers() -> void:
 	if weapon_user_component:
 		weapon_user_component.qte_time_mod = starting_arrow_speed_modifier * (base_arrow_speed_modifier ** amount)
 		weapon_user_component.qte_perfect_heal_modifier_from_max_modifier = starting_hp_recovery_modifier * (base_hp_recovery_modifier ** amount)
+		set_minor_stat("[color=crimson]Heal From Perfect Hit:[/color] " + str(weapon_user_component.qte_perfect_heal_modifier_from_max_modifier * 100 - 100) + "%", "qte_perfect_heal_modifier_from_max_modifier")
+		set_second_minor_stat("[color=crimson]Perfect Hit Arrow Speed:[/color] " + str(weapon_user_component.qte_time_mod * 100) + "%", "qte_time_mod")
 
 func _ready() -> void:
 	weapon_user_component = parent.get_node_or_null("WeaponUserComponent")

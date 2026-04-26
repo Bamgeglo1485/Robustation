@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://0qaedvb6js57" path="res://Components/Triggers/SetProjectileExplosionOnTriggerComponent.gd" id="5_fvop5"]
 [ext_resource type="PackedScene" uid="uid://c03qvua0tf8st" path="res://Scenes/Explosion/MiniExplosion.tscn" id="6_blmrq"]
 [ext_resource type="Script" uid="uid://wy7p8eumw3ik" path="res://Components/Entity/DifficultyDependentProjectileSpeedComponent.gd" id="7_blmrq"]
+[ext_resource type="Script" uid="uid://b644hh7xbxspy" path="res://Components/Entity/DifficultyDependentProjectileDamageComponent.gd" id="8_rtoq7"]
 
 [sub_resource type="Shader" id="Shader_ut4xv"]
 code = "shader_type canvas_item;
@@ -37,7 +38,6 @@ damage = 6
 delayed_damage = 3
 delayed_damage_delay = 5
 parry_damage_modifier = 3.0
-parry_speed_boost = 3.0
 
 [node name="CollisionShape2D" parent="ProjectileComponent" index="0" unique_id=1391622764]
 rotation = 1.5707964
@@ -65,7 +65,14 @@ metadata/_custom_type_script = "uid://0qaedvb6js57"
 
 [node name="DifficultyDependentProjectileSpeedComponent" type="Node" parent="." index="9" unique_id=563008404]
 script = ExtResource("7_blmrq")
-speed_on_roleplayer = 600
+speed_on_roleplayer = 650
 speed_on_agent = 700
 speed_on_greytide = 800
 metadata/_custom_type_script = "uid://wy7p8eumw3ik"
+
+[node name="DifficultyDependentProjectileDamageComponent" type="Node" parent="." index="10" unique_id=756869143]
+script = ExtResource("8_rtoq7")
+damage_on_roleplayer = 4
+damage_on_agent = 6
+damage_on_greytide = 10
+metadata/_custom_type_script = "uid://b644hh7xbxspy"

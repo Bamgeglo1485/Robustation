@@ -79,6 +79,7 @@ texture = ExtResource("2_l3ous")
 [node name="SetProjectileExplosionOnTriggerComponent2" type="Node" parent="." index="4" unique_id=1322456650]
 script = ExtResource("5_65omb")
 explosion_scene = ExtResource("7_lqmm4")
+delete_on_hit = false
 explode_on_delete = true
 speed = 1000
 metadata/_custom_type_script = "uid://0qaedvb6js57"

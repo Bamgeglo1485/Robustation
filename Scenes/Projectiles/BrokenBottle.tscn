@@ -4,6 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://cwegkx2i1iohu" path="res://Resources/Audio/GlassBreakRandom.tres" id="2_wr6qi"]
 [ext_resource type="Texture2D" uid="uid://b6phl7ind2mhy" path="res://Textures/Weapons/Pneumatic/bottle.png" id="3_bnkh0"]
 [ext_resource type="Script" uid="uid://wy7p8eumw3ik" path="res://Components/Entity/DifficultyDependentProjectileSpeedComponent.gd" id="4_bnkh0"]
+[ext_resource type="Script" uid="uid://b644hh7xbxspy" path="res://Components/Entity/DifficultyDependentProjectileDamageComponent.gd" id="5_mml0w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wr6qi"]
 radius = 18.027756
@@ -12,10 +13,9 @@ radius = 18.027756
 
 [node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture")]
 texture = NodePath("../Texture")
-damage = 30
+damage = 15.0
 rotate_speed = 10
 parry_damage_modifier = 3.0
-parry_speed_boost = 3.0
 
 [node name="CollisionShape2D" parent="ProjectileComponent" index="0" unique_id=1391622764]
 rotation = 1.5707964
@@ -32,7 +32,14 @@ texture = ExtResource("3_bnkh0")
 
 [node name="DifficultyDependentProjectileSpeedComponent" type="Node" parent="." index="7" unique_id=2142644239]
 script = ExtResource("4_bnkh0")
-speed_on_roleplayer = 400
+speed_on_roleplayer = 450
 speed_on_agent = 500
 speed_on_greytide = 600
 metadata/_custom_type_script = "uid://wy7p8eumw3ik"
+
+[node name="DifficultyDependentProjectileDamageComponent" type="Node" parent="." index="8" unique_id=1316300310]
+script = ExtResource("5_mml0w")
+damage_on_roleplayer = 10
+damage_on_agent = 15
+damage_on_greytide = 25
+metadata/_custom_type_script = "uid://b644hh7xbxspy"

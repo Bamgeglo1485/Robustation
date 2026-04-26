@@ -72,6 +72,7 @@
 [ext_resource type="FontFile" uid="uid://mhx51lyuasx4" path="res://Resources/Text/Fonts/Ac437_ApricotPortable.ttf" id="59_5mfce"]
 [ext_resource type="AudioStream" uid="uid://byemtkosqdf5f" path="res://Audio/Music/Arena_s3.ogg" id="60_jcq5h"]
 [ext_resource type="AudioStream" uid="uid://dyh6tufx6pffo" path="res://Audio/Music/Arena_s4.ogg" id="61_1j3ws"]
+[ext_resource type="Material" uid="uid://c431ei1tq3rl8" path="res://Resources/Shaders/Wobble.tres" id="65_jcq5h"]
 
 [sub_resource type="DPITexture" id="DPITexture_wl2js"]
 _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"4\" height=\"8\"><path fill=\"#fff\" fill-opacity=\".25\" d=\"M1 0h2v16H1z\"/></svg>
@@ -119,6 +120,7 @@ shader_parameter/hue_shift = 0.0
 shader_parameter/gamma = 1.0
 shader_parameter/alpha = 0.0
 shader_parameter/vignette_strength = 0.0
+shader_parameter/chromatic_aberration_strength = 0.0
 
 [node name="Player" unique_id=914217487 instance=ExtResource("1_mq7la")]
 
@@ -163,7 +165,7 @@ timers_timescaled = false
 [node name="Spear" type="Node" parent="WeaponUserComponent" index="0" unique_id=1787565286 node_paths=PackedStringArray("shoot_sound", "bullets_recover_sound", "alt_attack")]
 script = ExtResource("23_si836")
 projectile = ExtResource("5_6fu7j")
-spread_angle = 3
+spread_angle = 6
 bullets_max_count = 1
 bullets = 1
 bullets_recover_count = 1
@@ -298,7 +300,7 @@ stream = ExtResource("24_e06si")
 [node name="SpearBoomerang" type="Node" parent="WeaponUserComponent" index="4" unique_id=1434839515 node_paths=PackedStringArray("shoot_sound", "projectile_can_parry_weapon", "shared_bullets_weapon", "rope")]
 script = ExtResource("23_si836")
 projectile = ExtResource("4_pcu7p")
-spread_angle = 0
+spread_angle = 6
 bullets_max_count = 1
 bullets = 1
 bullets_recover_count = 0
@@ -354,7 +356,7 @@ volume_db = -8.0
 [node name="Lasergun" type="Node" parent="WeaponUserComponent" index="6" unique_id=705566024 node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound", "alt_attack")]
 script = ExtResource("23_si836")
 projectile = ExtResource("40_c8gs6")
-spread_angle = 1
+spread_angle = 2
 bullets_max_count = 1
 bullets_recover_count = 1
 shots = 1
@@ -383,7 +385,7 @@ stream = ExtResource("19_kyb4y")
 [node name="LasergunUnlethal" type="Node" parent="WeaponUserComponent" index="7" unique_id=679740801 node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound")]
 script = ExtResource("23_si836")
 projectile = ExtResource("45_rhd25")
-spread_angle = 1
+spread_angle = 2
 bullets_max_count = 1
 bullets_recover_count = 1
 shots = 1
@@ -541,7 +543,16 @@ offset_bottom = 4.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_c8gs6")
 metadata/_edit_use_anchors_ = true
 
-[node name="Hypo" type="TextureRect" parent="GUI/Inventory/Hand_L" parent_id_path=PackedInt32Array(723434357) index="0" unique_id=376867296]
+[node name="Health" parent="GUI/Inventory" parent_id_path=PackedInt32Array(1069930799) index="0" unique_id=737991682]
+material = ExtResource("65_jcq5h")
+
+[node name="HardDamage" parent="GUI/Inventory/Health" index="1" unique_id=24170418]
+material = ExtResource("65_jcq5h")
+
+[node name="Hand_L" parent="GUI/Inventory" parent_id_path=PackedInt32Array(1069930799) index="1" unique_id=723434357]
+visible = true
+
+[node name="Hypo" type="TextureRect" parent="GUI/Inventory/Hand_L" index="0" unique_id=376867296]
 material = ExtResource("32_m4dpc")
 layout_mode = 1
 anchors_preset = -1

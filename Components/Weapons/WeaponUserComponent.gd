@@ -14,10 +14,13 @@ class_name WeaponUserComponent extends Component
 @export var minor_damage_modifier: float = 1.0
 @export var knockback_modifier: int = 0
 @export var cooldown_modifier: float = 1.0
+@export var recover_modifier: float = 1.0
 @export var spread_modifier: float = 1.0
 
 @export var overheat_per_shoot_modifier: float = 1.0
 @export var extra_shots: int = 0
+@export var extra_penetrations: int = 0
+@export var extra_bounces: int = 0
 
 @export var qte_perfect_heal_modifier_from_max_modifier: float = 1.0
 @export var qte_time_mod: float = 3.0
@@ -37,6 +40,12 @@ func force_select_weapon(new_weapon: Weapon):
 			new_weapon.extra_shots = extra_shots
 		if spread_modifier != 1.0:
 			new_weapon.spread_modifier = spread_modifier
+		if recover_modifier != 1.0:
+			new_weapon.recover_modifier = recover_modifier
+		if extra_penetrations != 0:
+			new_weapon.extra_penetrations = extra_penetrations
+		if extra_bounces != 0:
+			new_weapon.extra_bounces = extra_bounces
 	elif new_weapon and new_weapon is MeleeWeapon:
 		new_weapon.qte_time_mod = qte_time_mod
 		new_weapon.qte_perfect_heal_modifier_from_max_modifier = qte_perfect_heal_modifier_from_max_modifier

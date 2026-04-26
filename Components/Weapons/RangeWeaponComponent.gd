@@ -20,6 +20,7 @@ class_name RangeWeapon extends Weapon
 @export var bullets_recover_sound: AudioStreamPlayer2D
 
 @export var bullets_recovery_delay: float = 4
+@export var recover_modifier: float = 1.0
 @export var gun_fire_effect: PackedScene
 @export var projectile_can_parry_weapon: Weapon
 
@@ -33,6 +34,9 @@ var children_shared_bullets_weapon: RangeWeapon
 @export var reload_animation: bool = true
 
 @export var random_bullet_recover_delay_coef: float = 0.0
+
+@export var extra_bounces: int = 0
+@export var extra_penetrations: int = 0
 
 @export_category("Overheat")
 @export var overheat_enabled: bool = false
@@ -162,9 +166,9 @@ func attack(raiser, _npc = true) -> void:
 	
 	if bullets == 0 and bullets_recovery_delay != 0 and bullets_recover_timer:
 		if !parent_weapon:
-			bullets_recover_timer.wait_time = bullets_recovery_delay
+			bullets_recover_timer.wait_time = bullets_recovery_delay * recover_modifier
 		else:
-			bullets_recover_timer.wait_time = parent_weapon.bullets_recovery_delay
+			bullets_recover_timer.wait_time = parent_weapon.bullets_recovery_delay * recover_modifier
 		if random_bullet_recover_delay_coef != 0:
 			bullets_recover_timer.wait_time *= randf_range(1 - random_bullet_recover_delay_coef, 1 + random_bullet_recover_delay_coef)
 		bullets_recover_timer.start()
@@ -216,6 +220,8 @@ func _projectile_shoot(direction) -> Node2D:
 		projectile_component.direction = angle
 		projectile_component.shooter = parent
 		projectile_component.weapon = self
+		projectile_component.max_penetrations += extra_penetrations
+		projectile_component.max_bounces += extra_bounces
 		if projectile_can_parry_weapon:
 			projectile_component.can_parry_weapon = projectile_can_parry_weapon
 		if rope:
@@ -240,6 +246,8 @@ func _projectile_shoot(direction) -> Node2D:
 		
 		hitscan_component.direction = shoot_direction
 		hitscan_component.shooter = parent
+		hitscan_component.max_penetrations += extra_penetrations
+		hitscan_component.max_bounces += extra_bounces
 		
 		if scene:
 			scene.add_child(instance)

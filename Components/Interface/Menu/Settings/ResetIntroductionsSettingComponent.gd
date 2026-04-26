@@ -3,7 +3,7 @@ class_name ResetIntroductionsSettingComponent extends Component
 var config = ConfigFile.new()
 
 func _ready() -> void:
-	var err = config.load("user://settings.cfg")
+	var err = config.load("user://save.cfg")
 	
 	if err != OK:
 		return
@@ -14,5 +14,5 @@ func _ready() -> void:
 func _toggled() -> void:
 	for intro in config.get_section_keys("INTRODUCTION"):
 		config.erase_section_key("INTRODUCTION", intro)
-		config.save("user://settings.cfg")
-		SettingsConfigSystem.introductiones_enemies.clear()
+		config.save("user://save.cfg")
+		IntroductionSystem.introductiones_enemies.clear()

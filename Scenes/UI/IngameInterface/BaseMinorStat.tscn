@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c1q4nwc2r84l7"]
+
+[ext_resource type="FontFile" uid="uid://dskv5n6tofrla" path="res://Resources/Text/Fonts/LCD 40x2 Display/LCD40x2Display-Regular.otf" id="1_yvjo2"]
+
+[node name="MinorStat" type="RichTextLabel" unique_id=323919868]
+custom_minimum_size = Vector2(300, 32)
+theme_override_fonts/normal_font = ExtResource("1_yvjo2")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+vertical_alignment = 1

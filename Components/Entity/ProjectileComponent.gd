@@ -30,6 +30,8 @@ var bounces: int = 0
 @export var ignore_armor: float = false
 @export var fall_time: float = 0.0
 
+@export var tile_destruction_audio: AudioStreamPlayer2D
+
 var shooter: PhysicsBody2D
 var direction: float
 var damage_modifier: float = 1.0
@@ -93,7 +95,6 @@ func _ready() -> void:
 		await tree.create_timer(lifetime, false).timeout
 	if deleted:
 		return
-	
 	_delete()
 	
 	if penetration_damaged_bodies.is_empty():
@@ -183,12 +184,12 @@ func explode() -> void:
 		scene.add_child(instance)
 
 func _on_body_entered(body: Node2D) -> void:
-	if !body or !can_hit or body == parent:
+	if !body or !can_hit or body == parent or body.get_parent() == parent:
 		return
 	if body.has_node("ProjectileIgnoreComponent"):
 		return
 	var projectile_comp: ProjectileComponent = body.get_node_or_null("ProjectileComponent")
-	if projectile_comp:
+	if projectile_comp and !projectile_comp.deleted:
 		if shooter and projectile_comp.shooter and shooter == projectile_comp.shooter and explode_on_projectile_hit:
 			explode_on_delete = true
 			_delete()
@@ -213,6 +214,18 @@ func _on_body_entered(body: Node2D) -> void:
 			if shooter_faction.faction == body_faction.faction:
 				return
 	
+	if body is TileMapLayer:
+		var tile_pos = body.local_to_map(body.to_local(global_position + Vector2.from_angle(direction) * 16))
+		var tile_data = body.get_cell_tile_data(tile_pos)
+		if tile_data and !tile_data.has_custom_data("Invincible") and tile_data.has_custom_data("Health"):
+			var health: float = tile_data.get_custom_data("Health")
+			tile_data.set_custom_data("Health", health - damage)
+			if health <= 0:
+				body.set_cell(tile_pos)
+				if tile_data.has_custom_data("DestructionSound"):
+					tile_destruction_audio.stream = tile_data.get_custom_data("DestructionSound")
+					tile_destruction_audio.play()
+	
 	if reflect(body):
 		return
 	if hit_sound:
@@ -223,13 +236,12 @@ func _on_body_entered(body: Node2D) -> void:
 	if health_comp:
 		if health_comp.INVINCIBLE:
 			health_comp.invincibility_effects()
+			EventBusManager.invincibility_damage_block.emit(body)
 			return
 		if !shooter:
 			shooter = null
-		@warning_ignore("narrowing_conversion")
 		health_comp.take_damage(modified_damage, shooter, "Projectile" ,ignore_armor)
 		if delayed_damage != 0 and delayed_damage_delay != 0:
-			@warning_ignore("narrowing_conversion")
 			health_comp.set_delayed_damage(delayed_damage * damage_modifier, delayed_damage_delay)
 		if max_penetrations != 0 and can_penetrate:
 			penetration_damaged_bodies.append(body)

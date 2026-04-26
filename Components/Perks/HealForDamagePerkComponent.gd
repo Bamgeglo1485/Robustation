@@ -6,6 +6,7 @@ func _init() -> void:
 	perk_icon = preload("res://Textures/Perks/crusher_module.png")
 	perk_equipped_texture = preload("res://Textures/Perks/crusher_module_equipped.png")
 	perk_name = tr(untranslated_perk_name)
+	rarity = rarity_classes.ROBUST
 	perk_desc = tr(perk_desc)
 
 @onready var health_component: HealthComponent = parent.get_node_or_null("HealthComponent")
@@ -21,6 +22,7 @@ func _ready() -> void:
 
 func apply_modifiers() -> void:
 	heal_for_damage_multiplier = base_heal_for_damage_multiplier ** amount
+	set_minor_stat("[color=crimson]Heal From Damage:[/color] " + str(heal_for_damage_multiplier * 100 - 100) + "%", "heal_for_damage_multiplier")
 
 func _on_damage(emitter: Node2D, damage: float, damager: Node2D) -> void:
 	if !is_instance_valid(emitter) or damager != parent or emitter == parent or damage <= 0:

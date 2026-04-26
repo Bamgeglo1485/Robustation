@@ -1,202 +1,166 @@
 class_name BattleTendencyComponent extends Component
 
-@export var battle_tendency: float = 30.0
-@export var battle_tendency_on_max_health: float = 50.0
-@export var max_battle_tendency: float = 100.0
-@export var battle_tendecy_dependency: float = 1.0
-@export var battle_tendency_debuff_multiplier: float = 0.12
-@export var battle_tendency_buff_multiplier: float = 1.0
-@export var battle_tendency_bonus: float = 0
-@export var palette_section: int = 2
-@export var section: int = 2
+enum battle_tendency_stages {
+	DESPERATE,
+	STRUGGLE,
+	PLEASURE,
+	EUPHORIA
+}
+@export var stage: battle_tendency_stages = battle_tendency_stages.STRUGGLE
+
+@export var battle_tendency: float = 50.0 : set = set_battle_tendency
+
+@export var max_stage_battle_tendency: float = 100.0
+@export var battle_tendency_on_stage_decrease: float = 80.0
+@export var battle_tendency_on_stage_increase: float = 15.0
+
+@export var battle_tendency_by_damage_multiplier: float = 0.2
+@export var batte_tendency_decrease_multiplier: float = 1.0
 
 @export var euphoria_effect: GPUParticles2D
 
 @export var battle_tendency_effect: ColorRect
-@onready var material = parent.get("material")
+@onready var material = parent.material
 @onready var health_component: HealthComponent = parent.get_node_or_null("HealthComponent")
 @onready var weapon_user_component: Node = parent.get_node_or_null("WeaponUserComponent")
 
-var last_section: int = 69
+var effects_tween: Tween
 
-func _ready() -> void:
-	EventBusManager.health_changed.connect(_on_health_changed)
-	EventBusManager.damaged.connect(_on_damaged)
-	EventBusManager.gibbed.connect(_on_gibbed)
-	EventBusManager.parry.connect(_on_parry)
-	EventBusManager.projectile_miss.connect(_on_projectile_miss)
-	EventBusManager.melee_miss.connect(_on_melee_miss)
+# BASE
+func set_battle_tendency(value: float) -> void:
+	battle_tendency = clamp(value, 0, max_stage_battle_tendency)
 	
-func _on_health_changed(_emitter, _health, _new_health) -> void:
-	change_battle_tendency(0)
-
-func _on_damaged(emitter, damage, damager) -> void:
-	if damage <= 0:
-		return
-	if damager == emitter and emitter == parent: # SELFHARM
-		change_battle_tendency(damage * -0.2)
-	elif damager == parent:
-		change_battle_tendency(damage * 0) # DAMAGE
-	else:
-		change_battle_tendency(damage * -0.1) # PLAYER DAMAGED
-
-func _on_gibbed(damager) -> void:
-	if damager != parent:
-		change_battle_tendency(1.5)
+	# print(get_stage_name(), " ", battle_tendency)
+	
+	if stage == battle_tendency_stages.EUPHORIA:
+		health_component.hard_damage = 0
 		
-func _on_parry(emitter, _type, _enemy):
-	if emitter == parent:
-		change_battle_tendency(1.5)
+	if battle_tendency == 0 and stage != battle_tendency_stages.DESPERATE:
+		stage = (stage - 1) as battle_tendency_stages
+		battle_tendency = battle_tendency_on_stage_decrease
+		EventBusManager.tendency_stage_changed.emit(parent)
+		change_palette()
+	elif battle_tendency == max_stage_battle_tendency and stage != battle_tendency_stages.EUPHORIA:
+		stage = (stage + 1) as battle_tendency_stages
+		battle_tendency = battle_tendency_on_stage_increase
+		EventBusManager.tendency_stage_changed.emit(parent)
+		change_palette()
 
-func _on_projectile_miss(emitter, projectile) -> void:
-	if emitter != parent:
-		return
-	change_battle_tendency(projectile.get_node("ProjectileComponent").damage * -0.05)
-
-func _on_melee_miss(emitter, weapon) -> void:
-	if emitter != parent:
-		return
-	change_battle_tendency(weapon.damage * -0.05)
-
-func change_battle_tendency(value) -> int:
-	if !health_component:
-		return section
-	
-	if value > 0:
-		value *= battle_tendency_buff_multiplier
-	else:
-		value *= battle_tendency_debuff_multiplier
-	
-	if !battle_tendency_bonus:
-		battle_tendency_bonus = 0
-	
-	EventBusManager.tendency_changed.emit(parent)
-	battle_tendency_bonus = battle_tendency_bonus + value
-	
-	battle_tendency = float(health_component.health) / float(health_component.max_health) * battle_tendency_on_max_health + battle_tendency_bonus
-	battle_tendency = clamp(battle_tendency, 0, max_battle_tendency)
-	
-	#print("Battle tendency: ", battle_tendency)
-	
-	var segmentation: float = max_battle_tendency * 0.25
-	var old_section: int = section
-	
-	if battle_tendency > segmentation * 3:
-		section = 4  # ЭЙФОРИЯ (EUPHORIA)
-	elif battle_tendency > segmentation * 2:
-		section = 3  # НАСЛАЖДЕНИЕ (PLEASURE)
-	elif battle_tendency - 5 > segmentation:
-		section = 2  # БОРЬБА (STRUGGLE)
-	else:
-		section = 1  # ОТЧАЯНИЕ (DESPERATE)
-	
-	if section == old_section:
-		return section
-	
-	_on_section_changed()
-	# print("Section: ", section, " (", get_section_name(), ")")
-	return section
-
-func _on_section_changed():
-	await get_tree().create_timer(3).timeout
-	
-	if last_section == section:
-		return
-	
-	last_section = section
-	set_battle_tendency_modifiers()
-	change_palette()
-	EventBusManager.tendency_section_changed.emit(parent)
-
-func get_section_name() -> String:
-	match section:
-		1: return "DESPERATE"
-		2: return "STRUGGLE" 
-		3: return "PLEASURE"
-		4: return "EUPHORIA"
-		_: return "NUH UN WHAT THE FUCK IS A BUG"
-
-func set_battle_tendency_modifiers() -> void:
-	if !health_component or !weapon_user_component:
-		return
-	
-	if section == 1:
-		weapon_user_component.damage_modifier -= 0.5
-		health_component.damage_modifier = 1.5
-	elif section == 2:
-		weapon_user_component.damage_modifier = 1
-		health_component.damage_modifier = 1
-	elif section == 3:
-		weapon_user_component.damage_modifier = 1.3
-		health_component.damage_modifier = 0.85
-	elif section == 4:
-		weapon_user_component.damage_modifier = 1.5
-		health_component.damage_modifier = 0.7
-	change_palette()
-
-# PLS REWORK THIS SHIT
 func change_palette() -> void:
-	if section < 1 or section > 4:
-		return
+	effects_tween = create_tween()
+	effects_tween.set_parallel(true)
 	
-	var tween: Tween = create_tween()
-	tween.set_parallel(true)
-	tween.set_trans(Tween.TRANS_SINE)
-	tween.set_ease(Tween.EASE_IN_OUT)
-	
-	match section:
-		1:
-			tween.tween_property(battle_tendency_effect.material, "shader_parameter/saturation", 0.5, 0.5)
-			tween.tween_property(battle_tendency_effect.material, "shader_parameter/contrast", 0.5, 0.5)
-			tween.tween_property(battle_tendency_effect.material, "shader_parameter/vignette_strength", 0.2, 0.5)
-			tween.tween_property(battle_tendency_effect.material, "shader_parameter/red_factor", 1.0, 0.5)
-			tween.tween_property(battle_tendency_effect.material, "shader_parameter/green_factor", 1.0, 0.5)
+	match stage:
+		battle_tendency_stages.DESPERATE:
+			effects_tween.tween_property(battle_tendency_effect.material, "shader_parameter/saturation", 0.7, 0.5)
+			effects_tween.tween_property(battle_tendency_effect.material, "shader_parameter/contrast", 0.7, 0.5)
+			effects_tween.tween_property(battle_tendency_effect.material, "shader_parameter/vignette_strength", 0.1, 0.5)
+			effects_tween.tween_property(battle_tendency_effect.material, "shader_parameter/red_factor", 1.0, 0.5)
+			effects_tween.tween_property(battle_tendency_effect.material, "shader_parameter/green_factor", 1.0, 0.5)
 			
 			if euphoria_effect:
 				euphoria_effect.visible = false
 			
 			if material:
-				tween.tween_property(material, "shader_parameter/aura_opacity", 0.0, 0.5)
+				effects_tween.tween_property(material, "shader_parameter/aura_opacity", 0.0, 0.5)
 		
-		2:
-			tween.tween_property(battle_tendency_effect.material, "shader_parameter/saturation", 1.0, 0.5)
-			tween.tween_property(battle_tendency_effect.material, "shader_parameter/contrast", 1.0, 0.5)
-			tween.tween_property(battle_tendency_effect.material, "shader_parameter/green_factor", 1.0, 0.5)
-			tween.tween_property(battle_tendency_effect.material, "shader_parameter/vignette_strength", 0.1, 0.5)
-			tween.tween_property(battle_tendency_effect.material, "shader_parameter/red_factor", 1.0, 0.5)
+		battle_tendency_stages.STRUGGLE:
+			effects_tween.tween_property(battle_tendency_effect.material, "shader_parameter/saturation", 1.0, 0.5)
+			effects_tween.tween_property(battle_tendency_effect.material, "shader_parameter/contrast", 1.0, 0.5)
+			effects_tween.tween_property(battle_tendency_effect.material, "shader_parameter/green_factor", 1.0, 0.5)
+			effects_tween.tween_property(battle_tendency_effect.material, "shader_parameter/vignette_strength", 0.05, 0.5)
+			effects_tween.tween_property(battle_tendency_effect.material, "shader_parameter/red_factor", 1.0, 0.5)
 			
 			if euphoria_effect:
 				euphoria_effect.visible = false
 			
 			if material:
-				tween.tween_property(material, "shader_parameter/aura_opacity", 0.0, 0.5)
+				effects_tween.tween_property(material, "shader_parameter/aura_opacity", 0.0, 0.5)
 		
-		3:
-			tween.tween_property(battle_tendency_effect.material, "shader_parameter/saturation", 1.5, 0.5)
-			tween.tween_property(battle_tendency_effect.material, "shader_parameter/contrast", 1.5, 0.5)
-			tween.tween_property(battle_tendency_effect.material, "shader_parameter/green_factor", 0.9, 0.5)
-			tween.tween_property(battle_tendency_effect.material, "shader_parameter/red_factor", 1.1, 0.5)
-			tween.tween_property(battle_tendency_effect.material, "shader_parameter/vignette_strength", 0.0, 0.5)
+		battle_tendency_stages.PLEASURE:
+			effects_tween.tween_property(battle_tendency_effect.material, "shader_parameter/saturation", 1.5, 0.5)
+			effects_tween.tween_property(battle_tendency_effect.material, "shader_parameter/contrast", 1.5, 0.5)
+			effects_tween.tween_property(battle_tendency_effect.material, "shader_parameter/green_factor", 0.9, 0.5)
+			effects_tween.tween_property(battle_tendency_effect.material, "shader_parameter/red_factor", 1.1, 0.5)
+			effects_tween.tween_property(battle_tendency_effect.material, "shader_parameter/vignette_strength", 0.0, 0.5)
 			
 			if euphoria_effect:
 				euphoria_effect.visible = false
 				
 			if material:
-				tween.tween_property(material, "shader_parameter/aura_min_line_width", 0.1, 0.5)
-				tween.tween_property(material, "shader_parameter/aura_max_line_width", 1.4, 0.5)
-				tween.tween_property(material, "shader_parameter/aura_opacity", 0.2, 0.5)
+				effects_tween.tween_property(material, "shader_parameter/aura_min_line_width", 0.1, 0.5)
+				effects_tween.tween_property(material, "shader_parameter/aura_max_line_width", 1.4, 0.5)
+				effects_tween.tween_property(material, "shader_parameter/aura_opacity", 0.2, 0.5)
 		
-		4:
-			tween.tween_property(battle_tendency_effect.material, "shader_parameter/saturation", 2.0, 0.5)
-			tween.tween_property(battle_tendency_effect.material, "shader_parameter/contrast", 2.0, 0.5)
-			tween.tween_property(battle_tendency_effect.material, "shader_parameter/vignette_strength", 0.0, 0.5)
-			tween.tween_property(battle_tendency_effect.material, "shader_parameter/red_factor", 1.2, 0.5)
-			tween.tween_property(battle_tendency_effect.material, "shader_parameter/green_factor", 0.8, 0.5)
+		battle_tendency_stages.EUPHORIA:
+			effects_tween.tween_property(battle_tendency_effect.material, "shader_parameter/saturation", 2.0, 0.5)
+			effects_tween.tween_property(battle_tendency_effect.material, "shader_parameter/contrast", 2.0, 0.5)
+			effects_tween.tween_property(battle_tendency_effect.material, "shader_parameter/vignette_strength", 0.0, 0.5)
+			effects_tween.tween_property(battle_tendency_effect.material, "shader_parameter/red_factor", 1.2, 0.5)
+			effects_tween.tween_property(battle_tendency_effect.material, "shader_parameter/green_factor", 0.8, 0.5)
 			
 			if euphoria_effect:
 				euphoria_effect.visible = true
 			
 			if material:
-				tween.tween_property(material, "shader_parameter/aura_min_line_width", 0.1, 0.5)
-				tween.tween_property(material, "shader_parameter/aura_max_line_width", 2.3, 0.5)
-				tween.tween_property(material, "shader_parameter/aura_opacity", 0.5, 0.5)
+				effects_tween.tween_property(material, "shader_parameter/aura_min_line_width", 0.1, 0.5)
+				effects_tween.tween_property(material, "shader_parameter/aura_max_line_width", 2.3, 0.5)
+				effects_tween.tween_property(material, "shader_parameter/aura_opacity", 0.5, 0.5)
+
+func get_stage_name() -> String:
+	var stage_name: String = "Orgasm"
+	match stage:
+		battle_tendency_stages.DESPERATE:
+			stage_name = "Desperate"
+		battle_tendency_stages.STRUGGLE:
+			stage_name = "Struggle"
+		battle_tendency_stages.PLEASURE:
+			stage_name = "Pleasure"
+		battle_tendency_stages.EUPHORIA:
+			stage_name = "Euphoria"
+	return stage_name
+
+# TENDENCY CHANGING
+
+func _ready() -> void:
+	EventBusManager.damaged.connect(_on_damaged)
+	EventBusManager.invincibility_damage_block.connect(_on_invincibility_block)
+	EventBusManager.parry.connect(_on_parry)
+	
+	match SettingsConfigSystem.difficulty:
+		SettingsConfigSystem.difficulties.RPER:
+			batte_tendency_decrease_multiplier = 0.5
+		SettingsConfigSystem.difficulties.AGENT:
+			batte_tendency_decrease_multiplier = 0.75
+		SettingsConfigSystem.difficulties.GREYTIDE:
+			batte_tendency_decrease_multiplier = 1.0
+
+func _on_invincibility_block(emitter: Node2D):
+	if emitter == parent:
+		battle_tendency += 30
+		if stage != battle_tendency_stages.EUPHORIA:
+			health_component.hard_damage -= 10
+
+func _on_parry(emitter: Node2D, type: String, enemy: bool):
+	if emitter == parent and enemy and type == "Projectile":
+		battle_tendency += 30
+		if stage != battle_tendency_stages.EUPHORIA:
+			health_component.hard_damage -= 10
+
+func _on_damaged(emitter: Node2D, damage: float, damager: Node2D) -> void:
+	if damage <= 0:
+		return
+	var amount: float
+	# ON ENEMY DAMAGED
+	if emitter != parent and damager == parent:
+		amount = damage * battle_tendency_by_damage_multiplier
+	# ON PARENT DAMAGED BY ENEMY
+	if emitter == parent and damager != parent:
+		amount = -damage * 13 * battle_tendency_by_damage_multiplier * batte_tendency_decrease_multiplier
+	# ON SELFHARM
+	if emitter == parent and damager == parent:
+		amount = -damage * 16 * battle_tendency_by_damage_multiplier * batte_tendency_decrease_multiplier
+	
+	battle_tendency += amount
+	if stage != battle_tendency_stages.EUPHORIA:
+		health_component.hard_damage -= amount * 0.25

@@ -6,7 +6,8 @@ class_name StaminaComponent extends Component
 @export var stun_effect: PackedScene = preload("res://Scenes/Effects/Particles/Stun.tscn")
 @export var after_damage_recover_cooldown_delay: float = 3
 
-var stamina: int = max_stamina
+@onready var base_max_stamina: int = max_stamina
+@onready var stamina: int = max_stamina
 var can_recover: bool = true
 var stunned: bool = false
 var stamina_recover_timer: Timer
@@ -15,7 +16,6 @@ var stamina_recover_timer: Timer
 @onready var mob_mover_component: MobMoverComponent = parent.get_node_or_null("MobMoverComponent")
 
 func _ready():
-	stamina = max_stamina
 	stamina_recover_timer = Timer.new()
 	stamina_recover_timer.wait_time = 1.0
 	stamina_recover_timer.one_shot = true

@@ -14,6 +14,9 @@ var base_max_health: float = max_health
 @export var invinciblitiy_attack_sound: AudioStreamPlayer2D
 @export var healing_from_organs_modifier: float = 1.0
 
+## Unremovable damage that affects maximum health.
+@export var hard_damage: float = 0.0 : set = set_hard_damage
+
 @export var blood_effect_scene: PackedScene
 @export var blood_spurt_effect_scene: PackedScene
 @export var gib_effect_scene: PackedScene
@@ -31,6 +34,7 @@ var delayed_damage_queue: Array = []
 var current_delayed_damage: float = 0
 
 signal health_changed(new_health)
+signal hard_damage_changed(new_damage)
 
 func _ready():
 	delayed_damage_timer = Timer.new()
@@ -52,8 +56,8 @@ func set_health(new_health: float) -> void:
 	if new_health < health:
 		if new_health <= 0:
 			_death()
-	health = clamp(new_health, 0, max_health)
-	health_changed.emit(new_health)
+	health = clamp(new_health, 0, max_health - hard_damage)
+	health_changed.emit(health)
 	
 	health_effect()
 
@@ -67,6 +71,7 @@ func get_health() -> float:
 # Наносит урон и создаёт эффекты
 func take_damage(damage: float, damager: Node2D, damage_type: String = "Generic", ignore_damage_modifier: bool = false) -> void:
 	if INVINCIBLE:
+		EventBusManager.invincibility_damage_block.emit(parent)
 		if damage > 5:
 			invincibility_effects()
 		return
@@ -189,5 +194,10 @@ func _delayed_damage_process() -> void:
 	
 	delayed_damage_timer.start()
 
-func set_max_health(new_value) -> void:
+func set_max_health(new_value: float) -> void:
 	max_health = new_value
+
+func set_hard_damage(new_value: float) -> void:
+	hard_damage = clamp(new_value, 0, max_health)
+	hard_damage_changed.emit(hard_damage)
+	set_health(clamp(health, 0, max_health - hard_damage))

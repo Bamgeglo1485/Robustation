@@ -69,7 +69,7 @@ anchor_right = 28.175003
 anchor_bottom = 1.9
 offset_left = -0.00012207031
 offset_right = -0.00012207031
-text = "DEMO 0.1.1H1"
+text = "DEMO 0.1.3"
 metadata/_edit_use_anchors_ = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Player/DEBUG/Control" unique_id=2124141107]

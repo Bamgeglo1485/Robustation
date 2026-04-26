@@ -11,6 +11,12 @@ var perk_notification_queue: Array[BasePerkComponent]
 
 @export var can_collect: bool = false
 
+@onready var minor_stat_container: Container
+
+func _ready() -> void:
+	if parent.has_node("GUI"):
+		minor_stat_container = parent.get_node("GUI").get_node("Touchable").get_node("Characteristics").get_node("MinorStats").get_node("MinorStats")
+
 func add_perk(new_perk, amount = 1) -> void:
 	if perk_collect_sound:
 		perk_collect_sound.play()
@@ -26,6 +32,7 @@ func add_perk(new_perk, amount = 1) -> void:
 		return
 	
 	var perk_instance = new_perk.new()
+	perk_instance.minor_stat_container = minor_stat_container
 	perk_instance.amount = amount
 	perks.append(perk_instance)
 	parent.add_child.call_deferred(perk_instance)

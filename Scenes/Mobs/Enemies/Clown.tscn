@@ -19,7 +19,6 @@
 [ext_resource type="AudioStream" uid="uid://byyinwd23qdiy" path="res://Audio/Weapon/trashbag2.ogg" id="15_lrk2o"]
 [ext_resource type="Script" uid="uid://dua6hp8ir5tiu" path="res://Components/Mobs/AI/Actions/AttackTargetAction.gd" id="17_0m0ai"]
 [ext_resource type="AudioStream" uid="uid://bngd1vkik15ra" path="res://Audio/EnemyThemes/Clown.ogg" id="23_iqm8m"]
-[ext_resource type="Script" uid="uid://s1yvc3m3ediv" path="res://Components/Mobs/DifficultyDependentSpeedComponent.gd" id="28_q8qhr"]
 [ext_resource type="Script" uid="uid://hv0g6akh0ftn" path="res://Components/Mobs/RandomizeMobMoverComponent.gd" id="31_nhx7t"]
 [ext_resource type="Script" uid="uid://8hn4kne15ac5" path="res://addons/beehave/nodes/composites/selector.gd" id="32_wbqi6"]
 [ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="33_1ursc"]
@@ -51,7 +50,7 @@ texture = ExtResource("2_0svj0")
 [node name="HealthComponent" parent="." index="4" unique_id=1758373275]
 max_health = 150
 damage_type_modifiers = Dictionary[String, float]({
-"Projectile": 2.0
+"Hitscan": 2.0
 })
 
 [node name="WeaponUserComponent" parent="." index="6" unique_id=2123544057 node_paths=PackedStringArray("selected_weapon")]
@@ -66,8 +65,8 @@ bullets = 1
 bullets_recover_count = 1
 shots = 1
 shoot_sound = NodePath("ShootSound")
-bullets_recovery_delay = 3.0
-random_bullet_recover_delay_coef = 0.2
+bullets_recovery_delay = 5.0
+random_bullet_recover_delay_coef = 0.3
 cooldown_delay = 0.1
 swing_delay = 0.3
 equipped_texture = ExtResource("5_gork3")
@@ -112,13 +111,13 @@ max_distance = 600.0
 [node name="PieCannon" type="Node" parent="WeaponUserComponent" index="2" unique_id=578340997 node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound", "bullets_recover_sound")]
 script = ExtResource("3_d7x3a")
 projectile = ExtResource("11_1v7dl")
-bullets = 2
+bullets = 1
 shots = 1
 shoot_sound = NodePath("ShootSound")
 empty_shoot_sound = NodePath("EmptySound")
 bullets_recover_sound = NodePath("BulletRecoverSound")
-bullets_recovery_delay = 4.5
-random_bullet_recover_delay_coef = 0.2
+bullets_recovery_delay = 6.0
+random_bullet_recover_delay_coef = 0.3
 cooldown_delay = 0.5
 swing_delay = 0.3
 equipped_texture = ExtResource("12_q8qhr")
@@ -167,7 +166,7 @@ randomize_multiplier_max = 1.2
 metadata/_custom_type_script = "uid://hv0g6akh0ftn"
 
 [node name="BeehaveTree" parent="." index="17" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@38108")
+blackboard = NodePath("@Node@18705")
 
 [node name="SequenceComposite" type="Node" parent="BeehaveTree" index="0" unique_id=772322784]
 script = ExtResource("33_1ursc")
@@ -252,7 +251,3 @@ subject_desc = "FUCKIN' BITCH
 [color=purple]KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT[/color]"
 subject_prefix = "ANNOYING MOTHERFUCKER"
 theme = ExtResource("23_iqm8m")
-
-[node name="DifficultyDependentSpeedComponent" type="Node" parent="." index="23" unique_id=953142121]
-script = ExtResource("28_q8qhr")
-metadata/_custom_type_script = "uid://s1yvc3m3ediv"

@@ -1,5 +1,6 @@
 class_name IntroductionSubjectComponent extends Component
 
+@export var enabled: bool = true
 @export var group: String
 @export var subject_name: String
 @export_multiline() var subject_desc: String
@@ -18,7 +19,7 @@ func _ready() -> void:
 
 func _if_on_screen() -> void:
 	EventBusManager.introduction_subject_on_screen.emit(parent)
-	screen_notifier.queue_free()
+	screen_notifier.screen_entered.disconnect(_on_screen)
 
 func _on_screen() -> void:
 	_if_on_screen()

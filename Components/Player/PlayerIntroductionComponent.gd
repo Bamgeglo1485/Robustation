@@ -8,6 +8,7 @@ var camera: Camera2D
 @onready var player_camera: PlayerCamera = parent.get_node_or_null("PlayerCamera")
 @export var control: Control
 @export var scan_scene: PackedScene
+@onready var music_component: MusicComponent = parent.get_node_or_null("MusicComponent")
 @onready var ingame_menu: IngameMenuComponent = parent.get_node("IngameMenuComponent")
 @onready var texture: TextureRect = control.get_node("Texture")
 @onready var information: RichTextLabel = control.get_node("Information")
@@ -33,6 +34,7 @@ func _ready() -> void:
 	camera = Camera2D.new()
 	camera.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
 	camera.process_mode = Node.PROCESS_MODE_ALWAYS
+	camera.ignore_rotation = false
 	parent.add_child.call_deferred(camera)
 	
 	scan = scan_scene.instantiate()
@@ -40,21 +42,22 @@ func _ready() -> void:
 	scan.visible = false
 	scene.add_child.call_deferred(scan)
 	scan_offset = scan.get_node("RandomOffsetComponent")
-	config.load("user://settings.cfg")
 
 func _on_subject_on_screen(target: Node2D) -> void:
 	var target_introduction: IntroductionSubjectComponent = target.get_node_or_null("IntroductionSubjectComponent")
-	if SettingsConfigSystem.introductiones_enemies.has(target_introduction.group):
+	if IntroductionSystem.introductiones_enemies.has(target_introduction.group):
 		return
-	SettingsConfigSystem.introductiones_enemies.append(target_introduction.group)
+	IntroductionSystem.introductiones_enemies.append(target_introduction.group)
+	config.load("user://save.cfg")
 	config.set_value("INTRODUCTION", target_introduction.group, true)
-	config.save("user://settings.cfg")
+	config.save("user://save.cfg")
 	if introductioning:
 		introduction_queue.append(target)
 	else:
 		introduction(target)
 
 func introduction(target: Node2D) -> void:
+	music_component.main_music_player.volume_db = -60
 	prev_timescale = Engine.time_scale
 	Engine.time_scale = 1.0
 	
@@ -79,6 +82,19 @@ func introduction(target: Node2D) -> void:
 	_tween.tween_property(camera, "zoom", Vector2(4, 4), 0.5)
 	
 	await _tween.finished
+	
+	var _rotate_tween = create_tween()
+	_rotate_tween.set_trans(Tween.TRANS_BACK)
+	_rotate_tween.set_ease(Tween.EASE_IN_OUT)
+	_rotate_tween.set_loops()
+	_rotate_tween.tween_property(camera, "zoom", Vector2(3.5, 3.5), 0.5)
+	_rotate_tween.tween_property(camera, "global_rotation", -0.1, 2)
+	_rotate_tween.tween_property(camera, "global_rotation", 0.05, 2)
+	_rotate_tween.tween_property(camera, "zoom", Vector2(4.5, 4.5), 0.5)
+	_rotate_tween.tween_property(camera, "global_rotation", 0.1, 2)
+	_rotate_tween.tween_property(camera, "global_rotation", -0.05, 2)
+	_rotate_tween.tween_property(camera, "zoom", Vector2(4, 4), 0.5)
+	_rotate_tween.tween_property(camera, "global_rotation", 0.1, 2)
 	
 	var direction_component: DirectionComponent = target.get_node_or_null("DirectionComponent")
 	if direction_component:
@@ -147,6 +163,7 @@ func _setup_camera(to_introduction: bool = true):
 		player_camera.make_current()
 
 func _resume() -> void:
+	music_component.main_music_player.volume_db = 0
 	Engine.time_scale = prev_timescale
 	
 	enemy_theme.stop()

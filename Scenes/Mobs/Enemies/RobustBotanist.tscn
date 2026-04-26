@@ -26,6 +26,7 @@
 [ext_resource type="AudioStream" uid="uid://cb0ht0w8ohixj" path="res://Audio/Music/BossThemes/Arena_boss_s1.ogg" id="23_ppp0o"]
 [ext_resource type="Material" uid="uid://cyp3pqnhbfrj3" path="res://Resources/Shaders/Jiggle.tres" id="23_yvi72"]
 [ext_resource type="FontFile" uid="uid://4xw2o0e2j051" path="res://Resources/Text/Fonts/RobotoMono/static/RobotoMono-Regular.ttf" id="24_4b3v0"]
+[ext_resource type="Material" uid="uid://c431ei1tq3rl8" path="res://Resources/Shaders/Wobble.tres" id="25_ppp0o"]
 [ext_resource type="Script" uid="uid://4io3bm7r86h6" path="res://Components/Interface/Menu/TextPrintingAnimationComponent.gd" id="25_u3757"]
 [ext_resource type="Script" uid="uid://b1stcr2j1euvf" path="res://Components/Mobs/HealthBarComponent.gd" id="26_3cthh"]
 [ext_resource type="AudioStream" uid="uid://pkjgiku4eow3" path="res://Audio/Music/BossThemes/Arena_boss_s2.ogg" id="30_hejhp"]
@@ -103,7 +104,7 @@ stream = ExtResource("5_gume5")
 target_desired_distance = 0.1
 
 [node name="BeehaveTree" parent="." index="16" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@18717")
+blackboard = NodePath("@Node@321656")
 
 [node name="SequenceComposite" type="Node" parent="BeehaveTree" index="0" unique_id=815350071]
 script = ExtResource("14_gt7if")
@@ -188,6 +189,7 @@ theme = ExtResource("23_hejhp")
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="21" unique_id=1204529116]
 
 [node name="ProgressBar" type="ProgressBar" parent="CanvasLayer" index="0" unique_id=1568004556]
+material = ExtResource("25_ppp0o")
 custom_minimum_size = Vector2(0, 48)
 theme_override_styles/background = SubResource("StyleBoxFlat_ak16y")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ppp0o")

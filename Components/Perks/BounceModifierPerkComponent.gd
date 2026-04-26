@@ -1,6 +1,7 @@
 class_name BounceModifierPerkComponent extends BasePerkComponent
 
 @onready var weapon_user_component: WeaponUserComponent = parent.get_node_or_null("WeaponUserComponent")
+@onready var penetration_perk: PenetrationModifierComponent = parent.get_node_or_null("PenetrationModifierComponent")
 
 func _init() -> void:
 	untranslated_perk_name = "Rubber Bullets(Without jokes about dildos pls)"
@@ -12,22 +13,20 @@ func _init() -> void:
 
 func _ready() -> void:
 	super._ready()
-	EventBusManager.projectile_shoot.connect(_on_projectile_shoot)
 
-func _on_projectile_shoot(emitter, _weapon, _direction, projectile):
-	if emitter != parent:
-		return
+func apply_modifiers() -> void:
+	if !penetration_perk and parent:
+		penetration_perk = parent.get_node_or_null("PenetrationModifierComponent")
 	
-	var projectile_component: ProjectileComponent = projectile.get_node_or_null("ProjectileComponent")
-	if projectile_component:
-		projectile_component.max_bounces += amount
-		if projectile_component.max_penetrations != 0:
-			projectile_component.max_penetrations -= amount
-		return
-		
-	var hitscan_component: HitscanComponent = projectile.get_node_or_null("HitscanComponent")
-	if hitscan_component:
-		hitscan_component.max_bounces += amount
-		if hitscan_component.max_penetrations != 0:
-			hitscan_component.max_penetrations -= amount
-		return
+	if !weapon_user_component and parent:
+		weapon_user_component = parent.get_node_or_null("WeaponUserComponent")
+	
+	if weapon_user_component:
+		weapon_user_component.extra_bounces = amount
+	if penetration_perk:
+		penetration_perk.extra_penetrations = -amount
+		penetration_perk.apply_modifiers()
+	
+	set_minor_stat("[color=crimson]Projectile Bounces:[/color] " + str(amount), "bounces")
+	if weapon_user_component:
+		set_second_minor_stat("[color=crimson]Projectile Penetrations:[/color] " + str(weapon_user_component.extra_penetrations), "penetrations")

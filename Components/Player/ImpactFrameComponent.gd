@@ -8,6 +8,17 @@ var pitch_tween: Tween
 var aberration_tween: Tween
 var pitch: AudioEffectPitchShift = AudioServer.get_bus_effect(0, 1)
 
+var freeze_lifetime: float
+signal freeze_end
+
+func _process(delta: float) -> void:
+	if freeze_lifetime <= 0:
+		return
+	freeze_lifetime -= delta
+	if freeze_lifetime <= 0:
+		freeze_lifetime = 0
+		freeze_end.emit()
+
 func impact_frame(
 	impact_time: float = 0.3,
 	wait_time: float = 0.0,
@@ -18,15 +29,21 @@ func impact_frame(
 		await(tree.create_timer(wait_time, true, false, true).timeout)
 	effect_frame.visible = true
 	frame_freeze(impact_time)
-	await(tree.create_timer(impact_time, true, false, true).timeout)
+	if freeze_lifetime <= 0:
+		await(tree.create_timer(impact_time, true, false, true).timeout)
+	else:
+		await freeze_end
 	effect_frame.visible = false
 	if modify_color:
 		set_color_modify(distort_audio)
 
 func frame_freeze(impact_time = 0.3) -> void:
-	tree.paused = true
+	if !tree.paused:
+		tree.paused = true
 	SettingsConfigSystem.impact_frame = true
-	await(tree.create_timer(impact_time, true, false, true).timeout)
+	if impact_time > 0:
+		freeze_lifetime += impact_time
+		await freeze_end
 	SettingsConfigSystem.impact_frame = false
 	if SettingsConfigSystem.paused:
 		return
@@ -113,7 +130,7 @@ func _on_exlosion(explosion) -> void:
 
 func _on_parry(emitter, type, _enemy):
 	if emitter == parent and type == "Projectile":
-		impact_frame(0.1, 0, false)
+		impact_frame(0.05, 0, false)
 
 func _on_kickdash_combo(emitter) -> void:
 	if emitter != parent:

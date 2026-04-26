@@ -18,3 +18,4 @@ func apply_modifiers() -> void:
 	
 	health_component.armor *= (base_armor ** amount)
 	health_component.healing_from_organs_modifier = base_organ_heal_modifier ** amount
+	set_second_minor_stat("[color=crimson]Organ Healing:[/color] " + str(health_component.healing_from_organs_modifier * 100) + "%", "healing_from_organs_modifier")

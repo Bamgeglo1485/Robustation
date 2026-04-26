@@ -5,6 +5,7 @@ func _init() -> void:
 	perk_desc = "[color=green]Adds and increases healing from projecile parry by 2%[/color]"
 	perk_icon = preload("res://Textures/Perks/redspace_paint.png")
 	perk_equipped_texture = preload("res://Textures/Perks/redspace_paint_equipped.png")
+	rarity = rarity_classes.ROBUST
 	perk_name = tr(untranslated_perk_name)
 	perk_desc = tr(perk_desc)
 
@@ -19,6 +20,7 @@ func _ready() -> void:
 
 func apply_modifiers() -> void:
 	heal_for_parry_multiplier = base_heal_for_parry_multiplier ** amount
+	set_minor_stat("[color=crimson]Heal From Parry:[/color] " + str(heal_for_parry_multiplier * 100 - 100) + "%", "heal_for_parry_multiplier")
 
 func _on_parry(emitter: Node2D, type: String, enemy: bool) -> void:
 	if emitter != parent or type != "Projectile" or !enemy:

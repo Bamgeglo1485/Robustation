@@ -12,17 +12,21 @@ collision_layer = 18432
 collision_mask = 0
 motion_mode = 1
 
-[node name="ProjectileComponent" type="Area2D" parent="." unique_id=2058769936 node_paths=PackedStringArray("hit_sound")]
+[node name="ProjectileComponent" type="Area2D" parent="." unique_id=2058769936 node_paths=PackedStringArray("hit_sound", "tile_destruction_audio")]
 collision_layer = 7
 collision_mask = 7
 priority = 2
 script = ExtResource("2_wrjq0")
 hit_sound = NodePath("HitSound")
+tile_destruction_audio = NodePath("TileSound")
 metadata/_custom_type_script = "uid://dn05jeqqq5844"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ProjectileComponent" unique_id=1391622764]
 
 [node name="HitSound" type="AudioStreamPlayer2D" parent="ProjectileComponent" unique_id=1752295456]
+max_distance = 600.0
+
+[node name="TileSound" type="AudioStreamPlayer2D" parent="ProjectileComponent" unique_id=351652522]
 max_distance = 600.0
 
 [node name="Parry" type="Area2D" parent="." unique_id=757156969]

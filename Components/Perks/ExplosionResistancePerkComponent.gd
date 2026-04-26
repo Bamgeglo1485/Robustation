@@ -5,6 +5,7 @@ func _init() -> void:
 	perk_desc = "[color=green]Increases your explosion resistance by 10%[/color]"
 	perk_icon = preload("res://Textures/Perks/rocket_jumpers.png")
 	perk_equipped_texture = preload("res://Textures/Perks/rocket_jumpers_equipped.png")
+	rarity = rarity_classes.ROBUST
 	perk_name = tr(untranslated_perk_name)
 	perk_desc = tr(perk_desc)
 
@@ -25,3 +26,4 @@ func apply_modifiers() -> void:
 	if !is_node_ready():
 		await ready
 	explosion_resist.resistance = base_resistance * (base_resist ** amount)
+	set_minor_stat("[color=crimson]Explosion Resistance:[/color] " + str(explosion_resist.resistance * 100) + "%", "explosion_resistance")

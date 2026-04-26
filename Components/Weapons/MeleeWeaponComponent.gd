@@ -30,6 +30,7 @@ class_name MeleeWeapon extends Weapon
 @onready var parent_mob_mover_component: MobMoverComponent
 @onready var parent_faction: FactionComponent
 @export var piercing_attack_animation: bool = false
+@export var tile_destruction_audio: AudioStreamPlayer2D
 
 @export_category("QTE")
 @export var qte_icon: Range
@@ -116,6 +117,11 @@ func _ready() -> void:
 	for child in parent.get_children():
 		if child is Area2D:
 			excluded_nodes.append(child)
+	
+	if !tile_destruction_audio:
+		tile_destruction_audio = AudioStreamPlayer2D.new()
+		add_child(tile_destruction_audio)
+		tile_destruction_audio.max_distance = 600
 
 func attack(raiser, npc = true) -> Dictionary:
 	if !raiser.has_method("get_attack_direction"):
@@ -187,7 +193,8 @@ func _try_melee_attack(direction) -> Dictionary:
 		if result.is_empty():
 			continue
 		
-		var enemy: Node2D = result.collider
+		var enemy = result.collider
+		
 		if enemy is Area2D:
 			enemy = enemy.get_parent()
 		
@@ -196,7 +203,7 @@ func _try_melee_attack(direction) -> Dictionary:
 		
 		if enemy.has_node("MeleeAttackIgnoreComponent"):
 			continue
-		if (enemy.global_position - parent.global_position).length() > attack_range:
+		if enemy is not TileMapLayer and (enemy.global_position - parent.global_position).length() > attack_range:
 			continue
 		
 		var _attacked = _melee_attack_target(enemy, direction, true)
@@ -217,13 +224,27 @@ func _try_melee_attack(direction) -> Dictionary:
 	_attack_animation(direction)
 	return _targets
 
-func _melee_attack_target(target: Node2D, direction: Vector2, 
+func _melee_attack_target(target, direction: Vector2, 
 multiple_attack: bool = false) -> bool:
 	
 	if !multiple_attack:
 		_attack_animation(direction)
 	
-	if (target and (target.global_position - parent.global_position).length() > attack_range):
+	if target is TileMapLayer:
+		var tile_pos = target.local_to_map(target.to_local(parent.global_position + direction.normalized() * 32))
+		var tile_data = target.get_cell_tile_data(tile_pos)
+		if tile_data and !tile_data.has_custom_data("Invincible") and tile_data.has_custom_data("Health"):
+			var health: float = tile_data.get_custom_data("Health")
+			tile_data.set_custom_data("Health", health - damage)
+			if health <= 0:
+				target.set_cell(tile_pos)
+				if tile_data.has_custom_data("DestructionSound"):
+					tile_destruction_audio.stream = tile_data.get_custom_data("DestructionSound")
+					tile_destruction_audio.play()
+		else:
+			target = null
+	
+	if target is not TileMapLayer and (target and (target.global_position - parent.global_position).length() > attack_range):
 		target = null
 	
 	if attack_sound and target:

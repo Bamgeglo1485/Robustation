@@ -6,7 +6,7 @@ extends Node2D
 @export var damage: float = 80
 @export var fly_force: int = 4000
 @export var fall_time: int = 2
-@export var radius: int = 128
+@export var radius: int = 128 : set = set_radius
 @export var source: PhysicsBody2D
 @export var explosion_duration: float = 0.3
 @export var check_interval: float = 0.1
@@ -75,16 +75,20 @@ func _check_overlapping_bodies() -> void:
 func _apply_damage_to_body(body: Node2D) -> void:
 	if !is_instance_valid(body) or body in damaged_bodies:
 		return
+	
+	damaged_bodies.append(body)
+	
 	var body_faction: Node = body.get_node_or_null("FactionComponent")
 	if source_faction and !ignore_faction and source and body_faction:
 		if source_faction.faction == body_faction.faction:
 			return
 	
 	var distance: float = (body.global_position - global_position).length()
-	var distance_factor = 1.0 - clamp(distance / radius, 0.0, 1.0)
 	
-	if distance_factor > 0.1:
-		var modifier: float = 1
+	var distance_factor = 1.0 - clamp(distance / float(radius), 0.0, 1.0)
+	
+	if distance_factor > 0.0:
+		var modifier: float = 1.0
 		
 		var explosion_resist: ExplosionResistanceComponent = body.get_node_or_null("ExplosionResistanceComponent")
 		if explosion_resist:
@@ -92,7 +96,8 @@ func _apply_damage_to_body(body: Node2D) -> void:
 		
 		var health: HealthComponent = body.get_node_or_null("HealthComponent")
 		if health:
-			health.take_damage(damage * distance_factor * modifier, source)
+			var final_damage = damage * distance_factor * modifier
+			health.take_damage(final_damage, source)
 		
 		var mob_mover: MobMoverComponent = body.get_node_or_null("MobMoverComponent")
 		if mob_mover:
@@ -100,5 +105,11 @@ func _apply_damage_to_body(body: Node2D) -> void:
 			var direction: Vector2 = (body.global_position - global_position).normalized()
 			if direction.length_squared() > 0:
 				mob_mover.throw(direction, fly_force * distance_factor)
-		
-		damaged_bodies.append(body)
+
+func set_radius(new_value) -> void:
+	if !is_node_ready():
+		await ready
+	radius = new_value
+	var collision_shape = area2d.get_node_or_null("CollisionShape2D").shape
+	if collision_shape and collision_shape is CircleShape2D:
+		collision_shape.radius = new_value

@@ -22,7 +22,7 @@ var bounces: int = 0
 @export var max_penetrations: int = 0
 var penetrations: int = 0
 
-var last_target: Node2D
+var last_target
 
 var shooter: PhysicsBody2D
 var direction: Vector2 = Vector2.RIGHT
@@ -193,3 +193,4 @@ func _ray_disappear_effects() -> void:
 		_width_tween.set_trans(Tween.TRANS_BACK)
 		_width_tween.set_ease(Tween.EASE_OUT)
 		_width_tween.tween_property(ray_line, "width", 0, tween_speed)
+		

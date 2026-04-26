@@ -5,7 +5,10 @@ var reflect_sound_player: AudioStreamPlayer2D
 
 @export var base_chance: float = 0.05
 @export var base_chance_decrease: float = 0.05
-var chance: float = base_chance
+var extra_chance: float = 0.0
+var chance: float = 0.0
+var apply_opposite: bool = true
+var is_updating: bool = false
 
 func _ready() -> void:
 	super._ready()
@@ -24,17 +27,32 @@ func _init() -> void:
 	untranslated_perk_name = "Bitch Ball"
 	perk_desc = "[color=green]Increases your melee attack reflect chance by 5%[/color], but [color=crimson]decreases your bullet reflect chance by 5%[/color]"
 	perk_icon = preload("res://Textures/Perks/bitch_ball.png")
-	rarity = rarity_classes.ROBUST
+	rarity = rarity_classes.ADMINABUSE
 	perk_name = tr(untranslated_perk_name)
 	perk_desc = tr(perk_desc)
 
 func apply_modifiers() -> void:
-	chance = base_chance * amount
-	if !parent:
+	if is_updating:
 		return
+	
+	is_updating = true
+	
+	chance = base_chance * amount + extra_chance
+	set_minor_stat("[color=crimson]Melee Reflect Chance:[/color] " + str(chance * 100) + "%", "melee_reflect_chance")
+	
+	if !parent:
+		is_updating = false
+		return
+	
 	var reflect_perk: ReflectPerkComponent = parent.get_node_or_null("ReflectPerkComponent")
-	if reflect_perk:
-		chance -= base_chance_decrease * reflect_perk.amount
+	if reflect_perk and apply_opposite:
+		reflect_perk.extra_chance = -base_chance_decrease * amount
+		reflect_perk.apply_opposite = false
+		reflect_perk.apply_modifiers()
+		reflect_perk.apply_opposite = true
+		reflect_perk.set_minor_stat("[color=crimson]Projectile Reflect Chance:[/color] " + str(reflect_perk.chance * 100) + "%", "projectile_reflect_chance")
+	
+	is_updating = false
 
 func reflect(attacker: PhysicsBody2D, weapon: MeleeWeapon) -> void:
 	if !attacker or !weapon:

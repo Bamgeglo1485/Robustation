@@ -75,6 +75,7 @@ metadata/_custom_type_script = "uid://cslfowwgmffis"
 
 [node name="SetProjectileExplosionOnTriggerComponent" type="Node" parent="." index="8" unique_id=1452082778]
 script = ExtResource("5_vwhna")
+delete_on_hit = false
 explode_lifetime = 0.0
 speed = 700
 metadata/_custom_type_script = "uid://0qaedvb6js57"

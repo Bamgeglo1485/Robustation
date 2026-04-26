@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bw67ptab1pvwi"]
+
+[ext_resource type="TileSet" uid="uid://bc7bghcv8144y" path="res://Resources/TileMaps/Tiles.tres" id="1_uhyuv"]
+[ext_resource type="TileSet" uid="uid://c7mk0aiygychu" path="res://Resources/TileMaps/Walls.tres" id="2_2yl28"]
+[ext_resource type="TileSet" uid="uid://cr4gmxce1ahdv" path="res://Resources/TileMaps/MinorTiles.tres" id="3_2yl28"]
+[ext_resource type="TileSet" uid="uid://ci8wda1xc88ki" path="res://Resources/TileMaps/WallsDestructible.tres" id="3_g0jr5"]
+
+[node name="BaseRoom" type="Node2D" unique_id=1899290231]
+
+[node name="Tiles" type="TileMapLayer" parent="." unique_id=1099697406]
+tile_set = ExtResource("1_uhyuv")
+collision_enabled = false
+
+[node name="MinorTiles" type="TileMapLayer" parent="." unique_id=1522005522]
+position = Vector2(0, -1)
+tile_set = ExtResource("3_2yl28")
+physics_quadrant_size = 64
+
+[node name="WallsDestructible" type="TileMapLayer" parent="." unique_id=703823791]
+tile_set = ExtResource("3_g0jr5")
+physics_quadrant_size = 64
+
+[node name="Walls" type="TileMapLayer" parent="." unique_id=917501688]
+tile_set = ExtResource("2_2yl28")
+physics_quadrant_size = 64

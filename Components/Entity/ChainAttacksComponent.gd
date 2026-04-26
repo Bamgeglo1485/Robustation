@@ -20,7 +20,6 @@ var faction: String
 
 func _ready() -> void:
 	ray_line.clear_points()
-	ray_line.add_point(Vector2(0,0))
 	fire()
 	_ray_appear_effects()
 	await tree.create_timer(disappear_speed).timeout

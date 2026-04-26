@@ -13,7 +13,7 @@ shader_parameter/feather = 0.135
 
 [node name="MiniExplosion" unique_id=1040504191 instance=ExtResource("1_wupnp")]
 impact_frame = false
-damage = 80.0
+damage = 40.0
 fly_force = 500
 radius = 64
 

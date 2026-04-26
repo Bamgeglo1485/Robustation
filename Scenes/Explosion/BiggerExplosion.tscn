@@ -3,5 +3,5 @@
 [ext_resource type="PackedScene" uid="uid://bbqpmpj4ntyg" path="res://Scenes/Explosion/BaseExplosion.tscn" id="1_nvw0q"]
 
 [node name="BaseExplosion" unique_id=890470773 instance=ExtResource("1_nvw0q")]
-damage = 250.0
-radius = 300
+damage = 150.0
+radius = 192

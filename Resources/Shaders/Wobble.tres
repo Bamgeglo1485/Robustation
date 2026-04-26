@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c431ei1tq3rl8"]
+
+[ext_resource type="Shader" uid="uid://bnyl3n271086y" path="res://Resources/Shaders/Wobble.gdshader" id="1_j3t0c"]
+
+[resource]
+shader = ExtResource("1_j3t0c")
+shader_parameter/amplitude = 0.0
+shader_parameter/speed = 1.0000000475

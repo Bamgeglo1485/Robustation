@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Robustation-OOP"
-config/version="0.1"
+config/version="0.1.3"
 run/main_scene="uid://8useii0cqwer"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
@@ -33,6 +33,7 @@ EventBusManager="*res://Scripts/EventBusManager.gd"
 SettingsConfigSystem="*uid://c86gbf2xo8vfy"
 BeehaveGlobalMetrics="*uid://c3ktl6ontsdt7"
 BeehaveGlobalDebugger="*uid://bl3ma400hpvsh"
+IntroductionSystem="*uid://bxbp4lhgr6m6m"
 
 [display]
 

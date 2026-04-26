@@ -80,14 +80,12 @@ MASTER OF SPEAR, MELEE AND RANGE WEAPONS.
 "CLOWN","КЛОУН"
 "ANNOYING MOTHERFUCKER","РАЗДРАЖАЮЩИЙ ПИДОР"
 "FUCKIN' BITCH
-[color=purple]KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT[/color]",
-"ЕБУЧАЯ СУЧКА
+[color=purple]KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT[/color]","ЕБУЧАЯ СУЧКА
 [color=purple]УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО[/color]"
 
 "TOMATO KILLER","ТОМАТ УБИЙЦА"
 "WEAKEST BOTANISTS PAWN.
-[color=purple]WEAK TO EVERYTHING[/color]",
-"СЛАБЕЙШАЯ ПЕШКА БОТАНИКА.
+[color=purple]WEAK TO EVERYTHING[/color]","СЛАБЕЙШАЯ ПЕШКА БОТАНИКА.
 [color=purple]УЯЗВИМ КО ВСЕМУ[/color]"
 
 "ROBUST BOTANIST","РОБАСТНЫЙ БОТАНИК"
@@ -120,7 +118,7 @@ MASTER OF SPEAR, MELEE AND RANGE WEAPONS.
 "[color=green]Increases your armor by 5%[/color], but [color=crimson]decreases healing from organs crushing by 10%[/color]","[color=green]Усиливает вашу броню на 5%[/color], но [color=crimson]уменьшает лечение от давления органов на 10%[/color]"
 
 "Combat Glove","Боевые Перчатки"
-"[color=green]Reduces weapon cooldown by 10%[/color]","[color=green]Понижает кулдаун оружия на 10%[/color]"
+"[color=green]Reduces weapon cooldown by 5%[/color]","[color=green]Понижает кулдаун оружия на 5%[/color]"
 
 "Galaxythistle","Галакточертополох"
 "[color=green]Reduces delayed damage by 10%[/color]","[color=green]Уменьшает отложенный урон на 10%[/color]"
@@ -155,7 +153,7 @@ MASTER OF SPEAR, MELEE AND RANGE WEAPONS.
 "[color=green]Increases projectile bounce[/color], but [color=crimson]decreases projectile penetration[/color]","[color=green]Повышает отскакиваемость снарядов[/color], но [color=crimson]уменьшает пробиваемость снарядов[/color]"
 
 "Inspector's Flask","Фляга инспектора"
-"[color=green]Decreases your Battle Tendency reduction by 15%[/color], but [color=crimson]increases weapon spread by 15%[/color]","[color=green]Снижает уменьшение боевого духа на 15%[/color], но [color=crimson]повышает разброс на 15%[/color]"
+"[color=green]Decreases your Battle Tendency reduction by 10%[/color], but [color=crimson]increases weapon spread by 25%[/color]","[color=green]Снижает уменьшение боевого духа на 10%[/color], но [color=crimson]повышает разброс на 25%[/color]"
 
 "Crusher Module","Модуль Крушителя"
 "[color=green]Adds and increases healing from damage by 4%[/color], but [color=crimson]healing only works within 3 tiles[/color]","[color=green]Добавляет и повышает лечение от урона на 4%[/color], но [color=crimson]лечение работает только в пределах 3 клеток[/color]"
@@ -199,21 +197,11 @@ The Shotgun can be used to launch a hook, which will either pull the subject in 
 
 Дробовик можно использовать для запускания крюка, который либо притянет субъект, либо притянет самого владельца. При притягивании к крюку дробовик перезаряжается, позволяя несколько раз стрелять без задержек, пока дуло не перегреется."
 
-"Lasergun is a long-range firearm, completely ineffective up close, but deadly when used on distant targets.
-
-Since it fires concentrated photons (gamma radiation), it only deals long-term cellular damage, meaning it causes no harm for the next several hours. However, the photons defocus due to air, and the laser strikes a larger area at a lower velocity, causing instant burns. The greater distance, the higher damage dealt to the subject. Laser also deals delayed damage due to ignition caused by the temperature.
-
-Attached to it is a laser stunner, which creates a chain of lightning between targets, disabling them and dealing stamina damage. Lightning may also strike the owner if they are close enough to it. It's most effective to stun a group of enemies, create distance, and fire using the primary mode.","Лазерная пушка - это дальнее огнестрельное оружие, полностью неэффективное вблизи, но смертельно опасное при применении на дальних целях.
-
-Так как он стреляет концентрированными фотонами(гамма излучением), он наносит только долговременный клеточный урон, то есть не наносит никакого вреда в ближайшие несколько часов. Но фотоны расфокусируются из-за воздуха и лазер бьёт по большей площади и с меньшей скоростью, нанося мгновенные ожоги. Поэтому, чем выше расстояние - тем больше урон по субъекту. Лазер также наносит отложенный урон из-за возгорания, вызываемый температурой. 
-
-К нему прикручен лазерный станнер, создающий цепочку молний по целям, которые выводят из строя и наносят урон по выносливости. Но при неосторожности молнии также могут задеть владельца, если он находится достаточно близко к месту попадания. Наиболее эффективно оглушать группу врагов, создавать дистанцию и стрелять основным режимом."
-
 "Spear is a weapon of mass destruction, effective for eliminating groups of enemies. However, it requires caution due to its large blast radius and damage output.
 
 By itself, it can pierce through several enemies, dealing high damage to single targets, but to eliminate a large group of enemies, the explosive charge must be activated. Activation is possible in two ways:
 1. When parried, an explosive release timer is initiated, causing an explosion after 0.3 seconds.
-2. The explosive can be detonated by shooting it with any weapon, though the explosion will be of lesser power.
+2. The explosive can be detonated by shooting it with any weapon, then the explosion will be stronger, but with half the radius of explosion.
 
 Spear accelerates via jet propulsion using an burning canister (which also serves as the explosive), and when struck by the hook, all the gas is instantly and evenly released, causing spear to ricochet uncontrollably off walls and pierce through everything in its path.
 
@@ -221,7 +209,7 @@ Spear can be launched with the hook, which deactivates the explosive and allows 
 
 Сам по себе он может пробить насквозь несколько врагов, нанося большой урон по единичным целям, но для устранения большой группы врагов необходимо активировать взрывчатку. Активация возможна двумя способами:
 1. При парировании инициируется таймер высвобождения взрывчатки, вызывая взрыв через 0.3 секунды.
-2. Взрывчатку можно взорвать при выстреле по нему любым оружием, но взрыв будет меньшей мощности.
+2. Взрывчатку можно взорвать при выстреле по нему любым оружием, тогда взрыв будет сильнее, но радиус поражения вдвое меньше.
 
 Копьё ускоряется благодаря реактивному ускорению через воспламеняющийся баллон(который также является взрывчаткой) и при повреждении его крюком весь газ мгновенно и равномерно высвобождается, из-за чего копьё начинает бесконтрольно отскакивать от стен и пробивать всё насквозь.
 

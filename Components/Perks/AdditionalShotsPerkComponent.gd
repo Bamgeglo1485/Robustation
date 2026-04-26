@@ -16,6 +16,8 @@ func apply_modifiers() -> void:
 	if weapon_user_component:
 		weapon_user_component.overheat_per_shoot_modifier = starting_overheat_per_shoot_modifier * (base_overheat_per_shoot_modifier ** amount)
 		weapon_user_component.extra_shots = amount
+		set_minor_stat("[color=crimson]Shots:[/color] " + str(amount), "extra_shots")
+		set_second_minor_stat("[color=crimson]Overheat:[/color] " + str(weapon_user_component.overheat_per_shoot_modifier * 100) + "%", "overheat_per_shoot_modifier")
 
 func _ready() -> void:
 	weapon_user_component = parent.get_node_or_null("WeaponUserComponent")

@@ -11,6 +11,7 @@ var plant_progress: int = 0
 var stage_timer: Timer
 
 @export_category("Tray")
+@onready var arena_component: ArenaComponent = scene.get_node_or_null("ArenaComponent")
 @export var max_plants: int = 8
 var plants: Array[Node2D]
 
@@ -34,6 +35,8 @@ func _stage_progress() -> void:
 		plant_inst.global_position = parent.global_position
 		scene.add_child.call_deferred(plant_inst)
 		plants.append(plant_inst)
+		if arena_component:
+			arena_component.current_enemies.append(plant_inst)
 	
 	plant_sprite.texture = plant_textures[plant_progress]
 
@@ -41,11 +44,3 @@ func _on_gibbed(emitter: Node2D) -> void:
 	if !plants.has(emitter):
 		return
 	plants.erase(emitter)
-
-func _exit_tree() -> void:
-	for plant in plants:
-		var health: HealthComponent = plant.get_node_or_null("HealthComponent")
-		if health:
-			health._death()
-		else:
-			plant.queue_free()

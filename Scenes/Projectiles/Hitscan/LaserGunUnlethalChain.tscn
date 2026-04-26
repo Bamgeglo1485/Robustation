@@ -144,7 +144,6 @@ top_level = true
 material = SubResource("ShaderMaterial_o48jm")
 position = Vector2(0.05896592, 0.018667966)
 scale = Vector2(1.058966, 1.0186689)
-points = PackedVector2Array(0, 0)
 width = 60.0
 default_color = Color(0, 1.1108615, 1.950255, 1)
 texture_mode = 2

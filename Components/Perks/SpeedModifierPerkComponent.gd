@@ -27,3 +27,5 @@ func apply_modifiers() -> void:
 	mob_mover_component.set_minor_speed_modifier("SpeedModifier", base_speed_modifier ** amount)
 	if ephedrine_overdose:
 		ephedrine_overdose.ability_delay = base_overdose_delay * (base_overdose_modifier ** amount)
+	
+	set_minor_stat("[color=crimson]Overdose Delay:[/color] " + str(ephedrine_overdose.ability_delay) + " sec", "overdose_ability_delay")

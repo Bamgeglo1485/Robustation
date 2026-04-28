@@ -100,6 +100,7 @@ func _ready() -> void:
 		for child in get_children():
 			if child is AudioStreamPlayer2D:
 				child.reparent(sounds)
+				child.position = Vector2(0, 0)
 	
 	# эту хуйню не трогайте
 	# dont touch this shit

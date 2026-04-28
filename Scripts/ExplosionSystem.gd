@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var tree: SceneTree = get_tree()
 @onready var area2d: Area2D = $Area2D
+@export var deflect_projectiles: bool = false
 @export var impact_frame: bool = true
 @export var damage: float = 80
 @export var fly_force: int = 4000
@@ -69,6 +70,8 @@ func _check_overlapping_bodies() -> void:
 	
 	var bodies: Array[Node2D] = area2d.get_overlapping_bodies()
 	for body in bodies:
+		if body is Area2D:
+			body = body.get_parent()
 		if is_instance_valid(body) and body not in damaged_bodies and body.has_node("HealthComponent"):
 			_apply_damage_to_body(body)
 
@@ -99,12 +102,18 @@ func _apply_damage_to_body(body: Node2D) -> void:
 			var final_damage = damage * distance_factor * modifier
 			health.take_damage(final_damage, source)
 		
+		var direction: Vector2 = (body.global_position - global_position).normalized()
 		var mob_mover: MobMoverComponent = body.get_node_or_null("MobMoverComponent")
 		if mob_mover:
-			mob_mover.drop(fall_time * distance_factor, drop_forced, drop_resistance_force)
-			var direction: Vector2 = (body.global_position - global_position).normalized()
-			if direction.length_squared() > 0:
-				mob_mover.throw(direction, fly_force * distance_factor)
+			if fall_time != 0:
+				mob_mover.drop(fall_time * distance_factor, drop_forced, drop_resistance_force)
+			if fly_force != 0:
+				if direction.length_squared() > 0:
+					mob_mover.throw(direction, fly_force * distance_factor)
+		
+		var projectile: ProjectileComponent = body.get_node_or_null("ProjectileComponent")
+		if projectile and deflect_projectiles:
+			projectile.direction = direction.angle()
 
 func set_radius(new_value) -> void:
 	if !is_node_ready():

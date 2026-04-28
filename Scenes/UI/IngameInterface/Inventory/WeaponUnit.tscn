@@ -2,6 +2,21 @@
 
 [ext_resource type="Texture2D" uid="uid://dnsj2opn0s2h2" path="res://Textures/Abilities/telecrystal.png" id="1_sbce1"]
 [ext_resource type="FontFile" uid="uid://dskv5n6tofrla" path="res://Resources/Text/Fonts/LCD 40x2 Display/LCD40x2Display-Regular.otf" id="2_a6u8i"]
+[ext_resource type="Script" uid="uid://b585q4mnwrsxr" path="res://Components/Interface/Ingame/Inventory/WeaponSelectButtonComponent.gd" id="3_a6u8i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sbce1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a6u8i"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.24526232, 0, 0.050708726, 0.78300005)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
 
 [node name="WeaponUnit" type="Panel" unique_id=1206055527]
 custom_minimum_size = Vector2(320, 96)
@@ -47,3 +62,19 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="." unique_id=2014091781]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_sbce1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_a6u8i")
+toggle_mode = true
+
+[node name="WeaponSelectButtonComponent" type="Node" parent="Button" unique_id=2115000766]
+script = ExtResource("3_a6u8i")
+metadata/_custom_type_script = "uid://b585q4mnwrsxr"

@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://bdtqyl5p2op74"]
+
+[ext_resource type="Script" uid="uid://bi1gje1pfokqc" path="res://Components/Weapons/RangeWeaponComponent.gd" id="1_kjgi3"]
+[ext_resource type="PackedScene" uid="uid://8u8crosi4th3" path="res://Scenes/Projectiles/Shotgun_bullet.tscn" id="2_lp1lg"]
+[ext_resource type="PackedScene" uid="uid://vj6mn42tufxs" path="res://Scenes/Effects/Particles/Case/ShotgunCase.tscn" id="3_jywpf"]
+[ext_resource type="PackedScene" uid="uid://cowxlra6ogbp0" path="res://Scenes/Effects/Particles/ShotgunFire.tscn" id="4_y07f7"]
+[ext_resource type="Texture2D" uid="uid://3st8a6jvfl4i" path="res://Textures/Weapons/Shotgun/shotgun-inhand.png" id="5_0h8w1"]
+[ext_resource type="Texture2D" uid="uid://b60x76q21cp5u" path="res://Textures/Weapons/Shotgun/shotgun_icon.png" id="6_ppfod"]
+[ext_resource type="AudioStream" uid="uid://cenp8snm2kjdm" path="res://Audio/Weapon/Projectile/shotgun_shoot.ogg" id="7_nc4j6"]
+[ext_resource type="AudioStream" uid="uid://2r0y32cx4e8s" path="res://Audio/Weapon/empty.ogg" id="8_0vxo8"]
+[ext_resource type="AudioStream" uid="uid://dhwn1xi06keaf" path="res://Audio/Weapon/shotgun_insert.ogg" id="9_5r5bk"]
+[ext_resource type="AudioStream" uid="uid://bxwx57y8k3fqt" path="res://Audio/Effects/lightburn.ogg" id="10_twrg3"]
+[ext_resource type="Script" uid="uid://ci5vgg14lkrku" path="res://Components/Weapons/HookComponent.gd" id="11_thrq6"]
+[ext_resource type="PackedScene" uid="uid://ebbkkdo5toyh" path="res://Scenes/Projectiles/Hook.tscn" id="12_dkegp"]
+[ext_resource type="Texture2D" uid="uid://cnd26u5psr454" path="res://Textures/Weapons/Hook/grappling_gun.png" id="13_x0if2"]
+[ext_resource type="AudioStream" uid="uid://dvixjlsidryp0" path="res://Audio/Weapon/Hit/reel.ogg" id="14_f2bf0"]
+[ext_resource type="AudioStream" uid="uid://c7yhulhuc27f4" path="res://Audio/Weapon/Projectile/harpoon.ogg" id="15_ujybp"]
+[ext_resource type="Material" uid="uid://ddgd2dckacjiv" path="res://Resources/Shaders/Wave.tres" id="16_82mc8"]
+
+[node name="Shotgun" type="Node" unique_id=1344688935 node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound", "bullets_recover_sound", "overheat_alert", "alt_attack")]
+script = ExtResource("1_kjgi3")
+projectile = ExtResource("2_lp1lg")
+spread_angle = 2
+bullets_max_count = 6
+bullets = 6
+bullets_recover_count = 6
+shots_angle = 45
+case_scene = ExtResource("3_jywpf")
+shoot_sound = NodePath("ShootSound")
+empty_shoot_sound = NodePath("EmptySound")
+bullets_recover_sound = NodePath("BulletRecoverSound")
+bullets_recovery_delay = 1.5
+gun_fire_effect = ExtResource("4_y07f7")
+overheat_enabled = true
+overheat_alert = NodePath("Overheat")
+cooldown_delay = 0.2
+swing_delay = 0.0
+equipped_texture = ExtResource("5_0h8w1")
+equipped_scale = Vector2(0.75, 0.75)
+icon_texture = ExtResource("6_ppfod")
+swing_rotation_multiplier = 0.0
+attack_rotation_multiplier = -0.6
+attack_shift_multiplier = -0.7
+alt_attack = NodePath("ShotgunHook")
+weapon_name = "Shotgun"
+color = Color(0.442488, 0.22811863, 0.03323717, 1)
+weapon_class = "Melee-mid"
+weapon_rarity = 2
+metadata/_custom_type_script = "uid://bi1gje1pfokqc"
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="." unique_id=1809781318]
+stream = ExtResource("7_nc4j6")
+
+[node name="EmptySound" type="AudioStreamPlayer2D" parent="." unique_id=374564107]
+stream = ExtResource("8_0vxo8")
+
+[node name="BulletRecoverSound" type="AudioStreamPlayer2D" parent="." unique_id=1727428930]
+stream = ExtResource("9_5r5bk")
+
+[node name="Overheat" type="AudioStreamPlayer2D" parent="." unique_id=1430529064]
+stream = ExtResource("10_twrg3")
+volume_db = 20.0
+
+[node name="ShotgunHook" type="Node" parent="." unique_id=951873888 node_paths=PackedStringArray("weapon_to_reload", "reel_sound", "shoot_sound", "rope")]
+script = ExtResource("11_thrq6")
+weapon_to_reload = NodePath("..")
+reel_sound = NodePath("ReelSound")
+projectile = ExtResource("12_dkegp")
+spread_angle = 0
+bullets_max_count = 1
+bullets = 1
+bullets_recover_count = 1
+shots = 1
+shots_angle = 0
+shoot_sound = NodePath("ShootSound")
+bullets_recovery_delay = 3.0
+rope = NodePath("../Rope")
+cooldown_delay = 0.15
+swing_delay = 0.0
+icon_texture = ExtResource("13_x0if2")
+metadata/_custom_type_script = "uid://ci5vgg14lkrku"
+
+[node name="ReelSound" type="AudioStreamPlayer2D" parent="ShotgunHook" unique_id=1590443781]
+stream = ExtResource("14_f2bf0")
+volume_db = 10.0
+parameters/looping = false
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="ShotgunHook" unique_id=2073276365]
+stream = ExtResource("15_ujybp")
+
+[node name="Rope" type="Line2D" parent="." unique_id=1114379310]
+material = ExtResource("16_82mc8")
+points = PackedVector2Array(0, 0)
+width = 50.0
+default_color = Color(0.15683922, 0.005713961, 0.03873314, 1)
+texture_mode = 2

@@ -396,6 +396,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_behavior_recursive = 1
 
 [node name="Information" type="RichTextLabel" parent="GUI/EnemyIntroduction" index="0" unique_id=2104700922]
 layout_mode = 1
@@ -918,6 +919,26 @@ offset_left = -0.72802734
 offset_top = -1.1444092e-05
 offset_right = 364.39197
 offset_bottom = 201.736
+
+[node name="InventoryButton" type="Button" parent="GUI/Touchable" index="4" unique_id=2053176558]
+process_mode = 3
+anchors_preset = -1
+anchor_left = 0.120000005
+anchor_top = 0.0015432099
+anchor_right = 0.20700002
+anchor_bottom = 0.025
+offset_left = -0.2400055
+offset_right = 27.53598
+offset_bottom = 8.799999
+mouse_behavior_recursive = 2
+theme_override_fonts/font = ExtResource("41_ixqny")
+theme_override_font_sizes/font_size = 16
+text = "INVENTORY"
+
+[node name="ToggleVisibleOnPressedComponent" type="Node" parent="GUI/Touchable/InventoryButton" index="0" unique_id=1325414052 node_paths=PackedStringArray("toggle_frame")]
+script = ExtResource("42_131qc")
+toggle_frame = NodePath("../../Inventory")
+metadata/_custom_type_script = "uid://bodxsix2kyyy6"
 
 [node name="Overlays" type="CanvasLayer" parent="GUI" index="6" unique_id=1713393531]
 layer = 2

@@ -54,6 +54,7 @@ lifetime = 30.0
 parry_speed_boost = 1.0
 explosion_scene = ExtResource("3_oqm3e")
 explode_on_projectile_hit = true
+explode_on_damage = true
 
 [node name="CollisionShape2D" parent="ProjectileComponent" index="0" unique_id=1391622764]
 rotation = 1.5707964
@@ -75,6 +76,9 @@ process_material = SubResource("ParticleProcessMaterial_oqm3e")
 [node name="Texture" type="Sprite2D" parent="." index="1" unique_id=1723735001]
 use_parent_material = true
 texture = ExtResource("2_l3ous")
+
+[node name="HealthComponent" parent="." index="3" unique_id=90404297]
+max_health = 100.0
 
 [node name="SetProjectileExplosionOnTriggerComponent2" type="Node" parent="." index="4" unique_id=1322456650]
 script = ExtResource("5_65omb")

@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://irh3fi1fwrs0"]
+
+[ext_resource type="Script" uid="uid://bi1gje1pfokqc" path="res://Components/Weapons/RangeWeaponComponent.gd" id="1_lonf0"]
+[ext_resource type="PackedScene" uid="uid://cc30l120jqrpr" path="res://Scenes/Projectiles/Hitscan/LaserGun.tscn" id="2_5tcis"]
+[ext_resource type="PackedScene" uid="uid://dwm5ay00kaqqf" path="res://Scenes/Effects/Particles/LaserFire.tscn" id="3_dv4r5"]
+[ext_resource type="Texture2D" uid="uid://oyppmxey67oa" path="res://Textures/Weapons/LaserGun/lasergun-inhand.png" id="4_ktm58"]
+[ext_resource type="Texture2D" uid="uid://xklko5ub50xq" path="res://Textures/Weapons/LaserGun/lasergun_icon.png" id="5_b4p8d"]
+[ext_resource type="AudioStream" uid="uid://b5y2urbnmjr2b" path="res://Audio/Weapon/laser_cannon2.ogg" id="6_7ewbc"]
+[ext_resource type="AudioStream" uid="uid://2r0y32cx4e8s" path="res://Audio/Weapon/empty.ogg" id="7_3fvnc"]
+[ext_resource type="PackedScene" uid="uid://dxdbd68ghao8p" path="res://Scenes/Projectiles/Hitscan/LaserGunUnlethal.tscn" id="8_ldm1x"]
+[ext_resource type="Texture2D" uid="uid://pe7a4yj0c7rq" path="res://Textures/Weapons/LaserGun/unlethal_icon.png" id="9_nf4fy"]
+[ext_resource type="AudioStream" uid="uid://brnrtg3y0uvbr" path="res://Audio/Weapon/Hit/laser3.ogg" id="10_hy2jb"]
+
+[node name="Lasergun" type="Node" unique_id=1495806879 node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound", "alt_attack")]
+script = ExtResource("1_lonf0")
+projectile = ExtResource("2_5tcis")
+spread_angle = 2
+bullets_max_count = 1
+bullets = 1
+bullets_recover_count = 1
+shots = 1
+shots_angle = 0
+shoot_sound = NodePath("ShootSound")
+empty_shoot_sound = NodePath("EmptySound")
+bullets_recovery_delay = 1.0
+gun_fire_effect = ExtResource("3_dv4r5")
+cooldown_delay = 0.2
+swing_delay = 0.0
+equipped_texture = ExtResource("4_ktm58")
+equipped_scale = Vector2(0.75, 0.75)
+icon_texture = ExtResource("5_b4p8d")
+swing_rotation_multiplier = 0.0
+attack_rotation_multiplier = -0.6
+attack_shift_multiplier = -0.7
+alt_attack = NodePath("LasergunUnlethal")
+weapon_name = "Lasergun"
+color = Color(0.677698, 5.4098964e-05, 0.540338, 1)
+weapon_class = "Range"
+metadata/_custom_type_script = "uid://bi1gje1pfokqc"
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="." unique_id=1943004527]
+stream = ExtResource("6_7ewbc")
+
+[node name="EmptySound" type="AudioStreamPlayer2D" parent="." unique_id=1056229215]
+stream = ExtResource("7_3fvnc")
+
+[node name="LasergunUnlethal" type="Node" parent="." unique_id=1803345047 node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound")]
+script = ExtResource("1_lonf0")
+projectile = ExtResource("8_ldm1x")
+spread_angle = 2
+bullets_max_count = 1
+bullets = 1
+bullets_recover_count = 1
+shots = 1
+shots_angle = 0
+shoot_sound = NodePath("ShootSound")
+empty_shoot_sound = NodePath("EmptySound")
+bullets_recovery_delay = 3.0
+gun_fire_effect = ExtResource("3_dv4r5")
+cooldown_delay = 0.2
+swing_delay = 0.0
+equipped_scale = Vector2(0.75, 0.75)
+icon_texture = ExtResource("9_nf4fy")
+swing_rotation_multiplier = 0.0
+attack_rotation_multiplier = -0.6
+attack_shift_multiplier = -0.7
+metadata/_custom_type_script = "uid://bi1gje1pfokqc"
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="LasergunUnlethal" unique_id=1560257689]
+stream = ExtResource("10_hy2jb")
+
+[node name="EmptySound" type="AudioStreamPlayer2D" parent="LasergunUnlethal" unique_id=291102360]
+stream = ExtResource("7_3fvnc")

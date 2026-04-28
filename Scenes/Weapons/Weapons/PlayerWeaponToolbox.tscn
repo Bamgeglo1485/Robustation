@@ -1,0 +1,199 @@
+[gd_scene format=3 uid="uid://cnl6bkhdpreps"]
+
+[ext_resource type="Script" uid="uid://6b7bcparwq17" path="res://Components/Weapons/MeleeWeaponComponent.gd" id="1_2hm8l"]
+[ext_resource type="PackedScene" uid="uid://co34sclxdwctu" path="res://Scenes/Effects/Particles/Perfect.tscn" id="2_uun0n"]
+[ext_resource type="Texture2D" uid="uid://1yvrhqvfqqus" path="res://Textures/Weapons/Toolbox/toolbox_inhand.png" id="3_p66nc"]
+[ext_resource type="Texture2D" uid="uid://dverpu5mv40au" path="res://Textures/Weapons/Toolbox/toolbox.png" id="4_3w24v"]
+[ext_resource type="AudioStream" uid="uid://c14ckhtbrb550" path="res://Audio/Weapon/parry.ogg" id="5_lfoe0"]
+[ext_resource type="AudioStream" uid="uid://eogckfs15aph" path="res://Audio/Weapon/miss.ogg" id="6_ijqgb"]
+[ext_resource type="AudioStream" uid="uid://blc0o0577akc7" path="res://Audio/Weapon/Hit/smash.ogg" id="7_bwbu3"]
+[ext_resource type="AudioStream" uid="uid://c7qffjnnscmnt" path="res://Audio/Weapon/soup.ogg" id="8_glpbo"]
+[ext_resource type="AudioStream" uid="uid://d2kkvggv8yiry" path="res://Audio/Effects/shine.ogg" id="9_rrile"]
+[ext_resource type="Script" uid="uid://enoou4fskgjn" path="res://Components/Weapons/ChargingMeleeWeaponComponent.gd" id="10_6jkit"]
+[ext_resource type="Texture2D" uid="uid://b826fwd46tvih" path="res://Textures/Weapons/Toolbox/tank.png" id="11_k88bl"]
+[ext_resource type="AudioStream" uid="uid://4e6wsvcw0jrt" path="res://Audio/Ambience/hiss.ogg" id="12_xox1u"]
+[ext_resource type="AudioStream" uid="uid://b3uvy6ds1t6fu" path="res://Audio/Weapon/Hit/heavy_punch.ogg" id="13_xc5wg"]
+[ext_resource type="AudioStream" uid="uid://p0nau7qxcixe" path="res://Audio/Effects/spinning.ogg" id="14_koaqh"]
+[ext_resource type="AudioStream" uid="uid://5ogeuyio4huy" path="res://Audio/Effects/spray.ogg" id="15_bvrp0"]
+[ext_resource type="Script" uid="uid://d35ly1kbt1uf" path="res://Components/Interface/AnchorToCursorComponent.gd" id="16_fuhwj"]
+
+[sub_resource type="DPITexture" id="DPITexture_s134r"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"4\" height=\"8\"><path fill=\"#fff\" fill-opacity=\".25\" d=\"M1 0h2v16H1z\"/></svg>
+"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q56c7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kbgqb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ei5x1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kudkp"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.12156863, 0.11372549, 0.14509805, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p1tv5"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.583302, 0, 0.082717575, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 1
+
+[node name="Toolbox" type="Node" unique_id=44420062 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound", "qte_icon", "qte_icon_perfect_frame", "qte_perfect_sound", "qte_perfect_time_sound", "alt_attack")]
+script = ExtResource("1_2hm8l")
+damage = 25.0
+attack_range = 80
+ignore_armor = true
+parry_sound = NodePath("ParrySound")
+attack_sound = NodePath("MeleeHitSound")
+miss_sound = NodePath("MeleeMissSound")
+parry_force = 1.5
+throw_speed = 400
+drop_enemy_delay = 0.5
+qte_icon = NodePath("CanvasLayer/QTE/HSlider")
+qte_icon_perfect_frame = NodePath("CanvasLayer/QTE/HSlider/Panel/Panel2")
+qte_enabled = true
+qte_perfect_sound = NodePath("PerfectSound")
+qte_perfect_time_sound = NodePath("PerfectTimeSound")
+qte_perfect_effect = ExtResource("2_uun0n")
+cooldown_delay = 0.5
+swing_delay = 0.1
+equipped_texture = ExtResource("3_p66nc")
+equipped_scale = Vector2(0.6, 0.6)
+icon_texture = ExtResource("4_3w24v")
+self_throw_speed = 200
+attack_rotation_multiplier = 0.5
+alt_attack = NodePath("ChargingToolbox")
+weapon_name = "Toolbox"
+color = Color(0.8917651, 0, 0.28858507, 1)
+weapon_class = "Melee"
+metadata/_custom_type_script = "uid://6b7bcparwq17"
+
+[node name="ParrySound" type="AudioStreamPlayer2D" parent="." unique_id=1803879457]
+stream = ExtResource("5_lfoe0")
+
+[node name="MeleeMissSound" type="AudioStreamPlayer2D" parent="." unique_id=1234154462]
+stream = ExtResource("6_ijqgb")
+
+[node name="MeleeHitSound" type="AudioStreamPlayer2D" parent="." unique_id=724755034]
+stream = ExtResource("7_bwbu3")
+
+[node name="PerfectSound" type="AudioStreamPlayer2D" parent="." unique_id=537465947]
+stream = ExtResource("8_glpbo")
+volume_db = 16.0
+
+[node name="PerfectTimeSound" type="AudioStreamPlayer2D" parent="." unique_id=2085833039]
+stream = ExtResource("9_rrile")
+
+[node name="ChargingToolbox" type="Node" parent="." unique_id=510851841 node_paths=PackedStringArray("charging_sound", "full_charge_sound", "parry_sound", "attack_sound", "miss_sound")]
+script = ExtResource("10_6jkit")
+exponent_divider = 0.7
+hitstop_charge = 0.75
+charging_sound = NodePath("ChargingSound")
+full_charge_sound = NodePath("FullChargeSound")
+attack_range = 80
+parry_sound = NodePath("ParrySound")
+attack_sound = NodePath("MeleeHitSound")
+miss_sound = NodePath("MeleeMissSound")
+parry_force = 1.0
+throw_speed = 200
+swing_delay = 0.0
+icon_texture = ExtResource("11_k88bl")
+self_throw_speed = 200
+metadata/_custom_type_script = "uid://enoou4fskgjn"
+
+[node name="ParrySound" type="AudioStreamPlayer2D" parent="ChargingToolbox" unique_id=601875146]
+stream = ExtResource("5_lfoe0")
+
+[node name="MeleeMissSound" type="AudioStreamPlayer2D" parent="ChargingToolbox" unique_id=65004734]
+stream = ExtResource("12_xox1u")
+
+[node name="MeleeHitSound" type="AudioStreamPlayer2D" parent="ChargingToolbox" unique_id=588890094]
+stream = ExtResource("13_xc5wg")
+
+[node name="ChargingSound" type="AudioStreamPlayer2D" parent="ChargingToolbox" unique_id=1482361413]
+stream = ExtResource("14_koaqh")
+parameters/looping = true
+
+[node name="FullChargeSound" type="AudioStreamPlayer2D" parent="ChargingToolbox" unique_id=771759649]
+stream = ExtResource("15_bvrp0")
+volume_db = -8.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=209764327]
+
+[node name="QTE" type="Control" parent="CanvasLayer" unique_id=231265715]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="HSlider" type="HSlider" parent="CanvasLayer/QTE" unique_id=1514860880]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.09461805
+anchor_top = 0.095679015
+anchor_right = 0.15538195
+anchor_bottom = 0.13425925
+offset_right = 30.0
+offset_bottom = -8.333336
+scale = Vector2(0.7, 1.5)
+theme_override_icons/grabber_disabled = SubResource("DPITexture_s134r")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_q56c7")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_kbgqb")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_ei5x1")
+max_value = 1.5
+step = 0.05
+value = 0.55
+editable = false
+scrollable = false
+metadata/_edit_use_anchors_ = true
+
+[node name="AnchorToCursorComponent" type="Node" parent="CanvasLayer/QTE/HSlider" unique_id=1539612582]
+script = ExtResource("16_fuhwj")
+offset = Vector2(-96, 10)
+metadata/_custom_type_script = "uid://d35ly1kbt1uf"
+
+[node name="Panel" type="Panel" parent="CanvasLayer/QTE/HSlider" unique_id=1743396379]
+z_index = -2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.07300001
+anchor_top = 0.5
+anchor_right = 1.0731708
+anchor_bottom = 0.5
+offset_left = -0.013999462
+offset_top = -4.0
+offset_bottom = 4.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_kudkp")
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel2" type="Panel" parent="CanvasLayer/QTE/HSlider/Panel" unique_id=1050814041]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.42886937
+anchor_top = 0.5
+anchor_right = 0.58054715
+anchor_bottom = 0.5
+offset_left = -0.028003693
+offset_top = -4.0
+offset_bottom = 4.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_p1tv5")
+metadata/_edit_use_anchors_ = true

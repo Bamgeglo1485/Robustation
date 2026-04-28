@@ -8,6 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://ftxxh2qcsb0s" path="res://Textures/Interface/Menu/cross_hovered.png" id="5_orpyr"]
 [ext_resource type="Script" uid="uid://bodxsix2kyyy6" path="res://Components/Interface/Menu/ToggleVisibleOnPressedComponent.gd" id="6_3m877"]
 [ext_resource type="Script" uid="uid://b7un74kbf4nsw" path="res://Components/Interface/Ingame/Inventory/WeaponInventoryComponent.gd" id="7_mk3tw"]
+[ext_resource type="Script" uid="uid://cmc4bynd24xwa" path="res://Components/Interface/Ingame/Inventory/WeaponSlotButtonComponent.gd" id="9_h2rly"]
+[ext_resource type="AudioStream" uid="uid://bxli3cjm2f10v" path="res://Audio/Weapon/pistol_cock.ogg" id="9_orpyr"]
+[ext_resource type="AudioStream" uid="uid://drhi1s5c4ustd" path="res://Audio/Effects/perk_collect.ogg" id="10_ehahb"]
+[ext_resource type="AudioStream" uid="uid://d3ducr0vxj16e" path="res://Audio/Weapon/rifle_bolt_open.ogg" id="11_smgot"]
+[ext_resource type="AudioStream" uid="uid://dj2iwylndekie" path="res://Audio/Effects/thudswoosh.ogg" id="12_qml5w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wdhnk"]
 bg_color = Color(0, 0, 0, 1)
@@ -25,12 +30,12 @@ bg_color = Color(0.14165193, 0.075261734, 0.0927326, 1)
 anchors_preset = -1
 anchor_left = 0.202
 anchor_top = 0.18400002
-anchor_right = 0.423
-anchor_bottom = 0.43500003
+anchor_right = 0.518
+anchor_bottom = 0.38500002
 offset_left = 0.29599
 offset_top = -0.23200989
-offset_right = 473.70398
-offset_bottom = 261.11996
+offset_right = 390.26398
+offset_bottom = 293.52
 mouse_behavior_recursive = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_wdhnk")
 
@@ -64,6 +69,7 @@ mouse_behavior_recursive = 1
 border_color = Color(0.033853278, 0.033853278, 0.033853274, 1)
 border_width = 5.0
 editor_only = false
+metadata/_edit_lock_ = true
 
 [node name="ReferenceRect2" type="ReferenceRect" parent="." unique_id=787201692]
 z_index = 3
@@ -81,6 +87,7 @@ mouse_behavior_recursive = 1
 border_color = Color(0.033853278, 0.033853278, 0.033853274, 1)
 border_width = 5.0
 editor_only = false
+metadata/_edit_lock_ = true
 
 [node name="Button" type="Button" parent="." unique_id=1205995112]
 z_index = 1
@@ -152,17 +159,212 @@ metadata/_custom_type_script = "uid://bodxsix2kyyy6"
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.125
-anchor_right = 0.38873628
+anchor_right = 0.37400532
 anchor_bottom = 0.995283
 mouse_behavior_recursive = 2
 theme_override_constants/line_separation = 3
 theme_override_fonts/normal_font = ExtResource("5_3m877")
 theme_override_font_sizes/normal_font_size = 10
 bbcode_enabled = true
+text = "1. Тулбокс
+2. Ближнее
+3. Common
+------
+1. Маленький урон, условно высокий
+2. Высокая скорость атаки, условно медленная
+3. Для наиболее эффективного применения требуется подбирать тайминг
+---
+1. Удар тулбоксом, парирующий снаряды. При зажатии активирует полоску идеального удара; при попадании в красную шкалу урон умножается в 4 раза и восстанавливается 10% ХП. 
+2. При зажатии заряжает удар, который наносит в 10 раз больше урона при максимальном заряде, а также охлаждает все оружия с перегревом."
 metadata/_edit_use_anchors_ = true
 
-[node name="WeaponInventoryComponent" type="Node" parent="." unique_id=1407622098 node_paths=PackedStringArray("description", "weapons_container")]
+[node name="WeaponInventoryComponent" type="Node" parent="." unique_id=1407622098 node_paths=PackedStringArray("weapon_slot_buttons", "melee_weapon_slot", "description", "weapons_container", "weapon_collect_sound", "weapon_added_to_slot_audio", "weapon_removed_from_slot_audio", "weapon_selected_audio")]
 script = ExtResource("7_mk3tw")
+weapon_slot_buttons = [NodePath("../Buttons/WeaponSlot1"), NodePath("../Buttons/WeaponSlot2"), NodePath("../Buttons/WeaponSlot3"), NodePath("../Buttons/WeaponSlot4")]
+melee_weapon_slot = NodePath("../Buttons/MeleeWeaponSlot")
 description = NodePath("../Description")
 weapons_container = NodePath("../Inventory/Inventory")
+weapon_collect_sound = NodePath("WeaponAdded")
+weapon_added_to_slot_audio = NodePath("SlotAdded")
+weapon_removed_from_slot_audio = NodePath("SlotRemoved")
+weapon_selected_audio = NodePath("WeaponSelected")
 metadata/_custom_type_script = "uid://b7un74kbf4nsw"
+
+[node name="WeaponAdded" type="AudioStreamPlayer" parent="WeaponInventoryComponent" unique_id=524242042]
+stream = ExtResource("9_orpyr")
+
+[node name="SlotAdded" type="AudioStreamPlayer" parent="WeaponInventoryComponent" unique_id=1171047658]
+stream = ExtResource("10_ehahb")
+
+[node name="SlotRemoved" type="AudioStreamPlayer" parent="WeaponInventoryComponent" unique_id=1654034761]
+stream = ExtResource("11_smgot")
+volume_db = -2.0
+
+[node name="WeaponSelected" type="AudioStreamPlayer" parent="WeaponInventoryComponent" unique_id=1209988660]
+stream = ExtResource("12_qml5w")
+volume_db = 4.0
+
+[node name="Buttons" type="VBoxContainer" parent="." unique_id=1918795511]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3793103
+anchor_top = 0.11556604
+anchor_right = 0.6392572
+anchor_bottom = 0.99999994
+offset_right = 3.0517578e-05
+theme_override_constants/separation = 10
+metadata/_edit_use_anchors_ = true
+
+[node name="Ignore" type="Panel" parent="Buttons" unique_id=883515141]
+custom_minimum_size = Vector2(100, 16)
+layout_mode = 2
+
+[node name="WeaponSlot1" type="Button" parent="Buttons" unique_id=1599911574]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_behavior_recursive = 2
+theme_override_constants/h_separation = 3
+theme_override_fonts/font = ExtResource("5_3m877")
+theme_override_font_sizes/font_size = 10
+
+[node name="WeaponSlotButtonComponent" type="Node" parent="Buttons/WeaponSlot1" unique_id=371711425]
+script = ExtResource("9_h2rly")
+number = 1
+metadata/_custom_type_script = "uid://cmc4bynd24xwa"
+
+[node name="Text" type="RichTextLabel" parent="Buttons/WeaponSlot1" unique_id=1433625039]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 1
+theme_override_constants/line_separation = 6
+theme_override_fonts/normal_font = ExtResource("5_3m877")
+theme_override_font_sizes/normal_font_size = 10
+bbcode_enabled = true
+text = "WEAPON SLOT 1"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WeaponSlot2" type="Button" parent="Buttons" unique_id=41972941]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_behavior_recursive = 2
+theme_override_constants/h_separation = 3
+theme_override_fonts/font = ExtResource("5_3m877")
+theme_override_font_sizes/font_size = 10
+
+[node name="WeaponSlotButtonComponent" type="Node" parent="Buttons/WeaponSlot2" unique_id=527757253]
+script = ExtResource("9_h2rly")
+number = 2
+metadata/_custom_type_script = "uid://cmc4bynd24xwa"
+
+[node name="Text" type="RichTextLabel" parent="Buttons/WeaponSlot2" unique_id=1182583824]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 1
+theme_override_constants/line_separation = 6
+theme_override_fonts/normal_font = ExtResource("5_3m877")
+theme_override_font_sizes/normal_font_size = 10
+bbcode_enabled = true
+text = "WEAPON SLOT 1"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WeaponSlot3" type="Button" parent="Buttons" unique_id=860712768]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_behavior_recursive = 2
+theme_override_constants/h_separation = 3
+theme_override_fonts/font = ExtResource("5_3m877")
+theme_override_font_sizes/font_size = 10
+
+[node name="WeaponSlotButtonComponent" type="Node" parent="Buttons/WeaponSlot3" unique_id=972096592]
+script = ExtResource("9_h2rly")
+number = 3
+metadata/_custom_type_script = "uid://cmc4bynd24xwa"
+
+[node name="Text" type="RichTextLabel" parent="Buttons/WeaponSlot3" unique_id=1263267149]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 1
+theme_override_constants/line_separation = 6
+theme_override_fonts/normal_font = ExtResource("5_3m877")
+theme_override_font_sizes/normal_font_size = 10
+bbcode_enabled = true
+text = "WEAPON SLOT 1"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WeaponSlot4" type="Button" parent="Buttons" unique_id=1974251625]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_behavior_recursive = 2
+theme_override_constants/h_separation = 3
+theme_override_fonts/font = ExtResource("5_3m877")
+theme_override_font_sizes/font_size = 10
+
+[node name="WeaponSlotButtonComponent" type="Node" parent="Buttons/WeaponSlot4" unique_id=667970575]
+script = ExtResource("9_h2rly")
+number = 4
+metadata/_custom_type_script = "uid://cmc4bynd24xwa"
+
+[node name="Text" type="RichTextLabel" parent="Buttons/WeaponSlot4" unique_id=835402436]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 1
+theme_override_constants/line_separation = 6
+theme_override_fonts/normal_font = ExtResource("5_3m877")
+theme_override_font_sizes/normal_font_size = 10
+bbcode_enabled = true
+text = "WEAPON SLOT 1"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MeleeWeaponSlot" type="Button" parent="Buttons" unique_id=1289978831]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_behavior_recursive = 2
+theme_override_constants/h_separation = 3
+theme_override_fonts/font = ExtResource("5_3m877")
+theme_override_font_sizes/font_size = 10
+
+[node name="WeaponSlotButtonComponent" type="Node" parent="Buttons/MeleeWeaponSlot" unique_id=989691883]
+script = ExtResource("9_h2rly")
+melee = true
+metadata/_custom_type_script = "uid://cmc4bynd24xwa"
+
+[node name="Text" type="RichTextLabel" parent="Buttons/MeleeWeaponSlot" unique_id=1697996826]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 1
+theme_override_constants/line_separation = 6
+theme_override_fonts/normal_font = ExtResource("5_3m877")
+theme_override_font_sizes/normal_font_size = 10
+bbcode_enabled = true
+text = "WEAPON SLOT 1"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1

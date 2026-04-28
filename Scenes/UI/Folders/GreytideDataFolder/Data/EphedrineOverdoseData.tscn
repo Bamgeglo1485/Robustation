@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dfsojujsxjsud"]
 
 [ext_resource type="PackedScene" uid="uid://3kpwp1isvu1g" path="res://Scenes/UI/Folders/BaseInfo.tscn" id="1_2v3mv"]
-[ext_resource type="Texture2D" uid="uid://dikwitqlv30ww" path="res://Textures/Abilities/injector.png" id="2_72bhp"]
+[ext_resource type="Texture2D" uid="uid://1wwu1blvl8rt" path="res://Textures/Abilities/hypo.png" id="2_ed1t0"]
 [ext_resource type="FontFile" uid="uid://mhx51lyuasx4" path="res://Resources/Text/Fonts/Ac437_ApricotPortable.ttf" id="3_lc3rl"]
 [ext_resource type="FontFile" uid="uid://dskv5n6tofrla" path="res://Resources/Text/Fonts/LCD 40x2 Display/LCD40x2Display-Regular.otf" id="4_1fch4"]
 
@@ -14,7 +14,7 @@ bg_color = Color(0.06469653, 0.064696535, 0.0646965, 1)
 text = "Robust-os - overdose_info.rbstxt - ui_system.rbst"
 
 [node name="Image" parent="Info" parent_id_path=PackedInt32Array(158480643) index="0" unique_id=503364341]
-texture = ExtResource("2_72bhp")
+texture = ExtResource("2_ed1t0")
 
 [node name="Name" parent="Info" parent_id_path=PackedInt32Array(158480643) index="1" unique_id=2133805158]
 text = "[color=lightblue]Ephedrine Overdose[/color]

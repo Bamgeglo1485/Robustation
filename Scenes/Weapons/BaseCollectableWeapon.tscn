@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://hjprahqqk826"]
+
+[ext_resource type="Material" uid="uid://dtj02cwmf0jbu" path="res://Resources/Shaders/CollectableShining.tres" id="1_t3wjt"]
+[ext_resource type="Texture2D" uid="uid://csjs5ggnfnuhm" path="res://Textures/Weapons/Beer/beer.png" id="2_rk1j3"]
+[ext_resource type="Script" uid="uid://dlcwn6gl6gxot" path="res://Components/Entity/CollectableWeaponComponent.gd" id="3_wwmfr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5h7ec"]
+radius = 36.0
+
+[node name="BaseCollectableWeapon" type="Node2D" unique_id=120587007]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1656808008]
+material = ExtResource("1_t3wjt")
+texture = ExtResource("2_rk1j3")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=385716300]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=773832578]
+shape = SubResource("CircleShape2D_5h7ec")
+
+[node name="CollectableWeaponComponent" type="Node" parent="." unique_id=135354404 node_paths=PackedStringArray("area", "sprite")]
+script = ExtResource("3_wwmfr")
+area = NodePath("../Area2D")
+sprite = NodePath("../Sprite2D")
+metadata/_custom_type_script = "uid://dlcwn6gl6gxot"

@@ -43,3 +43,6 @@ signal on_perk_choosed()
 signal player_death()
 
 signal introduction_subject_on_screen(emitter: Node2D)
+
+signal weapon_selected(weapon: Weapon)
+signal weapon_slot_changed(number: int)

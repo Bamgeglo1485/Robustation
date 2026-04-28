@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://bdjqd0mnhmtd8"]
+
+[ext_resource type="Script" uid="uid://bi1gje1pfokqc" path="res://Components/Weapons/RangeWeaponComponent.gd" id="1_x8krt"]
+[ext_resource type="PackedScene" uid="uid://dmokrqrpfaex0" path="res://Scenes/Projectiles/Spear.tscn" id="2_v3d0w"]
+[ext_resource type="Texture2D" uid="uid://fiix6iyke3n3" path="res://Textures/Weapons/Spear/spear_inhand.png" id="3_ya8gn"]
+[ext_resource type="Texture2D" uid="uid://c2wadc7c7e3v3" path="res://Textures/Weapons/Spear/spear.png" id="4_mu55p"]
+[ext_resource type="AudioStream" uid="uid://cln64q1fo5f86" path="res://Audio/Weapon/Projectile/spear_throw.ogg" id="5_twyvh"]
+[ext_resource type="AudioStream" uid="uid://baxotaiac5j8p" path="res://Audio/Effects/spear_eject.ogg" id="6_w0qmh"]
+[ext_resource type="PackedScene" uid="uid://dp68l1ivbgils" path="res://Scenes/Projectiles/SpearBoomerang.tscn" id="7_gtont"]
+[ext_resource type="Texture2D" uid="uid://cnd26u5psr454" path="res://Textures/Weapons/Hook/grappling_gun.png" id="8_5motl"]
+[ext_resource type="Material" uid="uid://ddgd2dckacjiv" path="res://Resources/Shaders/Wave.tres" id="9_xuvcs"]
+
+[node name="MaxcapperSpear" type="Node" unique_id=963773417 node_paths=PackedStringArray("shoot_sound", "bullets_recover_sound", "alt_attack")]
+script = ExtResource("1_x8krt")
+projectile = ExtResource("2_v3d0w")
+spread_angle = 6
+bullets_max_count = 1
+bullets = 1
+bullets_recover_count = 1
+shots = 1
+shots_angle = 0
+shoot_sound = NodePath("ShootSound")
+bullets_recover_sound = NodePath("BulletRecoverSound")
+bullets_recovery_delay = 8.0
+cooldown_delay = 0.3
+swing_delay = 0.2
+equipped_texture = ExtResource("3_ya8gn")
+icon_texture = ExtResource("4_mu55p")
+alt_attack = NodePath("SpearBoomerang")
+weapon_name = "Maxcapper Spear"
+color = Color(0, 0.5310769, 0.56252176, 1)
+weapon_class = "Mass"
+weapon_rarity = 2
+metadata/_custom_type_script = "uid://bi1gje1pfokqc"
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="." unique_id=52897885]
+stream = ExtResource("5_twyvh")
+
+[node name="BulletRecoverSound" type="AudioStreamPlayer2D" parent="." unique_id=1729686353]
+stream = ExtResource("6_w0qmh")
+
+[node name="SpearBoomerang" type="Node" parent="." unique_id=1375310998 node_paths=PackedStringArray("shoot_sound", "shared_bullets_weapon", "rope")]
+script = ExtResource("1_x8krt")
+projectile = ExtResource("7_gtont")
+spread_angle = 6
+bullets_max_count = 1
+bullets = 1
+bullets_recover_count = 0
+shots = 1
+shots_angle = 0
+shoot_sound = NodePath("../ShootSound")
+bullets_recovery_delay = 0.0
+shared_bullets_weapon = NodePath("..")
+show_cooldown_on_icon = true
+rope = NodePath("../Rope")
+cooldown_delay = 5.0
+swing_delay = 0.2
+icon_texture = ExtResource("8_5motl")
+metadata/_custom_type_script = "uid://bi1gje1pfokqc"
+
+[node name="Rope" type="Line2D" parent="." unique_id=1735646058]
+material = ExtResource("9_xuvcs")
+points = PackedVector2Array(0, 0)
+width = 50.0
+default_color = Color(0.15683922, 0.005713961, 0.03873314, 1)
+texture_mode = 2

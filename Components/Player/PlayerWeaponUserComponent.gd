@@ -15,6 +15,8 @@ var alt_weapon_icon_component: WeaponIconComponent
 var kostil: bool = true
 var position: int = 1
 
+signal inventory_updated(new_weapon: Weapon)
+
 func _ready() -> void:
 	if weapon_icon:
 		weapon_icon_component = weapon_icon.get_node_or_null("WeaponIconComponent")
@@ -116,20 +118,10 @@ func _attack(weapon_selected: bool, attack_event: String = "attack", selected_we
 	if release_alt:
 		alt_weapon.on_release(self)
 
-func add_weapon(slot: int, weapon: Weapon, set_melee: bool = false) -> void:
-	var weapon_slot = get("weapon_"+str(slot))
-	if !weapon_slot:
-		return
-	weapon_slot = weapon
-	if set_melee:
-		melee_weapon = weapon
-		
-
 func add_weapon_to_inventory(weapon: Weapon) -> void:
-	add_child.call_deferred(weapon)
+	add_child(weapon)
 	weapon_inventory.append(weapon)
-	
-	
+	inventory_updated.emit(weapon)
 
 func get_attack_direction() -> Vector2:
 	if !parent.has_method("get_global_mouse_position"):

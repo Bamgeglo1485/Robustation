@@ -59,7 +59,7 @@ var qte_tween: Tween
 var perfect_time_sound_played: bool = false
 
 var excluded_nodes: Array
-	
+
 func _physics_process(delta: float) -> void:
 	if qte_enabled and qte_active:
 		if !qte_move_back:
@@ -341,10 +341,12 @@ func parry_projectile(projectile: Node2D, projectile_component: ProjectileCompon
 	if !projectile_component.parriable:
 		return
 	# To prevent shotgun projectile boost spamming
-	if is_instance_valid(projectile_component.weapon) and projectile_component.weapon.overheat > projectile_component.weapon.alert_on_heat and projectile_component.shooter == parent:
-		projectile_component.shooter_faction = null
-		projectile_component.shooter = null
-		projectile_component.direction = (parent.global_position - projectile.global_position).angle()
+	if is_instance_valid(projectile_component.weapon) and projectile_component.weapon.overheat_enabled and projectile_component.shooter == parent:
+		if projectile_component.weapon.overheat > projectile_component.weapon.alert_on_heat:
+			projectile_component.shooter_faction = null
+			projectile_component.shooter = null
+			projectile_component.direction = (parent.global_position - projectile.global_position).angle()
+			return
 	var enemy: bool = false
 	if projectile_component.shooter != parent:
 		enemy = true

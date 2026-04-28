@@ -27,7 +27,7 @@ var bounces: int = 0
 @export var delete_on_hit: bool = true
 @export var embed_on_hit: bool = false
 @export var ignore_faction: bool = false
-@export var ignore_armor: float = false
+@export var ignore_armor: bool = false
 @export var fall_time: float = 0.0
 
 @export var tile_destruction_audio: AudioStreamPlayer2D
@@ -101,8 +101,10 @@ func _ready() -> void:
 		EventBusManager.projectile_miss.emit(shooter, parent)
 
 func _physics_process(delta: float) -> void:
-	if rope and shooter:
-		rope.points[1] = shooter.to_local(global_position)
+	if rope:
+		if rope.points.size() == 1:
+			rope.add_point(parent.global_position)
+		rope.points[1] = parent.global_position
 	if !moving:
 		return
 	if speed_decreasing != 0 and speed > 0:
@@ -240,7 +242,7 @@ func _on_body_entered(body: Node2D) -> void:
 			return
 		if !shooter:
 			shooter = null
-		health_comp.take_damage(modified_damage, shooter, "Projectile" ,ignore_armor)
+		health_comp.take_damage(modified_damage, shooter, "Projectile", ignore_armor)
 		if delayed_damage != 0 and delayed_damage_delay != 0:
 			health_comp.set_delayed_damage(delayed_damage * damage_modifier, delayed_damage_delay)
 		if max_penetrations != 0 and can_penetrate:
@@ -316,6 +318,8 @@ func reflect(target) -> bool:
 	parent.global_rotation = angle
 	direction = angle
 	shooter = target
+	var target_faction: FactionComponent = target.get_node_or_null("FactionComponent")
+	shooter_faction = target_faction
 	
 	reflect_component.on_reflect()
 	

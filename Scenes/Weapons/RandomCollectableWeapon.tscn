@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://c5oy5lbyef8ac"]
+
+[ext_resource type="Material" uid="uid://dtj02cwmf0jbu" path="res://Resources/Shaders/CollectableShining.tres" id="1_dgart"]
+[ext_resource type="Script" uid="uid://dlcwn6gl6gxot" path="res://Components/Entity/CollectableWeaponComponent.gd" id="3_xxe3s"]
+[ext_resource type="PackedScene" uid="uid://cnl6bkhdpreps" path="res://Scenes/Weapons/Weapons/PlayerWeaponToolbox.tscn" id="4_3rgct"]
+[ext_resource type="PackedScene" uid="uid://bdtqyl5p2op74" path="res://Scenes/Weapons/Weapons/PlayerWeaponShotgun.tscn" id="5_kctil"]
+[ext_resource type="PackedScene" uid="uid://irh3fi1fwrs0" path="res://Scenes/Weapons/Weapons/PlayerWeaponLaserGun.tscn" id="6_5n7x3"]
+[ext_resource type="PackedScene" uid="uid://bdjqd0mnhmtd8" path="res://Scenes/Weapons/Weapons/PlayerWeaponMaxcapperSpear.tscn" id="7_rrrlb"]
+[ext_resource type="Texture2D" uid="uid://dverpu5mv40au" path="res://Textures/Weapons/Toolbox/toolbox.png" id="15_61lgx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5h7ec"]
+radius = 36.0
+
+[node name="BaseCollectableWeapon" type="Node2D" unique_id=120587007]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1656808008]
+material = ExtResource("1_dgart")
+texture = ExtResource("15_61lgx")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=385716300]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=773832578]
+shape = SubResource("CircleShape2D_5h7ec")
+
+[node name="CollectableWeaponComponent" type="Node" parent="." unique_id=135354404 node_paths=PackedStringArray("area", "sprite")]
+script = ExtResource("3_xxe3s")
+weapons = Array[PackedScene]([ExtResource("4_3rgct"), ExtResource("5_kctil"), ExtResource("6_5n7x3"), ExtResource("7_rrrlb")])
+area = NodePath("../Area2D")
+sprite = NodePath("../Sprite2D")
+metadata/_custom_type_script = "uid://dlcwn6gl6gxot"

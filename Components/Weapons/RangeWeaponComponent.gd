@@ -155,16 +155,16 @@ func attack(raiser, _npc = true) -> void:
 		
 		for i in range(possible_shots + extra_shots):
 			var shot_direction = direction.rotated(start_angle + angle_step * i)
-			_projectile_shoot(shot_direction)
+			_shoot(shot_direction)
 			
 	else:
-		_projectile_shoot(direction)
+		_shoot(direction)
 		bullets -= 1
 	
 	if shoot_sound:
 		shoot_sound.play()
 	
-	if bullets == 0 and bullets_recovery_delay != 0 and bullets_recover_timer:
+	if bullets <= 0 and bullets_recovery_delay != 0 and bullets_recover_timer:
 		if !parent_weapon:
 			bullets_recover_timer.wait_time = bullets_recovery_delay * recover_modifier
 		else:
@@ -196,7 +196,7 @@ func attack(raiser, _npc = true) -> void:
 		if attack_shift_multiplier != 0:
 			animation_component.shift_to_direction(direction, 0.2, attack_shift_multiplier)
 
-func _projectile_shoot(direction) -> Node2D:
+func _shoot(direction) -> Node2D:
 	if direction > Vector2(1, 1):
 		direction = direction.normalized()
 	
@@ -231,8 +231,6 @@ func _projectile_shoot(direction) -> Node2D:
 				rope.material.set_shader_parameter("wave_amplitude", 0.15)
 				var tween: Tween = create_tween()
 				tween.tween_property(rope.material, "shader_parameter/wave_amplitude", 0, 0.5)
-		if scene:
-			scene.add_child(instance)
 		if overheat_enabled:
 			var heat_factor: float = overheat / max_overheat
 			var damage_multiplier: float = 1.0 - pow(heat_factor, 2) * (1.0 - min_overheat_damage_debuff)
@@ -248,11 +246,11 @@ func _projectile_shoot(direction) -> Node2D:
 		hitscan_component.shooter = parent
 		hitscan_component.max_penetrations += extra_penetrations
 		hitscan_component.max_bounces += extra_bounces
-		
-		if scene:
-			scene.add_child(instance)
-	else:
-		instance.queue_free()
+	elif instance.has_method("set_radius"):
+		instance.source = parent
+		instance.global_position = parent.global_position
+	if scene:
+		scene.add_child(instance)
 	
 	return instance
 
@@ -302,3 +300,7 @@ func _overheat_visuals() -> void:
 	weapon_inhand_texture.modulate = Color(red, green, blue, 1.0)
 	if player_weapon_user:
 		player_weapon_user.weapon_icon.modulate = Color(red, green, blue, 1.0)
+
+func _process(_delta: float) -> void:
+	if rope:
+		rope.points[0] = parent.global_position

@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://cwbrguboo4upr"]
+
+[ext_resource type="Script" uid="uid://bi1gje1pfokqc" path="res://Components/Weapons/RangeWeaponComponent.gd" id="1_b4sjq"]
+[ext_resource type="PackedScene" uid="uid://bqi4p770b55ug" path="res://Scenes/Projectiles/ArrowPlayer.tscn" id="2_3qqyp"]
+[ext_resource type="Texture2D" uid="uid://dfrqsbt71ss31" path="res://Textures/Weapons/Bow/bow_inhands.png" id="3_jvd8u"]
+[ext_resource type="Texture2D" uid="uid://dno5t6v4mhtyb" path="res://Textures/Weapons/Bow/bow_icon.png" id="4_vdynv"]
+[ext_resource type="AudioStream" uid="uid://bxovm2xahbdet" path="res://Resources/Audio/BulletMissRandom.tres" id="5_pjgfh"]
+[ext_resource type="AudioStream" uid="uid://ii51ruio4r4v" path="res://Audio/Weapon/bow_pull.ogg" id="6_uncyk"]
+[ext_resource type="Script" uid="uid://fx07buhgtyei" path="res://Components/Weapons/DodgeBonusRangeWeaponComponent.gd" id="7_0rny1"]
+[ext_resource type="Texture2D" uid="uid://wom8s2w2b67j" path="res://Textures/Weapons/Bow/quiver.png" id="8_3qqyp"]
+
+[node name="Bow" type="Node" unique_id=1852817361 node_paths=PackedStringArray("shoot_sound", "bullets_recover_sound", "alt_attack")]
+script = ExtResource("1_b4sjq")
+projectile = ExtResource("2_3qqyp")
+spread_angle = 0
+bullets_max_count = 1
+bullets = 1
+bullets_recover_count = 1
+shots = 1
+shoot_sound = NodePath("ShootSound")
+bullets_recover_sound = NodePath("BulletRecoverSound")
+bullets_recovery_delay = 0.3
+timers_timescaled = false
+cooldown_delay = 0.1
+swing_delay = 0.2
+equipped_texture = ExtResource("3_jvd8u")
+equipped_scale = Vector2(0.5, 0.55)
+icon_texture = ExtResource("4_vdynv")
+swing_rotation_multiplier = 0.0
+attack_rotation_multiplier = -0.6
+attack_shift_multiplier = -0.7
+parriable = false
+auto = true
+alt_attack = NodePath("AltBow")
+weapon_name = "Bow"
+color = Color(0.6996699, 0.3148181, 7.70092e-07, 1)
+weapon_class = "Mid-Range"
+metadata/_custom_type_script = "uid://bi1gje1pfokqc"
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="." unique_id=329362300]
+stream = ExtResource("5_pjgfh")
+max_distance = 600.0
+max_polyphony = 3
+
+[node name="BulletRecoverSound" type="AudioStreamPlayer2D" parent="." unique_id=1976081140]
+stream = ExtResource("6_uncyk")
+volume_db = 5.0
+max_distance = 600.0
+
+[node name="AltBow" type="Node" parent="." unique_id=229568891 node_paths=PackedStringArray("shoot_sound")]
+script = ExtResource("7_0rny1")
+projectile = ExtResource("2_3qqyp")
+spread_angle = 0
+bullets_max_count = 15
+bullets = 0
+shots = 15
+shots_angle = 60
+shoot_sound = NodePath("ShootSound")
+bullets_recovery_delay = 0.0
+timers_timescaled = false
+cooldown_delay = 0.1
+swing_delay = 0.2
+equipped_texture = ExtResource("3_jvd8u")
+equipped_scale = Vector2(0.5, 0.55)
+icon_texture = ExtResource("8_3qqyp")
+swing_rotation_multiplier = 0.0
+attack_rotation_multiplier = -0.6
+attack_shift_multiplier = -0.7
+parriable = false
+auto = true
+metadata/_custom_type_script = "uid://fx07buhgtyei"
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="AltBow" unique_id=389678032]
+stream = ExtResource("5_pjgfh")
+max_distance = 600.0
+max_polyphony = 3

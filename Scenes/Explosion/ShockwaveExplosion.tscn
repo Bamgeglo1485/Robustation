@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://bq4rrvubclybf"]
+
+[ext_resource type="PackedScene" uid="uid://bbqpmpj4ntyg" path="res://Scenes/Explosion/BaseExplosion.tscn" id="1_kqifr"]
+[ext_resource type="Texture2D" uid="uid://bli7jsrusea5n" path="res://Textures/Effects/Particles/fall.png" id="2_fs6vl"]
+[ext_resource type="Shader" uid="uid://dtwokqwiognyt" path="res://Resources/Shaders/Explosion.gdshader" id="2_na1js"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_na1js"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_max = 51.719997
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -42.530003
+linear_accel_max = 99.99999
+radial_accel_min = -100.0
+radial_accel_max = 99.99999
+scale_max = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u3mfi"]
+shader = ExtResource("2_na1js")
+shader_parameter/strength = 0.08
+shader_parameter/radius = 0.25
+shader_parameter/aberration = 0.425
+shader_parameter/width = 0.04
+shader_parameter/feather = 0.135
+
+[node name="MiniExplosion" unique_id=1040504191 instance=ExtResource("1_kqifr")]
+deflect_projectiles = true
+impact_frame = false
+damage = 0.0
+fly_force = 900
+radius = 160
+ignore_faction = false
+drop_resistance_force = 1
+
+[node name="Area2D" parent="." index="0" unique_id=251884086]
+collision_layer = 24591
+collision_mask = 24591
+
+[node name="GPUParticles2D2" parent="." index="1" unique_id=621859249]
+amount = 2
+texture = ExtResource("2_fs6vl")
+lifetime = 0.4
+
+[node name="Light" parent="." index="3" unique_id=1912790245]
+color = Color(1, 1, 1, 1)
+texture_scale = 1.2
+
+[node name="GPUParticles2D" parent="." index="4" unique_id=250018996]
+lifetime = 0.9
+process_material = SubResource("ParticleProcessMaterial_na1js")
+
+[node name="ColorRect" parent="GPUParticles2D" index="0" unique_id=1543119462]
+material = SubResource("ShaderMaterial_u3mfi")
+offset_left = -136.0
+offset_top = -140.0
+offset_right = 143.0
+offset_bottom = 139.0
+scale = Vector2(1, 1)

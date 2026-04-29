@@ -2,10 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://jg0ru5ss6ppw" path="res://Scenes/Mobs/Base/BasePlayer.tscn" id="1_mq7la"]
 [ext_resource type="Texture2D" uid="uid://oeskymbnxvee" path="res://Textures/Mobs/Player/greytide.png" id="4_bvl14"]
+[ext_resource type="PackedScene" uid="uid://bdtqyl5p2op74" path="res://Scenes/Weapons/Weapons/PlayerWeaponShotgun.tscn" id="4_kyllh"]
 [ext_resource type="PackedScene" uid="uid://cnl6bkhdpreps" path="res://Scenes/Weapons/Weapons/PlayerWeaponToolbox.tscn" id="4_ylcb0"]
 [ext_resource type="AudioStream" uid="uid://c064ooavx7oy1" path="res://Audio/Abilities/Teleport.ogg" id="5_42pyi"]
 [ext_resource type="PackedScene" uid="uid://cwbrguboo4upr" path="res://Scenes/Weapons/Weapons/PlayerWeaponBow.tscn" id="5_f7g7y"]
 [ext_resource type="PackedScene" uid="uid://14xgqyxv1nfp" path="res://Scenes/Weapons/Weapons/PlayerWeaponProtokineticAccelerator.tscn" id="6_7afoe"]
+[ext_resource type="PackedScene" uid="uid://bkftibbpw6q5w" path="res://Scenes/Weapons/Weapons/PlayerWeaponBaseballBat.tscn" id="7_0tl26"]
 [ext_resource type="Texture2D" uid="uid://1yvrhqvfqqus" path="res://Textures/Weapons/Toolbox/toolbox_inhand.png" id="8_42pyi"]
 [ext_resource type="Texture2D" uid="uid://dverpu5mv40au" path="res://Textures/Weapons/Toolbox/toolbox.png" id="13_4xc88"]
 [ext_resource type="Texture2D" uid="uid://cnd26u5psr454" path="res://Textures/Weapons/Hook/grappling_gun.png" id="24_483ma"]
@@ -72,18 +74,23 @@ ignore_time_scale = true
 [node name="WeaponUserComponent" parent="." index="8" unique_id=2123544057]
 timers_timescaled = false
 
-[node name="PlayerWeaponUserComponent" parent="." index="10" unique_id=283125688 node_paths=PackedStringArray("weapon_1", "weapon_2", "weapon_3", "melee_weapon", "weapon_inventory")]
+[node name="PlayerWeaponUserComponent" parent="." index="10" unique_id=283125688 node_paths=PackedStringArray("weapon_1", "weapon_2", "weapon_3", "weapon_4", "melee_weapon", "weapon_inventory")]
 weapon_1 = NodePath("Toolbox")
 weapon_2 = NodePath("Bow")
 weapon_3 = NodePath("ProtokineticAccelerator")
+weapon_4 = NodePath("BaseballBat")
 melee_weapon = NodePath("Toolbox")
-weapon_inventory = [NodePath("Toolbox"), NodePath("Bow"), NodePath("ProtokineticAccelerator")]
+weapon_inventory = [NodePath("Toolbox"), NodePath("Bow"), NodePath("ProtokineticAccelerator"), NodePath("BaseballBat"), NodePath("Shotgun")]
 
-[node name="Toolbox" parent="PlayerWeaponUserComponent" index="0" unique_id=44420062 instance=ExtResource("4_ylcb0")]
+[node name="Shotgun" parent="PlayerWeaponUserComponent" index="0" unique_id=1344688935 instance=ExtResource("4_kyllh")]
 
-[node name="Bow" parent="PlayerWeaponUserComponent" index="1" unique_id=1852817361 instance=ExtResource("5_f7g7y")]
+[node name="Toolbox" parent="PlayerWeaponUserComponent" index="1" unique_id=44420062 instance=ExtResource("4_ylcb0")]
 
-[node name="ProtokineticAccelerator" parent="PlayerWeaponUserComponent" index="2" unique_id=1841802932 instance=ExtResource("6_7afoe")]
+[node name="Bow" parent="PlayerWeaponUserComponent" index="2" unique_id=1852817361 instance=ExtResource("5_f7g7y")]
+
+[node name="ProtokineticAccelerator" parent="PlayerWeaponUserComponent" index="3" unique_id=1841802932 instance=ExtResource("6_7afoe")]
+
+[node name="BaseballBat" parent="PlayerWeaponUserComponent" index="4" unique_id=409183348 instance=ExtResource("7_0tl26")]
 
 [node name="AnimationComponent" parent="." index="11" unique_id=1054272185]
 ignore_time_scale = true

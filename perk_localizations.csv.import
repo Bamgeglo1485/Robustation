@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://c6ois67rart3f"
+
+[deps]
+
+files=["res://perk_localizations.en.translation", "res://perk_localizations.ru.translation"]
+
+source_file="res://perk_localizations.csv"
+dest_files=["res://perk_localizations.en.translation", "res://perk_localizations.ru.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

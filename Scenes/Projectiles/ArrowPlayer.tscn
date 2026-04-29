@@ -33,9 +33,9 @@ material = SubResource("ShaderMaterial_doom2")
 texture = NodePath("../Texture")
 speed = 600
 damage = 25.0
-delayed_damage = 10.0
+delayed_damage = 15.0
 delayed_damage_delay = 3.0
-parry_damage_modifier = 3.0
+parry_damage_modifier = 2.0
 
 [node name="CollisionShape2D" parent="ProjectileComponent" index="0" unique_id=1391622764]
 rotation = 1.5707964
@@ -43,6 +43,9 @@ shape = SubResource("CapsuleShape2D_i6uow")
 
 [node name="HitSound" parent="ProjectileComponent" index="1" unique_id=1752295456]
 stream = ExtResource("2_42qbw")
+
+[node name="HealthComponent" parent="." index="2" unique_id=90404297]
+max_health = 100.0
 
 [node name="Texture" type="Sprite2D" parent="." index="4" unique_id=1806190901]
 use_parent_material = true
@@ -53,6 +56,7 @@ script = ExtResource("4_d6nqw")
 colors = Array[Color]([Color(0.8164007, 0, 0, 1), Color(0.7808727, 0.00017808378, 0.689379, 1)])
 clean_delay = 1.0
 trail_lifetime = 0.2
+required_position_length = 800
 metadata/_custom_type_script = "uid://dfahm1hamvt58"
 
 [node name="SetProjectileExplosionOnTriggerComponent" type="Node" parent="." index="6" unique_id=1857456193]

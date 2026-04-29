@@ -2,12 +2,11 @@ class_name HealthComponent extends Component
 
 @export var hitstop_on_death: bool = false
 @export var do_not_delete_after_gib: bool = false
-@export var max_health: float = 100
+@export var max_health: float = 100 : get = get_max_health
 @export var INVINCIBLE: bool = false
 var base_max_health: float = max_health
 @export var health: float = max_health: set = set_health, get = get_health
 @export var damage_type_modifiers: Dictionary[String, float]
-@export var damage_modifier: float = 1
 @export var armor: float = 1 # I'm too lazy to integrate armor perk with other systems.
 @export var gibbed: bool = false
 @export var invinciblitiy_attack_effect: PackedScene
@@ -15,7 +14,7 @@ var base_max_health: float = max_health
 @export var healing_from_organs_modifier: float = 1.0
 
 ## Unremovable damage that affects maximum health.
-@export var hard_damage: float = 0.0 : set = set_hard_damage
+@export var hard_damage: float = 0.0
 
 @export var blood_effect_scene: PackedScene
 @export var blood_spurt_effect_scene: PackedScene
@@ -28,13 +27,24 @@ var base_max_health: float = max_health
 @onready var trigger_on_damage_component: TriggerOnDamageComponent = parent.get_node_or_null("TriggerOnDamageComponent")
 
 @export_category("Delayed damage")
-@export var delayed_damage_modifier: float = 1.0
 var delayed_damage_timer: Timer
 var delayed_damage_queue: Array = []
 var current_delayed_damage: float = 0
 
 signal health_changed(new_health)
 signal hard_damage_changed(new_damage)
+
+@export_category("Modifier")
+@export var max_health_multipliers: Dictionary
+@export var max_health_multiplier: float = 1.0
+@export var max_health_addendums: Dictionary
+@export var max_health_addendum: float = 0.0
+
+@export var damage_multipliers: Dictionary
+@export var damage_multiplier: float = 1.0
+
+@export var delayed_damage_multipliers: Dictionary
+@export var delayed_damage_multiplier: float = 1.0
 
 func _ready():
 	delayed_damage_timer = Timer.new()
@@ -75,20 +85,20 @@ func take_damage(damage: float, damager: Node2D, damage_type: String = "Generic"
 		if damage > 5:
 			invincibility_effects()
 		return
-	var modifier = armor * damage_modifier
+	var modifier: float = damage_multiplier
 	if !damage_type_modifiers.is_empty() and damage_type_modifiers.has(damage_type):
 		modifier *= damage_type_modifiers[damage_type]
 	if ignore_damage_modifier:
-		modifier = 1
+		modifier = 1.0
 	
-	var modified_damage: float = damage * damage_modifier * modifier
-	health -= int(modified_damage)
-	if damage > 0:
+	var modified_damage: float = damage * modifier
+	health -= modified_damage
+	if modified_damage > 0:
 		damage_effects(damager)
 	else:
 		_flash(1, Color(0.0, 0.937, 0.792, 1.0))
 	
-	EventBusManager.damaged.emit(parent, damage, damager)
+	EventBusManager.damaged.emit(parent, modified_damage, damager)
 	
 	if !damager:
 		return
@@ -189,13 +199,13 @@ func _delayed_damage_process() -> void:
 	
 	if total_damage > 0:
 		@warning_ignore("narrowing_conversion")
-		take_damage(total_damage * delayed_damage_modifier, null)
+		take_damage(total_damage * delayed_damage_multiplier, null)
 		_flash(0.5, Color(0.0, 0.694, 0.508, 0.188))
 	
 	delayed_damage_timer.start()
 
-func set_max_health(new_value: float) -> void:
-	max_health = new_value
+func get_max_health() -> float:
+	return max_health * max_health_multiplier + max_health_addendum
 
 func set_hard_damage(new_value: float) -> void:
 	hard_damage = clamp(new_value, 0, max_health)

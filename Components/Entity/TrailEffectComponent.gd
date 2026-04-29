@@ -45,7 +45,7 @@ func _ready() -> void:
 		cleanup_timer.timeout.connect(_clean_up)
 		cleanup_timer.start()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if !enabled:
 		return
 	if autodelete_active:
@@ -73,7 +73,7 @@ func _process(delta: float) -> void:
 	
 	for children in get_parent().get_children():
 		if children is not Sprite2D:
-			if !children.has_node("Texture"):
+			if is_instance_valid(children) and !children.has_node("Texture"):
 				continue
 			children = children.get_node("Texture")
 		

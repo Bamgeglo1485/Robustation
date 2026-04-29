@@ -38,8 +38,7 @@ shape = ExtResource("3_geesq")
 
 [node name="HealthComponent" type="Node" parent="." unique_id=90404297]
 script = ExtResource("3_88g3b")
-max_health = 1
-damage_modifier = 0.0
+max_health = 200.0
 metadata/_custom_type_script = "uid://df356su15y7ow"
 
 [node name="TriggerOnParryComponent" type="Node" parent="." unique_id=1141083762]

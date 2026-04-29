@@ -65,7 +65,7 @@ func _on_swap(_new_weapon: Weapon) -> void:
 
 func attack_logic(direction):
 	if state == hook_states.BASE:
-		_projectile_shoot(direction)
+		_shoot(direction)
 	else:
 		return
 
@@ -121,8 +121,8 @@ func _physics_process(_delta: float) -> void:
 			if !hook_enemy:
 				target_mob_mover.throw(parent.velocity, hook_throw_force, parent)
 
-func _projectile_shoot(direction) -> Node2D:
-	hook = super._projectile_shoot(direction)
+func _shoot(direction) -> Node2D:
+	hook = super._shoot(direction)
 	if !hook:
 		return null
 	hook_projectile_comp = hook.get_node_or_null("ProjectileComponent")

@@ -30,7 +30,7 @@ material = SubResource("ShaderMaterial_doom2")
 [node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture")]
 texture = NodePath("../Texture")
 speed = 900
-damage = 50.0
+damage = 80.0
 lifetime = 0.2
 throw_speed = 600.0
 ignore_armor = true
@@ -45,6 +45,7 @@ shape = SubResource("CapsuleShape2D_i6uow")
 stream = ExtResource("2_3cpa6")
 
 [node name="Texture" type="Sprite2D" parent="." index="4" unique_id=1806190901]
+modulate = Color(4.415934, 4.415934, 4.415934, 1)
 use_parent_material = true
 texture = ExtResource("3_blbcx")
 

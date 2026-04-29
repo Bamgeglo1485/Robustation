@@ -32,6 +32,11 @@ class_name MeleeWeapon extends Weapon
 @export var piercing_attack_animation: bool = false
 @export var tile_destruction_audio: AudioStreamPlayer2D
 
+@export var attack_angle: float = 90
+@export var ray_count: int = 10
+@export var parry_extra_bounces: int = 0
+@export var parry_extra_penetrations: int = 0
+
 @export_category("QTE")
 @export var qte_icon: Range
 @export var qte_icon_perfect_frame: Panel
@@ -175,8 +180,11 @@ func _try_melee_attack(direction) -> Dictionary:
 	var _targets: Dictionary
 	var attacked_enemies: Array = []
 	
-	for i in range(10):
-		var angle_offset: float = deg_to_rad(i * 20 - 90)
+	var angle_step: float = attack_angle / (ray_count - 1) if ray_count > 1 else 0.0
+	var start_angle: float = -attack_angle / 2.0
+	
+	for i in range(ray_count):
+		var angle_offset: float = deg_to_rad(i * angle_step + start_angle)
 		var ray_direction: Vector2 = direction.rotated(angle_offset)
 		var ray_start: Vector2 = parent.global_position - ray_direction * 0.2
 		var ray_end: Vector2 = parent.global_position + ray_direction * attack_range
@@ -185,7 +193,6 @@ func _try_melee_attack(direction) -> Dictionary:
 		query.collision_mask = 1 | 2 | 4 | 7 | 12
 		query.collide_with_areas = true
 		query.hit_from_inside = true
-		
 		query.exclude = excluded_nodes
 		
 		var result = space_state.intersect_ray(query)
@@ -333,7 +340,7 @@ func _attack_animation(direction):
 		return
 	
 	if !piercing_attack_animation:
-		weapon_sprite.slash_animation(direction, attack_animation_speed)
+		weapon_sprite.slash_animation(direction, attack_animation_speed, attack_angle)
 	else:
 		weapon_sprite.piercing_animation(direction, attack_animation_speed)
 
@@ -359,6 +366,10 @@ func parry_projectile(projectile: Node2D, projectile_component: ProjectileCompon
 	projectile_component.shooter = parent
 	projectile_component.shooter_faction = parent_faction
 	projectile_component.on_parried()
+	if parry_extra_bounces:
+		projectile_component.max_bounces += parry_extra_bounces
+	if parry_extra_penetrations:
+		projectile_component.max_penetrations += parry_extra_penetrations
 	
 	if parry_sound:
 		parry_sound.play()

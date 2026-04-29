@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://bkftibbpw6q5w"]
+
+[ext_resource type="Script" uid="uid://6b7bcparwq17" path="res://Components/Weapons/MeleeWeaponComponent.gd" id="1_bbqq7"]
+[ext_resource type="Texture2D" uid="uid://14syk1bnah4c" path="res://Textures/Weapons/BaseballBat/baseball_bat_inhand.png" id="2_ffy2e"]
+[ext_resource type="Texture2D" uid="uid://c0shg1aa14j2b" path="res://Textures/Weapons/BaseballBat/baseball_bat_icon.png" id="3_ffy2e"]
+[ext_resource type="AudioStream" uid="uid://bg0r8tjnlek1l" path="res://Audio/Weapon/BatParry.ogg" id="4_46bar"]
+[ext_resource type="AudioStream" uid="uid://eogckfs15aph" path="res://Audio/Weapon/miss.ogg" id="6_aj4ed"]
+[ext_resource type="AudioStream" uid="uid://djwhsufysh1dq" path="res://Resources/Audio/PunchRandom.tres" id="6_ffy2e"]
+[ext_resource type="Texture2D" uid="uid://bm4h7pntduqy" path="res://Textures/Weapons/BaseballBat/baseball_bat_alt_icon.png" id="7_xqiyq"]
+
+[node name="BaseballBat" type="Node" unique_id=44420062 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound", "alt_attack")]
+script = ExtResource("1_bbqq7")
+damage = 5.0
+stamina_damage = 10
+attack_range = 96
+parry_sound = NodePath("ParrySound")
+attack_sound = NodePath("MeleeHitSound")
+miss_sound = NodePath("MeleeMissSound")
+parry_force = 1.5
+throw_speed = 400
+ray_count = 15
+parry_extra_bounces = 1
+parry_extra_penetrations = 1
+cooldown_delay = 0.5
+swing_delay = 0.0
+equipped_texture = ExtResource("2_ffy2e")
+equipped_scale = Vector2(1, 1)
+icon_texture = ExtResource("3_ffy2e")
+self_throw_speed = 200
+attack_rotation_multiplier = 0.5
+alt_attack = NodePath("BaseballBat360")
+weapon_name = "Baseball Bat"
+color = Color(0.37392247, 0.16584373, 0.056216568, 1)
+weapon_class = "Melee"
+metadata/_custom_type_script = "uid://6b7bcparwq17"
+
+[node name="ParrySound" type="AudioStreamPlayer2D" parent="." unique_id=1803879457]
+stream = ExtResource("4_46bar")
+
+[node name="MeleeMissSound" type="AudioStreamPlayer2D" parent="." unique_id=1234154462]
+stream = ExtResource("6_aj4ed")
+
+[node name="MeleeHitSound" type="AudioStreamPlayer2D" parent="." unique_id=724755034]
+stream = ExtResource("6_ffy2e")
+
+[node name="BaseballBat360" type="Node" parent="." unique_id=1578793250 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound")]
+script = ExtResource("1_bbqq7")
+stamina_damage = 10
+attack_range = 128
+parry_sound = NodePath("ParrySound")
+attack_sound = NodePath("MeleeHitSound")
+miss_sound = NodePath("MeleeMissSound")
+parry_force = 1.5
+throw_speed = 500
+attack_angle = 360.0
+ray_count = 50
+parry_extra_bounces = 1
+parry_extra_penetrations = 1
+cooldown_delay = 2.0
+swing_delay = 0.0
+equipped_texture = ExtResource("2_ffy2e")
+equipped_scale = Vector2(0.6, 0.6)
+icon_texture = ExtResource("7_xqiyq")
+self_throw_speed = 200
+attack_rotation_multiplier = 0.5
+weapon_name = "Baseball Bat"
+color = Color(0.37392247, 0.16584373, 0.056216568, 1)
+weapon_class = "Melee"
+metadata/_custom_type_script = "uid://6b7bcparwq17"
+
+[node name="ParrySound" type="AudioStreamPlayer2D" parent="BaseballBat360" unique_id=1757764201]
+stream = ExtResource("4_46bar")
+
+[node name="MeleeMissSound" type="AudioStreamPlayer2D" parent="BaseballBat360" unique_id=1819114668]
+stream = ExtResource("6_aj4ed")
+
+[node name="MeleeHitSound" type="AudioStreamPlayer2D" parent="BaseballBat360" unique_id=630931799]
+stream = ExtResource("6_ffy2e")

@@ -176,9 +176,10 @@ jump={
 [internationalization]
 
 locale/translation_remaps={
-"res://localization.csv": PackedStringArray()
+"res://localization.csv": PackedStringArray(),
+"res://perk_localizations.csv": PackedStringArray("res://perk_localizations.en.translation:en", "res://perk_localizations.ru.translation:ru")
 }
-locale/translations=PackedStringArray("res://localization.ru.translation")
+locale/translations=PackedStringArray("res://localization.ru.translation", "res://perk_localizations.en.translation", "res://perk_localizations.ru.translation")
 locale/translation_add_builtin_strings_to_pot=true
 
 [physics]

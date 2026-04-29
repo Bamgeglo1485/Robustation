@@ -9,16 +9,22 @@ class_name ChargingMeleeWeaponComponent extends MeleeWeapon
 @export var hitstop_charge: float = 0.7
 @export var charging_sound: AudioStreamPlayer2D
 @export var full_charge_sound: AudioStreamPlayer2D
-@export var remove_overheat_weapon: RangeWeapon
+@export var remove_overheat: bool = true
 var charging: bool = false
 var charge: float = 0
 var npc: bool = true
 var fullcharge: bool = false
 
+var weapons_folder: Node
+
 func _ready() -> void:
 	super._ready()
 	throw_speed = 0
 	self_throw_speed = 0
+	
+	weapons_folder = get_parent()
+	if weapons_folder is Weapon:
+		weapons_folder = weapons_folder.get_parent()
 
 func _physics_process(delta: float) -> void:
 	if !charging:
@@ -65,10 +71,12 @@ func on_release(raiser) -> void:
 	throw_speed = base_throw_speed * mod
 	self_throw_speed = base_self_throw_speed * mod
 	var targets = await _attack(raiser, npc)
-	if remove_overheat_weapon:
-		remove_overheat_weapon.overheat = 0
 	if targets.is_empty():
 		return
+	if remove_overheat:
+		for weapon in weapons_folder.get_children():
+			if weapon is RangeWeapon and weapon.overheat_enabled:
+				weapon.overheat = 0
 	if hitstop_charge != 0 and hitstop_charge < charge:
 		var hitstop_cof = charge / hitstop_charge * 0.2
 		attack_sound.volume_db = hitstop_cof

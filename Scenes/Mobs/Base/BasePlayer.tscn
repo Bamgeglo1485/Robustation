@@ -253,7 +253,7 @@ invinciblitiy_attack_effect = ExtResource("5_oayod")
 gib_effect_scene = ExtResource("7_nnp87")
 
 [node name="FactionComponent" parent="." index="7" unique_id=1651473390]
-faction = "Player"
+faction = &""
 
 [node name="WeaponUserComponent" parent="." index="8" unique_id=2123544057]
 block_when_fallen = false
@@ -910,6 +910,7 @@ toggle_frame = NodePath("../../Characteristics")
 metadata/_custom_type_script = "uid://bodxsix2kyyy6"
 
 [node name="Inventory" parent="GUI/Touchable" index="3" unique_id=1932067856 instance=ExtResource("65_131qc")]
+process_mode = 3
 visible = false
 anchor_left = 0.23700002
 anchor_top = 0.066
@@ -1106,9 +1107,8 @@ current = true
 
 [node name="PerkOwnerComponent" parent="." index="32" unique_id=1121886740 node_paths=PackedStringArray("perk_ui", "perk_notification_ui", "perk_collect_sound")]
 perk_ui = NodePath("../GUI/PerkList/Panel/GridContainer")
-perk_notification_ui = NodePath("../GUI/Touchable")
+perk_notification_ui = NodePath("../GUI/Overlays")
 perk_collect_sound = NodePath("../Sounds/PerkCollect")
-can_collect = true
 
 [node name="PlayerIntroductionComponent" type="Node" parent="." index="33" unique_id=2031283859 node_paths=PackedStringArray("control", "alarm_sound", "scan_start_sound", "scan_loop_sound", "computer_loop_sound", "return_sound", "enemy_theme")]
 script = ExtResource("62_bvsa3")

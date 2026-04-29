@@ -2,8 +2,8 @@ class_name ArenaComponent extends Component
 
 @export_category("Settings")
 @export var enabled: bool = true
-@export_file_path() var perks: Array[String]
-@export_file_path() var enemy_perks: Array[String]
+@export var perks: Array[PackedScene]
+@export var enemy_perks: Array[PackedScene]
 @export var boss_battles_per: int = 10
 @export var area_info: RichTextLabel
 @export var start_budget: float = 5
@@ -52,26 +52,23 @@ var high_pass_tween: Tween
 
 const MAX_ATTEMPTS: int = 100
 
-#-----------------------READY-----------------------
 func _ready() -> void:
 	if !enabled:
 		return
-	_get_random_perk(perks) #preload to avoid lags
-	_get_random_perk(enemy_perks) #preload to avoid lags
 	EventBusManager.gibbed.connect(_on_gibbed)
 	for enemy in available_enemies:
-		if enemy.enemy_type == enemy.enemy_types.MELEE:
-			melee_enemies.append(enemy)
-		elif enemy.enemy_type == enemy.enemy_types.RANGE:
-			range_enemies.append(enemy)
-		elif enemy.enemy_type == enemy.enemy_types.ASSIST:
-			assist_enemies.append(enemy)
-		elif enemy.enemy_type == enemy.enemy_types.UNIVERSAL:
-			universal_enemies.append(enemy)
+		match enemy.enemy_type:
+			enemy.enemy_types.MELEE:
+				melee_enemies.append(enemy)
+			enemy.enemy_types.RANGE:
+				range_enemies.append(enemy)
+			enemy.enemy_types.ASSIST:
+				assist_enemies.append(enemy)
+			enemy.enemy_types.UNIVERSAL:
+				universal_enemies.append(enemy)
 	
 	start_game()
 
-#-----------------------PROCESS-----------------------
 func _physics_process(delta: float) -> void:
 	if !wave_active or tree.paused:
 		return
@@ -89,6 +86,7 @@ func start_new_wave(new_game: bool = false) -> void:
 		health_component.set_health(health_component.max_health)
 		stamina_component.set_stamina(stamina_component.max_stamina)
 		await _open_perk_choose()
+	
 	wave_active = true
 	wave += 1
 	budget = start_budget + budget_per_wave * wave
@@ -100,22 +98,19 @@ func start_new_wave(new_game: bool = false) -> void:
 		boss_array.append(boss_enemy.scene)
 		bosses = _spawn_enemies(boss_array)
 		budget -= boss_enemy.cost
-		current_enemies.append(bosses[0])
+		current_enemies.append_array(bosses)
 	
 	current_enemies.append_array(_spawn_enemies(_choose_enemies(available_enemies)))
 	
 	if budget < 2:
 		return
 	
+	var targets = bosses if !bosses.is_empty() else current_enemies
 	var attempts: int = 0
 	while budget >= 2 and attempts < MAX_ATTEMPTS:
 		attempts += 1
-		if !bosses:
-			_add_perks(current_enemies)
-		else:
-			_add_perks(bosses)
+		_add_perks(targets)
 
-#-----------------------ASSIST FUNCTIONS-----------------------
 func _spawn_enemies(enemies: Array[PackedScene]) -> Array[PhysicsBody2D]:
 	var spawned_enemies: Array[PhysicsBody2D]
 	
@@ -143,25 +138,22 @@ func _choose_enemies(enemies: Array[Enemy]) -> Array[PackedScene]:
 		
 		var enemy: Enemy = _random_enemy(_available_enemies)
 		
-		if enemy.enemy_type == enemy.enemy_types.MELEE :
-			if melee_enemies_count + 1 >= max_melee_enemies:
-				continue
-			else:
+		match enemy.enemy_type:
+			enemy.enemy_types.MELEE:
+				if melee_enemies_count >= max_melee_enemies:
+					continue
 				melee_enemies_count += 1
-		elif enemy.enemy_type == enemy.enemy_types.RANGE :
-			if range_enemies_count + 1 >= max_range_enemies:
-				continue
-			else:
+			enemy.enemy_types.RANGE:
+				if range_enemies_count >= max_range_enemies:
+					continue
 				range_enemies_count += 1
-		elif enemy.enemy_type == enemy.enemy_types.ASSIST :
-			if assist_enemies_count + 1 >= max_assist_enemies:
-				continue
-			else:
+			enemy.enemy_types.ASSIST:
+				if assist_enemies_count >= max_assist_enemies:
+					continue
 				assist_enemies_count += 1
-		elif enemy.enemy_type == enemy.enemy_types.UNIVERSAL :
-			if universal_enemies_count + 1 >= max_universal_enemies:
-				continue
-			else:
+			enemy.enemy_types.UNIVERSAL:
+				if universal_enemies_count >= max_universal_enemies:
+					continue
 				universal_enemies_count += 1
 		
 		var max_count: int = floor(remaining_budget / enemy.cost)
@@ -169,18 +161,15 @@ func _choose_enemies(enemies: Array[Enemy]) -> Array[PackedScene]:
 			_available_enemies.erase(enemy)
 			continue
 		
-		var count_to_spawn: int
+		var count_to_spawn: int = 1
 		if max_count >= 3 and randf() > 0.5:
 			count_to_spawn = randi_range(1, min(3, max_count))
-		else:
-			count_to_spawn = 1
 		
 		for i in count_to_spawn:
 			choosed_enemies.append(enemy.scene)
 		remaining_budget -= enemy.cost * count_to_spawn
 	
 	budget = remaining_budget
-	
 	return choosed_enemies
 
 func _random_enemy(enemies: Array[Enemy]) -> Enemy:
@@ -198,7 +187,7 @@ func _random_enemy(enemies: Array[Enemy]) -> Enemy:
 	
 	return enemies.back()
 
-func _add_perks(enemies: Array[PhysicsBody2D]):
+func _add_perks(enemies: Array[PhysicsBody2D]) -> void:
 	for enemy in enemies:
 		if !is_instance_valid(enemy):
 			continue
@@ -210,25 +199,21 @@ func _add_perks(enemies: Array[PhysicsBody2D]):
 		perk_owner_comp.add_perk(_get_random_perk(enemy_perks), 5)
 		budget -= 2
 
-func _get_random_perk(list: Array[String]):
-		var valid_perks: Array[Script] = []
-		for potential_perk in list:
-			var loaded_perk = load(potential_perk)
-			if loaded_perk is Script:
-				valid_perks.append(loaded_perk)
-		
-		if valid_perks.is_empty():
-			return
-		
-		return valid_perks.pick_random()
+func _get_random_perk(list: Array[PackedScene]) -> PackedScene:
+	if list.is_empty():
+		return null
+	return list.pick_random()
 
-func _clean_blood():
+func _clean_blood() -> void:
 	var blood_pools: Array[Node] = get_tree().get_nodes_in_group("Blood")
 	for blood in blood_pools:
-		blood.clean()
+		if blood.has_method("clean"):
+			blood.clean()
+	
 	var phys_particles: Array[Node] = get_tree().get_nodes_in_group("PhysicalParticle")
 	for particle in phys_particles:
-		particle.clean()
+		if particle.has_method("clean"):
+			particle.clean()
 
 func _open_perk_choose() -> void:
 	if loose:
@@ -249,31 +234,45 @@ func _open_perk_choose() -> void:
 	
 	var perk_units: Array[Panel]
 	var perk_units_buttons: Array[Button]
+	
 	for i in choosable_perk_count_per_wave:
-		var perk = _get_random_perk(perks)
-		var inst_perk: BasePerkComponent = perk.new()
+		var perk_scene = _get_random_perk(perks)
+		if !perk_scene:
+			continue
+		
+		var inst_perk: PerkComponent = perk_scene.instantiate()
+		
+		player.add_child(inst_perk)
+		if !inst_perk.is_node_ready():
+			await inst_perk.ready
 		
 		var perk_unit: Panel = perk_list_unit.instantiate()
 		player_perk_ui_list.add_child.call_deferred(perk_unit)
 		perk_unit.modulate = Color(0.0, 0.0, 0.0, 0.0)
 		perk_units.append(perk_unit)
-		perk_unit.get_node("TextureRect").texture = inst_perk.perk_icon
-		perk_unit.get_node("Desc").text = inst_perk.perk_desc
+		
+		perk_unit.get_node("TextureRect").texture = inst_perk.perk_data.icon_texture
+		perk_unit.get_node("Desc").text = inst_perk.perk_data.perk_description
+		
 		var perk_name_label: Label = perk_unit.get_node("Name")
-		perk_name_label.text = inst_perk.perk_name
-		if inst_perk.rarity == inst_perk.rarity_classes.COMMON:
-			perk_name_label.modulate = Color(0.744, 0.188, 0.0, 1.0)
-		elif inst_perk.rarity == inst_perk.rarity_classes.SHITTY:
-			perk_name_label.modulate = Color(0.348, 0.197, 0.0, 1.0)
-		elif inst_perk.rarity == inst_perk.rarity_classes.ROBUST:
-			perk_name_label.modulate = Color(0.931, 0.0, 0.323, 1.0)
-		elif inst_perk.rarity == inst_perk.rarity_classes.ADMINABUSE:
-			perk_name_label.modulate = Color(0.613, 0.003, 0.899, 1.0)
+		perk_name_label.text = inst_perk.perk_data.perk_name
+		
+		match inst_perk.perk_data.perk_rarity:
+			PerkData.rarity_classes.COMMON:
+				perk_name_label.modulate = Color(0.744, 0.188, 0.0, 1.0)
+			PerkData.rarity_classes.SHITTY:
+				perk_name_label.modulate = Color(0.348, 0.197, 0.0, 1.0)
+			PerkData.rarity_classes.ROBUST:
+				perk_name_label.modulate = Color(0.931, 0.0, 0.323, 1.0)
+			PerkData.rarity_classes.ADMINABUSE:
+				perk_name_label.modulate = Color(0.613, 0.003, 0.899, 1.0)
+		
 		inst_perk.queue_free()
+		
 		var perk_unit_button: Button = perk_unit.get_node("Button")
 		perk_unit_button.disabled = true
 		perk_units_buttons.append(perk_unit_button)
-		perk_unit_button.get_node("PerkChooseOnPressedComponent").perk = perk
+		perk_unit_button.get_node("PerkChooseOnPressedComponent").perk = perk_scene
 	
 	for perk in perk_units:
 		perk_choice_sound.play()
@@ -331,7 +330,6 @@ func _high_pass_set(enable: bool) -> void:
 		await high_pass_tween.finished
 		AudioServer.set_bus_effect_enabled(1, 2, false)
 
-#-----------------------SIGNALS-----------------------
 func _on_gibbed(emitter: Node2D) -> void:
 	if emitter == player:
 		_on_player_death()

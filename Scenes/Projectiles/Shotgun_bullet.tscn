@@ -14,11 +14,10 @@ radius = 11.0
 
 [node name="Projectile" unique_id=1536955502 instance=ExtResource("1_uq5et")]
 
-[node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture", "particle_emitter")]
+[node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture")]
 collision_layer = 15
 collision_mask = 15
 texture = NodePath("../Texture")
-particle_emitter = NodePath("")
 speed = 1300
 damage = 40
 lifetime = 30.0
@@ -46,4 +45,5 @@ script = ExtResource("6_mjd5c")
 colors = Array[Color]([Color(1.8247963, 1.8247963, 1.8247963, 1)])
 clean_delay = 0.2
 trail_lifetime = 0.1
+required_position_length = 800
 metadata/_custom_type_script = "uid://dfahm1hamvt58"

@@ -121,6 +121,7 @@ anchor_top = 0.11556604
 anchor_right = 1.0631868
 anchor_bottom = 1.009434
 offset_right = 6.1035156e-05
+mouse_behavior_recursive = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Inventory" type="VBoxContainer" parent="Inventory" unique_id=61776999]

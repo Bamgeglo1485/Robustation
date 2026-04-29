@@ -255,7 +255,7 @@ metadata/_edit_use_anchors_ = true
 [node name="StatisticsProgressComponent" type="Node" parent="StatisticsPolygonComponent/Armor" unique_id=1507159477]
 script = ExtResource("6_ftgfo")
 component_name = "HealthComponent"
-variable_name = "armor"
+variable_name = "damage_multiplier"
 recursive = true
 metadata/_custom_type_script = "uid://bqln1scsu0vax"
 
@@ -449,7 +449,7 @@ metadata/_edit_use_anchors_ = true
 [node name="StatisticsProgressComponent" type="Node" parent="StatisticsPolygonComponent/Speed" unique_id=403112070]
 script = ExtResource("6_ftgfo")
 component_name = "MobMoverComponent"
-variable_name = "minor_speed_modifier"
+variable_name = "speed_multiplier"
 metadata/_custom_type_script = "uid://bqln1scsu0vax"
 
 [node name="Tendency" type="ProgressBar" parent="StatisticsPolygonComponent" unique_id=1935159087]

@@ -2,13 +2,12 @@
 
 [ext_resource type="Script" uid="uid://bi1gje1pfokqc" path="res://Components/Weapons/RangeWeaponComponent.gd" id="1_100be"]
 [ext_resource type="PackedScene" uid="uid://bgp6pxacv3gge" path="res://Scenes/Projectiles/KineticProjectile.tscn" id="2_nj0hh"]
-[ext_resource type="Texture2D" uid="uid://dfrqsbt71ss31" path="res://Textures/Weapons/Bow/bow_inhands.png" id="3_nj0hh"]
 [ext_resource type="Texture2D" uid="uid://cowom5irnhb7d" path="res://Textures/Weapons/ProtoKineticAccelerator/kinetic_accelerator_inhand.png" id="3_w5bov"]
 [ext_resource type="Texture2D" uid="uid://dhe0lm314sjkv" path="res://Textures/Weapons/ProtoKineticAccelerator/kinetic_accelerator_icon.png" id="4_3ae3q"]
-[ext_resource type="Texture2D" uid="uid://dno5t6v4mhtyb" path="res://Textures/Weapons/Bow/bow_icon.png" id="4_dus7a"]
 [ext_resource type="AudioStream" uid="uid://r88fv2nles4" path="res://Audio/Weapon/kinetic_accel.ogg" id="5_dus7a"]
 [ext_resource type="AudioStream" uid="uid://ctlu60sqttxw5" path="res://Audio/Weapon/kinetic_reload.ogg" id="6_3ae3q"]
 [ext_resource type="PackedScene" uid="uid://bq4rrvubclybf" path="res://Scenes/Explosion/ShockwaveExplosion.tscn" id="7_dus7a"]
+[ext_resource type="Texture2D" uid="uid://6g06o1h6q87g" path="res://Textures/Weapons/ProtoKineticAccelerator/kinetic_projectile.png" id="8_nj0hh"]
 [ext_resource type="AudioStream" uid="uid://bxwx57y8k3fqt" path="res://Audio/Effects/lightburn.ogg" id="10_3ae3q"]
 
 [node name="ProtokineticAccelerator" type="Node" unique_id=1852817361 node_paths=PackedStringArray("shoot_sound", "bullets_recover_sound", "alt_attack")]
@@ -21,7 +20,7 @@ bullets_recover_count = 1
 shots = 1
 shoot_sound = NodePath("ShootSound")
 bullets_recover_sound = NodePath("BulletRecoverSound")
-bullets_recovery_delay = 1.0
+bullets_recovery_delay = 1.5
 timers_timescaled = false
 cooldown_delay = 0.1
 swing_delay = 0.0
@@ -62,9 +61,9 @@ bullets_recovery_delay = 6.0
 timers_timescaled = false
 cooldown_delay = 0.1
 swing_delay = 0.0
-equipped_texture = ExtResource("3_nj0hh")
+equipped_texture = ExtResource("3_w5bov")
 equipped_scale = Vector2(0.5, 0.55)
-icon_texture = ExtResource("4_dus7a")
+icon_texture = ExtResource("8_nj0hh")
 swing_rotation_multiplier = 0.0
 attack_rotation_multiplier = -0.6
 attack_shift_multiplier = -0.7

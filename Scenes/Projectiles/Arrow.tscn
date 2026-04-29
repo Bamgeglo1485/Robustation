@@ -55,6 +55,7 @@ script = ExtResource("4_1lymg")
 colors = Array[Color]([Color(0.8164007, 0, 0, 1), Color(0.7808727, 0.00017808378, 0.689379, 1)])
 clean_delay = 1.0
 trail_lifetime = 0.2
+required_position_length = 800
 metadata/_custom_type_script = "uid://dfahm1hamvt58"
 
 [node name="SetProjectileExplosionOnTriggerComponent" type="Node" parent="." index="6" unique_id=1857456193]

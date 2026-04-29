@@ -67,6 +67,10 @@ var friction_amount: float
 var velocity: Vector2
 var speed: float
 
+@export_category("Modifiers")
+@export var speed_multipliers: Dictionary
+@export var speed_multiplier: float = 1.0
+
 func _ready() -> void:
 	if fly_impact_area:
 		fly_impact_area.body_entered.connect(on_fly_impact)
@@ -110,7 +114,7 @@ func _move(delta: float) -> void:
 			var nav_vel: Vector2 = direction * acceleration * speed_modifier * minor_speed_modifier
 			navigation_agent.set_velocity(nav_vel)
 		
-		max_speed_current = max_speed * speed_modifier * minor_speed_modifier
+		max_speed_current = max_speed * speed_modifier * minor_speed_modifier * speed_multiplier
 		if speed > max_speed_current:
 			velocity = (velocity / speed) * max_speed_current
 	

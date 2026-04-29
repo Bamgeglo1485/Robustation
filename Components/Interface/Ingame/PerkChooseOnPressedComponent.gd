@@ -1,6 +1,6 @@
 class_name PerkChooseOnPressedComponent extends Component
 
-@export var perk: Script
+@export var perk: PackedScene
 @export var delete: bool = true
 var player: PhysicsBody2D
 

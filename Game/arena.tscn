@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://bmqxe8ujyt6le" path="res://Resources/Custom/Enemy/Gray.tres" id="8_33n3b"]
 [ext_resource type="Texture2D" uid="uid://yjigwd3i118j" path="res://Textures/Light/point_light.jpg" id="8_rpdke"]
 [ext_resource type="Texture2D" uid="uid://cf2mkb22grqmy" path="res://Textures/Parallax/Space/layer2.png" id="9_33n3b"]
+[ext_resource type="PackedScene" uid="uid://dx75c08agri7r" path="res://Scenes/Perks/PerkSceneBandageAndToxicMarker.tscn" id="9_cvmb5"]
 [ext_resource type="Resource" uid="uid://c7ill5kgubqqa" path="res://Resources/Custom/Enemy/Tider.tres" id="9_rxmp4"]
 [ext_resource type="Script" uid="uid://b1vs1lh4jku4h" path="res://Components/Level/ArenaComponent.gd" id="10_glinl"]
 [ext_resource type="Resource" uid="uid://cou375htkckp8" path="res://Resources/Custom/Enemy/Assistant.tres" id="10_qyr8x"]
@@ -119,9 +120,10 @@ texture_scale = 10.0
 [node name="ArenaComponent" type="Node" parent="." unique_id=1165337052 node_paths=PackedStringArray("area_info", "perk_choice_start_sound", "perk_choice_sound", "perk_selected_sound")]
 process_mode = 3
 script = ExtResource("10_glinl")
-perks = Array[String](["res://Components/Perks/AdditionalHealthPerkComponent.gd", "res://Components/Perks/AdditionalKnockbackPerkComponent.gd", "res://Components/Perks/AdditionalStaminaPerkComponent.gd", "res://Components/Perks/ArmorPerkComponent.gd", "res://Components/Perks/CooldownModifierPerkComponent.gd", "res://Components/Perks/DelayedDamageModifierPerkComponent.gd", "res://Components/Perks/PenetrationModifierPerkComponent.gd", "res://Components/Perks/ReflectMeleePerkComponent.gd", "res://Components/Perks/ReflectPerkComponent.gd", "res://Components/Perks/RegenerationPerkComponent.gd", "res://Components/Perks/SpeedModifierPerkComponent.gd", "res://Components/Perks/ExplosionDamageModifierPerk.gd", "res://Components/Perks/ExplosionResistancePerkComponent.gd", "res://Components/Perks/AdditionalShotsPerkComponent.gd", "res://Components/Perks/PerfectTimerPerkComponent.gd", "res://Components/Perks/BounceModifierPerkComponent.gd", "res://Components/Perks/BattleTendencyDebuffModifierPerkComponent.gd", "res://Components/Perks/HealForDamagePerkComponent.gd", "res://Components/Perks/HealForParryPerkComponent.gd"])
-enemy_perks = Array[String](["res://Components/Perks/AdditionalHealthPerkComponent.gd", "res://Components/Perks/AdditionalShotsPerkComponent.gd", "res://Components/Perks/AdditionalStaminaPerkComponent.gd", "res://Components/Perks/ArmorPerkComponent.gd", "res://Components/Perks/BounceModifierPerkComponent.gd", "res://Components/Perks/CooldownModifierPerkComponent.gd", "res://Components/Perks/DelayedDamageModifierPerkComponent.gd", "res://Components/Perks/HealForDamagePerkComponent.gd", "res://Components/Perks/PenetrationModifierPerkComponent.gd", "res://Components/Perks/ReflectMeleePerkComponent.gd", "res://Components/Perks/RegenerationPerkComponent.gd", "res://Components/Perks/SpeedModifierPerkComponent.gd"])
+perks = Array[PackedScene]([ExtResource("9_cvmb5")])
+enemy_perks = Array[PackedScene]([ExtResource("9_cvmb5")])
 area_info = NodePath("../Player/DEBUG/Control/RichTextLabel")
+start_budget = 1.0
 available_enemies = Array[ExtResource("11_72g0p")]([ExtResource("8_33n3b"), ExtResource("9_rxmp4"), ExtResource("10_qyr8x"), ExtResource("11_2cxdh"), ExtResource("11_4w5h0"), ExtResource("12_4w5h0")])
 available_bosses = Array[ExtResource("11_72g0p")]([ExtResource("10_ss60k"), ExtResource("13_4w5h0")])
 spawn_positions = Array[Vector2]([Vector2(-576, 0), Vector2(594, 0), Vector2(0, 453), Vector2(0, -386)])

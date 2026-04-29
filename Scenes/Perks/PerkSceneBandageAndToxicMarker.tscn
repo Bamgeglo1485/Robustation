@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dx75c08agri7r"]
+
+[ext_resource type="Script" uid="uid://bdektmaq0iu7p" path="res://Components/Perks/Base/PerkComponent.gd" id="1_fh4ix"]
+[ext_resource type="Texture2D" uid="uid://dego7kgun8mjb" path="res://Textures/Perks/bandage_equipped.png" id="2_ais25"]
+[ext_resource type="Script" uid="uid://brk1lcgtq0fmo" path="res://Resources/Custom/PerkData/Base/PerkModifier.gd" id="2_wyw5y"]
+[ext_resource type="Texture2D" uid="uid://cpnnsgar352qs" path="res://Textures/Perks/bandage_and_marker.png" id="3_5bn4w"]
+[ext_resource type="Script" uid="uid://cd4tbi43h4hjk" path="res://Resources/Custom/PerkData/Base/PerkData.gd" id="3_dltle"]
+
+[sub_resource type="Resource" id="Resource_ua56r"]
+script = ExtResource("2_wyw5y")
+target_component = "HealthComponent"
+property = "max_health"
+operation = 1
+value = 10.0
+metadata/_custom_type_script = "uid://brk1lcgtq0fmo"
+
+[sub_resource type="Resource" id="Resource_ais25"]
+script = ExtResource("2_wyw5y")
+target_component = "HealthComponent"
+property = "delayed_damage"
+value = 1.07
+metadata/_custom_type_script = "uid://brk1lcgtq0fmo"
+
+[sub_resource type="Resource" id="Resource_qyf8a"]
+script = ExtResource("3_dltle")
+perk_id = &"BandageAndToxicMarker"
+icon_texture = ExtResource("3_5bn4w")
+equipped_texture = ExtResource("2_ais25")
+modifiers = Array[ExtResource("2_wyw5y")]([SubResource("Resource_ua56r"), SubResource("Resource_ais25")])
+metadata/_custom_type_script = "uid://cd4tbi43h4hjk"
+
+[node name="BandageAndToxicMarkerPerk" type="Node" unique_id=1604168029]
+script = ExtResource("1_fh4ix")
+perk_data = SubResource("Resource_qyf8a")
+metadata/_custom_type_script = "uid://bdektmaq0iu7p"

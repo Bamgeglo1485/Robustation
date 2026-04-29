@@ -52,9 +52,6 @@ friction = 1000.0
 position = Vector2(0, 1)
 texture = ExtResource("2_f6ny4")
 
-[node name="HealthComponent" parent="." index="4" unique_id=1758373275]
-max_health = 50
-
 [node name="NavigationAgent" parent="." index="13" unique_id=1358139639]
 avoidance_enabled = false
 max_speed = 0.01
@@ -143,7 +140,7 @@ stream = ExtResource("29_f6ny4")
 stream = ExtResource("28_mbwmj")
 
 [node name="BeehaveTree" parent="." index="19" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@39381")
+blackboard = NodePath("@Node@90393")
 
 [node name="MoveToPlayer" type="Node" parent="BeehaveTree" index="0" unique_id=1542265017]
 script = ExtResource("36_k3vsn")

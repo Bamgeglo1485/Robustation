@@ -14,7 +14,7 @@ var base_max_health: float = max_health
 @export var healing_from_organs_modifier: float = 1.0
 
 ## Unremovable damage that affects maximum health.
-@export var hard_damage: float = 0.0
+@export var hard_damage: float = 0.0 : set = set_hard_damage
 
 @export var blood_effect_scene: PackedScene
 @export var blood_spurt_effect_scene: PackedScene

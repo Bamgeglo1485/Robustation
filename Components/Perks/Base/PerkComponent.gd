@@ -5,7 +5,6 @@ class_name PerkComponent extends Component
 var sprite: DirectionalSprite
 
 @export var minor_stat_control_scene: PackedScene = preload("res://Scenes/UI/IngameInterface/BaseMinorStat.tscn")
-var minor_stat_control: Control
 var second_minor_stat_control: Control
 var minor_stat_container: Container
 
@@ -26,8 +25,12 @@ func _ready() -> void:
 func _exit_tree() -> void:
 	if sprite:
 		sprite.queue_free()
+	amount = 0
+	_update_modifiers()
 
 func _update_modifiers() -> void:
+	if !parent.has_node("PerkOwnerComponent"):
+		return
 	_apply_base_modifiers()
 	apply_custom_modifiers()
 
@@ -40,8 +43,14 @@ func _apply_base_modifiers() -> void:
 	for modifier in perk_data.modifiers:
 		var component: Component = parent.get_node_or_null(modifier.target_component)
 		if !component:
-			continue
-		var property = component.get(modifier.property)
+			if modifier.ensure_component:
+				var component_script = load(modifier.target_component) as Script
+				if component_script:
+					component = component_script.new()
+					component.name = modifier.target_component
+					parent.add_child.call_deferred(component)
+			else:
+				continue
 		
 		# Всегда используем только словари для избежания конфликтов и невозможности откатить перк
 		# Always use only dictionaries to avoid conflicts and inability to revert the perk
@@ -56,23 +65,28 @@ func _add_minor_stat(modifier: PerkModifier) -> void:
 	if !minor_stat_container:
 		return
 	
+	var component: Component = parent.get_node_or_null(modifier.target_component)
+	if !component:
+		return
+	
+	var property_name_with_operation: String
+	
 	var text: String = modifier.property + ": "
 	match modifier.operation:
 		modifier.operations.MULTIPLY:
-			text += str(modifier.value ** amount * 100) + "%"
+			property_name_with_operation = modifier.property + "_multiplier"
+			var property = component.get(property_name_with_operation)
+			text += str(property * 100) + "%"
 		modifier.operations.ADD:
-			text += str(modifier.value * amount) + "u"
+			property_name_with_operation = modifier.property + "_addendum"
+			var property = component.get(property_name_with_operation)
+			text += str(property) + "u"
 	
-	if minor_stat_control:
-		minor_stat_control.text = text
+	var already_exist: Control = minor_stat_container.get_node_or_null(property_name_with_operation)
+	if !already_exist:
+		var inst: Control = minor_stat_control_scene.instantiate()
+		minor_stat_container.add_child.call_deferred(inst)
+		inst.text = text
+		inst.name = property_name_with_operation
 	else:
-		var already_exist: Control = minor_stat_container.get_node_or_null(modifier.property)
-		if !already_exist:
-			var inst: Control = minor_stat_control_scene.instantiate()
-			minor_stat_container.add_child.call_deferred(inst)
-			inst.text = text
-			inst.name = modifier.property
-			minor_stat_control = inst
-		else:
-			minor_stat_control = already_exist
-			already_exist.text = text
+		already_exist.text = text

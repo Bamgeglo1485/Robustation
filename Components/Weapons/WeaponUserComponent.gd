@@ -18,35 +18,50 @@ class_name WeaponUserComponent extends Component
 @export var spread_modifier: float = 1.0
 
 @export var overheat_per_shoot_modifier: float = 1.0
-@export var extra_shots: int = 0
-@export var extra_penetrations: int = 0
-@export var extra_bounces: int = 0
 
 @export var qte_perfect_heal_modifier_from_max_modifier: float = 1.0
 @export var qte_time_mod: float = 3.0
 
 @export var can_attack: bool = true
 var ignore_setter: bool = false
+var last_attacked_weapon: Weapon
+
+@export_category("Modifiers")
+@export var extra_shots_addendums: Dictionary
+@export var extra_shots_addendum: int = 0
+@export var extra_penetrations_addendums: Dictionary
+@export var extra_penetrations_addendum: int = 0
+@export var extra_bounces_addendums: Dictionary
+@export var extra_bounces_addendum: int = 0
+@export var spread_multipliers: Dictionary
+@export var spread_multiplier: float = 1.0
+@export var recover_multipliers: Dictionary
+@export var recover_multiplier: float = 1.0
+@export var damage_multipliers: Dictionary
+@export var damage_multiplier: float = 1.0
 
 func _ready() -> void:
 	if selected_weapon:
 		select_weapon(selected_weapon)
 
 func force_select_weapon(new_weapon: Weapon):
-	if new_weapon and new_weapon is RangeWeapon:
-		if overheat_per_shoot_modifier != 1.0 and new_weapon.overheat_enabled:
-			new_weapon.overheat_per_shoot_modifier = overheat_per_shoot_modifier
-		if extra_shots != 0 and new_weapon and new_weapon.shots != 1:
-			new_weapon.extra_shots = extra_shots
-		if spread_modifier != 1.0:
-			new_weapon.spread_modifier = spread_modifier
-		if recover_modifier != 1.0:
-			new_weapon.recover_modifier = recover_modifier
-		if extra_penetrations != 0:
-			new_weapon.extra_penetrations = extra_penetrations
-		if extra_bounces != 0:
-			new_weapon.extra_bounces = extra_bounces
-	elif new_weapon and new_weapon is MeleeWeapon:
+	if new_weapon:
+		if damage_multiplier != 0:
+			new_weapon.damage_multiplier = damage_multiplier
+		if new_weapon is RangeWeapon:
+			if overheat_per_shoot_modifier != 1.0 and new_weapon.overheat_enabled:
+				new_weapon.overheat_per_shoot_modifier = overheat_per_shoot_modifier
+			if extra_shots_addendum != 0 and new_weapon and new_weapon.shots != 1:
+				new_weapon.extra_shots_addendum = extra_shots_addendum
+			if spread_multiplier != 1.0:
+				new_weapon.spread_multiplier = spread_multiplier
+			if recover_multiplier != 1.0:
+				new_weapon.recover_multiplier = recover_multiplier
+			if extra_penetrations_addendum != 0:
+				new_weapon.extra_penetrations_addendum = extra_penetrations_addendum
+			if extra_bounces_addendum != 0:
+				new_weapon.extra_bounces_addendum = extra_bounces_addendum
+	elif new_weapon is MeleeWeapon:
 		new_weapon.qte_time_mod = qte_time_mod
 		new_weapon.qte_perfect_heal_modifier_from_max_modifier = qte_perfect_heal_modifier_from_max_modifier
 	ignore_setter = true
@@ -79,6 +94,8 @@ func attack(raiser, npc: bool = true, weapon: Weapon = null) -> bool:
 		weapon = selected_weapon
 	if weapon.get_cooldown():
 		return false
+	
+	last_attacked_weapon = weapon
 	
 	if mob_mover_component:
 		if mob_mover_component.fallen and block_when_fallen:

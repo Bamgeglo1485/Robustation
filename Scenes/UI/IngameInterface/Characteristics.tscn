@@ -255,7 +255,7 @@ metadata/_edit_use_anchors_ = true
 [node name="StatisticsProgressComponent" type="Node" parent="StatisticsPolygonComponent/Armor" unique_id=1507159477]
 script = ExtResource("6_ftgfo")
 component_name = "HealthComponent"
-variable_name = "damage_multiplier"
+variable_name = "damage_resistance_multiplier"
 recursive = true
 metadata/_custom_type_script = "uid://bqln1scsu0vax"
 

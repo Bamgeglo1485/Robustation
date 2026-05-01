@@ -32,6 +32,12 @@ var deleted: bool = false
 @export var explosion_scene: PackedScene
 @export var chain_scene: PackedScene
 
+@export_category("MarkOfDeath")
+@export var mark_delay: float = 0.0
+@export var mark_heal: float = 0.4
+@export var mark_damage: float = 1.0
+@export var mark_hard_damage: float = 0.3
+
 @export_category("ModifyByRange")
 @export var modify_by_range_base_range: int = 0
 @export var modify_by_range_min_value: float = 0.3
@@ -113,6 +119,11 @@ func damage_collider(collider: Node2D) -> void:
 	
 	if collider is not TileMapLayer:
 		last_target = collider
+	
+	if mark_delay != 0:
+		var mark_comp: MarkOfDeathComponent = collider.get_node_or_null("MarkOfDeathComponent")
+		if mark_comp:
+			mark_comp.set_mark(mark_delay, mark_heal, mark_damage, mark_hard_damage)
 	
 	if damage != 0:
 		var target_health: HealthComponent = collider.get_node_or_null("HealthComponent")

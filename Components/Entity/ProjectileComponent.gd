@@ -44,6 +44,12 @@ var weapon: RangeWeapon
 var shooter_faction: FactionComponent
 var targeted_enemies: Array[PhysicsBody2D]
 
+@export_category("MarkOfDeath")
+@export var mark_delay: float = 0.0
+@export var mark_heal: float = 0.7
+@export var mark_damage: float = 1.0
+@export var mark_hard_damage: float = 0.3
+
 @export_category("Sender")
 @export var return_to_sender: bool = false
 @export var instant_bullets_recover_to_sender: int = 1
@@ -228,8 +234,10 @@ func _on_body_entered(body: Node2D) -> void:
 					tile_destruction_audio.stream = tile_data.get_custom_data("DestructionSound")
 					tile_destruction_audio.play()
 	
-	if reflect(body):
-		return
+	var reflect_component: ReflectComponent = body.get_node_or_null("ReflectComponent")
+	if reflect_component:
+		if reflect_component.projectile_reflect(body, parent, self):
+			return
 	if hit_sound:
 		hit_sound.play()
 	
@@ -264,7 +272,12 @@ func _on_body_entered(body: Node2D) -> void:
 			mover_comp.throw(parent.velocity, throw_speed, shooter)
 		if fall_time != 0:
 			mover_comp.drop(fall_time)
-		
+	
+	if mark_delay != 0:
+		var mark_comp: MarkOfDeathComponent = body.get_node_or_null("MarkOfDeathComponent")
+		if mark_comp:
+			mark_comp.set_mark(mark_delay, mark_heal, mark_damage, mark_hard_damage)
+	
 	if embed_on_hit:
 		parent.reparent.call_deferred(body)
 		deleted = true
@@ -296,43 +309,6 @@ func _on_body_entered(body: Node2D) -> void:
 		_delete()
 	elif max_penetrations < penetrations and can_penetrate:
 		_delete()
-
-func reflect(target) -> bool:
-	if !parriable:
-		return false
-	if !shooter:
-		return false
-	var reflect_component = target.get_node_or_null("ReflectPerkComponent")
-	if !reflect_component:
-		return false
-	
-	if randf() > reflect_component.chance:
-		return false
-	
-	var angle = (shooter.global_position - global_position).normalized().angle()
-	
-	if !reflect_component.reflect_to_attacker:
-		angle = -angle
-	
-	parent.modulate = Color(2.658, 2.362, 0.0, 1.0)
-	parent.global_rotation = angle
-	direction = angle
-	shooter = target
-	var target_faction: FactionComponent = target.get_node_or_null("FactionComponent")
-	shooter_faction = target_faction
-	
-	reflect_component.on_reflect()
-	
-	var trail = TrailEffectComponent.new()
-	trail.trail_lifetime = 0.2
-	trail.end_color = Color(0.544, 0.0, 0.578, 0.0)
-	var colors: Array[Color] = [
-		Color(3.674, 1.907, 0.0, 1.0),
-		Color(3.236, 0.576, 1.751, 1.0)]
-	trail.colors = colors
-	parent.add_child(trail)
-	
-	return true
 
 func _on_area_shape_entered(_area_rid: RID, area: Area2D, _area_shape_index: int, _local_shape_index: int) -> void:
 	var area_parent: Node2D = area.get_parent()

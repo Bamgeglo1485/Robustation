@@ -242,7 +242,7 @@ func _open_perk_choose() -> void:
 		
 		var inst_perk: PerkComponent = perk_scene.instantiate()
 		
-		player.add_child(inst_perk)
+		scene.add_child(inst_perk)
 		if !inst_perk.is_node_ready():
 			await inst_perk.ready
 		

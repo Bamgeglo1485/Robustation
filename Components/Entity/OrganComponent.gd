@@ -3,7 +3,7 @@ class_name OrganComponent extends PhysicalParticleComponent
 @export var area2d: Area2D
 @export var step_sound: AudioStreamPlayer2D
 @export var blood_scene: PackedScene = preload("res://Scenes/Effects/Particles/Blood.tscn")
-@export var health_bonus: int = 8
+@export var health_bonus: float = 8
 
 func _ready() -> void:
 	parent.reparent.call_deferred(scene)
@@ -22,7 +22,7 @@ func _on_step(_body) -> void:
 		var health_component: HealthComponent = _body.get_node("HealthComponent")
 		if health_component:
 			_effect.rotation = _body.velocity.angle()
-			health_component.set_health(health_component.health + health_bonus * health_component.healing_from_organs_modifier)
+			health_component.take_damage(-health_bonus * health_component.healing_from_organs_multiplier, null, "Heal", true)
 	
 	if step_sound:
 		step_sound.play()

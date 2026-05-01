@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://c5b5ke884uc34"]
+
+[ext_resource type="Script" uid="uid://bdektmaq0iu7p" path="res://Components/Perks/Base/PerkComponent.gd" id="1_3bn50"]
+[ext_resource type="Texture2D" uid="uid://dmi27ha6o2hqw" path="res://Textures/Perks/first_aids_equipped.png" id="2_rmlbx"]
+[ext_resource type="Script" uid="uid://brk1lcgtq0fmo" path="res://Resources/Custom/PerkData/Base/PerkModifier.gd" id="3_itfg2"]
+[ext_resource type="Texture2D" uid="uid://doykn2ikgtcj4" path="res://Textures/Perks/first_aids.png" id="3_yldbv"]
+[ext_resource type="Script" uid="uid://cd4tbi43h4hjk" path="res://Resources/Custom/PerkData/Base/PerkData.gd" id="4_iolye"]
+
+[sub_resource type="Resource" id="Resource_uvn7x"]
+script = ExtResource("3_itfg2")
+target_component = "HealthComponent"
+property = "max_health"
+value = 1.1
+metadata/_custom_type_script = "uid://brk1lcgtq0fmo"
+
+[sub_resource type="Resource" id="Resource_ais25"]
+script = ExtResource("3_itfg2")
+target_component = "MobMoverComponent"
+property = "speed"
+value = 0.95
+type = 2
+metadata/_custom_type_script = "uid://brk1lcgtq0fmo"
+
+[sub_resource type="Resource" id="Resource_qyf8a"]
+script = ExtResource("4_iolye")
+perk_id = &"FirstAIDS"
+icon_texture = ExtResource("3_yldbv")
+equipped_texture = ExtResource("2_rmlbx")
+modifiers = Array[ExtResource("3_itfg2")]([SubResource("Resource_uvn7x"), SubResource("Resource_ais25")])
+metadata/_custom_type_script = "uid://cd4tbi43h4hjk"
+
+[node name="FirstAIDS" type="Node" unique_id=1604168029]
+script = ExtResource("1_3bn50")
+perk_data = SubResource("Resource_qyf8a")
+metadata/_custom_type_script = "uid://bdektmaq0iu7p"

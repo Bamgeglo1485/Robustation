@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://clyc1832p50m3"]
+
+[ext_resource type="PackedScene" uid="uid://c2fs5eoy7ntgu" path="res://Scenes/Projectiles/BaseProjectile.tscn" id="1_gugq2"]
+[ext_resource type="AudioStream" uid="uid://cg0leh0na5lvv" path="res://Resources/Audio/BulletHitRandom.tres" id="2_nkdal"]
+[ext_resource type="Texture2D" uid="uid://6g06o1h6q87g" path="res://Textures/Weapons/ProtoKineticAccelerator/kinetic_projectile.png" id="4_qrvxm"]
+[ext_resource type="Script" uid="uid://dfahm1hamvt58" path="res://Components/Entity/TrailEffectComponent.gd" id="5_3lihf"]
+[ext_resource type="Script" uid="uid://cg2q0h3wyjldl" path="res://Components/Triggers/HitscanOnTriggerComponent.gd" id="6_ofr1v"]
+[ext_resource type="PackedScene" uid="uid://cyym2wr88bhdq" path="res://Scenes/Projectiles/Hitscan/CrusherLaser.tscn" id="7_qrvxm"]
+
+[sub_resource type="Shader" id="Shader_ut4xv"]
+code = "shader_type canvas_item;
+
+uniform float jiggle = 5.0;
+uniform float speed = 30.0;
+
+void vertex() {
+	VERTEX.y += VERTEX_ID % 2 == 0 ? cos((TIME * speed) + VERTEX.x + float(VERTEX_ID * 10)) * jiggle : sin((TIME * speed) + VERTEX.x + float(VERTEX_ID * 10)) * jiggle;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_doom2"]
+shader = SubResource("Shader_ut4xv")
+shader_parameter/jiggle = 5.0
+shader_parameter/speed = 20.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i6uow"]
+radius = 11.0
+height = 46.0
+
+[node name="Projectile" unique_id=1269485508 instance=ExtResource("1_gugq2")]
+material = SubResource("ShaderMaterial_doom2")
+
+[node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture")]
+texture = NodePath("../Texture")
+speed = 900
+damage = 0.0
+lifetime = 0.2
+mark_delay = 4.0
+mark_heal = 0.7
+parry_projectile_to_enemy = false
+
+[node name="CollisionShape2D" parent="ProjectileComponent" index="0" unique_id=1391622764]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_i6uow")
+
+[node name="HitSound" parent="ProjectileComponent" index="1" unique_id=1752295456]
+stream = ExtResource("2_nkdal")
+
+[node name="Texture" type="Sprite2D" parent="." index="4" unique_id=1806190901]
+modulate = Color(2.4643818e-05, 2.5542245, 2.8671727, 1)
+use_parent_material = true
+texture = ExtResource("4_qrvxm")
+
+[node name="TrailEffectComponent" type="Node" parent="." index="7" unique_id=423566313]
+script = ExtResource("5_3lihf")
+colors = Array[Color]([Color(0.45411357, 1, 1, 1), Color(0.632597, 0.5303495, 1.825, 1)])
+clean_delay = 0.2
+trail_lifetime = 0.2
+metadata/_custom_type_script = "uid://dfahm1hamvt58"
+
+[node name="HitscanOnTriggerComponent" type="Node" parent="." index="8" unique_id=1510437074]
+script = ExtResource("6_ofr1v")
+hitscan_scene = ExtResource("7_qrvxm")
+metadata/_custom_type_script = "uid://cg2q0h3wyjldl"

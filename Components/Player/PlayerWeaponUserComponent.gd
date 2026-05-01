@@ -7,6 +7,7 @@ class_name PlayerWeaponUserComponent extends Component
 @export var weapon_3: Weapon
 @export var weapon_4: Weapon
 @export var melee_weapon: Weapon
+@export var melee_weapon_use_alt: bool = false
 @export var weapon_icon: TextureRect
 @export var alt_weapon_icon: TextureRect
 @export var weapon_inventory: Array[Weapon]
@@ -66,11 +67,13 @@ func _weapon_input():
 		weapon_user_component.select_weapon(weapon_4)
 		weapon_selected = true
 	elif melee_attack and melee_weapon:
-		weapon_user_component.attack(self, false, melee_weapon)
-		melee_weapon.on_release(self)
+		var weapon_to_use: Weapon = melee_weapon
+		if melee_weapon_use_alt:
+			weapon_to_use = melee_weapon.alt_attack
+		weapon_user_component.attack(self, false, weapon_to_use)
+		weapon_to_use.on_release(self)
 		return
 	_attack(weapon_selected)
-
 
 func _attack(weapon_selected: bool, attack_event: String = "attack", selected_weapon: Weapon = null, change_weapon_icon: bool = true):
 	if !selected_weapon:

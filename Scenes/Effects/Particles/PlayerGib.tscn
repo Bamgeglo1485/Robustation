@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://ybqrx04pn6uh" path="res://Textures/Effects/Organs/kidney-l.png" id="15_2k07j"]
 [ext_resource type="PackedScene" uid="uid://deq4t84d81wnb" path="res://Scenes/Effects/Particles/Dodge.tscn" id="16_vyqqg"]
 [ext_resource type="Texture2D" uid="uid://bx3kpq3irdo3m" path="res://Textures/Effects/Particles/gib.png" id="17_oxnyw"]
-[ext_resource type="AudioStream" uid="uid://b8kpxdiehqqc3" path="res://Audio/Effects/player_collaps.ogg" id="17_thajx"]
+[ext_resource type="AudioStream" uid="uid://b8kpxdiehqqc3" path="res://Audio/Effects/player_collapse.ogg" id="17_thajx"]
 [ext_resource type="Texture2D" uid="uid://wbxnpjl6pvxb" path="res://Textures/Light/double_light_cone.png" id="21_s8akl"]
 [ext_resource type="Script" uid="uid://qpw7cn2mqx7i" path="res://Components/Entity/RotatingObjectComponent.gd" id="22_lkr2h"]
 [ext_resource type="Script" uid="uid://q6vb3j07d62t" path="res://Components/Entity/FadeInComponent.gd" id="23_lkr2h"]

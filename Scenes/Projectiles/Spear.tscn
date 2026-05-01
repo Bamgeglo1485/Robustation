@@ -80,7 +80,7 @@ texture = ExtResource("2_l3ous")
 [node name="HealthComponent" parent="." index="3" unique_id=90404297]
 max_health = 100.0
 
-[node name="SetProjectileExplosionOnTriggerComponent2" type="Node" parent="." index="4" unique_id=1322456650]
+[node name="SetProjectileExplosionOnTriggerComponent" type="Node" parent="." index="4" unique_id=1322456650]
 script = ExtResource("5_65omb")
 explosion_scene = ExtResource("7_lqmm4")
 delete_on_hit = false

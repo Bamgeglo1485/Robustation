@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://fh4o05ew62pv"]
+
+[ext_resource type="Script" uid="uid://bdektmaq0iu7p" path="res://Components/Perks/Base/PerkComponent.gd" id="1_26af5"]
+[ext_resource type="Texture2D" uid="uid://10mqju08kqre" path="res://Textures/Perks/mirror_shard_equipped.png" id="2_26af5"]
+[ext_resource type="Texture2D" uid="uid://nf0x5dlckryd" path="res://Textures/Perks/mirror_shard.png" id="3_8nbhc"]
+[ext_resource type="Script" uid="uid://brk1lcgtq0fmo" path="res://Resources/Custom/PerkData/Base/PerkModifier.gd" id="4_hru2v"]
+[ext_resource type="Script" uid="uid://cd4tbi43h4hjk" path="res://Resources/Custom/PerkData/Base/PerkData.gd" id="5_0hrfc"]
+
+[sub_resource type="Resource" id="Resource_ua56r"]
+script = ExtResource("4_hru2v")
+target_component = "ReflectComponent"
+ensure_component = true
+property = "projectile_chance"
+operation = 1
+value = 0.05
+metadata/_custom_type_script = "uid://brk1lcgtq0fmo"
+
+[sub_resource type="Resource" id="Resource_ais25"]
+script = ExtResource("4_hru2v")
+target_component = "ReflectComponent"
+ensure_component = true
+property = "melee_chance"
+operation = 1
+value = -0.05
+type = 2
+metadata/_custom_type_script = "uid://brk1lcgtq0fmo"
+
+[sub_resource type="Resource" id="Resource_qyf8a"]
+script = ExtResource("5_0hrfc")
+perk_id = &"MirrorShard"
+perk_rarity = 3
+icon_texture = ExtResource("3_8nbhc")
+equipped_texture = ExtResource("2_26af5")
+modifiers = Array[ExtResource("4_hru2v")]([SubResource("Resource_ua56r"), SubResource("Resource_ais25")])
+metadata/_custom_type_script = "uid://cd4tbi43h4hjk"
+
+[node name="MirrorShard" type="Node" unique_id=1604168029]
+script = ExtResource("1_26af5")
+perk_data = SubResource("Resource_qyf8a")
+metadata/_custom_type_script = "uid://bdektmaq0iu7p"

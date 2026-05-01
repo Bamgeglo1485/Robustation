@@ -65,6 +65,7 @@ drop_enemy_delay = 0.5
 qte_icon = NodePath("CanvasLayer/QTE/HSlider")
 qte_icon_perfect_frame = NodePath("CanvasLayer/QTE/HSlider/Panel/Panel2")
 qte_enabled = true
+qte_time_speed = 3.0
 qte_perfect_sound = NodePath("PerfectSound")
 qte_perfect_time_sound = NodePath("PerfectTimeSound")
 qte_perfect_effect = ExtResource("2_uun0n")

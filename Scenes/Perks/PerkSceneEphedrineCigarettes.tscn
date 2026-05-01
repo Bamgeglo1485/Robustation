@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://1qu5kklprskj"]
+
+[ext_resource type="Script" uid="uid://bdektmaq0iu7p" path="res://Components/Perks/Base/PerkComponent.gd" id="1_kvwqa"]
+[ext_resource type="Texture2D" uid="uid://bwvdamf8fx1bt" path="res://Textures/Perks/cigarette_equipped.png" id="2_kvwqa"]
+[ext_resource type="Texture2D" uid="uid://bbto5be46610f" path="res://Textures/Perks/ephderine_cigarette.png" id="3_ujrtm"]
+[ext_resource type="Script" uid="uid://brk1lcgtq0fmo" path="res://Resources/Custom/PerkData/Base/PerkModifier.gd" id="4_80ic2"]
+[ext_resource type="Script" uid="uid://cd4tbi43h4hjk" path="res://Resources/Custom/PerkData/Base/PerkData.gd" id="5_7gakp"]
+
+[sub_resource type="Resource" id="Resource_ais25"]
+script = ExtResource("4_80ic2")
+target_component = "MobMoverComponent"
+property = "speed"
+value = 1.05
+metadata/_custom_type_script = "uid://brk1lcgtq0fmo"
+
+[sub_resource type="Resource" id="Resource_uvn7x"]
+script = ExtResource("4_80ic2")
+target_component = "RegenerationComponent"
+ensure_component = true
+property = "regeneration"
+operation = 1
+value = -1.0
+type = 2
+metadata/_custom_type_script = "uid://brk1lcgtq0fmo"
+
+[sub_resource type="Resource" id="Resource_qyf8a"]
+script = ExtResource("5_7gakp")
+perk_id = &"EphedrineCigarettes"
+perk_rarity = 2
+icon_texture = ExtResource("3_ujrtm")
+equipped_texture = ExtResource("2_kvwqa")
+modifiers = Array[ExtResource("4_80ic2")]([SubResource("Resource_ais25"), SubResource("Resource_uvn7x")])
+metadata/_custom_type_script = "uid://cd4tbi43h4hjk"
+
+[node name="EphedrineCigarettes" type="Node" unique_id=1604168029]
+script = ExtResource("1_kvwqa")
+perk_data = SubResource("Resource_qyf8a")
+metadata/_custom_type_script = "uid://bdektmaq0iu7p"

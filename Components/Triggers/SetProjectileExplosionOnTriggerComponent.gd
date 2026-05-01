@@ -1,4 +1,4 @@
-class_name SetProjectileExplosionOnTriggerComponent extends BaseXOnTriggerComponent
+class_name SetProjectileVariablesOnTriggerComponent extends BaseXOnTriggerComponent
 
 @export var explosion_scene: PackedScene
 @export var delete_on_hit: bool = true
@@ -7,6 +7,7 @@ class_name SetProjectileExplosionOnTriggerComponent extends BaseXOnTriggerCompon
 @export var explode_on_damage: bool = false
 @export var explode_lifetime: float = 0.3
 @export var speed: int = 69
+@export var additive_penetations: int = 0
 
 func on_trigger() -> void:
 	var projectile: ProjectileComponent = parent.get_node_or_null("ProjectileComponent")
@@ -15,6 +16,8 @@ func on_trigger() -> void:
 		projectile.explode_on_hit = explode_on_hit
 		projectile.explode_on_damage = explode_on_damage
 		projectile.delete_on_hit = delete_on_hit
+		if additive_penetations != 0:
+			projectile.max_penetrations += additive_penetations
 		if speed != 69:
 			projectile.speed = speed
 		
@@ -23,6 +26,7 @@ func on_trigger() -> void:
 		
 		if !explode_on_delete:
 			return
+		
 		
 		if explode_lifetime != 0:
 			await get_tree().create_timer(explode_lifetime).timeout

@@ -21,6 +21,28 @@
 [ext_resource type="Script" uid="uid://bsicagw5u742w" path="res://Components/Mobs/StaminaComponent.gd" id="19_pns3t"]
 [ext_resource type="Script" uid="uid://kxk8t3aa4hjf" path="res://Components/Mobs/WeaponSpriteComponent.gd" id="20_vr1aj"]
 [ext_resource type="Script" uid="uid://bl4o52tmouk6e" path="res://Components/Perks/Entity/PerkOwnerComponent.gd" id="21_1lf4d"]
+[ext_resource type="Script" uid="uid://n8u3msdsi2d2" path="res://Components/Entity/MarkOfDeathComponent.gd" id="22_b81ta"]
+[ext_resource type="Texture2D" uid="uid://bciubl6yinluq" path="res://Textures/Weapons/Crusher/mark.png" id="23_40yjh"]
+[ext_resource type="Script" uid="uid://b2pqseaw3bym7" path="res://Components/Entity/AnimatedSpriteComponent.gd" id="24_qy6eb"]
+
+[sub_resource type="Shader" id="Shader_ut4xv"]
+code = "shader_type canvas_item;
+
+uniform float jiggle = 5.0;
+uniform float speed = 30.0;
+
+void vertex() {
+	VERTEX.y += VERTEX_ID % 2 == 0 ? cos((TIME * speed) + VERTEX.x + float(VERTEX_ID * 10)) * jiggle : sin((TIME * speed) + VERTEX.x + float(VERTEX_ID * 10)) * jiggle;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b81ta"]
+shader = SubResource("Shader_ut4xv")
+shader_parameter/jiggle = 3.0
+shader_parameter/speed = 20.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b81ta"]
+atlas = ExtResource("23_40yjh")
+region = Rect2(0, 0, 32, 32)
 
 [node name="Mob" type="CharacterBody2D" unique_id=660687485 groups=["Mob"]]
 physics_interpolation_mode = 1
@@ -150,3 +172,22 @@ position = Vector2(-2, 3)
 [node name="PerkOwnerComponent" type="Node" parent="." unique_id=1121886740]
 script = ExtResource("21_1lf4d")
 metadata/_custom_type_script = "uid://bl4o52tmouk6e"
+
+[node name="MarkOfDeathComponent" type="Node" parent="." unique_id=711977768 node_paths=PackedStringArray("sprite")]
+script = ExtResource("22_b81ta")
+sprite = NodePath("../MarkOfDeath")
+metadata/_custom_type_script = "uid://n8u3msdsi2d2"
+
+[node name="MarkOfDeath" type="Sprite2D" parent="." unique_id=424975963]
+visible = false
+modulate = Color(1.8247963, 1.8247963, 1.8247963, 0.5)
+material = SubResource("ShaderMaterial_b81ta")
+texture = SubResource("AtlasTexture_b81ta")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="AnimatedSpriteComponent" type="Node" parent="MarkOfDeath" unique_id=1690730768]
+script = ExtResource("24_qy6eb")
+animation_h_frames = 3
+animation_w_frames = 2
+metadata/_custom_type_script = "uid://b2pqseaw3bym7"

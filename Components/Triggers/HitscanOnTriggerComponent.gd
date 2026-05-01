@@ -13,6 +13,8 @@ func on_trigger() -> void:
 	var projectile_comp: ProjectileComponent = parent.get_node_or_null("ProjectileComponent")
 	if hitscan_comp and projectile_comp:
 		hitscan_comp.direction = Vector2.from_angle(projectile_comp.direction)
+		hitscan_comp.max_penetrations = projectile_comp.max_penetrations
+		hitscan_comp.max_bounces = projectile_comp.max_bounces
 	scene.add_child(inst)
 	if delete_parent:
 		parent.queue_free()

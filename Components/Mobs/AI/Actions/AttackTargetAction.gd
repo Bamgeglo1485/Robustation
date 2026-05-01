@@ -8,7 +8,18 @@ var blackboard: Blackboard
 
 @export var prediction_coef: float = 0.8
 
+@export var prediction_modify_by_difficulty: bool = true
+
 var out_of_ammo: bool = false
+
+func _ready() -> void:
+	match SettingsConfigSystem.difficulty:
+		SettingsConfigSystem.difficulties.RPER:
+			prediction_coef = 0.0
+		SettingsConfigSystem.difficulties.AGENT:
+			prediction_coef = 0.4
+		SettingsConfigSystem.difficulties.GREYTIDE:
+			prediction_coef = 0.7
 
 func tick(_actor: Node, _blackboard: Blackboard) -> int:
 	if !blackboard:

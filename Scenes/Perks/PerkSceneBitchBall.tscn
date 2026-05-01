@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://cfg8g768i2k83"]
+
+[ext_resource type="Script" uid="uid://bdektmaq0iu7p" path="res://Components/Perks/Base/PerkComponent.gd" id="1_8xttq"]
+[ext_resource type="Texture2D" uid="uid://exsef6crft3y" path="res://Textures/Perks/bitch_ball.png" id="2_8fwwo"]
+[ext_resource type="Script" uid="uid://brk1lcgtq0fmo" path="res://Resources/Custom/PerkData/Base/PerkModifier.gd" id="4_exa3n"]
+[ext_resource type="Script" uid="uid://cd4tbi43h4hjk" path="res://Resources/Custom/PerkData/Base/PerkData.gd" id="5_dd6ou"]
+
+[sub_resource type="Resource" id="Resource_ua56r"]
+script = ExtResource("4_exa3n")
+target_component = "ReflectComponent"
+ensure_component = true
+property = "melee_chance"
+operation = 1
+value = 0.05
+metadata/_custom_type_script = "uid://brk1lcgtq0fmo"
+
+[sub_resource type="Resource" id="Resource_ais25"]
+script = ExtResource("4_exa3n")
+target_component = "ReflectComponent"
+ensure_component = true
+property = "projectile_chance"
+operation = 1
+value = -0.05
+type = 2
+metadata/_custom_type_script = "uid://brk1lcgtq0fmo"
+
+[sub_resource type="Resource" id="Resource_qyf8a"]
+script = ExtResource("5_dd6ou")
+perk_id = &"BitchBall"
+perk_rarity = 3
+icon_texture = ExtResource("2_8fwwo")
+modifiers = Array[ExtResource("4_exa3n")]([SubResource("Resource_ua56r"), SubResource("Resource_ais25")])
+metadata/_custom_type_script = "uid://cd4tbi43h4hjk"
+
+[node name="BitchBall" type="Node" unique_id=1604168029]
+script = ExtResource("1_8xttq")
+perk_data = SubResource("Resource_qyf8a")
+metadata/_custom_type_script = "uid://bdektmaq0iu7p"

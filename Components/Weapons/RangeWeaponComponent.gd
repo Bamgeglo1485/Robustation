@@ -2,14 +2,12 @@ class_name RangeWeapon extends Weapon
 
 @export var projectile: PackedScene
 @export var spread_angle: int = 10
-@export var spread_modifier: float = 1.0
 
 @export var bullets_max_count: int = 2
 @export var bullets: int = bullets_max_count : set = set_bullets, get = get_bullets
 @export var bullets_recover_count: int = 2
 
 @export var shots: int = 3
-@export var extra_shots: int = 0
 @export var shots_angle: int = 15
 
 @export var case_scene: PackedScene
@@ -20,7 +18,6 @@ class_name RangeWeapon extends Weapon
 @export var bullets_recover_sound: AudioStreamPlayer2D
 
 @export var bullets_recovery_delay: float = 4
-@export var recover_modifier: float = 1.0
 @export var gun_fire_effect: PackedScene
 @export var projectile_can_parry_weapon: Weapon
 
@@ -54,6 +51,18 @@ var overheat: float
 
 var bullets_recover_timer: Timer
 var projectile_speed: float
+
+@export_category("Multipliers")
+@export var extra_shots_addendums: Dictionary
+@export var extra_shots_addendum: int = 0
+@export var extra_penetrations_addendums: Dictionary
+@export var extra_penetrations_addendum: int = 0
+@export var extra_bounces_addendums: Dictionary
+@export var extra_bounces_addendum: int = 0
+@export var spread_multipliers: Dictionary
+@export var spread_multiplier: float = 1.0
+@export var recover_multipliers: Dictionary
+@export var recover_multiplier: float = 1.0
 
 func set_bullets(new_value) -> void:
 	bullets = new_value
@@ -135,12 +144,13 @@ func attack(raiser, _npc = true) -> void:
 	if flip_after_shoot and weapon_sprite:
 		weapon_sprite.flip_hell_yeah()
 	
-	if parent.has_node("MobMoverComponent"):
+	var mob_mover_component: MobMoverComponent = parent.get_node("MobMoverComponent")
+	if mob_mover_component:
 		if self_throw_speed != 0:
-			parent.get_node("MobMoverComponent").throw(-direction, self_throw_speed, null, self_throw_stop_speed, true, self_throw_rewrite)
+			mob_mover_component.throw(-direction, self_throw_speed, null, self_throw_stop_speed, true, self_throw_rewrite)
 	
 	if shots > 1 and bullets >= 1:
-		var total_spread: float = deg_to_rad(shots_angle)
+		var total_spread: float = deg_to_rad(shots_angle) * spread_multiplier
 		var angle_step: float = total_spread / (shots - 1) if shots > 1 else 0.0
 		var start_angle: float = -total_spread * 0.5
 		
@@ -153,10 +163,9 @@ func attack(raiser, _npc = true) -> void:
 		bullets -= possible_shots
 		bullets = clamp(bullets, 0, bullets_max_count)
 		
-		for i in range(possible_shots + extra_shots):
+		for i in range(possible_shots + extra_shots_addendum):
 			var shot_direction = direction.rotated(start_angle + angle_step * i)
 			_shoot(shot_direction)
-			
 	else:
 		_shoot(direction)
 		bullets -= 1
@@ -166,9 +175,9 @@ func attack(raiser, _npc = true) -> void:
 	
 	if bullets <= 0 and bullets_recovery_delay != 0 and bullets_recover_timer:
 		if !parent_weapon:
-			bullets_recover_timer.wait_time = bullets_recovery_delay * recover_modifier
+			bullets_recover_timer.wait_time = bullets_recovery_delay * recover_multiplier
 		else:
-			bullets_recover_timer.wait_time = parent_weapon.bullets_recovery_delay * recover_modifier
+			bullets_recover_timer.wait_time = parent_weapon.bullets_recovery_delay * recover_multiplier
 		if random_bullet_recover_delay_coef != 0:
 			bullets_recover_timer.wait_time *= randf_range(1 - random_bullet_recover_delay_coef, 1 + random_bullet_recover_delay_coef)
 		bullets_recover_timer.start()
@@ -200,7 +209,7 @@ func _shoot(direction) -> Node2D:
 	if direction > Vector2(1, 1):
 		direction = direction.normalized()
 	
-	var weapon_spread: float = spread_angle * spread_modifier
+	var weapon_spread: float = spread_angle
 	var spread: float = 0.0
 	
 	if weapon_spread != 0:
@@ -220,8 +229,10 @@ func _shoot(direction) -> Node2D:
 		projectile_component.direction = angle
 		projectile_component.shooter = parent
 		projectile_component.weapon = self
-		projectile_component.max_penetrations += extra_penetrations
-		projectile_component.max_bounces += extra_bounces
+		@warning_ignore_start("narrowing_conversion")
+		projectile_component.max_penetrations += extra_penetrations_addendum
+		projectile_component.max_bounces += extra_bounces_addendum
+		projectile_component.damage_modifier = damage_multiplier
 		if projectile_can_parry_weapon:
 			projectile_component.can_parry_weapon = projectile_can_parry_weapon
 		if rope:
@@ -233,8 +244,9 @@ func _shoot(direction) -> Node2D:
 				tween.tween_property(rope.material, "shader_parameter/wave_amplitude", 0, 0.5)
 		if overheat_enabled:
 			var heat_factor: float = overheat / max_overheat
+			@warning_ignore("shadowed_variable_base_class")
 			var damage_multiplier: float = 1.0 - pow(heat_factor, 2) * (1.0 - min_overheat_damage_debuff)
-			projectile_component.damage = int(projectile_component.damage * damage_multiplier)
+			projectile_component.damage = projectile_component.damage * damage_multiplier
 	elif instance.has_node("HitscanComponent"):
 		var hitscan_component: HitscanComponent = instance.get_node_or_null("HitscanComponent")
 		instance.global_position = parent.global_position
@@ -244,8 +256,9 @@ func _shoot(direction) -> Node2D:
 		
 		hitscan_component.direction = shoot_direction
 		hitscan_component.shooter = parent
-		hitscan_component.max_penetrations += extra_penetrations
-		hitscan_component.max_bounces += extra_bounces
+		hitscan_component.max_penetrations += extra_penetrations_addendum
+		hitscan_component.max_bounces += extra_bounces_addendum
+		hitscan_component.damage_modifier = damage_multiplier
 	elif instance.has_method("set_radius"):
 		instance.source = parent
 		instance.global_position = parent.global_position
@@ -267,7 +280,7 @@ func _on_swap(_new_weapon: Weapon) -> void:
 func _on_bullets_recover() -> void:
 	if weapon_sprite and weapon_sprite.weapon_texture.texture == equipped_texture and reload_animation:
 		weapon_sprite.reload()
-	bullets += bullets_recover_count + extra_shots
+	bullets += bullets_recover_count + int(extra_shots_addendum)
 	bullets = clamp(bullets, 0, bullets_max_count)
 	if bullets_recover_sound:
 		bullets_recover_sound.play()

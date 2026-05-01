@@ -17,8 +17,7 @@ enum anomaly_states {
 @onready var animation_player: AnimationPlayer = parent.get_node_or_null("AnimationPlayer")
 @export var pulse_lighting: Array[PointLight2D]
 @export var minor_lighting: Array[PointLight2D]
-@onready var reflect_component: ReflectPerkComponent = parent.get_node_or_null("ReflectPerkComponent")
-@onready var melee_reflect_component: ReflectMeleePerkComponent = parent.get_node_or_null("ReflectMeleePerkComponent")
+@onready var reflect_component: ReflectComponent = parent.get_node_or_null("ReflectComponent")
 @onready var weapon_user_component: WeaponUserComponent = parent.get_node_or_null("WeaponUserComponent")
 @onready var faction_component: FactionComponent = parent.get_node_or_null("FactionComponent")
 @export var pulse_sound: AudioStreamPlayer2D
@@ -65,10 +64,8 @@ func pulse():
 	animation_sprite.visible = false
 	impulse_sprite.visible = true
 	health_component.INVINCIBLE = false
-	reflect_component.base_chance = 0
-	reflect_component.amount = 1
-	melee_reflect_component.base_chance = 0
-	melee_reflect_component.amount = 1
+	reflect_component.melee_chance = 0
+	reflect_component.projectile_chance = 0
 	
 	await get_tree().create_timer(pulse_time).timeout
 	
@@ -88,10 +85,8 @@ func pulse():
 	animation_sprite.visible = false
 	base_sprite.visible = true
 	health_component.INVINCIBLE = true
-	reflect_component.base_chance = 1
-	reflect_component.amount = 1
-	melee_reflect_component.base_chance = 1
-	melee_reflect_component.amount = 1
+	reflect_component.melee_chance = 1
+	reflect_component.projectile_chance = 1
 
 func _toggle_lighting(enable, list):
 	var energy: float = 0.0

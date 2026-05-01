@@ -4,12 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://roeennw572p2" path="res://Scenes/Mobs/Player/PlayerGreytide.tscn" id="3_fsxsm"]
 [ext_resource type="Script" uid="uid://bo7lklhepnuja" path="res://Scripts/fps.gd" id="4_glinl"]
 [ext_resource type="Texture2D" uid="uid://ctmvqt423d0il" path="res://Textures/Parallax/Space/XenoParallaxNeb.png" id="6_4lqr4"]
+[ext_resource type="PackedScene" uid="uid://cilxau2d1ryo5" path="res://Scenes/Perks/PerkSceneDoublePenetration.tscn" id="7_1xc2n"]
 [ext_resource type="TileSet" uid="uid://c7mk0aiygychu" path="res://Resources/TileMaps/Walls.tres" id="7_qlwvw"]
 [ext_resource type="Resource" uid="uid://bmqxe8ujyt6le" path="res://Resources/Custom/Enemy/Gray.tres" id="8_33n3b"]
+[ext_resource type="PackedScene" uid="uid://dqt0jqxgluxsi" path="res://Scenes/Perks/PerkSceneRubberBullets.tscn" id="8_oyup5"]
 [ext_resource type="Texture2D" uid="uid://yjigwd3i118j" path="res://Textures/Light/point_light.jpg" id="8_rpdke"]
 [ext_resource type="Texture2D" uid="uid://cf2mkb22grqmy" path="res://Textures/Parallax/Space/layer2.png" id="9_33n3b"]
+[ext_resource type="PackedScene" uid="uid://c5b5ke884uc34" path="res://Scenes/Perks/PerkSceneFirstAIDS.tscn" id="9_a3v0t"]
 [ext_resource type="PackedScene" uid="uid://dx75c08agri7r" path="res://Scenes/Perks/PerkSceneBandageAndToxicMarker.tscn" id="9_cvmb5"]
 [ext_resource type="Resource" uid="uid://c7ill5kgubqqa" path="res://Resources/Custom/Enemy/Tider.tres" id="9_rxmp4"]
+[ext_resource type="PackedScene" uid="uid://1qu5kklprskj" path="res://Scenes/Perks/PerkSceneEphedrineCigarettes.tscn" id="10_a3v0t"]
 [ext_resource type="Script" uid="uid://b1vs1lh4jku4h" path="res://Components/Level/ArenaComponent.gd" id="10_glinl"]
 [ext_resource type="Resource" uid="uid://cou375htkckp8" path="res://Resources/Custom/Enemy/Assistant.tres" id="10_qyr8x"]
 [ext_resource type="AudioStream" uid="uid://1qnhfchhf4jb" path="res://Audio/Effects/voteding.ogg" id="10_rpdke"]
@@ -18,9 +22,13 @@
 [ext_resource type="Resource" uid="uid://dt4sscnunrdcs" path="res://Resources/Custom/Enemy/Clown.tres" id="11_4w5h0"]
 [ext_resource type="AudioStream" uid="uid://14o4e8msndow" path="res://Audio/Weapon/Projectile/mk58_shoot.ogg" id="11_33n3b"]
 [ext_resource type="Script" uid="uid://di5u0whaqiyjp" path="res://Resources/Custom/Enemy/Base/Enemy.gd" id="11_72g0p"]
+[ext_resource type="PackedScene" uid="uid://hk7lpgoexkxf" path="res://Scenes/Perks/PerkSceneMedBelt.tscn" id="11_q4fix"]
 [ext_resource type="Resource" uid="uid://cy0o6q7rklt6r" path="res://Resources/Custom/Enemy/Botanist.tres" id="12_4w5h0"]
 [ext_resource type="AudioStream" uid="uid://b2utqxvujdi7f" path="res://Audio/Ambience/box_deploy.ogg" id="12_33n3b"]
+[ext_resource type="PackedScene" uid="uid://fh4o05ew62pv" path="res://Scenes/Perks/PerkSceneMirrorShard.tscn" id="12_s4atg"]
 [ext_resource type="Resource" uid="uid://tcq0h43ui04w" path="res://Resources/Custom/Enemy/RobustBotanist.tres" id="13_4w5h0"]
+[ext_resource type="PackedScene" uid="uid://cfg8g768i2k83" path="res://Scenes/Perks/PerkSceneBitchBall.tscn" id="13_muyte"]
+[ext_resource type="PackedScene" uid="uid://bm4hm4bycw8ti" path="res://Scenes/Perks/PerkSceneGoliathPlate.tscn" id="14_muyte"]
 [ext_resource type="Environment" uid="uid://r1a7fr7x6en8" path="res://DemoTrash/Light.tres" id="15_qlwvw"]
 [ext_resource type="Script" uid="uid://dptr5blvqsgks" path="res://Components/Interface/Menu/Settings/WorldEnvComponent.gd" id="15_rpdke"]
 [ext_resource type="Script" uid="uid://08qu36la5uv4" path="res://Components/Interface/Menu/Settings/ParallaxComponent.gd" id="20_vtcgr"]
@@ -120,8 +128,9 @@ texture_scale = 10.0
 [node name="ArenaComponent" type="Node" parent="." unique_id=1165337052 node_paths=PackedStringArray("area_info", "perk_choice_start_sound", "perk_choice_sound", "perk_selected_sound")]
 process_mode = 3
 script = ExtResource("10_glinl")
-perks = Array[PackedScene]([ExtResource("9_cvmb5")])
-enemy_perks = Array[PackedScene]([ExtResource("9_cvmb5")])
+perks = Array[PackedScene]([ExtResource("9_cvmb5"), ExtResource("7_1xc2n"), ExtResource("8_oyup5"), ExtResource("9_a3v0t"), ExtResource("10_a3v0t"), ExtResource("11_q4fix"), ExtResource("12_s4atg"), ExtResource("13_muyte"), ExtResource("14_muyte")])
+enemy_perks = Array[PackedScene]([ExtResource("9_cvmb5"), ExtResource("7_1xc2n"), ExtResource("8_oyup5"), ExtResource("9_a3v0t"), ExtResource("10_a3v0t"), ExtResource("11_q4fix"), ExtResource("12_s4atg"), ExtResource("13_muyte"), ExtResource("14_muyte")])
+boss_battles_per = 9
 area_info = NodePath("../Player/DEBUG/Control/RichTextLabel")
 start_budget = 1.0
 available_enemies = Array[ExtResource("11_72g0p")]([ExtResource("8_33n3b"), ExtResource("9_rxmp4"), ExtResource("10_qyr8x"), ExtResource("11_2cxdh"), ExtResource("11_4w5h0"), ExtResource("12_4w5h0")])

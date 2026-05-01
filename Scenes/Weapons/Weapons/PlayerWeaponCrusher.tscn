@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://dh8p35p502up6"]
+
+[ext_resource type="Script" uid="uid://6b7bcparwq17" path="res://Components/Weapons/MeleeWeaponComponent.gd" id="1_kl30x"]
+[ext_resource type="Texture2D" uid="uid://iibn3dytoj3m" path="res://Textures/Weapons/Crusher/crusher_inhands.png" id="2_l3cwq"]
+[ext_resource type="Texture2D" uid="uid://cscbs63g62xct" path="res://Textures/Weapons/Crusher/crusher_icon.png" id="3_laxcv"]
+[ext_resource type="AudioStream" uid="uid://c14ckhtbrb550" path="res://Audio/Weapon/parry.ogg" id="5_367yw"]
+[ext_resource type="AudioStream" uid="uid://eogckfs15aph" path="res://Audio/Weapon/miss.ogg" id="6_ysbvn"]
+[ext_resource type="Script" uid="uid://bi1gje1pfokqc" path="res://Components/Weapons/RangeWeaponComponent.gd" id="8_t3amk"]
+[ext_resource type="PackedScene" uid="uid://clyc1832p50m3" path="res://Scenes/Projectiles/CrusherProjectile.tscn" id="9_t3amk"]
+[ext_resource type="Texture2D" uid="uid://kaetitdx6nj0" path="res://Textures/Perks/crusher_module.png" id="10_t3amk"]
+[ext_resource type="AudioStream" uid="uid://r88fv2nles4" path="res://Audio/Weapon/kinetic_accel.ogg" id="12_qtk55"]
+[ext_resource type="AudioStream" uid="uid://ctlu60sqttxw5" path="res://Audio/Weapon/kinetic_reload.ogg" id="13_bg8ut"]
+[ext_resource type="AudioStream" uid="uid://b3uvy6ds1t6fu" path="res://Audio/Weapon/Hit/heavy_punch.ogg" id="13_jre7l"]
+
+[node name="Crusher" type="Node" unique_id=44420062 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound", "alt_attack")]
+script = ExtResource("1_kl30x")
+damage = 75.0
+attack_range = 80
+parry_sound = NodePath("ParrySound")
+attack_sound = NodePath("MeleeHitSound")
+miss_sound = NodePath("MeleeMissSound")
+parry_force = 3.0
+drop_enemy_delay = 1.0
+can_clear_mark = true
+attack_angle = 5.0
+ray_count = 1
+swing_delay = 0.0
+equipped_texture = ExtResource("2_l3cwq")
+equipped_scale = Vector2(1, 1)
+icon_texture = ExtResource("3_laxcv")
+self_throw_speed = 200
+attack_rotation_multiplier = 0.5
+alt_attack = NodePath("AltCrusher")
+weapon_name = "Toolbox"
+color = Color(0.8917651, 0, 0.28858507, 1)
+weapon_class = "Melee"
+metadata/_custom_type_script = "uid://6b7bcparwq17"
+
+[node name="ParrySound" type="AudioStreamPlayer2D" parent="." unique_id=1803879457]
+stream = ExtResource("5_367yw")
+
+[node name="MeleeMissSound" type="AudioStreamPlayer2D" parent="." unique_id=1234154462]
+stream = ExtResource("6_ysbvn")
+
+[node name="MeleeHitSound" type="AudioStreamPlayer2D" parent="." unique_id=724755034]
+stream = ExtResource("13_jre7l")
+
+[node name="AltCrusher" type="Node" parent="." unique_id=1852817361 node_paths=PackedStringArray("shoot_sound", "bullets_recover_sound", "alt_attack")]
+script = ExtResource("8_t3amk")
+projectile = ExtResource("9_t3amk")
+spread_angle = 0
+bullets_max_count = 1
+bullets = 1
+bullets_recover_count = 1
+shots = 1
+shoot_sound = NodePath("ShootSound")
+bullets_recover_sound = NodePath("BulletRecoverSound")
+bullets_recovery_delay = 1.5
+flip_after_shoot = false
+reload_animation = false
+timers_timescaled = false
+cooldown_delay = 0.1
+swing_delay = 0.0
+equipped_scale = Vector2(1, 1)
+icon_texture = ExtResource("10_t3amk")
+swing_rotation_multiplier = 0.0
+attack_rotation_multiplier = -0.6
+attack_shift_multiplier = -0.7
+parriable = false
+auto = true
+alt_attack = NodePath("")
+weapon_name = "Kinetic Accelerator"
+color = Color(0.66250384, 0.47551048, 0.24570236, 1)
+weapon_class = "Melee"
+weapon_rarity = 0
+metadata/_custom_type_script = "uid://bi1gje1pfokqc"
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="AltCrusher" unique_id=329362300]
+stream = ExtResource("12_qtk55")
+max_distance = 600.0
+max_polyphony = 3
+
+[node name="BulletRecoverSound" type="AudioStreamPlayer2D" parent="AltCrusher" unique_id=1976081140]
+stream = ExtResource("13_bg8ut")
+volume_db = 5.0
+max_distance = 600.0

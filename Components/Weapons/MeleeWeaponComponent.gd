@@ -25,12 +25,14 @@ class_name MeleeWeapon extends Weapon
 @export var drop_resistance_force: int = 1
 @export var drop_forced: bool = false
 @export var drop_enemy_delay: float = 0.0
-@onready var base_throw_speed: float = throw_speed
-@onready var base_self_throw_speed: float = self_throw_speed
+@onready var base_throw_speed: int = throw_speed
+@onready var base_self_throw_speed: int = self_throw_speed
 @onready var parent_mob_mover_component: MobMoverComponent
 @onready var parent_faction: FactionComponent
 @export var piercing_attack_animation: bool = false
 @export var tile_destruction_audio: AudioStreamPlayer2D
+
+@export var can_clear_mark: bool = false
 
 @export var attack_angle: float = 90
 @export var ray_count: int = 10
@@ -186,8 +188,14 @@ func _try_melee_attack(direction) -> Dictionary:
 	for i in range(ray_count):
 		var angle_offset: float = deg_to_rad(i * angle_step + start_angle)
 		var ray_direction: Vector2 = direction.rotated(angle_offset)
-		var ray_start: Vector2 = parent.global_position - ray_direction * 0.2
-		var ray_end: Vector2 = parent.global_position + ray_direction * attack_range
+		var ray_start: Vector2
+		var ray_end: Vector2
+		if ray_count > 1:
+			ray_start = parent.global_position - ray_direction * 0.2
+			ray_end = parent.global_position + ray_direction * attack_range
+		else:
+			ray_start = parent.get_global_mouse_position()
+			ray_end = parent.get_global_mouse_position()
 		
 		var query: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.create(ray_start, ray_end)
 		query.collision_mask = 1 | 2 | 4 | 7 | 12
@@ -273,10 +281,9 @@ multiple_attack: bool = false) -> bool:
 		EventBusManager.melee_miss.emit(parent, self)
 		return false
 	
-	var reflect_component = target.get_node_or_null("ReflectMeleePerkComponent")
+	var reflect_component = target.get_node_or_null("ReflectComponent")
 	if reflect_component and target != parent:
-		if randf() < reflect_component.chance:
-			reflect_component.reflect(parent, self)
+		if reflect_component.melee_reflect(parent, self):
 			return false
 	
 	var projectile = target.get_node_or_null("ProjectileComponent")
@@ -293,10 +300,9 @@ multiple_attack: bool = false) -> bool:
 	
 	var target_health_component: HealthComponent = target.get_node_or_null("HealthComponent")
 	if target_health_component:
-		@warning_ignore_start("narrowing_conversion")
-		target_health_component.take_damage(damage * damage_modifier * _get_minor_modifiers(), parent, "Melee", ignore_armor)
+		target_health_component.take_damage(damage * damage_modifier * damage_multiplier * _get_minor_modifiers(), parent, "Melee", ignore_armor)
 		if delayed_damage != 0 and delayed_damage_delay != 0:
-			target_health_component.set_delayed_damage(delayed_damage * _get_minor_modifiers(), delayed_damage_delay)
+			target_health_component.set_delayed_damage(delayed_damage * damage_multiplier * _get_minor_modifiers(), delayed_damage_delay)
 	
 	var target_mover: MobMoverComponent = target.get_node_or_null("MobMoverComponent")
 	if target_mover and direction:

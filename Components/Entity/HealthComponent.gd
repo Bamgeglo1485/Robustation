@@ -11,7 +11,6 @@ var base_max_health: float = max_health
 @export var gibbed: bool = false
 @export var invinciblitiy_attack_effect: PackedScene
 @export var invinciblitiy_attack_sound: AudioStreamPlayer2D
-@export var healing_from_organs_modifier: float = 1.0
 
 ## Unremovable damage that affects maximum health.
 @export var hard_damage: float = 0.0 : set = set_hard_damage
@@ -31,8 +30,9 @@ var delayed_damage_timer: Timer
 var delayed_damage_queue: Array = []
 var current_delayed_damage: float = 0
 
-signal health_changed(new_health)
-signal hard_damage_changed(new_damage)
+signal damaged(damage: float, damager: Node2D)
+signal health_changed(new_health: float)
+signal hard_damage_changed(new_damage: float)
 
 @export_category("Modifier")
 @export var max_health_multipliers: Dictionary
@@ -40,8 +40,11 @@ signal hard_damage_changed(new_damage)
 @export var max_health_addendums: Dictionary
 @export var max_health_addendum: float = 0.0
 
-@export var damage_multipliers: Dictionary
-@export var damage_multiplier: float = 1.0
+@export var damage_resistance_multipliers: Dictionary
+@export var damage_resistance_multiplier: float = 1.0
+
+@export var healing_from_organs_multipliers: Dictionary
+@export var healing_from_organs_multiplier: float = 1.0
 
 @export var delayed_damage_multipliers: Dictionary
 @export var delayed_damage_multiplier: float = 1.0
@@ -85,7 +88,7 @@ func take_damage(damage: float, damager: Node2D, damage_type: String = "Generic"
 		if damage > 5:
 			invincibility_effects()
 		return
-	var modifier: float = damage_multiplier
+	var modifier: float = damage_resistance_multiplier
 	if !damage_type_modifiers.is_empty() and damage_type_modifiers.has(damage_type):
 		modifier *= damage_type_modifiers[damage_type]
 	if ignore_damage_modifier:
@@ -99,6 +102,7 @@ func take_damage(damage: float, damager: Node2D, damage_type: String = "Generic"
 		_flash(1, Color(0.0, 0.937, 0.792, 1.0))
 	
 	EventBusManager.damaged.emit(parent, modified_damage, damager)
+	damaged.emit(modified_damage, damager)
 	
 	if !damager:
 		return

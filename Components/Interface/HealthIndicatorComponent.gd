@@ -18,7 +18,7 @@ func _on_health_changed(emitter, _health, new_health) -> void:
 	if emitter != parent:
 		return
 	
-	var ne_pridumal: float = float(new_health) / health_component.max_health
+	var ne_pridumal: float = new_health / health_component.max_health
 	if ne_pridumal <= 0.2:
 		texture_rect.texture.atlas = health_4
 		color = Color(0.934, 0.0, 0.295, 1.0)

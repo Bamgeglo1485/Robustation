@@ -62,6 +62,10 @@ var weapon_sprite: WeaponSpriteComponent
 @export var weapon_class: String
 @export_multiline() var weapon_desc: String
 
+@export_category("Modifiers")
+@export var damage_multipliers: Dictionary
+@export var damage_multiplier: float = 1.0
+
 enum rarity_classes {
 	SHITTY,
 	COMMON,

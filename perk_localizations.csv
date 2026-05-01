@@ -4,3 +4,34 @@ BandageAndToxicMarker_name,Bandage and (Toxic) Marker,Бинт и (Токсич�
 BandageAndToxicMarker_desc,"[color=green]Increases maximum health by 10 units[/color]
 [color=crimson]Increases damage over time by 7%","[color=green]Увеличивает максимальное здоровье на 10 единиц[/color]
 [color=crimson]Увеличивает отложенный урон на 7%"
+DoublePenetration_name,Double Penetration,Двойное Проникновение
+DoublePenetration_desc,"[color=green]Increases ranged weapon penetration by 1 units[/color]
+[color=crimson]Decreases weapon damage by 10%","[color=green]Увеличивает пробиваемость дальнего оружия на 1 единицу[/color]
+[color=crimson]Уменьшает урон оружия на 10%"
+RubberBullets_name,Rubber Bullets,Резиновые Пули
+RubberBullets_desc,"[color=green]Increases ranged weapon bounce by 1 units[/color]
+[color=crimson]Decreases ranged weapon penetration by 1 units","[color=green]Увеличивает отскакивание дальнего оружия на 1 единицу[/color]
+[color=crimson]Уменьшает пробиваемость дальнего оружия на 1 единицу"
+FirstAIDS_name,First AIDS,ПерВИЧная помощь
+FirstAIDS_desc,"[color=green]Increases health by 10%[/color]
+[color=crimson]Decreases movement speed by 5%","[color=green]Повышает здоровье на 10%[/color]
+[color=crimson]Уменьшает скорость движения на 5%"
+EphedrineCigarettes_name,Ephedrine Cigarettes,Эфедриновые Сигареты
+EphedrineCigarettes_desc,"[color=green]Increases movement speed by 5%[/color]
+[color=crimson]Increases passive damage by 1 unit","[color=green]Повышает скорость движения на 5%[/color]
+[color=crimson]Повышает пассивный урон на 1 единицу"
+MedBelt_name,MedBelt,МедПояс
+MedBelt_desc,[color=green]Increases passive regeneration by 1 unit,[color=green]Повышает пассивную регенерацию на 1 единицу
+MirrorShard_name,Mirror Shard or (Shard of Mirror),Зеркальный Осколок или (Осколок Зеркала)
+MirrorShard_desc,"[color=green]Increases projectile reflect chance by 5%[/color]
+[color=crimson]Decreases melee reflect chance by 5%[/color]","[color=green]Повышает шанс отражение снарядов на 5%[/color]
+[color=crimson]Понижает шанс отражения ближнего оружия на 5%[/color]"
+BitchBall_name,Bitch Ball,Бляжный Мяч
+BitchBall_desc,"[color=green]Increases melee reflect chance by 5%[/color]
+[color=crimson]Decreases projectile reflect chance by 5%[/color]","[color=green]Повышает шанс отражение ближнего оружия на 5%[/color]
+[color=crimson]Понижает шанс отражения снарядов на 5%[/color]"
+GoliathPlate_name,Goliath Plate,Пластина Голиафа
+GoliathPlate_desc,"[color=green]Increases your armor by 5%[/color]
+[color=crimson]Decreases healing from organs crushing by 10%[/color]
+","[color=green]Повышает броню на 5%[/color]
+[color=crimson]Уменьшает лечение от раздавления органов на 10%[/color]"

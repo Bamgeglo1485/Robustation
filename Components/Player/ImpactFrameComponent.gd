@@ -76,6 +76,8 @@ func set_color_modify(distort_audio = false) -> void:
 	aberration_tween.tween_property(material, "shader_parameter/chromatic_aberration_strength", 0.01, 0.5)
 	aberration_tween.tween_property(material, "shader_parameter/chromatic_aberration_strength", 0.0, 0.3)
 	
+	color_modify_frame.visible = true
+	
 	color_tween = create_tween()
 	color_tween.set_trans(Tween.TRANS_SINE)
 	color_tween.set_ease(Tween.EASE_IN_OUT)
@@ -116,6 +118,10 @@ func set_color_modify(distort_audio = false) -> void:
 	material.set_shader_parameter("red_factor", red_factor)
 	material.set_shader_parameter("green_factor", green_factor)
 	material.set_shader_parameter("blue_factor", blue_factor)
+	
+	await color_tween.finished
+	
+	color_modify_frame.visible = false
 
 func _ready() -> void:
 	EventBusManager.explosion.connect(_on_exlosion)

@@ -268,7 +268,7 @@ alt_weapon_icon = NodePath("../GUI/Inventory/Hand_R/WeaponIcon/AltAttackIcon")
 metadata/_custom_type_script = "uid://gek7ma2qpdp6"
 
 [node name="AnimationComponent" parent="." index="11" unique_id=1054272185 node_paths=PackedStringArray("flash_frame")]
-flash_frame = NodePath("../GUI/Overlays/DamageFlash/DamageFlash")
+flash_frame = NodePath("")
 
 [node name="PerkCollect" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="1" unique_id=1054597139]
 stream = ExtResource("8_4awd5")
@@ -980,6 +980,7 @@ metadata/_custom_type_script = "uid://qcmegh7138ug"
 [node name="ColorModify" type="CanvasLayer" parent="GUI/Overlays" index="2" unique_id=1450573894]
 
 [node name="ColorModify" type="ColorRect" parent="GUI/Overlays/ColorModify" index="0" unique_id=395695325]
+visible = false
 z_index = 50
 material = ExtResource("9_d6ik8")
 anchors_preset = 15
@@ -1012,6 +1013,7 @@ color = Color(1, 1, 1, 0)
 [node name="Rainbow" type="CanvasLayer" parent="GUI/Overlays" index="4" unique_id=1257070989]
 
 [node name="Rainbow" type="ColorRect" parent="GUI/Overlays/Rainbow" index="0" unique_id=400252612]
+visible = false
 z_index = -1
 material = ExtResource("18_wns57")
 anchors_preset = 15
@@ -1050,6 +1052,7 @@ color = Color(1, 1, 1, 0)
 [node name="Death" type="CanvasLayer" parent="GUI/Overlays" index="8" unique_id=452867960]
 
 [node name="Death" type="ColorRect" parent="GUI/Overlays/Death" index="0" unique_id=568475295]
+visible = false
 material = SubResource("ShaderMaterial_wm8ym")
 anchors_preset = 15
 anchor_right = 1.0
@@ -1061,23 +1064,6 @@ color = Color(1, 1, 1, 0)
 metadata/_edit_lock_ = true
 
 [node name="UniqueShaderComponent" type="Node" parent="GUI/Overlays/Death/Death" index="0" unique_id=322135712]
-script = ExtResource("11_yhquf")
-metadata/_custom_type_script = "uid://qcmegh7138ug"
-
-[node name="DamageFlash" type="CanvasLayer" parent="GUI/Overlays" index="9" unique_id=924204243]
-
-[node name="DamageFlash" type="ColorRect" parent="GUI/Overlays/DamageFlash" index="0" unique_id=1157850152]
-material = ExtResource("7_5768p")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_behavior_recursive = 1
-color = Color(1, 1, 1, 0)
-metadata/_edit_lock_ = true
-
-[node name="UniqueShaderComponent" type="Node" parent="GUI/Overlays/DamageFlash/DamageFlash" index="0" unique_id=104124287]
 script = ExtResource("11_yhquf")
 metadata/_custom_type_script = "uid://qcmegh7138ug"
 

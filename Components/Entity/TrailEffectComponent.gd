@@ -22,8 +22,15 @@ var autodelete_active: bool = false
 var enabled: bool = true
 @export var active_delete: bool = false
 var cleanup_timer: Timer
+var parent_sprites: Array[Sprite2D]
+var sprite_tweens: Array[Tween]
 
 func _ready() -> void:
+	for children in parent.get_children():
+		if children is not Sprite2D:
+			continue
+		parent_sprites.append(children)
+	
 	color = Color(1.0, 1.0, 1.0, 1.0)
 	parent.modulate = color
 	
@@ -31,8 +38,6 @@ func _ready() -> void:
 	for color_from_array in colors:
 		color_tween.tween_property(parent, "self_modulate", color_from_array, color_change_delay)
 	color_tween.set_loops()
-	color_tween.set_trans(Tween.TRANS_SINE)
-	color_tween.set_ease(Tween.EASE_IN_OUT)
 	
 	if lifetime > 0:
 		lifetime_timer = lifetime
@@ -43,7 +48,7 @@ func _ready() -> void:
 		cleanup_timer.wait_time = 5
 		cleanup_timer.one_shot = true
 		cleanup_timer.timeout.connect(_clean_up)
-		cleanup_timer.start()
+		cleanup_timer.autostart = true
 
 func _physics_process(delta: float) -> void:
 	if !enabled:
@@ -71,21 +76,19 @@ func _physics_process(delta: float) -> void:
 	
 	last_position = parent_position
 	
-	for children in get_parent().get_children():
-		if children is not Sprite2D:
-			if is_instance_valid(children) and !children.has_node("Texture"):
-				continue
-			children = children.get_node("Texture")
+	for children in parent_sprites:
+		if !is_instance_valid(children):
+			continue
 		
-		var new_sprite: Node = children.duplicate()
+		var new_sprite: Sprite2D = children.duplicate()
 		new_sprite.global_position = parent_position
 		new_sprite.global_rotation = parent.global_rotation
 		new_sprite.global_skew = parent.global_skew
-		new_sprite.scale = parent.scale
 		new_sprite.modulate = parent.self_modulate
-		get_parent().get_parent().add_child(new_sprite)
+		scene.add_child(new_sprite)
 		var tween: Tween = create_tween()
 		tween.tween_property(new_sprite, "modulate", end_color, trail_lifetime)
+		sprite_tweens.append(tween)
 		
 		duplicates.append(new_sprite)
 
@@ -106,12 +109,13 @@ func _clean() -> void:
 			continue
 		dupl.queue_free()
 	duplicates.clear()
+	for tween in sprite_tweens:
+		if tween.is_running():
+			tween.kill()
+	sprite_tweens.clear()
 
 func _exit_tree() -> void:
-	for dupl in duplicates:
-		if !dupl:
-			continue
-		dupl.queue_free()
+	_clean()
 
 func _clean_up():
 	for dupl in duplicates:
@@ -119,3 +123,7 @@ func _clean_up():
 			continue
 		dupl.queue_free()
 	duplicates.clear()
+	for tween in sprite_tweens:
+		if tween.is_running():
+			tween.kill()
+	sprite_tweens.clear()

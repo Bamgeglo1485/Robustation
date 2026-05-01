@@ -23,9 +23,10 @@ func _on_health_changed(health) -> void:
 	
 	if health <= 0 and !dead:
 		dead = true
-		if get_tree().paused:
-			get_tree().paused = false
+		if tree.paused:
+			tree.paused = false
 		if death_effect:
+			death_effect.visible = true
 			var _effect_tween = create_tween()
 			_effect_tween.set_parallel()
 			_effect_tween.tween_property(death_effect.material, "shader_parameter/bg_color", Color(0.0, 0.0, 0.0, 1.0), 1.5)
@@ -33,7 +34,7 @@ func _on_health_changed(health) -> void:
 		EventBusManager.change_player.emit(null, 0)
 		EventBusManager.player_death.emit()
 		if death_screen:
-			await get_tree().create_timer(death_screen_wait_time).timeout
+			await tree.create_timer(death_screen_wait_time).timeout
 			var inst = death_screen.instantiate()
 			death_screen_parent.add_child(inst)
 		return

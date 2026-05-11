@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://yxsq46ajfdy4" path="res://Components/Mobs/NPC/AttackTargetComponent.gd" id="2_wokfi"]
 [ext_resource type="Script" uid="uid://bv7whrderww4t" path="res://Components/Mobs/NPC/MoveToTargetComponent.gd" id="3_dqoi5"]
 [ext_resource type="PackedScene" uid="uid://dkhqewofgeh1b" path="res://Scenes/Projectiles/IceProjectile.tscn" id="3_rryuq"]
-[ext_resource type="Script" uid="uid://b1p6bdh2vi8b" path="res://Components/Weapons/WeaponUserComponent.gd" id="4_dxeyw"]
+[ext_resource type="Script" uid="uid://b1p6bdh2vi8b" path="res://Components/Weapons/Misc/WeaponUserComponent.gd" id="4_dxeyw"]
 [ext_resource type="Texture2D" uid="uid://3st8a6jvfl4i" path="res://Textures/Weapons/Shotgun/shotgun-inhand.png" id="6_dqoi5"]
 [ext_resource type="Texture2D" uid="uid://b60x76q21cp5u" path="res://Textures/Weapons/Shotgun/shotgun_icon.png" id="7_dxeyw"]
 [ext_resource type="AudioStream" uid="uid://chhcruegxfy1y" path="res://Audio/Weapon/radpulse4.ogg" id="8_prkpk"]

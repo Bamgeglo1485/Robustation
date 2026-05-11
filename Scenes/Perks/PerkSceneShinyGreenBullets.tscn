@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dbarl1l1jbwt4"]
+
+[ext_resource type="Script" uid="uid://bdektmaq0iu7p" path="res://Components/Perks/Base/PerkComponent.gd" id="1_y68uv"]
+[ext_resource type="Texture2D" uid="uid://yphdodjnre6d" path="res://Textures/Perks/shiny_green_bullets.png" id="2_fvbru"]
+[ext_resource type="Script" uid="uid://brk1lcgtq0fmo" path="res://Resources/Custom/PerkData/Base/PerkModifier.gd" id="4_hdqaq"]
+[ext_resource type="Script" uid="uid://cd4tbi43h4hjk" path="res://Resources/Custom/PerkData/Base/PerkData.gd" id="5_5w52i"]
+
+[sub_resource type="Resource" id="Resource_uvn7x"]
+script = ExtResource("4_hdqaq")
+target_component = "WeaponUserComponent"
+property = "extra_shots"
+operation = 1
+value = 1.1
+metadata/_custom_type_script = "uid://brk1lcgtq0fmo"
+
+[sub_resource type="Resource" id="Resource_fvbru"]
+script = ExtResource("4_hdqaq")
+target_component = "WeaponUserComponent"
+property = "overheat_per_shoot"
+operation = 1
+value = 0.5
+metadata/_custom_type_script = "uid://brk1lcgtq0fmo"
+
+[sub_resource type="Resource" id="Resource_qyf8a"]
+script = ExtResource("5_5w52i")
+perk_id = &"ShinyGreenBullets"
+perk_rarity = 2
+icon_texture = ExtResource("2_fvbru")
+modifiers = Array[ExtResource("4_hdqaq")]([SubResource("Resource_uvn7x"), SubResource("Resource_fvbru")])
+metadata/_custom_type_script = "uid://cd4tbi43h4hjk"
+
+[node name="ShinyGreenBullets" type="Node" unique_id=1604168029]
+script = ExtResource("1_y68uv")
+perk_data = SubResource("Resource_qyf8a")
+metadata/_custom_type_script = "uid://bdektmaq0iu7p"

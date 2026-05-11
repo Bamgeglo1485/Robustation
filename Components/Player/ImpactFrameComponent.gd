@@ -12,7 +12,7 @@ var freeze_lifetime: float
 signal freeze_end
 
 func _process(delta: float) -> void:
-	if freeze_lifetime <= 0:
+	if freeze_lifetime < 0:
 		return
 	freeze_lifetime -= delta
 	if freeze_lifetime <= 0:

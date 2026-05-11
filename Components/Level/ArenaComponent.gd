@@ -4,6 +4,7 @@ class_name ArenaComponent extends Component
 @export var enabled: bool = true
 @export var perks: Array[PackedScene]
 @export var enemy_perks: Array[PackedScene]
+@export var boss_kill_reward: PackedScene
 @export var boss_battles_per: int = 10
 @export var area_info: RichTextLabel
 @export var start_budget: float = 5
@@ -12,7 +13,7 @@ class_name ArenaComponent extends Component
 @export var available_bosses: Array[Enemy]
 @export var budget_per_wave: float = 1.5
 @export var spawn_positions: Array[Vector2]
-@export var difficulty: int = 2
+@export var enemy_health_modifier_per_boss: float = 0.2
 
 @export var max_melee_enemies: int = 6
 @export var max_range_enemies: int = 6
@@ -46,6 +47,7 @@ var perk_list_unit: PackedScene = preload("res://Scenes/UI/IngameInterface/Perks
 @export_category("Operational")
 var wave_active: bool = false
 var current_enemies: Array[PhysicsBody2D]
+var current_bosses: Array[PhysicsBody2D]
 
 var high_pass: AudioEffectHighPassFilter = AudioServer.get_bus_effect(1, 2)
 var high_pass_tween: Tween
@@ -99,6 +101,7 @@ func start_new_wave(new_game: bool = false) -> void:
 		bosses = _spawn_enemies(boss_array)
 		budget -= boss_enemy.cost
 		current_enemies.append_array(bosses)
+		current_bosses = bosses
 	
 	current_enemies.append_array(_spawn_enemies(_choose_enemies(available_enemies)))
 	
@@ -311,6 +314,7 @@ func _close_perk_choose() -> void:
 		child.queue_free()
 
 func _on_player_death() -> void:
+	GlobalVariables.enemy_health_modifier = 1.0
 	wave_active = false
 	loose = true
 
@@ -334,6 +338,12 @@ func _on_gibbed(emitter: Node2D) -> void:
 	if emitter == player:
 		_on_player_death()
 		return
+	if current_bosses.has(emitter):
+		var reward_inst: Node2D = boss_kill_reward.instantiate()
+		reward_inst.global_position = emitter.global_position
+		scene.add_child(reward_inst)
+		GlobalVariables.enemy_health_modifier += enemy_health_modifier_per_boss
+		current_bosses.erase(emitter)
 	if current_enemies.has(emitter):
 		current_enemies.erase(emitter)
 		if current_enemies.is_empty():

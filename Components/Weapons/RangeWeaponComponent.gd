@@ -38,7 +38,6 @@ var children_shared_bullets_weapon: RangeWeapon
 @export_category("Overheat")
 @export var overheat_enabled: bool = false
 @export var max_overheat: float = 8.0
-@export var overheat_per_shoot_modifier: float = 1.0
 @export var overheat_per_shoot: float = 1.5
 @export var cool_delay: float = 0.1
 @export var cool_count: float = 0.1
@@ -63,6 +62,8 @@ var projectile_speed: float
 @export var spread_multiplier: float = 1.0
 @export var recover_multipliers: Dictionary
 @export var recover_multiplier: float = 1.0
+@export var overheat_per_shoot_addendums: Dictionary
+@export var overheat_per_shoot_addendum: int = 0
 
 func set_bullets(new_value) -> void:
 	bullets = new_value
@@ -79,21 +80,20 @@ func get_bullets() -> int:
 func _ready() -> void:
 	super._ready()
 	
-	if overheat_enabled:
-		cool_timer = Timer.new()
-		cool_timer.ignore_time_scale = !timers_timescaled
-		cool_timer.timeout.connect(_on_cool)
-		cool_timer.one_shot = true
-		cool_timer.wait_time = cool_delay
-		cool_timer.autostart = true
-		add_child(cool_timer)
-		
-		cool_start_timer = Timer.new()
-		cool_start_timer.ignore_time_scale = !timers_timescaled
-		cool_start_timer.timeout.connect(_start_cool)
-		cool_start_timer.one_shot = true
-		cool_start_timer.wait_time = 0.5
-		add_child(cool_start_timer)
+	cool_timer = Timer.new()
+	cool_timer.ignore_time_scale = !timers_timescaled
+	cool_timer.timeout.connect(_on_cool)
+	cool_timer.one_shot = true
+	cool_timer.wait_time = cool_delay
+	cool_timer.autostart = true
+	add_child(cool_timer)
+	
+	cool_start_timer = Timer.new()
+	cool_start_timer.ignore_time_scale = !timers_timescaled
+	cool_start_timer.timeout.connect(_start_cool)
+	cool_start_timer.one_shot = true
+	cool_start_timer.wait_time = 0.5
+	add_child(cool_start_timer)
 	
 	if !shared_bullets_weapon:
 		bullets_recover_timer = Timer.new()
@@ -131,7 +131,7 @@ func attack(raiser, _npc = true) -> void:
 	await _swing(raiser.get_attack_direction())
 	
 	if overheat_enabled:
-		overheat += overheat_per_shoot * overheat_per_shoot_modifier
+		overheat += overheat_per_shoot + overheat_per_shoot_addendum
 		overheat = clamp(overheat, 0, max_overheat)
 		if overheat_alert and overheat >= alert_on_heat:
 			overheat_alert.play()
@@ -149,9 +149,10 @@ func attack(raiser, _npc = true) -> void:
 		if self_throw_speed != 0:
 			mob_mover_component.throw(-direction, self_throw_speed, null, self_throw_stop_speed, true, self_throw_rewrite)
 	
-	if shots > 1 and bullets >= 1:
+	var shots_with_addendum: int = shots + extra_shots_addendum
+	if shots_with_addendum > 1 and bullets >= 1:
 		var total_spread: float = deg_to_rad(shots_angle) * spread_multiplier
-		var angle_step: float = total_spread / (shots - 1) if shots > 1 else 0.0
+		var angle_step: float = total_spread / (shots_with_addendum - 1)
 		var start_angle: float = -total_spread * 0.5
 		
 		var possible_shots: int = 0

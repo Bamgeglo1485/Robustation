@@ -17,8 +17,6 @@ class_name WeaponUserComponent extends Component
 @export var recover_modifier: float = 1.0
 @export var spread_modifier: float = 1.0
 
-@export var overheat_per_shoot_modifier: float = 1.0
-
 @export var qte_perfect_heal_modifier_from_max_modifier: float = 1.0
 @export var qte_time_mod: float = 3.0
 
@@ -37,8 +35,12 @@ var last_attacked_weapon: Weapon
 @export var spread_multiplier: float = 1.0
 @export var recover_multipliers: Dictionary
 @export var recover_multiplier: float = 1.0
+@export var cooldown_multipliers: Dictionary
+@export var cooldown_multiplier: float = 1.0
 @export var damage_multipliers: Dictionary
 @export var damage_multiplier: float = 1.0
+@export var overheat_per_shoot_addendums: Dictionary
+@export var overheat_per_shoot_addendum: int = 0
 
 func _ready() -> void:
 	if selected_weapon:
@@ -48,13 +50,18 @@ func force_select_weapon(new_weapon: Weapon):
 	if new_weapon:
 		if damage_multiplier != 0:
 			new_weapon.damage_multiplier = damage_multiplier
+		if cooldown_multiplier != 1.0:
+			new_weapon.cooldown_multiplier = cooldown_multiplier
 		if new_weapon is RangeWeapon:
-			if overheat_per_shoot_modifier != 1.0 and new_weapon.overheat_enabled:
-				new_weapon.overheat_per_shoot_modifier = overheat_per_shoot_modifier
-			if extra_shots_addendum != 0 and new_weapon and new_weapon.shots != 1:
+			if overheat_per_shoot_addendum != 0.0:
+				new_weapon.overheat_per_shoot_addendum = overheat_per_shoot_addendum
+				new_weapon.overheat_enabled = true
+			if extra_shots_addendum != 0 and new_weapon:
 				new_weapon.extra_shots_addendum = extra_shots_addendum
 			if spread_multiplier != 1.0:
 				new_weapon.spread_multiplier = spread_multiplier
+			if recover_multiplier != 1.0:
+				new_weapon.recover_multiplier = recover_multiplier
 			if recover_multiplier != 1.0:
 				new_weapon.recover_multiplier = recover_multiplier
 			if extra_penetrations_addendum != 0:
@@ -118,3 +125,11 @@ func set_minor_modifier(key: String, value: float):
 	for modifier in minor_damage_modifiers.values():
 		minor_mod *= modifier
 	minor_damage_modifier = minor_mod
+
+func set_multiplier(stat: String, key: String, value: float) -> void:
+	super.set_multiplier(stat, key, value)
+	force_select_weapon(selected_weapon)
+
+func set_addendum(stat: String, key: String, value: float) -> void:
+	super.set_addendum(stat, key, value)
+	force_select_weapon(selected_weapon)

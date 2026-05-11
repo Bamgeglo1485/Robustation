@@ -14,9 +14,6 @@ enum battle_tendency_stages {
 @export var battle_tendency_on_stage_decrease: float = 80.0
 @export var battle_tendency_on_stage_increase: float = 15.0
 
-@export var battle_tendency_by_damage_multiplier: float = 0.2
-@export var batte_tendency_decrease_multiplier: float = 1.0
-
 @export var euphoria_effect: GPUParticles2D
 
 @export var battle_tendency_effect: ColorRect
@@ -25,6 +22,13 @@ enum battle_tendency_stages {
 @onready var weapon_user_component: Node = parent.get_node_or_null("WeaponUserComponent")
 
 var effects_tween: Tween
+
+@export_category("Modifiers")
+
+@export var battle_tendency_by_damage_multipliers: Dictionary
+@export var battle_tendency_by_damage_multiplier: float = 0.2
+@export var batte_tendency_decrease_multipliers: Dictionary
+@export var batte_tendency_decrease_multiplier: float = 1.0
 
 # BASE
 func set_battle_tendency(value: float) -> void:

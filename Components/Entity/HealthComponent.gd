@@ -209,7 +209,7 @@ func _delayed_damage_process() -> void:
 	delayed_damage_timer.start()
 
 func get_max_health() -> float:
-	return max_health * max_health_multiplier + max_health_addendum
+	return (max_health + max_health_addendum) * max_health_multiplier
 
 func set_hard_damage(new_value: float) -> void:
 	hard_damage = clamp(new_value, 0, max_health)

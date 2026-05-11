@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://t8go84dailgi" path="res://Textures/Mobs/Mobs/Hair/shorthairg.png" id="6_nqxm1"]
 [ext_resource type="Texture2D" uid="uid://fx8bg7p2wfff" path="res://Textures/Mobs/Mobs/Hair/80s.png" id="7_umo1f"]
 [ext_resource type="Texture2D" uid="uid://exreeul6rla6" path="res://Textures/Mobs/Mobs/Hair/bald.png" id="8_t6gyr"]
+[ext_resource type="Script" uid="uid://udvlhbibn11h" path="res://Components/Weapons/Misc/DifficultyDependentWeaponDamageComponent.gd" id="8_t6qnj"]
 [ext_resource type="AudioStream" uid="uid://0durbeo6lc4n" path="res://Audio/Weapon/spear_flip.ogg" id="8_umo1f"]
 [ext_resource type="AudioStream" uid="uid://c2enn441tmky8" path="res://Audio/Effects/rush.ogg" id="9_t6gyr"]
 [ext_resource type="Texture2D" uid="uid://b46je4cwbysn6" path="res://Textures/Mobs/Mobs/Hair/bun3.png" id="9_t6qnj"]
@@ -85,6 +86,13 @@ stream = ExtResource("28_5yr2p")
 [node name="MissSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Spear" index="1" unique_id=69188948]
 stream = ExtResource("30_k5qt2")
 
+[node name="DifficultyDependentWeaponDamageComponent" type="Node" parent="WeaponUserComponent/Spear" index="2" unique_id=2021871661]
+script = ExtResource("8_t6qnj")
+damage_on_roleplayer = 10
+damage_on_agent = 15
+damage_on_greytide = 20
+metadata/_custom_type_script = "uid://udvlhbibn11h"
+
 [node name="Rush_Prepare" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="2" unique_id=750446342]
 stream = ExtResource("8_umo1f")
 max_distance = 300.0
@@ -116,7 +124,7 @@ randomize_multiplier_max = 1.2
 metadata/_custom_type_script = "uid://hv0g6akh0ftn"
 
 [node name="BeehaveTree" parent="." index="18" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@18981")
+blackboard = NodePath("@Node@47588")
 
 [node name="SelectorComposite" type="Node" parent="BeehaveTree" index="0" unique_id=102813076]
 script = ExtResource("34_j0lau")

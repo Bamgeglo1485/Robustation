@@ -22,25 +22,24 @@ vec3 rgb2hsl(vec3 color) {
     float min_color = min(min(color.r, color.g), color.b);
     float delta = max_color - min_color;
 
-    float lightness = (max_color + min_color) / 2.0;
-    float hue = 0.0;
-    float sat = 0.0;
-
-    if (delta != 0.0) {
-        sat = (lightness < 0.5) ? (delta / (max_color + min_color)) : (delta / (2.0 - max_color - min_color));
-        
-        if (max_color == color.r) {
-            hue = (color.g - color.b) / delta + (color.g < color.b ? 6.0 : 0.0);
-        } else if (max_color == color.g) {
-            hue = (color.b - color.r) / delta + 2.0;
-        } else {
-            hue = (color.r - color.g) / delta + 4.0;
-        }
-
-        hue /= 6.0;
+    float lightness = (max_color + min_color) * 0.5;
+    
+    if (delta < 0.00001) {
+        return vec3(0.0, 0.0, lightness);
+    }
+    
+    float sat = lightness < 0.5 ? delta / (max_color + min_color) : delta / (2.0 - max_color - min_color);
+    
+    float hue;
+    if (max_color == color.r) {
+        hue = (color.g - color.b) / delta + (color.g < color.b ? 6.0 : 0.0);
+    } else if (max_color == color.g) {
+        hue = (color.b - color.r) / delta + 2.0;
+    } else {
+        hue = (color.r - color.g) / delta + 4.0;
     }
 
-    return vec3(hue, sat, lightness);
+    return vec3(hue / 6.0, sat, lightness);
 }
 
 vec3 hsl2rgb(vec3 hsl) {
@@ -48,28 +47,48 @@ vec3 hsl2rgb(vec3 hsl) {
     float sat = hsl.y;
     float lightness = hsl.z;
 
+    if (sat < 0.00001) {
+        return vec3(lightness);
+    }
+    
     float chroma = (1.0 - abs(2.0 * lightness - 1.0)) * sat;
     float h = hue * 6.0;
     float x = chroma * (1.0 - abs(mod(h, 2.0) - 1.0));
+    float m = lightness - chroma * 0.5;
 
     vec3 result;
-
-    if (h < 1.0) {
+    float h_int = floor(h);
+    
+    if (h_int == 0.0) {
         result = vec3(chroma, x, 0.0);
-    } else if (h < 2.0) {
+    } else if (h_int == 1.0) {
         result = vec3(x, chroma, 0.0);
-    } else if (h < 3.0) {
+    } else if (h_int == 2.0) {
         result = vec3(0.0, chroma, x);
-    } else if (h < 4.0) {
+    } else if (h_int == 3.0) {
         result = vec3(0.0, x, chroma);
-    } else if (h < 5.0) {
+    } else if (h_int == 4.0) {
         result = vec3(x, 0.0, chroma);
     } else {
         result = vec3(chroma, 0.0, x);
     }
 
-    float m = lightness - chroma / 2.0;
-    return result + vec3(m, m, m);
+    return result + m;
+}
+
+vec3 apply_color_correction(vec3 color) {
+    color *= vec3(red_factor, green_factor, blue_factor);
+    
+    vec3 hsl = rgb2hsl(color);
+    hsl.x = mod(hsl.x + hue_shift, 1.0);
+    hsl.y = clamp(hsl.y * saturation, 0.0, 1.0);
+    hsl.z = clamp(hsl.z, 0.0, 1.0);
+    
+    color = hsl2rgb(hsl);
+    color = clamp(color * contrast + brightness, 0.0, 1.0);
+    color = pow(color, vec3(gamma));
+    
+    return color;
 }
 
 void fragment() {
@@ -80,53 +99,20 @@ void fragment() {
         vec2 offset = (uv - 0.5) * chromatic_aberration_strength;
         
         float r = texture(SCREEN_TEXTURE, uv + offset).r;
-        float g = texture(SCREEN_TEXTURE, uv).g;
+        vec4 center_sample = texture(SCREEN_TEXTURE, uv);
         float b = texture(SCREEN_TEXTURE, uv - offset).b;
-        float a = texture(SCREEN_TEXTURE, uv).a;
         
-        vec3 color = vec3(r, g, b);
-        
-        color.r *= red_factor;
-        color.g *= green_factor;
-        color.b *= blue_factor;
-        
-        vec3 hsl = rgb2hsl(color);
-        hsl.x = mod(hsl.x + hue_shift, 1.0);
-        hsl.y *= saturation;
-        hsl.y = clamp(hsl.y, 0.0, 1.0);
-        
-        color = hsl2rgb(hsl);
-        color = color * contrast + vec3(brightness);
-        color = pow(color, vec3(gamma));
-        color = clamp(color, 0.0, 1.0);
-        
-        final_color = vec4(color, a);
+        vec3 color = apply_color_correction(vec3(r, center_sample.g, b));
+        final_color = vec4(color, center_sample.a);
     } else {
         vec4 tex_color = texture(SCREEN_TEXTURE, uv);
-        vec3 color = tex_color.rgb;
-        
-        color.r *= red_factor;
-        color.g *= green_factor;
-        color.b *= blue_factor;
-        
-        vec3 hsl = rgb2hsl(color);
-        hsl.x = mod(hsl.x + hue_shift, 1.0);
-        hsl.y *= saturation;
-        hsl.y = clamp(hsl.y, 0.0, 1.0);
-        
-        color = hsl2rgb(hsl);
-        color = color * contrast + vec3(brightness);
-        color = pow(color, vec3(gamma));
-        color = clamp(color, 0.0, 1.0);
-        
-        final_color = vec4(color, tex_color.a);
+        final_color = vec4(apply_color_correction(tex_color.rgb), tex_color.a);
     }
     
     if (vignette_strength > 0.0) {
         vec2 vignette_uv = uv * 2.0 - 1.0;
         float vignette = 1.0 - dot(vignette_uv, vignette_uv) * vignette_strength;
-        vignette = clamp(vignette, 0.0, 1.0);
-        final_color.rgb *= vignette;
+        final_color.rgb *= clamp(vignette, 0.0, 1.0);
     }
     
     final_color.a *= alpha;

@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dplevsy1jomld"]
+
+[ext_resource type="Script" uid="uid://bdektmaq0iu7p" path="res://Components/Perks/Base/PerkComponent.gd" id="1_r68lw"]
+[ext_resource type="Texture2D" uid="uid://cvydb3k3rbrxr" path="res://Textures/Perks/galaxythistle_equipped.png" id="2_r68lw"]
+[ext_resource type="Texture2D" uid="uid://b8y3m15r5mwux" path="res://Textures/Perks/galaxythistle.png" id="3_2qrdo"]
+[ext_resource type="Script" uid="uid://brk1lcgtq0fmo" path="res://Resources/Custom/PerkData/Base/PerkModifier.gd" id="4_sk3w8"]
+[ext_resource type="Script" uid="uid://cd4tbi43h4hjk" path="res://Resources/Custom/PerkData/Base/PerkData.gd" id="5_lc7r3"]
+
+[sub_resource type="Resource" id="Resource_ua56r"]
+script = ExtResource("4_sk3w8")
+target_component = "HealthComponent"
+property = "delayed_damage"
+value = 0.9
+metadata/_custom_type_script = "uid://brk1lcgtq0fmo"
+
+[sub_resource type="Resource" id="Resource_qyf8a"]
+script = ExtResource("5_lc7r3")
+perk_id = &"Galaxythistle"
+perk_rarity = 0
+icon_texture = ExtResource("3_2qrdo")
+equipped_texture = ExtResource("2_r68lw")
+modifiers = Array[ExtResource("4_sk3w8")]([SubResource("Resource_ua56r")])
+metadata/_custom_type_script = "uid://cd4tbi43h4hjk"
+
+[node name="Galaxythistle" type="Node" unique_id=1604168029]
+script = ExtResource("1_r68lw")
+perk_data = SubResource("Resource_qyf8a")
+metadata/_custom_type_script = "uid://bdektmaq0iu7p"

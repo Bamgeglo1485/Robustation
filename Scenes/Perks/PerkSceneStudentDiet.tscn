@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dhw0xsac3vmpn"]
+
+[ext_resource type="Script" uid="uid://bdektmaq0iu7p" path="res://Components/Perks/Base/PerkComponent.gd" id="1_n7gpq"]
+[ext_resource type="Texture2D" uid="uid://csbj1qxxtp41l" path="res://Textures/Perks/student_diet.png" id="2_16ngr"]
+[ext_resource type="Script" uid="uid://brk1lcgtq0fmo" path="res://Resources/Custom/PerkData/Base/PerkModifier.gd" id="4_0jlqq"]
+[ext_resource type="Script" uid="uid://cd4tbi43h4hjk" path="res://Resources/Custom/PerkData/Base/PerkData.gd" id="5_2y6ji"]
+
+[sub_resource type="Resource" id="Resource_uvn7x"]
+script = ExtResource("4_0jlqq")
+target_component = "StaminaComponent"
+property = "max_stamina"
+operation = 1
+value = 20.0
+metadata/_custom_type_script = "uid://brk1lcgtq0fmo"
+
+[sub_resource type="Resource" id="Resource_qyf8a"]
+script = ExtResource("5_2y6ji")
+perk_id = &"StudentDiet"
+perk_rarity = 0
+icon_texture = ExtResource("2_16ngr")
+modifiers = Array[ExtResource("4_0jlqq")]([SubResource("Resource_uvn7x")])
+metadata/_custom_type_script = "uid://cd4tbi43h4hjk"
+
+[node name="StudentDiet" type="Node" unique_id=1604168029]
+script = ExtResource("1_n7gpq")
+perk_data = SubResource("Resource_qyf8a")
+metadata/_custom_type_script = "uid://bdektmaq0iu7p"

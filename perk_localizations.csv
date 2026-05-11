@@ -5,12 +5,12 @@ BandageAndToxicMarker_desc,"[color=green]Increases maximum health by 10 units[/c
 [color=crimson]Increases damage over time by 7%","[color=green]Увеличивает максимальное здоровье на 10 единиц[/color]
 [color=crimson]Увеличивает отложенный урон на 7%"
 DoublePenetration_name,Double Penetration,Двойное Проникновение
-DoublePenetration_desc,"[color=green]Increases ranged weapon penetration by 1 units[/color]
+DoublePenetration_desc,"[color=green]Increases ranged weapon penetration by 1 unit[/color]
 [color=crimson]Decreases weapon damage by 10%","[color=green]Увеличивает пробиваемость дальнего оружия на 1 единицу[/color]
 [color=crimson]Уменьшает урон оружия на 10%"
 RubberBullets_name,Rubber Bullets,Резиновые Пули
 RubberBullets_desc,"[color=green]Increases ranged weapon bounce by 1 units[/color]
-[color=crimson]Decreases ranged weapon penetration by 1 units","[color=green]Увеличивает отскакивание дальнего оружия на 1 единицу[/color]
+[color=crimson]Decreases ranged weapon penetration by 1 unit","[color=green]Увеличивает отскакивание дальнего оружия на 1 единицу[/color]
 [color=crimson]Уменьшает пробиваемость дальнего оружия на 1 единицу"
 FirstAIDS_name,First AIDS,ПерВИЧная помощь
 FirstAIDS_desc,"[color=green]Increases health by 10%[/color]
@@ -24,14 +24,45 @@ MedBelt_name,MedBelt,МедПояс
 MedBelt_desc,[color=green]Increases passive regeneration by 1 unit,[color=green]Повышает пассивную регенерацию на 1 единицу
 MirrorShard_name,Mirror Shard or (Shard of Mirror),Зеркальный Осколок или (Осколок Зеркала)
 MirrorShard_desc,"[color=green]Increases projectile reflect chance by 5%[/color]
-[color=crimson]Decreases melee reflect chance by 5%[/color]","[color=green]Повышает шанс отражение снарядов на 5%[/color]
+[color=crimson]Decreases melee reflect chance by 5%","[color=green]Повышает шанс отражение снарядов на 5%[/color]
 [color=crimson]Понижает шанс отражения ближнего оружия на 5%[/color]"
 BitchBall_name,Bitch Ball,Бляжный Мяч
 BitchBall_desc,"[color=green]Increases melee reflect chance by 5%[/color]
-[color=crimson]Decreases projectile reflect chance by 5%[/color]","[color=green]Повышает шанс отражение ближнего оружия на 5%[/color]
+[color=crimson]Decreases projectile reflect chance by 5%","[color=green]Повышает шанс отражение ближнего оружия на 5%[/color]
 [color=crimson]Понижает шанс отражения снарядов на 5%[/color]"
 GoliathPlate_name,Goliath Plate,Пластина Голиафа
 GoliathPlate_desc,"[color=green]Increases your armor by 5%[/color]
-[color=crimson]Decreases healing from organs crushing by 10%[/color]
+[color=crimson]Decreases healing from organs crushing by 10%
 ","[color=green]Повышает броню на 5%[/color]
 [color=crimson]Уменьшает лечение от раздавления органов на 10%[/color]"
+Galaxythistle_name,Galaxythistle,Галакточертополох
+Galaxythistle_desc,[color=green]Decreases damage over time by 10%,[color=green]Уменьшает отложенный урон на 10%
+ShinyGreenBullets_name,Shiny Green Bullets
+ShinyGreenBullets_desc,"[color=green]Increases ranged weapon shots count by 1 unit[/color]
+[color=crimson]Increases overheat of ranged weapons per shoot by 0.5 units","[color=green]Повышает количество дроби дальнего оружия на 1 единицу[/color]
+[color=crimson]Повышает перегрев дальнего оружия за выстрел на 0.5 единиц"
+PlasmaTank_name,Plasma Panzer,Панзер Плазма
+PlasmaTank_desc,"[color=green]Increases explosion damage and radius by 15%[/color]
+[color=crimson]Increases enemies explosion damage and radius by 15%","[color=green]Повышает урон и радиус взрывов на 15%[/color]
+[color=crimson]Повышает урон и радиус взрывов врагов на 15%"
+CombatGloves_name,Combat gLoves,Боевые Перчатки
+CombatGloves_desc,"[color=green]Decreases weapon cooldown by 5%
+Decreases ammo recovery delay by 5%
+","[color=green]Уменьшает кулдаун оружия на 5%
+Уменьшает время восстановления снарядов на 5%"
+CrusherModule_name,Crushed Crusher Module,Крошенный Модуль Крушителя
+CrusherModule_desc,"[color=green]Increases healing from dealing damage by 7%[/color]
+Healing only works within 3 tiles
+","[color=green]Повышает лечение от нанесения урона на 10%[/color]
+Лечение работает только в пределах 3 клеток"
+RedspacePaint_name,Redspace Paint,Редспейс Краска
+RedspacePaint_desc,[color=green]Increases healing from projectiles parry by 10%,[color=green]Повышает лечение от парирования снарядов на 10%
+InspectorsFlask_name,Inspectors Flask,Фляга Детектива
+InspectorsFlask_desc,"[color=green]Decreases Battle Tendency reduction by 15%[/color]
+[color=crimson]Increases weapon spread by 15%
+","[color=green]Уменьшает снижение боевого духа на 15%[/color]
+[color=crimson]Увеличивает разброс оружия на 15%"
+RocketJumpers_name,Rocket Jumpers,Рокет Джамперы
+RocketJumpers_desc,[color=green]Increases explosion resistance by 10%,[color=green]Повышает сопротивление к взрывам на 10%
+StudentDiet_name,Student Diet,Студенческая Диета
+StudentDiet_desc,[color=green]Increases stamina by 20 units,[color=green]Повышает стамину на 20 единиц

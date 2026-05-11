@@ -393,6 +393,106 @@ toggle_mode = true
 text = "RESET"
 metadata/_edit_use_anchors_ = true
 
+[node name="Jump" type="Panel" parent="ScrollContainer/VBoxContainer" unique_id=231027031]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="Bind" type="Button" parent="ScrollContainer/VBoxContainer/Jump" unique_id=1971693257]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8684211
+anchor_right = 0.9676113
+anchor_bottom = 0.9791667
+theme_override_fonts/font = ExtResource("1_dxep6")
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+toggle_mode = true
+text = "SEX"
+clip_text = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Jump/Bind" unique_id=2118426496]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -7.8802514
+anchor_top = 0.36120737
+anchor_right = -4.186374
+anchor_bottom = 0.9449734
+offset_right = 1.5258789e-05
+theme_override_fonts/font = ExtResource("1_dxep6")
+text = "JUMP"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="KeybindComponent" type="Node" parent="ScrollContainer/VBoxContainer/Jump/Bind" unique_id=2089185705]
+script = ExtResource("6_aeqpk")
+action = &"jump"
+metadata/_custom_type_script = "uid://5tnk7at8us3g"
+
+[node name="Reset" type="Button" parent="ScrollContainer/VBoxContainer/Jump/Bind" unique_id=1898363133]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.5918367
+anchor_right = -0.1632653
+anchor_bottom = 0.97916675
+theme_override_fonts/font = ExtResource("1_dxep6")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+disabled = true
+toggle_mode = true
+text = "RESET"
+metadata/_edit_use_anchors_ = true
+
+[node name="Slide" type="Panel" parent="ScrollContainer/VBoxContainer" unique_id=165268489]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+
+[node name="Bind" type="Button" parent="ScrollContainer/VBoxContainer/Slide" unique_id=1065555966]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8684211
+anchor_right = 0.9676113
+anchor_bottom = 0.9791667
+theme_override_fonts/font = ExtResource("1_dxep6")
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+toggle_mode = true
+text = "SEX"
+clip_text = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Slide/Bind" unique_id=1823047286]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -7.8802514
+anchor_top = 0.36120737
+anchor_right = -4.186374
+anchor_bottom = 0.9449734
+offset_right = 1.5258789e-05
+theme_override_fonts/font = ExtResource("1_dxep6")
+text = "SLIDE"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="KeybindComponent" type="Node" parent="ScrollContainer/VBoxContainer/Slide/Bind" unique_id=1170933204]
+script = ExtResource("6_aeqpk")
+action = &"slide"
+metadata/_custom_type_script = "uid://5tnk7at8us3g"
+
+[node name="Reset" type="Button" parent="ScrollContainer/VBoxContainer/Slide/Bind" unique_id=53943124]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.5918367
+anchor_right = -0.1632653
+anchor_bottom = 0.97916675
+theme_override_fonts/font = ExtResource("1_dxep6")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_5us0c")
+disabled = true
+toggle_mode = true
+text = "RESET"
+metadata/_edit_use_anchors_ = true
+
 [node name="BattleHeading" type="Panel" parent="ScrollContainer/VBoxContainer" unique_id=1791540845]
 custom_minimum_size = Vector2(0, 48.025)
 layout_mode = 2

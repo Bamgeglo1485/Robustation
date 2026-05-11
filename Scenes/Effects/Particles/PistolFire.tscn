@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://ryax633fcqok"]
+
+[ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts/Effects/TimedDelete.gd" id="1_okjir"]
+
+[sub_resource type="Curve" id="Curve_gec8y"]
+_limits = [0.0, 1.6853933, 0.0, 1.0]
+_data = [Vector2(0, 1.6853933), 0.0, 0.0, 0, 0, Vector2(0.77205884, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6ugap"]
+curve = SubResource("Curve_gec8y")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0sbr1"]
+lifetime_randomness = 0.48
+particle_flag_disable_z = true
+spread = 10.0
+initial_velocity_min = 59.77
+initial_velocity_max = 234.48
+gravity = Vector3(0, 0, 0)
+scale_over_velocity_max = 230.76999
+scale_over_velocity_curve = SubResource("CurveTexture_6ugap")
+hue_variation_min = -1.0
+hue_variation_max = -0.3
+
+[node name="GPUParticles2D" type="GPUParticles2D" unique_id=1567534584]
+modulate = Color(10.034221, 4.298072, 4.201102, 1)
+z_index = -2
+texture_filter = 1
+emitting = false
+amount = 20
+lifetime = 0.5
+one_shot = true
+speed_scale = 5.53
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 4246352849
+trail_enabled = true
+trail_sections = 2
+trail_section_subdivisions = 1
+process_material = SubResource("ParticleProcessMaterial_0sbr1")
+script = ExtResource("1_okjir")
+
+[node name="VisibleOnScreenEnabler" type="VisibleOnScreenEnabler2D" parent="." unique_id=1236946888]
+rect = Rect2(-30, -30, 60, 60)

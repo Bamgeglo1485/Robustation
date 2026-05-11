@@ -28,8 +28,9 @@ shader_parameter/feather = 0.135
 deflect_projectiles = true
 impact_frame = false
 damage = 0.0
-fly_force = 900
-radius = 160
+fly_force = 1200
+fall_time = 2
+radius = 400
 ignore_faction = false
 drop_resistance_force = 1
 

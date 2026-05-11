@@ -8,13 +8,17 @@ var material: Material
 var effect_tween: Tween
 
 func _process(delta: float) -> void:
+	if !material and overlay:
+		material = overlay.material
+	if !material:
+		return
 	if lifetime <= 0 and !enabled:
 		return
 	elif lifetime <= 0 and enabled:
 		enabled = false
 		lifetime = 0
 		var _tween: Tween = create_tween()
-		_tween.tween_property(material, "shader_parameter/transparency", 1, 1)
+		_tween.tween_property(material, "shader_parameter/transparency", 1.0, 1)
 		_tween.finished.connect(_destroy_tween)
 		return
 	

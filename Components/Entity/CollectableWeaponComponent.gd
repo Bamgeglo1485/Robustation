@@ -27,7 +27,7 @@ func _ready() -> void:
 		tween.set_loops()
 
 func _on_collide(body) -> void:
-	var weapon_user_comp: PlayerWeaponUserComponent = body.get_node("PlayerWeaponUserComponent")
+	var weapon_user_comp: PlayerWeaponUserComponent = body.get_node_or_null("PlayerWeaponUserComponent")
 	if !weapon or !weapon_user_comp:
 		return
 	

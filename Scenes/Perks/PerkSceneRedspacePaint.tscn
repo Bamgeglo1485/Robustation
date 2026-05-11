@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://c7fwcipo1a7jq"]
+
+[ext_resource type="Script" uid="uid://bdektmaq0iu7p" path="res://Components/Perks/Base/PerkComponent.gd" id="1_n640y"]
+[ext_resource type="Texture2D" uid="uid://udxqfnn4et7a" path="res://Textures/Perks/redspace_paint_equipped.png" id="2_n640y"]
+[ext_resource type="Texture2D" uid="uid://usm8x7xjyk2x" path="res://Textures/Perks/redspace_paint.png" id="3_yte3b"]
+[ext_resource type="Script" uid="uid://brk1lcgtq0fmo" path="res://Resources/Custom/PerkData/Base/PerkModifier.gd" id="4_2wxbl"]
+[ext_resource type="Script" uid="uid://cd4tbi43h4hjk" path="res://Resources/Custom/PerkData/Base/PerkData.gd" id="5_twtlt"]
+
+[sub_resource type="Resource" id="Resource_uvn7x"]
+script = ExtResource("4_2wxbl")
+target_component = "HealFromParryComponent"
+ensure_component = true
+property = "heal"
+operation = 1
+value = 0.1
+metadata/_custom_type_script = "uid://brk1lcgtq0fmo"
+
+[sub_resource type="Resource" id="Resource_qyf8a"]
+script = ExtResource("5_twtlt")
+perk_id = &"RedspacePaint"
+perk_rarity = 2
+icon_texture = ExtResource("3_yte3b")
+equipped_texture = ExtResource("2_n640y")
+modifiers = Array[ExtResource("4_2wxbl")]([SubResource("Resource_uvn7x")])
+metadata/_custom_type_script = "uid://cd4tbi43h4hjk"
+
+[node name="RedspacePaint" type="Node" unique_id=1604168029]
+script = ExtResource("1_n640y")
+perk_data = SubResource("Resource_qyf8a")
+metadata/_custom_type_script = "uid://bdektmaq0iu7p"

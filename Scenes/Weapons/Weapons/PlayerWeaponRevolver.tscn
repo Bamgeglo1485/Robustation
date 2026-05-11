@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://e5glkfdvjd7d"]
+
+[ext_resource type="Script" uid="uid://bw4mwgbu4yydn" path="res://Components/Weapons/RevolverWeaponComponent.gd" id="1_l4e5k"]
+[ext_resource type="PackedScene" uid="uid://bkpfu8be5bdcc" path="res://Scenes/Projectiles/Revolver_bullet.tscn" id="2_x7erm"]
+[ext_resource type="PackedScene" uid="uid://ryax633fcqok" path="res://Scenes/Effects/Particles/PistolFire.tscn" id="3_vtgfn"]
+[ext_resource type="Texture2D" uid="uid://bip6facd5j7h1" path="res://Textures/Weapons/Revolver/revolver-inhand.png" id="4_l4e5k"]
+[ext_resource type="Texture2D" uid="uid://bdx4diykffbcc" path="res://Textures/Weapons/Revolver/revolver_icon.png" id="5_x7erm"]
+[ext_resource type="AudioStream" uid="uid://djxvvhoh1ra23" path="res://Audio/Weapon/revolver.ogg" id="6_x7erm"]
+[ext_resource type="AudioStream" uid="uid://2r0y32cx4e8s" path="res://Audio/Weapon/empty.ogg" id="8_4us7i"]
+[ext_resource type="AudioStream" uid="uid://4ao03nsaw1xc" path="res://Audio/Weapon/revolver_magin.ogg" id="8_vtgfn"]
+[ext_resource type="Script" uid="uid://bejdx4rrda4yw" path="res://Components/Weapons/RevolverWeaponChargerComponent.gd" id="9_x7erm"]
+[ext_resource type="PackedScene" uid="uid://ctjnwl5bhistw" path="res://Scenes/Effects/Particles/Case/BaseCase.tscn" id="10_x7erm"]
+[ext_resource type="Script" uid="uid://d3bhv7gdscl62" path="res://Components/Weapons/Misc/RandomWeaponRarityComponent.gd" id="17_i6uvj"]
+
+[node name="Revolver" type="Node" unique_id=1229414995 node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound", "bullets_recover_sound", "alt_attack")]
+script = ExtResource("1_l4e5k")
+projectile = ExtResource("2_x7erm")
+spread_angle = 5
+bullets_max_count = 6
+bullets = 6
+bullets_recover_count = 6
+shots = 1
+shoot_sound = NodePath("ShootSound")
+empty_shoot_sound = NodePath("EmptySound")
+bullets_recover_sound = NodePath("BulletRecoverSound")
+bullets_recovery_delay = 0.0
+gun_fire_effect = ExtResource("3_vtgfn")
+cooldown_delay = 0.1
+swing_delay = 0.0
+equipped_texture = ExtResource("4_l4e5k")
+equipped_scale = Vector2(1, 1)
+icon_texture = ExtResource("5_x7erm")
+swing_rotation_multiplier = 0.0
+attack_rotation_multiplier = -0.6
+attack_shift_multiplier = -0.7
+alt_attack = NodePath("RevolverWeaponCharger")
+weapon_name = "Shotgun"
+color = Color(0.442488, 0.22811863, 0.03323717, 1)
+weapon_class = "Mid-Long Range"
+weapon_desc = "1. Revolver
+2. Mid-Long Range
+3. Common
+------
+1. Medium damage.
+2. Unlimited rate of fire, unlimited reload speed.
+3. Manual reload.
+------
+1. Fires a bullet that can be parried, turning it into a laser. The delay between shots is minimal.
+2. Alternate attack empties the magazine, after which each use adds +1 ammo to the magazine.
+------"
+weapon_rarity = 2
+metadata/_custom_type_script = "uid://bw4mwgbu4yydn"
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="." unique_id=1809781318]
+stream = ExtResource("6_x7erm")
+max_polyphony = 10
+
+[node name="EmptySound" type="AudioStreamPlayer2D" parent="." unique_id=374564107]
+stream = ExtResource("8_4us7i")
+
+[node name="BulletRecoverSound" type="AudioStreamPlayer2D" parent="." unique_id=1727428930]
+stream = ExtResource("8_vtgfn")
+volume_db = 10.0
+max_polyphony = 10
+
+[node name="RevolverWeaponCharger" type="Node" parent="." unique_id=316286323]
+script = ExtResource("9_x7erm")
+cartridge_fall = ExtResource("10_x7erm")
+metadata/_custom_type_script = "uid://bejdx4rrda4yw"
+
+[node name="RandomWeaponRarityComponent" type="Node" parent="." unique_id=1426791527]
+script = ExtResource("17_i6uvj")
+adminabuse_chance = 0.1
+robust_chance = 0.6
+common_chance = 0.3
+adminabuse_multiplier = 1.5
+common_multiplier = 0.7
+adminabuse_extra_penetrations = 1
+adminabuse_second_multiplier = 0.7
+common_second_multiplier = 1.3
+metadata/_custom_type_script = "uid://d3bhv7gdscl62"

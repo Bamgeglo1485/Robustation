@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Robustation-OOP"
-config/version="0.1.3"
+config/version="0.1.4"
 run/main_scene="uid://8useii0cqwer"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
@@ -34,6 +34,7 @@ SettingsConfigSystem="*uid://c86gbf2xo8vfy"
 BeehaveGlobalMetrics="*uid://c3ktl6ontsdt7"
 BeehaveGlobalDebugger="*uid://bl3ma400hpvsh"
 IntroductionSystem="*uid://bxbp4lhgr6m6m"
+GlobalVariables="*uid://ckonde1lpghu5"
 
 [display]
 
@@ -172,6 +173,11 @@ jump={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"location":0,"echo":false,"script":null)
 ]
 }
+slide={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194326,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
 
 [internationalization]
 
@@ -181,6 +187,12 @@ locale/translation_remaps={
 }
 locale/translations=PackedStringArray("res://localization.ru.translation", "res://perk_localizations.en.translation", "res://perk_localizations.ru.translation")
 locale/translation_add_builtin_strings_to_pot=true
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Enemies"
+2d_physics/layer_20="Objects that can be jumped over"
 
 [physics]
 

@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bi1gje1pfokqc" path="res://Components/Weapons/RangeWeaponComponent.gd" id="8_t3amk"]
 [ext_resource type="PackedScene" uid="uid://clyc1832p50m3" path="res://Scenes/Projectiles/CrusherProjectile.tscn" id="9_t3amk"]
 [ext_resource type="Texture2D" uid="uid://kaetitdx6nj0" path="res://Textures/Perks/crusher_module.png" id="10_t3amk"]
+[ext_resource type="Script" uid="uid://d3bhv7gdscl62" path="res://Components/Weapons/Misc/RandomWeaponRarityComponent.gd" id="12_laxcv"]
 [ext_resource type="AudioStream" uid="uid://r88fv2nles4" path="res://Audio/Weapon/kinetic_accel.ogg" id="12_qtk55"]
 [ext_resource type="AudioStream" uid="uid://ctlu60sqttxw5" path="res://Audio/Weapon/kinetic_reload.ogg" id="13_bg8ut"]
 [ext_resource type="AudioStream" uid="uid://b3uvy6ds1t6fu" path="res://Audio/Weapon/Hit/heavy_punch.ogg" id="13_jre7l"]
@@ -31,9 +32,21 @@ icon_texture = ExtResource("3_laxcv")
 self_throw_speed = 200
 attack_rotation_multiplier = 0.5
 alt_attack = NodePath("AltCrusher")
-weapon_name = "Toolbox"
-color = Color(0.8917651, 0, 0.28858507, 1)
+weapon_name = "Crusher"
+color = Color(0.3263999, 0.18416753, 0.32814524, 1)
 weapon_class = "Melee"
+weapon_desc = "1. Crusher
+2. Close Range
+3. Robust
+------
+1. High damage.
+2. Average attack speed.
+3. Requires aiming directly at the target.
+------
+1. Attack that requires precise placement on the enemy, making parrying nearly impossible.
+2. Fires a bolt of energy that marks the enemy for death. Hitting an marked enemy with a crusher restores 50% health and removes 30% of morale damage. The bolt can be parried to turn into a stunning and knockdown laser, but it only heals for 30% of health.
+------"
+weapon_rarity = 2
 metadata/_custom_type_script = "uid://6b7bcparwq17"
 
 [node name="ParrySound" type="AudioStreamPlayer2D" parent="." unique_id=1803879457]
@@ -45,7 +58,7 @@ stream = ExtResource("6_ysbvn")
 [node name="MeleeHitSound" type="AudioStreamPlayer2D" parent="." unique_id=724755034]
 stream = ExtResource("13_jre7l")
 
-[node name="AltCrusher" type="Node" parent="." unique_id=1852817361 node_paths=PackedStringArray("shoot_sound", "bullets_recover_sound", "alt_attack")]
+[node name="AltCrusher" type="Node" parent="." unique_id=1852817361 node_paths=PackedStringArray("shoot_sound", "bullets_recover_sound")]
 script = ExtResource("8_t3amk")
 projectile = ExtResource("9_t3amk")
 spread_angle = 0
@@ -68,7 +81,6 @@ attack_rotation_multiplier = -0.6
 attack_shift_multiplier = -0.7
 parriable = false
 auto = true
-alt_attack = NodePath("")
 weapon_name = "Kinetic Accelerator"
 color = Color(0.66250384, 0.47551048, 0.24570236, 1)
 weapon_class = "Melee"
@@ -84,3 +96,14 @@ max_polyphony = 3
 stream = ExtResource("13_bg8ut")
 volume_db = 5.0
 max_distance = 600.0
+
+[node name="RandomWeaponRarityComponent" type="Node" parent="." unique_id=455130059]
+script = ExtResource("12_laxcv")
+adminabuse_chance = 0.1
+robust_chance = 0.6
+common_chance = 0.3
+adminabuse_multiplier = 1.4
+common_multiplier = 0.7
+adminabuse_second_multiplier = 0.6
+common_second_multiplier = 1.3
+metadata/_custom_type_script = "uid://d3bhv7gdscl62"

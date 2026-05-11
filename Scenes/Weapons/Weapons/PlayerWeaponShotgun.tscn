@@ -16,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://dvixjlsidryp0" path="res://Audio/Weapon/Hit/reel.ogg" id="14_f2bf0"]
 [ext_resource type="AudioStream" uid="uid://c7yhulhuc27f4" path="res://Audio/Weapon/Projectile/harpoon.ogg" id="15_ujybp"]
 [ext_resource type="Material" uid="uid://ddgd2dckacjiv" path="res://Resources/Shaders/Wave.tres" id="16_82mc8"]
+[ext_resource type="Script" uid="uid://d3bhv7gdscl62" path="res://Components/Weapons/Misc/RandomWeaponRarityComponent.gd" id="17_v2pih"]
 
 [node name="Shotgun" type="Node" unique_id=1344688935 node_paths=PackedStringArray("shoot_sound", "empty_shoot_sound", "bullets_recover_sound", "overheat_alert", "alt_attack")]
 script = ExtResource("1_kjgi3")
@@ -44,7 +45,18 @@ attack_shift_multiplier = -0.7
 alt_attack = NodePath("ShotgunHook")
 weapon_name = "Shotgun"
 color = Color(0.442488, 0.22811863, 0.03323717, 1)
-weapon_class = "Melee-mid"
+weapon_class = "Melee-Mid Range"
+weapon_desc = "1. Shotgun
+2. Melee-Mid Range
+3. Robust
+------
+1. High damage (pellets).
+2. High rate of fire, moderate reload speed.
+3. Frequent firing causes the shotgun to overheat, reducing damage and preventing parrying.
+------
+1. Fires a 3-shot pellet that can be parried, creating an explosive laser beams.
+2. Alternate attack fires a hook that either pulls an enemy or the user (depending on the target's mass). Pulling fully reloads the shotgun.
+------"
 weapon_rarity = 2
 metadata/_custom_type_script = "uid://bi1gje1pfokqc"
 
@@ -94,3 +106,15 @@ points = PackedVector2Array(0, 0)
 width = 50.0
 default_color = Color(0.15683922, 0.005713961, 0.03873314, 1)
 texture_mode = 2
+
+[node name="RandomWeaponRarityComponent" type="Node" parent="." unique_id=1426791527]
+script = ExtResource("17_v2pih")
+adminabuse_chance = 0.1
+robust_chance = 0.6
+common_chance = 0.3
+adminabuse_multiplier = 1.5
+common_multiplier = 0.7
+adminabuse_extra_penetrations = 1
+adminabuse_second_multiplier = 0.7
+common_second_multiplier = 1.3
+metadata/_custom_type_script = "uid://d3bhv7gdscl62"

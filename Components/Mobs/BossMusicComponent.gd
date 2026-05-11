@@ -25,7 +25,6 @@ func _ready() -> void:
 
 func _health_changed(_new_health: float) -> void:
 	if _new_health <= 0:
-		player_music.reset_main()
 		player_music.main_music_player.pitch_scale = 1.0
 		player_tendency_music.force_change()
 		return

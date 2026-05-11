@@ -23,7 +23,7 @@ func _ready() -> void:
 	error_panel.hide()
 	base_interval = spawn_time / clone_count
 	
-	await get_tree().process_frame
+	await tree.process_frame
 	_calculate_spawn_area()
 	
 	clone_timer = Timer.new()
@@ -32,7 +32,7 @@ func _ready() -> void:
 	add_child(clone_timer)
 	_reset_timer()
 	
-	await get_tree().create_timer(can_restart_delay).timeout
+	await tree.create_timer(can_restart_delay).timeout
 	var restart: RestartComponent = RestartComponent.new()
 	add_child(restart)
 

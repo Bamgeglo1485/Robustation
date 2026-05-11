@@ -12,10 +12,12 @@ func _notification(notif):
 		direction_component = get_direction_component()
 
 func get_direction_component() -> DirectionComponent:
-	if parent.has_node("DirectionComponent"):
-		return parent.get_node("DirectionComponent")
-	else:
-		return null
+	direction_component = parent.get_node_or_null("DirectionComponent")
+	
+	if !direction_component:
+		direction_component = parent.get_parent().get_node_or_null("DirectionComponent")
+	
+	return direction_component
 
 func _ready() -> void:
 	if direction_component:

@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c03qvua0tf8st" path="res://Scenes/Explosion/MiniExplosion.tscn" id="6_blmrq"]
 [ext_resource type="Script" uid="uid://wy7p8eumw3ik" path="res://Components/Entity/DifficultyDependentProjectileSpeedComponent.gd" id="7_blmrq"]
 [ext_resource type="Script" uid="uid://b644hh7xbxspy" path="res://Components/Entity/DifficultyDependentProjectileDamageComponent.gd" id="8_rtoq7"]
+[ext_resource type="Script" uid="uid://ce7fhtshm5naj" path="res://Components/Entity/DifficultyDependentProjectileDelayedDamageComponent.gd" id="9_v4dyq"]
 
 [sub_resource type="Shader" id="Shader_ut4xv"]
 code = "shader_type canvas_item;
@@ -35,8 +36,8 @@ material = SubResource("ShaderMaterial_doom2")
 texture = NodePath("../Texture")
 speed = 700
 damage = 6
-delayed_damage = 3
-delayed_damage_delay = 5
+delayed_damage = 2.0
+delayed_damage_delay = 4.0
 parry_damage_modifier = 3.0
 
 [node name="CollisionShape2D" parent="ProjectileComponent" index="0" unique_id=1391622764]
@@ -53,9 +54,9 @@ texture = ExtResource("3_doom2")
 [node name="TrailEffectComponent" type="Node" parent="." index="5" unique_id=15597664]
 script = ExtResource("4_1lymg")
 colors = Array[Color]([Color(0.8164007, 0, 0, 1), Color(0.7808727, 0.00017808378, 0.689379, 1)])
-clean_delay = 1.0
+clean_delay = 0.2
 trail_lifetime = 0.2
-required_position_length = 800
+required_position_length = 3000
 metadata/_custom_type_script = "uid://dfahm1hamvt58"
 
 [node name="SetProjectileExplosionOnTriggerComponent" type="Node" parent="." index="6" unique_id=1857456193]
@@ -73,7 +74,14 @@ metadata/_custom_type_script = "uid://wy7p8eumw3ik"
 
 [node name="DifficultyDependentProjectileDamageComponent" type="Node" parent="." index="10" unique_id=756869143]
 script = ExtResource("8_rtoq7")
-damage_on_roleplayer = 4
-damage_on_agent = 6
-damage_on_greytide = 10
+damage_on_roleplayer = 2
+damage_on_agent = 4
+damage_on_greytide = 8
 metadata/_custom_type_script = "uid://b644hh7xbxspy"
+
+[node name="DifficultyDependentProjectileDelayedDamageComponent" type="Node" parent="." index="11" unique_id=2045273194]
+script = ExtResource("9_v4dyq")
+damage_on_roleplayer = 1.0
+damage_on_agent = 1.5
+damage_on_greytide = 2.0
+metadata/_custom_type_script = "uid://ce7fhtshm5naj"

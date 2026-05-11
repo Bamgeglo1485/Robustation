@@ -29,9 +29,18 @@
 [ext_resource type="Resource" uid="uid://tcq0h43ui04w" path="res://Resources/Custom/Enemy/RobustBotanist.tres" id="13_4w5h0"]
 [ext_resource type="PackedScene" uid="uid://cfg8g768i2k83" path="res://Scenes/Perks/PerkSceneBitchBall.tscn" id="13_muyte"]
 [ext_resource type="PackedScene" uid="uid://bm4hm4bycw8ti" path="res://Scenes/Perks/PerkSceneGoliathPlate.tscn" id="14_muyte"]
+[ext_resource type="PackedScene" uid="uid://dplevsy1jomld" path="res://Scenes/Perks/PerkSceneGalaxythistle.tscn" id="15_4g3hn"]
 [ext_resource type="Environment" uid="uid://r1a7fr7x6en8" path="res://DemoTrash/Light.tres" id="15_qlwvw"]
 [ext_resource type="Script" uid="uid://dptr5blvqsgks" path="res://Components/Interface/Menu/Settings/WorldEnvComponent.gd" id="15_rpdke"]
+[ext_resource type="PackedScene" uid="uid://dbarl1l1jbwt4" path="res://Scenes/Perks/PerkSceneShinyGreenBullets.tscn" id="16_mufbu"]
+[ext_resource type="PackedScene" uid="uid://c5oy5lbyef8ac" path="res://Scenes/Weapons/RandomCollectableWeapon.tscn" id="17_1wusj"]
+[ext_resource type="PackedScene" uid="uid://b3pri7wp4hsjb" path="res://Scenes/Perks/PerkScenePlasmaTank.tscn" id="17_34yx5"]
+[ext_resource type="PackedScene" uid="uid://cu7kn4eus454b" path="res://Scenes/Perks/PerkSceneCombatGloves.tscn" id="18_ye3yq"]
+[ext_resource type="PackedScene" uid="uid://c7fwcipo1a7jq" path="res://Scenes/Perks/PerkSceneRedspacePaint.tscn" id="19_jbrfh"]
+[ext_resource type="PackedScene" uid="uid://51553qtnrkvu" path="res://Scenes/Perks/PerkSceneInspectorsFlask.tscn" id="20_rvf63"]
 [ext_resource type="Script" uid="uid://08qu36la5uv4" path="res://Components/Interface/Menu/Settings/ParallaxComponent.gd" id="20_vtcgr"]
+[ext_resource type="PackedScene" uid="uid://duyalsqrvhov0" path="res://Scenes/Perks/PerkSceneRocketJumpers.tscn" id="21_p17xd"]
+[ext_resource type="PackedScene" uid="uid://dhw0xsac3vmpn" path="res://Scenes/Perks/PerkSceneStudentDiet.tscn" id="22_vdwl3"]
 
 [node name="Game" type="Node2D" unique_id=1459948473]
 physics_interpolation_mode = 2
@@ -39,6 +48,8 @@ metadata/_edit_vertical_guides_ = [-31.0]
 
 [node name="Player" parent="." unique_id=26438699 instance=ExtResource("3_fsxsm")]
 position = Vector2(-2, -2)
+collision_layer = 1
+collision_mask = 1
 
 [node name="DEBUG" type="CanvasLayer" parent="Player" unique_id=624192426]
 
@@ -113,6 +124,7 @@ layer = 0
 position = Vector2(158, -75)
 tile_map_data = PackedByteArray("AADn//b/AgADAAIAAADn//X/AgAEAAAAAADo//X/AgACAAMAAAANAPX/AgAAAAMAAAAOAPX/AgAHAAAAAAAOAPb/AgADAAIAAADn/xAAAgADAAAAAADn/xEAAgAEAAMAAADo/xEAAgACAAMAAAAOABEAAgAHAAMAAAANABEAAgAAAAMAAAAOABAAAgADAAAAAAAOAA8AAgAPAAIAAAAOAA4AAgAPAAEAAAAOAA0AAgAPAAEAAAAOAAwAAgAPAAEAAAAOAAsAAgAPAAEAAAAOAAoAAgAPAAEAAAAOAAkAAgAPAAEAAAAOAAgAAgAPAAEAAAAOAAcAAgAPAAEAAAAOAAYAAgAPAAEAAAAOAAUAAgAPAAEAAAAOAAQAAgAPAAEAAAAOAAMAAgAPAAEAAAAOAAIAAgAPAAEAAAAOAAEAAgAPAAEAAAAOAAAAAgAPAAEAAAAOAP//AgAPAAEAAAAOAP7/AgAPAAEAAAAOAP3/AgAPAAEAAAAOAPz/AgAPAAEAAAAOAPv/AgAPAAEAAAAOAPr/AgAPAAEAAAAOAPn/AgAPAAEAAAAOAPj/AgAPAAEAAAAOAPf/AgAPAAAAAAAMAPX/AgAOAAMAAAALAPX/AgANAAMAAAAKAPX/AgANAAMAAAAJAPX/AgANAAMAAAAIAPX/AgANAAMAAAAHAPX/AgANAAMAAAAGAPX/AgANAAMAAAAFAPX/AgANAAMAAAAEAPX/AgANAAMAAAADAPX/AgANAAMAAAACAPX/AgANAAMAAAABAPX/AgANAAMAAAD///X/AgANAAMAAAD+//X/AgANAAMAAAD9//X/AgANAAMAAAD8//X/AgANAAMAAAD7//X/AgANAAMAAAD6//X/AgANAAMAAAAAAPX/AgANAAMAAAD5//X/AgANAAMAAAD4//X/AgANAAMAAAD3//X/AgANAAMAAAD2//X/AgANAAMAAAD1//X/AgANAAMAAAD0//X/AgANAAMAAADz//X/AgANAAMAAADy//X/AgANAAMAAADx//X/AgANAAMAAADw//X/AgANAAMAAADv//X/AgANAAMAAADu//X/AgANAAMAAADt//X/AgANAAMAAADs//X/AgANAAMAAADr//X/AgANAAMAAADq//X/AgANAAMAAADp//X/AgAMAAMAAADn//f/AgAPAAAAAADn//j/AgAPAAEAAADn//n/AgAPAAEAAADn//r/AgAPAAEAAADn//v/AgAPAAEAAADn//z/AgAPAAEAAADn//3/AgAPAAEAAADn//7/AgAPAAEAAADn////AgAPAAEAAADn/wAAAgAPAAEAAADn/wEAAgAPAAEAAADn/wIAAgAPAAEAAADn/wMAAgAPAAEAAADn/wQAAgAPAAEAAADn/wUAAgAPAAEAAADn/wYAAgAPAAEAAADn/wcAAgAPAAEAAADn/wgAAgAPAAEAAADn/wkAAgAPAAEAAADn/woAAgAPAAEAAADn/wsAAgAPAAEAAADn/wwAAgAPAAEAAADn/w0AAgAPAAEAAADn/w4AAgAPAAEAAADn/w8AAgAPAAIAAADp/xEAAgAMAAMAAADq/xEAAgANAAMAAADr/xEAAgANAAMAAADs/xEAAgANAAMAAADt/xEAAgANAAMAAADu/xEAAgANAAMAAADv/xEAAgANAAMAAADw/xEAAgANAAMAAADx/xEAAgANAAMAAADy/xEAAgANAAMAAADz/xEAAgANAAMAAAD0/xEAAgANAAMAAAD1/xEAAgANAAMAAAD2/xEAAgANAAMAAAD3/xEAAgANAAMAAAD4/xEAAgANAAMAAAD5/xEAAgANAAMAAAD6/xEAAgANAAMAAAD7/xEAAgANAAMAAAD8/xEAAgANAAMAAAD9/xEAAgANAAMAAAD+/xEAAgANAAMAAAD//xEAAgANAAMAAAAAABEAAgANAAMAAAABABEAAgANAAMAAAACABEAAgANAAMAAAADABEAAgANAAMAAAAEABEAAgANAAMAAAAFABEAAgANAAMAAAAGABEAAgANAAMAAAAHABEAAgANAAMAAAAIABEAAgANAAMAAAAJABEAAgANAAMAAAAKABEAAgANAAMAAAALABEAAgANAAMAAAAMABEAAgAOAAMAAAA=")
 tile_set = ExtResource("7_qlwvw")
+occlusion_enabled = false
 physics_quadrant_size = 32
 navigation_enabled = false
 
@@ -123,18 +135,19 @@ color = Color(0, 0, 0, 1)
 position = Vector2(50, 29)
 energy = 2.0
 texture = ExtResource("8_rpdke")
-texture_scale = 10.0
+texture_scale = 8.5
 
 [node name="ArenaComponent" type="Node" parent="." unique_id=1165337052 node_paths=PackedStringArray("area_info", "perk_choice_start_sound", "perk_choice_sound", "perk_selected_sound")]
 process_mode = 3
 script = ExtResource("10_glinl")
-perks = Array[PackedScene]([ExtResource("9_cvmb5"), ExtResource("7_1xc2n"), ExtResource("8_oyup5"), ExtResource("9_a3v0t"), ExtResource("10_a3v0t"), ExtResource("11_q4fix"), ExtResource("12_s4atg"), ExtResource("13_muyte"), ExtResource("14_muyte")])
-enemy_perks = Array[PackedScene]([ExtResource("9_cvmb5"), ExtResource("7_1xc2n"), ExtResource("8_oyup5"), ExtResource("9_a3v0t"), ExtResource("10_a3v0t"), ExtResource("11_q4fix"), ExtResource("12_s4atg"), ExtResource("13_muyte"), ExtResource("14_muyte")])
-boss_battles_per = 9
+perks = Array[PackedScene]([ExtResource("9_cvmb5"), ExtResource("7_1xc2n"), ExtResource("8_oyup5"), ExtResource("9_a3v0t"), ExtResource("10_a3v0t"), ExtResource("11_q4fix"), ExtResource("12_s4atg"), ExtResource("13_muyte"), ExtResource("14_muyte"), ExtResource("15_4g3hn"), ExtResource("16_mufbu"), ExtResource("17_34yx5"), ExtResource("18_ye3yq"), ExtResource("19_jbrfh"), ExtResource("20_rvf63"), ExtResource("21_p17xd"), ExtResource("22_vdwl3")])
+enemy_perks = Array[PackedScene]([ExtResource("9_cvmb5"), ExtResource("7_1xc2n"), ExtResource("8_oyup5"), ExtResource("9_a3v0t"), ExtResource("10_a3v0t"), ExtResource("11_q4fix"), ExtResource("12_s4atg"), ExtResource("13_muyte"), ExtResource("14_muyte"), ExtResource("16_mufbu"), ExtResource("18_ye3yq"), ExtResource("21_p17xd")])
+boss_kill_reward = ExtResource("17_1wusj")
+boss_battles_per = 5
 area_info = NodePath("../Player/DEBUG/Control/RichTextLabel")
-start_budget = 50.0
 available_enemies = Array[ExtResource("11_72g0p")]([ExtResource("8_33n3b"), ExtResource("9_rxmp4"), ExtResource("10_qyr8x"), ExtResource("11_2cxdh"), ExtResource("11_4w5h0"), ExtResource("12_4w5h0")])
 available_bosses = Array[ExtResource("11_72g0p")]([ExtResource("10_ss60k"), ExtResource("13_4w5h0")])
+budget_per_wave = 0.75
 spawn_positions = Array[Vector2]([Vector2(-576, 0), Vector2(594, 0), Vector2(0, 453), Vector2(0, -386)])
 perk_choice_start_sound = NodePath("PerkStart")
 perk_choice_sound = NodePath("PerkChoice")

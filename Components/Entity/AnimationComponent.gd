@@ -9,10 +9,10 @@ var last_time_scale: float
 @export var ignore_time_scale: bool = false
 @onready var shader: ShaderMaterial
 
-
-
-func set_animation(tween, priority, rewrite = false) -> void:
+func set_animation(tween: Tween, priority: int, rewrite: bool = false) -> void:
 	if (priority > animation_priority) or (priority == animation_priority and rewrite):
+		if !tween.is_running():
+			tween.play()
 		if animation_tween:
 			animation_tween.kill()
 		tween.set_ignore_time_scale(ignore_time_scale)
@@ -31,9 +31,10 @@ func clear_animation(kill_tween = true) -> void:
 
 func _clear_tween() -> void:
 	var _tween: Tween = create_tween()
+	_tween.set_ease(Tween.EASE_OUT)
+	_tween.set_trans(Tween.TRANS_BACK)
 	_tween.tween_property(parent, "global_rotation", 0.0, 0.3)
 	_tween.tween_property(parent, "rotation", 0.0, 0.3)
-	_tween.tween_property(parent, "scale", Vector2(1, 1), 0.3)
 	_tween.tween_property(parent, "skew", 0.0, 0.3)
 
 func shift_to_direction(

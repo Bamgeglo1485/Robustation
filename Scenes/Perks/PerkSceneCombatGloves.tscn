@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://cu7kn4eus454b"]
+
+[ext_resource type="Script" uid="uid://bdektmaq0iu7p" path="res://Components/Perks/Base/PerkComponent.gd" id="1_yvu2i"]
+[ext_resource type="Texture2D" uid="uid://c2yscpdt4mpeq" path="res://Textures/Perks/combat_glove_equipped.png" id="2_yvu2i"]
+[ext_resource type="Texture2D" uid="uid://bdaico7q8lswu" path="res://Textures/Perks/combat_glove.png" id="3_kb6bc"]
+[ext_resource type="Script" uid="uid://brk1lcgtq0fmo" path="res://Resources/Custom/PerkData/Base/PerkModifier.gd" id="4_1eeng"]
+[ext_resource type="Script" uid="uid://cd4tbi43h4hjk" path="res://Resources/Custom/PerkData/Base/PerkData.gd" id="5_2cesl"]
+
+[sub_resource type="Resource" id="Resource_uvn7x"]
+script = ExtResource("4_1eeng")
+target_component = "WeaponUserComponent"
+property = "recover"
+value = 0.95
+metadata/_custom_type_script = "uid://brk1lcgtq0fmo"
+
+[sub_resource type="Resource" id="Resource_yvu2i"]
+script = ExtResource("4_1eeng")
+target_component = "WeaponUserComponent"
+property = "cooldown"
+value = 0.95
+metadata/_custom_type_script = "uid://brk1lcgtq0fmo"
+
+[sub_resource type="Resource" id="Resource_qyf8a"]
+script = ExtResource("5_2cesl")
+perk_id = &"CombatGloves"
+icon_texture = ExtResource("3_kb6bc")
+equipped_texture = ExtResource("2_yvu2i")
+modifiers = Array[ExtResource("4_1eeng")]([SubResource("Resource_uvn7x"), SubResource("Resource_yvu2i")])
+metadata/_custom_type_script = "uid://cd4tbi43h4hjk"
+
+[node name="CombatGloves" type="Node" unique_id=1604168029]
+script = ExtResource("1_yvu2i")
+perk_data = SubResource("Resource_qyf8a")
+metadata/_custom_type_script = "uid://bdektmaq0iu7p"

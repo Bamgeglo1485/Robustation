@@ -19,7 +19,6 @@ bullets_max_count = 1
 bullets = 1
 bullets_recover_count = 1
 shots = 1
-shots_angle = 0
 shoot_sound = NodePath("ShootSound")
 empty_shoot_sound = NodePath("EmptySound")
 bullets_recovery_delay = 1.0
@@ -35,7 +34,18 @@ attack_shift_multiplier = -0.7
 alt_attack = NodePath("LasergunUnlethal")
 weapon_name = "Lasergun"
 color = Color(0.677698, 5.4098964e-05, 0.540338, 1)
-weapon_class = "Range"
+weapon_class = "Long Range"
+weapon_desc = "1. Laser Gun
+2. Long Range
+3. Common
+------
+1. Conditional Damage.
+2. Average Rate of Fire.
+3. Near-zero damage at close range.
+------
+1. Fires a laser that deals instant and delayed damage based on range.
+2. Alternate attack fires lightning that, upon impact, creates an electrical chain that knocks down targets and deals high stamina damage.
+------"
 metadata/_custom_type_script = "uid://bi1gje1pfokqc"
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="." unique_id=1943004527]

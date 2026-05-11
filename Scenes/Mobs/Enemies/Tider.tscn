@@ -19,7 +19,7 @@
 [ext_resource type="Script" uid="uid://hv0g6akh0ftn" path="res://Components/Mobs/RandomizeMobMoverComponent.gd" id="24_nl1i0"]
 [ext_resource type="Texture2D" uid="uid://t8go84dailgi" path="res://Textures/Mobs/Mobs/Hair/shorthairg.png" id="25_1l0qo"]
 [ext_resource type="Script" uid="uid://bi1gje1pfokqc" path="res://Components/Weapons/RangeWeaponComponent.gd" id="25_t8yss"]
-[ext_resource type="Script" uid="uid://bd0gbdhbjn7xx" path="res://Components/Weapons/RandomWeaponSelectorComponent.gd" id="25_urnpk"]
+[ext_resource type="Script" uid="uid://bd0gbdhbjn7xx" path="res://Components/Weapons/Misc/RandomWeaponSelectorComponent.gd" id="25_urnpk"]
 [ext_resource type="PackedScene" uid="uid://jg5yy62ibcvf" path="res://Scenes/Projectiles/BrokenBottle.tscn" id="26_51p2b"]
 [ext_resource type="Texture2D" uid="uid://k32gxv505ucy" path="res://Textures/Mobs/Mobs/Hair/sidecut.png" id="26_lvqdh"]
 [ext_resource type="Texture2D" uid="uid://bk26qjgmxjoyq" path="res://Textures/Weapons/Pneumatic/pneumatic-inhand.png" id="27_8rngm"]

@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://c2enn441tmky8" path="res://Audio/Effects/rush.ogg" id="9_y3v4h"]
 [ext_resource type="AudioStream" uid="uid://c14ckhtbrb550" path="res://Audio/Weapon/parry.ogg" id="10_jkj8r"]
 [ext_resource type="Texture2D" uid="uid://daq6dn5bnvcwu" path="res://Textures/Weapons/Toolbox/toolbox_blue.png" id="10_k2qsy"]
+[ext_resource type="Script" uid="uid://udvlhbibn11h" path="res://Components/Weapons/Misc/DifficultyDependentWeaponDamageComponent.gd" id="10_q07ed"]
 [ext_resource type="AudioStream" uid="uid://blc0o0577akc7" path="res://Audio/Weapon/Hit/smash.ogg" id="11_k2qsy"]
 [ext_resource type="AudioStream" uid="uid://c86nvnjcdaiue" path="res://Audio/Weapon/swing.mp3" id="13_jkj8r"]
 [ext_resource type="Script" uid="uid://bi1gje1pfokqc" path="res://Components/Weapons/RangeWeaponComponent.gd" id="14_da6d8"]
@@ -100,8 +101,8 @@ corner_detail = 6
 visibility_layer = 3
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
-base_max_speed = 350.0
-acceleration = 350.0
+base_max_speed = 270.0
+acceleration = 270.0
 friction = 700.0
 can_fall_from_body = false
 set_navigation_velocity = false
@@ -116,7 +117,7 @@ material = SubResource("ShaderMaterial_jkj8r")
 
 [node name="HealthComponent" parent="." index="4" unique_id=1758373275]
 hitstop_on_death = true
-max_health = 1800
+max_health = 1200.0
 INVINCIBLE = true
 damage_type_modifiers = Dictionary[String, float]({
 "Projectile": 1.5
@@ -152,6 +153,13 @@ stream = ExtResource("6_yuitr")
 [node name="MissSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Spear" index="1" unique_id=69188948]
 stream = ExtResource("7_fe6br")
 
+[node name="DifficultyDependentWeaponDamageComponent" type="Node" parent="WeaponUserComponent/Spear" index="2" unique_id=760895449]
+script = ExtResource("10_q07ed")
+damage_on_roleplayer = 4
+damage_on_agent = 7
+damage_on_greytide = 15
+metadata/_custom_type_script = "uid://udvlhbibn11h"
+
 [node name="Toolbox" type="Node" parent="WeaponUserComponent" index="1" unique_id=1309996882 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound", "swinging_sound")]
 script = ExtResource("3_tryy6")
 damage = 20.0
@@ -173,6 +181,13 @@ self_throw_speed = 200
 attack_rotation_multiplier = 0.5
 swinging_sound = NodePath("../../Sounds/SwingSound")
 metadata/_custom_type_script = "uid://6b7bcparwq17"
+
+[node name="DifficultyDependentWeaponDamageComponent" type="Node" parent="WeaponUserComponent/Toolbox" index="0" unique_id=1827114830]
+script = ExtResource("10_q07ed")
+damage_on_roleplayer = 3
+damage_on_agent = 5
+damage_on_greytide = 15
+metadata/_custom_type_script = "uid://udvlhbibn11h"
 
 [node name="Bow" type="Node" parent="WeaponUserComponent" index="2" unique_id=1549778911 node_paths=PackedStringArray("shoot_sound", "bullets_recover_sound")]
 script = ExtResource("14_da6d8")
@@ -243,7 +258,7 @@ avoidance_enabled = false
 radius = 64.0
 
 [node name="BeehaveTree" parent="." index="16" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@27470")
+blackboard = NodePath("@Node@56812")
 
 [node name="MoveToPlayer" type="Node" parent="BeehaveTree" index="0" unique_id=478688837]
 script = ExtResource("33_8bpma")
@@ -356,7 +371,7 @@ metadata/_custom_type_script = "uid://b2bu3qqcql0lk"
 [node name="AttackTargetAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/Bow" index="2" unique_id=1997944300 node_paths=PackedStringArray("weapon")]
 script = ExtResource("23_7am8w")
 weapon = NodePath("../../../../../WeaponUserComponent/Bow")
-prediction_coef = 1.0
+prediction_coef = 0.4
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 
 [node name="FactionCondition" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/Bow" index="3" unique_id=1317504172]
@@ -376,6 +391,7 @@ metadata/_custom_type_script = "uid://d1v7cmsrg6uvj"
 [node name="AttackTargetAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/Toolbox" index="1" unique_id=414740139 node_paths=PackedStringArray("weapon")]
 script = ExtResource("23_7am8w")
 weapon = NodePath("../../../../../WeaponUserComponent/Toolbox")
+prediction_coef = 0.4
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 
 [node name="FactionCondition" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/Toolbox" index="2" unique_id=525506974]

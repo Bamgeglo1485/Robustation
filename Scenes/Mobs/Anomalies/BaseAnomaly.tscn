@@ -14,9 +14,7 @@
 [ext_resource type="Material" uid="uid://cyp3pqnhbfrj3" path="res://Resources/Shaders/Jiggle.tres" id="14_nkwwc"]
 [ext_resource type="Texture2D" uid="uid://8trm1p4ix3id" path="res://Textures/Structures/Anomalies/Ice/ice_opening.png" id="15_8fjpw"]
 [ext_resource type="Texture2D" uid="uid://yjigwd3i118j" path="res://Textures/Light/point_light.jpg" id="15_nkwwc"]
-[ext_resource type="Script" uid="uid://nnac0ng77wfq" path="res://Components/Perks/ReflectPerkComponent.gd" id="16_8fjpw"]
-[ext_resource type="AudioStream" uid="uid://bxwx57y8k3fqt" path="res://Audio/Effects/lightburn.ogg" id="17_riw2h"]
-[ext_resource type="Script" uid="uid://cth8csvhil3ut" path="res://Components/Perks/ReflectMeleePerkComponent.gd" id="18_558ai"]
+[ext_resource type="Script" uid="uid://dntmjxlwav506" path="res://Components/Entity/ReflectComponent.gd" id="17_riw2h"]
 [ext_resource type="AudioStream" uid="uid://7wp18isf74u" path="res://Audio/Entites/Anomaly/pulse_anomaly.ogg" id="18_jmfem"]
 [ext_resource type="Script" uid="uid://b2j14u62ikqnw" path="res://Components/Mobs/FactionComponent.gd" id="31_cxvvd"]
 
@@ -294,19 +292,6 @@ script = ExtResource("5_fl87i")
 speed = -14
 metadata/_custom_type_script = "uid://qpw7cn2mqx7i"
 
-[node name="ReflectPerkComponent" type="Node" parent="." unique_id=22752871]
-script = ExtResource("16_8fjpw")
-reflect_sound = ExtResource("17_riw2h")
-base_chance = 1.0
-reflect_to_attacker = false
-metadata/_custom_type_script = "uid://nnac0ng77wfq"
-
-[node name="ReflectMeleePerkComponent" type="Node" parent="." unique_id=1708484812]
-script = ExtResource("18_558ai")
-reflect_sound = ExtResource("17_riw2h")
-base_chance = 1.0
-metadata/_custom_type_script = "uid://cth8csvhil3ut"
-
 [node name="Pulse" type="AudioStreamPlayer2D" parent="." unique_id=1255635604]
 stream = ExtResource("18_jmfem")
 
@@ -314,3 +299,7 @@ stream = ExtResource("18_jmfem")
 script = ExtResource("31_cxvvd")
 faction = "Enemy"
 metadata/_custom_type_script = "uid://b2j14u62ikqnw"
+
+[node name="ReflectComponent" type="Node" parent="." unique_id=1890427571]
+script = ExtResource("17_riw2h")
+metadata/_custom_type_script = "uid://dntmjxlwav506"

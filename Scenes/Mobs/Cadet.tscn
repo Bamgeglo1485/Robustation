@@ -24,7 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://4rew8bctbhwt" path="res://Textures/Mobs/Mobs/Hair/undercutleft.png" id="22_laupp"]
 [ext_resource type="Texture2D" uid="uid://cvtrwkf34me6c" path="res://Textures/Mobs/Mobs/Hair/classicmulder.png" id="23_4kfla"]
 [ext_resource type="Script" uid="uid://hv0g6akh0ftn" path="res://Components/Mobs/RandomizeMobMoverComponent.gd" id="24_ehfik"]
-[ext_resource type="Script" uid="uid://bd0gbdhbjn7xx" path="res://Components/Weapons/RandomWeaponSelectorComponent.gd" id="25_gqcph"]
+[ext_resource type="Script" uid="uid://bd0gbdhbjn7xx" path="res://Components/Weapons/Misc/RandomWeaponSelectorComponent.gd" id="25_gqcph"]
 [ext_resource type="Texture2D" uid="uid://ds0awta17suhg" path="res://Textures/Weapons/Stunbaton/stunbaton_inhand.png" id="26_er2us"]
 [ext_resource type="Script" uid="uid://6b7bcparwq17" path="res://Components/Weapons/MeleeWeaponComponent.gd" id="26_jmhc7"]
 [ext_resource type="Texture2D" uid="uid://cryng1krd6fxs" path="res://Textures/Weapons/Stunbaton/stunbaton.png" id="27_gsqal"]

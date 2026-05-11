@@ -39,7 +39,7 @@ metadata/_custom_type_script = "uid://wy7p8eumw3ik"
 
 [node name="DifficultyDependentProjectileDamageComponent" type="Node" parent="." index="8" unique_id=1316300310]
 script = ExtResource("5_mml0w")
-damage_on_roleplayer = 10
-damage_on_agent = 15
-damage_on_greytide = 25
+damage_on_roleplayer = 4
+damage_on_agent = 8
+damage_on_greytide = 13
 metadata/_custom_type_script = "uid://b644hh7xbxspy"

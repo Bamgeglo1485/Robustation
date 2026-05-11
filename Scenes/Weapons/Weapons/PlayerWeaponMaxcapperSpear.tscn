@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dp68l1ivbgils" path="res://Scenes/Projectiles/SpearBoomerang.tscn" id="7_gtont"]
 [ext_resource type="Texture2D" uid="uid://cnd26u5psr454" path="res://Textures/Weapons/Hook/grappling_gun.png" id="8_5motl"]
 [ext_resource type="Material" uid="uid://ddgd2dckacjiv" path="res://Resources/Shaders/Wave.tres" id="9_xuvcs"]
+[ext_resource type="Script" uid="uid://d3bhv7gdscl62" path="res://Components/Weapons/Misc/RandomWeaponRarityComponent.gd" id="10_mr3n8"]
 
 [node name="MaxcapperSpear" type="Node" unique_id=963773417 node_paths=PackedStringArray("shoot_sound", "bullets_recover_sound", "alt_attack")]
 script = ExtResource("1_x8krt")
@@ -30,6 +31,17 @@ alt_attack = NodePath("SpearBoomerang")
 weapon_name = "Maxcapper Spear"
 color = Color(0, 0.5310769, 0.56252176, 1)
 weapon_class = "Mass"
+weapon_desc = "1. Maxcaper's Spear
+2. Mass-Attack
+3. Robust
+------
+1. Very high damage.
+2. Very low rate of fire.
+3. Can injure the user if not careful.
+------
+1. Throws a spear that penetrates through multiple enemies and deals high damage. When fired, it creates a concentrated, powerful explosion. When parried, the spear accelerates and explodes after 0.3 seconds with a large blast radius. It can be hooked, causing it to bounce uncontrollably off walls and pierce everything.
+2. The alternate attack throws a spear on a hook, which will first fly forward and then be pulled back, piercing enemies. It can be parried for juggling it. It also parries incoming projectiles and lasers fired at nearby enemies.
+------"
 weapon_rarity = 2
 metadata/_custom_type_script = "uid://bi1gje1pfokqc"
 
@@ -64,3 +76,12 @@ points = PackedVector2Array(0, 0)
 width = 50.0
 default_color = Color(0.15683922, 0.005713961, 0.03873314, 1)
 texture_mode = 2
+
+[node name="RandomWeaponRarityComponent" type="Node" parent="." unique_id=549770299]
+script = ExtResource("10_mr3n8")
+adminabuse_chance = 0.1
+robust_chance = 0.6
+common_chance = 0.3
+adminabuse_second_multiplier = 0.7
+common_second_multiplier = 1.3
+metadata/_custom_type_script = "uid://d3bhv7gdscl62"

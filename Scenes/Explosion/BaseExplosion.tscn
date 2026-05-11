@@ -27,6 +27,14 @@ scale_max = 5.0
 hue_variation_min = -1.0
 hue_variation_max = -0.67
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eaqol"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 442.53
+initial_velocity_max = 706.89996
+gravity = Vector3(0, 0, 0)
+
 [node name="BaseExplosion" type="Node2D" unique_id=890470773 node_paths=PackedStringArray("main_lighting")]
 light_mask = 0
 z_index = 10
@@ -46,16 +54,6 @@ priority = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1183762416]
 shape = SubResource("CircleShape2D_a5ua4")
-
-[node name="GPUParticles2D2" parent="." unique_id=621859249 instance=ExtResource("2_a5ua4")]
-light_mask = 0
-position = Vector2(-1, -1)
-emitting = false
-amount = 10
-lifetime = 0.8
-interpolate = false
-fract_delta = false
-visibility_rect = Rect2(-1000, -1000, 2000, 2000)
 
 [node name="GPUParticles2D3" parent="." unique_id=2131820347 instance=ExtResource("3_a5ua4")]
 light_mask = 0
@@ -114,3 +112,14 @@ metadata/_custom_type_script = "uid://blngddal1vmwe"
 [node name="ExplosionSound" type="AudioStreamPlayer2D" parent="." unique_id=351949433]
 stream = ExtResource("11_2x53i")
 autoplay = true
+
+[node name="GPUParticles2D2" parent="." unique_id=621859249 instance=ExtResource("2_a5ua4")]
+modulate = Color(1.5720325, 1.5720325, 1.5720325, 1)
+z_index = 50
+position = Vector2(-1, -1)
+amount = 10
+lifetime = 0.8
+interpolate = false
+fract_delta = false
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+process_material = SubResource("ParticleProcessMaterial_eaqol")

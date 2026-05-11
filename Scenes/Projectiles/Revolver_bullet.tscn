@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://bkpfu8be5bdcc"]
+
+[ext_resource type="PackedScene" uid="uid://c2fs5eoy7ntgu" path="res://Scenes/Projectiles/BaseProjectile.tscn" id="1_m26cb"]
+[ext_resource type="AudioStream" uid="uid://cg0leh0na5lvv" path="res://Resources/Audio/BulletHitRandom.tres" id="2_wxwi8"]
+[ext_resource type="Texture2D" uid="uid://cjw2xf8pptrke" path="res://Textures/Weapons/Shotgun/Bullet.png" id="3_buwph"]
+[ext_resource type="Script" uid="uid://cg2q0h3wyjldl" path="res://Components/Triggers/HitscanOnTriggerComponent.gd" id="4_51gwn"]
+[ext_resource type="PackedScene" uid="uid://h7vby2qql2kq" path="res://Scenes/Projectiles/Hitscan/RevolverHitscan.tscn" id="5_m26cb"]
+[ext_resource type="Script" uid="uid://dfahm1hamvt58" path="res://Components/Entity/TrailEffectComponent.gd" id="6_dhf6m"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uq5et"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1uto6"]
+radius = 11.0
+
+[node name="Projectile" unique_id=1536955502 instance=ExtResource("1_m26cb")]
+
+[node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture")]
+collision_layer = 15
+collision_mask = 15
+texture = NodePath("../Texture")
+speed = 1600
+damage = 40.0
+lifetime = 30.0
+parry_speed_boost = 1.0
+
+[node name="CollisionShape2D" parent="ProjectileComponent" index="0" unique_id=1391622764]
+shape = SubResource("CircleShape2D_uq5et")
+
+[node name="HitSound" parent="ProjectileComponent" index="1" unique_id=1752295456]
+stream = ExtResource("2_wxwi8")
+
+[node name="Texture" type="Sprite2D" parent="." index="1" unique_id=1813040051]
+texture = ExtResource("3_buwph")
+
+[node name="HitscanOnTriggerComponent" type="Node" parent="." index="5" unique_id=1557179025]
+script = ExtResource("4_51gwn")
+hitscan_scene = ExtResource("5_m26cb")
+metadata/_custom_type_script = "uid://cg2q0h3wyjldl"
+
+[node name="CollisionShape2D" parent="." index="7" unique_id=32254729]
+shape = SubResource("CircleShape2D_1uto6")
+
+[node name="TrailEffectComponent" type="Node" parent="." index="8" unique_id=250790236]
+script = ExtResource("6_dhf6m")
+colors = Array[Color]([Color(1.8247963, 1.8247963, 1.8247963, 1)])
+clean_delay = 0.2
+trail_lifetime = 0.1
+metadata/_custom_type_script = "uid://dfahm1hamvt58"

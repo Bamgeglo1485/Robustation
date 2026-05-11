@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://b3pri7wp4hsjb"]
+
+[ext_resource type="Script" uid="uid://bdektmaq0iu7p" path="res://Components/Perks/Base/PerkComponent.gd" id="1_alnvl"]
+[ext_resource type="Texture2D" uid="uid://cbpl85dpe28d8" path="res://Textures/Perks/plasma_tank_equipped.png" id="2_alnvl"]
+[ext_resource type="Texture2D" uid="uid://cvjtnlvv4wgo5" path="res://Textures/Perks/plasma_tank.png" id="3_n3t08"]
+[ext_resource type="Script" uid="uid://brk1lcgtq0fmo" path="res://Resources/Custom/PerkData/Base/PerkModifier.gd" id="4_l8tit"]
+[ext_resource type="Script" uid="uid://cd4tbi43h4hjk" path="res://Resources/Custom/PerkData/Base/PerkData.gd" id="5_if1ks"]
+
+[sub_resource type="Resource" id="Resource_ua56r"]
+script = ExtResource("4_l8tit")
+target_component = "ExplosionResistanceComponent"
+ensure_component = true
+property = "explosion"
+value = 1.15
+metadata/_custom_type_script = "uid://brk1lcgtq0fmo"
+
+[sub_resource type="Resource" id="Resource_qyf8a"]
+script = ExtResource("5_if1ks")
+perk_id = &"PlasmaTank"
+perk_rarity = 2
+icon_texture = ExtResource("3_n3t08")
+equipped_texture = ExtResource("2_alnvl")
+modifiers = Array[ExtResource("4_l8tit")]([SubResource("Resource_ua56r")])
+metadata/_custom_type_script = "uid://cd4tbi43h4hjk"
+
+[node name="PlasmaTank" type="Node" unique_id=1604168029]
+script = ExtResource("1_alnvl")
+perk_data = SubResource("Resource_qyf8a")
+metadata/_custom_type_script = "uid://bdektmaq0iu7p"

@@ -19,7 +19,6 @@ texture_mode = 2
 damage = 70
 disappear_speed = 0.2
 explosion_scene = ExtResource("3_ngd65")
-modify_by_range_base_range = 300
 
 [node name="HitSound" type="AudioStreamPlayer2D" parent="." index="2" unique_id=1641163860]
 stream = ExtResource("3_ixhhx")

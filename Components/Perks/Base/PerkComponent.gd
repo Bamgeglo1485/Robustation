@@ -9,7 +9,7 @@ var second_minor_stat_control: Control
 var minor_stat_container: Container
 
 func _ready() -> void:
-	if !perk_data:
+	if !perk_data or !parent:
 		return
 	
 	perk_data.perk_name = tr(perk_data.perk_id + "_name")

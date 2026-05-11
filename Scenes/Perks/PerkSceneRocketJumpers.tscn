@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://duyalsqrvhov0"]
+
+[ext_resource type="Script" uid="uid://bdektmaq0iu7p" path="res://Components/Perks/Base/PerkComponent.gd" id="1_qrgln"]
+[ext_resource type="Texture2D" uid="uid://bpjfigi1seqnr" path="res://Textures/Perks/rocket_jumpers_equipped.png" id="2_nq4j1"]
+[ext_resource type="Texture2D" uid="uid://57gvp0kiplbi" path="res://Textures/Perks/rocket_jumpers.png" id="3_qrgln"]
+[ext_resource type="Script" uid="uid://brk1lcgtq0fmo" path="res://Resources/Custom/PerkData/Base/PerkModifier.gd" id="4_5diwp"]
+[ext_resource type="Script" uid="uid://cd4tbi43h4hjk" path="res://Resources/Custom/PerkData/Base/PerkData.gd" id="5_fdmp5"]
+
+[sub_resource type="Resource" id="Resource_ua56r"]
+script = ExtResource("4_5diwp")
+target_component = "ExplosionResistanceComponent"
+ensure_component = true
+property = "resistance"
+value = 0.9
+metadata/_custom_type_script = "uid://brk1lcgtq0fmo"
+
+[sub_resource type="Resource" id="Resource_qyf8a"]
+script = ExtResource("5_fdmp5")
+perk_id = &"RocketJumpers"
+icon_texture = ExtResource("3_qrgln")
+equipped_texture = ExtResource("2_nq4j1")
+modifiers = Array[ExtResource("4_5diwp")]([SubResource("Resource_ua56r")])
+metadata/_custom_type_script = "uid://cd4tbi43h4hjk"
+
+[node name="RocketJumpers" type="Node" unique_id=1604168029]
+script = ExtResource("1_qrgln")
+perk_data = SubResource("Resource_qyf8a")
+metadata/_custom_type_script = "uid://bdektmaq0iu7p"

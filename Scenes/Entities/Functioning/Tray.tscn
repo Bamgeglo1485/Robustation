@@ -278,7 +278,6 @@ shape = SubResource("CircleShape2D_50c0m")
 script = ExtResource("7_ejp66")
 max_health = 400
 gib_effect_scene = ExtResource("8_ejp66")
-delayed_damage_modifier = 0.0
 metadata/_custom_type_script = "uid://df356su15y7ow"
 
 [node name="FactionComponent" type="Node" parent="." unique_id=1619346385]

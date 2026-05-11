@@ -2,10 +2,16 @@
 
 [ext_resource type="Material" uid="uid://dtj02cwmf0jbu" path="res://Resources/Shaders/CollectableShining.tres" id="1_dgart"]
 [ext_resource type="Script" uid="uid://dlcwn6gl6gxot" path="res://Components/Entity/CollectableWeaponComponent.gd" id="3_xxe3s"]
-[ext_resource type="PackedScene" uid="uid://cnl6bkhdpreps" path="res://Scenes/Weapons/Weapons/PlayerWeaponToolbox.tscn" id="4_3rgct"]
+[ext_resource type="PackedScene" uid="uid://cwbrguboo4upr" path="res://Scenes/Weapons/Weapons/PlayerWeaponBow.tscn" id="4_cynlv"]
+[ext_resource type="PackedScene" uid="uid://dh8p35p502up6" path="res://Scenes/Weapons/Weapons/PlayerWeaponCrusher.tscn" id="5_j454r"]
 [ext_resource type="PackedScene" uid="uid://bdtqyl5p2op74" path="res://Scenes/Weapons/Weapons/PlayerWeaponShotgun.tscn" id="5_kctil"]
-[ext_resource type="PackedScene" uid="uid://irh3fi1fwrs0" path="res://Scenes/Weapons/Weapons/PlayerWeaponLaserGun.tscn" id="6_5n7x3"]
 [ext_resource type="PackedScene" uid="uid://bdjqd0mnhmtd8" path="res://Scenes/Weapons/Weapons/PlayerWeaponMaxcapperSpear.tscn" id="7_rrrlb"]
+[ext_resource type="Texture2D" uid="uid://wbxnpjl6pvxb" path="res://Textures/Light/double_light_cone.png" id="8_htdy8"]
+[ext_resource type="Script" uid="uid://qpw7cn2mqx7i" path="res://Components/Entity/RotatingObjectComponent.gd" id="9_igrli"]
+[ext_resource type="PackedScene" uid="uid://bkftibbpw6q5w" path="res://Scenes/Weapons/Weapons/PlayerWeaponBaseballBat.tscn" id="9_qy4wa"]
+[ext_resource type="Texture2D" uid="uid://b0b3vncwssou1" path="res://Textures/Light/light_cone.png" id="10_4syhy"]
+[ext_resource type="Script" uid="uid://bfpmngiw3fvni" path="res://Components/Entity/RotatingToObjectComponent.gd" id="11_24d1p"]
+[ext_resource type="PackedScene" uid="uid://e5glkfdvjd7d" path="res://Scenes/Weapons/Weapons/PlayerWeaponRevolver.tscn" id="12_j454r"]
 [ext_resource type="Texture2D" uid="uid://dverpu5mv40au" path="res://Textures/Weapons/Toolbox/toolbox.png" id="15_61lgx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5h7ec"]
@@ -24,7 +30,32 @@ shape = SubResource("CircleShape2D_5h7ec")
 
 [node name="CollectableWeaponComponent" type="Node" parent="." unique_id=135354404 node_paths=PackedStringArray("area", "sprite")]
 script = ExtResource("3_xxe3s")
-weapons = Array[PackedScene]([ExtResource("4_3rgct"), ExtResource("5_kctil"), ExtResource("6_5n7x3"), ExtResource("7_rrrlb")])
+weapons = Array[PackedScene]([ExtResource("4_cynlv"), ExtResource("5_j454r"), ExtResource("5_kctil"), ExtResource("9_qy4wa"), ExtResource("7_rrrlb"), ExtResource("12_j454r")])
 area = NodePath("../Area2D")
 sprite = NodePath("../Sprite2D")
 metadata/_custom_type_script = "uid://dlcwn6gl6gxot"
+
+[node name="Alarm" type="PointLight2D" parent="." unique_id=2067670731]
+scale = Vector2(1, 0.87431693)
+color = Color(1, 0.33444554, 0.522528, 1)
+energy = 5.0
+shadow_enabled = true
+texture = ExtResource("8_htdy8")
+texture_scale = 0.7
+
+[node name="RotatingObjectComponent" type="Node" parent="Alarm" unique_id=1986187173]
+script = ExtResource("9_igrli")
+speed = 5
+metadata/_custom_type_script = "uid://qpw7cn2mqx7i"
+
+[node name="Alarm2" type="PointLight2D" parent="." unique_id=760418853]
+position = Vector2(0, 0.49999666)
+scale = Vector2(1, 0.5)
+color = Color(1, 0.33444554, 0.522528, 1)
+energy = 10.0
+texture = ExtResource("10_4syhy")
+texture_scale = 0.7
+
+[node name="RotatingToObjectComponent" type="Node" parent="Alarm2" unique_id=664036574]
+script = ExtResource("11_24d1p")
+metadata/_custom_type_script = "uid://bfpmngiw3fvni"

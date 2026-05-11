@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://eogckfs15aph" path="res://Audio/Weapon/miss.ogg" id="6_aj4ed"]
 [ext_resource type="AudioStream" uid="uid://djwhsufysh1dq" path="res://Resources/Audio/PunchRandom.tres" id="6_ffy2e"]
 [ext_resource type="Texture2D" uid="uid://bm4h7pntduqy" path="res://Textures/Weapons/BaseballBat/baseball_bat_alt_icon.png" id="7_xqiyq"]
+[ext_resource type="Script" uid="uid://d3bhv7gdscl62" path="res://Components/Weapons/Misc/RandomWeaponRarityComponent.gd" id="8_xqiyq"]
 
 [node name="BaseballBat" type="Node" unique_id=44420062 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound", "alt_attack")]
 script = ExtResource("1_bbqq7")
@@ -32,6 +33,17 @@ alt_attack = NodePath("BaseballBat360")
 weapon_name = "Baseball Bat"
 color = Color(0.37392247, 0.16584373, 0.056216568, 1)
 weapon_class = "Melee"
+weapon_desc = "1. Baseball Bat
+2. Close-Range
+3. General
+------
+1. Low damage, low stamina damage.
+2. Average attack speed.
+3. Ineffective against enemies.
+------
+1. Attack knocks back the enemy and effectively parries attacks, adding +1 bounce and +1 penetration.
+2. Alternate attack emits a spinning attack with increased range.
+------"
 metadata/_custom_type_script = "uid://6b7bcparwq17"
 
 [node name="ParrySound" type="AudioStreamPlayer2D" parent="." unique_id=1803879457]
@@ -76,3 +88,19 @@ stream = ExtResource("6_aj4ed")
 
 [node name="MeleeHitSound" type="AudioStreamPlayer2D" parent="BaseballBat360" unique_id=630931799]
 stream = ExtResource("6_ffy2e")
+
+[node name="RandomWeaponRarityComponent" type="Node" parent="." unique_id=1679925335]
+script = ExtResource("8_xqiyq")
+adminabuse_chance = 0.1
+robust_chance = 0.2
+common_chance = 0.5
+shitty_chance = 0.2
+adminabuse_multiplier = 2.0
+robust_multiplier = 1.5
+shitty_multiplier = 0.5
+adminabuse_parry_extra_bounces = 1
+adminabuse_parry_extra_penetrations = 1
+adminabuse_second_multiplier = 0.5
+robust_second_multiplier = 0.75
+shitty_second_multiplier = 1.3
+metadata/_custom_type_script = "uid://d3bhv7gdscl62"

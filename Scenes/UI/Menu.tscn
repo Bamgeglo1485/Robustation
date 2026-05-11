@@ -41,9 +41,7 @@
 [ext_resource type="Texture2D" uid="uid://bmf0mdjgl2efj" path="res://Textures/Interface/Menu/NT_logo.png" id="36_prvga"]
 [ext_resource type="Texture2D" uid="uid://cnn46f7pl7ll0" path="res://Textures/Interface/Menu/difficulty_hovered.png" id="37_u0gst"]
 [ext_resource type="Script" uid="uid://bqqtllkj6p2n0" path="res://Components/Interface/Menu/ToggleVisibleIfConfigComponent.gd" id="38_f00cl"]
-[ext_resource type="PackedScene" uid="uid://coat4jbvf6jfe" path="res://Scenes/UI/Folders/WeaponsDataFolder/WeaponsDataFolder.tscn" id="39_7aweg"]
 [ext_resource type="PackedScene" uid="uid://df8siups3u0kj" path="res://Scenes/UI/Folders/asdasFolder/asdasFolder.tscn" id="40_jfwmj"]
-[ext_resource type="PackedScene" uid="uid://q26tbtj4imqa" path="res://Scenes/UI/Folders/GreytideDataFolder/GreytideDataFolder.tscn" id="40_xn7hy"]
 [ext_resource type="PackedScene" uid="uid://dq8gvtmjild2a" path="res://Scenes/UI/Difficulty_setup.tscn" id="41_u0gst"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_444o2"]
@@ -558,92 +556,6 @@ metadata/_custom_type_script = "uid://cja3led3n1ehp"
 script = ExtResource("24_xefsv")
 metadata/_custom_type_script = "uid://bhmllu85kiqcc"
 
-[node name="WeaponsDataFolder" type="TextureButton" parent="Desktop" unique_id=1435743335]
-z_index = 1
-layout_mode = 0
-offset_left = 156.0
-offset_top = 376.0
-offset_right = 252.0
-offset_bottom = 472.0
-mouse_behavior_recursive = 2
-mouse_default_cursor_shape = 2
-texture_normal = ExtResource("27_rnwc8")
-texture_hover = ExtResource("28_7aweg")
-
-[node name="Input_text" type="RichTextLabel" parent="Desktop/WeaponsDataFolder" unique_id=964080149]
-z_index = 1
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.23958333
-anchor_top = 0.9895833
-anchor_right = 1.3125
-anchor_bottom = 1.1606773
-theme_override_fonts/normal_font = ExtResource("1_wxq71")
-text = "weapons_data"
-scroll_active = false
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="DragButtonComponent" type="Node" parent="Desktop/WeaponsDataFolder" unique_id=486675645 node_paths=PackedStringArray("frame_to_drag", "parent_bounds_control")]
-script = ExtResource("23_heu7w")
-frame_to_drag = NodePath("..")
-use_parent_corners = true
-parent_bounds_control = NodePath("../../Wallpaper")
-metadata/_custom_type_script = "uid://cja3led3n1ehp"
-
-[node name="SavePositionComponent" type="Node" parent="Desktop/WeaponsDataFolder" unique_id=545125964]
-script = ExtResource("24_xefsv")
-metadata/_custom_type_script = "uid://bhmllu85kiqcc"
-
-[node name="ToggleVisibleOnPressedComponent" type="Node" parent="Desktop/WeaponsDataFolder" unique_id=1093059903 node_paths=PackedStringArray("toggle_frame")]
-script = ExtResource("25_1r0lg")
-toggle_frame = NodePath("../../../WeaponsDataFolder")
-require_double_click = true
-metadata/_custom_type_script = "uid://bodxsix2kyyy6"
-
-[node name="GreytideData" type="TextureButton" parent="Desktop" unique_id=508477452]
-z_index = 1
-layout_mode = 0
-offset_left = 331.0
-offset_top = 375.0
-offset_right = 427.0
-offset_bottom = 471.0
-mouse_behavior_recursive = 2
-mouse_default_cursor_shape = 2
-texture_normal = ExtResource("27_rnwc8")
-texture_hover = ExtResource("28_7aweg")
-
-[node name="Input_text" type="RichTextLabel" parent="Desktop/GreytideData" unique_id=11114731]
-z_index = 1
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.30208334
-anchor_top = 0.9895833
-anchor_right = 1.3541666
-anchor_bottom = 1.1606773
-theme_override_fonts/normal_font = ExtResource("1_wxq71")
-text = "greytide_data"
-scroll_active = false
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="DragButtonComponent" type="Node" parent="Desktop/GreytideData" unique_id=1683487649 node_paths=PackedStringArray("frame_to_drag", "parent_bounds_control")]
-script = ExtResource("23_heu7w")
-frame_to_drag = NodePath("..")
-use_parent_corners = true
-parent_bounds_control = NodePath("../../Wallpaper")
-metadata/_custom_type_script = "uid://cja3led3n1ehp"
-
-[node name="SavePositionComponent" type="Node" parent="Desktop/GreytideData" unique_id=1165744553]
-script = ExtResource("24_xefsv")
-metadata/_custom_type_script = "uid://bhmllu85kiqcc"
-
-[node name="ToggleVisibleOnPressedComponent" type="Node" parent="Desktop/GreytideData" unique_id=1119806045 node_paths=PackedStringArray("toggle_frame")]
-script = ExtResource("25_1r0lg")
-toggle_frame = NodePath("../../../GreytidesDataFolder")
-require_double_click = true
-metadata/_custom_type_script = "uid://bodxsix2kyyy6"
-
 [node name="asdas" type="TextureButton" parent="Desktop" unique_id=1062030481]
 z_index = 1
 layout_mode = 0
@@ -893,22 +805,6 @@ offset_left = -247.09607
 offset_top = -0.01600647
 offset_right = 246.90393
 offset_bottom = 377.984
-
-[node name="WeaponsDataFolder" parent="." unique_id=1676258678 instance=ExtResource("39_7aweg")]
-visible = false
-layout_mode = 1
-offset_left = -141.18402
-offset_top = 13.751995
-offset_right = 339.81598
-offset_bottom = 260.86398
-
-[node name="GreytidesDataFolder" parent="." unique_id=899442614 instance=ExtResource("40_xn7hy")]
-visible = false
-layout_mode = 1
-offset_left = -109.36804
-offset_top = 6.50399
-offset_right = 371.63196
-offset_bottom = 253.616
 
 [node name="asdasFolder" parent="." unique_id=1251840759 instance=ExtResource("40_jfwmj")]
 visible = false

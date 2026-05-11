@@ -62,18 +62,20 @@ var weapon_sprite: WeaponSpriteComponent
 @export var weapon_class: String
 @export_multiline() var weapon_desc: String
 
-@export_category("Modifiers")
-@export var damage_multipliers: Dictionary
-@export var damage_multiplier: float = 1.0
-
 enum rarity_classes {
 	SHITTY,
 	COMMON,
 	ROBUST,
 	ADMINABUSE
 }
-
 @export var weapon_rarity: rarity_classes = rarity_classes.COMMON
+
+@export_category("Modifiers")
+@export var damage_multipliers: Dictionary
+@export var damage_multiplier: float = 1.0
+
+@export var cooldown_multipliers: Dictionary
+@export var cooldown_multiplier: float = 1.0
 
 @warning_ignore("unused_signal")
 signal swapped(new_weapon: Weapon)
@@ -151,7 +153,7 @@ func _swing(direction) -> void:
 func _cooldown() -> void:
 	if cooldown_delay != 0:
 		cooldown = true
-		var modified_cooldown = cooldown_delay * cooldown_modifier
+		var modified_cooldown = cooldown_delay * cooldown_modifier * cooldown_multiplier
 		if random_cooldown_delay_coef != 0:
 			modified_cooldown *= randf_range(1.0 - random_cooldown_delay_coef, 1 + random_cooldown_delay_coef)
 		

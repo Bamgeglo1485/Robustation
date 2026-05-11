@@ -32,8 +32,8 @@ material = SubResource("ShaderMaterial_doom2")
 [node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture")]
 texture = NodePath("../Texture")
 speed = 600
-damage = 25.0
-delayed_damage = 15.0
+damage = 35.0
+delayed_damage = 20.0
 delayed_damage_delay = 3.0
 parry_damage_modifier = 2.0
 
@@ -54,9 +54,9 @@ texture = ExtResource("3_3p5ys")
 [node name="TrailEffectComponent" type="Node" parent="." index="5" unique_id=15597664]
 script = ExtResource("4_d6nqw")
 colors = Array[Color]([Color(0.8164007, 0, 0, 1), Color(0.7808727, 0.00017808378, 0.689379, 1)])
-clean_delay = 1.0
+clean_delay = 0.2
 trail_lifetime = 0.2
-required_position_length = 800
+required_position_length = 3000
 metadata/_custom_type_script = "uid://dfahm1hamvt58"
 
 [node name="SetProjectileExplosionOnTriggerComponent" type="Node" parent="." index="6" unique_id=1857456193]

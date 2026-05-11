@@ -21,3 +21,7 @@ func _ready() -> void:
 	health_component.base_max_health = health
 	health_component.max_health = health
 	health_component.health = health
+	
+	health_component.base_max_health *= GlobalVariables.enemy_health_modifier
+	health_component.max_health *= GlobalVariables.enemy_health_modifier
+	health_component.health *= GlobalVariables.enemy_health_modifier 

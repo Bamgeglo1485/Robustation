@@ -31,7 +31,8 @@ material = SubResource("ShaderMaterial_doom2")
 [node name="ProjectileComponent" parent="." index="0" unique_id=2058769936 node_paths=PackedStringArray("texture")]
 texture = NodePath("../Texture")
 speed = 900
-damage = 80.0
+max_damage = 100.0
+damage = 65.0
 lifetime = 0.2
 throw_speed = 600.0
 ignore_armor = true

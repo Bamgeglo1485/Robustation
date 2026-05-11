@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://ii51ruio4r4v" path="res://Audio/Weapon/bow_pull.ogg" id="6_uncyk"]
 [ext_resource type="Script" uid="uid://fx07buhgtyei" path="res://Components/Weapons/DodgeBonusRangeWeaponComponent.gd" id="7_0rny1"]
 [ext_resource type="Texture2D" uid="uid://wom8s2w2b67j" path="res://Textures/Weapons/Bow/quiver.png" id="8_3qqyp"]
+[ext_resource type="Script" uid="uid://d3bhv7gdscl62" path="res://Components/Weapons/Misc/RandomWeaponRarityComponent.gd" id="9_jvd8u"]
 
 [node name="Bow" type="Node" unique_id=1852817361 node_paths=PackedStringArray("shoot_sound", "bullets_recover_sound", "alt_attack")]
 script = ExtResource("1_b4sjq")
@@ -34,7 +35,18 @@ auto = true
 alt_attack = NodePath("AltBow")
 weapon_name = "Bow"
 color = Color(0.6996699, 0.3148181, 7.70092e-07, 1)
-weapon_class = "Mid-Range"
+weapon_class = "Mid-Long Range"
+weapon_desc = "1. Bow
+2. Medium-Long Range
+3. Shitty
+------
+1. Medium instant and delayed damage.
+2. High rate of fire, shots fire with a 0.3 second delay.
+3. Projectiles have low velocity.
+------
+1. Fires a poison arrow. Parrying the projectile is possible, but difficult due to the delay.
+2. Alternate attack instantly fires additional arrows. They can be added to the quiver when blocking damage (example: dash dodge)
+------"
 metadata/_custom_type_script = "uid://bi1gje1pfokqc"
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="." unique_id=329362300]
@@ -74,3 +86,14 @@ metadata/_custom_type_script = "uid://fx07buhgtyei"
 stream = ExtResource("5_pjgfh")
 max_distance = 600.0
 max_polyphony = 3
+
+[node name="RandomWeaponRarityComponent" type="Node" parent="." unique_id=1944210974]
+script = ExtResource("9_jvd8u")
+robust_chance = 0.1
+common_chance = 0.3
+shitty_chance = 0.7
+robust_multiplier = 1.7
+common_multiplier = 1.35
+robust_second_multiplier = 0.7
+common_second_multiplier = 0.85
+metadata/_custom_type_script = "uid://d3bhv7gdscl62"

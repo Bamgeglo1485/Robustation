@@ -1,19 +1,23 @@
 class_name StaminaComponent extends Component
 
-@export var max_stamina: int = 100
+@export var max_stamina: float = 100
 @export var stun_time: float = 4
-@export var stamina_recover: int = 20
+@export var stamina_recover: float = 20
 @export var stun_effect: PackedScene = preload("res://Scenes/Effects/Particles/Stun.tscn")
 @export var after_damage_recover_cooldown_delay: float = 3
 
-@onready var base_max_stamina: int = max_stamina
-@onready var stamina: int = max_stamina
+@onready var base_max_stamina: float = max_stamina
+@onready var stamina: float = max_stamina
 var can_recover: bool = true
 var stunned: bool = false
 var stamina_recover_timer: Timer
 
 @onready var animation_component: AnimationComponent = parent.get_node_or_null("AnimationComponent")
 @onready var mob_mover_component: MobMoverComponent = parent.get_node_or_null("MobMoverComponent")
+
+@export_category("Modifiers")
+@export var max_stamina_addendums: Dictionary
+@export var max_stamina_addendum: float = 0.0
 
 func _ready():
 	stamina_recover_timer = Timer.new()
@@ -49,7 +53,7 @@ func set_stamina(new_stamina):
 	stamina = clamp(stamina, 0, max_stamina)
 	
 	if mob_mover_component:
-		mob_mover_component.set_minor_speed_modifier("stamina", float(stamina) / max_stamina)
+		mob_mover_component.set_minor_speed_modifier("stamina", stamina / max_stamina)
 	
 	if stamina == 0:
 		stun()
@@ -63,7 +67,7 @@ func stun():
 		parent.add_child(inst)
 		if inst.has_node("Delete"):
 			inst.get_node("Delete").wait_time = stun_time
-	get_tree().create_timer(stun_time).timeout.connect(unstun)
+	tree.create_timer(stun_time).timeout.connect(unstun)
 
 func unstun():
 	stunned = false
@@ -71,5 +75,8 @@ func unstun():
 
 func _can_recover_cooldown():
 	can_recover = false
-	await get_tree().create_timer(after_damage_recover_cooldown_delay).timeout
+	await tree.create_timer(after_damage_recover_cooldown_delay).timeout
 	can_recover = true
+
+func get_max_stamina() -> float:
+	return max_stamina + max_stamina_addendum

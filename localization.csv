@@ -1,20 +1,20 @@
 ,ru
 
-"[color=crimson]NEW TARGET DETECTED. LOADING INFORMATION FROM THE DATABASE[/color]","[color=crimson]ОБНАРУЖЕНА НОВАЯ ЦЕЛЬ. ЗАГРУЗКА ИНФОРМАЦИИ С БАЗЫ ДАННЫХ[/color]"
+[color=crimson]NEW TARGET DETECTED. LOADING INFORMATION FROM THE DATABASE[/color],[color=crimson]ОБНАРУЖЕНА НОВАЯ ЦЕЛЬ. ЗАГРУЗКА ИНФОРМАЦИИ С БАЗЫ ДАННЫХ[/color]
 
-"[color=green]LOADING SUCCESSFUL[/color]:","[color=green]ЗАГРУЗКА ПРОШЛА УСПЕШНО[/color]:"
+[color=green]LOADING SUCCESSFUL[/color]:,[color=green]ЗАГРУЗКА ПРОШЛА УСПЕШНО[/color]:
 
-"TARGET_NAME: [color=crimson]","НАЗВАНИЕ_ЦЕЛИ: [color=crimson]"
+TARGET_NAME: [color=crimson],НАЗВАНИЕ_ЦЕЛИ: [color=crimson]
 
-"TARGET_PREFIX: [color=crimson]","ПРЕФИКС_ЦЕЛИ: [color=crimson]"
+TARGET_PREFIX: [color=crimson],ПРЕФИКС_ЦЕЛИ: [color=crimson]
 
-"TARGET_DESC: [color=crimson]","ОПИСАНИЕ_ЦЕЛИ: [color=crimson]"
+TARGET_DESC: [color=crimson],ОПИСАНИЕ_ЦЕЛИ: [color=crimson]
 
-"TARGET_HEALTH: [color=crimson]","ЗДОРОВЬЕ_ЦЕЛИ: [color=crimson]"
+TARGET_HEALTH: [color=crimson],ЗДОРОВЬЕ_ЦЕЛИ: [color=crimson]
 
-"TARGET_SPEED: [color=crimson]","СКОРОСТЬ_ЦЕЛИ: [color=crimson]"
+TARGET_SPEED: [color=crimson],СКОРОСТЬ_ЦЕЛИ: [color=crimson]
 
-"[color=green]INPUT 'R' TO RESUME REPLAY[/color]","[color=green]ВВЕДИТЕ 'R' ЧТОБЫ ПРОДОЛЖИТЬ РЕПЛЕЙ[/color]"
+[color=green]INPUT 'R' TO RESUME REPLAY[/color],[color=green]ВВЕДИТЕ 'R' ЧТОБЫ ПРОДОЛЖИТЬ РЕПЛЕЙ[/color]
 
 GRAYTIDER,ГРЕЙТАЙДЕР
 "AFTER THE DEATH OF WARDEN OF INSULS, THE MAINTS 
@@ -26,13 +26,13 @@ ADVANCED FOLLOWERS OF GREYTIDE.
 [color=purple]УЯЗВИМ К ПУЛЯМ. БЫСТРО УСТАЮТ ОТ РЫВКОВ.[/color]"
 SUPERIOR GREYTIDE'S FOLLOWER,ВЫСШИЙ ПОСЛЕДОВАТЕЛЬ ГРЕЙТАЙДА
 
-GRAY, ГРЕЙ
-GREYTIDE'S FOLLOWER, ПОСЛЕДОВАТЕЛЬ ГРЕЙТАЙДА
+GRAY," ГРЕЙ"
+GREYTIDE'S FOLLOWER," ПОСЛЕДОВАТЕЛЬ ГРЕЙТАЙДА"
 "A GRAYTIDE SPEARMAN WHO ATTACKS WITH A DASH.
 [color=purple]WEAK TO THE BULLETS AND GETS STUN WHEN HITTING A WALL[/color]","КОПЕЙЩИК ГРЕЙТАЙД, АТАКУЮЩИЙ РЫВКАМИ.
 [color=purple]УЯЗВИМ К ПУЛЯМ И ПОЛУЧАЕТ ОГЛУШЕНИЕ ПРИ УДАРЕ ОБ СТЕНУ[/color]"
 
-TIDER, ТАЙДЕР
+TIDER," ТАЙДЕР"
 "TIDE TECHNIQUE USER. 
 DODGES BULLETS AND ATTACKS WITH 
 A MAKESHIFT RANGE WEAPON.
@@ -41,14 +41,14 @@ A MAKESHIFT RANGE WEAPON.
 САМОДЕЛЬНЫМ ДАЛЬНИМ ОРУЖИЕМ.
 [color=purple]УЯЗВИМ К БЛИЖНЕМУ ОРУЖИЮ[/color]"
 
-ASSISTANT, АССИСТЕНТ
-MELEE PAWN, БЛИЖНЯЯ ПЕШКА
+ASSISTANT," АССИСТЕНТ"
+MELEE PAWN," БЛИЖНЯЯ ПЕШКА"
 "WEAK INSANE ASSISTANT USING MELEE WEAPON.
 [color=purple]WEAK TO EVERYTHING[/color]","НЕМОЩНЫЙ ОБЕЗУМЕВШИЙ АССИСТЕНТ, ИСПОЛЬЗУЮЩИЙ БЛИЖНЕЕ ОРУЖИЕ
 [color=purple]УЯЗВИМ КО ВСЕМУ[/color]"
 
-GREYTIDE, ГРЕЙТАЙД
-WARDEN OF INSULS, ХРАНИТЕЛЬ ИЗОЛЕЙ
+GREYTIDE," ГРЕЙТАЙД"
+WARDEN OF INSULS," ХРАНИТЕЛЬ ИЗОЛЕЙ"
 "USE OF THE ADVANCED TIDE TECHNIQUE 
 TO DODGE RANGE AND MELEE ATTACKS. 
 MASTER OF SPEAR, MELEE AND RANGE WEAPONS.
@@ -58,108 +58,108 @@ MASTER OF SPEAR, MELEE AND RANGE WEAPONS.
 [color=purple]УЯЗВИМ К ПУЛЯМ.[/color]"
 
 "I will help you get rid of these posers, Brother","Я помогу тебе избавиться от этих позеров, Братец"
-"You fought well","Достойно ты сражался"
+You fought well,Достойно ты сражался
 "Die with honor, Brother","С честью умри, Братец"
-"Only one can rule the maints","Только один может властвовать над техами"
+Only one can rule the maints,Только один может властвовать над техами
 "Now, let's dance, [color=crimson]Brother","А теперь, давай станцуем, [color=crimson]Братец"
 "Dash quickly, Brother","Делай рывок скорее, Братец"
-"Dodge this","Уклонись от этого"
-"Keep maneuvering","Продолжай маневрировать"
-"How about dash this?","Как насчёт уклониться от этого?"
-"You'll overdose","Ты передознёшься"
-"A shotgun for casuals","Дробовик - для казуалов"
+Dodge this,Уклонись от этого
+Keep maneuvering,Продолжай маневрировать
+How about dash this?,Как насчёт уклониться от этого?
+You'll overdose,Ты передознёшься
+A shotgun for casuals,Дробовик - для казуалов
 "Don't go far, Brother","Не убегай далеко, Братец"
-"Stop running away","Прекрати убегать"
-"Closer to me","Ближе ко мне"
-"Blood is more visible on blue","Кровь лучше виднеется на синем"
-"Try pairing now","Попробуй спарировать сейчас"
+Stop running away,Прекрати убегать
+Closer to me,Ближе ко мне
+Blood is more visible on blue,Кровь лучше виднеется на синем
+Try pairing now,Попробуй спарировать сейчас
 "Pay attention, Brother","Внимательнее, Братец"
-"Bang","Бам"
+Bang,Бам
 "Take this, Brother!","Получай, Братец!"
 
-"CLOWN","КЛОУН"
-"ANNOYING MOTHERFUCKER","РАЗДРАЖАЮЩИЙ ПИДОР"
+CLOWN,КЛОУН
+ANNOYING MOTHERFUCKER,РАЗДРАЖАЮЩИЙ ПИДОР
 "FUCKIN' BITCH
 [color=purple]KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT KILL IT[/color]","ЕБУЧАЯ СУЧКА
 [color=purple]УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО УБЕЙ ЭТО[/color]"
 
-"TOMATO KILLER","ТОМАТ УБИЙЦА"
+TOMATO KILLER,ТОМАТ УБИЙЦА
 "WEAKEST BOTANISTS PAWN.
 [color=purple]WEAK TO EVERYTHING[/color]","СЛАБЕЙШАЯ ПЕШКА БОТАНИКА.
 [color=purple]УЯЗВИМ КО ВСЕМУ[/color]"
 
-"ROBUST BOTANIST","РОБАСТНЫЙ БОТАНИК"
-"STONED ROBUSTER","ОБКУРЕННЫЙ РОБАСТЕР"
+ROBUST BOTANIST,РОБАСТНЫЙ БОТАНИК
+STONED ROBUSTER,ОБКУРЕННЫЙ РОБАСТЕР
 "A BOTANIST WHO HAS MASTERED THE USE OF MUTAGEN. DUE TO THE HEALING GAS, HE IS PRACTICALLY IMMORTAL AS LONG AS HYDROPONIC TRAYS WITH TOMATO KILLERS ARE ACTIVE. HE USES POISON GAS AND DEATHNETTLE.
 [color=PURPLE]IMMORTAL UNTIL THE TRAYS ARE BROKEN[/color]","БОТАНИК, КОТОРЫЙ ДОСТИГ МАСТЕРСТВА В ИСПОЛЬЗОВАНИИ МУТАГЕНА. ИЗ-ЗА ЛЕЧЕБНОГО ГАЗА ОН ПРАКТИЧЕСКИ БЕССМЕРТЕН, ПОКА АКТИВНЫ ГИДРОПОНЫЕ ЛОТКИ С ТОМАТАМИ УБИЙЦАМИ. ОН ИСПОЛЬЗУЕТ ЯДОВИТЫЙ ГАЗ И СМЕРТОКРАПИВУ.
 [color=PURPLE]БЕССМЕРТЕН ПОКА ЛОТКИ НЕ УНИЧТОЖЕНЫ[/color]"
 "Bruuh... try my gas, it's fucking better than frezon","Броо... попробуй мой газ, он дохуя лучше фрезона"
-"Brooo...","Братааан..."
-"Weeds!..","Травка!.."
-"I hate tomatoes... unless they're killers","Я ненавижу томаты... если они не убийцы"
+Brooo...,Братааан...
+Weeds!..,Травка!..
+I hate tomatoes... unless they're killers,Я ненавижу томаты... если они не убийцы
 "I see a rainbow. Catch the rainbow, bro!","Я вижу радугу. Catch the rainbow, братан!"
-"Bruuh...","Броо..."
+Bruuh...,Броо...
 
-"BOTANIST","БОТАНИК"
-"SUPERIOR CREW MEMBER","ВЫСШИЙ ЧЛЕН ЭКИПАЖА"
+BOTANIST,БОТАНИК
+SUPERIOR CREW MEMBER,ВЫСШИЙ ЧЛЕН ЭКИПАЖА
 "AFTER THE DEATH OF STONED ROBUSTER, THE MUTAGEN BECAME AVAILABLE TO ALL BOTANISTS
 [color=PURPLE]IMMORTAL UNTIL THE TRAYS ARE BROKEN[/color]","ПОСЛЕ СМЕРТИ ОБКУРЕННОГО РОБАСТЕРА, МУТАГЕН СТАЛ ДОСТУПЕН ДЛЯ ВСЕХ БОТАНИКОВ
 [color=PURPLE]БЕССМЕРТЕН ПОКА ЛОТКИ НЕ УНИЧТОЖЕНЫ[/color]"
 
-"Bandage and (Toxic) Marker","Бинт и (Токсичный) Маркер"
+Bandage and (Toxic) Marker,Бинт и (Токсичный) Маркер
 "[color=green]Increases your maximum health by 10 unit[/color], but [color=crimson]decreases passive regeneration by 2 unit[/color]","[color=green]Повышает твоё максимальное здоровье на 10 единиц[/color], но [color=crimson]снижает пассивную регенерацию на 2 единицы[/color]"
 
-"[color=green]Increases your attack knockback power and the damage of enemy-to-enemy collisions by 40%[/color]","[color=green]Повышает силу толкания при атаках и урон от столкновения врага об врага на 40%[/color]"
+[color=green]Increases your attack knockback power and the damage of enemy-to-enemy collisions by 40%[/color],[color=green]Повышает силу толкания при атаках и урон от столкновения врага об врага на 40%[/color]
 
-"Student Diet","Студенческая Диета"
-"[color=green]Increases your stamina by 20 units[/color]","[color=green]Повышает вашу стамину на 20 единиц[/color]"
+Student Diet,Студенческая Диета
+[color=green]Increases your stamina by 20 units[/color],[color=green]Повышает вашу стамину на 20 единиц[/color]
 
-"Goliath Plate","Пластина Голиафа"
+Goliath Plate,Пластина Голиафа
 "[color=green]Increases your armor by 5%[/color], but [color=crimson]decreases healing from organs crushing by 10%[/color]","[color=green]Усиливает вашу броню на 5%[/color], но [color=crimson]уменьшает лечение от давления органов на 10%[/color]"
 
-"Combat Glove","Боевые Перчатки"
-"[color=green]Reduces weapon cooldown by 5%[/color]","[color=green]Понижает кулдаун оружия на 5%[/color]"
+Combat Glove,Боевые Перчатки
+[color=green]Reduces weapon cooldown by 5%[/color],[color=green]Понижает кулдаун оружия на 5%[/color]
 
-"Galaxythistle","Галакточертополох"
-"[color=green]Reduces delayed damage by 10%[/color]","[color=green]Уменьшает отложенный урон на 10%[/color]"
+Galaxythistle,Галакточертополох
+[color=green]Reduces delayed damage by 10%[/color],[color=green]Уменьшает отложенный урон на 10%[/color]
 
-"Double Penetration Bullets","Пули Двойного Проникновения"
+Double Penetration Bullets,Пули Двойного Проникновения
 "[color=green]Increases projectile penetration[/color], but [color=crimson]decreases damage by 10%[/color]","[color=green]Повышает количество прострелов проджектайлов[/color], но [color=crimson]понижает урон на 10%[/color]"
 
-"Bitch Ball","Бляжный Мяч"
+Bitch Ball,Бляжный Мяч
 "[color=green]Increases your melee attack reflect chance by 5%[/color], but [color=crimson]decreases your bullet reflect chance by 5%[/color]","[color=green]Повышает шанс отражения ближних атак на 5%[/color], но [color=crimson]уменьшает шанс отражения снарядов на 5%[/color]"
 
-"Mirror Shard or (Shard of Mirror)","Стеклянный Осколок или же (Осколок Стекла)"
+Mirror Shard or (Shard of Mirror),Стеклянный Осколок или же (Осколок Стекла)
 "[color=green]Increases your bullet reflect chance by 5%[/color], but [color=crimson]decreases your melee reflect chance by 5%[/color]","[color=green]Повышает шанс отражения пуль на 5%[/color], но [color=crimson]уменьшает шанс отражения ближних атак на 5%[/color]"
 
-"Practice Medicine","Практическая Медицина"
-"[color=green]Increases your passive regeneration by 2 units per second[/color]","[color=green]Повышает пассивную регенерацию на 2 единицы[/color]"
+Practice Medicine,Практическая Медицина
+[color=green]Increases your passive regeneration by 2 units per second[/color],[color=green]Повышает пассивную регенерацию на 2 единицы[/color]
 
-"Ephedrine Cigarette","Эфедриновая Сигаретка"
+Ephedrine Cigarette,Эфедриновая Сигаретка
 "[color=green]Increases your movement speed by 5%[/color], but [color=crimson]decreases Ephedrine Overdose delay by 5%[/color]","[color=green]Повышает скорость на 5%[/color], но [color=crimson]уменьшает длительность Эфедринового Передоза на 5%[/color]"
 
-"Rocket Jumpers","Рокет Джамперы"
-"[color=green]Increases your explosion resistance by 10%[/color]","[color=green]Уменьшает урон от взрывов на 10%[/color]"
+Rocket Jumpers,Рокет Джамперы
+[color=green]Increases your explosion resistance by 10%[/color],[color=green]Уменьшает урон от взрывов на 10%[/color]
 
-"Shiny Green Bullets","Блестящие Зелёные Пули"
+Shiny Green Bullets,Блестящие Зелёные Пули
 "[color=green]Increases the amount of shotgun pellets by 1[/color], but [color=crimson]increases overheat per shot by 40%[/color]","[color=green]Увеличивает дробь дробовика на 1[/color], но [color=crimson]увеличивает перегрев за выстрел на 40%[/color]"
 
-"Opened Plasma Tank","Открытый Баллон Плазмы"
+Opened Plasma Tank,Открытый Баллон Плазмы
 "[color=green]Increases explosion damage by 10%[/color], but [color=crimson]increases also for enemies[/color]","[color=green]Повышает урон взрывов на 10%[/color], но [color=crimson]это работает также для взрывов противников[/color]"
 
 "[color=green]Increases HP recovery from a perfect hit by 10%[/color], but [color=crimson]speeds up the arrow by 10%[/color]","[color=green]Повышает восстановление здоровья от идеального удара на 10%[/color], но [color=crimson]ускоряет стрелку на 10%[/color]"
 
-"Rubber Bullets(Without jokes about dildos pls)","Резиновые Пули(Пж без шуток о дилдаках)"
+Rubber Bullets(Without jokes about dildos pls),Резиновые Пули(Пж без шуток о дилдаках)
 "[color=green]Increases projectile bounce[/color], but [color=crimson]decreases projectile penetration[/color]","[color=green]Повышает отскакиваемость снарядов[/color], но [color=crimson]уменьшает пробиваемость снарядов[/color]"
 
-"Inspector's Flask","Фляга инспектора"
+Inspector's Flask,Фляга инспектора
 "[color=green]Decreases your Battle Tendency reduction by 10%[/color], but [color=crimson]increases weapon spread by 25%[/color]","[color=green]Снижает уменьшение боевого духа на 10%[/color], но [color=crimson]повышает разброс на 25%[/color]"
 
-"Crusher Module","Модуль Крушителя"
+Crusher Module,Модуль Крушителя
 "[color=green]Adds and increases healing from damage by 4%[/color], but [color=crimson]healing only works within 3 tiles[/color]","[color=green]Добавляет и повышает лечение от урона на 4%[/color], но [color=crimson]лечение работает только в пределах 3 клеток[/color]"
 
-"Redspace Paint","Редспейс Краска"
-"[color=green]Adds and increases healing from projecile parry by 2%[/color]","[color=green]Добавляет и повышает лечение от парирования снарядов на 2%[/color]"
+Redspace Paint,Редспейс Краска
+[color=green]Adds and increases healing from projecile parry by 2%[/color],[color=green]Добавляет и повышает лечение от парирования снарядов на 2%[/color]
 
 
 
@@ -235,14 +235,14 @@ Dash requires an instant injection of 3 doses of █████ephedrine. The d
 
 Рывок требует мгновенной инъекции 3 доз █████эфедрина, дозы берутся с инъекторов для рывка, поэтому Передоз невозможен, если у вас недостаточно полных инъекторов. Также дополнительная инъекция может увеличить длительность Передоза, но пользователь начнёт получать урон от ядов."
 
-"Subject Greytide is able to heal his body by crushing organs on the floor, YW5vbWFseQ==[CLASSIFIED]
+"Subject Greytide is able to heal his body by crushing organs on the floor
 
 █████████████████████████████████████████████████████████████████
 ████████████████████
 ██████████████████████████████
 ████████████████████
 ██████████████████████████████
-██████████","Субъект Грейтайд способен излечивать своё тело раздавливая органы на полу, так как 0LDQvdC+0LzQsNC70LjRjw==[CLASSIFIED]
+██████████","Субъект Грейтайд способен излечивать своё тело раздавливая органы на полу
 
 █████████████████████████████████████████████████████████████████
 ████████████████████
@@ -250,3 +250,195 @@ Dash requires an instant injection of 3 doses of █████ephedrine. The d
 ████████████████████
 ██████████████████████████████
 ██████████"
+"1. Baseball Bat
+2. Melee
+3. Common
+------
+1. Low damage, low stamina damage.
+2. Average attack speed.
+3. Ineffective against enemies.
+------
+1. Attack knocks back the enemy and effectively parries attacks, adding +1 bounce and +1 penetration.
+2. Alternate attack emits a spinning attack with increased range.
+------","1. Бейсбольная Бита
+2. Ближнее
+3. Common
+------
+1. Низкий урон, низкий урон по стамине.
+2. Средняя скорость атаки.
+3. Неэффективен против врагов.
+------
+1. Удар откидывает врагов и эффективно парирует снаряды, добавляя к ним +1 отскок и +1 пробитие.
+2. Альтернативная атака ударяет круговой атакой с увеличенной дальностью.
+------"
+"1. Bow
+2. Medium-Long Range
+3. Shitty
+------
+1. Medium instant and delayed damage.
+2. High rate of fire, shots fire with a 0.3 second delay.
+3. Projectiles have low velocity.
+------
+1. Fires a poison arrow. Parrying the projectile is possible, but difficult due to the delay.
+2. Alternate attack instantly fires additional arrows. 
+They can be added to the quiver when blocking damage (for example: dodging with a dash)------","1. Лук
+2. Среднее-дальнее
+3. Shitty
+------
+1. Средний мгновенный и отложенный урон.
+2. Высокая скорострельность, выстрелы происходят с задержкой в 0.3 секунды.
+3. Снаряды имеют низкую скорость.
+------
+1. Стреляет ядовитой стрелой. Парировать снаряд возможно, но сложно из-за задержки при стрельбе.
+2. Альтернативная атака мгновенно выпускает дополнительные стрелы. Они добавляются в колчан при блокировании урона(например: уклонение рывком)
+------
+"
+"1. Crusher
+2. Melee
+3. Robust
+------
+1. High damage.
+2. Average attack speed.
+3. Requires aiming directly at the target.
+------
+1. Attack that requires precise placement on the enemy, making parrying nearly impossible.
+2. Fires a bolt of energy that marks the enemy for death. Hitting an marked enemy with a crusher restores 50% health and removes 30% of morale damage. The bolt can be parried to turn into a stunning and knockdown laser, but it only heals for 30% of health.
+------
+","1. Крушитель
+2. Ближнее
+3. Robust
+------
+1. Высокий урон.
+2. Средняя скорость атаки.
+3. Для атаки нужно нацелиться ровно на цель.
+------
+1. Удар крушителем, требующий точного попадания по врагу, из-за чего парирование снарядов практически невозможно.
+2. Стреляет сгустком энергии, который наносит метку смерти на врага. При ударе по врагу крушителем пользователь восстанавливает себе 50% здоровья и снимает 30% морального урона. Сгусток можно парировать, чтобы превратить в оглушающий и сбивающий лазер, но который лечит всего 30% здоровья.
+------
+"
+"1. Laser Gun
+2. Long Range
+3. Common
+------
+1. Conditional Damage.
+2. Average Rate of Fire.
+3. Near-zero damage at close range.
+------
+1. Fires a laser that deals instant and delayed damage based on range.
+2. Alternate attack fires lightning that, upon impact, creates an electrical chain that knocks down targets and deals high stamina damage.
+------","1. Лазерная пушка
+2. Дальнее
+3. Common
+------
+1. Условный урон.
+2. Средняя скорострельность.
+3. На близких дистанциях урон почти нулевой.
+------
+1. Стреляет лазером, который наносит зависимый от дальности мгновенный и отложенный урон.
+2. Альтернативная атака стреляет молнией, которая при попадании создаёт электрическую цепочку, роняющая цели и наносящая высокий урон по стамине.
+------"
+"1. Maxcaper's Spear
+2. Mass-Attack
+3. Robust
+------
+1. Very high damage.
+2. Very low rate of fire.
+3. Can injure the user if not careful.
+------
+1. Throws a spear that penetrates through multiple enemies and deals high damage. When fired, it creates a concentrated, powerful explosion. When parried, the spear accelerates and explodes after 0.3 seconds with a large blast radius. It can be hooked, causing it to bounce uncontrollably off walls and pierce everything.
+2. The alternate attack throws a spear on a hook, which will first fly forward and then be pulled back, piercing enemies. It can be parried for juggling it. It also parries incoming projectiles and lasers fired at nearby enemies.
+------","1. Копьё Макскапера
+2. Массовое
+3. Robust
+------
+1. Очень высокий урон.
+2. Очень низкая скорострельность.
+3. Может навредить пользователю при неосторожности.
+------
+1. Бросок копьём, который пробивает несколько врагов и наносящит большой урон. При выстреле по нему создаёт концентрированный мощный взрыв, а при парировании копьё ускоряется и взрывается через 0.3 секунды с большим радиусом поражения. Можно притянуть крюком, тогда он начнёт бесконтрольно отскакивать от стен и пробивать всех насквозь.
+2. Альтернативная атака кидает копьё на крюке, которое сперва будет лететь вперёд, а после притягиваться обратно, пробивая врагов. Можно парировать, жонглируя им. Парирует попадающие в него снаряды и лазеры в ближайших врагов.
+------"
+"1. Protokinetic Accelerator
+2. Close Range
+3. Shitty
+------
+1. Medium damage. Ignores armor.
+2. Low rate of fire.
+3. Projectile travels no further than 6 tiles. Ignoring armor also ignores negative enemy armor.
+------
+1. Fires a kinetic charge. When parried, the projectile accelerates and gains +1 penetration.
+2. Alternate attack overcharges the accelerator and creates a repulsion wave, which also repels projectiles.
+------","1. Протокинетический Ускоритель
+2. Ближнее
+3. Shitty
+------
+1. Средний урон. Игнорирует броню.
+2. Низкая скорострельность.
+3. Снаряд не летит дальше 6 клеток. Игнорирование брони также игнорирует отрицательную броню врагов.
+------
+1. Стреляет кинетическим зарядом. При парировании снаряд ускоряется и получает +1 пробитие.
+2. Альтернативная атака перегружает ускоритель и создаёт отталкивающую волну, она также отталкивает снаряды.
+------"
+"1. Revolver
+2. Medium-Long Range
+3. Common
+------
+1. Medium damage.
+2. Unlimited rate of fire, unlimited reload speed.
+3. Manual reload.
+------
+1. Fires a bullet that can be parried, turning it into a laser. The delay between shots is minimal.
+2. Alternate attack empties the magazine, after which each use adds +1 ammo to the magazine.
+------","1. Револьвер
+2. Средне-дальнее
+3. Common
+------
+1. Средний урон.
+2. Неограниченная скорость стрельбы, неограниченная скорость перезарядки.
+3. Ручная перезарядка.
+------
+1. Стреляет пулей, которую можно парировать, превращая в лазер. Задержка между выстрелами минимальна.
+2. Альтернативная атака опустошает барабан, после чего каждое использование добавляет +1 патрон в барабан.
+------"
+"1. Shotgun
+2. Short-to-Medium Range
+3. Robust
+------
+1. High damage (pellets).
+2. High rate of fire, moderate reload speed.
+3. Frequent firing causes the shotgun to overheat, reducing damage and preventing parrying.
+------
+1. Fires a 3-shot pellet that can be parried, creating an explosive laser beams.
+2. Alternate attack fires a hook that either pulls an enemy or the user (depending on the target's mass). Pulling fully reloads the shotgun.
+------","1. Дробовик
+2. Ближнее-среднее
+3. Robust
+------
+1. Высокий урон(дробью).
+2. Высокая скорострельность, средняя скорость перезарядки.
+3. При частой стрельбе происходит перегрев, понижающий урон и блокирующий парирование снарядов
+------
+1. Стреляет дробью из 3 снарядов, которые можно парировать, создавая лучи взрывного лазера.
+2. Альтернативная атака выпускает крюк, который либо притягивает врага, либо притягивает самого пользователя(зависит от массы цели). При притягивании полностью перезаряжается дробовик.
+------"
+"1. Toolbox
+2. Melee
+3. Common
+------
+1. Low damage, but conditionally high, ignores armor.
+2. High rate of attack, but conditionally average. 0.1 second delay before attack.
+3. For maximum effectiveness, timing is crucial.
+------
+1. When held, activates the Perfect Hit bar; when hitting the red bar, damage is quadrupled and 10% health is retained.
+2. Alternate attack charges a strike that deals 10 times more damage at full charge and also cools all overheated weapons.
+------","1. Тулбокс
+2. Ближнее
+3. Common
+------
+1. Маленький урон, но условно высокий, игнорирует броню.
+2. Высокая скорость атаки, но условно средняя. Задержка 0.1 секунда перед ударом.
+3. Для наиболее эффективного применения требуется подбирать тайминг
+------
+1. При зажатии активирует полоску идеального удара; при попадании в красную шкалу урон умножается в 4 раза и восстанавливается 10% здоровья.
+2. Альтернативная атака при зажатии заряжает удар, который наносит в 10 раз больше урона при максимальном заряде, а также охлаждает все оружия с перегревом.
+------"

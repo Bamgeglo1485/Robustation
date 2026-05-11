@@ -15,7 +15,7 @@ func _ready() -> void:
 	if health_component and overlay:
 		health_component.health_changed.connect(_on_health_changed)
 		material = overlay.material
-		material.set_shader_parameter("intensity", 0)
+		material.set_shader_parameter("intensity", 0.0)
 
 func _on_health_changed(health) -> void:
 	if !material:
@@ -40,8 +40,6 @@ func _on_health_changed(health) -> void:
 		return
 	
 	var _tween: Tween = create_tween()
-	_tween.set_trans(Tween.TRANS_SINE)
-	_tween.set_ease(Tween.EASE_IN_OUT)
 	
 	var max_health: float = health_component.max_health
 	

@@ -22,7 +22,10 @@
 [ext_resource type="Script" uid="uid://bdxrxakvokr52" path="res://Components/Player/ScreenShakeComponent.gd" id="13_0r3jo"]
 [ext_resource type="AudioStream" uid="uid://bm4puq01g5yws" path="res://Audio/Effects/flashlight_on.ogg" id="13_dxps5"]
 [ext_resource type="AudioStream" uid="uid://4fxhy8fsdcb1" path="res://Audio/Effects/flashlight_off.ogg" id="14_p5itk"]
+[ext_resource type="AudioStream" uid="uid://c86nvnjcdaiue" path="res://Audio/Weapon/swing.mp3" id="15_tjmdb"]
+[ext_resource type="AudioStream" uid="uid://b7l65hp5rr2pt" path="res://Resources/Audio/BodyFallRandom.tres" id="16_hmh1a"]
 [ext_resource type="PackedScene" uid="uid://dxkngv1mfm6mc" path="res://Scenes/UI/IngameInterface/DeathScreen.tscn" id="16_nnp87"]
+[ext_resource type="AudioStream" uid="uid://djwhsufysh1dq" path="res://Resources/Audio/PunchRandom.tres" id="16_xsn64"]
 [ext_resource type="Script" uid="uid://jqnpe0oqv5il" path="res://Components/Player/RainbowOverlayComponent.gd" id="17_egoq8"]
 [ext_resource type="Material" uid="uid://dm7k2tvshj7cb" path="res://Resources/Shaders/RainbowEffect.tres" id="18_wns57"]
 [ext_resource type="Script" uid="uid://ck3n6ttlwtal7" path="res://Components/Player/IngameMenuComponent.gd" id="19_pd2gv"]
@@ -81,6 +84,8 @@
 [ext_resource type="PackedScene" uid="uid://brn852jtxqouj" path="res://Scenes/UI/IngameInterface/Characteristics.tscn" id="76_3x86v"]
 [ext_resource type="Script" uid="uid://baa51nd6y0b4w" path="res://Components/Entity/RegenerationComponent.gd" id="80_th2h1"]
 [ext_resource type="Script" uid="uid://dntmjxlwav506" path="res://Components/Entity/ReflectComponent.gd" id="81_bvt24"]
+[ext_resource type="Script" uid="uid://1l1buv51s2sf" path="res://Components/Abilities/NonBinary/JumpAbilityComponent.gd" id="82_32ogs"]
+[ext_resource type="Script" uid="uid://hpbkyirramr4" path="res://Components/Abilities/NonBinary/SlideAbilityComponent.gd" id="83_xl84a"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_p8133"]
 random_pitch = 1.2599211
@@ -213,8 +218,8 @@ shader_parameter/mask_edge = 1.0
 shader_parameter/animation_speed = 0.5
 
 [node name="Player" unique_id=808070232 instance=ExtResource("1_gq7me")]
-collision_layer = 1
-collision_mask = 1
+collision_layer = 524289
+collision_mask = 524289
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
 acceleration = 200.0
@@ -267,9 +272,6 @@ weapon_icon = NodePath("../GUI/Inventory/Hand_R/WeaponIcon")
 alt_weapon_icon = NodePath("../GUI/Inventory/Hand_R/WeaponIcon/AltAttackIcon")
 metadata/_custom_type_script = "uid://gek7ma2qpdp6"
 
-[node name="AnimationComponent" parent="." index="11" unique_id=1054272185 node_paths=PackedStringArray("flash_frame")]
-flash_frame = NodePath("")
-
 [node name="PerkCollect" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="1" unique_id=1054597139]
 stream = ExtResource("8_4awd5")
 max_polyphony = 10
@@ -303,13 +305,25 @@ process_mode = 3
 stream = ExtResource("14_p5itk")
 volume_db = -8.0
 
+[node name="Jump" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="8" unique_id=415546642]
+stream = ExtResource("15_tjmdb")
+max_polyphony = 10
+
+[node name="WallJump" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="9" unique_id=468557396]
+stream = ExtResource("16_xsn64")
+max_polyphony = 10
+
+[node name="Slide" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="10" unique_id=372952739]
+stream = ExtResource("16_hmh1a")
+max_polyphony = 10
+
 [node name="HealthOverlayComponent" type="Node" parent="." index="16" unique_id=490260157 node_paths=PackedStringArray("overlay", "death_effect", "death_screen_parent")]
 script = ExtResource("6_korw6")
 overlay = NodePath("../GUI/Overlays/Health/Health")
 curve = SubResource("Curve_nnp87")
 death_effect = NodePath("../GUI/Overlays/Death/Death")
 death_screen = ExtResource("16_nnp87")
-death_screen_parent = NodePath("../GUI")
+death_screen_parent = NodePath("../GUI/Touchable")
 metadata/_custom_type_script = "uid://djmi5xfppmrii"
 
 [node name="BattleTendencyComponent" type="Node" parent="." index="17" unique_id=1071898636 node_paths=PackedStringArray("euphoria_effect", "battle_tendency_effect")]
@@ -666,7 +680,6 @@ metadata/_custom_type_script = "uid://cd0dtperukumm"
 metadata/_edit_use_anchors_ = true
 
 [node name="BossHealthBars" type="Control" parent="GUI" index="3" unique_id=1699387203]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -947,20 +960,7 @@ metadata/_custom_type_script = "uid://bodxsix2kyyy6"
 [node name="Overlays" type="CanvasLayer" parent="GUI" index="6" unique_id=1713393531]
 layer = 2
 
-[node name="Health" type="CanvasLayer" parent="GUI/Overlays" index="0" unique_id=1783291718]
-
-[node name="Health" type="ColorRect" parent="GUI/Overlays/Health" index="0" unique_id=657939308]
-material = ExtResource("7_5768p")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_behavior_recursive = 1
-color = Color(1, 1, 1, 0)
-metadata/_edit_lock_ = true
-
-[node name="BattleTendency" type="CanvasLayer" parent="GUI/Overlays" index="1" unique_id=1422523169]
+[node name="BattleTendency" type="CanvasLayer" parent="GUI/Overlays" index="0" unique_id=1422523169]
 
 [node name="BattleTendency" type="ColorRect" parent="GUI/Overlays/BattleTendency" index="0" unique_id=586695650]
 material = ExtResource("9_d6ik8")
@@ -977,7 +977,7 @@ metadata/_edit_lock_ = true
 script = ExtResource("11_yhquf")
 metadata/_custom_type_script = "uid://qcmegh7138ug"
 
-[node name="ColorModify" type="CanvasLayer" parent="GUI/Overlays" index="2" unique_id=1450573894]
+[node name="ColorModify" type="CanvasLayer" parent="GUI/Overlays" index="1" unique_id=1450573894]
 
 [node name="ColorModify" type="ColorRect" parent="GUI/Overlays/ColorModify" index="0" unique_id=395695325]
 visible = false
@@ -996,7 +996,7 @@ metadata/_edit_lock_ = true
 script = ExtResource("11_yhquf")
 metadata/_custom_type_script = "uid://qcmegh7138ug"
 
-[node name="Menu" type="CanvasLayer" parent="GUI/Overlays" index="3" unique_id=100970343]
+[node name="Menu" type="CanvasLayer" parent="GUI/Overlays" index="2" unique_id=100970343]
 layer = 3
 
 [node name="MenuOverlay" type="ColorRect" parent="GUI/Overlays/Menu" index="0" unique_id=1738391628]
@@ -1010,7 +1010,7 @@ grow_vertical = 2
 mouse_behavior_recursive = 1
 color = Color(1, 1, 1, 0)
 
-[node name="Rainbow" type="CanvasLayer" parent="GUI/Overlays" index="4" unique_id=1257070989]
+[node name="Rainbow" type="CanvasLayer" parent="GUI/Overlays" index="3" unique_id=1257070989]
 
 [node name="Rainbow" type="ColorRect" parent="GUI/Overlays/Rainbow" index="0" unique_id=400252612]
 visible = false
@@ -1032,7 +1032,7 @@ color = Color(1, 1, 1, 0)
 script = ExtResource("11_yhquf")
 metadata/_custom_type_script = "uid://qcmegh7138ug"
 
-[node name="ImpactFrame" type="CanvasLayer" parent="GUI/Overlays" index="5" unique_id=552674945]
+[node name="ImpactFrame" type="CanvasLayer" parent="GUI/Overlays" index="4" unique_id=552674945]
 
 [node name="ImpactFrame" type="ColorRect" parent="GUI/Overlays/ImpactFrame" index="0" unique_id=1727064910]
 visible = false
@@ -1045,9 +1045,22 @@ grow_vertical = 2
 mouse_behavior_recursive = 1
 color = Color(1, 1, 1, 0)
 
-[node name="Ability" type="CanvasLayer" parent="GUI/Overlays" index="6" unique_id=614013625]
+[node name="Ability" type="CanvasLayer" parent="GUI/Overlays" index="5" unique_id=614013625]
 
-[node name="PerkList" type="CanvasLayer" parent="GUI/Overlays" index="7" unique_id=1605192126]
+[node name="PerkList" type="CanvasLayer" parent="GUI/Overlays" index="6" unique_id=1605192126]
+
+[node name="Health" type="CanvasLayer" parent="GUI/Overlays" index="7" unique_id=1783291718]
+
+[node name="Health" type="ColorRect" parent="GUI/Overlays/Health" index="0" unique_id=657939308]
+material = ExtResource("7_5768p")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 1
+color = Color(1, 1, 1, 0)
+metadata/_edit_lock_ = true
 
 [node name="Death" type="CanvasLayer" parent="GUI/Overlays" index="8" unique_id=452867960]
 
@@ -1182,3 +1195,14 @@ metadata/_custom_type_script = "uid://baa51nd6y0b4w"
 [node name="ReflectComponent" type="Node" parent="." index="37" unique_id=1485667458]
 script = ExtResource("81_bvt24")
 metadata/_custom_type_script = "uid://dntmjxlwav506"
+
+[node name="JumpAbilityComponent" type="Node" parent="." index="43" unique_id=532833306 node_paths=PackedStringArray("sound_effect", "wall_sound_effect")]
+script = ExtResource("82_32ogs")
+sound_effect = NodePath("../Sounds/Jump")
+wall_sound_effect = NodePath("../Sounds/WallJump")
+metadata/_custom_type_script = "uid://1l1buv51s2sf"
+
+[node name="SlideAbilityComponent" type="Node" parent="." index="44" unique_id=1579239093 node_paths=PackedStringArray("sound_effect")]
+script = ExtResource("83_xl84a")
+sound_effect = NodePath("../Sounds/Slide")
+metadata/_custom_type_script = "uid://hpbkyirramr4"

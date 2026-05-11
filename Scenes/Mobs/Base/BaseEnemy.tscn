@@ -40,7 +40,7 @@ position = Vector2(-2, 2)
 physics_interpolation_mode = 2
 script = ExtResource("2_8me6v")
 tick_rate = 10
-blackboard = NodePath("@Node@26950")
+blackboard = NodePath("@Node@115472")
 custom_monitor = true
 actor = NodePath("..")
 metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
@@ -58,5 +58,6 @@ metadata/_custom_type_script = "uid://bwpenliytwp2h"
 
 [node name="DifficultyDependentSpeedComponent" type="Node" parent="." index="21" unique_id=1125569315]
 script = ExtResource("5_4xxt2")
-speed_modifier_on_greytide = 1.2
+speed_modifier_on_roleplayer = 0.6
+speed_modifier_on_greytide = 1.3
 metadata/_custom_type_script = "uid://s1yvc3m3ediv"

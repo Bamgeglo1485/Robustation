@@ -35,7 +35,18 @@ auto = true
 alt_attack = NodePath("Shockwave")
 weapon_name = "Kinetic Accelerator"
 color = Color(0.66250384, 0.47551048, 0.24570236, 1)
-weapon_class = "Melee"
+weapon_class = "Close Range"
+weapon_desc = "1. Protokinetic Accelerator
+2. Close Range
+3. Shitty
+------
+1. Medium damage. Ignores armor.
+2. Low rate of fire.
+3. Projectile travels no further than 6 tiles. Ignoring armor also ignores negative enemy armor.
+------
+1. Fires a kinetic charge. When parried, the projectile accelerates and gains +1 penetration.
+2. Alternate attack overcharges the accelerator and creates a repulsion wave, which also repels projectiles.
+------"
 weapon_rarity = 0
 metadata/_custom_type_script = "uid://bi1gje1pfokqc"
 

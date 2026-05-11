@@ -53,7 +53,7 @@ corner_detail = 1
 
 [node name="Toolbox" type="Node" unique_id=44420062 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound", "qte_icon", "qte_icon_perfect_frame", "qte_perfect_sound", "qte_perfect_time_sound", "alt_attack")]
 script = ExtResource("1_2hm8l")
-damage = 25.0
+damage = 20.0
 attack_range = 80
 ignore_armor = true
 parry_sound = NodePath("ParrySound")
@@ -80,6 +80,17 @@ alt_attack = NodePath("ChargingToolbox")
 weapon_name = "Toolbox"
 color = Color(0.8917651, 0, 0.28858507, 1)
 weapon_class = "Melee"
+weapon_desc = "1. Toolbox
+2. Melee
+3. Common
+------
+1. Low damage, but conditionally high, ignores armor.
+2. High rate of attack, but conditionally average. 0.1 second delay before attack.
+3. For maximum effectiveness, timing is crucial.
+------
+1. When held, activates the Perfect Hit bar; when hitting the red bar, damage is quadrupled and 10% health is retained.
+2. Alternate attack charges a strike that deals 10 times more damage at full charge and also cools all overheated weapons.
+------"
 metadata/_custom_type_script = "uid://6b7bcparwq17"
 
 [node name="ParrySound" type="AudioStreamPlayer2D" parent="." unique_id=1803879457]

@@ -193,16 +193,6 @@ theme_override_constants/line_separation = 3
 theme_override_fonts/normal_font = ExtResource("5_3m877")
 theme_override_font_sizes/normal_font_size = 10
 bbcode_enabled = true
-text = "1. Тулбокс
-2. Ближнее
-3. Common
-------
-1. Маленький урон, условно высокий
-2. Высокая скорость атаки, условно медленная
-3. Для наиболее эффективного применения требуется подбирать тайминг
----
-1. Удар тулбоксом, парирующий снаряды. При зажатии активирует полоску идеального удара; при попадании в красную шкалу урон умножается в 4 раза и восстанавливается 10% ХП. 
-2. При зажатии заряжает удар, который наносит в 10 раз больше урона при максимальном заряде, а также охлаждает все оружия с перегревом."
 metadata/_edit_use_anchors_ = true
 
 [node name="WeaponInventoryComponent" type="Node" parent="." unique_id=1407622098 node_paths=PackedStringArray("weapon_slot_buttons", "melee_weapon_slot", "description", "weapons_container", "weapon_collect_sound", "weapon_added_to_slot_audio", "weapon_removed_from_slot_audio", "weapon_selected_audio")]

@@ -60,6 +60,10 @@ var fly_animation_tween: Tween
 var walking_tween: Tween
 var drop_tween: Tween
 
+# signal
+
+signal unflied
+
 # Cache
 
 var max_speed_current: float
@@ -134,14 +138,12 @@ func _walk_animation() -> void:
 	elif parent.velocity.length_squared() != 0 and animation_component.animation_priority < 1:
 		walking_tween = create_tween()
 		walking_tween.set_loops()
-		walking_tween.set_trans(Tween.TRANS_SINE)
-		walking_tween.set_ease(Tween.EASE_IN_OUT)
 		
 		var modified_time: float = 0.2 * max_speed / base_max_speed
 		
-		walking_tween.tween_property(parent, "global_rotation", -moving_animation_lean, modified_time)
-		walking_tween.tween_property(parent, "global_rotation", moving_animation_lean, modified_time)
-		
+		walking_tween.stop()
+		walking_tween.tween_property(parent, "rotation", -moving_animation_lean, modified_time)
+		walking_tween.tween_property(parent, "rotation", moving_animation_lean, modified_time)
 		animation_component.set_animation(walking_tween, 1)
 
 # Movement when body flying
@@ -173,6 +175,8 @@ func _fly(delta) -> void:
 		parent.velocity = Vector2.ZERO
 		flying = false
 		fly_priority = 0
+		
+		unflied.emit()
 
 # Make body fly
 func throw(

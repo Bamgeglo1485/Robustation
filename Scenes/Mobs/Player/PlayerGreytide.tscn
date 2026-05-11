@@ -2,14 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://jg0ru5ss6ppw" path="res://Scenes/Mobs/Base/BasePlayer.tscn" id="1_mq7la"]
 [ext_resource type="Texture2D" uid="uid://oeskymbnxvee" path="res://Textures/Mobs/Player/greytide.png" id="4_bvl14"]
-[ext_resource type="PackedScene" uid="uid://bdtqyl5p2op74" path="res://Scenes/Weapons/Weapons/PlayerWeaponShotgun.tscn" id="4_kyllh"]
 [ext_resource type="PackedScene" uid="uid://cnl6bkhdpreps" path="res://Scenes/Weapons/Weapons/PlayerWeaponToolbox.tscn" id="4_ylcb0"]
 [ext_resource type="AudioStream" uid="uid://c064ooavx7oy1" path="res://Audio/Abilities/Teleport.ogg" id="5_42pyi"]
-[ext_resource type="PackedScene" uid="uid://cwbrguboo4upr" path="res://Scenes/Weapons/Weapons/PlayerWeaponBow.tscn" id="5_f7g7y"]
 [ext_resource type="PackedScene" uid="uid://14xgqyxv1nfp" path="res://Scenes/Weapons/Weapons/PlayerWeaponProtokineticAccelerator.tscn" id="6_7afoe"]
-[ext_resource type="PackedScene" uid="uid://bkftibbpw6q5w" path="res://Scenes/Weapons/Weapons/PlayerWeaponBaseballBat.tscn" id="7_0tl26"]
+[ext_resource type="PackedScene" uid="uid://irh3fi1fwrs0" path="res://Scenes/Weapons/Weapons/PlayerWeaponLaserGun.tscn" id="7_7afoe"]
 [ext_resource type="Texture2D" uid="uid://1yvrhqvfqqus" path="res://Textures/Weapons/Toolbox/toolbox_inhand.png" id="8_42pyi"]
-[ext_resource type="PackedScene" uid="uid://dh8p35p502up6" path="res://Scenes/Weapons/Weapons/PlayerWeaponCrusher.tscn" id="9_ylcb0"]
 [ext_resource type="Texture2D" uid="uid://dverpu5mv40au" path="res://Textures/Weapons/Toolbox/toolbox.png" id="13_4xc88"]
 [ext_resource type="Texture2D" uid="uid://cnd26u5psr454" path="res://Textures/Weapons/Hook/grappling_gun.png" id="24_483ma"]
 [ext_resource type="Script" uid="uid://cmonoqon5s4vx" path="res://Components/Abilities/NonBinary/DashAbilityComponent.gd" id="25_46s63"]
@@ -64,6 +61,14 @@ scale = Vector2(0.7, 0.7)
 texture = ExtResource("8_42pyi")
 region_rect = Rect2(0, 0, 32, 32)
 
+[node name="Unlit" type="Sprite2D" parent="Texture" index="1" unique_id=146609340]
+modulate = Color(2.8165433, 1.6618701, 0.82175255, 1)
+texture = ExtResource("30_xwdpk")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+script = ExtResource("31_m4dpc")
+metadata/_custom_type_script = "uid://bqvdlb3r03cs0"
+
 [node name="Flashlight" parent="PlayerCamera" parent_id_path=PackedInt32Array(2000720665) index="0" unique_id=1075954047]
 physics_interpolation_mode = 1
 energy = 0.0
@@ -75,25 +80,18 @@ ignore_time_scale = true
 [node name="WeaponUserComponent" parent="." index="8" unique_id=2123544057]
 timers_timescaled = false
 
-[node name="PlayerWeaponUserComponent" parent="." index="10" unique_id=283125688 node_paths=PackedStringArray("weapon_1", "weapon_2", "weapon_3", "weapon_4", "melee_weapon", "weapon_inventory")]
-weapon_1 = NodePath("Crusher")
-weapon_2 = NodePath("Bow")
+[node name="PlayerWeaponUserComponent" parent="." index="10" unique_id=283125688 node_paths=PackedStringArray("weapon_1", "weapon_2", "weapon_3", "melee_weapon", "weapon_inventory")]
+weapon_1 = NodePath("Toolbox")
+weapon_2 = NodePath("Lasergun")
 weapon_3 = NodePath("ProtokineticAccelerator")
-weapon_4 = NodePath("BaseballBat")
 melee_weapon = NodePath("Toolbox")
-weapon_inventory = [NodePath("Toolbox"), NodePath("Bow"), NodePath("ProtokineticAccelerator"), NodePath("BaseballBat"), NodePath("Shotgun")]
+weapon_inventory = [NodePath("Toolbox"), NodePath("Lasergun"), NodePath("ProtokineticAccelerator")]
 
-[node name="Shotgun" parent="PlayerWeaponUserComponent" index="0" unique_id=1344688935 instance=ExtResource("4_kyllh")]
+[node name="Toolbox" parent="PlayerWeaponUserComponent" index="0" unique_id=44420062 instance=ExtResource("4_ylcb0")]
 
-[node name="Toolbox" parent="PlayerWeaponUserComponent" index="1" unique_id=44420062 instance=ExtResource("4_ylcb0")]
+[node name="Lasergun" parent="PlayerWeaponUserComponent" index="1" unique_id=1495806879 instance=ExtResource("7_7afoe")]
 
-[node name="Bow" parent="PlayerWeaponUserComponent" index="2" unique_id=1852817361 instance=ExtResource("5_f7g7y")]
-
-[node name="ProtokineticAccelerator" parent="PlayerWeaponUserComponent" index="3" unique_id=1841802932 instance=ExtResource("6_7afoe")]
-
-[node name="BaseballBat" parent="PlayerWeaponUserComponent" index="4" unique_id=409183348 instance=ExtResource("7_0tl26")]
-
-[node name="Crusher" parent="PlayerWeaponUserComponent" index="5" unique_id=63160683 instance=ExtResource("9_ylcb0")]
+[node name="ProtokineticAccelerator" parent="PlayerWeaponUserComponent" index="2" unique_id=1841802932 instance=ExtResource("6_7afoe")]
 
 [node name="AnimationComponent" parent="." index="11" unique_id=1054272185]
 ignore_time_scale = true
@@ -140,15 +138,7 @@ start_sound = NodePath("../Sounds/Overdose")
 ability_icon = NodePath("../GUI/Inventory/Hand_L/Hypo")
 metadata/_custom_type_script = "uid://b8d56xguabrvi"
 
-[node name="Unlit" type="Sprite2D" parent="." index="26" unique_id=146609340]
-modulate = Color(2.8165433, 1.6618701, 0.82175255, 1)
-texture = ExtResource("30_xwdpk")
-region_enabled = true
-region_rect = Rect2(0, 0, 32, 32)
-script = ExtResource("31_m4dpc")
-metadata/_custom_type_script = "uid://bqvdlb3r03cs0"
-
-[node name="BattleTendencyMusicComponent" parent="." index="28" unique_id=947169944]
+[node name="BattleTendencyMusicComponent" parent="." index="27" unique_id=947169944]
 music_1 = ExtResource("58_typtw")
 music_2 = ExtResource("59_5key3")
 music_3 = ExtResource("60_jcq5h")
@@ -209,7 +199,7 @@ offset_bottom = 0.0
 [node name="ImpactFrame" parent="GUI/Overlays/ImpactFrame" parent_id_path=PackedInt32Array(552674945) index="0" unique_id=1727064910]
 process_mode = 3
 
-[node name="Ability" parent="GUI/Overlays" parent_id_path=PackedInt32Array(1713393531) index="6" unique_id=614013625]
+[node name="Ability" parent="GUI/Overlays" parent_id_path=PackedInt32Array(1713393531) index="5" unique_id=614013625]
 layer = 2
 
 [node name="Overdose" type="ColorRect" parent="GUI/Overlays/Ability" index="0" unique_id=387714321]

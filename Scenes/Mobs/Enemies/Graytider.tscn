@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://cg0leh0na5lvv" path="res://Resources/Audio/BulletHitRandom.tres" id="8_gtp7j"]
 [ext_resource type="AudioStream" uid="uid://eogckfs15aph" path="res://Audio/Weapon/miss.ogg" id="9_yvblk"]
 [ext_resource type="Texture2D" uid="uid://de06igrm3qql0" path="res://Textures/Weapons/Toolbox/toolbox_inhand_blue.png" id="10_7m7lg"]
+[ext_resource type="Script" uid="uid://udvlhbibn11h" path="res://Components/Weapons/Misc/DifficultyDependentWeaponDamageComponent.gd" id="10_hyrwf"]
 [ext_resource type="Texture2D" uid="uid://daq6dn5bnvcwu" path="res://Textures/Weapons/Toolbox/toolbox_blue.png" id="11_h041r"]
 [ext_resource type="AudioStream" uid="uid://c14ckhtbrb550" path="res://Audio/Weapon/parry.ogg" id="12_kq0dj"]
 [ext_resource type="AudioStream" uid="uid://blc0o0577akc7" path="res://Audio/Weapon/Hit/smash.ogg" id="13_hyrwf"]
@@ -91,7 +92,7 @@ radius = 40.0
 visibility_layer = 3
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
-base_max_speed = 300.0
+base_max_speed = 250.0
 acceleration = 200.0
 friction = 700.0
 can_fall_from_body = false
@@ -118,7 +119,6 @@ selected_weapon = NodePath("Spear")
 
 [node name="Spear" type="Node" parent="WeaponUserComponent" index="0" unique_id=30503364 node_paths=PackedStringArray("attack_sound", "miss_sound")]
 script = ExtResource("5_3symc")
-damage = 20.0
 attack_sound = NodePath("HitSound")
 miss_sound = NodePath("MissSound")
 throw_speed = 600
@@ -134,14 +134,22 @@ attack_shift_multiplier = 0.7
 metadata/_custom_type_script = "uid://6b7bcparwq17"
 
 [node name="HitSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Spear" index="0" unique_id=1629730960]
+visible = false
 stream = ExtResource("8_gtp7j")
 
 [node name="MissSound" type="AudioStreamPlayer2D" parent="WeaponUserComponent/Spear" index="1" unique_id=69188948]
 stream = ExtResource("9_yvblk")
 
+[node name="DifficultyDependentWeaponDamageComponent" type="Node" parent="WeaponUserComponent/Spear" index="2" unique_id=1437584153]
+script = ExtResource("10_hyrwf")
+damage_on_roleplayer = 5
+damage_on_agent = 7
+damage_on_greytide = 10
+metadata/_custom_type_script = "uid://udvlhbibn11h"
+
 [node name="Toolbox" type="Node" parent="WeaponUserComponent" index="1" unique_id=1309996882 node_paths=PackedStringArray("parry_sound", "attack_sound", "miss_sound", "swinging_sound")]
 script = ExtResource("5_3symc")
-damage = 15.0
+damage = 13.0
 attack_range = 96
 ignore_armor = true
 parry_sound = NodePath("ParrySound")
@@ -177,6 +185,13 @@ max_distance = 600.0
 stream = ExtResource("14_u6nc7")
 volume_db = 9.0
 max_distance = 600.0
+
+[node name="DifficultyDependentWeaponDamageComponent" type="Node" parent="WeaponUserComponent/Toolbox" index="4" unique_id=399988777]
+script = ExtResource("10_hyrwf")
+damage_on_roleplayer = 8
+damage_on_agent = 10
+damage_on_greytide = 13
+metadata/_custom_type_script = "uid://udvlhbibn11h"
 
 [node name="Bow" type="Node" parent="WeaponUserComponent" index="2" unique_id=1549778911 node_paths=PackedStringArray("shoot_sound", "bullets_recover_sound")]
 script = ExtResource("15_c3dtl")
@@ -231,7 +246,7 @@ avoidance_enabled = false
 radius = 64.0
 
 [node name="BeehaveTree" parent="." index="16" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@27470")
+blackboard = NodePath("@Node@19029")
 
 [node name="MoveToPlayer" type="Node" parent="BeehaveTree" index="0" unique_id=478688837]
 script = ExtResource("23_fs2h0")
@@ -313,7 +328,7 @@ metadata/_custom_type_script = "uid://b2bu3qqcql0lk"
 [node name="AttackTargetAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/Bow" index="2" unique_id=1997944300 node_paths=PackedStringArray("weapon")]
 script = ExtResource("33_p6rex")
 weapon = NodePath("../../../../../WeaponUserComponent/Bow")
-prediction_coef = 1.0
+prediction_coef = 0.4
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 
 [node name="Toolbox" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite" index="2" unique_id=1218643424]
@@ -328,6 +343,7 @@ metadata/_custom_type_script = "uid://d1v7cmsrg6uvj"
 [node name="AttackTargetAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/Toolbox" index="1" unique_id=414740139 node_paths=PackedStringArray("weapon")]
 script = ExtResource("33_p6rex")
 weapon = NodePath("../../../../../WeaponUserComponent/Toolbox")
+prediction_coef = 0.4
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 
 [node name="Rush" type="Area2D" parent="." index="18" unique_id=429380638]
@@ -372,7 +388,9 @@ alignment = 2
 [node name="TrailEffectComponent" type="Node" parent="." index="22" unique_id=1673440786]
 script = ExtResource("42_0mf7p")
 colors = Array[Color]([Color(1, 1, 1, 0.259)])
+clean_delay = 0.1
 trail_lifetime = 0.1
+required_position_length = 1300
 active_delete = true
 metadata/_custom_type_script = "uid://dfahm1hamvt58"
 

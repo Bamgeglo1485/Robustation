@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://51553qtnrkvu"]
+
+[ext_resource type="Script" uid="uid://bdektmaq0iu7p" path="res://Components/Perks/Base/PerkComponent.gd" id="1_siytr"]
+[ext_resource type="Texture2D" uid="uid://bpfu2628utnmt" path="res://Textures/Perks/inspectors_flask.png" id="2_k7lcy"]
+[ext_resource type="Script" uid="uid://brk1lcgtq0fmo" path="res://Resources/Custom/PerkData/Base/PerkModifier.gd" id="4_7n8j0"]
+[ext_resource type="Script" uid="uid://cd4tbi43h4hjk" path="res://Resources/Custom/PerkData/Base/PerkData.gd" id="5_vn1nf"]
+
+[sub_resource type="Resource" id="Resource_k7lcy"]
+script = ExtResource("4_7n8j0")
+target_component = "BattleTendencyComponent"
+ensure_component = true
+property = "batte_tendency_decrease"
+value = 0.85
+metadata/_custom_type_script = "uid://brk1lcgtq0fmo"
+
+[sub_resource type="Resource" id="Resource_siytr"]
+script = ExtResource("4_7n8j0")
+target_component = "WeaponUserComponent"
+property = "spread"
+value = 1.15
+type = 2
+metadata/_custom_type_script = "uid://brk1lcgtq0fmo"
+
+[sub_resource type="Resource" id="Resource_qyf8a"]
+script = ExtResource("5_vn1nf")
+perk_id = &"InspectorsFlask"
+icon_texture = ExtResource("2_k7lcy")
+modifiers = Array[ExtResource("4_7n8j0")]([SubResource("Resource_k7lcy"), SubResource("Resource_siytr")])
+metadata/_custom_type_script = "uid://cd4tbi43h4hjk"
+
+[node name="InspectorsFlask" type="Node" unique_id=1604168029]
+script = ExtResource("1_siytr")
+perk_data = SubResource("Resource_qyf8a")
+metadata/_custom_type_script = "uid://bdektmaq0iu7p"

@@ -251,8 +251,8 @@ Dash requires an instant injection of 3 doses of █████ephedrine. The d
 ██████████████████████████████
 ██████████"
 "1. Baseball Bat
-2. Melee
-3. Common
+2. Close-Range
+3. General
 ------
 1. Low damage, low stamina damage.
 2. Average attack speed.
@@ -281,7 +281,8 @@ Dash requires an instant injection of 3 doses of █████ephedrine. The d
 ------
 1. Fires a poison arrow. Parrying the projectile is possible, but difficult due to the delay.
 2. Alternate attack instantly fires additional arrows. 
-They can be added to the quiver when blocking damage (for example: dodging with a dash)------","1. Лук
+They can be added to the quiver when blocking damage (for example: dodging with a dash)
+------","1. Лук
 2. Среднее-дальнее
 3. Shitty
 ------
@@ -401,7 +402,7 @@ They can be added to the quiver when blocking damage (for example: dodging with 
 2. Альтернативная атака опустошает барабан, после чего каждое использование добавляет +1 патрон в барабан.
 ------"
 "1. Shotgun
-2. Short-to-Medium Range
+2. Melee-Mid Range
 3. Robust
 ------
 1. High damage (pellets).

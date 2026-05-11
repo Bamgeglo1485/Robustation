@@ -11,6 +11,7 @@ func _ready() -> void:
 		parent.queue_free()
 		return
 	
+	randomize()
 	weapon = weapons.pick_random()
 	
 	area.body_entered.connect(_on_collide)

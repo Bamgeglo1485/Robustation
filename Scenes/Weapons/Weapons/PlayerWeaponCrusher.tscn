@@ -36,7 +36,7 @@ weapon_name = "Crusher"
 color = Color(0.3263999, 0.18416753, 0.32814524, 1)
 weapon_class = "Melee"
 weapon_desc = "1. Crusher
-2. Close Range
+2. Melee
 3. Robust
 ------
 1. High damage.

@@ -45,7 +45,8 @@ weapon_desc = "1. Bow
 3. Projectiles have low velocity.
 ------
 1. Fires a poison arrow. Parrying the projectile is possible, but difficult due to the delay.
-2. Alternate attack instantly fires additional arrows. They can be added to the quiver when blocking damage (example: dash dodge)
+2. Alternate attack instantly fires additional arrows. 
+They can be added to the quiver when blocking damage (for example: dodging with a dash)
 ------"
 metadata/_custom_type_script = "uid://bi1gje1pfokqc"
 

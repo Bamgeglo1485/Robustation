@@ -269,11 +269,9 @@ func _shoot(direction) -> Node2D:
 	return instance
 
 func _on_swap(_new_weapon: Weapon) -> void:
-	if !overheat_enabled:
-		return
-	if _new_weapon == self:
+	if _new_weapon == self and overheat > 0:
 		_overheat_visuals()
-	else:
+	elif overheat <= 0:
 		weapon_inhand_texture.modulate = Color(1.0, 1.0, 1.0, 1.0)
 		if player_weapon_user:
 			player_weapon_user.weapon_icon.modulate = Color(1.0, 1.0, 1.0, 1.0)

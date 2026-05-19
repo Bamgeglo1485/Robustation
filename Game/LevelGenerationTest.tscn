@@ -1,23 +1,130 @@
 [gd_scene format=3 uid="uid://t11oui78ufap"]
 
+[ext_resource type="PackedScene" uid="uid://xox6pb86v3gg" path="res://Scenes/Entities/Functioning/BaseRoomAirlock.tscn" id="2_owoip"]
+[ext_resource type="TileSet" uid="uid://bc7bghcv8144y" path="res://Resources/TileMaps/Tiles.tres" id="2_usbqj"]
+[ext_resource type="PackedScene" uid="uid://drhfrmcjgyx2" path="res://Scenes/Entities/Functioning/EnemySpawnerAirlock.tscn" id="3_6byl8"]
 [ext_resource type="Script" uid="uid://bsiofl2b54syo" path="res://Components/Level/LevelGeneratorComponent.gd" id="3_e1wfd"]
-[ext_resource type="PackedScene" uid="uid://d21pimbjvvsno" path="res://Scenes/StationRun/Rooms/Tom1/Chapter12/Arenas/RoomA1.tscn" id="4_82w5q"]
+[ext_resource type="TileSet" uid="uid://ci8wda1xc88ki" path="res://Resources/TileMaps/WallsDestructible.tres" id="4_82w5q"]
+[ext_resource type="TileSet" uid="uid://cr4gmxce1ahdv" path="res://Resources/TileMaps/MinorTiles.tres" id="4_e1wfd"]
+[ext_resource type="Script" uid="uid://bjc8u38pksoym" path="res://Components/Level/LevelComponent.gd" id="4_g6d10"]
+[ext_resource type="Script" uid="uid://dcmiiyxq6u2f8" path="res://Resources/Custom/Level/GenerationUnit.gd" id="4_nrpeh"]
 [ext_resource type="TileSet" uid="uid://c7mk0aiygychu" path="res://Resources/TileMaps/Walls.tres" id="5_e1wfd"]
-[ext_resource type="PackedScene" uid="uid://dnoaq77825hf2" path="res://Scenes/Entities/Functioning/BaseOpenableAirlock.tscn" id="5_owoip"]
+[ext_resource type="Script" uid="uid://di5u0whaqiyjp" path="res://Resources/Custom/Enemy/Base/Enemy.gd" id="5_merkf"]
+[ext_resource type="PackedScene" uid="uid://c8mg0fsh77c21" path="res://Scenes/Entities/Functioning/BaseLight.tscn" id="5_xyxp4"]
 [ext_resource type="PackedScene" uid="uid://roeennw572p2" path="res://Scenes/Mobs/Player/PlayerGreytide.tscn" id="6_82w5q"]
+[ext_resource type="Resource" uid="uid://bmqxe8ujyt6le" path="res://Resources/Custom/Enemy/Gray.tres" id="6_puepq"]
+[ext_resource type="Resource" uid="uid://c7ill5kgubqqa" path="res://Resources/Custom/Enemy/Tider.tres" id="7_nrpeh"]
+[ext_resource type="Environment" uid="uid://r1a7fr7x6en8" path="res://DemoTrash/Light.tres" id="8_16t0s"]
+[ext_resource type="Resource" uid="uid://cou375htkckp8" path="res://Resources/Custom/Enemy/Assistant.tres" id="8_xyxp4"]
+[ext_resource type="Resource" uid="uid://btivhod77cnen" path="res://Resources/Custom/Enemy/Graytider.tres" id="9_2r3hv"]
+[ext_resource type="Script" uid="uid://dptr5blvqsgks" path="res://Components/Interface/Menu/Settings/WorldEnvComponent.gd" id="9_6byl8"]
+[ext_resource type="PackedScene" uid="uid://dx75c08agri7r" path="res://Scenes/Perks/PerkSceneBandageAndToxicMarker.tscn" id="14_bqtwj"]
+[ext_resource type="PackedScene" uid="uid://cilxau2d1ryo5" path="res://Scenes/Perks/PerkSceneDoublePenetration.tscn" id="15_3ma1n"]
+[ext_resource type="PackedScene" uid="uid://dqt0jqxgluxsi" path="res://Scenes/Perks/PerkSceneRubberBullets.tscn" id="16_i3hiq"]
+[ext_resource type="PackedScene" uid="uid://c5b5ke884uc34" path="res://Scenes/Perks/PerkSceneFirstAIDS.tscn" id="17_h4g5t"]
+[ext_resource type="PackedScene" uid="uid://1qu5kklprskj" path="res://Scenes/Perks/PerkSceneEphedrineCigarettes.tscn" id="18_bupnh"]
+[ext_resource type="PackedScene" uid="uid://hk7lpgoexkxf" path="res://Scenes/Perks/PerkSceneMedBelt.tscn" id="19_0qr1g"]
+[ext_resource type="PackedScene" uid="uid://fh4o05ew62pv" path="res://Scenes/Perks/PerkSceneMirrorShard.tscn" id="20_0tyrb"]
+[ext_resource type="PackedScene" uid="uid://cfg8g768i2k83" path="res://Scenes/Perks/PerkSceneBitchBall.tscn" id="21_rqcmx"]
+[ext_resource type="PackedScene" uid="uid://bm4hm4bycw8ti" path="res://Scenes/Perks/PerkSceneGoliathPlate.tscn" id="22_aymn4"]
+[ext_resource type="PackedScene" uid="uid://dplevsy1jomld" path="res://Scenes/Perks/PerkSceneGalaxythistle.tscn" id="23_tnywj"]
+[ext_resource type="PackedScene" uid="uid://dbarl1l1jbwt4" path="res://Scenes/Perks/PerkSceneShinyGreenBullets.tscn" id="24_acqqm"]
+[ext_resource type="PackedScene" uid="uid://b3pri7wp4hsjb" path="res://Scenes/Perks/PerkScenePlasmaTank.tscn" id="25_ygd3n"]
+[ext_resource type="PackedScene" uid="uid://cu7kn4eus454b" path="res://Scenes/Perks/PerkSceneCombatGloves.tscn" id="26_mher4"]
+[ext_resource type="PackedScene" uid="uid://c7fwcipo1a7jq" path="res://Scenes/Perks/PerkSceneRedspacePaint.tscn" id="27_h0a86"]
+[ext_resource type="PackedScene" uid="uid://51553qtnrkvu" path="res://Scenes/Perks/PerkSceneInspectorsFlask.tscn" id="28_o7uxj"]
+[ext_resource type="PackedScene" uid="uid://duyalsqrvhov0" path="res://Scenes/Perks/PerkSceneRocketJumpers.tscn" id="29_j5p6s"]
+[ext_resource type="PackedScene" uid="uid://dhw0xsac3vmpn" path="res://Scenes/Perks/PerkSceneStudentDiet.tscn" id="30_e0skq"]
+[ext_resource type="PackedScene" uid="uid://c4ex02nnk4ge3" path="res://Scenes/Perks/PerkSceneCrusherModule.tscn" id="31_f5i4u"]
+[ext_resource type="AudioStream" uid="uid://1qnhfchhf4jb" path="res://Audio/Effects/voteding.ogg" id="32_h4g5t"]
+[ext_resource type="AudioStream" uid="uid://14o4e8msndow" path="res://Audio/Weapon/Projectile/mk58_shoot.ogg" id="33_bupnh"]
+[ext_resource type="AudioStream" uid="uid://b2utqxvujdi7f" path="res://Audio/Ambience/box_deploy.ogg" id="34_0qr1g"]
+
+[sub_resource type="Resource" id="Resource_2r3hv"]
+script = ExtResource("4_nrpeh")
+scene = ExtResource("5_xyxp4")
+max_units = 6
+min_units = 3
+metadata/_custom_type_script = "uid://dcmiiyxq6u2f8"
 
 [node name="Game" type="Node2D" unique_id=49398453]
+
+[node name="LevelGeneratorComponent" type="Node" parent="." unique_id=1323842931 node_paths=PackedStringArray("wall_tile_map", "destructible_wall_tile_map", "tiles_tile_map", "minor_tiles_tile_map")]
+script = ExtResource("3_e1wfd")
+wall_tile_map = NodePath("../WallTileMap")
+destructible_wall_tile_map = NodePath("../WallsDestructible")
+tiles_tile_map = NodePath("../Tiles")
+minor_tiles_tile_map = NodePath("../MinorTiles")
+airlock = ExtResource("2_owoip")
+enemy_airlock = ExtResource("3_6byl8")
+generation_units = Array[ExtResource("4_nrpeh")]([SubResource("Resource_2r3hv")])
+floor_tile_atlas_coords = Vector2i(2, 1)
+metadata/_custom_type_script = "uid://bsiofl2b54syo"
+
+[node name="LevelComponent" type="Node" parent="." unique_id=1648950004 node_paths=PackedStringArray("perk_choice_start_sound", "perk_choice_sound", "perk_selected_sound")]
+script = ExtResource("4_g6d10")
+available_enemies = Array[ExtResource("5_merkf")]([ExtResource("6_puepq"), ExtResource("7_nrpeh"), ExtResource("8_xyxp4"), ExtResource("9_2r3hv")])
+start_budget = 2.0
+available_reward_enemies = Array[ExtResource("5_merkf")]([ExtResource("6_puepq")])
+perks = Array[PackedScene]([ExtResource("14_bqtwj"), ExtResource("15_3ma1n"), ExtResource("16_i3hiq"), ExtResource("17_h4g5t"), ExtResource("18_bupnh"), ExtResource("19_0qr1g"), ExtResource("20_0tyrb"), ExtResource("21_rqcmx"), ExtResource("22_aymn4"), ExtResource("23_tnywj"), ExtResource("24_acqqm"), ExtResource("25_ygd3n"), ExtResource("26_mher4"), ExtResource("27_h0a86"), ExtResource("28_o7uxj"), ExtResource("29_j5p6s"), ExtResource("30_e0skq"), ExtResource("31_f5i4u")])
+perk_choice_start_sound = NodePath("PerkStart")
+perk_choice_sound = NodePath("PerkChoice")
+perk_selected_sound = NodePath("PerkSelected")
+metadata/_custom_type_script = "uid://bjc8u38pksoym"
+
+[node name="PerkStart" type="AudioStreamPlayer" parent="LevelComponent" unique_id=581089703]
+stream = ExtResource("32_h4g5t")
+
+[node name="PerkChoice" type="AudioStreamPlayer" parent="LevelComponent" unique_id=712145523]
+stream = ExtResource("33_bupnh")
+volume_db = -10.0
+pitch_scale = 2.0
+
+[node name="PerkSelected" type="AudioStreamPlayer" parent="LevelComponent" unique_id=1458849207]
+stream = ExtResource("34_0qr1g")
 
 [node name="WallTileMap" type="TileMapLayer" parent="." unique_id=525973106]
 z_index = 1
 tile_set = ExtResource("5_e1wfd")
+navigation_enabled = false
 
-[node name="Player" parent="." unique_id=1830007488 instance=ExtResource("6_82w5q")]
+[node name="Tiles" type="TileMapLayer" parent="." unique_id=720768513]
+z_index = -1
+tile_set = ExtResource("2_usbqj")
+collision_enabled = false
 
-[node name="LevelGeneratorComponent" type="Node" parent="." unique_id=1307692254 node_paths=PackedStringArray("wall_tile_map", "rooms_parent")]
-script = ExtResource("3_e1wfd")
-available_arena_rooms = Array[PackedScene]([ExtResource("4_82w5q")])
-wall_tile_map = NodePath("../WallTileMap")
-door_scene = ExtResource("5_owoip")
-rooms_parent = NodePath("..")
-metadata/_custom_type_script = "uid://bsiofl2b54syo"
+[node name="MinorTiles" type="TileMapLayer" parent="." unique_id=388512218]
+position = Vector2(0, -1)
+tile_set = ExtResource("4_e1wfd")
+physics_quadrant_size = 64
+
+[node name="WallsDestructible" type="TileMapLayer" parent="." unique_id=517611006]
+tile_set = ExtResource("4_82w5q")
+navigation_enabled = false
+
+[node name="Player" parent="." unique_id=914217487 instance=ExtResource("6_82w5q")]
+position = Vector2(215, 113)
+collision_layer = 786433
+platform_wall_layers = 0
+
+[node name="Space" type="CanvasLayer" parent="Player" unique_id=648019453]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="Player/Space" unique_id=428709831]
+light_mask = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1053939501]
+environment = ExtResource("8_16t0s")
+
+[node name="WorldEnvComponent" type="Node" parent="WorldEnvironment" unique_id=688089276]
+script = ExtResource("9_6byl8")
+metadata/_custom_type_script = "uid://dptr5blvqsgks"
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=576209262]
+color = Color(0.008202022, 0.008202025, 0.008202025, 1)

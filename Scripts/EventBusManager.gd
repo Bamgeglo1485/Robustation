@@ -46,3 +46,8 @@ signal introduction_subject_on_screen(emitter: Node2D)
 
 signal weapon_selected(weapon: Weapon)
 signal weapon_slot_changed(number: int)
+
+signal room_start(room: int)
+signal room_end(room: int)
+signal force_bolt(room: int)
+signal force_unbolt(room: int)

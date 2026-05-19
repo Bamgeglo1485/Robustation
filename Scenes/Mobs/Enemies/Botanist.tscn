@@ -54,6 +54,16 @@ drop_resistance = 2
 position = Vector2(0, 1)
 texture = ExtResource("2_8bjdt")
 
+[node name="Hair" type="Sprite2D" parent="Texture" index="1" unique_id=682336587]
+position = Vector2(0, -1)
+texture = ExtResource("24_nd1cv")
+offset = Vector2(0, -2)
+region_enabled = true
+script = ExtResource("25_3bpxu")
+random_textures = Array[Texture2D]([ExtResource("26_3u4av"), ExtResource("27_27mmv"), ExtResource("28_tcd2f"), ExtResource("29_ex5hw"), ExtResource("30_1fi8b"), ExtResource("31_fl2im"), ExtResource("32_4rnjf"), ExtResource("33_i5b83"), ExtResource("34_hk7io"), ExtResource("35_t2vwi"), ExtResource("36_br5qh"), ExtResource("37_lko1v"), ExtResource("38_dm2cf"), ExtResource("39_7wmxi"), ExtResource("40_c7pau"), ExtResource("41_6cwrr"), ExtResource("42_oeaax"), ExtResource("43_sprdq"), ExtResource("24_nd1cv")])
+random_color = true
+metadata/_custom_type_script = "uid://bqvdlb3r03cs0"
+
 [node name="HealthComponent" parent="." index="4" unique_id=1758373275]
 hitstop_on_death = true
 max_health = 150
@@ -102,7 +112,7 @@ stream = ExtResource("5_gume5")
 target_desired_distance = 0.1
 
 [node name="BeehaveTree" parent="." index="16" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@18993")
+blackboard = NodePath("@Node@111313")
 
 [node name="SequenceComposite" type="Node" parent="BeehaveTree" index="0" unique_id=815350071]
 script = ExtResource("14_gt7if")
@@ -121,11 +131,13 @@ metadata/_custom_type_script = "uid://cxcq0m0o1gno7"
 [node name="AttackTargetAction" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite" index="1" unique_id=1168815313 node_paths=PackedStringArray("weapon")]
 script = ExtResource("17_ie53o")
 weapon = NodePath("../../../../WeaponUserComponent/Deathnettle")
+prediction_coef = 0.4
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 
 [node name="AttackTargetAction2" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite" index="2" unique_id=2111187169 node_paths=PackedStringArray("weapon")]
 script = ExtResource("17_ie53o")
 weapon = NodePath("../../../../WeaponUserComponent/Bloonion")
+prediction_coef = 0.4
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 
 [node name="SayAction" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite" index="3" unique_id=1020312439]
@@ -183,12 +195,3 @@ subject_desc = "AFTER THE DEATH OF STONED ROBUSTER, THE MUTAGEN BECAME AVAILABLE
 [color=PURPLE]IMMORTAL UNTIL THE TRAYS ARE BROKEN[/color]"
 subject_prefix = "SUPERIOR CREW MEMBER"
 theme = ExtResource("23_nd1cv")
-
-[node name="Hair" type="Sprite2D" parent="." index="21" unique_id=682336587]
-texture = ExtResource("24_nd1cv")
-offset = Vector2(0, -2)
-region_enabled = true
-script = ExtResource("25_3bpxu")
-random_textures = Array[Texture2D]([ExtResource("26_3u4av"), ExtResource("27_27mmv"), ExtResource("28_tcd2f"), ExtResource("29_ex5hw"), ExtResource("30_1fi8b"), ExtResource("31_fl2im"), ExtResource("32_4rnjf"), ExtResource("33_i5b83"), ExtResource("34_hk7io"), ExtResource("35_t2vwi"), ExtResource("36_br5qh"), ExtResource("37_lko1v"), ExtResource("38_dm2cf"), ExtResource("39_7wmxi"), ExtResource("40_c7pau"), ExtResource("41_6cwrr"), ExtResource("42_oeaax"), ExtResource("43_sprdq"), ExtResource("24_nd1cv")])
-random_color = true
-metadata/_custom_type_script = "uid://bqvdlb3r03cs0"

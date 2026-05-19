@@ -2,6 +2,7 @@ class_name HealthComponent extends Component
 
 @export var hitstop_on_death: bool = false
 @export var do_not_delete_after_gib: bool = false
+@export var imaginary_death: bool = false
 @export var max_health: float = 100 : get = get_max_health
 @export var INVINCIBLE: bool = false
 var base_max_health: float = max_health
@@ -131,13 +132,13 @@ func damage_effects(damager) -> void:
 	_flash()
 	
 	if blood_effect_scene:
-		var blood_effect: Node = blood_effect_scene.instantiate()
+		var blood_effect: Node2D = blood_effect_scene.instantiate()
 		blood_effect.global_position = parent.global_position
 		scene.add_child(blood_effect)
 		blood_effect.rotation = attack_direction.angle()
 	
 	if blood_spurt_effect_scene:
-		var blood_spurt_effect: Node = blood_spurt_effect_scene.instantiate()
+		var blood_spurt_effect: Node2D = blood_spurt_effect_scene.instantiate()
 		blood_spurt_effect.global_position = parent.global_position
 		blood_spurt_effect.emitting = true
 		scene.add_child(blood_spurt_effect)
@@ -160,7 +161,9 @@ func _death() -> void:
 		scene.add_child.call_deferred(gib_effect)
 	
 	EventBusManager.gibbed.emit(parent)
-	if !do_not_delete_after_gib:
+	if do_not_delete_after_gib:
+		return
+	if !imaginary_death:
 		parent.call_deferred("queue_free")
 	else:
 		for child in parent.get_children():

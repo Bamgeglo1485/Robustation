@@ -41,6 +41,7 @@
 [ext_resource type="Script" uid="uid://08qu36la5uv4" path="res://Components/Interface/Menu/Settings/ParallaxComponent.gd" id="20_vtcgr"]
 [ext_resource type="PackedScene" uid="uid://duyalsqrvhov0" path="res://Scenes/Perks/PerkSceneRocketJumpers.tscn" id="21_p17xd"]
 [ext_resource type="PackedScene" uid="uid://dhw0xsac3vmpn" path="res://Scenes/Perks/PerkSceneStudentDiet.tscn" id="22_vdwl3"]
+[ext_resource type="PackedScene" uid="uid://c4ex02nnk4ge3" path="res://Scenes/Perks/PerkSceneCrusherModule.tscn" id="23_fhfdn"]
 
 [node name="Game" type="Node2D" unique_id=1459948473]
 physics_interpolation_mode = 2
@@ -140,7 +141,7 @@ texture_scale = 8.5
 [node name="ArenaComponent" type="Node" parent="." unique_id=1165337052 node_paths=PackedStringArray("area_info", "perk_choice_start_sound", "perk_choice_sound", "perk_selected_sound")]
 process_mode = 3
 script = ExtResource("10_glinl")
-perks = Array[PackedScene]([ExtResource("9_cvmb5"), ExtResource("7_1xc2n"), ExtResource("8_oyup5"), ExtResource("9_a3v0t"), ExtResource("10_a3v0t"), ExtResource("11_q4fix"), ExtResource("12_s4atg"), ExtResource("13_muyte"), ExtResource("14_muyte"), ExtResource("15_4g3hn"), ExtResource("16_mufbu"), ExtResource("17_34yx5"), ExtResource("18_ye3yq"), ExtResource("19_jbrfh"), ExtResource("20_rvf63"), ExtResource("21_p17xd"), ExtResource("22_vdwl3")])
+perks = Array[PackedScene]([ExtResource("9_cvmb5"), ExtResource("7_1xc2n"), ExtResource("8_oyup5"), ExtResource("9_a3v0t"), ExtResource("10_a3v0t"), ExtResource("11_q4fix"), ExtResource("12_s4atg"), ExtResource("13_muyte"), ExtResource("14_muyte"), ExtResource("15_4g3hn"), ExtResource("16_mufbu"), ExtResource("17_34yx5"), ExtResource("18_ye3yq"), ExtResource("19_jbrfh"), ExtResource("20_rvf63"), ExtResource("21_p17xd"), ExtResource("22_vdwl3"), ExtResource("23_fhfdn")])
 enemy_perks = Array[PackedScene]([ExtResource("9_cvmb5"), ExtResource("7_1xc2n"), ExtResource("8_oyup5"), ExtResource("9_a3v0t"), ExtResource("10_a3v0t"), ExtResource("11_q4fix"), ExtResource("12_s4atg"), ExtResource("13_muyte"), ExtResource("14_muyte"), ExtResource("16_mufbu"), ExtResource("18_ye3yq"), ExtResource("21_p17xd")])
 boss_kill_reward = ExtResource("17_1wusj")
 boss_battles_per = 5

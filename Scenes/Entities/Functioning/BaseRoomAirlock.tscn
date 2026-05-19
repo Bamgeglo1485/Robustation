@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://xox6pb86v3gg"]
+
+[ext_resource type="PackedScene" uid="uid://dnoaq77825hf2" path="res://Scenes/Entities/Functioning/BaseOpenableAirlock.tscn" id="1_nxqff"]
+[ext_resource type="Script" uid="uid://c7q5yuev0w3im" path="res://Components/Entity/Structures/RoomAirlockComponent.gd" id="2_yex7g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yex7g"]
+size = Vector2(61, 96)
+
+[node name="BaseRoomAirlock" unique_id=166874154 instance=ExtResource("1_nxqff")]
+
+[node name="StartZone" type="Area2D" parent="." index="17" unique_id=2084832115]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartZone" index="0" unique_id=1603987741]
+position = Vector2(69.5, 0)
+shape = SubResource("RectangleShape2D_yex7g")
+
+[node name="RoomAirlockComponent" type="Node" parent="." index="18" unique_id=1481262031 node_paths=PackedStringArray("trigger_area")]
+script = ExtResource("2_yex7g")
+trigger_area = NodePath("../StartZone")
+metadata/_custom_type_script = "uid://c7q5yuev0w3im"

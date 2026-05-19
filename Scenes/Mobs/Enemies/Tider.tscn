@@ -58,12 +58,8 @@ friction = 700.0
 position = Vector2(0, 1)
 texture = ExtResource("2_20t8h")
 
-[node name="HealthComponent" parent="." index="4" unique_id=1758373275]
-damage_type_modifiers = Dictionary[String, float]({
-"Melee": 2.0
-})
-
-[node name="Hair" type="Sprite2D" parent="." index="14" unique_id=927075308]
+[node name="Hair" type="Sprite2D" parent="Texture" index="1" unique_id=927075308]
+position = Vector2(0, -1)
 texture = ExtResource("30_qavuh")
 offset = Vector2(0, -2)
 region_enabled = true
@@ -72,13 +68,18 @@ random_textures = Array[Texture2D]([ExtResource("25_1l0qo"), ExtResource("12_kqv
 random_color = true
 metadata/_custom_type_script = "uid://bqvdlb3r03cs0"
 
-[node name="RandomizeMobMoverComponent" type="Node" parent="." index="15" unique_id=831758902]
+[node name="HealthComponent" parent="." index="4" unique_id=1758373275]
+damage_type_modifiers = Dictionary[String, float]({
+"Melee": 2.0
+})
+
+[node name="RandomizeMobMoverComponent" type="Node" parent="." index="14" unique_id=831758902]
 script = ExtResource("24_nl1i0")
 randomize_multiplier_min = 0.85
 randomize_multiplier_max = 1.2
 metadata/_custom_type_script = "uid://hv0g6akh0ftn"
 
-[node name="RandomWeaponSelectorComponent" type="Node" parent="." index="16" unique_id=1846898249 node_paths=PackedStringArray("weapons_to_select")]
+[node name="RandomWeaponSelectorComponent" type="Node" parent="." index="15" unique_id=1846898249 node_paths=PackedStringArray("weapons_to_select")]
 script = ExtResource("25_urnpk")
 weapons_to_select = [NodePath("PneumaticCannon"), NodePath("Bow")]
 metadata/_custom_type_script = "uid://bd0gbdhbjn7xx"
@@ -148,8 +149,8 @@ stream = ExtResource("34_nqd62")
 volume_db = 5.0
 max_distance = 600.0
 
-[node name="BeehaveTree" parent="." index="19" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@35278")
+[node name="BeehaveTree" parent="." index="18" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
+blackboard = NodePath("@Node@114988")
 
 [node name="SequenceComposite" type="Node" parent="BeehaveTree" index="0" unique_id=1348709416]
 script = ExtResource("36_tw04h")
@@ -208,17 +209,17 @@ metadata/_custom_type_script = "uid://wlnghjnvdlyn"
 
 [node name="AttackTargetAction" type="Node" parent="BeehaveTree/SequenceComposite" index="3" unique_id=1357816782]
 script = ExtResource("40_eljyk")
-prediction_coef = 1.0
+prediction_coef = 0.4
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 
-[node name="DodgerComponent" type="Node" parent="." index="22" unique_id=342231048]
+[node name="DodgerComponent" type="Node" parent="." index="21" unique_id=342231048]
 script = ExtResource("36_wxygg")
 dash_force = 800.0
 dash_stop_speed = 700.0
 stamina_recovery_delay = 3.0
 metadata/_custom_type_script = "uid://bdcq7y2ek222e"
 
-[node name="IntroductionSubjectComponent" parent="." index="24" unique_id=776935428]
+[node name="IntroductionSubjectComponent" parent="." index="23" unique_id=776935428]
 group = "Tider"
 subject_name = "TIDER"
 subject_desc = "TIDE TECHNIQUE USER. 

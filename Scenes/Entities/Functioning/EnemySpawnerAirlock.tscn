@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://drhfrmcjgyx2"]
+
+[ext_resource type="PackedScene" uid="uid://c23n3m40ywq45" path="res://Scenes/Entities/Functioning/BaseAirlock.tscn" id="1_ul7m4"]
+[ext_resource type="Script" uid="uid://blwdf3jwx1sp0" path="res://Components/Entity/Structures/EnemySpawnerAirlockComponent.gd" id="2_ul7m4"]
+[ext_resource type="Texture2D" uid="uid://yjigwd3i118j" path="res://Textures/Light/point_light.jpg" id="3_kgelt"]
+[ext_resource type="Script" uid="uid://yhmqgocl43pi" path="res://Components/Entity/Structures/OpenableAirlockComponent.gd" id="4_la18t"]
+[ext_resource type="Script" uid="uid://c7q5yuev0w3im" path="res://Components/Entity/Structures/RoomAirlockComponent.gd" id="5_bbpgc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kgelt"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_la18t"]
+size = Vector2(61, 96)
+
+[node name="EnemySpawnerAirlock" unique_id=985248610 instance=ExtResource("1_ul7m4")]
+
+[node name="Outercollision" parent="." index="7" unique_id=139227872]
+collision_layer = 3
+collision_mask = 3
+
+[node name="AirlockComponent" parent="." index="8" unique_id=505238705 node_paths=PackedStringArray("point_light")]
+point_light = NodePath("../PointLight2D")
+
+[node name="OpenableAirlockComponent" type="Node" parent="." index="10" unique_id=424016634 node_paths=PackedStringArray("trigger_area")]
+script = ExtResource("4_la18t")
+enabled = false
+trigger_area = NodePath("../Outercollision")
+metadata/_custom_type_script = "uid://yhmqgocl43pi"
+
+[node name="BoltSound" parent="." index="16" unique_id=370861228]
+volume_db = 0.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="17" unique_id=991694422]
+collision_layer = 65535
+collision_mask = 65535
+
+[node name="Collision" type="CollisionShape2D" parent="StaticBody2D" index="0" unique_id=1167732752]
+shape = SubResource("RectangleShape2D_kgelt")
+
+[node name="EnemySpawnerAirlockComponent" type="Node" parent="." index="18" unique_id=994368294 node_paths=PackedStringArray("unlocked_lights", "collision", "outer_collision")]
+script = ExtResource("2_ul7m4")
+unlocked_lights = NodePath("../PointLight2D")
+collision = NodePath("../StaticBody2D")
+outer_collision = NodePath("../Outercollision")
+metadata/_custom_type_script = "uid://blwdf3jwx1sp0"
+
+[node name="PointLight2D" type="PointLight2D" parent="." index="19" unique_id=1652217752]
+position = Vector2(-1, 15)
+enabled = false
+color = Color(0, 0.5556891, 0.6871906, 1)
+texture = ExtResource("3_kgelt")
+texture_scale = 0.2
+
+[node name="StartZone" type="Area2D" parent="." index="21" unique_id=122783388]
+rotation = -1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartZone" index="0" unique_id=1379969782]
+position = Vector2(69.5, 0)
+shape = SubResource("RectangleShape2D_la18t")
+
+[node name="RoomAirlockComponent" type="Node" parent="." index="22" unique_id=1739505457 node_paths=PackedStringArray("trigger_area")]
+script = ExtResource("5_bbpgc")
+trigger_area = NodePath("../StartZone")
+metadata/_custom_type_script = "uid://c7q5yuev0w3im"

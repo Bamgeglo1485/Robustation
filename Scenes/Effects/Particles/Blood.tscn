@@ -8,15 +8,18 @@ particle_flag_disable_z = true
 initial_velocity_min = 110.0
 initial_velocity_max = 245.0
 gravity = Vector3(0, 0, 0)
-color = Color(0.5568628, 0, 0.18431373, 1)
+scale_min = 0.39999998
+scale_max = 1.5
+color = Color(0.38224578, 0, 0.1284019, 1)
 
 [node name="Blood" type="GPUParticles2D" unique_id=1006355857 groups=["Blood"]]
 visible = false
 z_index = -1
 texture_filter = 1
+emitting = false
 amount = 32
 texture = ExtResource("1_iq24q")
-lifetime = 0.2
+lifetime = 0.4
 explosiveness = 1.0
 interpolate = false
 fract_delta = false

@@ -54,14 +54,15 @@ var standing_delay: float = 0.0
 @onready var navigation_agent: NavigationAgent2D = parent.get_node_or_null("NavigationAgent")
 @onready var health_component: HealthComponent = parent.get_node_or_null("HealthComponent")
 
+@onready var texture: Sprite2D = parent.get_node_or_null("Texture")
+
 # Non binary animation tweens
 var unfly_animation_tween: Tween
 var fly_animation_tween: Tween
 var walking_tween: Tween
 var drop_tween: Tween
 
-# signal
-
+# signals
 signal unflied
 
 # Cache
@@ -142,8 +143,8 @@ func _walk_animation() -> void:
 		var modified_time: float = 0.2 * max_speed / base_max_speed
 		
 		walking_tween.stop()
-		walking_tween.tween_property(parent, "rotation", -moving_animation_lean, modified_time)
-		walking_tween.tween_property(parent, "rotation", moving_animation_lean, modified_time)
+		walking_tween.tween_property(texture, "rotation", -moving_animation_lean, modified_time)
+		walking_tween.tween_property(texture, "rotation", moving_animation_lean, modified_time)
 		animation_component.set_animation(walking_tween, 1)
 
 # Movement when body flying
@@ -163,11 +164,14 @@ func _fly_movement() -> void:
 func _fly(delta) -> void:
 	fly_speed -= 400 * delta
 	
+	if fly_animation_tween:
+		fly_animation_tween.kill()
+	
 	if fly_speed < fly_stop_speed * 20:
 		unfly_animation_tween = create_tween()
 		unfly_animation_tween.set_trans(Tween.TRANS_SINE)
 		unfly_animation_tween.set_ease(Tween.EASE_IN_OUT)
-		unfly_animation_tween.tween_property(parent, "scale", Vector2(1, 1), 0.2)
+		unfly_animation_tween.tween_property(texture, "scale", Vector2(1.0, 1.0), 0.2)
 	
 	if fly_speed < fly_stop_speed:
 		fly_speed = 0
@@ -207,7 +211,7 @@ func throw(
 		fly_animation_tween = create_tween()
 		fly_animation_tween.set_trans(Tween.TRANS_SINE)
 		fly_animation_tween.set_ease(Tween.EASE_IN_OUT)
-		fly_animation_tween.tween_property(parent, "scale", Vector2(1.5, 1.5), 0.2)
+		fly_animation_tween.tween_property(texture, "scale", Vector2(1.5, 1.5), 0.2)
 
 func _fall_process(delta: float) -> void:
 	if !flying:
@@ -237,8 +241,8 @@ func drop(delay: float, force: bool = false, resistance_force: int = 0) -> void:
 		drop_tween = create_tween()
 		drop_tween.set_trans(Tween.TRANS_SINE)
 		drop_tween.set_ease(Tween.EASE_IN_OUT)
-		drop_tween.tween_property(parent, "global_rotation", -1.55, 0.2)
-		drop_tween.tween_property(parent, "global_rotation", -1.55, 690)
+		drop_tween.tween_property(texture, "global_rotation", -1.55, 0.2)
+		drop_tween.tween_property(texture, "global_rotation", -1.55, 690)
 		animation_component.set_animation(drop_tween, 69, true)
 	
 	if fallen:

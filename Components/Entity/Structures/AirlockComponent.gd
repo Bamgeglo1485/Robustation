@@ -9,6 +9,9 @@ enum airlock_states {
 }
 @export var state: airlock_states = airlock_states.CLOSED
 @export var collision: CollisionShape2D
+var can_open: bool = true
+
+@export var point_light: PointLight2D
 
 @export_category("Delays")
 @export var closing_collision_delay: float = 0.3
@@ -36,17 +39,8 @@ enum airlock_states {
 @export var bolt_sound: AudioStreamPlayer2D
 @export var unbolt_sound: AudioStreamPlayer2D
 
-func open(unbolt_airlock = false) -> void:
-	if state == airlock_states.OPENED or state == airlock_states.OPENING:
-		return
-	
-	if state == airlock_states.BOLTED:
-		if unbolt_airlock:
-			unbolt()
-		else:
-			return
-	
-	if state != airlock_states.CLOSED:
+func open() -> void:
+	if state != airlock_states.CLOSED or !can_open:
 		return
 	
 	closed_sprite.visible = false
@@ -92,12 +86,10 @@ func open(unbolt_airlock = false) -> void:
 	if opened_unlit_sprite:
 		opened_unlit_sprite.visible = true
 
-func close() -> void:
-	if state == airlock_states.CLOSED or state == airlock_states.CLOSING or state == airlock_states.BOLTED:
-		return
-	
-	if state != airlock_states.OPENED:
-		return
+func close(force: bool = false) -> void:
+	if !force:
+		if state != airlock_states.OPENED:
+			return
 	
 	opened_sprite.visible = false
 	if opened_unlit_sprite:
@@ -126,11 +118,11 @@ func close() -> void:
 	
 	state = airlock_states.CLOSING
 	
-	await get_tree().create_timer(closing_collision_delay).timeout
+	await tree.create_timer(closing_collision_delay).timeout
 	if collision:
 		collision.disabled = false
 	
-	await get_tree().create_timer(closing_delay - closing_collision_delay).timeout
+	await tree.create_timer(closing_delay - closing_collision_delay).timeout
 	
 	state = airlock_states.CLOSED
 	
@@ -144,22 +136,28 @@ func close() -> void:
 
 func bolt() -> void:
 	if state != airlock_states.CLOSED:
-		if state == airlock_states.OPENED or state == airlock_states.OPENING:
-			await close()
+		if state == airlock_states.OPENED or state == airlock_states.OPENING or state == airlock_states.CLOSING:
+			collision.disabled = false
+			can_open = false
+			await close(true)
+			opened_sprite.visible = false
 		else:
 			return
+	
+	state = airlock_states.BOLTED
+	can_open = true
 	
 	if bolt_sound:
 		bolt_sound.play()
 	
-	state = airlock_states.BOLTED
-	
-	closed_sprite.visible = false
 	if closed_unlit_sprite:
 		closed_unlit_sprite.visible = false
 	
 	if bolted_unlit:
 		bolted_unlit.visible = true
+	
+	if point_light:
+		point_light.color = Color(0.941, 0.0, 0.298, 1.0)
 
 func unbolt() -> void:
 	if state != airlock_states.BOLTED:
@@ -176,3 +174,8 @@ func unbolt() -> void:
 	closed_sprite.visible = true
 	if closed_unlit_sprite:
 		closed_unlit_sprite.visible = true
+	if opened_sprite:
+		opened_sprite.visible = false
+	
+	if point_light:
+		point_light.color = Color(0.0, 0.565, 0.698, 1.0)

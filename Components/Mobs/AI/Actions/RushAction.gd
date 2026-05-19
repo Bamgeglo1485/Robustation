@@ -16,8 +16,8 @@ var blackboard: Blackboard
 @export var rush_sound: AudioStreamPlayer2D
 @export var rush_prepare_sound: AudioStreamPlayer2D
 
-@export var throw_speed: float = 800
-@export var throw_stop_speed: float = 500
+@export var throw_speed: float = 500
+@export var throw_stop_speed: float = 300
 
 @export var rush_combo: int = 1
 var combos: int = 0
@@ -35,7 +35,7 @@ func _ready() -> void:
 		damage_area2d.body_entered.connect(_on_body_entered)
 
 func tick(_actor: Node, _blackboard: Blackboard) -> int:
-	if rushing or !mob_mover_component:
+	if rushing or !mob_mover_component or mob_mover_component.movement_blocked:
 		return FAILURE
 	if !blackboard:
 		blackboard = _blackboard

@@ -23,7 +23,7 @@ spread = 180.0
 initial_velocity_min = 2.0
 initial_velocity_max = 100.0
 gravity = Vector3(0, 0, 0)
-color = Color(0.5568628, 0, 0.18431373, 1)
+color = Color(0.38039216, 0, 0.12941177, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uu161"]
 
@@ -43,7 +43,7 @@ initial_velocity_max = 211.48999
 gravity = Vector3(0, 0, 0)
 scale_over_velocity_max = 230.76999
 scale_over_velocity_curve = SubResource("CurveTexture_s8gfb")
-color = Color(0.5568628, 0, 0.18431373, 1)
+color = Color(0.38039216, 0, 0.12941177, 1)
 
 [node name="Blood" type="GPUParticles2D" unique_id=980653200]
 visible = false
@@ -51,7 +51,7 @@ z_index = -1
 texture_filter = 1
 amount = 4
 texture = ExtResource("1_kgwu6")
-lifetime = 0.2
+lifetime = 0.3
 explosiveness = 1.0
 use_fixed_seed = true
 seed = 4246352849
@@ -62,14 +62,14 @@ process_material = SubResource("ParticleProcessMaterial_70dfb")
 script = ExtResource("2_7m5ur")
 
 [node name="PauseTimer" type="Timer" parent="." unique_id=397941844]
-wait_time = 0.2
+wait_time = 0.3
 one_shot = true
 autostart = true
 
 [node name="Eye" type="CharacterBody2D" parent="." unique_id=1571758759]
 z_index = 1
-collision_layer = 16
-collision_mask = 512
+collision_layer = 0
+collision_mask = 528
 motion_mode = 1
 
 [node name="Texture" type="Sprite2D" parent="Eye" unique_id=2007548951]
@@ -108,8 +108,8 @@ metadata/_custom_type_script = "uid://ch6fjxkr8n5db"
 
 [node name="Brain" type="CharacterBody2D" parent="." unique_id=1716066439]
 z_index = 1
-collision_layer = 16
-collision_mask = 512
+collision_layer = 0
+collision_mask = 528
 motion_mode = 1
 
 [node name="Texture" type="Sprite2D" parent="Brain" unique_id=5119715]
@@ -148,8 +148,8 @@ metadata/_custom_type_script = "uid://ch6fjxkr8n5db"
 
 [node name="Heart" type="CharacterBody2D" parent="." unique_id=523662636]
 z_index = 1
-collision_layer = 16
-collision_mask = 512
+collision_layer = 0
+collision_mask = 528
 motion_mode = 1
 
 [node name="Texture" type="Sprite2D" parent="Heart" unique_id=1831369204]
@@ -188,8 +188,8 @@ metadata/_custom_type_script = "uid://ch6fjxkr8n5db"
 
 [node name="Stomach" type="CharacterBody2D" parent="." unique_id=2136891988]
 z_index = 1
-collision_layer = 16
-collision_mask = 512
+collision_layer = 0
+collision_mask = 528
 motion_mode = 1
 
 [node name="Texture" type="Sprite2D" parent="Stomach" unique_id=1839001961]
@@ -228,8 +228,8 @@ metadata/_custom_type_script = "uid://ch6fjxkr8n5db"
 
 [node name="Ears" type="CharacterBody2D" parent="." unique_id=1370736291]
 z_index = 1
-collision_layer = 16
-collision_mask = 512
+collision_layer = 0
+collision_mask = 528
 motion_mode = 1
 
 [node name="Texture" type="Sprite2D" parent="Ears" unique_id=1928315991]
@@ -268,8 +268,8 @@ metadata/_custom_type_script = "uid://ch6fjxkr8n5db"
 
 [node name="Liver" type="CharacterBody2D" parent="." unique_id=145671700]
 z_index = 1
-collision_layer = 16
-collision_mask = 512
+collision_layer = 0
+collision_mask = 528
 motion_mode = 1
 
 [node name="Texture" type="Sprite2D" parent="Liver" unique_id=1730720956]
@@ -308,8 +308,8 @@ metadata/_custom_type_script = "uid://ch6fjxkr8n5db"
 
 [node name="Kidney" type="CharacterBody2D" parent="." unique_id=1066121005]
 z_index = 1
-collision_layer = 16
-collision_mask = 512
+collision_layer = 0
+collision_mask = 528
 motion_mode = 1
 
 [node name="Texture" type="Sprite2D" parent="Kidney" unique_id=949012046]

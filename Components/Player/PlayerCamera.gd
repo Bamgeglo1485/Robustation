@@ -56,8 +56,6 @@ func _physics_process(_delta: float) -> void:
 	direction_component.look_at_direction(direction)
 	
 	if flashlight and flashlight.energy != 0:
-		var cone_scale: float = clamp(direction.length() / 170, flashlight_min_scale, flashlight_max_scale)
-		flashlight.scale = Vector2(cone_scale, cone_scale / 2)
 		flashlight.global_rotation = direction.angle()
 
 func _input(_event: InputEvent) -> void:

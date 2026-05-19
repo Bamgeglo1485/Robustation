@@ -49,10 +49,8 @@
 [ext_resource type="AudioStream" uid="uid://ren60q8kwtf1" path="res://Audio/Effects/V-1/v-1_theme.ogg" id="48_3ayfq"]
 [ext_resource type="Texture2D" uid="uid://bt3u4868xurik" path="res://Textures/Mobs/Mobs/Secret/V-1_unlit.png" id="49_gsnmg"]
 [ext_resource type="Script" uid="uid://bqvdlb3r03cs0" path="res://Components/Visual/DirectionalSpriteComponent.gd" id="50_2t588"]
-[ext_resource type="Script" uid="uid://cth8csvhil3ut" path="res://Components/Perks/ReflectMeleePerkComponent.gd" id="51_e2u2o"]
-[ext_resource type="AudioStream" uid="uid://rfervefrhp8d" path="res://Audio/Effects/V-1/v-1_parry.ogg" id="52_mp0n8"]
-[ext_resource type="Script" uid="uid://nnac0ng77wfq" path="res://Components/Perks/ReflectPerkComponent.gd" id="53_4jgah"]
-[ext_resource type="Script" uid="uid://cobcsv0xos71b" path="res://Components/Perks/HealForDamagePerkComponent.gd" id="53_oxh77"]
+[ext_resource type="Script" uid="uid://dntmjxlwav506" path="res://Components/Entity/ReflectComponent.gd" id="50_ws42g"]
+[ext_resource type="Script" uid="uid://byb8gedmvto65" path="res://Components/Mobs/HealFromDamageComponent.gd" id="51_p3ni3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jkj8r"]
 shader = ExtResource("3_jtqfy")
@@ -322,7 +320,7 @@ avoidance_enabled = false
 radius = 64.0
 
 [node name="BeehaveTree" parent="." index="16" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@29384")
+blackboard = NodePath("@Node@116745")
 
 [node name="MoveToPlayer" type="Node" parent="BeehaveTree" index="0" unique_id=478688837]
 script = ExtResource("32_28lqn")
@@ -364,7 +362,7 @@ metadata/_custom_type_script = "uid://b2bu3qqcql0lk"
 [node name="AttackTargetAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/Hook" index="1" unique_id=1314616936 node_paths=PackedStringArray("weapon")]
 script = ExtResource("39_nuwcy")
 weapon = NodePath("../../../../../WeaponUserComponent/ShotgunHook")
-prediction_coef = 1.0
+prediction_coef = 0.4
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 
 [node name="Shotgun" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite" index="1" unique_id=508461700]
@@ -374,7 +372,7 @@ metadata/_custom_type_script = "uid://cg016dbe7gs1x"
 [node name="AttackTargetAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/Shotgun" index="0" unique_id=1997944300 node_paths=PackedStringArray("weapon")]
 script = ExtResource("39_nuwcy")
 weapon = NodePath("../../../../../WeaponUserComponent/Shotgun")
-prediction_coef = 1.0
+prediction_coef = 0.4
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 
 [node name="ShotgunExplosive" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite" index="2" unique_id=1530240686]
@@ -390,7 +388,7 @@ metadata/_custom_type_script = "uid://b2bu3qqcql0lk"
 [node name="AttackTargetAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/ShotgunExplosive" index="1" unique_id=93806772 node_paths=PackedStringArray("weapon")]
 script = ExtResource("39_nuwcy")
 weapon = NodePath("../../../../../WeaponUserComponent/ShotgunExplosive")
-prediction_coef = 1.0
+prediction_coef = 0.4
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 
 [node name="KnuckleBlaster" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite" index="3" unique_id=1218643424]
@@ -400,6 +398,7 @@ metadata/_custom_type_script = "uid://cg016dbe7gs1x"
 [node name="AttackTargetAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/KnuckleBlaster" index="0" unique_id=414740139 node_paths=PackedStringArray("weapon")]
 script = ExtResource("39_nuwcy")
 weapon = NodePath("../../../../../WeaponUserComponent/Knuckleblaster")
+prediction_coef = 0.4
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 
 [node name="Piercer" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite" index="4" unique_id=590651813]
@@ -415,7 +414,7 @@ metadata/_custom_type_script = "uid://b2bu3qqcql0lk"
 [node name="AttackTargetAction" type="Node" parent="BeehaveTree/MoveToPlayer/SelectorComposite/Piercer" index="1" unique_id=1467481585 node_paths=PackedStringArray("weapon")]
 script = ExtResource("39_nuwcy")
 weapon = NodePath("../../../../../WeaponUserComponent/Piercer")
-prediction_coef = 0.0
+prediction_coef = 0.4
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 
 [node name="DodgerComponent" type="Node" parent="." index="17" unique_id=1942897066 node_paths=PackedStringArray("dodge_sound")]
@@ -508,21 +507,13 @@ region_rect = Rect2(0, 0, 32, 32)
 script = ExtResource("50_2t588")
 metadata/_custom_type_script = "uid://bqvdlb3r03cs0"
 
-[node name="ReflectMeleePerkComponent" type="Node" parent="." index="27" unique_id=672273571]
-script = ExtResource("51_e2u2o")
-reflect_sound = ExtResource("52_mp0n8")
-base_chance = 0.2
-base_chance_decrease = 0.0
-metadata/_custom_type_script = "uid://cth8csvhil3ut"
+[node name="ReflectComponent" type="Node" parent="." index="33" unique_id=2112077358]
+script = ExtResource("50_ws42g")
+projectile_chance = 0.25
+melee_chance = 0.25
+metadata/_custom_type_script = "uid://dntmjxlwav506"
 
-[node name="ReflectPerkComponent" type="Node" parent="." index="28" unique_id=1622348733]
-script = ExtResource("53_4jgah")
-reflect_sound = ExtResource("52_mp0n8")
-base_chance = 0.3
-base_chance_decrease = 0.0
-metadata/_custom_type_script = "uid://nnac0ng77wfq"
-
-[node name="HealForDamagePerkComponent" type="Node" parent="." index="29" unique_id=1191855027]
-script = ExtResource("53_oxh77")
-base_heal_for_damage_multiplier = 6.0
-metadata/_custom_type_script = "uid://cobcsv0xos71b"
+[node name="HealFromDamageComponent2" type="Node" parent="." index="34" unique_id=1824302037]
+script = ExtResource("51_p3ni3")
+heal_multiplier = 2.0
+metadata/_custom_type_script = "uid://byb8gedmvto65"

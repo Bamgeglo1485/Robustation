@@ -1,8 +1,8 @@
 class_name DifficultyDependentWeaponDamageComponent extends Component
 
-@export var damage_on_roleplayer: int = 69
-@export var damage_on_agent: int = 69
-@export var damage_on_greytide: int = 69
+@export var damage_on_roleplayer: float = 0.5
+@export var damage_on_agent: float = 1.0
+@export var damage_on_greytide: float = 1.5
 
 func _ready() -> void:
 	match SettingsConfigSystem.difficulty:

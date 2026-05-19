@@ -35,7 +35,7 @@ class_name MeleeWeapon extends Weapon
 @export var can_clear_mark: bool = false
 
 @export var attack_angle: float = 90
-@export var ray_count: int = 10
+@export var ray_count: int = 15
 @export var parry_extra_bounces: int = 0
 @export var parry_extra_penetrations: int = 0
 
@@ -191,7 +191,7 @@ func _try_melee_attack(direction) -> Dictionary:
 		var ray_start: Vector2
 		var ray_end: Vector2
 		if ray_count > 1:
-			ray_start = parent.global_position - ray_direction * 0.2
+			ray_start = parent.global_position - ray_direction * 0.4
 			ray_end = parent.global_position + ray_direction * attack_range
 		else:
 			ray_start = parent.get_global_mouse_position()

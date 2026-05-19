@@ -2,22 +2,43 @@
 
 [ext_resource type="PackedScene" uid="uid://c23n3m40ywq45" path="res://Scenes/Entities/Functioning/BaseAirlock.tscn" id="1_soual"]
 [ext_resource type="Script" uid="uid://yhmqgocl43pi" path="res://Components/Entity/Structures/OpenableAirlockComponent.gd" id="2_xct4t"]
+[ext_resource type="Texture2D" uid="uid://yjigwd3i118j" path="res://Textures/Light/point_light.jpg" id="3_hrb8a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xct4t"]
+size = Vector2(50, 69)
 
 [node name="BaseOpenableAirlock" unique_id=166874154 instance=ExtResource("1_soual")]
+
+[node name="AirlockComponent" parent="." index="8" unique_id=505238705 node_paths=PackedStringArray("point_light")]
+point_light = NodePath("../PointLight2D")
 
 [node name="OpenableAirlockComponent" type="Node" parent="." index="10" unique_id=1662078526 node_paths=PackedStringArray("trigger_area")]
 script = ExtResource("2_xct4t")
 trigger_area = NodePath("../Outercollision")
 metadata/_custom_type_script = "uid://yhmqgocl43pi"
 
-[node name="OpenSound" parent="." index="13"]
+[node name="OpenSound" parent="." index="13" unique_id=2013108459]
 max_distance = 200.0
 
-[node name="CloseSound" parent="." index="14"]
+[node name="CloseSound" parent="." index="14" unique_id=440834374]
 max_distance = 200.0
 
-[node name="BoltSound" parent="." index="15"]
-max_distance = 200.0
+[node name="UnboltSound" parent="." index="15" unique_id=743049838]
+max_distance = 600.0
 
-[node name="UnboltSound" parent="." index="16"]
-max_distance = 200.0
+[node name="BoltSound" parent="." index="16" unique_id=370861228]
+max_distance = 600.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="17" unique_id=498708606]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Collision" type="CollisionShape2D" parent="StaticBody2D" index="0" unique_id=2059493431]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_xct4t")
+
+[node name="PointLight2D" type="PointLight2D" parent="." index="18" unique_id=591131954]
+position = Vector2(-1, 15)
+color = Color(0, 0.5556891, 0.6871906, 1)
+texture = ExtResource("3_hrb8a")
+texture_scale = 0.2

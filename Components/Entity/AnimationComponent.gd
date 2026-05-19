@@ -8,6 +8,7 @@ var last_time_scale: float
 @export var flash_frame: ColorRect
 @export var ignore_time_scale: bool = false
 @onready var shader: ShaderMaterial
+@onready var texture: Node2D = parent.get_node_or_null("Texture")
 
 func set_animation(tween: Tween, priority: int, rewrite: bool = false) -> void:
 	if (priority > animation_priority) or (priority == animation_priority and rewrite):
@@ -36,6 +37,11 @@ func _clear_tween() -> void:
 	_tween.tween_property(parent, "global_rotation", 0.0, 0.3)
 	_tween.tween_property(parent, "rotation", 0.0, 0.3)
 	_tween.tween_property(parent, "skew", 0.0, 0.3)
+	
+	if texture:
+		_tween.tween_property(texture, "global_rotation", 0.0, 0.3)
+		_tween.tween_property(texture, "rotation", 0.0, 0.3)
+		_tween.tween_property(texture, "skew", 0.0, 0.3)
 
 func shift_to_direction(
 	direction: Vector2,

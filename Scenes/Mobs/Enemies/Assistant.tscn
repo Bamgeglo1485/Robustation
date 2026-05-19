@@ -52,11 +52,8 @@ friction = 1000.0
 position = Vector2(0, 1)
 texture = ExtResource("2_f6ny4")
 
-[node name="NavigationAgent" parent="." index="13" unique_id=1358139639]
-avoidance_enabled = false
-max_speed = 0.01
-
-[node name="Hair" type="Sprite2D" parent="." index="14" unique_id=927075308]
+[node name="Hair" type="Sprite2D" parent="Texture" index="0" unique_id=927075308]
+position = Vector2(0, -1)
 texture = ExtResource("3_7ct2p")
 offset = Vector2(0, -2)
 region_enabled = true
@@ -65,20 +62,24 @@ random_textures = Array[Texture2D]([ExtResource("5_xiial"), ExtResource("6_hjwmf
 random_color = true
 metadata/_custom_type_script = "uid://bqvdlb3r03cs0"
 
-[node name="RandomizeMobMoverComponent" type="Node" parent="." index="15" unique_id=831758902]
+[node name="NavigationAgent" parent="." index="13" unique_id=1358139639]
+avoidance_enabled = false
+max_speed = 0.01
+
+[node name="RandomizeMobMoverComponent" type="Node" parent="." index="14" unique_id=831758902]
 script = ExtResource("23_hnomy")
 randomize_multiplier_min = 0.85
 randomize_multiplier_max = 1.2
 metadata/_custom_type_script = "uid://hv0g6akh0ftn"
 
-[node name="RandomWeaponSelectorComponent" type="Node" parent="." index="16" unique_id=1846898249 node_paths=PackedStringArray("weapons_to_select")]
+[node name="RandomWeaponSelectorComponent" type="Node" parent="." index="15" unique_id=1846898249 node_paths=PackedStringArray("weapons_to_select")]
 script = ExtResource("24_7suw5")
 weapons_to_select = [NodePath("Crowbar"), NodePath("Fist"), NodePath("Toolbox")]
 metadata/_custom_type_script = "uid://bd0gbdhbjn7xx"
 
 [node name="Crowbar" type="Node" parent="RandomWeaponSelectorComponent" index="0" unique_id=1903842277 node_paths=PackedStringArray("attack_sound", "miss_sound")]
 script = ExtResource("25_ipqlo")
-damage = 12.0
+damage = 3.0
 attack_range = 83
 attack_sound = NodePath("HitSound")
 miss_sound = NodePath("MissSound")
@@ -100,14 +101,11 @@ stream = ExtResource("29_f6ny4")
 
 [node name="DifficultyDependentWeaponDamageComponent" type="Node" parent="RandomWeaponSelectorComponent/Crowbar" index="2" unique_id=206918406]
 script = ExtResource("30_2q2qw")
-damage_on_roleplayer = 2
-damage_on_agent = 5
-damage_on_greytide = 10
 metadata/_custom_type_script = "uid://udvlhbibn11h"
 
 [node name="Fist" type="Node" parent="RandomWeaponSelectorComponent" index="1" unique_id=2029928507 node_paths=PackedStringArray("attack_sound", "miss_sound")]
 script = ExtResource("25_ipqlo")
-damage = 6.0
+damage = 1.5
 attack_range = 83
 attack_sound = NodePath("HitSound")
 miss_sound = NodePath("MissSound")
@@ -128,14 +126,11 @@ stream = ExtResource("29_f6ny4")
 
 [node name="DifficultyDependentWeaponDamageComponent" type="Node" parent="RandomWeaponSelectorComponent/Fist" index="2" unique_id=2031926985]
 script = ExtResource("30_2q2qw")
-damage_on_roleplayer = 2
-damage_on_agent = 4
-damage_on_greytide = 6
 metadata/_custom_type_script = "uid://udvlhbibn11h"
 
 [node name="Toolbox" type="Node" parent="RandomWeaponSelectorComponent" index="2" unique_id=1243054908 node_paths=PackedStringArray("attack_sound", "miss_sound")]
 script = ExtResource("25_ipqlo")
-damage = 20.0
+damage = 7.0
 stamina_damage = 20
 attack_range = 83
 attack_sound = NodePath("HitSound")
@@ -155,13 +150,10 @@ stream = ExtResource("28_mbwmj")
 
 [node name="DifficultyDependentWeaponDamageComponent" type="Node" parent="RandomWeaponSelectorComponent/Toolbox" index="2" unique_id=214981512]
 script = ExtResource("30_2q2qw")
-damage_on_roleplayer = 5
-damage_on_agent = 10
-damage_on_greytide = 15
 metadata/_custom_type_script = "uid://udvlhbibn11h"
 
-[node name="BeehaveTree" parent="." index="19" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@50414")
+[node name="BeehaveTree" parent="." index="18" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
+blackboard = NodePath("@Node@53228")
 
 [node name="MoveToPlayer" type="Node" parent="BeehaveTree" index="0" unique_id=1542265017]
 script = ExtResource("36_k3vsn")
@@ -191,12 +183,12 @@ script = ExtResource("41_i5qxx")
 prediction_coef = 0.4
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 
-[node name="IntroductionSubjectComponent" parent="." index="23" unique_id=776935428]
+[node name="IntroductionSubjectComponent" parent="." index="22" unique_id=776935428]
 group = "Assistant"
 subject_name = "ASSISTANT"
 subject_desc = "WEAK INSANE ASSISTANT USING MELEE WEAPON.
 [color=purple]WEAK TO EVERYTHING[/color]"
 subject_prefix = "MELEE PAWN"
 
-[node name="ExplosionResistanceComponent" parent="." index="29" unique_id=69597611]
+[node name="ExplosionResistanceComponent" parent="." index="28" unique_id=69597611]
 resistance = 2.0

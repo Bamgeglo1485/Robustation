@@ -56,6 +56,15 @@ friction = 700.0
 [node name="Texture" parent="." index="2" unique_id=382857461]
 texture = ExtResource("2_qkn30")
 
+[node name="Hair" type="Sprite2D" parent="Texture" index="1" unique_id=927075308]
+texture = ExtResource("4_fb4jx")
+offset = Vector2(0, -2)
+region_enabled = true
+script = ExtResource("5_6dpsf")
+random_textures = Array[Texture2D]([ExtResource("6_nqxm1"), ExtResource("7_umo1f"), ExtResource("8_t6gyr"), ExtResource("9_t6qnj"), ExtResource("10_qbu4j"), ExtResource("11_ubojo"), ExtResource("12_vseh5"), ExtResource("13_tbj3n"), ExtResource("14_r1g2j"), ExtResource("15_c37sb"), ExtResource("16_mn8tn"), ExtResource("17_y14om"), ExtResource("18_fgfyo"), ExtResource("19_gyac8"), ExtResource("20_e85ew"), ExtResource("21_f5tam"), ExtResource("22_cge0e"), ExtResource("23_p4khf"), ExtResource("4_fb4jx")])
+random_color = true
+metadata/_custom_type_script = "uid://bqvdlb3r03cs0"
+
 [node name="HealthComponent" parent="." index="4" unique_id=1758373275]
 damage_type_modifiers = Dictionary[String, float]({
 "Projectile": 2.0
@@ -108,23 +117,14 @@ position = Vector2(0, -1)
 [node name="NavigationAgent" parent="." index="13" unique_id=1358139639]
 target_desired_distance = 96.0
 
-[node name="Hair" type="Sprite2D" parent="." index="15" unique_id=927075308]
-texture = ExtResource("4_fb4jx")
-offset = Vector2(0, -2)
-region_enabled = true
-script = ExtResource("5_6dpsf")
-random_textures = Array[Texture2D]([ExtResource("6_nqxm1"), ExtResource("7_umo1f"), ExtResource("8_t6gyr"), ExtResource("9_t6qnj"), ExtResource("10_qbu4j"), ExtResource("11_ubojo"), ExtResource("12_vseh5"), ExtResource("13_tbj3n"), ExtResource("14_r1g2j"), ExtResource("15_c37sb"), ExtResource("16_mn8tn"), ExtResource("17_y14om"), ExtResource("18_fgfyo"), ExtResource("19_gyac8"), ExtResource("20_e85ew"), ExtResource("21_f5tam"), ExtResource("22_cge0e"), ExtResource("23_p4khf"), ExtResource("4_fb4jx")])
-random_color = true
-metadata/_custom_type_script = "uid://bqvdlb3r03cs0"
-
-[node name="RandomizeMobMoverComponent" type="Node" parent="." index="16" unique_id=831758902]
+[node name="RandomizeMobMoverComponent" type="Node" parent="." index="15" unique_id=831758902]
 script = ExtResource("24_vgswd")
 randomize_multiplier_min = 0.85
 randomize_multiplier_max = 1.2
 metadata/_custom_type_script = "uid://hv0g6akh0ftn"
 
-[node name="BeehaveTree" parent="." index="18" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@47588")
+[node name="BeehaveTree" parent="." index="17" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
+blackboard = NodePath("@Node@112206")
 
 [node name="SelectorComposite" type="Node" parent="BeehaveTree" index="0" unique_id=102813076]
 script = ExtResource("34_j0lau")
@@ -164,8 +164,6 @@ rush_weapon = NodePath("../../../../../WeaponUserComponent/Spear")
 weapon_sprite = NodePath("../../../../../Texture/WeaponSpriteComponent")
 rush_sound = NodePath("../../../../../Sounds/Rush")
 rush_prepare_sound = NodePath("../../../../../Sounds/Rush_Prepare")
-throw_speed = 900.0
-throw_stop_speed = 700.0
 metadata/_custom_type_script = "uid://djnlrq07s5frw"
 
 [node name="LookAtPoint" type="Node" parent="BeehaveTree/SelectorComposite" index="1" unique_id=1002675121]
@@ -182,13 +180,13 @@ script = ExtResource("36_6dpsf")
 key = "MovePoint"
 metadata/_custom_type_script = "uid://ttwxxcce2i4p"
 
-[node name="Rush" type="Area2D" parent="." index="20" unique_id=429380638]
+[node name="Rush" type="Area2D" parent="." index="19" unique_id=429380638]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rush" index="0" unique_id=1679646748]
 visible = false
 shape = SubResource("CircleShape2D_fb4jx")
 
-[node name="IntroductionSubjectComponent" parent="." index="23" unique_id=776935428]
+[node name="IntroductionSubjectComponent" parent="." index="22" unique_id=776935428]
 group = "Gray"
 subject_name = "GRAY"
 subject_desc = "A GRAYTIDE SPEARMAN WHO ATTACKS WITH A DASH.

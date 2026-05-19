@@ -1,0 +1,1 @@
+class_name LevelRunnerComponent extends Component

@@ -14,21 +14,21 @@ curve = SubResource("Curve_gec8y")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_70dfb"]
 particle_flag_disable_z = true
 spread = 180.0
-initial_velocity_min = 59.77
-initial_velocity_max = 234.48
+initial_velocity_min = 90.7
+initial_velocity_max = 134.83
 gravity = Vector3(0, 0, 0)
+scale_min = 0.5
 scale_over_velocity_max = 230.76999
 scale_over_velocity_curve = SubResource("CurveTexture_6ugap")
-color = Color(0.5568628, 0, 0.18431373, 1)
+color = Color(0.38039216, 0, 0.12941177, 1)
 
 [node name="Blood" type="GPUParticles2D" unique_id=1787277679 groups=["Blood"]]
-visible = false
 z_index = -2
 texture_filter = 1
 emitting = false
-amount = 12
+amount = 16
 texture = ExtResource("1_nr0qg")
-lifetime = 0.2
+lifetime = 0.3
 one_shot = true
 explosiveness = 1.0
 interpolate = false

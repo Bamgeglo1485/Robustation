@@ -39,6 +39,8 @@
 [ext_resource type="AudioStream" uid="uid://1qnhfchhf4jb" path="res://Audio/Effects/voteding.ogg" id="32_h4g5t"]
 [ext_resource type="AudioStream" uid="uid://14o4e8msndow" path="res://Audio/Weapon/Projectile/mk58_shoot.ogg" id="33_bupnh"]
 [ext_resource type="AudioStream" uid="uid://b2utqxvujdi7f" path="res://Audio/Ambience/box_deploy.ogg" id="34_0qr1g"]
+[ext_resource type="FontFile" uid="uid://dskv5n6tofrla" path="res://Resources/Text/Fonts/LCD 40x2 Display/LCD40x2Display-Regular.otf" id="38_h4g5t"]
+[ext_resource type="Script" uid="uid://4io3bm7r86h6" path="res://Components/Interface/Menu/TextPrintingAnimationComponent.gd" id="39_bupnh"]
 
 [sub_resource type="Resource" id="Resource_2r3hv"]
 script = ExtResource("4_nrpeh")
@@ -63,6 +65,8 @@ metadata/_custom_type_script = "uid://bsiofl2b54syo"
 
 [node name="LevelComponent" type="Node" parent="." unique_id=1648950004 node_paths=PackedStringArray("perk_choice_start_sound", "perk_choice_sound", "perk_selected_sound")]
 script = ExtResource("4_g6d10")
+level_name = "Maints | Exposition
+\"...Like Cum To Face\""
 available_enemies = Array[ExtResource("5_merkf")]([ExtResource("6_puepq"), ExtResource("7_nrpeh"), ExtResource("8_xyxp4"), ExtResource("9_2r3hv")])
 start_budget = 2.0
 available_reward_enemies = Array[ExtResource("5_merkf")]([ExtResource("6_puepq")])
@@ -118,6 +122,36 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="Level" type="CanvasLayer" parent="Player" unique_id=1368465323]
+
+[node name="LevelName" type="Control" parent="Player/Level" unique_id=1326748827]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Name" type="RichTextLabel" parent="Player/Level/LevelName" unique_id=179175973]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.055555556
+anchor_top = 0.5925926
+anchor_right = 0.3888889
+anchor_bottom = 0.79012346
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("38_h4g5t")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="TextPrintingAnimationComponent" type="Node" parent="Player/Level/LevelName/Name" unique_id=671411029]
+script = ExtResource("39_bupnh")
+animate_on_ready = false
+metadata/_custom_type_script = "uid://4io3bm7r86h6"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1053939501]
 environment = ExtResource("8_16t0s")

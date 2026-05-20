@@ -1,6 +1,8 @@
 class_name LevelComponent extends Component
 
 @export_category("Settings")
+@export_multiline var level_name: String
+
 @export var available_enemies: Array[Enemy]
 @export var max_enemies_per_room: int = 10
 @export var min_enemies_per_room: int = 10
@@ -36,6 +38,7 @@ var room: int
 const MAX_ATTEMPTS = 100
 
 @onready var player: PhysicsBody2D = scene.get_node_or_null("Player")
+@onready var level_name_label: RichTextLabel = player.get_node_or_null("Level").get_node_or_null("LevelName").get_node_or_null("Name")
 @onready var weapon_user_component: WeaponUserComponent = player.get_node_or_null("WeaponUserComponent")
 @onready var player_perk_ui: Control = player.get_node("GUI").get_node("PerkChoose").get_node("PerkChoose")
 @onready var player_perk_ui_list: VBoxContainer = player_perk_ui.get_node("Panel").get_node("VBoxContainer")
@@ -49,6 +52,9 @@ func _ready() -> void:
 	EventBusManager.gibbed.connect(_on_death)
 
 func _on_start(_room: int) -> void:
+	if _room == 0:
+		_level_name_animation()
+	
 	if _room < 100:
 		second_spawned = false
 		room = _room
@@ -56,20 +62,29 @@ func _on_start(_room: int) -> void:
 		var first_spawner: PhysicsBody2D = first_enemy_spawners[room]
 		var second_spawner: PhysicsBody2D = second_enemy_spawners[room]
 		
-		spawn_enemies(available_enemies, first_spawner)
+		_spawn_enemies(available_enemies, first_spawner)
 		await tree.create_timer(delay_before_second_spawn).timeout
-		spawn_enemies(available_enemies, second_spawner)
+		_spawn_enemies(available_enemies, second_spawner)
 		second_spawned = true
 	else:
 		if randf() < reward_enemy_chance:
 			second_spawned = true
 			room = _room
-			spawn_enemies(available_reward_enemies, null, player.global_position)
+			_spawn_enemies(available_reward_enemies, null, player.global_position)
 			EventBusManager.force_bolt.emit(room)
 		elif randf() < reward_chance:
 			_open_perk_choose()
 
-func spawn_enemies(_enemies: Array[Enemy], spawner: PhysicsBody2D, position: Vector2 = Vector2.ZERO) -> void:
+func _level_name_animation() -> void:
+	var text_printing: TextPrintingAnimationComponent = level_name_label.get_node_or_null("TextPrintingAnimationComponent")
+	text_printing.animate(level_name, 1.5, true, false)
+	await tree.create_timer(3).timeout
+	var tween: Tween = create_tween()
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(level_name_label, "text", " ", 1.5)
+
+func _spawn_enemies(_enemies: Array[Enemy], spawner: PhysicsBody2D, position: Vector2 = Vector2.ZERO) -> void:
 	var spawner_comp: EnemySpawnerAirlockComponent
 	if spawner:
 		spawner_comp = spawner.get_node_or_null("EnemySpawnerAirlockComponent")

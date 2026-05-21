@@ -2,8 +2,10 @@ class_name LevelGeneratorComponent extends Component
 
 @warning_ignore_start("integer_division")
 @export_category("Settings")
-@export var max_room_size: int = 25
-@export var min_room_size: int = 17
+@export var max_room_width: int = 24
+@export var min_room_width: int = 18
+@export var max_room_height: int = 20
+@export var min_room_height: int = 8
 @export var room_count: int = 8
 
 @export var reward_room_min_size: int = 10
@@ -27,6 +29,8 @@ class_name LevelGeneratorComponent extends Component
 @export var floor_tile_source_id: int = 1
 @export var floor_tile_atlas_coords: Vector2i = Vector2i.ZERO
 
+@export var tile_generation_units: Array[TileGenerationUnit]
+
 @onready var level_component: LevelComponent = scene.get_node_or_null("LevelComponent")
 
 @export_category("Operational")
@@ -49,8 +53,8 @@ func generate_level() -> void:
 func generate_room(connect_to_previous: bool = false) -> void:
 	positions.clear()
 	
-	var width = _get_random_odd(min_room_size, max_room_size)
-	var height = _get_random_odd(min_room_size, max_room_size)
+	var width = _get_random_odd(min_room_width, max_room_width)
+	var height = _get_random_odd(min_room_height, max_room_height)
 	
 	if connect_to_previous:
 		var y_offset = (previous_room_size.y - height) / 2
@@ -65,6 +69,8 @@ func generate_room(connect_to_previous: bool = false) -> void:
 		_connect_rooms(height)
 		_set_enemy_spawners(width, height)
 	
+	for tile_unit in tile_generation_units:
+		_set_tile_generation_unit(tile_unit, width, height)
 	for generation_unit in generation_units:
 		_set_generation_unit(generation_unit, width, height)
 	
@@ -117,6 +123,10 @@ func _set_generation_unit(unit: GenerationUnit, width: int, height: int, positio
 				var inst: Node2D = _spawn_on_side(unit, width, height, other_positions, position)
 				if inst:
 					other_positions.append(Vector2i(inst.global_position))
+			GenerationUnit.spawn_patterns.NOISE:
+				var inst: Node2D = _spawn_noise(unit, width, height, other_positions, position)
+				if inst:
+					other_positions.append(Vector2i(inst.global_position))
 
 func _spawn_on_side(unit: GenerationUnit, room_width: int, room_height: int, other_positions: Array[Vector2i], position: Vector2i = current_position) -> Node2D:
 	var spawn_position: Vector2i = Vector2i.ZERO
@@ -159,13 +169,229 @@ func _spawn_on_side(unit: GenerationUnit, room_width: int, room_height: int, oth
 	
 	return null
 
-func _spawn_anywhere(unit: GenerationUnit, room_width: int, room_height: int, other_positions: Array[Vector2i], position: Vector2i = current_position) -> Node2D:
-	for attempt in range(150):
-		var spawn_position = Vector2i(
-			randi_range(1, room_width - 2),
-			randi_range(1, room_height - 2)
-		) + position
+func _set_tile_generation_unit(unit: TileGenerationUnit, width: int, height: int, position: Vector2i = current_position) -> void:
+	if randf() > unit.chance_to_appear:
+		return
+	
+	var target_tile_map: TileMapLayer
+	match unit.tile_map_layer:
+		0:
+			target_tile_map = tiles_tile_map
+		1:
+			target_tile_map = minor_tiles_tile_map
+		2:
+			target_tile_map = destructible_wall_tile_map
+		_:
+			target_tile_map = tiles_tile_map
+	
+	match unit.spawn_pattern:
+		TileGenerationUnit.spawn_patterns.NOISE:
+			_generate_noise_tiles(unit, width, height, position, target_tile_map)
+		TileGenerationUnit.spawn_patterns.HORIZONTAL_LINE:
+			_generate_horizontal_line(unit, width, height, position, target_tile_map)
+		TileGenerationUnit.spawn_patterns.VERTICAL_LINE:
+			_generate_vertical_line(unit, width, height, position, target_tile_map)
+		TileGenerationUnit.spawn_patterns.CROSS_LINE:
+			_generate_vertical_line(unit, width, height, position, target_tile_map)
+			_generate_horizontal_line(unit, width, height, position, target_tile_map)
+		TileGenerationUnit.spawn_patterns.SIDE:
+			_generate_side_tiles(unit, width, height, position, target_tile_map)
+
+func _generate_side_tiles(unit: TileGenerationUnit, room_width: int, room_height: int, position: Vector2i, target_tile_map: TileMapLayer) -> void:
+	if !target_tile_map:
+		return
+	
+	var cells: Array[Vector2i] = []
+	var side_width = unit.width
+	
+	if unit.place_on_all_sides:
+		for x in range(1, room_width - 1):
+			for y in range(1, 1 + side_width):
+				if y >= room_height - 1:
+					break
+				var tile_pos = Vector2i(x, y) + position
+				if !(unit.restrict_overlaying and positions.has(tile_pos)):
+					cells.append(tile_pos)
 		
+		for x in range(1, room_width - 1):
+			for y in range(room_height - 1 - side_width, room_height - 1):
+				if y < 1:
+					continue
+				var tile_pos = Vector2i(x, y) + position
+				if !(unit.restrict_overlaying and positions.has(tile_pos)):
+					cells.append(tile_pos)
+		
+		for x in range(1, 1 + side_width):
+			if x >= room_width - 1:
+				break
+			for y in range(1, room_height - 1):
+				var tile_pos = Vector2i(x, y) + position
+				if !(unit.restrict_overlaying and positions.has(tile_pos)):
+					cells.append(tile_pos)
+		
+		for x in range(room_width - 1 - side_width, room_width - 1):
+			if x < 1:
+				continue
+			for y in range(1, room_height - 1):
+				var tile_pos = Vector2i(x, y) + position
+				if !(unit.restrict_overlaying and positions.has(tile_pos)):
+					cells.append(tile_pos)
+	else:
+		var side = randi_range(0, 3)
+		match side:
+			0:
+				for x in range(1, room_width - 1):
+					for y in range(1, 1 + side_width):
+						if y >= room_height - 1:
+							break
+						var tile_pos = Vector2i(x, y) + position
+						if !(unit.restrict_overlaying and positions.has(tile_pos)):
+							cells.append(tile_pos)
+			1:
+				for x in range(1, room_width - 1):
+					for y in range(room_height - 1 - side_width, room_height - 1):
+						if y < 1:
+							continue
+						var tile_pos = Vector2i(x, y) + position
+						if !(unit.restrict_overlaying and positions.has(tile_pos)):
+							cells.append(tile_pos)
+			2:
+				for x in range(1, 1 + side_width):
+					if x >= room_width - 1:
+						break
+					for y in range(1, room_height - 1):
+						var tile_pos = Vector2i(x, y) + position
+						if !(unit.restrict_overlaying and positions.has(tile_pos)):
+							cells.append(tile_pos)
+			3:
+				for x in range(room_width - 1 - side_width, room_width - 1):
+					if x < 1:
+						continue
+					for y in range(1, room_height - 1):
+						var tile_pos = Vector2i(x, y) + position
+						if !(unit.restrict_overlaying and positions.has(tile_pos)):
+							cells.append(tile_pos)
+	
+	_set_terrain_cells(target_tile_map, cells, unit, unit.delete_under_plate)
+	
+	if unit.restrict_overlaying:
+		positions.append_array(cells)
+
+func _generate_noise_tiles(unit: TileGenerationUnit, room_width: int, room_height: int, position: Vector2i, target_tile_map: TileMapLayer) -> void:
+	if !target_tile_map:
+		return
+	
+	var available_positions = _get_noise_positions(
+		room_width,
+		room_height,
+		position,
+		unit.noise,
+		unit.noise_threshold,
+		unit.noise_scale,
+		unit.noise_offset
+	)
+	
+	var tiles_to_place: int = randi_range(unit.min_units, unit.max_units)
+	var placed_tiles: int = 0
+	
+	for tile_pos in available_positions:
+		if placed_tiles >= tiles_to_place:
+			break
+		
+		if unit.restrict_overlaying and positions.has(tile_pos):
+			continue
+		
+		_set_terrain_cells(target_tile_map, [tile_pos], unit, unit.delete_under_plate)
+		if unit.restrict_overlaying:
+			positions.append(tile_pos)
+		placed_tiles += 1
+
+func _generate_vertical_line(unit: TileGenerationUnit, room_width: int, room_height: int, position: Vector2i, target_tile_map: TileMapLayer) -> void:
+	if !target_tile_map:
+		return
+	
+	var center_x = room_width / 2
+	var line_width = unit.width
+	var cells: Array[Vector2i] = []
+	
+	for x in range(center_x - line_width / 2, center_x + line_width / 2 + 1):
+		for y in range(1, room_height - 1):
+			var tile_pos = Vector2i(x, y) + position
+			
+			if unit.restrict_overlaying and positions.has(tile_pos):
+				continue
+			
+			cells.append(tile_pos)
+	
+	_set_terrain_cells(target_tile_map, cells, unit, unit.delete_under_plate)
+	
+	if unit.restrict_overlaying:
+		positions.append_array(cells)
+
+func _generate_horizontal_line(unit: TileGenerationUnit, room_width: int, room_height: int, position: Vector2i, target_tile_map: TileMapLayer) -> void:
+	if !target_tile_map:
+		return
+	
+	var center_y = room_height / 2
+	var line_width = unit.width
+	var cells: Array[Vector2i] = []
+	
+	for y in range(center_y - line_width / 2, center_y + line_width / 2 + 1):
+		for x in range(1, room_width - 1):
+			var tile_pos = Vector2i(x, y) + position
+			
+			if unit.restrict_overlaying and positions.has(tile_pos):
+				continue
+			
+			cells.append(tile_pos)
+	
+	_set_terrain_cells(target_tile_map, cells, unit, unit.delete_under_plate)
+	
+	if unit.restrict_overlaying:
+		positions.append_array(cells)
+
+func _get_noise_positions(width: int, height: int, position: Vector2i, noise_texture: NoiseTexture2D, threshold: float, scale: float, offset: Vector2) -> Array[Vector2i]:
+	var result: Array[Vector2i] = []
+	
+	if !noise_texture or !noise_texture.noise:
+		return result
+	
+	var noise_obj = noise_texture.noise
+	
+	for x in range(1, width - 1):
+		for y in range(1, height - 1):
+			var tile_pos = Vector2i(x, y) + position
+			
+			if positions.has(tile_pos):
+				continue
+			
+			var noise_x = (tile_pos.x * 100 + offset.x) * scale
+			var noise_y = (tile_pos.y * 100 + offset.y) * scale
+			var noise_value = noise_obj.get_noise_2d(noise_x, noise_y)
+			
+			var normalized_noise = (noise_value + 1.0) / 2.0
+			
+			if normalized_noise >= threshold:
+				result.append(tile_pos)
+	
+	result.shuffle()
+	return result
+
+func _spawn_noise(unit: GenerationUnit, room_width: int, room_height: int, other_positions: Array[Vector2i], position: Vector2i = current_position) -> Node2D:
+	if !unit.noise or !unit.noise.noise:
+		return null
+	
+	var available_positions = _get_noise_positions(
+		room_width,
+		room_height,
+		position,
+		unit.noise,
+		unit.noise_threshold,
+		unit.noise_scale,
+		unit.noise_offset
+	)
+	
+	for spawn_position in available_positions:
 		if positions.has(spawn_position):
 			continue
 		
@@ -185,6 +411,24 @@ func _spawn_anywhere(unit: GenerationUnit, room_width: int, room_height: int, ot
 		return _spawn_unit(unit, spawn_position, 0.0)
 	
 	return null
+
+func _set_terrain_cells(target_tile_map: TileMapLayer, cells: Array[Vector2i], unit: TileGenerationUnit, delete_under_plate: bool = false) -> void:
+	if cells.is_empty():
+		return
+	
+	var tile_set: TileSet = target_tile_map.tile_set
+	var has_terrain: bool = unit.terrain_set >= 0 and unit.terrain >= 0
+	
+	if has_terrain and tile_set and unit.terrain_set < tile_set.get_terrain_sets_count():
+		target_tile_map.set_cells_terrain_connect(cells, unit.terrain_set, unit.terrain)
+		if delete_under_plate:
+			for cell in cells:
+				tiles_tile_map.set_cell(cell, -1, Vector2i(0, 0))
+	else:
+		for cell in cells:
+			target_tile_map.set_cell(cell, unit.tile_source_id, unit.tile_atlas_coords)
+			if delete_under_plate:
+				tiles_tile_map.set_cell(cell, -1, Vector2i(0, 0))
 
 func _spawn_unit(unit: GenerationUnit, position: Vector2i, rotation: float = 0.0) -> Node2D:
 	var instance: Node2D = unit.scene.instantiate()
@@ -321,4 +565,6 @@ func _generate_reward_room(spawn_position: Vector2i, direction: Vector2i) -> voi
 	room += 100
 	for generation_unit in generation_units:
 		_set_generation_unit(generation_unit, room_size.x, room_size.y, room_start)
+	for tile_unit in tile_generation_units:
+		_set_tile_generation_unit(tile_unit, room_size.x, room_size.y, room_start)
 	room -= 100

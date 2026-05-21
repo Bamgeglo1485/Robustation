@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://4ecb4c3m88q1"]
+
+[ext_resource type="PackedScene" uid="uid://c23n3m40ywq45" path="res://Scenes/Entities/Functioning/Airlocks/BaseAirlock.tscn" id="1_3tu4e"]
+[ext_resource type="Script" uid="uid://yhmqgocl43pi" path="res://Components/Entity/Structures/OpenableAirlockComponent.gd" id="2_ow7y2"]
+[ext_resource type="Texture2D" uid="uid://djqwl8l83wj68" path="res://Textures/Entities/Airlock/Maints/closed.png" id="2_pwe0v"]
+[ext_resource type="Texture2D" uid="uid://yjigwd3i118j" path="res://Textures/Light/point_light.jpg" id="3_3tqw4"]
+[ext_resource type="Texture2D" uid="uid://c0caqnouryvwu" path="res://Textures/Entities/Airlock/Maints/opening.png" id="3_cbiq8"]
+[ext_resource type="Texture2D" uid="uid://dpx6la0uemqax" path="res://Textures/Entities/Airlock/Maints/closing.png" id="4_giuv3"]
+[ext_resource type="Texture2D" uid="uid://cvulo3dho8ovf" path="res://Textures/Entities/Airlock/Maints/open.png" id="5_8fcpr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xct4t"]
+size = Vector2(50, 69)
+
+[node name="BaseOpenableAirlock" unique_id=166874154 instance=ExtResource("1_3tu4e")]
+
+[node name="Closed" parent="Sprites" parent_id_path=PackedInt32Array(1905283432) index="0" unique_id=718164909]
+texture = ExtResource("2_pwe0v")
+
+[node name="Opening" parent="Sprites" parent_id_path=PackedInt32Array(1905283432) index="3" unique_id=34032996]
+texture = ExtResource("3_cbiq8")
+
+[node name="Closing" parent="Sprites" parent_id_path=PackedInt32Array(1905283432) index="4" unique_id=555617277]
+texture = ExtResource("4_giuv3")
+
+[node name="Open" parent="Sprites" parent_id_path=PackedInt32Array(1905283432) index="5" unique_id=744969111]
+texture = ExtResource("5_8fcpr")
+
+[node name="AirlockComponent" parent="." index="3" unique_id=505238705 node_paths=PackedStringArray("point_light")]
+point_light = NodePath("../PointLight2D")
+
+[node name="OpenSound" parent="." index="4" unique_id=2013108459]
+max_distance = 200.0
+
+[node name="CloseSound" parent="." index="5" unique_id=440834374]
+max_distance = 200.0
+
+[node name="UnboltSound" parent="." index="6" unique_id=743049838]
+max_distance = 600.0
+
+[node name="BoltSound" parent="." index="7" unique_id=370861228]
+max_distance = 600.0
+
+[node name="OpenableAirlockComponent" type="Node" parent="." index="10" unique_id=1662078526 node_paths=PackedStringArray("trigger_area")]
+script = ExtResource("2_ow7y2")
+trigger_area = NodePath("../Outercollision")
+metadata/_custom_type_script = "uid://yhmqgocl43pi"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="12" unique_id=498708606]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Collision" type="CollisionShape2D" parent="StaticBody2D" index="0" unique_id=2059493431]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_xct4t")
+
+[node name="PointLight2D" type="PointLight2D" parent="." index="13" unique_id=591131954]
+position = Vector2(-1, 15)
+color = Color(0, 0.5556891, 0.6871906, 1)
+texture = ExtResource("3_3tqw4")
+texture_scale = 0.2
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." index="14" unique_id=1900219963]
+radius = 30.0
+vertices = PackedVector2Array(16, -16, -16, -16, -16, 16, 16, 16)

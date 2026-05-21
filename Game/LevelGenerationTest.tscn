@@ -1,18 +1,20 @@
 [gd_scene format=3 uid="uid://t11oui78ufap"]
 
-[ext_resource type="PackedScene" uid="uid://xox6pb86v3gg" path="res://Scenes/Entities/Functioning/BaseRoomAirlock.tscn" id="2_owoip"]
+[ext_resource type="PackedScene" uid="uid://b0dhyfw1q4gyo" path="res://Scenes/Entities/Functioning/Airlocks/Themed/MaintsRoomAirlock.tscn" id="2_bupnh"]
 [ext_resource type="TileSet" uid="uid://bc7bghcv8144y" path="res://Resources/TileMaps/Tiles.tres" id="2_usbqj"]
-[ext_resource type="PackedScene" uid="uid://drhfrmcjgyx2" path="res://Scenes/Entities/Functioning/EnemySpawnerAirlock.tscn" id="3_6byl8"]
+[ext_resource type="PackedScene" uid="uid://b3aui7aggb1cb" path="res://Scenes/Entities/Functioning/Airlocks/Themed/MaintsEnemySpawnerAirlock.tscn" id="3_0qr1g"]
 [ext_resource type="Script" uid="uid://bsiofl2b54syo" path="res://Components/Level/LevelGeneratorComponent.gd" id="3_e1wfd"]
-[ext_resource type="TileSet" uid="uid://ci8wda1xc88ki" path="res://Resources/TileMaps/WallsDestructible.tres" id="4_82w5q"]
 [ext_resource type="TileSet" uid="uid://cr4gmxce1ahdv" path="res://Resources/TileMaps/MinorTiles.tres" id="4_e1wfd"]
 [ext_resource type="Script" uid="uid://bjc8u38pksoym" path="res://Components/Level/LevelComponent.gd" id="4_g6d10"]
 [ext_resource type="Script" uid="uid://dcmiiyxq6u2f8" path="res://Resources/Custom/Level/GenerationUnit.gd" id="4_nrpeh"]
 [ext_resource type="TileSet" uid="uid://c7mk0aiygychu" path="res://Resources/TileMaps/Walls.tres" id="5_e1wfd"]
 [ext_resource type="Script" uid="uid://di5u0whaqiyjp" path="res://Resources/Custom/Enemy/Base/Enemy.gd" id="5_merkf"]
 [ext_resource type="PackedScene" uid="uid://c8mg0fsh77c21" path="res://Scenes/Entities/Functioning/BaseLight.tscn" id="5_xyxp4"]
+[ext_resource type="PackedScene" uid="uid://bl30578g0svxo" path="res://Scenes/Entities/Decoration/Decals/DirtDecal.tscn" id="6_0qr1g"]
 [ext_resource type="PackedScene" uid="uid://roeennw572p2" path="res://Scenes/Mobs/Player/PlayerGreytide.tscn" id="6_82w5q"]
+[ext_resource type="Script" uid="uid://cslfae10nu8b7" path="res://Resources/Custom/Level/TileGenerationUnit.gd" id="6_bupnh"]
 [ext_resource type="Resource" uid="uid://bmqxe8ujyt6le" path="res://Resources/Custom/Enemy/Gray.tres" id="6_puepq"]
+[ext_resource type="PackedScene" uid="uid://dgyd7vfh30c07" path="res://Scenes/Entities/Decoration/Decals/BurntDecal.tscn" id="7_0tyrb"]
 [ext_resource type="Resource" uid="uid://c7ill5kgubqqa" path="res://Resources/Custom/Enemy/Tider.tres" id="7_nrpeh"]
 [ext_resource type="Environment" uid="uid://r1a7fr7x6en8" path="res://DemoTrash/Light.tres" id="8_16t0s"]
 [ext_resource type="Resource" uid="uid://cou375htkckp8" path="res://Resources/Custom/Enemy/Assistant.tres" id="8_xyxp4"]
@@ -39,8 +41,10 @@
 [ext_resource type="AudioStream" uid="uid://1qnhfchhf4jb" path="res://Audio/Effects/voteding.ogg" id="32_h4g5t"]
 [ext_resource type="AudioStream" uid="uid://14o4e8msndow" path="res://Audio/Weapon/Projectile/mk58_shoot.ogg" id="33_bupnh"]
 [ext_resource type="AudioStream" uid="uid://b2utqxvujdi7f" path="res://Audio/Ambience/box_deploy.ogg" id="34_0qr1g"]
+[ext_resource type="TileSet" uid="uid://c1iav1n2526cq" path="res://Resources/TileMaps/DestructibleWalls.tres" id="37_bupnh"]
 [ext_resource type="FontFile" uid="uid://dskv5n6tofrla" path="res://Resources/Text/Fonts/LCD 40x2 Display/LCD40x2Display-Regular.otf" id="38_h4g5t"]
 [ext_resource type="Script" uid="uid://4io3bm7r86h6" path="res://Components/Interface/Menu/TextPrintingAnimationComponent.gd" id="39_bupnh"]
+[ext_resource type="Script" uid="uid://bo7lklhepnuja" path="res://Scripts/fps.gd" id="43_rqcmx"]
 
 [sub_resource type="Resource" id="Resource_2r3hv"]
 script = ExtResource("4_nrpeh")
@@ -48,6 +52,107 @@ scene = ExtResource("5_xyxp4")
 max_units = 6
 min_units = 3
 metadata/_custom_type_script = "uid://dcmiiyxq6u2f8"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bupnh"]
+noise_type = 3
+frequency = 0.0003
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bupnh"]
+noise = SubResource("FastNoiseLite_bupnh")
+
+[sub_resource type="Resource" id="Resource_acqqm"]
+script = ExtResource("4_nrpeh")
+scene = ExtResource("6_0qr1g")
+spawn_pattern = 1
+max_units = 10
+min_units = 5
+min_range_from_others = 0
+rotate = false
+noise = SubResource("NoiseTexture2D_bupnh")
+noise_threshold = 0.05
+metadata/_custom_type_script = "uid://dcmiiyxq6u2f8"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rqcmx"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_aymn4"]
+noise = SubResource("FastNoiseLite_rqcmx")
+
+[sub_resource type="Resource" id="Resource_ygd3n"]
+script = ExtResource("4_nrpeh")
+scene = ExtResource("7_0tyrb")
+spawn_pattern = 1
+max_units = 10
+min_units = 5
+min_range_from_others = 0
+rotate = false
+noise = SubResource("NoiseTexture2D_aymn4")
+noise_threshold = 0.1
+metadata/_custom_type_script = "uid://dcmiiyxq6u2f8"
+
+[sub_resource type="Resource" id="Resource_0tyrb"]
+script = ExtResource("6_bupnh")
+tile_source_id = 1
+tile_atlas_coords = Vector2i(1, 1)
+spawn_pattern = 4
+restrict_overlaying = false
+chance_to_appear = 0.5
+width = 2
+metadata/_custom_type_script = "uid://cslfae10nu8b7"
+
+[sub_resource type="Resource" id="Resource_0qr1g"]
+script = ExtResource("6_bupnh")
+tile_source_id = 1
+tile_atlas_coords = Vector2i(1, 1)
+spawn_pattern = 2
+restrict_overlaying = false
+chance_to_appear = 0.3
+width = 2
+metadata/_custom_type_script = "uid://cslfae10nu8b7"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0qr1g"]
+noise_type = 3
+frequency = 0.0046
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0tyrb"]
+noise = SubResource("FastNoiseLite_0qr1g")
+
+[sub_resource type="Resource" id="Resource_rqcmx"]
+script = ExtResource("6_bupnh")
+tile_source_id = 1
+tile_atlas_coords = Vector2i(0, 1)
+restrict_overlaying = false
+max_units = 20
+min_units = 10
+noise = SubResource("NoiseTexture2D_0tyrb")
+metadata/_custom_type_script = "uid://cslfae10nu8b7"
+
+[sub_resource type="Resource" id="Resource_bupnh"]
+script = ExtResource("6_bupnh")
+tile_map_layer = 1
+spawn_pattern = 2
+restrict_overlaying = false
+chance_to_appear = 0.3
+width = 2
+metadata/_custom_type_script = "uid://cslfae10nu8b7"
+
+[sub_resource type="Resource" id="Resource_aymn4"]
+script = ExtResource("6_bupnh")
+tile_map_layer = 1
+spawn_pattern = 4
+restrict_overlaying = false
+chance_to_appear = 0.3
+width = 2
+metadata/_custom_type_script = "uid://cslfae10nu8b7"
+
+[sub_resource type="Resource" id="Resource_tnywj"]
+script = ExtResource("6_bupnh")
+tile_map_layer = 2
+chance_to_appear = 0.3
+min_units = 2
+delete_under_plate = true
+noise = SubResource("NoiseTexture2D_bupnh")
+noise_threshold = 0.05
+metadata/_custom_type_script = "uid://cslfae10nu8b7"
 
 [node name="Game" type="Node2D" unique_id=49398453]
 
@@ -57,16 +162,17 @@ wall_tile_map = NodePath("../WallTileMap")
 destructible_wall_tile_map = NodePath("../WallsDestructible")
 tiles_tile_map = NodePath("../Tiles")
 minor_tiles_tile_map = NodePath("../MinorTiles")
-airlock = ExtResource("2_owoip")
-enemy_airlock = ExtResource("3_6byl8")
-generation_units = Array[ExtResource("4_nrpeh")]([SubResource("Resource_2r3hv")])
+airlock = ExtResource("2_bupnh")
+enemy_airlock = ExtResource("3_0qr1g")
+generation_units = Array[ExtResource("4_nrpeh")]([SubResource("Resource_2r3hv"), SubResource("Resource_acqqm"), SubResource("Resource_ygd3n")])
 floor_tile_atlas_coords = Vector2i(2, 1)
+tile_generation_units = Array[ExtResource("6_bupnh")]([SubResource("Resource_0tyrb"), SubResource("Resource_0qr1g"), SubResource("Resource_rqcmx"), SubResource("Resource_bupnh"), SubResource("Resource_aymn4"), SubResource("Resource_tnywj")])
 metadata/_custom_type_script = "uid://bsiofl2b54syo"
 
 [node name="LevelComponent" type="Node" parent="." unique_id=1648950004 node_paths=PackedStringArray("perk_choice_start_sound", "perk_choice_sound", "perk_selected_sound")]
 script = ExtResource("4_g6d10")
-level_name = "Maints | Exposition
-\"...Like Cum To Face\""
+level_name = " [color=#f5bc42]MAINTS | EXPOSITION[/color]
+「 Gray Gray Gates of Maints」"
 available_enemies = Array[ExtResource("5_merkf")]([ExtResource("6_puepq"), ExtResource("7_nrpeh"), ExtResource("8_xyxp4"), ExtResource("9_2r3hv")])
 start_budget = 2.0
 available_reward_enemies = Array[ExtResource("5_merkf")]([ExtResource("6_puepq")])
@@ -103,7 +209,7 @@ tile_set = ExtResource("4_e1wfd")
 physics_quadrant_size = 64
 
 [node name="WallsDestructible" type="TileMapLayer" parent="." unique_id=517611006]
-tile_set = ExtResource("4_82w5q")
+tile_set = ExtResource("37_bupnh")
 navigation_enabled = false
 
 [node name="Player" parent="." unique_id=914217487 instance=ExtResource("6_82w5q")]
@@ -137,9 +243,11 @@ grow_vertical = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.055555556
-anchor_top = 0.5925926
-anchor_right = 0.3888889
-anchor_bottom = 0.79012346
+anchor_top = 0.70100003
+anchor_right = 0.83000004
+anchor_bottom = 0.86728394
+offset_top = -107.24802
+offset_right = -0.16003418
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/normal_font = ExtResource("38_h4g5t")
@@ -152,6 +260,47 @@ metadata/_edit_use_anchors_ = true
 script = ExtResource("39_bupnh")
 animate_on_ready = false
 metadata/_custom_type_script = "uid://4io3bm7r86h6"
+
+[node name="DEBUG" type="CanvasLayer" parent="Player" unique_id=39445258]
+
+[node name="Control" type="Control" parent="Player/DEBUG" unique_id=756916900]
+layout_mode = 3
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1152.0
+offset_right = -1112.0
+offset_bottom = -608.0
+grow_horizontal = 0
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Player/DEBUG/Control" unique_id=1086457814]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 24.400002
+anchor_top = 0.025
+anchor_right = 25.400002
+anchor_bottom = 1.25
+offset_left = -6.1035156e-05
+offset_right = -6.1035156e-05
+text = "69
+"
+script = ExtResource("43_rqcmx")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="Player/DEBUG/Control" unique_id=749910478]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 25.950003
+anchor_top = 0.025
+anchor_right = 28.175003
+anchor_bottom = 1.9
+offset_left = -0.00012207031
+offset_right = -0.00012207031
+text = "DEMO 0.1.3"
+metadata/_edit_use_anchors_ = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1053939501]
 environment = ExtResource("8_16t0s")

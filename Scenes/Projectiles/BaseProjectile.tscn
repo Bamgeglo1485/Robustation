@@ -45,8 +45,4 @@ metadata/_custom_type_script = "uid://df356su15y7ow"
 script = ExtResource("3_t4af8")
 metadata/_custom_type_script = "uid://bqtip02i73xyq"
 
-[node name="VisibleOnScreenEnabler" type="VisibleOnScreenEnabler2D" parent="." unique_id=776942242]
-rect = Rect2(-20, -20, 40, 40)
-enable_node_path = NodePath("../Texture")
-
 [connection signal="body_entered" from="ProjectileComponent" to="ProjectileComponent" method="_on_body_entered"]

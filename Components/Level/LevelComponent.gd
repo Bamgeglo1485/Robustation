@@ -7,7 +7,8 @@ class_name LevelComponent extends Component
 @export var max_enemies_per_room: int = 10
 @export var min_enemies_per_room: int = 10
 @export var start_budget: float = 1.5
-@export var budget_per_room: float = 1
+@export var budget_per_room: float = 0.25
+@export var budget_on_last_rooms: float = 1.0
 @export var reward_chance: float = 0.7
 @export var reward_enemy_chance: float = 0.5
 @export var available_reward_enemies: Array[Enemy]
@@ -35,6 +36,7 @@ var current_enemies: Array[PhysicsBody2D]
 var second_spawned: bool = true
 var room: int
 
+@onready var level_generator_component: LevelGeneratorComponent = scene.get_node_or_null("LevelGeneratorComponent")
 const MAX_ATTEMPTS = 100
 
 @onready var player: PhysicsBody2D = scene.get_node_or_null("Player")
@@ -190,7 +192,10 @@ func _on_death(emitter: Node2D) -> void:
 		if current_enemies.is_empty() and second_spawned:
 			if room < 100:
 				EventBusManager.room_end.emit(room)
-				budget += budget_per_room
+				if level_generator_component.room_count == room or level_generator_component.room_count == room - 1:
+					budget += budget_on_last_rooms
+				else:
+					budget += budget_per_room
 			else:
 				EventBusManager.room_end.emit(room)
 				EventBusManager.force_unbolt.emit(room)

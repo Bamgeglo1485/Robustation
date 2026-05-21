@@ -29,10 +29,12 @@ func impact_frame(
 		await(tree.create_timer(wait_time, true, false, true).timeout)
 	effect_frame.visible = true
 	frame_freeze(impact_time)
+	AudioServer.set_bus_mute(1, true)
 	if freeze_lifetime <= 0:
 		await(tree.create_timer(impact_time, true, false, true).timeout)
 	else:
 		await freeze_end
+	AudioServer.set_bus_mute(1, false)
 	effect_frame.visible = false
 	if modify_color:
 		set_color_modify(distort_audio)

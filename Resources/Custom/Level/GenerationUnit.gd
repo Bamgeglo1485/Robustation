@@ -8,7 +8,8 @@ class_name GenerationUnit extends Resource
 @export var min_units: int = 1
 
 enum spawn_patterns {
-	SIDE
+	SIDE,
+	NOISE
 }
 
 @export_category("Shared")
@@ -16,3 +17,9 @@ enum spawn_patterns {
 
 @export_category("Side")
 @export var rotate: bool = true
+
+@export_category("Noise")
+@export var noise: NoiseTexture2D
+@export var noise_threshold: float = 0.5
+@export var noise_scale: float = 0.1
+@export var noise_offset: Vector2 = Vector2.ZERO

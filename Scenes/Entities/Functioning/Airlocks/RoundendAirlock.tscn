@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://c75uo5mx4hqa1"]
+
+[ext_resource type="PackedScene" uid="uid://c23n3m40ywq45" path="res://Scenes/Entities/Functioning/Airlocks/BaseAirlock.tscn" id="1_5d04i"]
+[ext_resource type="Script" uid="uid://c0lqk4r1en7do" path="res://Components/Entity/Structures/RoundAirlockComponent.gd" id="2_j8fxp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j8fxp"]
+size = Vector2(147, 32)
+
+[node name="BaseAirlock" unique_id=985248610 instance=ExtResource("1_5d04i")]
+
+[node name="Collision" parent="Outercollision" parent_id_path=PackedInt32Array(139227872) index="0" unique_id=866938835]
+position = Vector2(1.5, 0)
+shape = SubResource("RectangleShape2D_j8fxp")
+
+[node name="RoundAirlockComponent" type="Node" parent="." index="11" unique_id=5729411 node_paths=PackedStringArray("area")]
+script = ExtResource("2_j8fxp")
+area = NodePath("../Outercollision")
+metadata/_custom_type_script = "uid://c0lqk4r1en7do"

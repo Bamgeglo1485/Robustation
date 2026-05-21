@@ -19,7 +19,7 @@ func _on_end(_room: int) -> void:
 	if _room == room:
 		occluder.visible = false
 		if unlocked_lights:
-			unlocked_lights.enabled = true
+			unlocked_lights.visible = true
 		if collision:
 			collision.queue_free()
 		openable_airlock.enabled = true

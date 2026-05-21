@@ -49,8 +49,7 @@ radius = 40.0
 visibility_layer = 3
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
-base_max_speed = 250.0
-acceleration = 250.0
+acceleration = 150.0
 friction = 700.0
 
 [node name="Texture" parent="." index="2" unique_id=382857461]
@@ -124,7 +123,7 @@ randomize_multiplier_max = 1.2
 metadata/_custom_type_script = "uid://hv0g6akh0ftn"
 
 [node name="BeehaveTree" parent="." index="17" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@112206")
+blackboard = NodePath("@Node@39100")
 
 [node name="SelectorComposite" type="Node" parent="BeehaveTree" index="0" unique_id=102813076]
 script = ExtResource("34_j0lau")

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://b3aui7aggb1cb"]
+
+[ext_resource type="PackedScene" uid="uid://drhfrmcjgyx2" path="res://Scenes/Entities/Functioning/Airlocks/EnemySpawnerAirlock.tscn" id="1_ex3f4"]
+[ext_resource type="Texture2D" uid="uid://djqwl8l83wj68" path="res://Textures/Entities/Airlock/Maints/closed.png" id="2_jrnq8"]
+[ext_resource type="Texture2D" uid="uid://c0caqnouryvwu" path="res://Textures/Entities/Airlock/Maints/opening.png" id="3_e1fec"]
+[ext_resource type="Texture2D" uid="uid://dpx6la0uemqax" path="res://Textures/Entities/Airlock/Maints/closing.png" id="4_ic0nl"]
+[ext_resource type="Texture2D" uid="uid://cvulo3dho8ovf" path="res://Textures/Entities/Airlock/Maints/open.png" id="5_fhbko"]
+
+[node name="EnemySpawnerAirlock" unique_id=985248610 instance=ExtResource("1_ex3f4")]
+
+[node name="Closed" parent="Sprites" parent_id_path=PackedInt32Array(1905283432) index="0" unique_id=718164909]
+texture = ExtResource("2_jrnq8")
+
+[node name="Opening" parent="Sprites" parent_id_path=PackedInt32Array(1905283432) index="3" unique_id=34032996]
+texture = ExtResource("3_e1fec")
+
+[node name="Closing" parent="Sprites" parent_id_path=PackedInt32Array(1905283432) index="4" unique_id=555617277]
+texture = ExtResource("4_ic0nl")
+
+[node name="Open" parent="Sprites" parent_id_path=PackedInt32Array(1905283432) index="5" unique_id=744969111]
+texture = ExtResource("5_fhbko")

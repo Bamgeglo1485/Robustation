@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://df356su15y7ow" path="res://Components/Entity/HealthComponent.gd" id="6_sjiyp"]
 [ext_resource type="AudioStream" uid="uid://cwegkx2i1iohu" path="res://Resources/Audio/GlassBreakRandom.tres" id="7_s5onu"]
 [ext_resource type="Script" uid="uid://b15l57aat44p8" path="res://Components/Entity/Structures/RoomDataComponent.gd" id="8_gyd5y"]
+[ext_resource type="AudioStream" uid="uid://c3rl1sygh5shd" path="res://Audio/Effects/light_tube_on.ogg" id="9_oe237"]
+[ext_resource type="Script" uid="uid://xv1vpacqdtlr" path="res://Components/Entity/VisibleOnScreenVisibleComponent.gd" id="10_x0vnx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sjiyp"]
 radius = 14.0
@@ -16,29 +18,6 @@ radius = 14.0
 collision_layer = 2
 collision_mask = 2
 
-[node name="Base" type="Sprite2D" parent="." unique_id=499720983]
-texture = ExtResource("1_pexge")
-
-[node name="Broken" type="Sprite2D" parent="." unique_id=28124153]
-visible = false
-texture = ExtResource("2_jxa4f")
-
-[node name="Glow" type="Sprite2D" parent="." unique_id=1657110528]
-visible = false
-modulate = Color(3.2944162, 3.2944162, 3.2944162, 1)
-texture = ExtResource("3_1hip3")
-
-[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1272221041]
-visible = false
-color = Color(0.704205, 0.6046489, 0.2624418, 1)
-energy = 0.6
-range_item_cull_mask = 3
-shadow_enabled = true
-shadow_color = Color(0, 0, 0, 1)
-shadow_item_cull_mask = 3
-texture = ExtResource("4_jxa4f")
-texture_scale = 6.0
-
 [node name="HealthComponent" type="Node" parent="." unique_id=899799290]
 script = ExtResource("6_sjiyp")
 do_not_delete_after_gib = true
@@ -46,20 +25,21 @@ max_health = 30.0
 health = 30.0
 metadata/_custom_type_script = "uid://df356su15y7ow"
 
-[node name="LightingComponent" type="Node" parent="." unique_id=586191408 node_paths=PackedStringArray("base", "broken", "glow", "light", "break_audio")]
+[node name="LightingComponent" type="Node" parent="." unique_id=586191408 node_paths=PackedStringArray("base", "broken", "glow", "light", "break_audio", "enable_audio")]
 script = ExtResource("5_1hip3")
-base = NodePath("../Base")
-broken = NodePath("../Broken")
-glow = NodePath("../Glow")
+base = NodePath("../Sprites/Base")
+broken = NodePath("../Sprites/Broken")
+glow = NodePath("../Sprites/Glow")
 light = NodePath("../PointLight2D")
-break_audio = NodePath("../AudioStreamPlayer2D")
+break_audio = NodePath("../Broke")
+enable_audio = NodePath("../Enable")
 metadata/_custom_type_script = "uid://cd1ibmkpjcma2"
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=71227951]
 position = Vector2(-1, 1)
 shape = SubResource("CapsuleShape2D_sjiyp")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1481080424]
+[node name="Broke" type="AudioStreamPlayer2D" parent="." unique_id=1481080424]
 stream = ExtResource("7_s5onu")
 volume_db = 5.0
 max_distance = 700.0
@@ -67,3 +47,51 @@ max_distance = 700.0
 [node name="RoomDataComponent" type="Node" parent="." unique_id=59516065]
 script = ExtResource("8_gyd5y")
 metadata/_custom_type_script = "uid://b15l57aat44p8"
+
+[node name="Enable" type="AudioStreamPlayer2D" parent="." unique_id=1180411512]
+stream = ExtResource("9_oe237")
+max_distance = 500.0
+
+[node name="Sprites" type="Node2D" parent="." unique_id=194731405]
+
+[node name="Base" type="Sprite2D" parent="Sprites" unique_id=499720983]
+texture = ExtResource("1_pexge")
+
+[node name="Broken" type="Sprite2D" parent="Sprites" unique_id=28124153]
+visible = false
+texture = ExtResource("2_jxa4f")
+
+[node name="Glow" type="Sprite2D" parent="Sprites" unique_id=1657110528]
+visible = false
+modulate = Color(3.2944162, 3.2944162, 3.2944162, 1)
+texture = ExtResource("3_1hip3")
+
+[node name="VisibleOnScreenVisibleComponent" type="Node" parent="." unique_id=1040927209 node_paths=PackedStringArray("visible_on_screen", "sprite")]
+script = ExtResource("10_x0vnx")
+visible_on_screen = NodePath("../VisibleOnScreenNotifier2D")
+sprite = NodePath("../Sprites")
+metadata/_custom_type_script = "uid://xv1vpacqdtlr"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1401324548]
+rect = Rect2(-40, -40, 80, 80)
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1272221041]
+visible = false
+enabled = false
+color = Color(0.704205, 0.6046489, 0.2624418, 1)
+energy = 0.6
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_item_cull_mask = 3
+texture = ExtResource("4_jxa4f")
+texture_scale = 4.0
+
+[node name="VisibleOnScreenVisibleComponent2" type="Node" parent="." unique_id=461610087 node_paths=PackedStringArray("visible_on_screen", "sprite")]
+script = ExtResource("10_x0vnx")
+visible_on_screen = NodePath("../VisibleOnScreenNotifier2D2")
+sprite = NodePath("../PointLight2D")
+metadata/_custom_type_script = "uid://xv1vpacqdtlr"
+
+[node name="VisibleOnScreenNotifier2D2" type="VisibleOnScreenNotifier2D" parent="." unique_id=1213225342]
+rect = Rect2(-300, -300, 600, 600)

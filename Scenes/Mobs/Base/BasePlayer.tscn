@@ -218,12 +218,13 @@ shader_parameter/mask_edge = 1.0
 shader_parameter/animation_speed = 0.5
 
 [node name="Player" unique_id=808070232 instance=ExtResource("1_gq7me")]
-collision_layer = 0
+collision_layer = 1
 collision_mask = 786433
 platform_wall_layers = 524288
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
-acceleration = 200.0
+base_max_speed = 250.0
+acceleration = 250.0
 friction = 500.0
 can_fall_from_body = false
 

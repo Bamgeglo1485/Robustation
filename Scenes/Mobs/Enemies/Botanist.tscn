@@ -47,7 +47,7 @@
 [node name="Botanist" unique_id=600669417 instance=ExtResource("1_ypxbh")]
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
-base_max_speed = 200.0
+acceleration = 150.0
 drop_resistance = 2
 
 [node name="Texture" parent="." index="2" unique_id=382857461]
@@ -112,7 +112,7 @@ stream = ExtResource("5_gume5")
 target_desired_distance = 0.1
 
 [node name="BeehaveTree" parent="." index="16" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@111313")
+blackboard = NodePath("@Node@40748")
 
 [node name="SequenceComposite" type="Node" parent="BeehaveTree" index="0" unique_id=815350071]
 script = ExtResource("14_gt7if")

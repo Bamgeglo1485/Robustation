@@ -101,8 +101,8 @@ corner_detail = 6
 visibility_layer = 3
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
-base_max_speed = 270.0
-acceleration = 270.0
+base_max_speed = 250.0
+acceleration = 250.0
 friction = 700.0
 can_fall_from_body = false
 set_navigation_velocity = false
@@ -258,7 +258,7 @@ avoidance_enabled = false
 radius = 64.0
 
 [node name="BeehaveTree" parent="." index="16" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@32435")
+blackboard = NodePath("@Node@39514")
 
 [node name="MoveToPlayer" type="Node" parent="BeehaveTree" index="0" unique_id=478688837]
 script = ExtResource("33_8bpma")

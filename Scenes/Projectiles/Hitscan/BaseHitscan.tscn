@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c7ls6pxubfe4d" path="res://Components/Entity/HitscanComponent.gd" id="1_c2a5l"]
 
 [node name="BaseHitscan" type="RayCast2D" unique_id=1219814461]
+modulate = Color(4.415934, 4.415934, 4.415934, 1)
 exclude_parent = false
 target_position = Vector2(1000, 0)
 collision_mask = 286722

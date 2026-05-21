@@ -38,8 +38,7 @@ radius = 40.0
 visibility_layer = 3
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
-base_max_speed = 300.0
-acceleration = 200.0
+acceleration = 150.0
 friction = 700.0
 moving_animation_lean = 0.4
 
@@ -166,7 +165,7 @@ randomize_multiplier_max = 1.2
 metadata/_custom_type_script = "uid://hv0g6akh0ftn"
 
 [node name="BeehaveTree" parent="." index="17" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@18705")
+blackboard = NodePath("@Node@40244")
 
 [node name="SequenceComposite" type="Node" parent="BeehaveTree" index="0" unique_id=772322784]
 script = ExtResource("33_1ursc")
@@ -212,6 +211,7 @@ metadata/_custom_type_script = "uid://b2bu3qqcql0lk"
 [node name="AttackTargetAction" type="Node" parent="BeehaveTree/SequenceComposite/Attack/Cannon" index="1" unique_id=1984940510 node_paths=PackedStringArray("weapon")]
 script = ExtResource("17_0m0ai")
 weapon = NodePath("../../../../../WeaponUserComponent/PieCannon")
+prediction_coef = 0.4
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 
 [node name="Banana" type="Node" parent="BeehaveTree/SequenceComposite/Attack" index="1" unique_id=1371964999]
@@ -227,6 +227,7 @@ metadata/_custom_type_script = "uid://b2bu3qqcql0lk"
 [node name="AttackTargetAction" type="Node" parent="BeehaveTree/SequenceComposite/Attack/Banana" index="1" unique_id=959716645 node_paths=PackedStringArray("weapon")]
 script = ExtResource("17_0m0ai")
 weapon = NodePath("../../../../../WeaponUserComponent/Banana")
+prediction_coef = 0.4
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 
 [node name="Horn" type="Node" parent="BeehaveTree/SequenceComposite/Attack" index="2" unique_id=1839476681]
@@ -236,6 +237,7 @@ metadata/_custom_type_script = "uid://cg016dbe7gs1x"
 [node name="AttackTargetAction" type="Node" parent="BeehaveTree/SequenceComposite/Attack/Horn" index="0" unique_id=1805989312 node_paths=PackedStringArray("weapon")]
 script = ExtResource("17_0m0ai")
 weapon = NodePath("../../../../../WeaponUserComponent/Horn")
+prediction_coef = 0.4
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 
 [node name="Rush" type="Area2D" parent="." index="19" unique_id=429380638]

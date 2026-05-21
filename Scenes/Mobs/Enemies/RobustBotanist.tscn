@@ -50,7 +50,7 @@ corner_detail = 6
 [node name="RobustBotanist" unique_id=600669417 instance=ExtResource("1_ypxbh")]
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
-base_max_speed = 200.0
+acceleration = 150.0
 drop_resistance = 2
 
 [node name="Texture" parent="." index="2" unique_id=382857461]
@@ -104,7 +104,7 @@ stream = ExtResource("5_gume5")
 target_desired_distance = 0.1
 
 [node name="BeehaveTree" parent="." index="16" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@321656")
+blackboard = NodePath("@Node@41162")
 
 [node name="SequenceComposite" type="Node" parent="BeehaveTree" index="0" unique_id=815350071]
 script = ExtResource("14_gt7if")
@@ -124,11 +124,13 @@ metadata/_custom_type_script = "uid://cxcq0m0o1gno7"
 [node name="AttackTargetAction" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite" index="1" unique_id=1168815313 node_paths=PackedStringArray("weapon")]
 script = ExtResource("17_ie53o")
 weapon = NodePath("../../../../WeaponUserComponent/Deathnettle")
+prediction_coef = 0.4
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 
 [node name="AttackTargetAction2" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite" index="2" unique_id=2111187169 node_paths=PackedStringArray("weapon")]
 script = ExtResource("17_ie53o")
 weapon = NodePath("../../../../WeaponUserComponent/Bloonion")
+prediction_coef = 0.4
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 
 [node name="ReturnSuccessAction" type="Node" parent="BeehaveTree/SequenceComposite/SelectorComposite" index="3" unique_id=1716648034]

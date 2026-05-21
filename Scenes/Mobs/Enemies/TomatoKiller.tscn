@@ -14,7 +14,6 @@
 [ext_resource type="Script" uid="uid://ttwxxcce2i4p" path="res://Components/Mobs/AI/Actions/LookAtPointAction.gd" id="36_otlk7"]
 [ext_resource type="Script" uid="uid://wlnghjnvdlyn" path="res://Components/Mobs/AI/Actions/MoveToPointAction.gd" id="37_p6f5y"]
 [ext_resource type="Script" uid="uid://dua6hp8ir5tiu" path="res://Components/Mobs/AI/Actions/AttackTargetAction.gd" id="38_im25f"]
-[ext_resource type="Script" uid="uid://clr7jbioge17t" path="res://Components/Entity/ExplosionResistanceComponent.gd" id="39_tvcc4"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ptdc5"]
 polygon = PackedVector2Array(5, 12, 10, 3, 3, -7, -4, -7, -11, 3, -6, 12)
@@ -23,8 +22,7 @@ polygon = PackedVector2Array(5, 12, 10, 3, 3, -7, -4, -7, -11, 3, -6, 12)
 visibility_layer = 3
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
-base_max_speed = 250.0
-acceleration = 250.0
+acceleration = 150.0
 friction = 1000.0
 
 [node name="Texture" parent="." index="2" unique_id=382857461]
@@ -76,7 +74,7 @@ randomize_multiplier_max = 1.2
 metadata/_custom_type_script = "uid://hv0g6akh0ftn"
 
 [node name="BeehaveTree" parent="." index="17" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@39877")
+blackboard = NodePath("@Node@41169")
 
 [node name="MoveToPlayer" type="Node" parent="BeehaveTree" index="0" unique_id=1542265017]
 script = ExtResource("33_f0rbt")
@@ -103,16 +101,15 @@ metadata/_custom_type_script = "uid://wlnghjnvdlyn"
 
 [node name="AttackTargetAction" type="Node" parent="BeehaveTree/MoveToPlayer" index="4" unique_id=1821364524]
 script = ExtResource("38_im25f")
+prediction_coef = 0.4
 metadata/_custom_type_script = "uid://dua6hp8ir5tiu"
 
-[node name="ExplosionResistanceComponent" type="Node" parent="." index="20" unique_id=857423690]
-script = ExtResource("39_tvcc4")
-resistance = 2.0
-metadata/_custom_type_script = "uid://clr7jbioge17t"
-
-[node name="IntroductionSubjectComponent" parent="." index="22" unique_id=776935428]
+[node name="IntroductionSubjectComponent" parent="." index="21" unique_id=776935428]
 group = "Tomato"
 subject_name = "TOMATO KILLER"
 subject_desc = "WEAKEST BOTANISTS PAWN.
 [color=purple]WEAK TO EVERYTHING[/color]"
 subject_prefix = "MELEE PAWN"
+
+[node name="ExplosionResistanceComponent" parent="." index="27" unique_id=69597611]
+resistance = 2.0

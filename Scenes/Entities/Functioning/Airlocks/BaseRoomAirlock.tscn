@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://xox6pb86v3gg"]
 
-[ext_resource type="PackedScene" uid="uid://dnoaq77825hf2" path="res://Scenes/Entities/Functioning/BaseOpenableAirlock.tscn" id="1_nxqff"]
+[ext_resource type="PackedScene" uid="uid://dnoaq77825hf2" path="res://Scenes/Entities/Functioning/Airlocks/BaseOpenableAirlock.tscn" id="1_nxqff"]
 [ext_resource type="Script" uid="uid://c7q5yuev0w3im" path="res://Components/Entity/Structures/RoomAirlockComponent.gd" id="2_yex7g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yex7g"]

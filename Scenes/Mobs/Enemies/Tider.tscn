@@ -50,8 +50,7 @@
 visibility_layer = 3
 
 [node name="MobMoverComponent" parent="." index="1" unique_id=2027089689]
-base_max_speed = 200.0
-acceleration = 200.0
+acceleration = 150.0
 friction = 700.0
 
 [node name="Texture" parent="." index="2" unique_id=382857461]
@@ -150,7 +149,7 @@ volume_db = 5.0
 max_distance = 600.0
 
 [node name="BeehaveTree" parent="." index="18" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@114988")
+blackboard = NodePath("@Node@38043")
 
 [node name="SequenceComposite" type="Node" parent="BeehaveTree" index="0" unique_id=1348709416]
 script = ExtResource("36_tw04h")

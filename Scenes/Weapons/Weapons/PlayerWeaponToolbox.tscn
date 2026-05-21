@@ -111,7 +111,7 @@ stream = ExtResource("9_rrile")
 
 [node name="ChargingToolbox" type="Node" parent="." unique_id=510851841 node_paths=PackedStringArray("charging_sound", "full_charge_sound", "parry_sound", "attack_sound", "miss_sound")]
 script = ExtResource("10_6jkit")
-exponent_divider = 0.7
+exponent_divider = 0.4
 hitstop_charge = 0.75
 charging_sound = NodePath("ChargingSound")
 full_charge_sound = NodePath("FullChargeSound")

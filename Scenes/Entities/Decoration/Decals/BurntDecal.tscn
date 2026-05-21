@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dgyd7vfh30c07"]
+
+[ext_resource type="Texture2D" uid="uid://cguah5ofsfehj" path="res://Textures/Tiles/Dirt/dirtheavy.png" id="1_7mf1i"]
+[ext_resource type="Script" uid="uid://dfpre1d0ulopj" path="res://Components/Entity/RandomSpriteComponent.gd" id="2_rnk7h"]
+[ext_resource type="Texture2D" uid="uid://kwwke33tarv4" path="res://Textures/Tiles/Dirt/burnt1.png" id="3_tthcg"]
+[ext_resource type="Texture2D" uid="uid://c47c2exsfmctx" path="res://Textures/Tiles/Dirt/burnt2.png" id="4_gvowi"]
+[ext_resource type="Script" uid="uid://xv1vpacqdtlr" path="res://Components/Entity/VisibleOnScreenVisibleComponent.gd" id="5_65dtt"]
+[ext_resource type="Texture2D" uid="uid://dpgu1cu1t3eng" path="res://Textures/Tiles/Dirt/burnt3.png" id="5_npi64"]
+[ext_resource type="Texture2D" uid="uid://ilp5y8xx4cq1" path="res://Textures/Tiles/Dirt/burnt4.png" id="6_hk4g7"]
+
+[node name="BurntDecal" type="Node2D" unique_id=751614460]
+
+[node name="BurntDecal" type="Sprite2D" parent="." unique_id=512899599]
+texture = ExtResource("1_7mf1i")
+
+[node name="RandomSpriteComponent" type="Node" parent="BurntDecal" unique_id=1797940811]
+script = ExtResource("2_rnk7h")
+textures = Array[Texture]([ExtResource("3_tthcg"), ExtResource("4_gvowi"), ExtResource("5_npi64"), ExtResource("6_hk4g7")])
+metadata/_custom_type_script = "uid://dfpre1d0ulopj"
+
+[node name="VisibleOnScreenVisibleComponent" type="Node" parent="." unique_id=27390639 node_paths=PackedStringArray("visible_on_screen", "sprite")]
+script = ExtResource("5_65dtt")
+visible_on_screen = NodePath("../VisibleOnScreenNotifier2D")
+sprite = NodePath("../BurntDecal")
+metadata/_custom_type_script = "uid://xv1vpacqdtlr"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1648118783]
+rect = Rect2(-40, -40, 80, 80)

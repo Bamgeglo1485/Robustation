@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bl30578g0svxo"]
+
+[ext_resource type="Script" uid="uid://dfpre1d0ulopj" path="res://Components/Entity/RandomSpriteComponent.gd" id="1_esush"]
+[ext_resource type="Texture2D" uid="uid://bm7h42ryh411d" path="res://Textures/Tiles/Dirt/dirtlight.png" id="2_defao"]
+[ext_resource type="Texture2D" uid="uid://b7ajc0xg3gqmh" path="res://Textures/Tiles/Dirt/dirtmedium.png" id="3_ulvro"]
+[ext_resource type="Texture2D" uid="uid://cguah5ofsfehj" path="res://Textures/Tiles/Dirt/dirtheavy.png" id="4_db532"]
+[ext_resource type="Script" uid="uid://xv1vpacqdtlr" path="res://Components/Entity/VisibleOnScreenVisibleComponent.gd" id="5_defao"]
+
+[node name="DirtDecal" type="Node2D" unique_id=751614460]
+
+[node name="DirtDecal" type="Sprite2D" parent="." unique_id=512899599]
+texture = ExtResource("4_db532")
+
+[node name="RandomSpriteComponent" type="Node" parent="DirtDecal" unique_id=1797940811]
+script = ExtResource("1_esush")
+textures = Array[Texture]([ExtResource("2_defao"), ExtResource("3_ulvro"), ExtResource("4_db532")])
+metadata/_custom_type_script = "uid://dfpre1d0ulopj"
+
+[node name="VisibleOnScreenVisibleComponent" type="Node" parent="." unique_id=27390639 node_paths=PackedStringArray("visible_on_screen", "sprite")]
+script = ExtResource("5_defao")
+visible_on_screen = NodePath("../VisibleOnScreenNotifier2D")
+sprite = NodePath("../DirtDecal")
+metadata/_custom_type_script = "uid://xv1vpacqdtlr"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1648118783]
+rect = Rect2(-40, -40, 80, 80)

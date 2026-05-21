@@ -17,7 +17,7 @@ func _on_step(_body) -> void:
 	
 	if blood_scene:
 		var _effect: Node = blood_scene.instantiate()
-		_effect.global_position = parent.global_position
+		_effect.global_position = _body.global_position
 		scene.add_child.call_deferred(_effect)
 		var health_component: HealthComponent = _body.get_node("HealthComponent")
 		if health_component:
@@ -25,6 +25,7 @@ func _on_step(_body) -> void:
 			health_component.take_damage(-health_bonus * health_component.healing_from_organs_multiplier, null, "Heal", true)
 	
 	if step_sound:
+		step_sound.global_position = _body.global_position
 		step_sound.play()
 		area2d.set_deferred("monitoring", false)
 		area2d.set_deferred("monitorable", false)

@@ -34,8 +34,8 @@ class_name MeleeWeapon extends Weapon
 
 @export var can_clear_mark: bool = false
 
-@export var attack_angle: float = 90
-@export var ray_count: int = 15
+@export var attack_angle: float = 130
+@export var ray_count: int = 20
 @export var parry_extra_bounces: int = 0
 @export var parry_extra_penetrations: int = 0
 
@@ -177,7 +177,7 @@ func attack_logic(raiser) -> bool:
 	return true
 
 func _try_melee_attack(direction) -> Dictionary:
-	await get_tree().physics_frame
+	await tree.physics_frame
 	var space_state = parent.get_world_2d().direct_space_state
 	var _targets: Dictionary
 	var attacked_enemies: Array = []
@@ -200,8 +200,8 @@ func _try_melee_attack(direction) -> Dictionary:
 		var query: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.create(ray_start, ray_end)
 		query.collision_mask = 1 | 2 | 4 | 7 | 12
 		query.collide_with_areas = true
-		query.hit_from_inside = true
 		query.exclude = excluded_nodes
+		query.collide_with_bodies = true
 		
 		var result = space_state.intersect_ray(query)
 		

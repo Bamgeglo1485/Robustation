@@ -1,15 +1,15 @@
-[gd_scene format=3 uid="uid://c75uo5mx4hqa1"]
+[gd_scene format=3 uid="uid://bqcq0s2jydisv"]
 
-[ext_resource type="PackedScene" uid="uid://c23n3m40ywq45" path="res://Scenes/Entities/Functioning/Airlocks/BaseAirlock.tscn" id="1_5d04i"]
-[ext_resource type="Script" uid="uid://c0lqk4r1en7do" path="res://Components/Entity/Structures/RoundAirlockComponent.gd" id="2_j8fxp"]
-[ext_resource type="Shader" uid="uid://b53pser2tah5a" path="res://Resources/Shaders/Monitor.gdshader" id="3_4kxbk"]
-[ext_resource type="Texture2D" uid="uid://yjigwd3i118j" path="res://Textures/Light/point_light.jpg" id="4_148jy"]
+[ext_resource type="PackedScene" uid="uid://c23n3m40ywq45" path="res://Scenes/Entities/Functioning/Airlocks/BaseAirlock.tscn" id="1_00m0n"]
+[ext_resource type="Script" uid="uid://c0lqk4r1en7do" path="res://Components/Entity/Structures/RoundAirlockComponent.gd" id="2_rmdvd"]
+[ext_resource type="Shader" uid="uid://b53pser2tah5a" path="res://Resources/Shaders/Monitor.gdshader" id="3_r6ue8"]
+[ext_resource type="Texture2D" uid="uid://yjigwd3i118j" path="res://Textures/Light/point_light.jpg" id="4_r868n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j8fxp"]
 size = Vector2(147, 32)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_148jy"]
-shader = ExtResource("3_4kxbk")
+shader = ExtResource("3_r6ue8")
 shader_parameter/overlay = true
 shader_parameter/scanlines_opacity = 0.4
 shader_parameter/scanlines_width = 0.25
@@ -35,7 +35,7 @@ shader_parameter/edge_darken = 1.0000000475
 shader_parameter/edge_softness = 0.1
 shader_parameter/global_alpha = 0.0
 
-[node name="BaseAirlock" unique_id=985248610 instance=ExtResource("1_5d04i")]
+[node name="BaseAirlock" unique_id=985248610 instance=ExtResource("1_00m0n")]
 
 [node name="Outercollision" parent="." index="2" unique_id=139227872]
 monitoring = false
@@ -48,7 +48,8 @@ shape = SubResource("RectangleShape2D_j8fxp")
 occluder_light_mask = 0
 
 [node name="RoundAirlockComponent" type="Node" parent="." index="11" unique_id=5729411 node_paths=PackedStringArray("area", "effect", "light")]
-script = ExtResource("2_j8fxp")
+script = ExtResource("2_rmdvd")
+roundend = false
 area = NodePath("../Outercollision")
 exit_position = Vector2(64, 0)
 start_position = Vector2(-64, 0)
@@ -67,9 +68,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_behavior_recursive = 1
 
 [node name="PointLight2D" type="PointLight2D" parent="." index="12" unique_id=2061979104]
-enabled = false
 color = Color(0, 0.5556891, 0.6871906, 1)
-texture = ExtResource("4_148jy")
+texture = ExtResource("4_r868n")
 texture_scale = 0.2

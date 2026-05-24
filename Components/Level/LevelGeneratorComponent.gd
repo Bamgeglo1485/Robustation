@@ -20,6 +20,8 @@ class_name LevelGeneratorComponent extends Component
 @export_category("Entities")
 @export var airlock: PackedScene
 @export var enemy_airlock: PackedScene
+@export var exit_airlock: PackedScene
+@export var entry_airlock: PackedScene
 
 @export var generation_units: Array[GenerationUnit]
 
@@ -74,8 +76,45 @@ func generate_room(connect_to_previous: bool = false) -> void:
 	for generation_unit in generation_units:
 		_set_generation_unit(generation_unit, width, height)
 	
+	if room + 2 == room_count:
+		_set_exit(width, height)
+	elif room == -1:
+		_set_entry(height)
+	
 	previous_room_size = Vector2i(width, height)
 	current_position.x += width - 1
+
+func _set_exit(width: int, height: int) -> void:
+	if !exit_airlock:
+		return
+	
+	var exit_inst: PhysicsBody2D = exit_airlock.instantiate()
+	scene.add_child.call_deferred(exit_inst)
+	var round_airlock: RoundAirlockComponent = exit_inst.get_node_or_null("RoundAirlockComponent")
+	round_airlock.room = room
+	
+	var exit_tile_pos = Vector2i(width - 1, height / 2) + current_position
+	
+	var world_pos = tiles_tile_map.to_global(tiles_tile_map.map_to_local(exit_tile_pos))
+	exit_inst.global_position = world_pos
+	
+	wall_tile_map.erase_cell(exit_tile_pos)
+	tiles_tile_map.set_cell(exit_tile_pos, floor_tile_source_id, floor_tile_atlas_coords)
+
+func _set_entry(height: int) -> void:
+	if !entry_airlock:
+		return
+	
+	var entry_inst: PhysicsBody2D = entry_airlock.instantiate()
+	scene.add_child.call_deferred(entry_inst)
+	
+	var entry_tile_pos = Vector2i(0, height / 2) + current_position
+	
+	var world_pos = tiles_tile_map.to_global(tiles_tile_map.map_to_local(entry_tile_pos))
+	entry_inst.global_position = world_pos
+	
+	wall_tile_map.erase_cell(entry_tile_pos)
+	tiles_tile_map.set_cell(entry_tile_pos, floor_tile_source_id, floor_tile_atlas_coords)
 
 func _build_floor(width: int, height: int, position: Vector2i = current_position) -> void:
 	if !tiles_tile_map:

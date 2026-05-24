@@ -32,9 +32,10 @@ uniform bool clip_warp = false;
 uniform float vignette_intensity = 0.4;
 uniform float vignette_opacity : hint_range(0.0, 1.0) = 0.5;
 
-// НОВЫЕ ПАРАМЕТРЫ ДЛЯ КОНТРОЛЯ ГРАНИЦ
 uniform float edge_darken : hint_range(0.0, 2.0) = 0.8;
 uniform float edge_softness : hint_range(0.0, 0.5) = 0.1;
+
+uniform float global_alpha : hint_range(0.0, 1.0) = 1.0;
 
 vec2 random(vec2 uv){
     uv = vec2(dot(uv, vec2(127.1,311.7)), dot(uv, vec2(269.5,183.3)));
@@ -63,46 +64,33 @@ vec2 warp(vec2 uv){
     return uv + delta * delta_offset;
 }
 
-// УЛУЧШЕННАЯ ФУНКЦИЯ ГРАНИЦЫ
 float border(vec2 uv) {
-    float radius = min(warp_amount, 0.15); // Увеличил радиус для более плавного перехода
+    float radius = min(warp_amount, 0.15);
     radius = max(radius, 0.02);
     
-    // Расстояние до края экрана
     vec2 dist_to_edge = min(uv, 1.0 - uv);
     float min_dist = min(dist_to_edge.x, dist_to_edge.y);
     
-    // Плавное затухание у краев
     return smoothstep(0.0, radius, min_dist);
 }
 
-// УЛУЧШЕННАЯ ФУНКЦИЯ ВИНЬЕТКИ
 float vignette(vec2 uv) {
-    // Нормализованное расстояние от центра
     vec2 center_dist = uv - 0.5;
-    float dist = length(center_dist) * 2.0; // *2 чтобы покрыть всю область
+    float dist = length(center_dist) * 2.0;
     
-    // Более мягкая винъетка
     float vignette = 1.0 - dist * vignette_intensity;
     vignette = clamp(vignette, 0.0, 1.0);
     
-    // Применяем opacity
     return mix(1.0, vignette, vignette_opacity);
 }
 
-// КОМБИНИРОВАННАЯ ФУНКЦИЯ ДЛЯ КРАЕВ
 float edge_mask(vec2 uv) {
-    // Получаем маску границы
     float border_mask = border(uv);
     
-    // Получаем винъетку
     float vignette_mask = vignette(uv);
     
-    // Комбинируем: используем минимальное значение чтобы избежать ярких краев
-    // и применяем дополнительное затемнение
     float edge = min(border_mask, vignette_mask);
     
-    // Дополнительное затемнение у самых краев
     vec2 dist_to_edge = min(uv, 1.0 - uv);
     float edge_dark = min(dist_to_edge.x, dist_to_edge.y);
     edge_dark = smoothstep(0.0, edge_softness, edge_dark);
@@ -179,7 +167,6 @@ void fragment()
         text.rgb += clamp(random((ceil(uv * resolution) / resolution) + fract(TIME)).x, 0.0, 1.0) * static_noise_intensity;
     }
 
-    // ИСПРАВЛЕНО: Используем комбинированную маску вместо отдельных функций
     float edge = edge_mask(uv);
     text.rgb *= edge;
 
@@ -196,6 +183,8 @@ void fragment()
         float midpoint = pow(0.5, 2.2);
         text.rgb = (text.rgb - vec3(midpoint)) * contrast + midpoint;
     }
+
+    text.a *= global_alpha;
 
     COLOR = text;
 }

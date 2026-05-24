@@ -3,12 +3,15 @@ class_name LevelComponent extends Component
 @export_category("Settings")
 @export_multiline var level_name: String
 
+@export var min_waves: int = 2
+@export var max_waves: int = 3
+@export var final_waves: int = 4
+
 @export var available_enemies: Array[Enemy]
 @export var max_enemies_per_room: int = 10
 @export var min_enemies_per_room: int = 10
 @export var start_budget: float = 1.5
 @export var budget_per_room: float = 0.25
-@export var budget_on_last_rooms: float = 1.0
 @export var reward_chance: float = 0.7
 @export var reward_enemy_chance: float = 0.5
 @export var available_reward_enemies: Array[Enemy]
@@ -18,7 +21,7 @@ class_name LevelComponent extends Component
 @export var max_assist_enemies: int = 4
 @export var max_universal_enemies: int = 6
 
-@export var delay_before_second_spawn: float = 3.0
+@export var delay_before_wave_spawn: float = 3.0
 @export var perks: Array[PackedScene]
 @export var choosable_perk_count_per_wave: int = 4
 
@@ -31,10 +34,16 @@ var budget: float = start_budget
 @export var perk_choice_sound: AudioStreamPlayer
 @export var perk_selected_sound: AudioStreamPlayer
 
+@export_category("Variables")
+var time: float
+
 @export_category("Operational")
+var processing: bool = false
 var current_enemies: Array[PhysicsBody2D]
-var second_spawned: bool = true
 var room: int
+var wave: int
+var max_wave: int
+var kills: int
 
 @onready var level_generator_component: LevelGeneratorComponent = scene.get_node_or_null("LevelGeneratorComponent")
 const MAX_ATTEMPTS = 100
@@ -49,33 +58,50 @@ var perk_list_unit: PackedScene = preload("res://Scenes/UI/IngameInterface/Perks
 var high_pass: AudioEffectHighPassFilter = AudioServer.get_bus_effect(1, 2)
 var high_pass_tween: Tween
 
+func _process(delta: float) -> void:
+	if processing:
+		time += delta
+
 func _ready() -> void:
 	EventBusManager.room_start.connect(_on_start)
+	EventBusManager.room_end.connect(_on_end)
 	EventBusManager.gibbed.connect(_on_death)
 
 func _on_start(_room: int) -> void:
 	if _room == 0:
 		_level_name_animation()
+		processing = true
 	
 	if _room < 100:
-		second_spawned = false
+		if _room + 2 == level_generator_component.room_count:
+			max_wave = final_waves
+		else:
+			max_wave = randi_range(min_waves, max_waves)
+		wave = 0
 		room = _room
-		
 		var first_spawner: PhysicsBody2D = first_enemy_spawners[room]
 		var second_spawner: PhysicsBody2D = second_enemy_spawners[room]
 		
-		_spawn_enemies(available_enemies, first_spawner)
-		await tree.create_timer(delay_before_second_spawn).timeout
-		_spawn_enemies(available_enemies, second_spawner)
-		second_spawned = true
+		for i in range(max_wave):
+			wave = i
+			if randf() > 0.5:
+				_spawn_enemies(available_enemies, first_spawner)
+			else:
+				_spawn_enemies(available_enemies, second_spawner)
+			await tree.create_timer(delay_before_wave_spawn).timeout
 	else:
-		if randf() < reward_enemy_chance:
-			second_spawned = true
+		if randf() < reward_enemy_chance and _choose_enemies != null:
+			max_wave = 1
+			wave = 2
 			room = _room
 			_spawn_enemies(available_reward_enemies, null, player.global_position)
 			EventBusManager.force_bolt.emit(room)
 		elif randf() < reward_chance:
 			_open_perk_choose()
+
+func _on_end(_room: int) -> void:
+	if _room + 2 == level_generator_component.room_count:
+		processing = false
 
 func _level_name_animation() -> void:
 	var text_printing: TextPrintingAnimationComponent = level_name_label.get_node_or_null("TextPrintingAnimationComponent")
@@ -113,6 +139,7 @@ func _spawn_enemies(_enemies: Array[Enemy], spawner: PhysicsBody2D, position: Ve
 	
 	if !spawner:
 		return
+	
 	var airlock_component: AirlockComponent = spawner.get_node_or_null("AirlockComponent")
 	airlock_component.open()
 	await tree.create_timer(0.5).timeout
@@ -169,6 +196,9 @@ func _choose_enemies(enemies: Array[Enemy]) -> Array[PackedScene]:
 			choosed_enemies.append(enemy.scene)
 		remaining_budget -= enemy.cost * count_to_spawn
 	
+	if choosed_enemies.is_empty():
+		choosed_enemies = Array(enemies.pick_random())
+	
 	return choosed_enemies
 
 func _random_enemy(enemies: Array[Enemy]) -> Enemy:
@@ -188,14 +218,12 @@ func _random_enemy(enemies: Array[Enemy]) -> Enemy:
 
 func _on_death(emitter: Node2D) -> void:
 	if current_enemies.has(emitter):
+		kills += 1
 		current_enemies.erase(emitter)
-		if current_enemies.is_empty() and second_spawned:
+		if current_enemies.is_empty() and wave >= max_wave - 1:
 			if room < 100:
 				EventBusManager.room_end.emit(room)
-				if level_generator_component.room_count == room or level_generator_component.room_count == room - 1:
-					budget += budget_on_last_rooms
-				else:
-					budget += budget_per_room
+				budget += budget_per_room
 			else:
 				EventBusManager.room_end.emit(room)
 				EventBusManager.force_unbolt.emit(room)

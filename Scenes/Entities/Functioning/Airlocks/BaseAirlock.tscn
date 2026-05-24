@@ -82,6 +82,7 @@ vframes = 3
 shape = SubResource("RectangleShape2D_bb2nl")
 
 [node name="Outercollision" type="Area2D" parent="." unique_id=139227872]
+monitorable = false
 
 [node name="Collision" type="CollisionShape2D" parent="Outercollision" unique_id=866938835]
 shape = SubResource("CircleShape2D_sx2rc")
@@ -106,13 +107,16 @@ metadata/_custom_type_script = "uid://bkyx6u1ve7hyr"
 
 [node name="OpenSound" type="AudioStreamPlayer2D" parent="." unique_id=2013108459]
 stream = ExtResource("11_6g1pn")
+max_distance = 700.0
 
 [node name="CloseSound" type="AudioStreamPlayer2D" parent="." unique_id=440834374]
 stream = ExtResource("12_0x40r")
+max_distance = 700.0
 
 [node name="UnboltSound" type="AudioStreamPlayer2D" parent="." unique_id=743049838]
 stream = ExtResource("13_hktyc")
 volume_db = 10.0
+max_distance = 700.0
 
 [node name="BoltSound" type="AudioStreamPlayer2D" parent="." unique_id=370861228]
 stream = ExtResource("14_biyfq")

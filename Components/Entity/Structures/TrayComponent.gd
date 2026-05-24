@@ -12,6 +12,7 @@ var stage_timer: Timer
 
 @export_category("Tray")
 @onready var arena_component: ArenaComponent = scene.get_node_or_null("ArenaComponent")
+@onready var level_component: LevelComponent = scene.get_node_or_null("LevelComponent")
 @export var max_plants: int = 8
 var plants: Array[Node2D]
 
@@ -37,6 +38,8 @@ func _stage_progress() -> void:
 		plants.append(plant_inst)
 		if arena_component:
 			arena_component.current_enemies.append(plant_inst)
+		if level_component:
+			level_component.current_enemies.append(plant_inst)
 	
 	plant_sprite.texture = plant_textures[plant_progress]
 

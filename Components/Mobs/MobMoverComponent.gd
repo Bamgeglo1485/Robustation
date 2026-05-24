@@ -56,6 +56,8 @@ var standing_delay: float = 0.0
 
 @onready var texture: Sprite2D = parent.get_node_or_null("Texture")
 
+const global_speed_modifier: float = 2.0
+
 # Non binary animation tweens
 var unfly_animation_tween: Tween
 var fly_animation_tween: Tween
@@ -67,10 +69,19 @@ signal unflied
 
 # Cache
 
+var speed_modifier_combined: float
 var max_speed_current: float
 var friction_amount: float
 var velocity: Vector2
 var speed: float
+var speed_sq: float
+
+var fly_velocity: Vector2
+var control_velocity: Vector2
+var combined_velocity: Vector2
+
+var max_speed_limit: float
+var max_speed_sq: float
 
 @export_category("Modifiers")
 @export var speed_multipliers: Dictionary
@@ -83,7 +94,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if flying and fly_speed > 0:
-		# First we run the flight logic, then the movement logic.
 		_fly(delta)
 	_move(delta)
 	if animation_component and !flying and !fallen:
@@ -96,32 +106,35 @@ func _move(delta: float) -> void:
 	if !parent is CharacterBody2D:
 		return
 	
+	# The flight has a separate logic
 	if flying:
 		_fly_movement()
 		return
 	
 	velocity = parent.velocity
-	speed = velocity.length()
 	
+	# If there is no direction of movement, then we apply friction
 	if direction.is_zero_approx():
-		# If the body does not go somewhere, we apply friction
-		if !velocity.is_zero_approx():
+		velocity.length_squared()
+		if speed_sq > 0.0:
 			friction_amount = friction * delta
-			if speed > friction_amount:
-				velocity -= (velocity / speed) * friction_amount
+			if friction_amount < 0.1:
+				var friction_factor = 1.0 - friction_amount / sqrt(max(speed_sq, 0.001))
+				velocity *= max(friction_factor, 0.0)
 			else:
-				velocity = Vector2.ZERO
+				velocity = velocity.move_toward(Vector2.ZERO, friction_amount)
+	# The movement itself
 	elif !movement_blocked:
-		# Just movement
-		velocity += direction * acceleration
+		velocity = velocity.move_toward(velocity + direction * acceleration, acceleration)
 		
 		if navigation_agent:
-			var nav_vel: Vector2 = direction * acceleration * speed_modifier * minor_speed_modifier
-			navigation_agent.set_velocity(nav_vel)
+			navigation_agent.set_velocity(direction * acceleration * speed_modifier * minor_speed_modifier)
 		
-		max_speed_current = max_speed * speed_modifier * minor_speed_modifier * speed_multiplier
-		if speed > max_speed_current:
-			velocity = (velocity / speed) * max_speed_current
+		max_speed_current = max_speed * speed_modifier * minor_speed_modifier * speed_multiplier * global_speed_modifier
+		var current_speed = velocity.length()
+		
+		if current_speed > max_speed_current:
+			velocity = velocity.normalized() * max_speed_current
 	
 	parent.velocity = velocity
 	parent.move_and_slide()
@@ -149,12 +162,19 @@ func _walk_animation() -> void:
 
 # Movement when body flying
 func _fly_movement() -> void:
-	var fly_velocity: Vector2 = fly_direction * fly_speed
+	fly_velocity = fly_direction * fly_speed
 	
 	if direction != Vector2.ZERO and !fallen:
-		var control_velocity: Vector2 = direction * acceleration
-		var combined_velocity: Vector2 = fly_velocity + control_velocity
-		parent.velocity = combined_velocity.limit_length(fly_speed + max_speed)
+		control_velocity = direction * acceleration
+		combined_velocity = fly_velocity + control_velocity
+		
+		max_speed_limit = fly_speed + max_speed
+		max_speed_sq = max_speed_limit * max_speed_limit
+		
+		if combined_velocity.length_squared() > max_speed_sq:
+			parent.velocity = combined_velocity.normalized() * max_speed_limit
+		else:
+			parent.velocity = combined_velocity
 	else:
 		parent.velocity = fly_velocity
 	

@@ -29,6 +29,7 @@ bg_color = Color(1, 1, 1, 0.2)
 bg_color = Color(0.9999922, 0.20501819, 0.4535386, 1)
 
 [node name="Characteristics" type="Panel" unique_id=1932067856]
+process_mode = 1
 anchors_preset = -1
 anchor_left = 0.202
 anchor_top = 0.18400002

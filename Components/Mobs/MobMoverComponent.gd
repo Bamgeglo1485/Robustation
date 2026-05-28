@@ -68,7 +68,6 @@ var drop_tween: Tween
 signal unflied
 
 # Cache
-
 var speed_modifier_combined: float
 var max_speed_current: float
 var friction_amount: float
@@ -115,14 +114,14 @@ func _move(delta: float) -> void:
 	
 	# If there is no direction of movement, then we apply friction
 	if direction.is_zero_approx():
-		velocity.length_squared()
+		speed_sq = velocity.length_squared()
 		if speed_sq > 0.0:
 			friction_amount = friction * delta
-			if friction_amount < 0.1:
-				var friction_factor = 1.0 - friction_amount / sqrt(max(speed_sq, 0.001))
-				velocity *= max(friction_factor, 0.0)
+			if speed_sq > friction_amount * friction_amount:
+				var speed_val = sqrt(speed_sq)
+				velocity -= (velocity / speed_val) * friction_amount
 			else:
-				velocity = velocity.move_toward(Vector2.ZERO, friction_amount)
+				velocity = Vector2.ZERO
 	# The movement itself
 	elif !movement_blocked:
 		velocity = velocity.move_toward(velocity + direction * acceleration, acceleration)
@@ -131,10 +130,10 @@ func _move(delta: float) -> void:
 			navigation_agent.set_velocity(direction * acceleration * speed_modifier * minor_speed_modifier)
 		
 		max_speed_current = max_speed * speed_modifier * minor_speed_modifier * speed_multiplier * global_speed_modifier
-		var current_speed = velocity.length()
+		max_speed_sq = max_speed_current * max_speed_current
 		
-		if current_speed > max_speed_current:
-			velocity = velocity.normalized() * max_speed_current
+		if velocity.length_squared() > max_speed_sq:
+			velocity = velocity.limit_length(max_speed_current)
 	
 	parent.velocity = velocity
 	parent.move_and_slide()
@@ -189,8 +188,6 @@ func _fly(delta) -> void:
 	
 	if fly_speed < fly_stop_speed * 20:
 		unfly_animation_tween = create_tween()
-		unfly_animation_tween.set_trans(Tween.TRANS_SINE)
-		unfly_animation_tween.set_ease(Tween.EASE_IN_OUT)
 		unfly_animation_tween.tween_property(texture, "scale", Vector2(1.0, 1.0), 0.2)
 	
 	if fly_speed < fly_stop_speed:

@@ -1,0 +1,352 @@
+[gd_scene format=3 uid="uid://bvl4oxl3ususm"]
+
+[ext_resource type="Script" uid="uid://bsiofl2b54syo" path="res://Components/Level/LevelGeneratorComponent.gd" id="1_6cfsj"]
+[ext_resource type="PackedScene" uid="uid://b0dhyfw1q4gyo" path="res://Scenes/Entities/Functioning/Airlocks/Themed/MaintsRoomAirlock.tscn" id="2_oburk"]
+[ext_resource type="PackedScene" uid="uid://b3aui7aggb1cb" path="res://Scenes/Entities/Functioning/Airlocks/Themed/MaintsEnemySpawnerAirlock.tscn" id="3_fcwpu"]
+[ext_resource type="PackedScene" uid="uid://c75uo5mx4hqa1" path="res://Scenes/Entities/Functioning/Airlocks/RoundendAirlock.tscn" id="4_w04mj"]
+[ext_resource type="PackedScene" uid="uid://bqcq0s2jydisv" path="res://Scenes/Entities/Functioning/Airlocks/RoundstartAirlock.tscn" id="5_ehoup"]
+[ext_resource type="Script" uid="uid://dcmiiyxq6u2f8" path="res://Resources/Custom/Level/GenerationUnit.gd" id="6_8eyyy"]
+[ext_resource type="PackedScene" uid="uid://c8mg0fsh77c21" path="res://Scenes/Entities/Functioning/BaseLight.tscn" id="7_w2jdl"]
+[ext_resource type="PackedScene" uid="uid://bl30578g0svxo" path="res://Scenes/Entities/Decoration/Decals/DirtDecal.tscn" id="8_bo8qy"]
+[ext_resource type="PackedScene" uid="uid://dgyd7vfh30c07" path="res://Scenes/Entities/Decoration/Decals/BurntDecal.tscn" id="9_4tn72"]
+[ext_resource type="Script" uid="uid://cslfae10nu8b7" path="res://Resources/Custom/Level/TileGenerationUnit.gd" id="10_k0o7g"]
+[ext_resource type="Script" uid="uid://bjc8u38pksoym" path="res://Components/Level/LevelComponent.gd" id="11_8xkxr"]
+[ext_resource type="Script" uid="uid://di5u0whaqiyjp" path="res://Resources/Custom/Enemy/Base/Enemy.gd" id="12_thbn5"]
+[ext_resource type="Resource" uid="uid://bmqxe8ujyt6le" path="res://Resources/Custom/Enemy/Gray.tres" id="13_6lttj"]
+[ext_resource type="Resource" uid="uid://c7ill5kgubqqa" path="res://Resources/Custom/Enemy/Tider.tres" id="14_qiig4"]
+[ext_resource type="Resource" uid="uid://cou375htkckp8" path="res://Resources/Custom/Enemy/Assistant.tres" id="15_vee86"]
+[ext_resource type="Resource" uid="uid://btivhod77cnen" path="res://Resources/Custom/Enemy/Graytider.tres" id="16_664wb"]
+[ext_resource type="PackedScene" uid="uid://dx75c08agri7r" path="res://Scenes/Perks/PerkSceneBandageAndToxicMarker.tscn" id="17_86x3x"]
+[ext_resource type="PackedScene" uid="uid://cilxau2d1ryo5" path="res://Scenes/Perks/PerkSceneDoublePenetration.tscn" id="18_fmtik"]
+[ext_resource type="PackedScene" uid="uid://dqt0jqxgluxsi" path="res://Scenes/Perks/PerkSceneRubberBullets.tscn" id="19_bgvpo"]
+[ext_resource type="PackedScene" uid="uid://c5b5ke884uc34" path="res://Scenes/Perks/PerkSceneFirstAIDS.tscn" id="20_41q2y"]
+[ext_resource type="PackedScene" uid="uid://1qu5kklprskj" path="res://Scenes/Perks/PerkSceneEphedrineCigarettes.tscn" id="21_fdhnt"]
+[ext_resource type="PackedScene" uid="uid://hk7lpgoexkxf" path="res://Scenes/Perks/PerkSceneMedBelt.tscn" id="22_shr2q"]
+[ext_resource type="PackedScene" uid="uid://fh4o05ew62pv" path="res://Scenes/Perks/PerkSceneMirrorShard.tscn" id="23_anqq0"]
+[ext_resource type="PackedScene" uid="uid://cfg8g768i2k83" path="res://Scenes/Perks/PerkSceneBitchBall.tscn" id="24_khasd"]
+[ext_resource type="PackedScene" uid="uid://bm4hm4bycw8ti" path="res://Scenes/Perks/PerkSceneGoliathPlate.tscn" id="25_e2yyl"]
+[ext_resource type="PackedScene" uid="uid://dplevsy1jomld" path="res://Scenes/Perks/PerkSceneGalaxythistle.tscn" id="26_pvx7v"]
+[ext_resource type="PackedScene" uid="uid://dbarl1l1jbwt4" path="res://Scenes/Perks/PerkSceneShinyGreenBullets.tscn" id="27_aw46t"]
+[ext_resource type="PackedScene" uid="uid://b3pri7wp4hsjb" path="res://Scenes/Perks/PerkScenePlasmaTank.tscn" id="28_hu3vy"]
+[ext_resource type="PackedScene" uid="uid://cu7kn4eus454b" path="res://Scenes/Perks/PerkSceneCombatGloves.tscn" id="29_5d332"]
+[ext_resource type="PackedScene" uid="uid://c7fwcipo1a7jq" path="res://Scenes/Perks/PerkSceneRedspacePaint.tscn" id="30_we2xu"]
+[ext_resource type="PackedScene" uid="uid://51553qtnrkvu" path="res://Scenes/Perks/PerkSceneInspectorsFlask.tscn" id="31_45y43"]
+[ext_resource type="PackedScene" uid="uid://duyalsqrvhov0" path="res://Scenes/Perks/PerkSceneRocketJumpers.tscn" id="32_yb5y8"]
+[ext_resource type="PackedScene" uid="uid://dhw0xsac3vmpn" path="res://Scenes/Perks/PerkSceneStudentDiet.tscn" id="33_5kuv3"]
+[ext_resource type="PackedScene" uid="uid://c4ex02nnk4ge3" path="res://Scenes/Perks/PerkSceneCrusherModule.tscn" id="34_7615v"]
+[ext_resource type="AudioStream" uid="uid://1qnhfchhf4jb" path="res://Audio/Effects/voteding.ogg" id="35_e3cyk"]
+[ext_resource type="AudioStream" uid="uid://14o4e8msndow" path="res://Audio/Weapon/Projectile/mk58_shoot.ogg" id="36_snye1"]
+[ext_resource type="AudioStream" uid="uid://b2utqxvujdi7f" path="res://Audio/Ambience/box_deploy.ogg" id="37_jm75q"]
+[ext_resource type="TileSet" uid="uid://c7mk0aiygychu" path="res://Resources/TileMaps/Walls.tres" id="38_bwu1r"]
+[ext_resource type="TileSet" uid="uid://bc7bghcv8144y" path="res://Resources/TileMaps/Tiles.tres" id="39_qyexe"]
+[ext_resource type="TileSet" uid="uid://cr4gmxce1ahdv" path="res://Resources/TileMaps/MinorTiles.tres" id="40_g3rqu"]
+[ext_resource type="TileSet" uid="uid://c1iav1n2526cq" path="res://Resources/TileMaps/DestructibleWalls.tres" id="41_blk5a"]
+[ext_resource type="PackedScene" uid="uid://roeennw572p2" path="res://Scenes/Mobs/Player/PlayerGreytide.tscn" id="42_auu7o"]
+[ext_resource type="FontFile" uid="uid://dskv5n6tofrla" path="res://Resources/Text/Fonts/LCD 40x2 Display/LCD40x2Display-Regular.otf" id="43_bg8ec"]
+[ext_resource type="Script" uid="uid://4io3bm7r86h6" path="res://Components/Interface/Menu/TextPrintingAnimationComponent.gd" id="44_rj424"]
+[ext_resource type="Script" uid="uid://bo7lklhepnuja" path="res://Scripts/fps.gd" id="45_dk0ep"]
+[ext_resource type="Environment" uid="uid://r1a7fr7x6en8" path="res://DemoTrash/Light.tres" id="46_psi10"]
+[ext_resource type="Script" uid="uid://dptr5blvqsgks" path="res://Components/Interface/Menu/Settings/WorldEnvComponent.gd" id="47_gg2qg"]
+
+[sub_resource type="Resource" id="Resource_2r3hv"]
+script = ExtResource("6_8eyyy")
+scene = ExtResource("7_w2jdl")
+max_units = 6
+min_units = 3
+metadata/_custom_type_script = "uid://dcmiiyxq6u2f8"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bupnh"]
+noise_type = 3
+frequency = 0.0003
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_bupnh"]
+noise = SubResource("FastNoiseLite_bupnh")
+
+[sub_resource type="Resource" id="Resource_acqqm"]
+script = ExtResource("6_8eyyy")
+scene = ExtResource("8_bo8qy")
+spawn_pattern = 1
+max_units = 10
+min_units = 5
+min_range_from_others = 0
+rotate = false
+noise = SubResource("NoiseTexture2D_bupnh")
+noise_threshold = 0.05
+metadata/_custom_type_script = "uid://dcmiiyxq6u2f8"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rqcmx"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_aymn4"]
+noise = SubResource("FastNoiseLite_rqcmx")
+
+[sub_resource type="Resource" id="Resource_ygd3n"]
+script = ExtResource("6_8eyyy")
+scene = ExtResource("9_4tn72")
+spawn_pattern = 1
+max_units = 10
+min_units = 5
+min_range_from_others = 0
+rotate = false
+noise = SubResource("NoiseTexture2D_aymn4")
+noise_threshold = 0.1
+metadata/_custom_type_script = "uid://dcmiiyxq6u2f8"
+
+[sub_resource type="Resource" id="Resource_0tyrb"]
+script = ExtResource("10_k0o7g")
+tile_source_id = 1
+tile_atlas_coords = Vector2i(1, 1)
+spawn_pattern = 4
+restrict_overlaying = false
+chance_to_appear = 0.5
+width = 2
+metadata/_custom_type_script = "uid://cslfae10nu8b7"
+
+[sub_resource type="Resource" id="Resource_0qr1g"]
+script = ExtResource("10_k0o7g")
+tile_source_id = 1
+tile_atlas_coords = Vector2i(1, 1)
+spawn_pattern = 2
+restrict_overlaying = false
+chance_to_appear = 0.3
+width = 2
+metadata/_custom_type_script = "uid://cslfae10nu8b7"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0qr1g"]
+noise_type = 3
+frequency = 0.0046
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_0tyrb"]
+noise = SubResource("FastNoiseLite_0qr1g")
+
+[sub_resource type="Resource" id="Resource_rqcmx"]
+script = ExtResource("10_k0o7g")
+tile_source_id = 1
+tile_atlas_coords = Vector2i(0, 1)
+restrict_overlaying = false
+max_units = 20
+min_units = 10
+noise = SubResource("NoiseTexture2D_0tyrb")
+metadata/_custom_type_script = "uid://cslfae10nu8b7"
+
+[sub_resource type="Resource" id="Resource_bupnh"]
+script = ExtResource("10_k0o7g")
+tile_map_layer = 1
+spawn_pattern = 2
+restrict_overlaying = false
+chance_to_appear = 0.3
+width = 2
+metadata/_custom_type_script = "uid://cslfae10nu8b7"
+
+[sub_resource type="Resource" id="Resource_aymn4"]
+script = ExtResource("10_k0o7g")
+tile_map_layer = 1
+spawn_pattern = 4
+restrict_overlaying = false
+chance_to_appear = 0.3
+width = 2
+metadata/_custom_type_script = "uid://cslfae10nu8b7"
+
+[sub_resource type="Resource" id="Resource_tnywj"]
+script = ExtResource("10_k0o7g")
+tile_map_layer = 2
+chance_to_appear = 0.3
+min_units = 2
+delete_under_plate = true
+noise = SubResource("NoiseTexture2D_bupnh")
+noise_threshold = 0.05
+metadata/_custom_type_script = "uid://cslfae10nu8b7"
+
+[node name="Game" type="Node2D" unique_id=49398453]
+physics_interpolation_mode = 2
+
+[node name="LevelGeneratorComponent" type="Node" parent="." unique_id=1323842931 node_paths=PackedStringArray("wall_tile_map", "destructible_wall_tile_map", "tiles_tile_map", "minor_tiles_tile_map")]
+script = ExtResource("1_6cfsj")
+room_count = 5
+wall_tile_map = NodePath("../WallTileMap")
+destructible_wall_tile_map = NodePath("../WallsDestructible")
+tiles_tile_map = NodePath("../Tiles")
+minor_tiles_tile_map = NodePath("../MinorTiles")
+airlock = ExtResource("2_oburk")
+enemy_airlock = ExtResource("3_fcwpu")
+exit_airlock = ExtResource("4_w04mj")
+entry_airlock = ExtResource("5_ehoup")
+generation_units = Array[ExtResource("6_8eyyy")]([SubResource("Resource_2r3hv"), SubResource("Resource_acqqm"), SubResource("Resource_ygd3n")])
+floor_tile_atlas_coords = Vector2i(2, 1)
+tile_generation_units = Array[ExtResource("10_k0o7g")]([SubResource("Resource_0tyrb"), SubResource("Resource_0qr1g"), SubResource("Resource_rqcmx"), SubResource("Resource_bupnh"), SubResource("Resource_aymn4"), SubResource("Resource_tnywj")])
+metadata/_custom_type_script = "uid://bsiofl2b54syo"
+
+[node name="LevelComponent" type="Node" parent="." unique_id=1648950004 node_paths=PackedStringArray("perk_choice_start_sound", "perk_choice_sound", "perk_selected_sound")]
+script = ExtResource("11_8xkxr")
+level_name = "level_name_1_1"
+available_enemies = Array[ExtResource("12_thbn5")]([ExtResource("13_6lttj"), ExtResource("14_qiig4"), ExtResource("15_vee86"), ExtResource("16_664wb")])
+start_budget = 2.0
+available_reward_enemies = Array[ExtResource("12_thbn5")]([ExtResource("13_6lttj")])
+perks = Array[PackedScene]([ExtResource("17_86x3x"), ExtResource("18_fmtik"), ExtResource("19_bgvpo"), ExtResource("20_41q2y"), ExtResource("21_fdhnt"), ExtResource("22_shr2q"), ExtResource("23_anqq0"), ExtResource("24_khasd"), ExtResource("25_e2yyl"), ExtResource("26_pvx7v"), ExtResource("27_aw46t"), ExtResource("28_hu3vy"), ExtResource("29_5d332"), ExtResource("30_we2xu"), ExtResource("31_45y43"), ExtResource("32_yb5y8"), ExtResource("33_5kuv3"), ExtResource("34_7615v")])
+perk_choice_start_sound = NodePath("PerkStart")
+perk_choice_sound = NodePath("PerkChoice")
+perk_selected_sound = NodePath("PerkSelected")
+metadata/_custom_type_script = "uid://bjc8u38pksoym"
+
+[node name="PerkStart" type="AudioStreamPlayer" parent="LevelComponent" unique_id=581089703]
+stream = ExtResource("35_e3cyk")
+
+[node name="PerkChoice" type="AudioStreamPlayer" parent="LevelComponent" unique_id=712145523]
+stream = ExtResource("36_snye1")
+volume_db = -10.0
+pitch_scale = 2.0
+
+[node name="PerkSelected" type="AudioStreamPlayer" parent="LevelComponent" unique_id=1458849207]
+stream = ExtResource("37_jm75q")
+
+[node name="WallTileMap" type="TileMapLayer" parent="." unique_id=525973106]
+z_index = 1
+tile_set = ExtResource("38_bwu1r")
+navigation_enabled = false
+
+[node name="Tiles" type="TileMapLayer" parent="." unique_id=720768513]
+z_index = -1
+tile_set = ExtResource("39_qyexe")
+collision_enabled = false
+
+[node name="MinorTiles" type="TileMapLayer" parent="." unique_id=388512218]
+position = Vector2(0, -1)
+tile_set = ExtResource("40_g3rqu")
+physics_quadrant_size = 64
+
+[node name="WallsDestructible" type="TileMapLayer" parent="." unique_id=517611006]
+tile_set = ExtResource("41_blk5a")
+navigation_enabled = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1053939501]
+environment = ExtResource("46_psi10")
+
+[node name="WorldEnvComponent" type="Node" parent="WorldEnvironment" unique_id=688089276]
+script = ExtResource("47_gg2qg")
+metadata/_custom_type_script = "uid://dptr5blvqsgks"
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=576209262]
+color = Color(0.008202022, 0.008202025, 0.008202025, 1)
+
+[node name="Player" parent="." unique_id=914217487 instance=ExtResource("42_auu7o")]
+position = Vector2(215, 113)
+collision_layer = 786433
+platform_wall_layers = 0
+
+[node name="Space" type="CanvasLayer" parent="Player" unique_id=1299408572]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="Player/Space" unique_id=2116632090]
+light_mask = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Level" type="CanvasLayer" parent="Player" unique_id=205873873]
+
+[node name="LevelName" type="Control" parent="Player/Level" unique_id=1681176035]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 1
+
+[node name="Name" type="RichTextLabel" parent="Player/Level/LevelName" unique_id=707203273]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.055555556
+anchor_top = 0.70100003
+anchor_right = 0.83000004
+anchor_bottom = 0.86728394
+offset_top = -107.24802
+offset_right = -0.16003418
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 1
+theme_override_fonts/normal_font = ExtResource("43_bg8ec")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+vertical_alignment = 1
+
+[node name="TextPrintingAnimationComponent" type="Node" parent="Player/Level/LevelName/Name" unique_id=2044550515]
+script = ExtResource("44_rj424")
+animate_on_ready = false
+metadata/_custom_type_script = "uid://4io3bm7r86h6"
+
+[node name="Stats" type="RichTextLabel" parent="Player/Level/LevelName" unique_id=531549813]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.056
+anchor_top = 0.23500001
+anchor_right = 0.83000004
+anchor_bottom = 0.65900004
+offset_left = -0.51200104
+offset_top = -0.28001404
+offset_right = -0.16003418
+offset_bottom = 134.96799
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 1
+theme_override_constants/line_separation = 5
+theme_override_fonts/normal_font = ExtResource("43_bg8ec")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+vertical_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="TextPrintingAnimationComponent" type="Node" parent="Player/Level/LevelName/Stats" unique_id=1031367860]
+script = ExtResource("44_rj424")
+animate_on_ready = false
+metadata/_custom_type_script = "uid://4io3bm7r86h6"
+
+[node name="Blackscreen" type="CanvasLayer" parent="Player" unique_id=190860615]
+
+[node name="Blackscreen" type="ColorRect" parent="Player/Blackscreen" unique_id=1307156167]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 0)
+
+[node name="DEBUG" type="CanvasLayer" parent="Player" unique_id=482444633]
+
+[node name="Control" type="Control" parent="Player/DEBUG" unique_id=909187986]
+layout_mode = 3
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1152.0
+offset_right = -1112.0
+offset_bottom = -608.0
+grow_horizontal = 0
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Player/DEBUG/Control" unique_id=1940845753]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 24.400002
+anchor_top = 0.025
+anchor_right = 25.400002
+anchor_bottom = 1.25
+offset_left = -6.1035156e-05
+offset_right = -6.1035156e-05
+text = "69
+"
+script = ExtResource("45_dk0ep")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="Player/DEBUG/Control" unique_id=1221199425]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 25.950003
+anchor_top = 0.025
+anchor_right = 28.175003
+anchor_bottom = 1.9
+offset_left = -0.00012207031
+offset_right = -0.00012207031
+text = "DEMO 0.1.3"
+metadata/_edit_use_anchors_ = true

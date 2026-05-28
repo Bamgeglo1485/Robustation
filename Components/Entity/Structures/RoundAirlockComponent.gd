@@ -8,15 +8,26 @@ class_name RoundAirlockComponent extends Component
 @export var light: PointLight2D
 @onready var airlock: AirlockComponent = parent.get_node_or_null("AirlockComponent")
 @onready var level_component: LevelComponent = scene.get_node_or_null("LevelComponent")
-@onready var player: CharacterBody2D = scene.get_node_or_null("Player")
+@onready var player: CharacterBody2D = GlobalVariables.player
+@onready var station_run_component: StationRunComponent = tree.get_root().get_node_or_null("StationRunComponent")
+@onready var black_screen: ColorRect = player.get_node_or_null("Blackscreen").get_node_or_null("Blackscreen")
 @onready var stats_text_printing: TextPrintingAnimationComponent = player.get_node_or_null("Level").get_node_or_null("LevelName").get_node_or_null("Stats").get_node_or_null("TextPrintingAnimationComponent")
 var camera: Camera2D
 var prev_camera: Camera2D
 var roundended: bool = false
 var room: int
+var ended: bool = false
+
+func _input(_event: InputEvent) -> void:
+	if !ended:
+		return
+	if Input.is_action_just_pressed("movement"):
+		var tween = create_tween()
+		tween.tween_property(black_screen, "Color", Color(), 0.7)
+		await tween.finished
+		EventBusManager.level_ended.emit(station_run_component.current_level)
 
 func _ready() -> void:
-	
 	camera = Camera2D.new()
 	add_child(camera)
 	
@@ -94,8 +105,8 @@ func _body_enteted(body: Node2D) -> void:
 	tween.tween_property(body, "global_position", parent.global_position + exit_position * 10, 1.0)
 	
 	await tween.finished
-	
 	airlock.bolt()
+	ended = true
 
 func _stats() -> void:
 	if stats_text_printing:

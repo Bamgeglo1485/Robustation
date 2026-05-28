@@ -3,31 +3,35 @@
 [ext_resource type="Texture2D" uid="uid://bc4akrjd4yio1" path="res://Textures/Effects/Particles/blood.png" id="1_nr0qg"]
 [ext_resource type="Script" uid="uid://ckngjbi4531ra" path="res://Scripts/Effects/BloodSystem.gd" id="2_nr0qg"]
 
-[sub_resource type="Curve" id="Curve_gec8y"]
-_limits = [0.0, 1.6853933, 0.0, 1.0]
-_data = [Vector2(0, 1.6853933), 0.0, 0.0, 0, 0, Vector2(0.77205884, 0), 0.0, 0.0, 0, 0]
-point_count = 2
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nr0qg"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
-[sub_resource type="CurveTexture" id="CurveTexture_6ugap"]
-curve = SubResource("Curve_gec8y")
+[sub_resource type="Gradient" id="Gradient_70dfb"]
+colors = PackedColorArray(0.46229059, 0.46229064, 0.4622904, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vd2x5"]
+gradient = SubResource("Gradient_70dfb")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_70dfb"]
 particle_flag_disable_z = true
-spread = 180.0
-initial_velocity_min = 76.95
-initial_velocity_max = 121.079994
+spread = 60.0
+initial_velocity_min = 46.02
+initial_velocity_max = 138.26
 gravity = Vector3(0, 0, 0)
 scale_min = 0.5
-scale_over_velocity_max = 230.76999
-scale_over_velocity_curve = SubResource("CurveTexture_6ugap")
 color = Color(0.38039216, 0, 0.12941177, 1)
+color_initial_ramp = SubResource("GradientTexture1D_vd2x5")
+anim_offset_max = 1.0
 
 [node name="Blood" type="GPUParticles2D" unique_id=1787277679 groups=["Blood"]]
 visible = false
 z_index = -1
 texture_filter = 1
+material = SubResource("CanvasItemMaterial_nr0qg")
 emitting = false
-amount = 16
 texture = ExtResource("1_nr0qg")
 lifetime = 0.6
 one_shot = true

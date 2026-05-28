@@ -2,6 +2,7 @@ class_name DashAbilityComponent extends Component
 
 @export var trail_effect: bool = true
 @export var dash_sound: AudioStreamPlayer2D
+@export var dash_sound_gib: AudioStreamPlayer2D
 @export var overdose_refuel_sound: AudioStreamPlayer2D
 @export var overdose_refuel_damage: int = 5
 @export var overdose_refuel_damage_time: int = 8
@@ -35,15 +36,16 @@ var current_stamina_progress: float = 0.0
 
 func _ready() -> void:
 	recovery_timer = Timer.new()
-	add_child(recovery_timer)
 	recovery_timer.wait_time = dash_stamina_recovery_delay
 	recovery_timer.one_shot = true
-	recovery_timer.start()
+	recovery_timer.autostart = true
 	recovery_timer.timeout.connect(_stamina_recovery)
+	add_child(recovery_timer)
 	
 	_update_stamina_bar()
 	
 	EventBusManager.projectile_shoot.connect(_on_shoot)
+	EventBusManager.body_to_body_collision.connect(_on_collide)
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("dash"):
@@ -126,7 +128,7 @@ func dash(direction) -> void:
 		dash_sound.play()
 	
 	mob_mover_component.try_stand_up()
-	mob_mover_component.throw(direction, dash_speed, null, 1460, false, true, false, 10)
+	mob_mover_component.throw(direction, dash_speed, null, 1460, false, true, true, 10)
 
 func _stamina_recovery() -> void:
 	if dash_stamina < max_dash_stamina:
@@ -179,3 +181,9 @@ func _on_shoot(emitter: Node2D, _weapon: Weapon, direction: Vector2, projectile:
 	if !projectile.is_node_ready():
 		await projectile.ready
 	parry_weapon.parry_projectile(projectile, projectile_component, direction)
+
+func _on_collide(emitter: Node2D, _body: Node2D, _damage: float, body_health: HealthComponent) -> void:
+	if active and emitter == parent:
+		body_health.health -= 70
+		if body_health.health <= 0 and dash_sound_gib:
+			dash_sound_gib.play()

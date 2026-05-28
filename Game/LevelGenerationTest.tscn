@@ -157,6 +157,7 @@ noise_threshold = 0.05
 metadata/_custom_type_script = "uid://cslfae10nu8b7"
 
 [node name="Game" type="Node2D" unique_id=49398453]
+physics_interpolation_mode = 2
 
 [node name="LevelGeneratorComponent" type="Node" parent="." unique_id=1323842931 node_paths=PackedStringArray("wall_tile_map", "destructible_wall_tile_map", "tiles_tile_map", "minor_tiles_tile_map")]
 script = ExtResource("3_e1wfd")

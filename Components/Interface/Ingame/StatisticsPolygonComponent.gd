@@ -16,6 +16,8 @@ func _ready() -> void:
 		if progress_bar:
 			progress_bar.value_changed.connect(_on_value_changed)
 	
+	if get_tree() == null:
+		return
 	await get_tree().process_frame
 	await get_tree().process_frame
 	queue_redraw()

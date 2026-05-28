@@ -51,3 +51,7 @@ signal room_start(room: int)
 signal room_end(room: int)
 signal force_bolt(room: int)
 signal force_unbolt(room: int)
+
+signal level_ended(level: int)
+
+signal scene_changed(new_scene: Node2D)

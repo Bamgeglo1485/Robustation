@@ -45,10 +45,10 @@ var wave: int
 var max_wave: int
 var kills: int
 
-@onready var level_generator_component: LevelGeneratorComponent = scene.get_node_or_null("LevelGeneratorComponent")
+@onready var level_generator_component: LevelGeneratorComponent = get_parent().get_node_or_null("LevelGeneratorComponent")
 const MAX_ATTEMPTS = 100
 
-@onready var player: PhysicsBody2D = scene.get_node_or_null("Player")
+@onready var player: PhysicsBody2D = GlobalVariables.player
 @onready var level_name_label: RichTextLabel = player.get_node_or_null("Level").get_node_or_null("LevelName").get_node_or_null("Name")
 @onready var weapon_user_component: WeaponUserComponent = player.get_node_or_null("WeaponUserComponent")
 @onready var player_perk_ui: Control = player.get_node("GUI").get_node("PerkChoose").get_node("PerkChoose")
@@ -105,8 +105,8 @@ func _on_end(_room: int) -> void:
 
 func _level_name_animation() -> void:
 	var text_printing: TextPrintingAnimationComponent = level_name_label.get_node_or_null("TextPrintingAnimationComponent")
-	text_printing.animate(level_name, 1.5, true, false)
-	await tree.create_timer(3).timeout
+	text_printing.animate(tr(level_name), 1.5, true, false)
+	await tree.create_timer(6).timeout
 	var tween: Tween = create_tween()
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_IN_OUT)
@@ -197,7 +197,7 @@ func _choose_enemies(enemies: Array[Enemy]) -> Array[PackedScene]:
 		remaining_budget -= enemy.cost * count_to_spawn
 	
 	if choosed_enemies.is_empty():
-		choosed_enemies = Array(enemies.pick_random())
+		choosed_enemies.append(enemies.pick_random().scene)
 	
 	return choosed_enemies
 

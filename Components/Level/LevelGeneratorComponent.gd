@@ -33,7 +33,7 @@ class_name LevelGeneratorComponent extends Component
 
 @export var tile_generation_units: Array[TileGenerationUnit]
 
-@onready var level_component: LevelComponent = scene.get_node_or_null("LevelComponent")
+@onready var level_component: LevelComponent = get_parent().get_node_or_null("LevelComponent")
 
 @export_category("Operational")
 var positions: Array[Vector2i]

@@ -16,7 +16,18 @@
 [ext_resource type="PackedScene" uid="uid://40fiorxrk4xk" path="res://Scenes/Effects/Particles/BloodSpurts.tscn" id="12_uu161"]
 [ext_resource type="PackedScene" uid="uid://deq4t84d81wnb" path="res://Scenes/Effects/Particles/Dodge.tscn" id="14_eb50u"]
 [ext_resource type="Texture2D" uid="uid://bx3kpq3irdo3m" path="res://Textures/Effects/Particles/gib.png" id="15_s8gfb"]
-[ext_resource type="Script" uid="uid://xv1vpacqdtlr" path="res://Components/Entity/VisibleOnScreenVisibleComponent.gd" id="17_67tnm"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vd2x5"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_70dfb"]
+colors = PackedColorArray(0.46229059, 0.46229064, 0.4622904, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vd2x5"]
+gradient = SubResource("Gradient_70dfb")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_70dfb"]
 particle_flag_disable_z = true
@@ -25,6 +36,8 @@ initial_velocity_min = 2.0
 initial_velocity_max = 100.0
 gravity = Vector3(0, 0, 0)
 color = Color(0.38039216, 0, 0.12941177, 1)
+color_initial_ramp = SubResource("GradientTexture1D_vd2x5")
+anim_offset_max = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uu161"]
 
@@ -49,9 +62,9 @@ color = Color(0.38039216, 0, 0.12941177, 1)
 [node name="Blood" type="GPUParticles2D" unique_id=980653200]
 z_index = -1
 texture_filter = 1
+material = SubResource("CanvasItemMaterial_vd2x5")
 amount = 4
 texture = ExtResource("1_kgwu6")
-lifetime = 0.3
 explosiveness = 1.0
 use_fixed_seed = true
 seed = 4246352849
@@ -367,13 +380,5 @@ texture = ExtResource("15_s8gfb")
 stream = ExtResource("11_2ypa8")
 volume_db = -20.0
 autoplay = true
-
-[node name="VisibleOnScreenVisibleComponent" type="Node" parent="." unique_id=1394106347 node_paths=PackedStringArray("visible_on_screen")]
-script = ExtResource("17_67tnm")
-visible_on_screen = NodePath("../VisibleOnScreenNotifier2D")
-metadata/_custom_type_script = "uid://xv1vpacqdtlr"
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=172313034]
-rect = Rect2(-40, -40, 80, 80)
 
 [connection signal="timeout" from="PauseTimer" to="." method="_on_pause_timer_timeout"]

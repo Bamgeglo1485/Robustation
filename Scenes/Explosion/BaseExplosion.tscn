@@ -13,6 +13,12 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_a5ua4"]
 radius = 132.30646
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vd2x5"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nkr7b"]
 lifetime_randomness = 1.0
 particle_flag_disable_z = true
@@ -57,6 +63,7 @@ shape = SubResource("CircleShape2D_a5ua4")
 
 [node name="GPUParticles2D3" parent="." unique_id=2131820347 instance=ExtResource("3_a5ua4")]
 light_mask = 0
+material = SubResource("CanvasItemMaterial_vd2x5")
 amount = 20
 lifetime = 125.0
 use_fixed_seed = false

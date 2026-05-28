@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://14xgqyxv1nfp" path="res://Scenes/Weapons/Weapons/PlayerWeaponProtokineticAccelerator.tscn" id="6_7afoe"]
 [ext_resource type="PackedScene" uid="uid://irh3fi1fwrs0" path="res://Scenes/Weapons/Weapons/PlayerWeaponLaserGun.tscn" id="7_7afoe"]
 [ext_resource type="Texture2D" uid="uid://1yvrhqvfqqus" path="res://Textures/Weapons/Toolbox/toolbox_inhand.png" id="8_42pyi"]
+[ext_resource type="AudioStream" uid="uid://ceo205bi48psk" path="res://Audio/Effects/dash_gib.ogg" id="11_0tl26"]
 [ext_resource type="Texture2D" uid="uid://dverpu5mv40au" path="res://Textures/Weapons/Toolbox/toolbox.png" id="13_4xc88"]
 [ext_resource type="Texture2D" uid="uid://cnd26u5psr454" path="res://Textures/Weapons/Hook/grappling_gun.png" id="24_483ma"]
 [ext_resource type="Script" uid="uid://cmonoqon5s4vx" path="res://Components/Abilities/NonBinary/DashAbilityComponent.gd" id="25_46s63"]
@@ -103,24 +104,30 @@ stream = ExtResource("5_42pyi")
 stream = ExtResource("25_hf65o")
 max_polyphony = 3
 
-[node name="OverdoseRefuel" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="3" unique_id=1750222133]
+[node name="DashGibSound" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="2" unique_id=239768161]
+position = Vector2(0, -1)
+stream = ExtResource("11_0tl26")
+max_polyphony = 3
+
+[node name="OverdoseRefuel" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="4" unique_id=1750222133]
 stream = ExtResource("26_27vau")
 max_polyphony = 3
 
-[node name="Overdose" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="11" unique_id=1431786301]
+[node name="Overdose" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="12" unique_id=1431786301]
 stream = ExtResource("40_sp3tm")
 max_polyphony = 3
 bus = &"OverdoseIgnore"
 
-[node name="Dodge" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="12" unique_id=1666659874]
+[node name="Dodge" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="13" unique_id=1666659874]
 stream = ExtResource("52_5key3")
 
 [node name="LightOccluder2D" parent="." index="15" unique_id=364816313]
 sdf_collision = true
 
-[node name="DashAbilityComponent" type="Node" parent="." index="16" unique_id=991976233 node_paths=PackedStringArray("dash_sound", "overdose_refuel_sound", "ability_icon")]
+[node name="DashAbilityComponent" type="Node" parent="." index="16" unique_id=991976233 node_paths=PackedStringArray("dash_sound", "dash_sound_gib", "overdose_refuel_sound", "ability_icon")]
 script = ExtResource("25_46s63")
 dash_sound = NodePath("../Sounds/DashSound")
+dash_sound_gib = NodePath("../Sounds/DashGibSound")
 overdose_refuel_sound = NodePath("../Sounds/OverdoseRefuel")
 ability_icon = NodePath("../GUI/Inventory/MovementAbility/MovementAbilityIcon")
 trail_colors = Array[Color]([Color(0.9866392, 0, 0.3066764, 1), Color(0.8036335, 0.0022644557, 0.98781973, 1)])

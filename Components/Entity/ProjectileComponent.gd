@@ -221,7 +221,15 @@ func _on_body_entered(body: Node2D) -> void:
 			body_faction):
 			if shooter_faction.faction == body_faction.faction:
 				return
-	
+	var weapon_user: WeaponUserComponent = body.get_node_or_null("WeaponUserComponent")
+	if weapon_user and weapon_user.parrying:
+		if weapon_user.parry_target:
+			weapon_user.parry_weapon.parry_projectile(parent, self, (weapon_user.parry_target - parent.global_position))
+		elif shooter:
+			weapon_user.parry_weapon.parry_projectile(parent, self, (shooter.global_position - parent.global_position))
+		else:
+			weapon_user.parry_weapon.parry_projectile(parent, self, -direction)
+		return
 	if body is TileMapLayer:
 		var tile_pos = body.local_to_map(body.to_local(global_position + Vector2.from_angle(direction) * 16))
 		var tile_data = body.get_cell_tile_data(tile_pos)

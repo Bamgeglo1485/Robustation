@@ -3,7 +3,7 @@ class_name StaminaComponent extends Component
 @export var max_stamina: float = 100
 @export var stun_time: float = 4
 @export var stamina_recover: float = 20
-@export var stun_effect: PackedScene = preload("res://Scenes/Effects/Particles/Stun.tscn")
+@export var stun_effect: PackedScene = preload("res://Scenes/Effects/Particles/Symbols/Stun.tscn")
 @export var after_damage_recover_cooldown_delay: float = 3
 
 @onready var base_max_stamina: float = max_stamina

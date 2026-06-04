@@ -69,6 +69,8 @@ func _check_overlapping_bodies() -> void:
 		return
 	
 	var bodies: Array[Node2D] = area2d.get_overlapping_bodies()
+	for area in area2d.get_overlapping_areas():
+		bodies.append(area.get_parent())
 	for body in bodies:
 		if body is Area2D:
 			body = body.get_parent()

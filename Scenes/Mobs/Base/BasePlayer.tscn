@@ -5,11 +5,11 @@
 [ext_resource type="Script" uid="uid://clpuxn7ckkj6f" path="res://Components/Mobs/InputMoverComponent.gd" id="4_3n0k4"]
 [ext_resource type="Script" uid="uid://gek7ma2qpdp6" path="res://Components/Player/PlayerWeaponUserComponent.gd" id="5_3n0k4"]
 [ext_resource type="Script" uid="uid://cmmp453ap55cp" path="res://Components/Player/PlayerCamera.gd" id="5_korw6"]
-[ext_resource type="PackedScene" uid="uid://deq4t84d81wnb" path="res://Scenes/Effects/Particles/Dodge.tscn" id="5_oayod"]
+[ext_resource type="PackedScene" uid="uid://deq4t84d81wnb" path="res://Scenes/Effects/Particles/Symbols/Dodge.tscn" id="5_oayod"]
 [ext_resource type="Texture2D" uid="uid://b0b3vncwssou1" path="res://Textures/Light/light_cone.png" id="6_2i8o7"]
 [ext_resource type="Script" uid="uid://djmi5xfppmrii" path="res://Components/Visual/HealthOverlayComponent.gd" id="6_korw6"]
 [ext_resource type="Material" uid="uid://bx7piwibywxgi" path="res://Resources/Shaders/DamageScreen.tres" id="7_5768p"]
-[ext_resource type="PackedScene" uid="uid://dbvva6n0vkfu2" path="res://Scenes/Effects/Particles/PlayerGib.tscn" id="7_nnp87"]
+[ext_resource type="PackedScene" uid="uid://dbvva6n0vkfu2" path="res://Scenes/Effects/Particles/Gib/PlayerGib.tscn" id="7_nnp87"]
 [ext_resource type="AudioStream" uid="uid://drhi1s5c4ustd" path="res://Audio/Effects/perk_collect.ogg" id="8_4awd5"]
 [ext_resource type="Script" uid="uid://bjb1tak0ajoof" path="res://Components/Player/BattleTendencyComponent.gd" id="8_ljr5e"]
 [ext_resource type="Material" uid="uid://dctvv4tidab2r" path="res://Resources/Shaders/BattleTendency.tres" id="9_d6ik8"]
@@ -63,7 +63,7 @@
 [ext_resource type="Script" uid="uid://bbn66jje1cqhs" path="res://Scripts/Spectrum.gd" id="42_omg6r"]
 [ext_resource type="Material" uid="uid://cqeu03o2ril5g" path="res://Resources/Shaders/Progress.tres" id="44_aq85w"]
 [ext_resource type="Script" uid="uid://bh67jcffdkivf" path="res://Components/Interface/StaminaIndicatorComponent.gd" id="44_svu4j"]
-[ext_resource type="PackedScene" uid="uid://bjjdc8deaiqli" path="res://Scenes/Effects/Particles/Robust.tscn" id="45_aq85w"]
+[ext_resource type="PackedScene" uid="uid://bjjdc8deaiqli" path="res://Scenes/Effects/Particles/Symbols/Robust.tscn" id="45_aq85w"]
 [ext_resource type="Script" uid="uid://b1stcr2j1euvf" path="res://Components/Mobs/HealthBarComponent.gd" id="46_d1k41"]
 [ext_resource type="FontFile" uid="uid://dskv5n6tofrla" path="res://Resources/Text/Fonts/LCD 40x2 Display/LCD40x2Display-Regular.otf" id="47_5xiwd"]
 [ext_resource type="Texture2D" uid="uid://crvhr1fwjc3wu" path="res://Textures/Interface/Ingame/Stamina/stamina_1.png" id="50_2d3wq"]
@@ -137,6 +137,7 @@ shader_parameter/vignette_intensity = 0.5
 shader_parameter/vignette_opacity = 1.0
 shader_parameter/edge_darken = 0.5170000245575
 shader_parameter/edge_softness = 0.5
+shader_parameter/global_alpha = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ak33s"]
 atlas = ExtResource("35_hp12l")
@@ -197,6 +198,7 @@ shader_parameter/vignette_intensity = 0.3
 shader_parameter/vignette_opacity = 0.5
 shader_parameter/edge_darken = 0.8
 shader_parameter/edge_softness = 0.1
+shader_parameter/global_alpha = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wm8ym"]
 shader = ExtResource("52_p5itk")
@@ -264,6 +266,7 @@ texture_scale = 1.5
 
 [node name="HealthComponent" parent="." index="6" unique_id=1758373275]
 imaginary_death = true
+invincibility_block_effect = true
 invinciblitiy_attack_effect = ExtResource("5_oayod")
 gib_effect_scene = ExtResource("7_nnp87")
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c0eulucj1dtco" path="res://Scenes/Mobs/Base/BaseEnemy.tscn" id="1_lj5p8"]
 [ext_resource type="Texture2D" uid="uid://dol7i2rajxbvh" path="res://Textures/Mobs/Mobs/tomatokiller.png" id="2_lj5p8"]
-[ext_resource type="PackedScene" uid="uid://n8vfwr1jp2yj" path="res://Scenes/Effects/Particles/TomatoGib.tscn" id="3_426ok"]
+[ext_resource type="PackedScene" uid="uid://n8vfwr1jp2yj" path="res://Scenes/Effects/Particles/Gib/TomatoGib.tscn" id="3_426ok"]
 [ext_resource type="AudioStream" uid="uid://5e1gmo3icdwn" path="res://Resources/Audio/FootstepSlimeRandom.tres" id="3_akqqm"]
 [ext_resource type="Script" uid="uid://hv0g6akh0ftn" path="res://Components/Mobs/RandomizeMobMoverComponent.gd" id="23_rwpxb"]
 [ext_resource type="Script" uid="uid://6b7bcparwq17" path="res://Components/Weapons/MeleeWeaponComponent.gd" id="25_nmuin"]

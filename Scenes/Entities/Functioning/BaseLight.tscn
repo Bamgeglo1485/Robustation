@@ -21,7 +21,6 @@ collision_mask = 2
 [node name="HealthComponent" type="Node" parent="." unique_id=899799290]
 script = ExtResource("6_sjiyp")
 do_not_delete_after_gib = true
-max_health = 30.0
 health = 30.0
 metadata/_custom_type_script = "uid://df356su15y7ow"
 
@@ -66,15 +65,6 @@ visible = false
 modulate = Color(3.2944162, 3.2944162, 3.2944162, 1)
 texture = ExtResource("3_1hip3")
 
-[node name="VisibleOnScreenVisibleComponent" type="Node" parent="." unique_id=1040927209 node_paths=PackedStringArray("visible_on_screen", "sprite")]
-script = ExtResource("10_x0vnx")
-visible_on_screen = NodePath("../VisibleOnScreenNotifier2D")
-sprite = NodePath("../Sprites")
-metadata/_custom_type_script = "uid://xv1vpacqdtlr"
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1401324548]
-rect = Rect2(-40, -40, 80, 80)
-
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1272221041]
 visible = false
 enabled = false
@@ -82,7 +72,7 @@ color = Color(0.704205, 0.6046489, 0.2624418, 1)
 energy = 0.6
 range_item_cull_mask = 3
 shadow_enabled = true
-shadow_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.22900002)
 shadow_item_cull_mask = 3
 texture = ExtResource("4_jxa4f")
 texture_scale = 4.0

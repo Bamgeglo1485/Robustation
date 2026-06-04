@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://cxxmy5bq4pjdx"]
+
+[ext_resource type="Material" uid="uid://cyp3pqnhbfrj3" path="res://Resources/Shaders/Jiggle.tres" id="1_11ca6"]
+[ext_resource type="Texture2D" uid="uid://bli7jsrusea5n" path="res://Textures/Effects/Particles/Symbols/fall.png" id="2_11ca6"]
+[ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts/Effects/TimedDelete.gd" id="3_d3snx"]
+
+[sub_resource type="Gradient" id="Gradient_lvx2o"]
+offsets = PackedFloat32Array(0.009090909, 0.5090909, 0.9909091)
+colors = PackedColorArray(1, 1, 1, 1, 0.55454546, 0.55454546, 0.55454546, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4ifew"]
+gradient = SubResource("Gradient_lvx2o")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mbpk4"]
+lifetime_randomness = 0.3
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 80.46
+initial_velocity_max = 137.93
+gravity = Vector3(0, 0, 0)
+scale_max = 2.0
+color = Color(1, 1, 1, 0.6901961)
+color_ramp = SubResource("GradientTexture1D_4ifew")
+
+[node name="GPUParticles2D" type="GPUParticles2D" unique_id=614702593]
+modulate = Color(2.4325802, 2.4325802, 2.4325802, 1)
+texture_filter = 1
+material = ExtResource("1_11ca6")
+amount = 1
+texture = ExtResource("2_11ca6")
+lifetime = 0.41
+preprocess = 0.5
+speed_scale = 0.7
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_mbpk4")
+script = ExtResource("3_d3snx")

@@ -54,6 +54,7 @@ Enemies=""
 Blood=""
 PhysicalParticle=""
 Mob=""
+EnemySpawner=""
 
 [input]
 
@@ -187,6 +188,7 @@ locale/translation_remaps={
 }
 locale/translations=PackedStringArray("res://Localization/level_localizations.en.translation", "res://Localization/level_localizations.ru.translation", "res://Localization/localization.ru.translation", "res://Localization/perk_localizations.en.translation", "res://Localization/perk_localizations.ru.translation")
 locale/translation_add_builtin_strings_to_pot=true
+locale/test="en"
 
 [layer_names]
 
@@ -205,12 +207,7 @@ common/physics_interpolation=true
 
 occlusion_culling/bvh_build_quality=1
 textures/canvas_textures/default_texture_filter=0
-lights_and_shadows/directional_shadow/soft_shadow_filter_quality=0
-lights_and_shadows/positional_shadow/soft_shadow_filter_quality=0
-2d/shadow_atlas/size=1024
 global_illumination/gi/use_half_resolution=true
 textures/default_filters/anisotropic_filtering_level=0
 viewport/hdr_2d=true
 occlusion_culling/use_occlusion_culling=true
-lights_and_shadows/positional_shadow/atlas_size=1024
-lights_and_shadows/positional_shadow/atlas_size.mobile=512

@@ -5,13 +5,14 @@
 [ext_resource type="Texture2D" uid="uid://1yvrhqvfqqus" path="res://Textures/Weapons/Toolbox/toolbox_inhand.png" id="3_p66nc"]
 [ext_resource type="Texture2D" uid="uid://dverpu5mv40au" path="res://Textures/Weapons/Toolbox/toolbox.png" id="4_3w24v"]
 [ext_resource type="AudioStream" uid="uid://c14ckhtbrb550" path="res://Audio/Weapon/parry.ogg" id="5_lfoe0"]
+[ext_resource type="AudioStream" uid="uid://bg0r8tjnlek1l" path="res://Audio/Weapon/BatParry.ogg" id="5_s134r"]
 [ext_resource type="AudioStream" uid="uid://eogckfs15aph" path="res://Audio/Weapon/miss.ogg" id="6_ijqgb"]
 [ext_resource type="AudioStream" uid="uid://blc0o0577akc7" path="res://Audio/Weapon/Hit/smash.ogg" id="7_bwbu3"]
 [ext_resource type="AudioStream" uid="uid://c7qffjnnscmnt" path="res://Audio/Weapon/soup.ogg" id="8_glpbo"]
 [ext_resource type="AudioStream" uid="uid://d2kkvggv8yiry" path="res://Audio/Effects/shine.ogg" id="9_rrile"]
 [ext_resource type="Script" uid="uid://enoou4fskgjn" path="res://Components/Weapons/ChargingMeleeWeaponComponent.gd" id="10_6jkit"]
 [ext_resource type="Texture2D" uid="uid://b826fwd46tvih" path="res://Textures/Weapons/Toolbox/tank.png" id="11_k88bl"]
-[ext_resource type="AudioStream" uid="uid://4e6wsvcw0jrt" path="res://Audio/Ambience/hiss.ogg" id="12_xox1u"]
+[ext_resource type="AudioStream" uid="uid://4e6wsvcw0jrt" path="res://Audio/Effects/hiss.ogg" id="12_xox1u"]
 [ext_resource type="AudioStream" uid="uid://b3uvy6ds1t6fu" path="res://Audio/Weapon/Hit/heavy_punch.ogg" id="13_xc5wg"]
 [ext_resource type="AudioStream" uid="uid://p0nau7qxcixe" path="res://Audio/Effects/spinning.ogg" id="14_koaqh"]
 [ext_resource type="AudioStream" uid="uid://5ogeuyio4huy" path="res://Audio/Effects/spray.ogg" id="15_bvrp0"]
@@ -94,7 +95,7 @@ weapon_desc = "1. Toolbox
 metadata/_custom_type_script = "uid://6b7bcparwq17"
 
 [node name="ParrySound" type="AudioStreamPlayer2D" parent="." unique_id=1803879457]
-stream = ExtResource("5_lfoe0")
+stream = ExtResource("5_s134r")
 
 [node name="MeleeMissSound" type="AudioStreamPlayer2D" parent="." unique_id=1234154462]
 stream = ExtResource("6_ijqgb")

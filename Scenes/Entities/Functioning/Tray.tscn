@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cv1hs1vd45kao" path="res://Scenes/Mobs/Enemies/TomatoKiller.tscn" id="5_t131l"]
 [ext_resource type="Texture2D" uid="uid://h3pmk4gmya75" path="res://Textures/Entities/Tray/hydrotray.png" id="6_s2fxt"]
 [ext_resource type="Script" uid="uid://df356su15y7ow" path="res://Components/Entity/HealthComponent.gd" id="7_ejp66"]
-[ext_resource type="PackedScene" uid="uid://emyro4v6t66y" path="res://Scenes/Effects/Particles/TrayGib.tscn" id="8_ejp66"]
+[ext_resource type="PackedScene" uid="uid://emyro4v6t66y" path="res://Scenes/Effects/Particles/Gib/TrayGib.tscn" id="8_ejp66"]
 [ext_resource type="Script" uid="uid://b2j14u62ikqnw" path="res://Components/Mobs/FactionComponent.gd" id="9_51if3"]
 [ext_resource type="Script" uid="uid://b770h0bntm0u4" path="res://Components/Entity/AnimationComponent.gd" id="10_t131l"]
 

@@ -5,7 +5,7 @@
 [ext_resource type="Shader" uid="uid://3piuftd8ukss" path="res://Resources/Shaders/CollectableShining.gdshader" id="3_20obr"]
 [ext_resource type="Script" uid="uid://6b7bcparwq17" path="res://Components/Weapons/MeleeWeaponComponent.gd" id="3_tryy6"]
 [ext_resource type="Texture2D" uid="uid://fiix6iyke3n3" path="res://Textures/Weapons/Spear/spear_inhand.png" id="4_aeccw"]
-[ext_resource type="PackedScene" uid="uid://deq4t84d81wnb" path="res://Scenes/Effects/Particles/Dodge.tscn" id="4_mhxqn"]
+[ext_resource type="PackedScene" uid="uid://deq4t84d81wnb" path="res://Scenes/Effects/Particles/Symbols/Dodge.tscn" id="4_mhxqn"]
 [ext_resource type="Texture2D" uid="uid://c2wadc7c7e3v3" path="res://Textures/Weapons/Spear/spear.png" id="5_1wq5k"]
 [ext_resource type="AudioStream" uid="uid://cg0leh0na5lvv" path="res://Resources/Audio/BulletHitRandom.tres" id="6_yuitr"]
 [ext_resource type="AudioStream" uid="uid://eogckfs15aph" path="res://Audio/Weapon/miss.ogg" id="7_fe6br"]
@@ -22,7 +22,6 @@
 [ext_resource type="Texture2D" uid="uid://dfrqsbt71ss31" path="res://Textures/Weapons/Bow/bow_inhands.png" id="16_mhxqn"]
 [ext_resource type="AudioStream" uid="uid://bxovm2xahbdet" path="res://Resources/Audio/BulletMissRandom.tres" id="17_nh2yj"]
 [ext_resource type="AudioStream" uid="uid://ii51ruio4r4v" path="res://Audio/Weapon/bow_pull.ogg" id="18_hwx0f"]
-[ext_resource type="AudioStream" uid="uid://dgpvog22fnchp" path="res://Audio/Barks/GreytideBark.ogg" id="22_mlgtv"]
 [ext_resource type="Script" uid="uid://dua6hp8ir5tiu" path="res://Components/Mobs/AI/Actions/AttackTargetAction.gd" id="23_7am8w"]
 [ext_resource type="Script" uid="uid://bankaictwkjye" path="res://Components/Mobs/AI/Actions/SetEnemyToBlackboardAction.gd" id="25_mjvbd"]
 [ext_resource type="Script" uid="uid://bpstodpkpmrij" path="res://Components/Mobs/AI/Actions/SetInvincibleAction.gd" id="26_y3v4h"]
@@ -72,12 +71,6 @@ shader_parameter/Phase_Offset = 0.0
 shader_parameter/Wiggle_Angle = false
 shader_parameter/Wiggle_Amount_deg = 15.0
 shader_parameter/Shine_Pause = 0.0
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mlgtv"]
-random_pitch = 1.2599211
-random_volume_offset_db = 2.0
-streams_count = 1
-stream_0/stream = ExtResource("22_mlgtv")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fb4jx"]
 radius = 40.0
@@ -229,25 +222,19 @@ stream = ExtResource("9_y3v4h")
 volume_db = 1.0
 max_distance = 300.0
 
-[node name="Bark" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="4" unique_id=1571425271]
-stream = SubResource("AudioStreamRandomizer_mlgtv")
-volume_db = 5.0
-max_distance = 600.0
-max_polyphony = 20
-
-[node name="ParrySound" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="5" unique_id=1896571880]
+[node name="ParrySound" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="4" unique_id=1896571880]
 stream = ExtResource("10_jkj8r")
 max_distance = 600.0
 
-[node name="MeleeMissSound" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="6" unique_id=1864746046]
+[node name="MeleeMissSound" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="5" unique_id=1864746046]
 stream = ExtResource("7_fe6br")
 max_distance = 600.0
 
-[node name="MeleeHitSound" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="7" unique_id=974708639]
+[node name="MeleeHitSound" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="6" unique_id=974708639]
 stream = ExtResource("11_k2qsy")
 max_distance = 900.0
 
-[node name="SwingSound" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="8" unique_id=845327928]
+[node name="SwingSound" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="7" unique_id=845327928]
 stream = ExtResource("13_jkj8r")
 volume_db = 9.0
 max_distance = 600.0
@@ -258,7 +245,7 @@ avoidance_enabled = false
 radius = 64.0
 
 [node name="BeehaveTree" parent="." index="16" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@39514")
+blackboard = NodePath("@Node@86620")
 
 [node name="MoveToPlayer" type="Node" parent="BeehaveTree" index="0" unique_id=478688837]
 script = ExtResource("33_8bpma")

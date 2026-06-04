@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c0eulucj1dtco" path="res://Scenes/Mobs/Base/BaseEnemy.tscn" id="1_5htym"]
 [ext_resource type="Texture2D" uid="uid://cybi4nve335q" path="res://Textures/Mobs/Mobs/graytider.png" id="2_kq0dj"]
 [ext_resource type="Shader" uid="uid://3piuftd8ukss" path="res://Resources/Shaders/CollectableShining.gdshader" id="3_e2xwj"]
-[ext_resource type="PackedScene" uid="uid://deq4t84d81wnb" path="res://Scenes/Effects/Particles/Dodge.tscn" id="4_4brc5"]
+[ext_resource type="PackedScene" uid="uid://deq4t84d81wnb" path="res://Scenes/Effects/Particles/Symbols/Dodge.tscn" id="4_4brc5"]
 [ext_resource type="Script" uid="uid://6b7bcparwq17" path="res://Components/Weapons/MeleeWeaponComponent.gd" id="5_3symc"]
 [ext_resource type="Texture2D" uid="uid://fiix6iyke3n3" path="res://Textures/Weapons/Spear/spear_inhand.png" id="6_icfde"]
 [ext_resource type="Texture2D" uid="uid://c2wadc7c7e3v3" path="res://Textures/Weapons/Spear/spear.png" id="7_53ye5"]
@@ -22,7 +22,6 @@
 [ext_resource type="AudioStream" uid="uid://ii51ruio4r4v" path="res://Audio/Weapon/bow_pull.ogg" id="19_cnbcq"]
 [ext_resource type="AudioStream" uid="uid://0durbeo6lc4n" path="res://Audio/Weapon/spear_flip.ogg" id="20_4mr6v"]
 [ext_resource type="AudioStream" uid="uid://c2enn441tmky8" path="res://Audio/Effects/rush.ogg" id="21_hyopg"]
-[ext_resource type="AudioStream" uid="uid://dgpvog22fnchp" path="res://Audio/Barks/GreytideBark.ogg" id="22_h5ppu"]
 [ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="23_fs2h0"]
 [ext_resource type="Script" uid="uid://c6fapai3prk4g" path="res://Components/Mobs/AI/Actions/SetPlayerToBlackboardAction.gd" id="24_bunwy"]
 [ext_resource type="Script" uid="uid://dl1x4qw4skabi" path="res://Components/Mobs/AI/Actions/SetMoveToKeyAction.gd" id="25_mxgew"]
@@ -78,12 +77,6 @@ shader_parameter/Phase_Offset = 0.0
 shader_parameter/Wiggle_Angle = false
 shader_parameter/Wiggle_Amount_deg = 15.0
 shader_parameter/Shine_Pause = 0.0
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mlgtv"]
-random_pitch = 1.2599211
-random_volume_offset_db = 2.0
-streams_count = 1
-stream_0/stream = ExtResource("22_h5ppu")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fb4jx"]
 radius = 40.0
@@ -240,12 +233,6 @@ stream = ExtResource("21_hyopg")
 volume_db = 1.0
 max_distance = 300.0
 
-[node name="Bark" type="AudioStreamPlayer2D" parent="Sounds" parent_id_path=PackedInt32Array(1426643006) index="4" unique_id=1571425271]
-stream = SubResource("AudioStreamRandomizer_mlgtv")
-volume_db = 5.0
-max_distance = 600.0
-max_polyphony = 20
-
 [node name="LightOccluder2D" parent="." index="12" unique_id=364816313]
 position = Vector2(0, -1)
 
@@ -255,7 +242,7 @@ avoidance_enabled = false
 radius = 64.0
 
 [node name="BeehaveTree" parent="." index="16" unique_id=448616328 node_paths=PackedStringArray("blackboard")]
-blackboard = NodePath("@Node@38455")
+blackboard = NodePath("@Node@87287")
 
 [node name="MoveToPlayer" type="Node" parent="BeehaveTree" index="0" unique_id=478688837]
 script = ExtResource("23_fs2h0")

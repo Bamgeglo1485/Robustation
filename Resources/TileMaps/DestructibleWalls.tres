@@ -947,8 +947,8 @@ texture_region_size = Vector2i(32, 32)
 [resource]
 tile_size = Vector2i(32, 32)
 occlusion_layer_0/light_mask = 3
-physics_layer_0/collision_layer = 134479890
-physics_layer_0/collision_mask = 134479890
+physics_layer_0/collision_layer = 2281963538
+physics_layer_0/collision_mask = 2281963538
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Wall"
 terrain_set_0/terrain_0/color = Color(0.059032753, 0.014387485, 0.1642423, 1)

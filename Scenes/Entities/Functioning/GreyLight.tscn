@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://b6o3wwa3p5bq1"]
+
+[ext_resource type="PackedScene" uid="uid://c8mg0fsh77c21" path="res://Scenes/Entities/Functioning/BaseLight.tscn" id="1_5gtub"]
+
+[node name="StaticBody2D" unique_id=436085379 instance=ExtResource("1_5gtub")]
+
+[node name="Glow" parent="Sprites" parent_id_path=PackedInt32Array(194731405) index="2" unique_id=1657110528]
+modulate = Color(1.7704394, 1.8679621, 3.2944162, 1)
+
+[node name="PointLight2D" parent="." index="7" unique_id=1272221041]
+color = Color(0.51718444, 0.5171845, 0.51718444, 1)

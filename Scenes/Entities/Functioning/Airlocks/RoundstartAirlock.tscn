@@ -35,6 +35,9 @@ shader_parameter/edge_darken = 1.0000000475
 shader_parameter/edge_softness = 0.1
 shader_parameter/global_alpha = 0.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_00m0n"]
+size = Vector2(32, 32)
+
 [node name="BaseAirlock" unique_id=985248610 instance=ExtResource("1_00m0n")]
 
 [node name="Outercollision" parent="." index="2" unique_id=139227872]
@@ -74,3 +77,10 @@ mouse_behavior_recursive = 1
 color = Color(0, 0.5556891, 0.6871906, 1)
 texture = ExtResource("4_r868n")
 texture_scale = 0.2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="13" unique_id=788462579]
+collision_layer = 65535
+collision_mask = 65535
+
+[node name="Collision" type="CollisionShape2D" parent="StaticBody2D" index="0" unique_id=1403793101]
+shape = SubResource("RectangleShape2D_00m0n")

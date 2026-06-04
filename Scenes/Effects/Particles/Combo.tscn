@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b8jkf5k8onoi3"]
 
 [ext_resource type="Material" uid="uid://cyp3pqnhbfrj3" path="res://Resources/Shaders/Jiggle.tres" id="1_e4u08"]
-[ext_resource type="Texture2D" uid="uid://fhnljvvwe6y7" path="res://Textures/Effects/Particles/combo.png" id="2_y4o6a"]
+[ext_resource type="Texture2D" uid="uid://fhnljvvwe6y7" path="res://Textures/Effects/Particles/Symbols/combo.png" id="2_y4o6a"]
 [ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts/Effects/TimedDelete.gd" id="3_bvvku"]
 
 [sub_resource type="Gradient" id="Gradient_lvx2o"]

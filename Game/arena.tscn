@@ -35,7 +35,7 @@
 [ext_resource type="Resource" uid="uid://tcq0h43ui04w" path="res://Resources/Custom/Enemy/RobustBotanist.tres" id="33_dd305"]
 [ext_resource type="AudioStream" uid="uid://1qnhfchhf4jb" path="res://Audio/Effects/voteding.ogg" id="34_shacc"]
 [ext_resource type="AudioStream" uid="uid://14o4e8msndow" path="res://Audio/Weapon/Projectile/mk58_shoot.ogg" id="35_xyga5"]
-[ext_resource type="AudioStream" uid="uid://b2utqxvujdi7f" path="res://Audio/Ambience/box_deploy.ogg" id="36_wae7y"]
+[ext_resource type="AudioStream" uid="uid://b2utqxvujdi7f" path="res://Audio/Effects/box_deploy.ogg" id="36_wae7y"]
 [ext_resource type="Texture2D" uid="uid://cf2mkb22grqmy" path="res://Textures/Parallax/Space/layer2.png" id="37_50r0y"]
 [ext_resource type="Texture2D" uid="uid://ctmvqt423d0il" path="res://Textures/Parallax/Space/XenoParallaxNeb.png" id="38_lw48d"]
 [ext_resource type="Script" uid="uid://08qu36la5uv4" path="res://Components/Interface/Menu/Settings/ParallaxComponent.gd" id="39_vt8en"]

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://28ktlm8hudhq"]
 
 [ext_resource type="Material" uid="uid://cyp3pqnhbfrj3" path="res://Resources/Shaders/Jiggle.tres" id="1_chbsr"]
-[ext_resource type="Texture2D" uid="uid://tq70wp3sblsx" path="res://Textures/Effects/Particles/parry.png" id="2_urugt"]
+[ext_resource type="Texture2D" uid="uid://tq70wp3sblsx" path="res://Textures/Effects/Particles/Symbols/parry.png" id="2_urugt"]
 [ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts/Effects/TimedDelete.gd" id="3_jaw6g"]
 [ext_resource type="PackedScene" uid="uid://lf1pf5qmfpp4" path="res://Scenes/Effects/Particles/Parry.tscn" id="4_tulvs"]
 

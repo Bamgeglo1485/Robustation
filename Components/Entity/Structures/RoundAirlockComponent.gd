@@ -8,24 +8,13 @@ class_name RoundAirlockComponent extends Component
 @export var light: PointLight2D
 @onready var airlock: AirlockComponent = parent.get_node_or_null("AirlockComponent")
 @onready var level_component: LevelComponent = scene.get_node_or_null("LevelComponent")
-@onready var player: CharacterBody2D = GlobalVariables.player
+@onready var player: CharacterBody2D = scene.get_node_or_null("Player")
 @onready var station_run_component: StationRunComponent = tree.get_root().get_node_or_null("StationRunComponent")
-@onready var black_screen: ColorRect = player.get_node_or_null("Blackscreen").get_node_or_null("Blackscreen")
 @onready var stats_text_printing: TextPrintingAnimationComponent = player.get_node_or_null("Level").get_node_or_null("LevelName").get_node_or_null("Stats").get_node_or_null("TextPrintingAnimationComponent")
 var camera: Camera2D
 var prev_camera: Camera2D
 var roundended: bool = false
 var room: int
-var ended: bool = false
-
-func _input(_event: InputEvent) -> void:
-	if !ended:
-		return
-	if Input.is_action_just_pressed("movement"):
-		var tween = create_tween()
-		tween.tween_property(black_screen, "Color", Color(), 0.7)
-		await tween.finished
-		EventBusManager.level_ended.emit(station_run_component.current_level)
 
 func _ready() -> void:
 	camera = Camera2D.new()
@@ -42,11 +31,14 @@ func _ready() -> void:
 		mob_mover.movement_blocked = true
 		var weapon_user: WeaponUserComponent = player.get_node_or_null("WeaponUserComponent")
 		weapon_user.can_attack = false
-	
+		
+		await tree.physics_frame
+		
 		player.global_position = parent.global_position + start_position
 		prev_camera = get_viewport().get_camera_2d()
 		camera.global_position = exit_position
 		camera.zoom = prev_camera.zoom
+		camera.offset = prev_camera.offset
 		camera.make_current()
 		var tween = create_tween()
 		tween.set_parallel()
@@ -64,12 +56,14 @@ func _ready() -> void:
 		tween.set_parallel()
 		tween.tween_property(camera, "zoom", prev_camera.zoom, 0.1)
 		tween.tween_property(camera, "global_position", prev_camera.global_position, 0.1)
+		tween.tween_property(camera, "offset", prev_camera.offset, 0.1)
 		tween.tween_property(effect.material, "shader_parameter/global_alpha", 0.0, 0.1)
 		await tween.finished
 		prev_camera.make_current()
 		camera.queue_free()
 		weapon_user.can_attack = true
 		mob_mover.movement_blocked = false
+		airlock.close()
 
 func _body_enteted(body: Node2D) -> void:
 	if body == parent or roundended:
@@ -106,7 +100,7 @@ func _body_enteted(body: Node2D) -> void:
 	
 	await tween.finished
 	airlock.bolt()
-	ended = true
+	EventBusManager.level_ended.emit(station_run_component.current_level)
 
 func _stats() -> void:
 	if stats_text_printing:
@@ -125,9 +119,15 @@ func _stats() -> void:
 		text += "[color=crimson]Kills:[/color] " + str(level_component.kills)
 		text += "\n"
 		text += "[color=crimson]Difficulty: [/color]" + difficulty
+		text += "\n"
+		text += "\n"
+		text += "[color=crimson]Input W/A/S/D to continue[/color]"
 		stats_text_printing.animate(text, 0.5)
 
 func _room_end(_room: int) -> void:
 	if room == _room:
 		area.set_deferred("monitoring", true)
 		light.enabled = true
+
+func _exit_tree() -> void:
+	stats_text_printing.parent.text = ""

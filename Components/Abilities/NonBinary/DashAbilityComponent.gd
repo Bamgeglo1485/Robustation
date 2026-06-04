@@ -1,6 +1,8 @@
 class_name DashAbilityComponent extends Component
 
 @export var trail_effect: bool = true
+@export var dash_effect: PackedScene
+var dash_effect_inst: GPUParticles2D
 @export var dash_sound: AudioStreamPlayer2D
 @export var dash_sound_gib: AudioStreamPlayer2D
 @export var overdose_refuel_sound: AudioStreamPlayer2D
@@ -28,6 +30,9 @@ class_name DashAbilityComponent extends Component
 @onready var mob_mover_component: MobMoverComponent = parent.get_node_or_null("MobMoverComponent")
 @onready var weapon_user_component: WeaponUserComponent = parent.get_node_or_null("WeaponUserComponent")
 
+@export var dash_active_effect: PackedScene = preload("res://Scenes/Effects/Particles/Wind/FootstepWindEffect.tscn")
+var dash_active_effect_inst: GPUParticles2D
+
 var recovery_timer: Timer
 var active: bool = false
 var progress_tween: Tween
@@ -46,6 +51,13 @@ func _ready() -> void:
 	
 	EventBusManager.projectile_shoot.connect(_on_shoot)
 	EventBusManager.body_to_body_collision.connect(_on_collide)
+	
+	if dash_effect:
+		dash_effect_inst = dash_effect.instantiate()
+		scene.add_child.call_deferred(dash_effect_inst)
+	if dash_active_effect:
+		dash_active_effect_inst = dash_active_effect.instantiate()
+		parent.add_child.call_deferred(dash_active_effect_inst)
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("dash"):
@@ -98,6 +110,10 @@ func dash(direction) -> void:
 		progress_tween.tween_method(_set_stamina_progress, old_progress, new_progress, 0.15)
 	
 	_cooldown()
+	
+	if dash_effect_inst:
+		dash_effect_inst.global_position = parent.global_position
+		dash_effect_inst.emitting = true
 	
 	var trail_effect_component: TrailEffectComponent = parent.get_node_or_null("TrailEffectComponent")
 	if overdose_component and overdose_component.active:
@@ -166,10 +182,12 @@ func _INVINCIBLE() -> void:
 		weapon_user_component.minor_damage_modifiers["Dashboost"] = 2.0
 		health_component.INVINCIBLE = true
 		active = true
+		dash_active_effect_inst.emitting = true
 		await tree.create_timer(invincibility_delay).timeout
 		weapon_user_component.minor_damage_modifiers["Dashboost"] = 1.0
 		health_component.INVINCIBLE = false
 		active = false
+		dash_active_effect_inst.emitting = false
 
 func _on_shoot(emitter: Node2D, _weapon: Weapon, direction: Vector2, projectile: Node2D) -> void:
 	if !active or !parry_weapon or emitter != parent:

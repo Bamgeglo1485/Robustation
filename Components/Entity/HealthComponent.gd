@@ -5,6 +5,7 @@ class_name HealthComponent extends Component
 @export var imaginary_death: bool = false
 @export var max_health: float = 100 : get = get_max_health
 @export var INVINCIBLE: bool = false
+@export var invincibility_block_effect: bool = false
 var base_max_health: float = max_health
 @export var health: float = max_health: set = set_health, get = get_health
 @export var damage_type_modifiers: Dictionary[String, float]
@@ -18,6 +19,7 @@ var base_max_health: float = max_health
 
 @export var blood_effect_scene: PackedScene
 @export var blood_spurt_effect_scene: PackedScene
+@export var blood_jets_scene: PackedScene
 @export var gib_effect_scene: PackedScene
 
 @export var ignore_time_scale: bool = false
@@ -85,7 +87,8 @@ func get_health() -> float:
 # Наносит урон и создаёт эффекты
 func take_damage(damage: float, damager: Node2D, damage_type: String = "Generic", ignore_damage_modifier: bool = false) -> void:
 	if INVINCIBLE:
-		EventBusManager.invincibility_damage_block.emit(parent)
+		if invincibility_block_effect:
+			EventBusManager.invincibility_damage_block.emit(parent)
 		if damage > 5:
 			invincibility_effects()
 		return
@@ -136,7 +139,12 @@ func damage_effects(damager) -> void:
 		blood_effect.global_position = parent.global_position
 		scene.add_child(blood_effect)
 		blood_effect.rotation = attack_direction.angle()
-	
+	if blood_jets_scene:
+		var blood_effect: Node2D = blood_jets_scene.instantiate()
+		blood_effect.emitting = true
+		parent.add_child(blood_effect)
+		var negative_direction: Vector2 = -attack_direction
+		blood_effect.rotation = negative_direction.angle()
 	if blood_spurt_effect_scene:
 		var blood_spurt_effect: Node2D = blood_spurt_effect_scene.instantiate()
 		blood_spurt_effect.global_position = parent.global_position
@@ -145,7 +153,7 @@ func damage_effects(damager) -> void:
 
 func _flash(
 	speed_multiplier: float = 1,
-	color: Color = Color(0.7, 0.0, 0.3, 0.729)
+	color: Color = Color(1.189, 0.0, 0.53, 1.0)
 	) -> void:
 	
 	if animation_component:

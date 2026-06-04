@@ -4,12 +4,13 @@
 [ext_resource type="Script" uid="uid://df356su15y7ow" path="res://Components/Entity/HealthComponent.gd" id="7_6tb4j"]
 [ext_resource type="Script" uid="uid://b2j14u62ikqnw" path="res://Components/Mobs/FactionComponent.gd" id="8_02kti"]
 [ext_resource type="Script" uid="uid://dcmqlndbp0jp7" path="res://Components/Visual/DirectionComponent.gd" id="8_gq5ok"]
-[ext_resource type="PackedScene" uid="uid://fhhycrapltrq" path="res://Scenes/Effects/Particles/Blood.tscn" id="8_kftdd"]
+[ext_resource type="PackedScene" uid="uid://fhhycrapltrq" path="res://Scenes/Effects/Particles/Blood/Blood.tscn" id="8_kftdd"]
 [ext_resource type="Script" uid="uid://b1p6bdh2vi8b" path="res://Components/Weapons/Misc/WeaponUserComponent.gd" id="9_331la"]
-[ext_resource type="PackedScene" uid="uid://g2ac83tmeyxn" path="res://Scenes/Effects/Particles/Gib.tscn" id="9_aasos"]
-[ext_resource type="PackedScene" uid="uid://40fiorxrk4xk" path="res://Scenes/Effects/Particles/BloodSpurts.tscn" id="9_gq5ok"]
+[ext_resource type="PackedScene" uid="uid://g2ac83tmeyxn" path="res://Scenes/Effects/Particles/Gib/Gib.tscn" id="9_aasos"]
+[ext_resource type="PackedScene" uid="uid://40fiorxrk4xk" path="res://Scenes/Effects/Particles/Blood/BloodSpurts.tscn" id="9_gq5ok"]
 [ext_resource type="Material" uid="uid://bsv1u4gql6dmg" path="res://Resources/Shaders/MobShader.tres" id="10_kftdd"]
 [ext_resource type="Script" uid="uid://dfs78nrhukxbl" path="res://Components/Mobs/MobMoverComponent.gd" id="10_nmodv"]
+[ext_resource type="PackedScene" uid="uid://dpw5uyyv0m62c" path="res://Scenes/Effects/Particles/Blood/BloodJets.tscn" id="11_85qv8"]
 [ext_resource type="Texture2D" uid="uid://kdxkqnccqti2" path="res://Textures/Mobs/Player/human_male.png" id="11_obr0u"]
 [ext_resource type="Script" uid="uid://qcmegh7138ug" path="res://Components/Entity/UniqueShaderComponent.gd" id="12_aasos"]
 [ext_resource type="Script" uid="uid://bqvdlb3r03cs0" path="res://Components/Visual/DirectionalSpriteComponent.gd" id="12_g8los"]
@@ -103,6 +104,7 @@ shape = ExtResource("2_vbbsq")
 script = ExtResource("7_6tb4j")
 blood_effect_scene = ExtResource("8_kftdd")
 blood_spurt_effect_scene = ExtResource("9_gq5ok")
+blood_jets_scene = ExtResource("11_85qv8")
 gib_effect_scene = ExtResource("9_aasos")
 metadata/_custom_type_script = "uid://df356su15y7ow"
 

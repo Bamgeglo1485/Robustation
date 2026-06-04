@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bq4rrvubclybf"]
 
 [ext_resource type="PackedScene" uid="uid://bbqpmpj4ntyg" path="res://Scenes/Explosion/BaseExplosion.tscn" id="1_kqifr"]
-[ext_resource type="Texture2D" uid="uid://bli7jsrusea5n" path="res://Textures/Effects/Particles/fall.png" id="2_fs6vl"]
+[ext_resource type="Texture2D" uid="uid://bli7jsrusea5n" path="res://Textures/Effects/Particles/Symbols/fall.png" id="2_fs6vl"]
 [ext_resource type="Shader" uid="uid://dtwokqwiognyt" path="res://Resources/Shaders/Explosion.gdshader" id="2_na1js"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_na1js"]

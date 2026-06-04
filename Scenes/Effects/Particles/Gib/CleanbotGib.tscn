@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://c6hdbx68d4jqg"]
+
+[ext_resource type="Texture2D" uid="uid://bc4akrjd4yio1" path="res://Textures/Effects/Particles/blood.png" id="1_oc2wt"]
+[ext_resource type="Script" uid="uid://ckngjbi4531ra" path="res://Scripts/Effects/BloodSystem.gd" id="2_xei43"]
+[ext_resource type="Script" uid="uid://cbntkpop03p5e" path="res://Components/Entity/PhysicalParticleComponent.gd" id="4_0jlee"]
+[ext_resource type="Texture2D" uid="uid://cvt7rxsrr8jc5" path="res://Textures/Effects/Organs/junk-bucket.png" id="4_su8ag"]
+[ext_resource type="Texture2D" uid="uid://caw1rdwkyrooc" path="res://Textures/Effects/Organs/borg_arm.png" id="7_aq6w6"]
+[ext_resource type="AudioStream" uid="uid://c3v2pethoxy5x" path="res://Textures/Effects/Organs/cleanbot_death.mp3" id="8_oc2wt"]
+[ext_resource type="PackedScene" uid="uid://deq4t84d81wnb" path="res://Scenes/Effects/Particles/Symbols/Dodge.tscn" id="14_wdrdp"]
+[ext_resource type="Texture2D" uid="uid://bx3kpq3irdo3m" path="res://Textures/Effects/Particles/Symbols/gib.png" id="15_yn7e7"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4b6p3"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 2.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+color = Color(0, 0, 0, 0.66300005)
+
+[node name="Blood" type="GPUParticles2D" unique_id=729155603]
+z_index = -1
+texture_filter = 1
+amount = 16
+texture = ExtResource("1_oc2wt")
+lifetime = 0.2
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 4246352849
+process_material = SubResource("ParticleProcessMaterial_4b6p3")
+script = ExtResource("2_xei43")
+
+[node name="PauseTimer" type="Timer" parent="." unique_id=2089446788]
+wait_time = 0.2
+one_shot = true
+autostart = true
+
+[node name="Bucket" type="CharacterBody2D" parent="." unique_id=215609771]
+z_index = 1
+collision_layer = 8
+collision_mask = 0
+motion_mode = 1
+
+[node name="Texture" type="Sprite2D" parent="Bucket" unique_id=1569084107]
+position = Vector2(-3, -3)
+texture = ExtResource("4_su8ag")
+
+[node name="PhysicalParticleComponent" type="Node" parent="Bucket" unique_id=205270039]
+script = ExtResource("4_0jlee")
+metadata/_custom_type_script = "uid://cbntkpop03p5e"
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Bucket" unique_id=1296859448]
+
+[node name="Brain" type="CharacterBody2D" parent="." unique_id=1945415070]
+z_index = 1
+collision_layer = 8
+collision_mask = 0
+motion_mode = 1
+
+[node name="Texture" type="Sprite2D" parent="Brain" unique_id=3296471]
+position = Vector2(-3, -3)
+texture = ExtResource("7_aq6w6")
+
+[node name="PhysicalParticleComponent" type="Node" parent="Brain" unique_id=14668284]
+script = ExtResource("4_0jlee")
+metadata/_custom_type_script = "uid://cbntkpop03p5e"
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Brain" unique_id=1684233375]
+
+[node name="GibSound" type="AudioStreamPlayer2D" parent="." unique_id=1603858092]
+stream = ExtResource("8_oc2wt")
+autoplay = true
+
+[node name="GPUParticles2D2" parent="." unique_id=2123337954 instance=ExtResource("14_wdrdp")]
+z_index = 2
+texture = ExtResource("15_yn7e7")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="GPUParticles2D2" unique_id=1300591609]
+
+[connection signal="timeout" from="PauseTimer" to="." method="_on_pause_timer_timeout"]

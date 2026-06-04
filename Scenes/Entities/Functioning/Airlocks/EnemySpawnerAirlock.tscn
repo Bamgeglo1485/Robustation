@@ -13,7 +13,7 @@ size = Vector2(32, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_la18t"]
 size = Vector2(61, 96)
 
-[node name="EnemySpawnerAirlock" unique_id=985248610 instance=ExtResource("1_ul7m4")]
+[node name="EnemySpawnerAirlock" unique_id=985248610 groups=["EnemySpawner"] instance=ExtResource("1_ul7m4")]
 
 [node name="Outercollision" parent="." index="2" unique_id=139227872]
 collision_layer = 3

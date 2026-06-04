@@ -15,7 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://b21hluxqt2tlt" path="res://Resources/Audio/LaughRandom.tres" id="12_ku322"]
 [ext_resource type="Texture2D" uid="uid://rbct170kdtnl" path="res://Textures/Weapons/PieCannon/pie_cannon_inhands.png" id="12_q8qhr"]
 [ext_resource type="AudioStream" uid="uid://d2heoxvpkxyp2" path="res://Audio/Weapon/thunk.ogg" id="13_vrxvs"]
-[ext_resource type="AudioStream" uid="uid://4e6wsvcw0jrt" path="res://Audio/Ambience/hiss.ogg" id="14_8uj3v"]
+[ext_resource type="AudioStream" uid="uid://4e6wsvcw0jrt" path="res://Audio/Effects/hiss.ogg" id="14_8uj3v"]
 [ext_resource type="AudioStream" uid="uid://byyinwd23qdiy" path="res://Audio/Weapon/trashbag2.ogg" id="15_lrk2o"]
 [ext_resource type="Script" uid="uid://dua6hp8ir5tiu" path="res://Components/Mobs/AI/Actions/AttackTargetAction.gd" id="17_0m0ai"]
 [ext_resource type="AudioStream" uid="uid://bngd1vkik15ra" path="res://Audio/EnemyThemes/Clown.ogg" id="23_iqm8m"]

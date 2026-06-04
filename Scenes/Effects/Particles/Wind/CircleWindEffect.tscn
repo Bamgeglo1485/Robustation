@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://c41dd6tp1645d"]
+
+[ext_resource type="Texture2D" uid="uid://bjh4r3nedwffv" path="res://Textures/Effects/Particles/Wind/circle_wind.png" id="1_yh4tc"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sac0u"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_yh4tc"]
+offsets = PackedFloat32Array(0, 0.22026432, 1)
+colors = PackedColorArray(1, 1, 1, 0.39200002, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sac0u"]
+gradient = SubResource("Gradient_yh4tc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i8g0b"]
+particle_flag_disable_z = true
+angular_velocity_min = -720.0
+angular_velocity_max = 719.99994
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = 82.46998
+gravity = Vector3(0, 0, 0)
+scale_min = 1.5
+scale_max = 2.0
+color_ramp = SubResource("GradientTexture1D_sac0u")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="CircleWindEffect" type="GPUParticles2D" unique_id=1385148187]
+modulate = Color(1, 1, 1, 0.512)
+material = SubResource("CanvasItemMaterial_sac0u")
+emitting = false
+amount = 1
+texture = ExtResource("1_yh4tc")
+lifetime = 0.3
+one_shot = true
+fixed_fps = 20
+interpolate = false
+fract_delta = false
+process_material = SubResource("ParticleProcessMaterial_i8g0b")

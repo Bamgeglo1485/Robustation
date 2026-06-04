@@ -20,7 +20,7 @@ func tick(_actor: Node, blackboard: Blackboard) -> int:
 		return FAILURE
 	
 	if !player:
-		player = GlobalVariables.player
+		player = scene.get_node_or_null("Player")
 		if !player or !player.has_node("MobMoverComponent"):
 			player = null
 	

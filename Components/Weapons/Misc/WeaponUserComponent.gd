@@ -41,6 +41,9 @@ var last_attacked_weapon: Weapon
 @export var damage_multiplier: float = 1.0
 @export var overheat_per_shoot_addendums: Dictionary
 @export var overheat_per_shoot_addendum: int = 0
+var parry_weapon: Weapon
+var parrying: bool = false
+var parry_target: Vector2
 
 func _ready() -> void:
 	if selected_weapon:

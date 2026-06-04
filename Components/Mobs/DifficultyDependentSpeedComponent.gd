@@ -12,14 +12,14 @@ func _ready() -> void:
 	await tree.create_timer(0.2).timeout
 	match SettingsConfigSystem.difficulty:
 		SettingsConfigSystem.difficulties.RPER:
-			mob_mover_component.speed *= speed_modifier_on_roleplayer
+			mob_mover_component.acceleration *= speed_modifier_on_roleplayer
 			mob_mover_component.base_max_speed *= speed_modifier_on_roleplayer
 			mob_mover_component.max_speed *= speed_modifier_on_roleplayer
 		SettingsConfigSystem.difficulties.AGENT:
-			mob_mover_component.speed *= speed_modifier_on_agent
+			mob_mover_component.acceleration *= speed_modifier_on_agent
 			mob_mover_component.base_max_speed *= speed_modifier_on_agent
 			mob_mover_component.max_speed *= speed_modifier_on_agent
 		SettingsConfigSystem.difficulties.GREYTIDE:
-			mob_mover_component.speed *= speed_modifier_on_greytide
+			mob_mover_component.acceleration *= speed_modifier_on_greytide
 			mob_mover_component.base_max_speed *= speed_modifier_on_greytide
 			mob_mover_component.max_speed *= speed_modifier_on_greytide

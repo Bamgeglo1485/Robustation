@@ -6,32 +6,42 @@ var current_level: int = 0
 @onready var root: Window = tree.get_root()
 @onready var player: CharacterBody2D = get_parent().get_node_or_null("Player")
 @onready var current_scene: Node2D = get_parent()
+var ended: bool = false
+var time: float
+var kills: int
 
 func _ready() -> void:
-	GlobalVariables.player = player
-	
 	call_deferred("reparent", root)
 	player.tree_exited.connect(_player_exit)
-	await tree.create_timer(1).timeout
+	await tree.physics_frame
 	start_new_level()
+	
+	EventBusManager.level_ended.connect(_level_ended)
 
 func start_new_level() -> void:
 	current_level += 1
+	ended = false
+	for child in scene.get_children():
+		if child != player and child != self:
+			child.queue_free()
 	
-	player.reparent(root, false)
+	if levels.size() < current_level - 1:
+		player.get_node("HealthComponent").health = 0
+		return
 	
-	get_tree().change_scene_to_packed(levels[current_level - 1])
+	var inst_level: Node2D = levels[current_level - 1].instantiate()
+	scene.add_child(inst_level)
+	for child in inst_level.get_children():
+		child.reparent(scene)
 	
-	await root.child_entered_tree
-	
-	current_scene = root.get_node("Game")
-	
-	var new_player = current_scene.get_node_or_null("Player")
-	if new_player:
-		new_player.queue_free()
-	
-	player.reparent(current_scene, false)
-	
+	EventBusManager.scene_changed.emit(current_scene)
+
+func _input(_event: InputEvent) -> void:
+	if ended and Input.is_action_just_pressed("movement"):
+		start_new_level()
+
+func _level_ended(_level: int) -> void:
+	ended = true
 
 func _player_exit() -> void:
 	queue_free()

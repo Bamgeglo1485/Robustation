@@ -8,8 +8,8 @@
 [node name="Projectile" type="CharacterBody2D" unique_id=1001723315]
 physics_interpolation_mode = 1
 texture_filter = 1
-collision_layer = 0
-collision_mask = 786432
+collision_layer = 2
+collision_mask = 0
 motion_mode = 1
 
 [node name="ProjectileComponent" type="Area2D" parent="." unique_id=2058769936 node_paths=PackedStringArray("hit_sound", "tile_destruction_audio")]
@@ -29,13 +29,6 @@ max_distance = 600.0
 [node name="TileSound" type="AudioStreamPlayer2D" parent="ProjectileComponent" unique_id=351652522]
 max_distance = 600.0
 
-[node name="Parry" type="Area2D" parent="." unique_id=757156969]
-collision_layer = 2055
-collision_mask = 2055
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Parry" unique_id=2139953676]
-shape = ExtResource("3_geesq")
-
 [node name="HealthComponent" type="Node" parent="." unique_id=90404297]
 script = ExtResource("3_88g3b")
 max_health = 200.0
@@ -44,5 +37,12 @@ metadata/_custom_type_script = "uid://df356su15y7ow"
 [node name="TriggerOnParryComponent" type="Node" parent="." unique_id=1141083762]
 script = ExtResource("3_t4af8")
 metadata/_custom_type_script = "uid://bqtip02i73xyq"
+
+[node name="Parry" type="Area2D" parent="." unique_id=757156969]
+collision_layer = 2055
+collision_mask = 2055
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Parry" unique_id=2139953676]
+shape = ExtResource("3_geesq")
 
 [connection signal="body_entered" from="ProjectileComponent" to="ProjectileComponent" method="_on_body_entered"]

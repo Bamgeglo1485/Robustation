@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://1yvrhqvfqqus" path="res://Textures/Weapons/Toolbox/toolbox_inhand.png" id="8_42pyi"]
 [ext_resource type="AudioStream" uid="uid://ceo205bi48psk" path="res://Audio/Effects/dash_gib.ogg" id="11_0tl26"]
 [ext_resource type="Texture2D" uid="uid://dverpu5mv40au" path="res://Textures/Weapons/Toolbox/toolbox.png" id="13_4xc88"]
+[ext_resource type="PackedScene" uid="uid://c41dd6tp1645d" path="res://Scenes/Effects/Particles/Wind/CircleWindEffect.tscn" id="16_kyllh"]
 [ext_resource type="Texture2D" uid="uid://cnd26u5psr454" path="res://Textures/Weapons/Hook/grappling_gun.png" id="24_483ma"]
 [ext_resource type="Script" uid="uid://cmonoqon5s4vx" path="res://Components/Abilities/NonBinary/DashAbilityComponent.gd" id="25_46s63"]
 [ext_resource type="AudioStream" uid="uid://bxj6l4kb3ei8m" path="res://Audio/Effects/dash.ogg" id="25_hf65o"]
@@ -126,6 +127,7 @@ sdf_collision = true
 
 [node name="DashAbilityComponent" type="Node" parent="." index="16" unique_id=991976233 node_paths=PackedStringArray("dash_sound", "dash_sound_gib", "overdose_refuel_sound", "ability_icon")]
 script = ExtResource("25_46s63")
+dash_effect = ExtResource("16_kyllh")
 dash_sound = NodePath("../Sounds/DashSound")
 dash_sound_gib = NodePath("../Sounds/DashGibSound")
 overdose_refuel_sound = NodePath("../Sounds/OverdoseRefuel")

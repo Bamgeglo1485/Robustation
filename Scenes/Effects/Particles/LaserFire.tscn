@@ -8,6 +8,12 @@ particles_anim_h_frames = 8
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
+[sub_resource type="Gradient" id="Gradient_rox0a"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ict16"]
+gradient = SubResource("Gradient_rox0a")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0sbr1"]
 lifetime_randomness = 0.48
 particle_flag_disable_z = true
@@ -15,6 +21,7 @@ spread = 25.0
 initial_velocity_min = 59.77
 initial_velocity_max = 234.48
 gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_ict16")
 anim_offset_max = 1.0
 
 [node name="GPUParticles2D" type="GPUParticles2D" unique_id=1567534584]
@@ -26,6 +33,7 @@ amount = 40
 speed_scale = 3.0
 explosiveness = 1.0
 use_fixed_seed = true
+seed = 2099304217
 trail_enabled = true
 trail_sections = 2
 trail_section_subdivisions = 1

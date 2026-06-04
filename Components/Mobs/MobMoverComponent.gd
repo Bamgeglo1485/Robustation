@@ -43,7 +43,9 @@ var fly_source: Node2D
 var fly_priority: int = 0
 
 @export var body_fall_sound: AudioStreamPlayer2D
-@export var fall_effect: PackedScene = preload("res://Scenes/Effects/Particles/Fall.tscn")
+@export var fall_effect: PackedScene = preload("res://Scenes/Effects/Particles/Symbols/Fall.tscn")
+@export var fly_effect: PackedScene = preload("res://Scenes/Effects/Particles/Wind/CircleWindEffect.tscn")
+var fly_effect_inst: GPUParticles2D
 ## For example, if the toolbox has drop_force = 3, and the body has drop_resistance = 4, then the toolbox cannot make it fall.
 @export var drop_resistance: int = 0
 var fallen: bool = false
@@ -72,7 +74,6 @@ var speed_modifier_combined: float
 var max_speed_current: float
 var friction_amount: float
 var velocity: Vector2
-var speed: float
 var speed_sq: float
 
 var fly_velocity: Vector2
@@ -90,6 +91,9 @@ func _ready() -> void:
 	if fly_impact_area:
 		fly_impact_area.body_entered.connect(on_fly_impact)
 	set_minor_speed_modifier("fallen", 1.0)
+	if fly_effect:
+		fly_effect_inst = fly_effect.instantiate()
+		scene.add_child.call_deferred(fly_effect_inst)
 
 func _physics_process(delta: float) -> void:
 	if flying and fly_speed > 0:
@@ -185,6 +189,8 @@ func _fly(delta) -> void:
 	
 	if fly_animation_tween:
 		fly_animation_tween.kill()
+	if unfly_animation_tween:
+		unfly_animation_tween.kill()
 	
 	if fly_speed < fly_stop_speed * 20:
 		unfly_animation_tween = create_tween()
@@ -229,6 +235,9 @@ func throw(
 		fly_animation_tween.set_trans(Tween.TRANS_SINE)
 		fly_animation_tween.set_ease(Tween.EASE_IN_OUT)
 		fly_animation_tween.tween_property(texture, "scale", Vector2(1.5, 1.5), 0.2)
+		if fly_effect and throw_speed > 400.0 and health_component.health >= 5.0 and is_instance_valid(fly_effect_inst):
+			fly_effect_inst.global_position = parent.global_position
+			fly_effect_inst.emitting = true
 
 func _fall_process(delta: float) -> void:
 	if !flying:

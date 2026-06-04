@@ -8,6 +8,7 @@ class_name LevelComponent extends Component
 @export var final_waves: int = 4
 
 @export var available_enemies: Array[Enemy]
+@export var boss: Enemy
 @export var max_enemies_per_room: int = 10
 @export var min_enemies_per_room: int = 10
 @export var start_budget: float = 1.5
@@ -48,11 +49,12 @@ var kills: int
 @onready var level_generator_component: LevelGeneratorComponent = get_parent().get_node_or_null("LevelGeneratorComponent")
 const MAX_ATTEMPTS = 100
 
-@onready var player: PhysicsBody2D = GlobalVariables.player
+@onready var player: CharacterBody2D = scene.get_node_or_null("Player")
 @onready var level_name_label: RichTextLabel = player.get_node_or_null("Level").get_node_or_null("LevelName").get_node_or_null("Name")
 @onready var weapon_user_component: WeaponUserComponent = player.get_node_or_null("WeaponUserComponent")
 @onready var player_perk_ui: Control = player.get_node("GUI").get_node("PerkChoose").get_node("PerkChoose")
 @onready var player_perk_ui_list: VBoxContainer = player_perk_ui.get_node("Panel").get_node("VBoxContainer")
+var station_run: StationRunComponent
 var perk_list_unit: PackedScene = preload("res://Scenes/UI/IngameInterface/Perks/PerkChooseUnit.tscn")
 
 var high_pass: AudioEffectHighPassFilter = AudioServer.get_bus_effect(1, 2)
@@ -61,11 +63,15 @@ var high_pass_tween: Tween
 func _process(delta: float) -> void:
 	if processing:
 		time += delta
+		if station_run:
+			station_run.time += delta
 
 func _ready() -> void:
 	EventBusManager.room_start.connect(_on_start)
 	EventBusManager.room_end.connect(_on_end)
 	EventBusManager.gibbed.connect(_on_death)
+	await tree.create_timer(0.5).timeout
+	station_run = tree.get_root().get_node_or_null("StationRunComponent")
 
 func _on_start(_room: int) -> void:
 	if _room == 0:
@@ -73,14 +79,19 @@ func _on_start(_room: int) -> void:
 		processing = true
 	
 	if _room < 100:
+		var is_final_room: bool = false
 		if _room + 2 == level_generator_component.room_count:
 			max_wave = final_waves
+			is_final_room = true
 		else:
 			max_wave = randi_range(min_waves, max_waves)
 		wave = 0
 		room = _room
 		var first_spawner: PhysicsBody2D = first_enemy_spawners[room]
 		var second_spawner: PhysicsBody2D = second_enemy_spawners[room]
+		
+		if is_final_room and boss:
+			_spawn_enemies([boss], first_spawner)
 		
 		for i in range(max_wave):
 			wave = i
@@ -219,6 +230,8 @@ func _random_enemy(enemies: Array[Enemy]) -> Enemy:
 func _on_death(emitter: Node2D) -> void:
 	if current_enemies.has(emitter):
 		kills += 1
+		if station_run:
+			station_run.kills += 1
 		current_enemies.erase(emitter)
 		if current_enemies.is_empty() and wave >= max_wave - 1:
 			if room < 100:

@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://dpw5uyyv0m62c"]
+
+[ext_resource type="Script" uid="uid://cwofh1tgsymr6" path="res://Components/Entity/AutoDeleteComponent.gd" id="2_bdjao"]
+
+[sub_resource type="Gradient" id="Gradient_pxprq"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xhabr"]
+gradient = SubResource("Gradient_pxprq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_70dfb"]
+particle_flag_disable_z = true
+spread = 30.0
+initial_velocity_min = 344.97998
+initial_velocity_max = 437.21
+angular_velocity_min = -351.34
+angular_velocity_max = 356.28998
+gravity = Vector3(0, 0, 0)
+color = Color(0.53414565, 0, 0.19542888, 1)
+color_ramp = SubResource("GradientTexture1D_xhabr")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+anim_offset_max = 1.0
+
+[node name="Blood" type="GPUParticles2D" unique_id=1787277679 groups=["Blood"]]
+z_index = -1
+texture_filter = 1
+emitting = false
+amount = 2
+lifetime = 0.2
+one_shot = true
+interpolate = false
+fract_delta = false
+trail_enabled = true
+trail_lifetime = 0.09999999999999999
+process_material = SubResource("ParticleProcessMaterial_70dfb")
+
+[node name="AutoDeleteComponent" type="Node" parent="." unique_id=1347119382]
+script = ExtResource("2_bdjao")
+lifetime = 0.2
+metadata/_custom_type_script = "uid://cwofh1tgsymr6"

@@ -22,7 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://yqtajeusof8p" path="res://Textures/Mobs/Mobs/Hair/flair.png" id="11_17egj"]
 [ext_resource type="AudioStream" uid="uid://dhwn1xi06keaf" path="res://Audio/Weapon/shotgun_insert.ogg" id="11_lbqxj"]
 [ext_resource type="Texture2D" uid="uid://lcbe8war4xp7" path="res://Textures/Mobs/Mobs/Hair/spiky.png" id="12_8fd87"]
-[ext_resource type="Script" uid="uid://da2q40ragr5wk" path="res://Components/Mobs/NPC/BuddyComponent.gd" id="12_17egj"]
+[ext_resource type="Script" path="res://Components/Mobs/NPC/BuddyComponent.gd" id="12_17egj"]
 [ext_resource type="AudioStream" uid="uid://dba5vdenu1s2u" path="res://Audio/Effects/bartender_rage.ogg" id="13_biq87"]
 [ext_resource type="Texture2D" uid="uid://ci84jx3iuyn21" path="res://Textures/Mobs/Mobs/Hair/bobcut.png" id="13_et3ly"]
 [ext_resource type="Texture2D" uid="uid://drxdjuw45awor" path="res://Textures/Mobs/Mobs/Hair/gentle.png" id="14_11246"]
@@ -36,7 +36,7 @@
 [ext_resource type="Texture2D" uid="uid://4rew8bctbhwt" path="res://Textures/Mobs/Mobs/Hair/undercutleft.png" id="21_ka5a3"]
 [ext_resource type="Texture2D" uid="uid://cvtrwkf34me6c" path="res://Textures/Mobs/Mobs/Hair/classicmulder.png" id="22_mdp64"]
 [ext_resource type="Script" uid="uid://d0a8e3f7tepch" path="res://Components/Mobs/RageComponent.gd" id="33_et3ly"]
-[ext_resource type="PackedScene" uid="uid://bpw4s6mkg7wkg" path="res://Scenes/Effects/Particles/RageEffect.tscn" id="34_11246"]
+[ext_resource type="PackedScene" uid="uid://bpw4s6mkg7wkg" path="res://Scenes/Effects/Particles/Symbols/RageEffect.tscn" id="34_11246"]
 [ext_resource type="Script" uid="uid://clr7jbioge17t" path="res://Components/Entity/ExplosionResistanceComponent.gd" id="37_3c5wa"]
 [ext_resource type="Script" uid="uid://bdca2wo1kubsv" path="res://Components/Mobs/SpawnPerkOnDeathComponent.gd" id="38_coqyf"]
 

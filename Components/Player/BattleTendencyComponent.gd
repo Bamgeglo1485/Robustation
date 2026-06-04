@@ -26,9 +26,9 @@ var effects_tween: Tween
 @export_category("Modifiers")
 
 @export var battle_tendency_by_damage_multipliers: Dictionary
-@export var battle_tendency_by_damage_multiplier: float = 0.2
+@export var battle_tendency_by_damage_multiplier: float = 0.05
 @export var batte_tendency_decrease_multipliers: Dictionary
-@export var batte_tendency_decrease_multiplier: float = 1.0
+@export var batte_tendency_decrease_multiplier: float = 0.9
 
 # BASE
 func set_battle_tendency(value: float) -> void:

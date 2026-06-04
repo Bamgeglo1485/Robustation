@@ -25,10 +25,11 @@ class_name MeleeWeapon extends Weapon
 @export var drop_resistance_force: int = 1
 @export var drop_forced: bool = false
 @export var drop_enemy_delay: float = 0.0
-@onready var base_throw_speed: int = throw_speed
-@onready var base_self_throw_speed: int = self_throw_speed
-@onready var parent_mob_mover_component: MobMoverComponent
-@onready var parent_faction: FactionComponent
+var base_throw_speed: int = throw_speed
+var base_self_throw_speed: int = self_throw_speed
+var parent_mob_mover_component: MobMoverComponent
+var weapon_user: WeaponUserComponent
+var parent_faction: FactionComponent
 @export var piercing_attack_animation: bool = false
 @export var tile_destruction_audio: AudioStreamPlayer2D
 
@@ -117,6 +118,7 @@ func _ready() -> void:
 	super._ready()
 	parent_mob_mover_component = parent.get_node_or_null("MobMoverComponent")
 	parent_faction = parent.get_node_or_null("FactionComponent")
+	weapon_user = parent.get_node_or_null("WeaponUserComponent")
 	if qte_enabled:
 		health_component = parent.get_node_or_null("HealthComponent")
 	
@@ -199,9 +201,9 @@ func _try_melee_attack(direction) -> Dictionary:
 		
 		var query: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.create(ray_start, ray_end)
 		query.collision_mask = 1 | 2 | 4 | 7 | 12
+		query.collide_with_bodies = true
 		query.collide_with_areas = true
 		query.exclude = excluded_nodes
-		query.collide_with_bodies = true
 		
 		var result = space_state.intersect_ray(query)
 		
@@ -241,9 +243,10 @@ func _try_melee_attack(direction) -> Dictionary:
 
 func _melee_attack_target(target, direction: Vector2, 
 multiple_attack: bool = false) -> bool:
-	
 	if !multiple_attack:
 		_attack_animation(direction)
+	
+	_toggle_parry()
 	
 	if target is TileMapLayer:
 		var tile_pos = target.local_to_map(target.to_local(parent.global_position + direction.normalized() * 32))
@@ -322,6 +325,19 @@ multiple_attack: bool = false) -> bool:
 			self_throw_speed = base_self_throw_speed
 	
 	return true
+
+func _toggle_parry() -> void:
+	if weapon_user.parrying:
+		return
+	weapon_user.parrying = true
+	weapon_user.parry_weapon = self
+	if parent.name == "Player":
+		weapon_user.parry_target = parent.get_global_mouse_position()
+	await tree.create_timer(0.15).timeout
+	weapon_user.parrying = false
+	weapon_user.parry_weapon = null
+	if parent.name == "Player":
+		weapon_user.parry_target = Vector2.ZERO
 
 func parry_weapon(weapon, target) -> void:
 	EventBusManager.parry.emit(parent, "Weapon", true)

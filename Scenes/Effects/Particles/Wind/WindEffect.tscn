@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://cwa45jm172jr4"]
+
+[ext_resource type="Texture2D" uid="uid://cn76ho3j5my3c" path="res://Textures/Effects/Particles/Wind/half_circle_wind.png" id="1_d3a1j"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sac0u"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_yh4tc"]
+offsets = PackedFloat32Array(0, 0.22026432, 1)
+colors = PackedColorArray(1, 1, 1, 0.39200002, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_sac0u"]
+gradient = SubResource("Gradient_yh4tc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i8g0b"]
+particle_flag_disable_z = true
+spread = 60.0
+initial_velocity_min = 17.18
+initial_velocity_max = 30.929998
+angular_velocity_min = -150.93001
+angular_velocity_max = 86.59998
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_sac0u")
+anim_speed_max = 1.0
+anim_offset_max = 1.0
+sub_emitter_keep_velocity = true
+
+[node name="FootstepWindEffect" type="GPUParticles2D" unique_id=1385148187]
+modulate = Color(1, 1, 1, 0.512)
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_sac0u")
+position = Vector2(-9, -1)
+emitting = false
+amount = 4
+texture = ExtResource("1_d3a1j")
+lifetime = 0.7
+speed_scale = 2.0
+fixed_fps = 20
+interpolate = false
+fract_delta = false
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+process_material = SubResource("ParticleProcessMaterial_i8g0b")

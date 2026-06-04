@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c75uo5mx4hqa1" path="res://Scenes/Entities/Functioning/Airlocks/RoundendAirlock.tscn" id="4_d4w5g"]
 [ext_resource type="PackedScene" uid="uid://bqcq0s2jydisv" path="res://Scenes/Entities/Functioning/Airlocks/RoundstartAirlock.tscn" id="5_5i6r4"]
 [ext_resource type="Script" uid="uid://dcmiiyxq6u2f8" path="res://Resources/Custom/Level/GenerationUnit.gd" id="6_gwahw"]
-[ext_resource type="PackedScene" uid="uid://c8mg0fsh77c21" path="res://Scenes/Entities/Functioning/BaseLight.tscn" id="7_gu688"]
+[ext_resource type="PackedScene" uid="uid://b6o3wwa3p5bq1" path="res://Scenes/Entities/Functioning/GreyLight.tscn" id="7_dirwk"]
 [ext_resource type="PackedScene" uid="uid://bl30578g0svxo" path="res://Scenes/Entities/Decoration/Decals/DirtDecal.tscn" id="8_hg56d"]
 [ext_resource type="PackedScene" uid="uid://dgyd7vfh30c07" path="res://Scenes/Entities/Decoration/Decals/BurntDecal.tscn" id="9_7pvo8"]
 [ext_resource type="Script" uid="uid://cslfae10nu8b7" path="res://Resources/Custom/Level/TileGenerationUnit.gd" id="10_xmb1o"]
@@ -17,6 +17,7 @@
 [ext_resource type="Resource" uid="uid://cou375htkckp8" path="res://Resources/Custom/Enemy/Assistant.tres" id="15_isw65"]
 [ext_resource type="Resource" uid="uid://btivhod77cnen" path="res://Resources/Custom/Enemy/Graytider.tres" id="16_ohrm1"]
 [ext_resource type="PackedScene" uid="uid://dx75c08agri7r" path="res://Scenes/Perks/PerkSceneBandageAndToxicMarker.tscn" id="17_iqkcu"]
+[ext_resource type="Resource" uid="uid://cmem6nmbosaiy" path="res://Resources/Custom/Enemy/Greytide.tres" id="17_xhbxp"]
 [ext_resource type="PackedScene" uid="uid://cilxau2d1ryo5" path="res://Scenes/Perks/PerkSceneDoublePenetration.tscn" id="18_icuvq"]
 [ext_resource type="PackedScene" uid="uid://dqt0jqxgluxsi" path="res://Scenes/Perks/PerkSceneRubberBullets.tscn" id="19_1gs6g"]
 [ext_resource type="PackedScene" uid="uid://c5b5ke884uc34" path="res://Scenes/Perks/PerkSceneFirstAIDS.tscn" id="20_dbj6u"]
@@ -36,21 +37,19 @@
 [ext_resource type="PackedScene" uid="uid://c4ex02nnk4ge3" path="res://Scenes/Perks/PerkSceneCrusherModule.tscn" id="34_0exo5"]
 [ext_resource type="AudioStream" uid="uid://1qnhfchhf4jb" path="res://Audio/Effects/voteding.ogg" id="35_oxj6e"]
 [ext_resource type="AudioStream" uid="uid://14o4e8msndow" path="res://Audio/Weapon/Projectile/mk58_shoot.ogg" id="36_cmxyq"]
-[ext_resource type="AudioStream" uid="uid://b2utqxvujdi7f" path="res://Audio/Ambience/box_deploy.ogg" id="37_el0v2"]
+[ext_resource type="AudioStream" uid="uid://b2utqxvujdi7f" path="res://Audio/Effects/box_deploy.ogg" id="37_el0v2"]
 [ext_resource type="TileSet" uid="uid://c7mk0aiygychu" path="res://Resources/TileMaps/Walls.tres" id="38_iu2yc"]
 [ext_resource type="TileSet" uid="uid://bc7bghcv8144y" path="res://Resources/TileMaps/Tiles.tres" id="39_l8vsk"]
 [ext_resource type="TileSet" uid="uid://cr4gmxce1ahdv" path="res://Resources/TileMaps/MinorTiles.tres" id="40_sh7yk"]
 [ext_resource type="TileSet" uid="uid://c1iav1n2526cq" path="res://Resources/TileMaps/DestructibleWalls.tres" id="41_2mt10"]
-[ext_resource type="PackedScene" uid="uid://roeennw572p2" path="res://Scenes/Mobs/Player/PlayerGreytide.tscn" id="42_d0aib"]
-[ext_resource type="FontFile" uid="uid://dskv5n6tofrla" path="res://Resources/Text/Fonts/LCD 40x2 Display/LCD40x2Display-Regular.otf" id="43_ve08y"]
-[ext_resource type="Script" uid="uid://4io3bm7r86h6" path="res://Components/Interface/Menu/TextPrintingAnimationComponent.gd" id="44_ll3ao"]
-[ext_resource type="Script" uid="uid://bo7lklhepnuja" path="res://Scripts/fps.gd" id="45_vw71x"]
+[ext_resource type="Script" uid="uid://dani3sldhdady" path="res://Components/Level/Special/GreytideBossRunnerComponent.gd" id="44_fm7m3"]
+[ext_resource type="PackedScene" uid="uid://cb2atpjhcp7qf" path="res://Scenes/Mobs/Enemies/StationRun/GreytideTeammate.tscn" id="45_xhbxp"]
 [ext_resource type="Environment" uid="uid://r1a7fr7x6en8" path="res://DemoTrash/Light.tres" id="46_1jjib"]
 [ext_resource type="Script" uid="uid://dptr5blvqsgks" path="res://Components/Interface/Menu/Settings/WorldEnvComponent.gd" id="47_1f8ml"]
 
 [sub_resource type="Resource" id="Resource_2r3hv"]
 script = ExtResource("6_gwahw")
-scene = ExtResource("7_gu688")
+scene = ExtResource("7_dirwk")
 max_units = 6
 min_units = 3
 metadata/_custom_type_script = "uid://dcmiiyxq6u2f8"
@@ -156,12 +155,22 @@ noise = SubResource("NoiseTexture2D_bupnh")
 noise_threshold = 0.05
 metadata/_custom_type_script = "uid://cslfae10nu8b7"
 
-[node name="Game" type="Node2D" unique_id=49398453]
+[sub_resource type="Gradient" id="Gradient_dirwk"]
+colors = PackedColorArray(0, 0, 0, 0, 0.5370987, 0.5370987, 0.5370987, 0.22900002)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rgy7d"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fm7m3"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_rgy7d")
+color_ramp = SubResource("Gradient_dirwk")
+
+[node name="Level" type="Node2D" unique_id=49398453]
 physics_interpolation_mode = 2
 
 [node name="LevelGeneratorComponent" type="Node" parent="." unique_id=1323842931 node_paths=PackedStringArray("wall_tile_map", "destructible_wall_tile_map", "tiles_tile_map", "minor_tiles_tile_map")]
 script = ExtResource("1_ffiiq")
-room_count = 5
 wall_tile_map = NodePath("../WallTileMap")
 destructible_wall_tile_map = NodePath("../WallsDestructible")
 tiles_tile_map = NodePath("../Tiles")
@@ -178,8 +187,11 @@ metadata/_custom_type_script = "uid://bsiofl2b54syo"
 [node name="LevelComponent" type="Node" parent="." unique_id=1648950004 node_paths=PackedStringArray("perk_choice_start_sound", "perk_choice_sound", "perk_selected_sound")]
 script = ExtResource("11_m7ibn")
 level_name = "level_name_1_2"
+final_waves = 1
 available_enemies = Array[ExtResource("12_eqe0f")]([ExtResource("13_bry7w"), ExtResource("14_wba3o"), ExtResource("15_isw65"), ExtResource("16_ohrm1")])
+boss = ExtResource("17_xhbxp")
 start_budget = 2.0
+budget_per_room = 0.5
 available_reward_enemies = Array[ExtResource("12_eqe0f")]([ExtResource("13_bry7w")])
 perks = Array[PackedScene]([ExtResource("17_iqkcu"), ExtResource("18_icuvq"), ExtResource("19_1gs6g"), ExtResource("20_dbj6u"), ExtResource("21_vw4vg"), ExtResource("22_248nj"), ExtResource("23_0j4g5"), ExtResource("24_mgdxh"), ExtResource("25_7rcfy"), ExtResource("26_a1q51"), ExtResource("27_fnq6c"), ExtResource("28_bgx7n"), ExtResource("29_0nvfp"), ExtResource("30_w6bb4"), ExtResource("31_6xct4"), ExtResource("32_6jop1"), ExtResource("33_blter"), ExtResource("34_0exo5")])
 perk_choice_start_sound = NodePath("PerkStart")
@@ -227,126 +239,23 @@ metadata/_custom_type_script = "uid://dptr5blvqsgks"
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=576209262]
 color = Color(0.008202022, 0.008202025, 0.008202025, 1)
 
-[node name="Player" parent="." unique_id=914217487 instance=ExtResource("42_d0aib")]
-position = Vector2(215, 113)
-collision_layer = 786433
-platform_wall_layers = 0
+[node name="Parallaxes" type="Node2D" parent="." unique_id=503727945]
+z_index = 4
+position = Vector2(1213, 681)
 
-[node name="Space" type="CanvasLayer" parent="Player" unique_id=268456767]
-layer = -1
+[node name="Parallax2D3" type="Parallax2D" parent="Parallaxes" unique_id=1737454590]
+scroll_scale = Vector2(0.95, 0.95)
+repeat_size = Vector2(1024, 1024)
+autoscroll = Vector2(20, 10)
+repeat_times = 2
+follow_viewport = false
+ignore_camera_scroll = true
 
-[node name="ColorRect" type="ColorRect" parent="Player/Space" unique_id=1921484586]
-light_mask = 0
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
+[node name="Sprite2D" type="Sprite2D" parent="Parallaxes/Parallax2D3" unique_id=881689956]
+texture_filter = 2
+texture = SubResource("NoiseTexture2D_fm7m3")
 
-[node name="Level" type="CanvasLayer" parent="Player" unique_id=1208411563]
-
-[node name="LevelName" type="Control" parent="Player/Level" unique_id=595969568]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_behavior_recursive = 1
-
-[node name="Name" type="RichTextLabel" parent="Player/Level/LevelName" unique_id=660437065]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.055555556
-anchor_top = 0.70100003
-anchor_right = 0.83000004
-anchor_bottom = 0.86728394
-offset_top = -107.24802
-offset_right = -0.16003418
-grow_horizontal = 2
-grow_vertical = 2
-mouse_behavior_recursive = 1
-theme_override_fonts/normal_font = ExtResource("43_ve08y")
-theme_override_font_sizes/normal_font_size = 20
-bbcode_enabled = true
-vertical_alignment = 1
-
-[node name="TextPrintingAnimationComponent" type="Node" parent="Player/Level/LevelName/Name" unique_id=321409937]
-script = ExtResource("44_ll3ao")
-animate_on_ready = false
-metadata/_custom_type_script = "uid://4io3bm7r86h6"
-
-[node name="Stats" type="RichTextLabel" parent="Player/Level/LevelName" unique_id=765817634]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.056
-anchor_top = 0.23500001
-anchor_right = 0.83000004
-anchor_bottom = 0.65900004
-offset_left = -0.51200104
-offset_top = -0.28001404
-offset_right = -0.16003418
-offset_bottom = 134.96799
-grow_horizontal = 2
-grow_vertical = 2
-mouse_behavior_recursive = 1
-theme_override_constants/line_separation = 5
-theme_override_fonts/normal_font = ExtResource("43_ve08y")
-theme_override_font_sizes/normal_font_size = 25
-bbcode_enabled = true
-vertical_alignment = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="TextPrintingAnimationComponent" type="Node" parent="Player/Level/LevelName/Stats" unique_id=1464560089]
-script = ExtResource("44_ll3ao")
-animate_on_ready = false
-metadata/_custom_type_script = "uid://4io3bm7r86h6"
-
-[node name="Blackscreen" type="CanvasLayer" parent="Player" unique_id=384871290]
-
-[node name="Blackscreen" type="ColorRect" parent="Player/Blackscreen" unique_id=1583924620]
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(0, 0, 0, 0)
-
-[node name="DEBUG" type="CanvasLayer" parent="Player" unique_id=901487794]
-
-[node name="Control" type="Control" parent="Player/DEBUG" unique_id=687858009]
-layout_mode = 3
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -1152.0
-offset_right = -1112.0
-offset_bottom = -608.0
-grow_horizontal = 0
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="Player/DEBUG/Control" unique_id=1402592215]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 24.400002
-anchor_top = 0.025
-anchor_right = 25.400002
-anchor_bottom = 1.25
-offset_left = -6.1035156e-05
-offset_right = -6.1035156e-05
-text = "69
-"
-script = ExtResource("45_vw71x")
-metadata/_edit_use_anchors_ = true
-
-[node name="Label2" type="Label" parent="Player/DEBUG/Control" unique_id=356366102]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 25.950003
-anchor_top = 0.025
-anchor_right = 28.175003
-anchor_bottom = 1.9
-offset_left = -0.00012207031
-offset_right = -0.00012207031
-text = "DEMO 0.1.3"
-metadata/_edit_use_anchors_ = true
+[node name="GreytideBossRunnerComponent" type="Node" parent="." unique_id=1869581093]
+script = ExtResource("44_fm7m3")
+boss = ExtResource("45_xhbxp")
+metadata/_custom_type_script = "uid://dani3sldhdady"

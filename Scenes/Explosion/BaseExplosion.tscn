@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bbqpmpj4ntyg"]
 
 [ext_resource type="Script" uid="uid://b8ixjn50v3a88" path="res://Scripts/ExplosionSystem.gd" id="1_cpk21"]
-[ext_resource type="PackedScene" uid="uid://bjqvcwxstx8u1" path="res://Scenes/Effects/Particles/Boom.tscn" id="2_a5ua4"]
+[ext_resource type="PackedScene" uid="uid://bjqvcwxstx8u1" path="res://Scenes/Effects/Particles/Symbols/Boom.tscn" id="2_a5ua4"]
 [ext_resource type="PackedScene" uid="uid://do6wj3407tcik" path="res://Scenes/Effects/Particles/Soot.tscn" id="3_a5ua4"]
 [ext_resource type="Texture2D" uid="uid://yjigwd3i118j" path="res://Textures/Light/point_light.jpg" id="5_jqe0j"]
 [ext_resource type="Material" uid="uid://4yrd4354bvw7" path="res://Resources/Shaders/Explosion.tres" id="8_gfupr"]

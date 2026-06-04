@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c6t0r08dwt8j4" path="res://Textures/Mobs/Mobs/Secret/V-1.png" id="2_ctsrs"]
 [ext_resource type="Shader" uid="uid://3piuftd8ukss" path="res://Resources/Shaders/CollectableShining.gdshader" id="3_jtqfy"]
 [ext_resource type="Shader" uid="uid://bl4ojx3gaol8" path="res://Resources/Shaders/Wave.gdshader" id="4_h7ie0"]
-[ext_resource type="PackedScene" uid="uid://deq4t84d81wnb" path="res://Scenes/Effects/Particles/Dodge.tscn" id="5_qvte6"]
+[ext_resource type="PackedScene" uid="uid://deq4t84d81wnb" path="res://Scenes/Effects/Particles/Symbols/Dodge.tscn" id="5_qvte6"]
 [ext_resource type="PackedScene" uid="uid://bkmo55qvqkckx" path="res://Scenes/Effects/Particles/V1Gib.tscn" id="6_oq3ep"]
 [ext_resource type="Script" uid="uid://6b7bcparwq17" path="res://Components/Weapons/MeleeWeaponComponent.gd" id="7_sr46d"]
 [ext_resource type="Texture2D" uid="uid://b7k6hgaralomn" path="res://Textures/Mobs/Mobs/Secret/V-1_knucklebluster.png" id="8_snpde"]

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://e33tm7nwmy0y"]
 
 [ext_resource type="Material" uid="uid://cyp3pqnhbfrj3" path="res://Resources/Shaders/Jiggle.tres" id="1_t1ota"]
-[ext_resource type="Texture2D" uid="uid://usxa7x8stx2r" path="res://Textures/Effects/Particles/charge.png" id="2_t1ota"]
+[ext_resource type="Texture2D" uid="uid://usxa7x8stx2r" path="res://Textures/Effects/Particles/Symbols/charge.png" id="2_t1ota"]
 [ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts/Effects/TimedDelete.gd" id="3_nxctu"]
 
 [sub_resource type="Gradient" id="Gradient_lvx2o"]

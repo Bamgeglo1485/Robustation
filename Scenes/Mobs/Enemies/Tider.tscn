@@ -26,7 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://lcbe8war4xp7" path="res://Textures/Mobs/Mobs/Hair/spiky.png" id="27_qp87a"]
 [ext_resource type="Texture2D" uid="uid://dpr87culdu5mg" path="res://Textures/Mobs/Mobs/Hair/swept2.png" id="28_do7sw"]
 [ext_resource type="AudioStream" uid="uid://d2heoxvpkxyp2" path="res://Audio/Weapon/thunk.ogg" id="28_wngo8"]
-[ext_resource type="AudioStream" uid="uid://4e6wsvcw0jrt" path="res://Audio/Ambience/hiss.ogg" id="29_60p5s"]
+[ext_resource type="AudioStream" uid="uid://4e6wsvcw0jrt" path="res://Audio/Effects/hiss.ogg" id="29_60p5s"]
 [ext_resource type="Texture2D" uid="uid://4rew8bctbhwt" path="res://Textures/Mobs/Mobs/Hair/undercutleft.png" id="29_j6xct"]
 [ext_resource type="AudioStream" uid="uid://byyinwd23qdiy" path="res://Audio/Weapon/trashbag2.ogg" id="30_8uqky"]
 [ext_resource type="Texture2D" uid="uid://cryexxr4x761f" path="res://Textures/Mobs/Mobs/Hair/undercutright.png" id="30_qavuh"]

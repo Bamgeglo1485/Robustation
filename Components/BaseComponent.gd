@@ -3,7 +3,7 @@ class_name Component extends Node
 
 var parent: Node = get_parent()
 @onready var tree: SceneTree = get_tree()
-@onready var scene: Node2D = tree.get_root().get_node_or_null("Game")
+@onready var scene: Node = tree.current_scene
 
 func _init() -> void:
 	name = get_script().get_global_name()
@@ -11,6 +11,13 @@ func _init() -> void:
 func _notification(notif) -> void:
 	if notif == NOTIFICATION_PARENTED:
 		parent = get_parent()
+
+func _enter_tree() -> void:
+	if !get_tree().scene_changed.is_connected(_scene_changed):
+		get_tree().scene_changed.connect(_scene_changed)
+
+func _scene_changed() -> void:
+	scene = tree.current_scene
 
 func set_multiplier(stat: String, key: String, value: float) -> void:
 	var dict = get(stat + "_multipliers")

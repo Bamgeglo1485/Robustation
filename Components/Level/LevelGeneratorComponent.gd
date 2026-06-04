@@ -6,6 +6,10 @@ class_name LevelGeneratorComponent extends Component
 @export var min_room_width: int = 18
 @export var max_room_height: int = 20
 @export var min_room_height: int = 8
+@export var max_last_room_width: int = 24
+@export var min_last_room_width: int = 20
+@export var max_last_room_height: int = 24
+@export var min_last_room_height: int = 20
 @export var room_count: int = 8
 
 @export var reward_room_min_size: int = 10
@@ -55,8 +59,14 @@ func generate_level() -> void:
 func generate_room(connect_to_previous: bool = false) -> void:
 	positions.clear()
 	
-	var width = _get_random_odd(min_room_width, max_room_width)
-	var height = _get_random_odd(min_room_height, max_room_height)
+	var width: int
+	var height: int
+	if room + 3 >= room_count:
+		width = _get_random_odd(min_last_room_width, max_last_room_width)
+		height = _get_random_odd(min_last_room_height, max_last_room_height)
+	else:
+		width = _get_random_odd(min_room_width, max_room_width)
+		height = _get_random_odd(min_room_height, max_room_height)
 	
 	if connect_to_previous:
 		var y_offset = (previous_room_size.y - height) / 2

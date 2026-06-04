@@ -369,6 +369,7 @@ stream = ExtResource("11_juk1d")
 
 [node name="RoundstartComponent" type="Node" parent="." unique_id=1364798108 node_paths=PackedStringArray("output_animation")]
 script = ExtResource("12_1obny")
+station_run = "res://Game/StationRun.tscn"
 arena = "res://Game/arena.tscn"
 v1 = "res://Game/v1_fight.tscn"
 output_animation = NodePath("../CMD/CMD_OUTPUT/TextPrintingAnimationComponent")
@@ -488,7 +489,7 @@ Area injection: Successful!
 Subject injection: Successful!
 Data verification: Successful![/color]
 
-[color=red]Have fun![/color]"
+[color=crimson]Have fun![/color]"
 require_double_click = true
 metadata/_custom_type_script = "uid://b0uuawujbqmt4"
 
@@ -540,7 +541,12 @@ metadata/_edit_use_anchors_ = true
 script = ExtResource("24_qk6ej")
 print_frame = NodePath("../../../CMD/CMD_OUTPUT")
 instant_text = "\\Omega\\Manager>purge_system init"
-text = "[color=red]ERROR 213: Access Denied[/color]"
+text = "[color=yellow]WARN: ε-protocol initialized...[/color]
+[color=green]Subject loaded
+Subject injection: Successful!
+Data verification: Successful![/color]
+
+[color=crimson]PURGE STARTING[/color]"
 delay = 0.2
 require_double_click = true
 metadata/_custom_type_script = "uid://b0uuawujbqmt4"
@@ -555,6 +561,13 @@ metadata/_custom_type_script = "uid://cja3led3n1ehp"
 [node name="SavePositionComponent" type="Node" parent="Desktop/StationRun" unique_id=1232635903]
 script = ExtResource("24_xefsv")
 metadata/_custom_type_script = "uid://bhmllu85kiqcc"
+
+[node name="RoundstartOnPressedComponent" type="Node" parent="Desktop/StationRun" unique_id=1170372993 node_paths=PackedStringArray("roundstart_component")]
+script = ExtResource("22_o5ktd")
+roundstart_component = NodePath("../../../RoundstartComponent")
+type = "station_run"
+require_double_click = true
+metadata/_custom_type_script = "uid://b21t14osl1vrf"
 
 [node name="asdas" type="TextureButton" parent="Desktop" unique_id=1062030481]
 z_index = 1

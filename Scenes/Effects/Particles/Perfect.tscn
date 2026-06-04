@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://co34sclxdwctu"]
 
 [ext_resource type="Material" uid="uid://cyp3pqnhbfrj3" path="res://Resources/Shaders/Jiggle.tres" id="1_yday1"]
-[ext_resource type="Texture2D" uid="uid://bmtd5cdcbm0i" path="res://Textures/Effects/perfect.png" id="2_yday1"]
+[ext_resource type="Texture2D" uid="uid://bmtd5cdcbm0i" path="res://Textures/Effects/Particles/Symbols/perfect.png" id="2_yday1"]
 [ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts/Effects/TimedDelete.gd" id="3_v6edi"]
 
 [sub_resource type="Gradient" id="Gradient_lvx2o"]

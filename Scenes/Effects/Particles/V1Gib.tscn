@@ -4,13 +4,13 @@
 [ext_resource type="Script" uid="uid://ckngjbi4531ra" path="res://Scripts/Effects/BloodSystem.gd" id="2_xrhp8"]
 [ext_resource type="Texture2D" uid="uid://d3sfdwq12le2y" path="res://Textures/Mobs/Mobs/Secret/V-1_head.png" id="3_ft4xk"]
 [ext_resource type="Script" uid="uid://d2eyb2xe1mh3p" path="res://Components/Entity/OrganComponent.gd" id="4_7p060"]
-[ext_resource type="PackedScene" uid="uid://40fiorxrk4xk" path="res://Scenes/Effects/Particles/BloodSpurts.tscn" id="5_ki4xq"]
+[ext_resource type="PackedScene" uid="uid://40fiorxrk4xk" path="res://Scenes/Effects/Particles/Blood/BloodSpurts.tscn" id="5_ki4xq"]
 [ext_resource type="AudioStream" uid="uid://di1m6qfvfmk8i" path="res://Resources/Audio/GibRandom.tres" id="6_q7jti"]
 [ext_resource type="Script" uid="uid://b4ckmc2py8cmg" path="res://Components/Entity/MeleeAttackIgnoreComponent.gd" id="7_ftejj"]
 [ext_resource type="Script" uid="uid://ch6fjxkr8n5db" path="res://Components/Entity/ProjectileIgnoreComponent.gd" id="8_k876s"]
 [ext_resource type="Texture2D" uid="uid://b6syj3g2i37qk" path="res://Textures/Mobs/Mobs/Secret/V-1_heart.png" id="9_poiud"]
-[ext_resource type="PackedScene" uid="uid://deq4t84d81wnb" path="res://Scenes/Effects/Particles/Dodge.tscn" id="15_osg0y"]
-[ext_resource type="Texture2D" uid="uid://bx3kpq3irdo3m" path="res://Textures/Effects/Particles/gib.png" id="16_4v5b6"]
+[ext_resource type="PackedScene" uid="uid://deq4t84d81wnb" path="res://Scenes/Effects/Particles/Symbols/Dodge.tscn" id="15_osg0y"]
+[ext_resource type="Texture2D" uid="uid://bx3kpq3irdo3m" path="res://Textures/Effects/Particles/Symbols/gib.png" id="16_4v5b6"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_70dfb"]
 particle_flag_disable_z = true

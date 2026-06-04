@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dy6a5fgqnjma0"]
 
 [ext_resource type="Script" uid="uid://bq58uyerhkt2q" path="res://Scripts/Effects/TimedDelete.gd" id="1_13s4m"]
-[ext_resource type="PackedScene" uid="uid://c3r6qp7twthfm" path="res://Scenes/Effects/Particles/Stun.tscn" id="1_ne7sc"]
+[ext_resource type="PackedScene" uid="uid://c3r6qp7twthfm" path="res://Scenes/Effects/Particles/Symbols/Stun.tscn" id="1_ne7sc"]
 [ext_resource type="Script" uid="uid://cwofh1tgsymr6" path="res://Components/Entity/AutoDeleteComponent.gd" id="3_kyp1k"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_13s4m"]
